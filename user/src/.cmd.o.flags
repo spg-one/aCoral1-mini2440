@@ -1,0 +1,3 @@
+ifeq (-I/mnt/hgfs/sharefile/acoral/include -I/mnt/hgfs/sharefile/acoral/kernel/include -I/mnt/hgfs/sharefile/acoral/hal/include -I/mnt/hgfs/sharefile/acoral/hal/arm/include -I/mnt/hgfs/sharefile/acoral/hal/arm/s3c2440/include -I/mnt/hgfs/sharefile/acoral/lib/include -I/mnt/hgfs/sharefile/acoral/driver/include -I/mnt/hgfs/sharefile/acoral/plugin/include -Wall -Wstrict-prototypes -g -O2 -fomit-frame-pointer -fPIC :,$(strip $(subst $(comma),:,$(CFLAGS) $(EXTRA_CFLAGS) $(CFLAGS_cmd.o))))
+FILES_FLAGS_UP_TO_DATE += cmd.o
+endif

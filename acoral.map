@@ -1,0 +1,1274 @@
+00000000 A FIQ_stack_size
+00000001 a R1_M
+00000002 a R1_A
+00000004 a R1_C
+00000013 a SVCMODE
+000000c0 a NOINT
+00000100 A Abort_stack_size
+00000100 A Undef_stack_size
+00000200 A IRQ_stack_size
+00000200 A SVC_stack_size
+00000200 A SYS_stack_size
+00001000 a R1_I
+30000000 T __ENTRY
+30000000 T text_start
+30000038 t HandleFIQ
+3000003c T HandleIRQ
+30000040 t HandleUndef
+30000044 t HandleSWI
+30000048 t HandleDabort
+3000004c t HandlePabort
+30000050 t _text_start
+30000054 t _bss_start
+30000058 t _bss_end
+3000005c t ResetHandler
+300000d8 t copy_self
+30000104 t copy_from_rom
+30000120 t copy_from_nand
+30000144 t bad_nand_read
+30000164 t ok_nand_read
+30000170 t go_next
+3000018c t notmatch
+300001ac t out
+300001b0 t InitStacks
+30000214 t memsetup
+30000238 t mem_clear
+30000250 t mem_cfg_val
+300002c0 T hal_stack_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_thread_c.c:21
+300003cc T hal_all_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_int_c.c:4
+30000498 t hal_intr_unmask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_int_c.c:23
+3000058c t hal_intr_mask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_int_c.c:38
+30000674 t hal_intr_ack	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_int_c.c:54
+30000768 T hal_intr_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_int_c.c:72
+30000864 T hal_ticks_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_timer.c:10
+30000938 T hal_ticks_delay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_timer.c:22
+30000974 T hal_mem_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_mem_c.c:7
+30000984 T flush_cache	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_mem_c.c:11
+30000a08 t hal_mmu_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_mem_c.c:22
+30000c04 T hal_mmu_setmtt	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_mem_c.c:67
+30000cb0 t nand_wait	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:6
+30000d00 t nand_reset	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:14
+30000d84 T nand_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:25
+30000db4 t is_bad_block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:42
+30000f6c t nand_read_page	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:74
+30001140 t nand_read_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:111
+300011c0 T nand_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/s3c2440/src/hal_nand.c:123
+3000147c T MMU_EnableICache
+3000148c T MMU_DisableICache
+3000149c T MMU_EnableDCache
+300014ac T MMU_DisableDCache
+300014bc T MMU_EnableAlignFault
+300014cc T MMU_DisableAlignFault
+300014dc T MMU_EnableMMU
+300014ec T MMU_DisableMMU
+300014fc T MMU_SetTTBase
+30001504 T MMU_SetDomain
+3000150c T MMU_InvalidateIDCache
+30001514 T MMU_InvalidateICache
+3000151c T MMU_InvalidateICacheMVA
+30001524 T MMU_PrefetchICacheMVA
+3000152c T MMU_InvalidateDCache
+30001534 T MMU_InvalidateDCacheMVA
+3000153c T MMU_CleanDCacheMVA
+30001544 T MMU_CleanInvalidateDCacheMVA
+3000154c T MMU_CleanDCacheIndex
+30001554 T MMU_CleanInvalidateDCacheIndex
+3000155c T MMU_WaitForInterrupt
+30001564 T MMU_InvalidateTLB
+3000156c T MMU_InvalidateITLB
+30001574 T MMU_InvalidateITLBMVA
+3000157c T MMU_InvalidateDTLB
+30001584 T MMU_SetProcessId
+3000158c T HAL_SWITCH_TO
+3000159c T HAL_INTR_SWITCH_TO
+300015dc T HAL_INTR_CTX_SWITCH
+30001644 T HAL_CONTEXT_SWITCH
+3000166c T HAL_INTR_ENTRY
+300016a8 T EXP_HANDLER
+300016c8 T HAL_INTR_ENABLE
+300016d8 T HAL_INTR_DISABLE
+300016ec T HAL_INTR_RESTORE
+300016f4 T HAL_INTR_DISABLE_SAVE
+3000171c T hal_intr_nesting_init_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:11
+30001760 T hal_get_intr_nesting_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:21
+30001774 T hal_intr_nesting_dec_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:30
+300017b8 T hal_intr_nesting_inc_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:42
+300017d4 T hal_sched_bridge_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:46
+30001800 T hal_intr_exit_bridge_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:53
+3000182c T hal_atomic_add_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:60
+30001874 T hal_atomic_sub_comm	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:68
+300018bc T idle	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:10
+300018c8 T daem	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:22
+30001998 T init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:67
+30001a8c T acoral_start	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:109
+30001ad0 T acoral_core_cpu_start	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:147
+30001bcc T acoral_start_os	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:166
+30001c0c T acoral_module_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:177
+30001c34 T create_thread_ext	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:8
+30001d08 T acoral_get_policy_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:28
+30001d88 T acoral_policy_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:41
+30001e48 T acoral_register_sched_policy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:55
+30001e74 T acoral_policy_delay_deal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:59
+30001ef0 T acoral_policy_thread_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:71
+30001f44 T acoral_sched_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:79
+30001f80 T app_enter_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:96
+30001f90 T app_exit_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:102
+30001fa0 T acoral_sched_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:11
+30001ff0 T acoral_sched_unlock	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:19
+30002010 T acoral_set_orig_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:24
+30002030 T acoral_set_running_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:28
+30002084 T acoral_thread_runqueue_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:38
+30002104 T acoral_get_idlest_cpu	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:55
+300021a4 T acoral_get_idle_maskcpu	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:68
+30002270 T acoral_rdyqueue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:85
+3000234c T acoral_rdyqueue_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:101
+30002420 T acoral_sched	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:118
+300024a0 T acoral_real_sched	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:141
+3000254c T acoral_real_intr_sched	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:174
+300025f8 T acoral_select_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:206
+300026c8 T acoral_release_thread1	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:27
+3000273c T acoral_release_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:49
+30002790 T acoral_suspend_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:70
+300027e4 T acoral_suspend_self	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:95
+30002804 T acoral_suspend_thread_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:105
+30002838 T acoral_resume_thread_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:116
+3000286c T acoral_resume_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:126
+300028c0 t acoral_delay_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:154
+3000294c t acoral_delay_thread_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:179
+30002984 T acoral_delay_self	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:189
+300029b4 T acoral_kill_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:198
+30002a50 T acoral_kill_thread_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:243
+30002a80 T acoral_thread_exit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:253
+30002aa0 T acoral_thread_change_prio	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:261
+30002b1c T acoral_change_prio_self	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:285
+30002b4c T acoral_thread_change_prio_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:293
+30002b88 T acoral_rdy_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:304
+30002bc4 T acoral_unrdy_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:327
+30002c00 T acoral_thread_move2_tail	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:343
+30002c40 T acoral_thread_move2_tail_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:361
+30002c70 T acoral_alloc_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:371
+30002c90 T acoral_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:384
+30002ebc T acoral_thread_pool_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:431
+30002f3c T acoral_set_thread_console	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:444
+30002f60 T acoral_sched_mechanism_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:448
+30002f90 T acoral_thread_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:459
+30002fa4 T create_comm_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/comm_thrd.c:22
+30003074 T comm_policy_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/comm_thrd.c:46
+30003174 T comm_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/comm_thrd.c:71
+300031d0 T acoral_create_pool	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:15
+30003334 T acoral_release_pool	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:43
+30003414 T acoral_collect_pool	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:65
+3000350c T acoral_get_res	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:89
+30003638 T acoral_release_res	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:128
+300037c0 T acoral_get_pool_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:170
+30003824 T acoral_get_free_pool	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:183
+30003888 T acoral_get_res_by_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:197
+30003900 T acoral_pool_res_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:213
+300039e4 T acoral_pools_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:235
+30003a88 T acoral_pool_ctrl_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:255
+30003b90 T acoral_obj_pool_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:280
+30003bd0 T acoral_obj_pool_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:287
+30003bf0 T acoral_get_obj	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:291
+30003c1c T acoral_free_obj	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:295
+30003c44 T acoral_res_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:303
+30003c54 T acoral_assert_res	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:307
+30003cd4 T acoral_intr_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:13
+30003d84 T acoral_intr_attach	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:42
+30003e00 T acoral_intr_detach	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:57
+30003e54 T acoral_intr_unmask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:69
+30003f3c T acoral_intr_mask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:88
+30004024 T acoral_intr_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:107
+300041cc T acoral_default_isr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:146
+300041dc T acoral_intr_exit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:154
+30004258 T acoral_set_intr_enter	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:177
+300042a4 T acoral_set_intr_exit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:188
+300042f0 T acoral_set_intr_mask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:199
+3000433c T acoral_set_intr_unmask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:210
+30004388 T acoral_intr_set_type	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:220
+300043d0 T acoral_fault_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:231
+300044e0 T acoral_time_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:24
+3000451c T acoral_get_ticks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:37
+30004530 T acoral_set_ticks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:41
+30004550 T acoral_ticks_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:45
+30004588 T acoral_ticks_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:53
+300045d8 T acoral_delayqueue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:74
+30004704 T time_delay_deal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:144
+30004818 T timeout_queue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:179
+30004920 T timeout_queue_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:240
+30004984 T timeout_delay_deal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:263
+30004a90 T acoral_mem_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mem.c:9
+30004ac0 T spin_lock_intr_save	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/spinlock.c:4
+30004aec T spin_unlock_intr_restore	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/spinlock.c:11
+30004b10 T spin_lock_intr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/spinlock.c:16
+30004b2c T spin_unlock_intr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/spinlock.c:21
+30004b48 T spin_lock_stamp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/spinlock.c:26
+30004b68 T spin_unlock_stamp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/spinlock.c:31
+30004b84 T acoral_evt_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:4
+30004b94 T acoral_evt_pool_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:8
+30004bec T acoral_alloc_evt	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:20
+30004c0c T acoral_evt_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:24
+30004c3c T acoral_evt_queue_empty	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:29
+30004c74 T acoral_evt_high_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:33
+30004cc4 T acoral_evt_queue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:43
+30004d88 T acoral_evt_queue_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:62
+30004dbc T acoral_mutex_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mutex.c:15
+30004e2c T acoral_mutex_create	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mutex.c:32
+30004eb4 T acoral_mutex_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mutex.c:54
+30004f40 T acoral_mutex_trypend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mutex.c:93
+30005018 T acoral_mutex_pend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mutex.c:134
+3000525c T acoral_mutex_post	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mutex.c:222
+30005404 T buddy_scan	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:33
+3000557c T buddy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:53
+30005d1c t recus_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:179
+30005fc4 t r_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:215
+30006324 T buddy_malloc_size	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:279
+300063c8 T buddy_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:294
+300064a8 T buddy_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:313
+30006960 t r_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/malloc.c:34
+30006c14 T v_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/malloc.c:122
+30006c68 T v_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/malloc.c:129
+30006f0c T v_mem_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/malloc.c:210
+30006fc8 T v_mem_scan	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/malloc.c:232
+300070ac T acoral_mbox_create	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mbox.c:23
+30007114 T acoral_mbox_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mbox.c:42
+30007184 T acoral_mbox_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mbox.c:61
+3000725c T acoral_mbox_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mbox.c:107
+300073d4 T acoral_mbox_tryrecv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/mbox.c:164
+30007470 T acoral_sem_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:20
+300074e0 T acoral_sem_create	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:37
+30007558 T acoral_sem_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:57
+30007608 T acoral_sem_trypend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:97
+300076c0 T acoral_sem_pend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:139
+3000786c T acoral_sem_post	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:210
+30007974 T acoral_sem_getnum	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sem.c:261
+300079cc T acoral_msg_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:19
+30007a78 T acoral_msgctr_list_queueadd	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:44
+30007aa8 T acoral_alloc_msgctr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:53
+30007ac8 T acoral_alloc_msg	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:58
+30007ae8 T acoral_msgctr_queue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:67
+30007b84 T acoral_msg_queue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:85
+30007bbc T acoral_msgctr_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:97
+30007c78 T acoral_msg_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:114
+30007d00 T acoral_msg_assign	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:130
+30007d68 T acoral_msgctr_create	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:148
+30007e50 T acoral_msg_create	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:175
+30007eec T acoral_msg_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:198
+30008000 T acoral_msg_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:258
+30008258 T acoral_msgctr_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:353
+300083a4 T acoral_msg_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:401
+300083dc T wake_up_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:414
+3000842c T acoral_print_all_msg	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:430
+300084bc T acoral_print_waitThreadsNum	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:453
+300084ec T rm_policy_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:20
+30008634 T rm_policy_thread_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:45
+3000865c T rm_discard_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:50
+300086a0 T rm_queue_ascend_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:56
+30008754 T rm_check	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:72
+300088ac T rm_thread_dispatch	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:85
+300089f8 T rm_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:119
+30008a8c T rm_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:129
+30008af0 T rm_end	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:139
+30008ba4 T period_policy_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:11
+30008d88 T period_policy_thread_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:55
+30008db0 T acoral_periodqueue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:59
+30008ebc T period_thread_delay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:83
+30008f1c T period_delay_deal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:88
+3000909c T period_thread_exit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:119
+300090ac T period_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:124
+3000912c T slice_policy_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/slice_thrd.c:13
+300092fc T slice_policy_thread_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/slice_thrd.c:53
+30009324 T slice_delay_deal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/slice_thrd.c:57
+300093a0 T slice_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/slice_thrd.c:80
+30009404 T posix_delay_deal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:13
+30009594 T acoral_posix_create	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:48
+30009654 T posix_policy_thread_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:66
+30009854 T posix_policy_thread_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:105
+3000987c T posix_policy_data_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:109
+300098d4 T posix_policy_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:119
+30009938 T delay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/softdelay.c:9
+3000998c T delay_task	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/softdelay.c:15
+300099b0 T acoral_soft_delay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/softdelay.c:22
+30009a0c T soft_delay_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/softdelay.c:29
+30009af0 T dummy_print	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/dummy.c:2
+30009b04 T acoral_ffs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/bitops.c:3
+30009be4 T acoral_find_first_bit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/bitops.c:15
+30009c70 T acoral_set_bit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/bitops.c:27
+30009cd0 T acoral_clear_bit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/bitops.c:36
+30009d34 T acoral_get_bit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/bitops.c:45
+30009d90 T acoral_prio_queue_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/queue.c:4
+30009e18 T acoral_prio_queue_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/queue.c:14
+30009eb0 T acoral_get_highprio	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/queue.c:25
+30009ee4 T acoral_prio_queue_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/queue.c:29
+30009fac T acoral_list_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/list.c:2
+30009ff8 T acoral_list_add2_tail	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/list.c:10
+3000a044 T acoral_list_del	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/list.c:18
+3000a094 t do_div	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:12
+3000a108 T skip_atoi	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:21
+3000a190 T number	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:32
+3000a6a8 T vsnprintf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:123
+3000b1e0 T acoral_sprint	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:350
+3000b240 T acoral_print	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:360
+3000b2cc T acoral_prints	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:371
+3000b32c T acoral_getchar	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:378
+3000b378 T acoral_putchar	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:384
+3000b3cc T acoral_debug	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:391
+3000b490 T acoral_debugs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:407
+3000b528 T acoral_tolower	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:3
+3000b58c T acoral_toupper	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:12
+3000b5f0 T acoral_str_upr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:21
+3000b698 T acoral_str_lwr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:32
+3000b738 T acoral_str_len	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:42
+3000b79c T acoral_str_cpy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:51
+3000b808 T acoral_str_cmp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:58
+3000b8f8 T acoral_str_nicmp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:87
+3000ba0c T acoral_str_ncpy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:124
+3000ba9c T acoral_str_lcpy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:152
+3000bb28 T acoral_str_cat	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:170
+3000bbb4 T acoral_str_ncat	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:193
+3000bc7c T acoral_str_lcat	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:219
+3000bd34 T acoral_str_ncmp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:248
+3000bdf4 T acoral_str_chr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:270
+3000be64 T acoral_str_rchr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:286
+3000bef0 T acoral_str_nchr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:306
+3000bf8c T acoral_str_nlen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:323
+3000c000 T acoral_str_spn	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:342
+3000c0b8 T acoral_str_cspn	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:370
+3000c158 T acoral_str_pbrk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:394
+3000c1e4 T acoral_str_sep	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:422
+3000c26c T acoral_memset	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:447
+3000c2dc T acoral_memcpy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:468
+3000c360 T acoral_memmove	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:488
+3000c46c T acoral_memcmp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:515
+3000c508 T acoral_memscan	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:538
+3000c578 T acoral_strstr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:558
+3000c624 T acoral_memchr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/str.c:587
+3000c6b8 T acoral_rand	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/random.c:3
+3000c6fc T acoral_rand_start	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/random.c:9
+3000c71c T plugin_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/src/plugin.c:3
+3000c730 T my_lwip_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/LwIPEntry.c:12
+3000c7d8 T acoral_net_lwip_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/LwIPEntry.c:27
+3000c818 T sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:30
+3000c8d4 T sys_sem_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:53
+3000c904 T sys_sem_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:61
+3000c928 T sys_sem_signal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:69
+3000c948 T sys_arch_sem_wait	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:77
+3000c98c T sys_mbox_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:89
+3000c9b8 T sys_mbox_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:99
+3000c9dc T sys_mbox_post	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:108
+3000ca40 T sys_mbox_trypost	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:121
+3000cab4 T sys_arch_mbox_fetch	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:135
+3000cb1c T getTONAvai	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:149
+3000cb6c T sys_thread_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:167
+3000cc70 T sys_arch_timeouts	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:201
+3000cd04 T netconn_new_with_proto_and_callback	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:68
+3000cdc4 T netconn_delete	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:99
+3000ce34 T netconn_type	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:123
+3000ce50 T netconn_getaddr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:139
+3000cec0 T netconn_bind	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:165
+3000cf28 T netconn_connect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:186
+3000cf90 T netconn_disconnect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:206
+3000cfdc T netconn_listen_with_backlog	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:225
+3000d030 T netconn_accept	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:249
+3000d098 T netconn_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:286
+3000d35c T netconn_sendto	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:396
+3000d3d0 T netconn_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:413
+3000d428 T netconn_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:437
+3000d498 T netconn_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_lib.c:462
+3000d4e4 t recv_raw	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:71
+3000d698 t recv_udp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:133
+3000d7dc t recv_tcp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:188
+3000d8f8 t poll_tcp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:231
+3000d960 t sent_tcp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:255
+3000da2c t err_tcp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:286
+3000db84 t setup_tcp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:326
+3000dbf8 t accept_function	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:345
+3000dcf8 t pcb_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:391
+3000dec8 T do_newconn	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:453
+3000df10 T netconn_alloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:476
+3000e044 T netconn_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:548
+3000e180 t do_close_internal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:592
+3000e308 T do_delconn	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:640
+3000e468 T do_bind	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:687
+3000e5c4 t do_connected	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:726
+3000e660 T do_connect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:756
+3000e7dc T do_disconnect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:799
+3000e834 T do_listen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:816
+3000ea08 T do_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:866
+3000ebb8 T do_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:904
+3000ec48 t do_writemore	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:938
+3000ef00 T do_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:1030
+3000efc4 T do_getaddr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:1072
+3000f180 T do_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/api_msg.c:1120
+3000f208 T netbuf_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:56
+3000f26c T netbuf_delete	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:77
+3000f2d8 T netbuf_alloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:97
+3000f370 T netbuf_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:121
+3000f3c4 T netbuf_ref	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:140
+3000f498 T netbuf_chain	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:164
+3000f4ec T netbuf_data	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:183
+3000f554 T netbuf_next	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:208
+3000f5c0 T netbuf_first	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/netbuf.c:229
+3000f5e0 T lwip_socket_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:173
+3000f61c t get_socket	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:186
+3000f694 t alloc_socket	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:214
+3000f86c T lwip_accept	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:246
+3000fb08 T lwip_bind	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:317
+3000fbf8 T lwip_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:353
+3000fcc0 T lwip_connect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:379
+3000fde0 T lwip_listen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:429
+3000fecc T lwip_recvfrom	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:461
+30010318 T lwip_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:597
+30010364 T lwip_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:603
+300103b4 T lwip_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:609
+300104cc T lwip_sendto	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:638
+3001068c T lwip_socket	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:729
+300107a0 T lwip_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:781
+300107dc t lwip_selscan	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:802
+30010a64 T lwip_select	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:846
+30010ef8 t event_callback	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:995
+300111e4 T lwip_shutdown	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1088
+30011210 t lwip_getaddrname	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1096
+30011300 T lwip_getpeername	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1129
+3001133c T lwip_getsockname	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1135
+30011378 T lwip_getsockopt	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1141
+30011648 t lwip_getsockopt_internal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1326
+3001191c T lwip_setsockopt	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1505
+30011ba4 t lwip_setsockopt_internal	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1700
+30011e64 T lwip_ioctl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:1879
+30012010 t tcpip_tcp_timer	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:77
+3001207c T tcp_timer_needed	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:100
+300120e4 t arp_timer	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:135
+30012118 T tcpip_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:233
+300122f4 T tcpip_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:337
+300123bc T tcpip_callback_with_block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:396
+300124b0 T tcpip_timeout	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:423
+30012564 T tcpip_apimsg	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:453
+300125e8 T tcpip_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:550
+300126b0 T icmp_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/icmp.c:69
+30012dec T icmp_dest_unreach	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/icmp.c:225
+30013040 T inet_addr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:61
+30013084 T inet_aton	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:83
+3001347c T inet_ntoa	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:183
+30013600 T htons	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:234
+3001364c T ntohs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:246
+3001367c T htonl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:258
+300136c4 T ntohl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet.c:273
+300136ec t lwip_standard_chksum	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet_chksum.c:80
+3001381c T inet_chksum_pseudo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet_chksum.c:264
+30013ac4 T inet_chksum_pseudo_partial	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet_chksum.c:320
+30013da8 T inet_chksum	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet_chksum.c:381
+30013e2c T inet_chksum_pbuf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/inet_chksum.c:400
+30013f54 T ip_route	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip.c:69
+30014068 T ip_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip.c:176
+3001463c T ip_output_if	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip.c:492
+30014bcc T ip_output	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip.c:577
+30014c58 T ip_addr_isbroadcast	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip_addr.c:58
+30014d7c T ip_frag	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip_frag.c:619
+3001513c T lwip_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/init.c:216
+30015158 T memp_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:250
+30015334 T memp_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:294
+300154c8 T memp_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:346
+3001558c T netif_add	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:79
+30015684 T netif_set_addr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:158
+300156cc T netif_remove	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:171
+300157a8 T netif_find	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:216
+30015864 T netif_set_ipaddr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:249
+30015a14 T netif_set_gw	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:310
+30015a70 T netif_set_netmask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:331
+30015acc T netif_set_default	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:352
+30015aec T netif_set_up	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:378
+30015b5c T netif_set_down	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:412
+30015b98 T netif_is_up	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:429
+30015bb8 T pbuf_alloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:113
+30015f74 T pbuf_realloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:274
+300160ec T pbuf_header	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:353
+30016280 T pbuf_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:460
+30016398 T pbuf_clen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:541
+300163e0 T pbuf_ref	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:560
+30016434 T pbuf_cat	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:582
+300164c4 T pbuf_chain	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:623
+300164f4 T pbuf_dechain	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:640
+30016598 T pbuf_copy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:689
+300166f0 T pbuf_copy_partial	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/pbuf.c:753
+30016848 T raw_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:78
+300169a0 T raw_bind	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:137
+30016a0c T raw_connect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:157
+30016a78 T raw_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:178
+30016aa8 T raw_sendto	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:201
+30016c20 T raw_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:273
+30016c6c T raw_remove	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:287
+30016d1c T raw_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:318
+30016da4 T sys_mbox_fetch	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:66
+30016f08 T sys_sem_wait	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:126
+30017058 T sys_timeout	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:188
+30017228 T sys_untimeout	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:248
+30017350 t sswt_handler	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:287
+30017390 T sys_sem_wait_timeout	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:304
+30017418 T sys_msleep	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/sys.c:334
+30017454 T tcp_tmr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:83
+3001749c T tcp_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:110
+30017718 T tcp_abort	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:195
+300178ac T tcp_bind	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:256
+30017cc0 t tcp_accept_null	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:323
+30017cec T tcp_listen_with_backlog	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:348
+30017ee8 T tcp_recved	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:393
+3001806c t tcp_new_port	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:441
+300181ac T tcp_connect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:486
+30018484 T tcp_slowtmr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:549
+30018b58 T tcp_fasttmr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:782
+30018c84 T tcp_segs_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:814
+30018cec T tcp_seg_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:833
+30018d54 T tcp_setprio	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:856
+30018d78 T tcp_seg_copy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:870
+30018ddc t tcp_recv_null	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:890
+30018e4c t tcp_kill_prio	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:908
+30018f38 t tcp_kill_timewait	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:941
+30018fe0 T tcp_alloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:969
+300191a8 T tcp_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1044
+300191c4 T tcp_arg	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1057
+300191e4 T tcp_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1071
+30019204 T tcp_sent	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1085
+30019224 T tcp_err	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1100
+30019244 T tcp_accept	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1115
+30019264 T tcp_poll	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1130
+30019298 T tcp_pcb_purge	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1146
+30019370 T tcp_pcb_remove	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1190
+300194b0 T tcp_next_iss	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1223
+300194e4 T tcp_eff_send_mss	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:1238
+3001955c T tcp_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:93
+3001a4b4 t tcp_listen_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:441
+3001a830 t tcp_timewait_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:521
+3001a8ec t tcp_process	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:544
+3001b4bc t tcp_receive	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:760
+3001d39c t tcp_parseopt	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:1360
+3001d574 T tcp_send_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:70
+3001d5d8 T tcp_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:95
+3001d6a0 T tcp_enqueue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:131
+3001dfd4 T tcp_output	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:412
+3001e988 t tcp_output_segment	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:605
+3001ecb0 T tcp_rst	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:702
+3001f030 T tcp_rexmit_rto	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:747
+3001f12c T tcp_rexmit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:783
+3001f210 T tcp_keepalive	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:818
+3001f5b0 T tcp_zero_window_probe	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_out.c:889
+3001f9c0 T udp_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:85
+30020038 T udp_send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:333
+30020088 T udp_sendto	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:357
+30020124 T udp_sendto_if	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:400
+3002047c T udp_bind	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:567
+30020604 T udp_connect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:667
+30020750 T udp_disconnect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:725
+300207bc T udp_recv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:744
+300207ec T udp_remove	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:763
+3002089c T udp_new	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:793
+300208f0 t plug_holes	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:194
+30020a80 T mem_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:232
+30020b6c T mem_free	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:269
+30020cc0 T mem_realloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:325
+30021014 T mem_malloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:442
+300213c4 T mem_calloc	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:563
+3002143c t free_etharp_q	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:144
+30021494 T etharp_tmr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:166
+30021688 t find_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:231
+30021ce0 t etharp_send_ip	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:429
+30021ddc t update_arp_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:468
+30022094 T etharp_find_addr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:545
+30022178 T etharp_ip_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:581
+3002221c T etharp_arp_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:618
+3002265c T etharp_output	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:789
+300228fc T etharp_query	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:879
+30022d90 t etharp_raw	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:1033
+30023084 T etharp_request	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:1118
+30023108 T ethernet_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:1135
+30023258 t low_level_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/ethernetif.c:65
+30023340 t low_level_output	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/ethernetif.c:118
+300233b4 T ethernetif_input	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/ethernetif.c:145
+300234d0 T ethernetif_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/ethernetif.c:209
+3002357c T StrToFDTName	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:19
+30023800 T _GetFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:96
+30023954 T GetDrive	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:157
+300239e0 T ChangeDrive	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:189
+30023a7c T GetDirClusIndex	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:220
+30023d30 T MakeDir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:328
+30023f78 T RemoveDir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:420
+30024098 T ChangeDir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:474
+30024128 T DiskInit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/disk.c:16
+30024420 T GetDiskInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/disk.c:51
+300244b0 T AddFileDriver	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/disk.c:106
+30024e60 T RemoveFileDriver	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/disk.c:216
+300251f8 T FATGetNextClus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fat.c:17
+300256ec T FATSetNextClus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fat.c:131
+30025cb4 T FATAddClus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fat.c:256
+30025eac T FATDelClusChain	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fat.c:344
+30025f58 T ClearClus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:15
+300260b0 T ReadFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:69
+30026520 T WriteFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:127
+300269ec T GetRootFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:191
+30026b08 T GetFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:231
+30026cd0 T SetRootFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:292
+30026de8 T SetFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:331
+30026fb4 T FindFDTInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:395
+300271d0 T AddFDT	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:457
+300273e8 T DelFDT	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:538
+300275f0 T ChangeFDT	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:602
+300277c8 T DirIsEmpty	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:663
+300278dc T FDTIsLie	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fdt.c:725
+30027ad8 T FileInit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:20
+30027b30 T FindOpenFile	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:42
+30027d14 T RemoveFile	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:87
+30027e34 T FindOpenFileW	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:136
+3002801c T _FileOpenR	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:181
+300281a0 T _FileOpenW	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:235
+30028444 T _FileOpenRW	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:319
+30028598 T FileOpen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:354
+3002866c T FileClose	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:398
+300287b8 T FileGetCh	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:441
+30028b1c T FileRead	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:545
+30029284 T FilePutCh	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:687
+30029570 T FileWrite	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:794
+30029dd4 T FileCloseAll	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:937
+30029e1c T FileEof	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:959
+30029ea4 T FileSeek	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:981
+3002a0b8 T strupr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:1047
+3002a130 T Format	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/format.c:75
+3002ac6c T FsCommand	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/fscmd.c:23
+3002afe4 T acoral_unlink	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:8
+3002b0dc T acoral_open	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:36
+3002b230 T acoral_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:70
+3002b2bc T acoral_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:85
+3002b340 T acoral_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:97
+3002b3c4 T acoral_closeall	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:108
+3002b428 T acoral_lseek	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:119
+3002b4b4 T acoral_mkdir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:130
+3002b5b4 T acoral_rmdir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:157
+3002b6ac T acoral_chdir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:184
+3002b7a4 T acoral_flush	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:211
+3002b804 T acoral_mount	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:222
+3002b8c0 T acoral_umount	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:241
+3002b938 T acoral_fs_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:252
+3002b994 T CacheInit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:21
+3002ba08 T CloseSec	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:43
+3002ba20 T CacheWriteBack2	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:60
+3002bacc T CacheWriteBack	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:91
+3002bba0 T AllCacheWriteBack	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:120
+3002bc00 T GetCache	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:144
+3002be28 T OpenSec	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:212
+3002c03c T ReadSuperSec	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:271
+3002c0b8 T ReadSec	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:296
+3002c244 T WriteSec	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:353
+3002c300 T aocal_net_mp3	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/user.c:26
+3002c344 T user_main	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/user.c:31
+3002c35c T parse_args	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:14
+3002c59c T add_command	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:68
+3002c600 T find_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:78
+3002c674 T execmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:90
+3002c6f4 T cmd_exe	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:102
+3002c778 T echo	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:116
+3002c7a0 T get_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:120
+3002c968 T acoral_shell_init	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:171
+3002c9fc T acoral_shell_exit	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:184
+3002ca20 T acoral_shell_enter	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:189
+3002cabc T malloc_scan	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:4
+3002cadc T malloc_scan2	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:16
+3002cafc T help	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:29
+3002cb68 T exit	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:45
+3002cbb8 T cmd_init	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:68
+3002cc04 T display_thread	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/thread_display.c:5
+3002ce18 T server_client	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/telnet.c:16
+3002cea8 T telnet_thread	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/telnet.c:32
+3002cf20 T user_telnetd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/telnet.c:55
+3002cf60 T cd_dir	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:9
+3002d0bc T print	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:45
+3002d2ec T ls_dir	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:93
+3002d490 T mk_dir	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:149
+3002d4e4 T rm_dir	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:166
+3002d578 T copy_file	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:190
+3002d68c T create_file	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:224
+3002d730 T rm_file	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:249
+3002d784 T fs_cmd_init	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:268
+3002d7e4 T httpd_thread	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/httpd.c:20
+3002daa8 T user_httpd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/httpd.c:79
+3002dacc T key_init	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/key.c:47
+3002dc34 T key_scan	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/key.c:83
+3002dec0 T ClearPending	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:32
+3002def8 T touch_pad_init	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:149
+3002df9c T ts_isr	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:167
+3002e148 T Lcd_Init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:60
+3002e2a8 T Lcd_EnvidOnOff	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:86
+3002e2f4 T Lcd_PowerEnable	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:97
+3002e3ac T Lcd_MoveViewPort	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:112
+3002e3c0 T MoveViewPort	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:120
+3002e3c4 T PutPixel	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:128
+3002e440 T Lcd_ClearScr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:137
+3002e4e4 T Glib_Line	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:160
+3002ea4c T Glib_Rectangle	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:282
+3002eae0 T Glib_FilledRectangle	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:293
+3002eb48 T Paint_Bmp	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:304
+3002ec80 T Lcd_TFT_Init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:326
+3002ecac T ts_command	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:364
+3002f030 T get_local_file_dir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:410
+3002f1c0 T suspector_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:450
+3002f4e0 T main_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:494
+30030108 T Lcd_TFT_Test	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:707
+30030338 T my_main_start	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_main.c:19
+300303dc T RequestDMASW	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:30
+30030470 T RequestDMA	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:48
+300307a8 T ReleaseDMA	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:132
+3003089c T StartDMA	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:153
+300309d4 T StopDMA	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:175
+30030ab0 T SetDMARun	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:194
+30030ce4 T QueryDMAStat	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:223
+30030db8 T QueryDMASrc	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:240
+30030e8c T QueryDMADst	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:257
+30030f60 T DbgChgUartDiv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:67
+30030f64 t SetSysFclk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:72
+3003104c T waveOutOpen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:92
+3003136c T waveOutClose	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:157
+30031440 T waveOutPrepareHeader	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:173
+300314c0 T waveOutUnprepareHeader	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:185
+30031510 T waveOutWrite	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:193
+300315e8 T waveOutSetVolume	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:215
+30031664 T waveOutGetVolume	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:226
+300316c8 T waveOutPause	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:235
+30031720 T waveOutRestart	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:244
+30031778 T waveOutReset	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:253
+300317c0 T SetPlayDma	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:263
+30031814 t StartPlay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:268
+300318fc T PlayDMA2Done	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:285
+30031a5c t SetRecDma	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:320
+30031aac t RecDMADone	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:325
+30031b94 T waveInOpen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:345
+30031ef4 T waveInClose	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:425
+3003200c T waveInStart	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:446
+30032150 T waveInStop	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:466
+300321cc T waveInPrepareHeader	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:478
+3003224c T waveInUnprepareHeader	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:490
+3003229c T waveInAddBuffer	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:498
+30032368 T waveInReset	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:519
+30032380 t IIS_PortSetting	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:525
+30032404 t _WrL3Addr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:552
+30032634 t _WrL3Data	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:587
+3003289c t Init1341	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:626
+30032a54 t PlayPause	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:697
+30032aa0 t AdjVolume	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:706
+30032b74 T PlayMusicTest	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/UDA1341.c:12
+30032f40 T mp3_pcm_player	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/pcm_player.c:7
+30033220 T file_pcm_player	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/pcm_player.c:59
+30033464 T local_mp3_file_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:34
+300338d8 T mp3_mask	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:92
+300338ec T local_wav_file_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:98
+30033de8 T online_sel	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:168
+3003405c T client_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:204
+30034254 T client_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:249
+30034290 T min	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:257
+300342e0 T online_wav_file_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:264
+30034860 T online_mp3_file_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:368
+30034d48 T talor_factorial	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:17
+30034eac T talor_pow	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:29
+30034f78 T talor_sin_cal	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:45
+30035098 T talor_cos_cal	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:52
+300351a4 T sin	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:59
+30035360 T cos	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:78
+300353b8 T tan	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:97
+30035414 T talor_exp_cal	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:103
+30035494 T exp	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:267
+3003559c T log	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:291
+3003577c T pow	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:308
+30035ae4 T sqrt	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:340
+30035c98 T modf	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:355
+30035d18 T open_bit_stream_r	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:29
+30035d8c T seek_sync	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:48
+30035e54 T js_bound	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:70
+30035e8c T hdr_to_frps	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:86
+30035f3c T getbit	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:104
+30036144 T quest_stream	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:167
+300364b0 T III_hufman_decode	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:49
+30037074 T HuffmanTable_decode	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:281
+300375c0 T hputbuf	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:398
+3003760c T hgetbits	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:408
+30037764 T rewindNbits	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:438
+300377ec T rewindNbytes	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:450
+30037848 T decode_info	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:22
+30037998 T III_get_side_info	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:41
+30038240 T III_get_scale_factors	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:110
+30038814 T III_dequantize_sample	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:226
+30039654 T III_reorder	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:374
+30039d14 T III_stereo	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:425
+3003bdc8 T III_antialias	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:640
+3003c004 T buffer_CRC	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:692
+3003c018 T main_data_slots	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:701
+3003c140 T Granule_subband_synthesis	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:46
+3003c3e4 T Granule_subband_synthesis2	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:119
+3003c808 T fast_idct_init	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:222
+3003cd90 T fast_idct	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:285
+3003d4b8 T matrix_mul16	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:366
+3003d5e0 T matrix_mul8	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:382
+3003d708 T Granule_imdct	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fastimdct.c:36
+3003f8b4 T Granule_freqinverse	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fastimdct.c:317
+3003f950 T mp3_decoder	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:40
+300403f8 T acoral_get_drv_ctrl_by_name	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:10
+30040484 T acoral_drv_register	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:21
+3004055c T acoral_drv_unregister	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:42
+300405e4 T acoral_dev_open	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:50
+30040678 T acoral_dev_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:61
+30040710 T acoral_dev_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:68
+300407a8 T acoral_dev_config	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:75
+3004083c T acoral_dev_close	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:81
+300408b8 T acoral_alloc_drv	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:88
+300408d8 T acoral_drv_pool_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:93
+30040920 T acoral_drv_sys_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:101
+30040974 T brd_driver_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/brd_driver.c:2
+30040990 T uart_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:9
+300409cc T uart_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:14
+30040a0c T console_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:19
+30040a88 T console_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:30
+30040af4 T console_config	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:40
+30040b24 T console_open	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:49
+30040b3c T uart_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:54
+30040bb0 T con_uart_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:64
+30040c10 T con_telnet_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:11
+30040c5c T con_telnet_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:16
+30040e04 T con_telnet_config	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:43
+30040ea0 T con_telnet_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:63
+30040f0c T SDI_Init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:128
+30040f58 T Delay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:135
+300410ac T SD_card_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:154
+30041530 T Check_Card_In	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:287
+300415bc t SD_Set_IOPort	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:309
+30041610 t Chk_CMDend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:316
+300417cc t CMD0	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:383
+30041814 t CMD8	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:394
+300418dc t CMD2	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:412
+300419c4 t CMD3	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:434
+30041a2c t Chk_MMC_OCR	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:449
+30041afc t CMD55	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:472
+30041b74 t Chk_SD_OCR	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:488
+30041d10 T Card_Select	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:532
+30041dd4 T Card_Deselect	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:560
+30041e70 t CMD9	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:582
+30041f74 t SetBus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:611
+30042050 t Set_1bit_bus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:644
+30042104 t Chk_DATend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:672
+30042204 t Chk_BUSYend	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:697
+300422a4 T SD_Rd_Block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:720
+300425d8 T SD_Wt_Block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:843
+300428dc T SD_Get_CardStat	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:967
+30042c54 T sd_open	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:1072
+30042c78 T Write_One_Block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:1078
+30042f10 T sd_write_block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:1135
+30043094 T sd_read_block	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:1175
+30043214 T sd_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:1241
+30043270 T udelay	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:32
+300432c0 T Eint7_ISR	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:46
+30043350 T IOSetInit	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:72
+30043418 T dm9000_reg_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:88
+30043454 T dm9000_reg_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:100
+30043494 T dm9000_reg_read16	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:111
+300434d0 T hw_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:122
+3004364c T hw_sendPacket	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:163
+300437f8 T hw_getPacket	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:243
+30043b30 T hw_dm9k_config	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:374
+30043b80 T hw_dm9k_read	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:384
+30043c00 T hw_dm9k_write	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:395
+30043c38 T dm9000_init	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:401
+30043ca0 t .udivsi3_nodiv0
+30043ca0 T __aeabi_uidiv
+30043ca0 T __udivsi3
+30043d94 T __aeabi_uidivmod
+30043db4 T __aeabi_idiv
+30043db4 T __divsi3
+30043dbc t .divsi3_nodiv0
+30043edc T __aeabi_idivmod
+30043efc W __aeabi_idiv0
+30043efc W __aeabi_ldiv0
+30043f00 T __aeabi_drsub
+30043f08 T __aeabi_dsub
+30043f08 T __subdf3
+30043f0c T __adddf3
+30043f0c T __aeabi_dadd
+3004421c T __aeabi_ui2d
+3004421c T __floatunsidf
+30044240 T __aeabi_i2d
+30044240 T __floatsidf
+30044268 T __aeabi_f2d
+30044268 T __extendsfdf2
+300442a8 T __aeabi_ul2d
+300442a8 T __floatundidf
+300442bc T __aeabi_l2d
+300442bc T __floatdidf
+3004431c T __aeabi_dmul
+3004431c T __muldf3
+300445ac T __aeabi_ddiv
+300445ac T __divdf3
+300447b8 T __gedf2
+300447b8 T __gtdf2
+300447c0 T __ledf2
+300447c0 T __ltdf2
+300447c8 T __cmpdf2
+300447c8 T __eqdf2
+300447c8 T __nedf2
+30044850 T __aeabi_cdrcmple
+3004486c T __aeabi_cdcmpeq
+3004486c T __aeabi_cdcmple
+30044884 T __aeabi_dcmpeq
+3004489c T __aeabi_dcmplt
+300448b4 T __aeabi_dcmple
+300448cc T __aeabi_dcmpge
+300448e4 T __aeabi_dcmpgt
+300448fc T __aeabi_d2iz
+300448fc T __fixdfsi
+30044958 T __aeabi_d2uiz
+30044958 T __fixunsdfsi
+300449ac T __aeabi_frsub
+300449b4 T __aeabi_fsub
+300449b4 T __subsf3
+300449b8 T __addsf3
+300449b8 T __aeabi_fadd
+30044b74 T __aeabi_ui2f
+30044b74 T __floatunsisf
+30044b7c T __aeabi_i2f
+30044b7c T __floatsisf
+30044b9c T __aeabi_ul2f
+30044b9c T __floatundisf
+30044bac T __aeabi_l2f
+30044bac T __floatdisf
+30044c58 T __aeabi_fmul
+30044c58 T __mulsf3
+30044df0 T __aeabi_fdiv
+30044df0 T __divsf3
+30044f50 T __gesf2
+30044f50 T __gtsf2
+30044f58 T __lesf2
+30044f58 T __ltsf2
+30044f60 T __cmpsf2
+30044f60 T __eqsf2
+30044f60 T __nesf2
+30044fc4 T __aeabi_cfrcmple
+30044fd4 T __aeabi_cfcmpeq
+30044fd4 T __aeabi_cfcmple
+30044fec T __aeabi_fcmpeq
+30045004 T __aeabi_fcmplt
+3004501c T __aeabi_fcmple
+30045034 T __aeabi_fcmpge
+3004504c T __aeabi_fcmpgt
+30045620 T small_digits	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:30
+30045648 T large_digits	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:31
+3004568c t err_to_errno_table	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:127
+300456d0 T ip_addr_any	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip_addr.c:48
+300456d4 T ip_addr_broadcast	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip_addr.c:49
+300456d8 t memp_sizes	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:116
+300456f4 t memp_num	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:122
+30045710 T tcp_backoff	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:56
+30045720 T tcp_persist_backoff	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:59
+30045750 T ethbroadcast	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:107
+30045758 T ethzero	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:108
+300457b4 T Root	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/format.c:4
+30045e70 t C.0.2321
+30046194 t C.169.1969
+30046688 D acoral_doMsgTtl_checked	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:10
+3004668c D prio	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:11
+30046690 D rm_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:13
+30046694 D right	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:14
+300466bc d console_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/print.c:389
+300466c0 d iss.3559
+300466c4 d port.3015
+300466c8 d net_dev_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/ethernetif.c:41
+300466d0 D mem_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:8
+300466e0 D mem2_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:20
+300466f0 D help_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:38
+30046700 D exit_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/cmd.c:50
+30046710 D dt_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/thread_display.c:56
+30046720 D cd_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:38
+30046730 D ls_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:142
+30046740 D mkdir_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:159
+30046750 D rmdir_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:182
+30046760 D copy_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:216
+30046770 D create_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:242
+30046780 D rm_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:261
+30046790 d WwwRoot	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/httpd.c:14
+30046794 D key_dir	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/key.c:44
+30046798 d flag	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:164
+3004679c D bg1	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/bg1.h:1
+3008639c D bg2	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/bg2.h:1
+300c5f9c D play_status	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:353
+300c5fa0 D play_model	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:355
+300c5fa4 D play_volume	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:356
+300c5fa8 d CodecPara	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:44
+300c5ffc d PlayVolume	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:65
+300c6000 D end_of_file	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:32
+300c6008 D useful_fact	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:7
+300c60b0 D get_exp	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:107
+300c63d0 D C1	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:254
+300c63f0 D C2	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/my_math.c:259
+300c6418 D s_freq	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:14
+300c6438 D mode_names	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:15
+300c6448 D layer_names	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:17
+300c6454 D bitrate	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:19
+300c6508 D mask	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:46
+300c6528 D putmask	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:100
+300c654c d jsb_table.1617
+300c6580 D h1	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:17
+300c6590 D h2	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:18
+300c65b4 D h3	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:20
+300c65d8 D h5	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:22
+300c6618 D h6	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:24
+300c6658 D h7	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:26
+300c66e8 D h8	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:31
+300c6778 D h9	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:36
+300c6808 D h10	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:41
+300c6908 D h11	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:49
+300c6a08 D h12	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:57
+300c6b08 D h13	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:65
+300c6f08 D h15	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:98
+300c7308 D h16	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:130
+300c7708 D h24	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:162
+300c7b08 D hA	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:194
+300c7b48 D hB	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:196
+300c7b88 D h_cue	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:201
+300c7da8 D h_tables	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:238
+300c7e30 d t_linbits	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:26
+300c7eb0 D buf_bit_idx	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:30
+300c7eb4 D sfBandIndex	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:11
+300c8070 D sfbtable	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:101
+300c8090 D slen	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:105
+300c8110 D pretab	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:154
+300c8168 D is43_table	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:157
+300c9168 D cs	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:638
+300c9188 D ca	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Decode.c:639
+300c91a8 d init.2591
+300c91ac d init.1747
+300c91b0 D D_coex	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/DEWINDOW.h:1
+300c99b0 d Granule_sbsynth_Vptr	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:27
+300c99b8 d init.1885
+300c99bc D Granule_twiddles_short	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fastimdct.c:25
+300c9a18 D Granule_twiddles_normal	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fastimdct.c:31
+300c9a84 d init.1609
+300c9a88 D mp3_first	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:35
+300c9a8c D mp3_fast_first	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:36
+300c9a90 D mp3_fastsb_first	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:37
+300c9a94 D mp3_freq	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:38
+300c9a98 B acoral_start_sched	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:3
+300c9a98 B bss_start
+300c9a9c b acoral_ready_queues	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:10
+300ca0d8 b ticks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:23
+300ca0dc b print_buf.2163
+300ca4dc b print_buf.2126
+300ca5dc b rand_seed	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/lib/src/random.c:2
+300ca5e0 B pbuf_release	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:7
+300ca5e4 b sockets	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:116
+300ca634 b select_cb_list	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:118
+300ca638 b socksem	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:121
+300ca63c b selectsem	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/sockets.c:123
+300ca640 b tcpip_init_done	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:58
+300ca644 b tcpip_init_done_arg	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:59
+300ca648 B mbox	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:60
+300ca64c b tcpip_tcp_timer_active	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/api/tcpip.c:69
+300ca650 b str.2216
+300ca660 b ip_id.2980
+300ca664 b buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/ipv4/ip_frag.c:602
+300cac40 b memp_tab	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:110
+300cac74 b memp_memory	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/memp.c:136
+300dbb8c b netifnum.2754
+300dbb90 b num_pbuf_realse.2437
+300dbb94 b raw_pcbs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/raw.c:58
+300dbb98 b tcp_timer	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:75
+300dbb9c b inseg	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:63
+300dbbb0 b tcphdr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:64
+300dbbb4 b iphdr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:65
+300dbbb8 b seqno	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:66
+300dbbbc b ackno	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:66
+300dbbc0 b flags	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:67
+300dbbc2 b tcplen	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:68
+300dbbc4 b recv_flags	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:70
+300dbbc8 b recv_data	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:71
+300dbbcc b ram_heap	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:172
+300e3be0 b ram	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:174
+300e3be4 b ram_end	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:176
+300e3be8 b lfree	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:178
+300e3bec b mem_sem	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/lwmem.c:180
+300e3bf0 b arp_table	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:109
+300e3cb8 b etharp_cached_entry	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/netif/etharp.c:111
+300e3cbc b Buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/disk.c:105
+300e3ebc b FileInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/file.c:4
+300e4024 b Buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/format.c:59
+300e5028 b tmp	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:189
+300e50a8 b j.2286
+300e50ac b httpd_buf	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/httpd.c:18
+300e54ac b str	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/httpd.c:19
+300e58ac B count	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:29
+300e58b0 B change	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:30
+300e58b4 B num	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:166
+300e58b8 B status_changed	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:352
+300e58bc B play_command	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:354
+300e58c0 B cur_song	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:358
+300e58c4 B end_of_song	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:359
+300e58c8 b DMAChannel	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/dma.c:23
+300e58e8 b lpPlayFstBlk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:28
+300e58ec b lpRecFstBlk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:28
+300e58f0 b lpPlayLstBlk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:29
+300e58f4 b lpRecLstBlk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:29
+300e58f8 b PlayTotBlks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:31
+300e58fc b RecTotBlks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:31
+300e5900 b save_MPLLCON	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:33
+300e5904 b PlayStatus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:63
+300e5924 b RecStatus	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:63
+300e5948 B totalBytes	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:160
+300e5950 B bytesReceived	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:161
+300e5958 B fileNameSize	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:162
+300e5960 B rec_cmd	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:164
+300e5964 B localFile	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:166
+300e5968 B sock_fd	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:203
+300e5970 b read_count.1721
+300e5974 b cur_file_buf.1722
+300e5978 B h0	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/../include/HUFFMAN.h:16
+300e597c b dataword	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:37
+300e5980 b Granule_sbsynth_V	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:29
+300e7980 b A16	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:31
+300e7d80 b A8	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:31
+300e7e80 b G16	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:32
+300e8280 b G8	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:32
+300e8380 b H16	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:33
+300e8780 b H8	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:33
+300e8880 b B16	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:35
+300e8c80 b B8	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/Fastsb.c:35
+300e8d80 b Granule_imdct_win.1587
+300e8fc0 b Granule_9x9_idct.1586
+300e90e0 b Granule_imdct_previous.1585
+300ea2e0 B totpos	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:18
+300ea2e4 b frame_start.2626
+300ea2e8 b con_buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:7
+300ea2ec B SD_CardIn	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:119
+300ea2f0 B TR_end	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:120
+300ea2f4 b dm9k_recv_sem	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:25
+300ea318 b flag	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:26
+300ea31c B nulltimeouts	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:23
+300ea328 B g_msgctr_header	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:14
+300ea334 B drv_table	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:9
+300ea384 B con_telnet_ops	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:5
+300ea398 B netif_list	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:61
+300ea39c B comm_policy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/comm_thrd.c:10
+300ea3b8 B acoral_free_res_pool	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:9
+300ea3bc B file_mp3_buf_hdr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:20
+300ea45c B posix_policy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/posix_thrd.c:118
+300ea478 B server_addr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/client.h:12
+300ea488 B sched_lock	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:8
+300ea48c B intr_table	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/int.c:7
+300eaa04 B slice_policy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/slice_thrd.c:12
+300eaa20 B thread_api	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:18
+300eaa24 B cur_file_name	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:28
+300eaa38 B tcp_active_pcbs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:69
+300eaa3c B udp_pcbs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/udp.c:70
+300eaa40 B mem_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/malloc.c:32
+300eaa74 B tcp_ticks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:55
+300eaa78 B tcp_listen_pcbs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:66
+300eaa7c B fileName	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:165
+300eaab0 B pcm_player_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:31
+300eaab4 B acoral_thread_pool_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:19
+300eaaec B acoral_drv_pool_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/src/driver.c:8
+300eab24 B remo_addr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/client.h:13
+300eab34 B acoral_threads_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/thread.c:17
+300eab40 B lpPlayCurBlk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:30
+300eab44 B thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:66
+300eab48 B DiskInfo	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/disk.c:3
+300eab7c B orig_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:104
+300eabd4 B tmp_rm_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:12
+300eabe0 B acoral_mem_blocks	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:31
+300eabe4 B LCD_BUFFER	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:54
+3012a7e4 B send	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/client.h:10
+3012a7f0 B sample_100ms	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/softdelay.c:7
+3012a7f4 B pvNullPointer	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:25
+3012a7f8 B console_ops	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_uart.c:6
+3012a80c B fs_mutex	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/os_file.c:6
+3012a810 B left	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:18
+3012a818 B remo_sock_fd	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/client.h:15
+3012a81c B id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:360
+3012a820 B key_eve	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/key.c:45
+3012a844 B CurrentDirName	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/fs_shellcmd.c:8
+3012a850 B tcp_tmp_pcb	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:73
+3012a854 B g_http_get_string	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/httpd.c:16
+3012ac54 B lpRecCurBlk	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/AudioDrv.c:30
+3012ac58 B net_if	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/LwIPEntry.c:5
+3012ac88 B daemon_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:4
+3012ac8c B period_delay_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:10
+3012ac98 B tcp_input_pcb	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp_in.c:73
+3012ac9c B head_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:6
+3012aca0 B acoral_res_release_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:2
+3012acac B file_mp3_buf_usedone_eve	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:23
+3012ae14 B acoral_pools	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/resource.c:8
+3012b634 B buf_byte_idx	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:31
+3012b638 B sock_len	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/client.h:17
+3012b63c B FreeList	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:6
+3012b640 B CurrentDrive	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/dir.c:4
+3012b644 B play_song	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:357
+3012b648 B acoral_msg_pool_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:13
+3012b680 B song_num	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:408
+3012b684 B buffer	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:25
+3012d684 B tcp_bound_pcbs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:64
+3012d688 B CacheNum	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:8
+3012d68c B hw_dm9k_ops	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/dm9000.c:24
+3012d6a0 B tcp_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:166
+3012d6a4 B idle_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:4
+3012d6a8 B datapos	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:39
+3012d6ac B policy_list	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/policy.c:7
+3012d6b8 B acoral_mem_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/buddy.c:30
+3012d6bc B rm_policy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/rm_thrd.c:128
+3012d6d8 B my_conn	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:6
+3012d6dc B FreeListTail	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:7
+3012d6e0 B data	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:362
+3012d6e8 B CardInf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:108
+3012d718 B mp3_dat	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:11
+3012d71c B init_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/core.c:4
+3012d720 B time_delay_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:17
+3012d72c B net_data	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:9
+3012d730 B file_wav_buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:19
+301f5730 B acoral_evt_pool_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/event.c:3
+301f5768 B acoral_msgctr_pool_ctrl	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/message.c:12
+301f57a0 B timeoutslist	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:24
+301f57a4 B xdata	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:31
+301f57a8 B pcm_dma_buf_playdone_eve	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:26
+301f5910 B HashTable	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/fs/src/rw_sec.c:5
+301f5938 B ydata	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:31
+301f593c B timeout_queue	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/timer.c:22
+301f5948 B file_mp3_buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:18
+302bd948 B grle	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:23
+302bda68 B buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:19
+302be268 B offset	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:29
+302be26c B ready_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:9
+302be270 B file_mp3_buf_update_eve	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:24
+302be3d8 B send_cmd	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:163
+302be3dc B local_file_dir	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/lcd.c:407
+302be508 B tcp_tw_pcbs	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/tcp.c:71
+302be50c B fmt	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/pcm_player.c:6
+302be520 B timeoutnodes	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/arch/sys_arch.c:21
+302be56c B dataword_len	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/HUFFMAN.c:38
+302be570 B lwip_stats	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/stats.c:49
+302be6a4 B intr_nesting	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/hal/src/hal_comm.c:6
+302be6a8 B netif_default	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/plugin/net/core/netif.c:62
+302be6ac B cur_file_ptr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:29
+302be6b0 B pcm_dma_buf_update_eve	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:27
+302be818 B running_thread	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:9
+302be81c B fr_ps	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:22
+302be830 B rec	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/../include/client.h:11
+302bf830 B sd_ops	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/sdi.c:1071
+302bf844 B mp3_decoder_id	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/file_read.c:30
+302bf848 B need_sched	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/sched.c:7
+302bf84c B hdr	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/pcm_player.c:5
+302bfa04 B pcm_dma_buf	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/user/src/Layer3.c:26
+302f7e04 B period_policy	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/period_thrd.c:123
+302f7e20 B len	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/driver/s3c2440/src/con_telnet.c:8
+302f7e24 B sample	/home/root1/eclipse_workspace/mp3_sp9/acoral_linux/kernel/src/softdelay.c:8
+302f7e28 B bs	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/MP3_COMMON.c:10
+302f7e44 B tail_cmd	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/shell.c:6
+302f7e48 B touch_eve	/home/root1/eclipse_workspace/mp3/acoral_linux/user/src/touch_pad.c:147
+302f7e6c A bss_end
+302f7e6c A heap_start
+33eff000 A heap_end
+33f00000 A MMU_base
+33fff900 A SYS_stack
+33fffb00 A SVC_stack
+33fffc00 A UDF_stack
+33fffd00 A ABT_stack
+33ffff00 A FIQ_stack
+33ffff00 A IRQ_stack
+33ffff00 A stack_base
+c0000000 a BUS_M
