@@ -52,7 +52,7 @@ acoral_shell_cmd_t exit_cmd={
 	NULL
 };
 void spg(acoral_32 argc,acoral_char **argv){
-	acoral_prints("SPGGOGOGO！！！");
+	acoral_prints("SPGGOGOGO!!!");
 }
 
 acoral_shell_cmd_t spg_cmd={

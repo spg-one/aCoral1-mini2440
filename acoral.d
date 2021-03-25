@@ -41,10 +41,10 @@ Disassembly of section .text:
 30000050:	30000000 	.word	0x30000000
 
 30000054 <_bss_start>:
-30000054:	3000eadc 	.word	0x3000eadc
+30000054:	3000ece8 	.word	0x3000ece8
 
 30000058 <_bss_end>:
-30000058:	30010424 	.word	0x30010424
+30000058:	30010630 	.word	0x30010630
 
 3000005c <ResetHandler>:
 3000005c:	e3a01453 	mov	r1, #1392508928	; 0x53000000
@@ -393,7 +393,7 @@ void hal_all_entry(acoral_vector vector){
 30000474:	1a000001 	bne	30000480 <hal_all_entry+0xb4>
     	acoral_prints("DErr\n");
 30000478:	e59f0014 	ldr	r0, [pc, #20]	; 30000494 <hal_all_entry+0xc8>
-3000047c:	eb002b84 	bl	3000b294 <acoral_prints>
+3000047c:	eb002c05 	bl	3000b498 <acoral_prints>
     acoral_intr_entry(vector);
 30000480:	e59d0004 	ldr	r0, [sp, #4]
 30000484:	eb000eda 	bl	30003ff4 <acoral_intr_entry>
@@ -401,7 +401,7 @@ void hal_all_entry(acoral_vector vector){
 30000488:	e28dd014 	add	sp, sp, #20
 3000048c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30000490:	e12fff1e 	bx	lr
-30000494:	3000e1d4 	.word	0x3000e1d4
+30000494:	3000e3d8 	.word	0x3000e3d8
 
 30000498 <hal_intr_unmask>:
 
@@ -2185,7 +2185,7 @@ void hal_intr_nesting_init_comm(){
 }
 30001754:	e28dd008 	add	sp, sp, #8
 30001758:	e12fff1e 	bx	lr
-3000175c:	300103f4 	.word	0x300103f4
+3000175c:	30010600 	.word	0x30010600
 
 30001760 <hal_get_intr_nesting_comm>:
 /*===========================                                                                                                                 
@@ -2199,7 +2199,7 @@ acoral_u32 hal_get_intr_nesting_comm(){
 }
 30001768:	e1a00003 	mov	r0, r3
 3000176c:	e12fff1e 	bx	lr
-30001770:	300103f4 	.word	0x300103f4
+30001770:	30010600 	.word	0x30010600
 
 30001774 <hal_intr_nesting_dec_comm>:
 
@@ -2229,7 +2229,7 @@ void hal_intr_nesting_dec_comm(){
 }
 300017ac:	e28dd008 	add	sp, sp, #8
 300017b0:	e12fff1e 	bx	lr
-300017b4:	300103f4 	.word	0x300103f4
+300017b4:	30010600 	.word	0x30010600
 
 300017b8 <hal_intr_nesting_inc_comm>:
 /*===========================                                                                                                                 
@@ -2245,7 +2245,7 @@ void hal_intr_nesting_inc_comm(){
 300017c8:	e5832000 	str	r2, [r3]
 }
 300017cc:	e12fff1e 	bx	lr
-300017d0:	300103f4 	.word	0x300103f4
+300017d0:	30010600 	.word	0x30010600
 
 300017d4 <hal_sched_bridge_comm>:
 
@@ -2398,7 +2398,7 @@ void daem(void *args){
 			acoral_spin_lock(&tmp->lock);/**/
 			acoral_list_del(tmp);/**/
 30001910:	e59d0018 	ldr	r0, [sp, #24]
-30001914:	eb0021bc 	bl	3000a00c <acoral_list_del>
+30001914:	eb00223d 	bl	3000a210 <acoral_list_del>
 			acoral_spin_unlock(&tmp->lock);/**/
 			acoral_spin_unlock(&head->lock);/**/
 			HAL_EXIT_CRITICAL();
@@ -2433,7 +2433,7 @@ void daem(void *args){
 30001964:	e2833020 	add	r3, r3, #32
 30001968:	e1a00003 	mov	r0, r3
 3000196c:	e59d1014 	ldr	r1, [sp, #20]
-30001970:	eb002192 	bl	30009fc0 <acoral_list_add2_tail>
+30001970:	eb002213 	bl	3000a1c4 <acoral_list_add2_tail>
 				acoral_spin_unlock(&tmp1->lock);/**/
 				acoral_spin_unlock(&head->lock);/**/
 				HAL_EXIT_CRITICAL();
@@ -2458,7 +2458,7 @@ void daem(void *args){
 3000198c:	eb000388 	bl	300027b4 <acoral_suspend_self>
 	}
 30001990:	eaffffd1 	b	300018dc <daem+0x14>
-30001994:	3000fad0 	.word	0x3000fad0
+30001994:	3000fcdc 	.word	0x3000fcdc
 
 30001998 <init>:
 #define DAEM_STACK_SIZE 512
@@ -2481,7 +2481,7 @@ void init(void *args){
 	/*软件延时初始化函数*/
 #ifdef CFG_SOFT_DELAY
 	soft_delay_init();
-300019b4:	eb002008 	bl	300099dc <soft_delay_init>
+300019b4:	eb002089 	bl	30009be0 <soft_delay_init>
 #ifdef CFG_STAT
 	/*内核统计相关数据初始化*/
 	stat_init();
@@ -2538,14 +2538,14 @@ void init(void *args){
 	/*应用级相关服务初始化,应用级不要使用延时函数，没有效果的*/
 #ifdef CFG_SHELL
 	acoral_shell_init();
-30001a54:	eb002cb2 	bl	3000cd24 <acoral_shell_init>
+30001a54:	eb002d33 	bl	3000cf28 <acoral_shell_init>
 #endif
 	plugin_init();
-30001a58:	eb002b21 	bl	3000c6e4 <plugin_init>
+30001a58:	eb002ba2 	bl	3000c8e8 <plugin_init>
 	app_enter_policy_init();
 30001a5c:	eb000147 	bl	30001f80 <app_enter_policy_init>
 	user_main();
-30001a60:	eb002b2b 	bl	3000c714 <user_main>
+30001a60:	eb002bac 	bl	3000c918 <user_main>
 #ifdef CFG_TEST
 	test_init();
 #endif
@@ -2555,12 +2555,12 @@ void init(void *args){
 30001a68:	e28dd024 	add	sp, sp, #36	; 0x24
 30001a6c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001a70:	e12fff1e 	bx	lr
-30001a74:	3000eadc 	.word	0x3000eadc
-30001a78:	3000fad0 	.word	0x3000fad0
+30001a74:	3000ece8 	.word	0x3000ece8
+30001a78:	3000fcdc 	.word	0x3000fcdc
 30001a7c:	300018c8 	.word	0x300018c8
-30001a80:	3000e1dc 	.word	0x3000e1dc
-30001a84:	3000fabc 	.word	0x3000fabc
-30001a88:	3000fa30 	.word	0x3000fa30
+30001a80:	3000e3e0 	.word	0x3000e3e0
+30001a84:	3000fcc8 	.word	0x3000fcc8
+30001a88:	3000fc3c 	.word	0x3000fc3c
 
 30001a8c <acoral_start>:
 acoral_thread_t orig_thread;
@@ -2593,7 +2593,7 @@ void acoral_start(){
 #ifdef CFG_DRIVER
 	orig_thread.console_id=acoral_dev_open("console");;
 30001aa8:	e59f001c 	ldr	r0, [pc, #28]	; 30001acc <acoral_start+0x40>
-30001aac:	eb002e4c 	bl	3000d3e4 <acoral_dev_open>
+30001aac:	eb002ecd 	bl	3000d5e8 <acoral_dev_open>
 30001ab0:	e1a02000 	mov	r2, r0
 30001ab4:	e59f300c 	ldr	r3, [pc, #12]	; 30001ac8 <acoral_start+0x3c>
 30001ab8:	e583204c 	str	r2, [r3, #76]	; 0x4c
@@ -2607,8 +2607,8 @@ void acoral_start(){
 }
 30001ac0:	e8bd4008 	pop	{r3, lr}
 30001ac4:	e12fff1e 	bx	lr
-30001ac8:	3000fa34 	.word	0x3000fa34
-30001acc:	3000e1e4 	.word	0x3000e1e4
+30001ac8:	3000fc40 	.word	0x3000fc40
+30001acc:	3000e3e8 	.word	0x3000e3e8
 
 30001ad0 <acoral_core_cpu_start>:
 /*================================
@@ -2689,14 +2689,14 @@ void acoral_core_cpu_start(){
 30001ba0:	e28dd01c 	add	sp, sp, #28
 30001ba4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001ba8:	e12fff1e 	bx	lr
-30001bac:	3000eadc 	.word	0x3000eadc
+30001bac:	3000ece8 	.word	0x3000ece8
 30001bb0:	300018bc 	.word	0x300018bc
-30001bb4:	3000e1ec 	.word	0x3000e1ec
-30001bb8:	30010334 	.word	0x30010334
+30001bb4:	3000e3f0 	.word	0x3000e3f0
+30001bb8:	30010540 	.word	0x30010540
 30001bbc:	30001998 	.word	0x30001998
-30001bc0:	3000e1f4 	.word	0x3000e1f4
-30001bc4:	3000e1fc 	.word	0x3000e1fc
-30001bc8:	30010364 	.word	0x30010364
+30001bc0:	3000e3f8 	.word	0x3000e3f8
+30001bc4:	3000e400 	.word	0x3000e400
+30001bc8:	30010570 	.word	0x30010570
 
 30001bcc <acoral_start_os>:
 
@@ -2720,8 +2720,8 @@ void acoral_start_os(){
 }
 30001bfc:	e8bd4008 	pop	{r3, lr}
 30001c00:	e12fff1e 	bx	lr
-30001c04:	300103f0 	.word	0x300103f0
-30001c08:	300103f8 	.word	0x300103f8
+30001c04:	300105fc 	.word	0x300105fc
+30001c08:	30010604 	.word	0x30010604
 
 30001c0c <acoral_module_init>:
 
@@ -2753,7 +2753,7 @@ void acoral_module_init(){
 	/*消息管理系统初始化*/
 #ifdef CFG_DRIVER
 	acoral_drv_sys_init();
-30001c28:	eb002ebc 	bl	3000d720 <acoral_drv_sys_init>
+30001c28:	eb002f3d 	bl	3000d924 <acoral_drv_sys_init>
 #endif
 }
 30001c2c:	e8bd4008 	pop	{r3, lr}
@@ -2785,7 +2785,7 @@ acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void
 		acoral_printerr("Alloc thread:%s fail\n",name);
 30001c64:	e59f0098 	ldr	r0, [pc, #152]	; 30001d04 <create_thread_ext+0xd0>
 30001c68:	e59d1008 	ldr	r1, [sp, #8]
-30001c6c:	eb002565 	bl	3000b208 <acoral_print>
+30001c6c:	eb0025e6 	bl	3000b40c <acoral_print>
 		acoral_printk("No Mem Space or Beyond the max thread\n");
 		return -1;
 30001c70:	e3e03000 	mvn	r3, #0
@@ -2836,7 +2836,7 @@ acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void
 30001cf8:	e28dd024 	add	sp, sp, #36	; 0x24
 30001cfc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001d00:	e12fff1e 	bx	lr
-30001d04:	3000e204 	.word	0x3000e204
+30001d04:	3000e408 	.word	0x3000e408
 
 30001d08 <acoral_get_policy_ctrl>:
 
@@ -2892,7 +2892,7 @@ acoral_sched_policy_t *acoral_get_policy_ctrl(acoral_u8 type){
 30001d78:	e1a00003 	mov	r0, r3
 30001d7c:	e28dd018 	add	sp, sp, #24
 30001d80:	e12fff1e 	bx	lr
-30001d84:	30010338 	.word	0x30010338
+30001d84:	30010544 	.word	0x30010544
 
 30001d88 <acoral_policy_thread_init>:
 
@@ -2936,7 +2936,7 @@ acoral_id acoral_policy_thread_init(acoral_u32 policy,acoral_thread_t *thread,vo
 30001df8:	e5d3300c 	ldrb	r3, [r3, #12]
 30001dfc:	e59f0040 	ldr	r0, [pc, #64]	; 30001e44 <acoral_policy_thread_init+0xbc>
 30001e00:	e1a01003 	mov	r1, r3
-30001e04:	eb0024ff 	bl	3000b208 <acoral_print>
+30001e04:	eb002580 	bl	3000b40c <acoral_print>
 		return -1;
 30001e08:	e3e03000 	mvn	r3, #0
 30001e0c:	ea000008 	b	30001e34 <acoral_policy_thread_init+0xac>
@@ -2956,7 +2956,7 @@ acoral_id acoral_policy_thread_init(acoral_u32 policy,acoral_thread_t *thread,vo
 30001e38:	e28dd01c 	add	sp, sp, #28
 30001e3c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001e40:	e12fff1e 	bx	lr
-30001e44:	3000e21c 	.word	0x3000e21c
+30001e44:	3000e420 	.word	0x3000e420
 
 30001e48 <acoral_register_sched_policy>:
 
@@ -2968,12 +2968,12 @@ void acoral_register_sched_policy(acoral_sched_policy_t *policy){
 30001e54:	e59d3004 	ldr	r3, [sp, #4]
 30001e58:	e1a00003 	mov	r0, r3
 30001e5c:	e59f100c 	ldr	r1, [pc, #12]	; 30001e70 <acoral_register_sched_policy+0x28>
-30001e60:	eb002056 	bl	30009fc0 <acoral_list_add2_tail>
+30001e60:	eb0020d7 	bl	3000a1c4 <acoral_list_add2_tail>
 }
 30001e64:	e28dd00c 	add	sp, sp, #12
 30001e68:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001e6c:	e12fff1e 	bx	lr
-30001e70:	30010338 	.word	0x30010338
+30001e70:	30010544 	.word	0x30010544
 
 30001e74 <acoral_policy_delay_deal>:
 
@@ -3027,7 +3027,7 @@ void acoral_policy_delay_deal(){
 30001ee0:	e28dd014 	add	sp, sp, #20
 30001ee4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001ee8:	e12fff1e 	bx	lr
-30001eec:	30010338 	.word	0x30010338
+30001eec:	30010544 	.word	0x30010544
 
 30001ef0 <acoral_policy_thread_release>:
 
@@ -3075,24 +3075,24 @@ void acoral_sched_policy_init(){
 30001f60:	eb000477 	bl	30003144 <comm_policy_init>
 #ifdef CFG_THRD_SLICE
 	slice_policy_init();
-30001f64:	eb001d01 	bl	30009370 <slice_policy_init>
+30001f64:	eb001d82 	bl	30009574 <slice_policy_init>
 #endif
 #ifdef CFG_THRD_PERIOD
 	period_policy_init();
-30001f68:	eb001c43 	bl	3000907c <period_policy_init>
+30001f68:	eb001cc4 	bl	30009280 <period_policy_init>
 #endif
 #ifdef CFG_THRD_RM
 	rm_policy_init();
-30001f6c:	eb001aba 	bl	30008a5c <rm_policy_init>
+30001f6c:	eb001b3b 	bl	30008c60 <rm_policy_init>
 #endif
 #ifdef CFG_THRD_POSIX
 	posix_policy_init();
-30001f70:	eb001e4b 	bl	300098a4 <posix_policy_init>
+30001f70:	eb001ecc 	bl	30009aa8 <posix_policy_init>
 #endif
 }
 30001f74:	e8bd4008 	pop	{r3, lr}
 30001f78:	e12fff1e 	bx	lr
-30001f7c:	30010338 	.word	0x30010338
+30001f7c:	30010544 	.word	0x30010544
 
 30001f80 <app_enter_policy_init>:
 
@@ -3100,7 +3100,7 @@ void app_enter_policy_init(){
 30001f80:	e92d4008 	push	{r3, lr}
 #ifdef CFG_THRD_RM
 	rm_init();
-30001f84:	eb001a8f 	bl	300089c8 <rm_init>
+30001f84:	eb001b10 	bl	30008bcc <rm_init>
 #endif
 }
 30001f88:	e8bd4008 	pop	{r3, lr}
@@ -3112,7 +3112,7 @@ void app_exit_policy_init(){
 30001f90:	e92d4008 	push	{r3, lr}
 #ifdef CFG_THRD_RM
 	rm_end();
-30001f94:	eb001ac9 	bl	30008ac0 <rm_end>
+30001f94:	eb001b4a 	bl	30008cc4 <rm_end>
 #endif
 }
 30001f98:	e8bd4008 	pop	{r3, lr}
@@ -3157,8 +3157,8 @@ void acoral_sched_init(){
 }
 30001fe0:	e28dd008 	add	sp, sp, #8
 30001fe4:	e12fff1e 	bx	lr
-30001fe8:	3000f3e4 	.word	0x3000f3e4
-30001fec:	300103fc 	.word	0x300103fc
+30001fe8:	3000f5f0 	.word	0x3000f5f0
+30001fec:	30010608 	.word	0x30010608
 
 30001ff0 <acoral_sched_unlock>:
 
@@ -3173,7 +3173,7 @@ void acoral_sched_unlock(){
 }
 30002004:	e8bd4008 	pop	{r3, lr}
 30002008:	e12fff1e 	bx	lr
-3000200c:	3000f3e4 	.word	0x3000f3e4
+3000200c:	3000f5f0 	.word	0x3000f5f0
 
 30002010 <acoral_set_orig_thread>:
 
@@ -3187,7 +3187,7 @@ void acoral_set_orig_thread(acoral_thread_t *thread){
 }
 30002024:	e28dd008 	add	sp, sp, #8
 30002028:	e12fff1e 	bx	lr
-3000202c:	300103f8 	.word	0x300103f8
+3000202c:	30010604 	.word	0x30010604
 
 30002030 <acoral_set_running_thread>:
 
@@ -3216,7 +3216,7 @@ void acoral_set_running_thread(acoral_thread_t *thread){
 }
 30002078:	e28dd008 	add	sp, sp, #8
 3000207c:	e12fff1e 	bx	lr
-30002080:	300103f8 	.word	0x300103f8
+30002080:	30010604 	.word	0x30010604
 
 30002084 <acoral_thread_runqueue_init>:
 
@@ -3252,7 +3252,7 @@ void acoral_thread_runqueue_init(){
 300020c8:	e58d3004 	str	r3, [sp, #4]
 		acoral_prio_queue_init(array);
 300020cc:	e59d0004 	ldr	r0, [sp, #4]
-300020d0:	eb001f75 	bl	30009eac <acoral_prio_queue_init>
+300020d0:	eb001ff6 	bl	3000a0b0 <acoral_prio_queue_init>
 void acoral_thread_runqueue_init(){
 	acoral_prio_array_t *array;
 	acoral_rdy_queue_t *rdy_queue;
@@ -3274,7 +3274,7 @@ void acoral_thread_runqueue_init(){
 300020ec:	e28dd014 	add	sp, sp, #20
 300020f0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300020f4:	e12fff1e 	bx	lr
-300020f8:	3000eae0 	.word	0x3000eae0
+300020f8:	3000ecec 	.word	0x3000ecec
 
 300020fc <acoral_get_idlest_cpu>:
 
@@ -3340,7 +3340,7 @@ acoral_u32 acoral_get_idlest_cpu(){
 30002184:	e1a00003 	mov	r0, r3
 30002188:	e28dd010 	add	sp, sp, #16
 3000218c:	e12fff1e 	bx	lr
-30002190:	3000eae0 	.word	0x3000eae0
+30002190:	3000ecec 	.word	0x3000ecec
 
 30002194 <acoral_get_idle_maskcpu>:
 
@@ -3413,7 +3413,7 @@ acoral_u32 acoral_get_idle_maskcpu(acoral_u32 cpu_mask){
 30002248:	e1a00003 	mov	r0, r3
 3000224c:	e28dd018 	add	sp, sp, #24
 30002250:	e12fff1e 	bx	lr
-30002254:	3000eae0 	.word	0x3000eae0
+30002254:	3000ecec 	.word	0x3000ecec
 
 30002258 <acoral_rdyqueue_add>:
 
@@ -3453,7 +3453,7 @@ void acoral_rdyqueue_add(acoral_thread_t *thread){
 300022b4:	e1a00001 	mov	r0, r1
 300022b8:	e1a01002 	mov	r1, r2
 300022bc:	e1a02003 	mov	r2, r3
-300022c0:	eb001ea4 	bl	30009d58 <acoral_prio_queue_add>
+300022c0:	eb001f25 	bl	30009f5c <acoral_prio_queue_add>
 	thread->state&=~ACORAL_THREAD_STATE_SUSPEND;
 300022c4:	e59d3004 	ldr	r3, [sp, #4]
 300022c8:	e5d33004 	ldrb	r3, [r3, #4]
@@ -3483,8 +3483,8 @@ void acoral_rdyqueue_add(acoral_thread_t *thread){
 30002318:	e28dd014 	add	sp, sp, #20
 3000231c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002320:	e12fff1e 	bx	lr
-30002324:	3000eae0 	.word	0x3000eae0
-30002328:	300103fc 	.word	0x300103fc
+30002324:	3000ecec 	.word	0x3000ecec
+30002328:	30010608 	.word	0x30010608
 
 3000232c <acoral_rdyqueue_del>:
 
@@ -3524,7 +3524,7 @@ void acoral_rdyqueue_del(acoral_thread_t *thread){
 30002388:	e1a00001 	mov	r0, r1
 3000238c:	e1a01002 	mov	r1, r2
 30002390:	e1a02003 	mov	r2, r3
-30002394:	eb001e91 	bl	30009de0 <acoral_prio_queue_del>
+30002394:	eb001f12 	bl	30009fe4 <acoral_prio_queue_del>
 	thread->state&=~ACORAL_THREAD_STATE_READY;
 30002398:	e59d3004 	ldr	r3, [sp, #4]
 3000239c:	e5d33004 	ldrb	r3, [r3, #4]
@@ -3553,8 +3553,8 @@ void acoral_rdyqueue_del(acoral_thread_t *thread){
 300023e4:	e28dd014 	add	sp, sp, #20
 300023e8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300023ec:	e12fff1e 	bx	lr
-300023f0:	3000eae0 	.word	0x3000eae0
-300023f4:	300103fc 	.word	0x300103fc
+300023f0:	3000ecec 	.word	0x3000ecec
+300023f4:	30010608 	.word	0x30010608
 
 300023f8 <acoral_sched>:
 
@@ -3626,9 +3626,9 @@ void acoral_sched(){
 }
 30002464:	e8bd4008 	pop	{r3, lr}
 30002468:	e12fff1e 	bx	lr
-3000246c:	300103fc 	.word	0x300103fc
-30002470:	3000f3e4 	.word	0x3000f3e4
-30002474:	3000eadc 	.word	0x3000eadc
+3000246c:	30010608 	.word	0x30010608
+30002470:	3000f5f0 	.word	0x3000f5f0
+30002474:	3000ece8 	.word	0x3000ece8
 
 30002478 <acoral_real_sched>:
 /*================================
@@ -3698,9 +3698,9 @@ void acoral_real_sched(){
 3000250c:	e28dd00c 	add	sp, sp, #12
 30002510:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002514:	e12fff1e 	bx	lr
-30002518:	300103fc 	.word	0x300103fc
-3000251c:	300103f8 	.word	0x300103f8
-30002520:	300103f0 	.word	0x300103f0
+30002518:	30010608 	.word	0x30010608
+3000251c:	30010604 	.word	0x30010604
+30002520:	300105fc 	.word	0x300105fc
 
 30002524 <acoral_real_intr_sched>:
 /*================================
@@ -3770,9 +3770,9 @@ void acoral_real_intr_sched(){
 300025b8:	e28dd00c 	add	sp, sp, #12
 300025bc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300025c0:	e12fff1e 	bx	lr
-300025c4:	300103fc 	.word	0x300103fc
-300025c8:	300103f8 	.word	0x300103f8
-300025cc:	300103f0 	.word	0x300103f0
+300025c4:	30010608 	.word	0x30010608
+300025c8:	30010604 	.word	0x30010604
+300025cc:	300105fc 	.word	0x300105fc
 
 300025d0 <acoral_select_thread>:
 
@@ -3809,7 +3809,7 @@ void acoral_select_thread(){
 	/*找出就绪队列中优先级最高的线程的优先级*/
 	index = acoral_get_highprio(array);
 30002614:	e59d0010 	ldr	r0, [sp, #16]
-30002618:	eb001e16 	bl	30009e78 <acoral_get_highprio>
+30002618:	eb001e97 	bl	3000a07c <acoral_get_highprio>
 3000261c:	e1a03000 	mov	r3, r0
 30002620:	e58d3008 	str	r3, [sp, #8]
 	queue = array->queue + index;
@@ -3844,9 +3844,9 @@ void acoral_select_thread(){
 30002680:	e28dd024 	add	sp, sp, #36	; 0x24
 30002684:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002688:	e12fff1e 	bx	lr
-3000268c:	3000eae0 	.word	0x3000eae0
-30002690:	3000e23c 	.word	0x3000e23c
-30002694:	300103f0 	.word	0x300103f0
+3000268c:	3000ecec 	.word	0x3000ecec
+30002690:	3000e440 	.word	0x3000e440
+30002694:	300105fc 	.word	0x300105fc
 
 30002698 <acoral_release_thread1>:
  * func: release thread in acoral
@@ -3879,7 +3879,7 @@ void acoral_release_thread1(acoral_thread_t *thread){
 300026c8:	e2833020 	add	r3, r3, #32
 300026cc:	e1a00003 	mov	r0, r3
 300026d0:	e59d100c 	ldr	r1, [sp, #12]
-300026d4:	eb001e39 	bl	30009fc0 <acoral_list_add2_tail>
+300026d4:	eb001eba 	bl	3000a1c4 <acoral_list_add2_tail>
 	if(tmp!=head)
 		acoral_spin_unlock(&tmp->lock);
 	acoral_spin_unlock(&head->lock);
@@ -3897,8 +3897,8 @@ void acoral_release_thread1(acoral_thread_t *thread){
 300026f8:	e28dd01c 	add	sp, sp, #28
 300026fc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002700:	e12fff1e 	bx	lr
-30002704:	3000fad0 	.word	0x3000fad0
-30002708:	3000fabc 	.word	0x3000fabc
+30002704:	3000fcdc 	.word	0x3000fcdc
+30002708:	3000fcc8 	.word	0x3000fcc8
 
 3000270c <acoral_release_thread>:
 /*================================
@@ -3919,7 +3919,7 @@ void acoral_release_thread(acoral_res_t *res){
 30002720:	e59d300c 	ldr	r3, [sp, #12]
 30002724:	e2833028 	add	r3, r3, #40	; 0x28
 30002728:	e1a00003 	mov	r0, r3
-3000272c:	eb001e36 	bl	3000a00c <acoral_list_del>
+3000272c:	eb001eb7 	bl	3000a210 <acoral_list_del>
 	acoral_spin_unlock(&acoral_threads_queue.head.lock);
 #ifdef CFG_TEST
 	acoral_print("Release %s thread\n",thread->name);
@@ -3931,7 +3931,7 @@ void acoral_release_thread(acoral_res_t *res){
 30002738:	e59d300c 	ldr	r3, [sp, #12]
 3000273c:	e5933038 	ldr	r3, [r3, #56]	; 0x38
 30002740:	e1a00003 	mov	r0, r3
-30002744:	eb000f4b 	bl	30006478 <buddy_free>
+30002744:	eb000fcc 	bl	3000667c <buddy_free>
 	acoral_release_res((acoral_res_t *)thread);
 30002748:	e59d300c 	ldr	r3, [sp, #12]
 3000274c:	e1a00003 	mov	r0, r3
@@ -4012,7 +4012,7 @@ void acoral_suspend_self(){
 }
 300027c8:	e8bd4008 	pop	{r3, lr}
 300027cc:	e12fff1e 	bx	lr
-300027d0:	300103f8 	.word	0x300103f8
+300027d0:	30010604 	.word	0x30010604
 
 300027d4 <acoral_suspend_thread_by_id>:
  * func: suspend thread in acoral
@@ -4181,7 +4181,7 @@ static void acoral_delay_thread(acoral_thread_t* thread,acoral_time time){
 3000290c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002910:	e12fff1e 	bx	lr
 30002914:	10624dd3 	.word	0x10624dd3
-30002918:	30010368 	.word	0x30010368
+30002918:	30010574 	.word	0x30010574
 
 3000291c <acoral_delay_thread_by_id>:
  *         	
@@ -4228,7 +4228,7 @@ void acoral_delay_self(acoral_time time){
 30002974:	e28dd00c 	add	sp, sp, #12
 30002978:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000297c:	e12fff1e 	bx	lr
-30002980:	300103f8 	.word	0x300103f8
+30002980:	30010604 	.word	0x30010604
 
 30002984 <acoral_kill_thread>:
 /*================================
@@ -4274,7 +4274,7 @@ void acoral_kill_thread(acoral_thread_t *thread){
 300029d0:	e59d3004 	ldr	r3, [sp, #4]
 300029d4:	e2833020 	add	r3, r3, #32
 300029d8:	e1a00003 	mov	r0, r3
-300029dc:	eb001d8a 	bl	3000a00c <acoral_list_del>
+300029dc:	eb001e0b 	bl	3000a210 <acoral_list_del>
 300029e0:	ea000004 	b	300029f8 <acoral_kill_thread+0x74>
 			acoral_spin_unlock(&thread->waiting.lock);
 			acoral_spin_unlock(&thread->waiting.prev->lock);
@@ -4349,7 +4349,7 @@ void acoral_thread_exit(){
 }
 30002a64:	e8bd4008 	pop	{r3, lr}
 30002a68:	e12fff1e 	bx	lr
-30002a6c:	300103f8 	.word	0x300103f8
+30002a6c:	30010604 	.word	0x30010604
 
 30002a70 <acoral_thread_change_prio>:
 
@@ -4424,7 +4424,7 @@ void acoral_change_prio_self(acoral_u32 prio){
 30002b0c:	e28dd00c 	add	sp, sp, #12
 30002b10:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002b14:	e12fff1e 	bx	lr
-30002b18:	300103f8 	.word	0x300103f8
+30002b18:	30010604 	.word	0x30010604
 
 30002b1c <acoral_thread_change_prio_by_id>:
 
@@ -4604,7 +4604,7 @@ acoral_thread_t *acoral_alloc_thread(){
 30002c50:	e1a00003 	mov	r0, r3
 30002c54:	e8bd4008 	pop	{r3, lr}
 30002c58:	e12fff1e 	bx	lr
-30002c5c:	3000f9b4 	.word	0x3000f9b4
+30002c5c:	3000fbc0 	.word	0x3000fbc0
 
 30002c60 <acoral_thread_init>:
  * in:   (*exit)   (acoral_thread_exit)
@@ -4640,7 +4640,7 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 30002cac:	e58d3014 	str	r3, [sp, #20]
 		thread->stack_buttom=(acoral_u32 *)acoral_malloc(stack_size);
 30002cb0:	e59d0014 	ldr	r0, [sp, #20]
-30002cb4:	eb000db7 	bl	30006398 <buddy_malloc>
+30002cb4:	eb000e38 	bl	3000659c <buddy_malloc>
 30002cb8:	e1a03000 	mov	r3, r0
 30002cbc:	e1a02003 	mov	r2, r3
 30002cc0:	e59d300c 	ldr	r3, [sp, #12]
@@ -4776,7 +4776,7 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 30002e58:	e2833028 	add	r3, r3, #40	; 0x28
 30002e5c:	e1a00003 	mov	r0, r3
 30002e60:	e59f1020 	ldr	r1, [pc, #32]	; 30002e88 <acoral_thread_init+0x228>
-30002e64:	eb001c55 	bl	30009fc0 <acoral_list_add2_tail>
+30002e64:	eb001cd6 	bl	3000a1c4 <acoral_list_add2_tail>
 	acoral_spin_unlock(&acoral_threads_queue.head.lock);
 	HAL_EXIT_CRITICAL();
 30002e68:	e59d0010 	ldr	r0, [sp, #16]
@@ -4791,8 +4791,8 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 30002e78:	e28dd01c 	add	sp, sp, #28
 30002e7c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002e80:	e12fff1e 	bx	lr
-30002e84:	300103f8 	.word	0x300103f8
-30002e88:	3000fa24 	.word	0x3000fa24
+30002e84:	30010604 	.word	0x30010604
+30002e88:	3000fc30 	.word	0x3000fc30
 
 30002e8c <acoral_thread_pool_init>:
 
@@ -4826,7 +4826,7 @@ void acoral_thread_pool_init(){
 30002ec4:	e5933008 	ldr	r3, [r3, #8]
 30002ec8:	e3a00028 	mov	r0, #40	; 0x28
 30002ecc:	e1a01003 	mov	r1, r3
-30002ed0:	eb002acb 	bl	3000da04 <__aeabi_uidiv>
+30002ed0:	eb002b4c 	bl	3000dc08 <__aeabi_uidiv>
 30002ed4:	e1a03000 	mov	r3, r0
 30002ed8:	e1a02003 	mov	r2, r3
 30002edc:	e59f3024 	ldr	r3, [pc, #36]	; 30002f08 <acoral_thread_pool_init+0x7c>
@@ -4841,9 +4841,9 @@ void acoral_thread_pool_init(){
 }
 30002ef8:	e8bd4008 	pop	{r3, lr}
 30002efc:	e12fff1e 	bx	lr
-30002f00:	3000f97c 	.word	0x3000f97c
+30002f00:	3000fb88 	.word	0x3000fb88
 30002f04:	3000270c 	.word	0x3000270c
-30002f08:	3000f9b4 	.word	0x3000f9b4
+30002f08:	3000fbc0 	.word	0x3000fbc0
 
 30002f0c <acoral_set_thread_console>:
 
@@ -4858,7 +4858,7 @@ void acoral_set_thread_console(acoral_id id){
 }
 30002f24:	e28dd008 	add	sp, sp, #8
 30002f28:	e12fff1e 	bx	lr
-30002f2c:	300103f8 	.word	0x300103f8
+30002f2c:	30010604 	.word	0x30010604
 
 30002f30 <acoral_sched_mechanism_init>:
 
@@ -4879,7 +4879,7 @@ void acoral_sched_mechanism_init(){
 }
 30002f54:	e8bd4008 	pop	{r3, lr}
 30002f58:	e12fff1e 	bx	lr
-30002f5c:	3000fa24 	.word	0x3000fa24
+30002f5c:	3000fc30 	.word	0x3000fc30
 
 30002f60 <acoral_thread_sys_init>:
 
@@ -4924,7 +4924,7 @@ acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,voi
 		acoral_printerr("Alloc thread:%s fail\n",name);
 30002fa4:	e59f0094 	ldr	r0, [pc, #148]	; 30003040 <create_comm_thread+0xcc>
 30002fa8:	e59d1000 	ldr	r1, [sp]
-30002fac:	eb002095 	bl	3000b208 <acoral_print>
+30002fac:	eb002116 	bl	3000b40c <acoral_print>
 		acoral_printk("No Mem Space or Beyond the max thread\n");
 		return -1;
 30002fb0:	e3e03000 	mvn	r3, #0
@@ -4977,7 +4977,7 @@ acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,voi
 30003034:	e28dd01c 	add	sp, sp, #28
 30003038:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000303c:	e12fff1e 	bx	lr
-30003040:	3000e254 	.word	0x3000e254
+30003040:	3000e458 	.word	0x3000e458
 
 30003044 <comm_policy_thread_init>:
 
@@ -5039,7 +5039,7 @@ acoral_id comm_policy_thread_init(acoral_thread_t *thread,void (*route)(void *ar
 300030e4:	e5933048 	ldr	r3, [r3, #72]	; 0x48
 300030e8:	e59f0050 	ldr	r0, [pc, #80]	; 30003140 <comm_policy_thread_init+0xfc>
 300030ec:	e1a01003 	mov	r1, r3
-300030f0:	eb002044 	bl	3000b208 <acoral_print>
+300030f0:	eb0020c5 	bl	3000b40c <acoral_print>
 		HAL_ENTER_CRITICAL();
 300030f4:	ebfff97e 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
 300030f8:	e1a03000 	mov	r3, r0
@@ -5068,7 +5068,7 @@ acoral_id comm_policy_thread_init(acoral_thread_t *thread,void (*route)(void *ar
 30003134:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003138:	e12fff1e 	bx	lr
 3000313c:	30002a50 	.word	0x30002a50
-30003140:	3000e26c 	.word	0x3000e26c
+30003140:	3000e470 	.word	0x3000e470
 
 30003144 <comm_policy_init>:
 
@@ -5100,9 +5100,9 @@ void comm_policy_init(){
 }
 3000318c:	e8bd4008 	pop	{r3, lr}
 30003190:	e12fff1e 	bx	lr
-30003194:	3000f3a8 	.word	0x3000f3a8
+30003194:	3000f5b4 	.word	0x3000f5b4
 30003198:	30003044 	.word	0x30003044
-3000319c:	3000e280 	.word	0x3000e280
+3000319c:	3000e484 	.word	0x3000e484
 
 300031a0 <acoral_create_pool>:
 /*================================
@@ -5163,7 +5163,7 @@ acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl){
 3000323c:	e5922010 	ldr	r2, [r2, #16]
 30003240:	e0030392 	mul	r3, r2, r3
 30003244:	e1a00003 	mov	r0, r3
-30003248:	eb000c52 	bl	30006398 <buddy_malloc>
+30003248:	eb000cd3 	bl	3000659c <buddy_malloc>
 3000324c:	e1a02000 	mov	r2, r0
 30003250:	e59d300c 	ldr	r3, [sp, #12]
 30003254:	e5832000 	str	r2, [r3]
@@ -5199,7 +5199,7 @@ acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl){
 300032b0:	e5933018 	ldr	r3, [r3, #24]
 300032b4:	e1a00002 	mov	r0, r2
 300032b8:	e1a01003 	mov	r1, r3
-300032bc:	eb001b3f 	bl	30009fc0 <acoral_list_add2_tail>
+300032bc:	eb001bc0 	bl	3000a1c4 <acoral_list_add2_tail>
 	acoral_list_add2_tail(&pool->free_list,pool_ctrl->free_pools);
 300032c0:	e59d300c 	ldr	r3, [sp, #12]
 300032c4:	e2832028 	add	r2, r3, #40	; 0x28
@@ -5207,7 +5207,7 @@ acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl){
 300032cc:	e5933014 	ldr	r3, [r3, #20]
 300032d0:	e1a00002 	mov	r0, r2
 300032d4:	e1a01003 	mov	r1, r3
-300032d8:	eb001b38 	bl	30009fc0 <acoral_list_add2_tail>
+300032d8:	eb001bb9 	bl	3000a1c4 <acoral_list_add2_tail>
 	pool_ctrl->num++;
 300032dc:	e59d3004 	ldr	r3, [sp, #4]
 300032e0:	e593300c 	ldr	r3, [r3, #12]
@@ -5258,17 +5258,17 @@ void acoral_release_pool(acoral_pool_ctrl_t *pool_ctrl){
 3000334c:	e59d300c 	ldr	r3, [sp, #12]
 30003350:	e2833020 	add	r3, r3, #32
 30003354:	e1a00003 	mov	r0, r3
-30003358:	eb001b2b 	bl	3000a00c <acoral_list_del>
+30003358:	eb001bac 	bl	3000a210 <acoral_list_del>
 			acoral_list_del(&pool->free_list);
 3000335c:	e59d300c 	ldr	r3, [sp, #12]
 30003360:	e2833028 	add	r3, r3, #40	; 0x28
 30003364:	e1a00003 	mov	r0, r3
-30003368:	eb001b27 	bl	3000a00c <acoral_list_del>
+30003368:	eb001ba8 	bl	3000a210 <acoral_list_del>
 			acoral_free(pool->base_adr);
 3000336c:	e59d300c 	ldr	r3, [sp, #12]
 30003370:	e5933000 	ldr	r3, [r3]
 30003374:	e1a00003 	mov	r0, r3
-30003378:	eb000c3e 	bl	30006478 <buddy_free>
+30003378:	eb000cbf 	bl	3000667c <buddy_free>
 			pool->base_adr=(void *)acoral_free_res_pool;
 3000337c:	e59f305c 	ldr	r3, [pc, #92]	; 300033e0 <acoral_release_pool+0xdc>
 30003380:	e5932000 	ldr	r2, [r3]
@@ -5315,7 +5315,7 @@ void acoral_release_pool(acoral_pool_ctrl_t *pool_ctrl){
 300033d4:	e28dd01c 	add	sp, sp, #28
 300033d8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300033dc:	e12fff1e 	bx	lr
-300033e0:	3000f3c4 	.word	0x3000f3c4
+300033e0:	3000f5d0 	.word	0x3000f5d0
 
 300033e4 <acoral_collect_pool>:
 /*================================
@@ -5360,17 +5360,17 @@ void acoral_collect_pool(acoral_pool_ctrl_t *pool_ctrl){
 30003444:	e59d300c 	ldr	r3, [sp, #12]
 30003448:	e2833020 	add	r3, r3, #32
 3000344c:	e1a00003 	mov	r0, r3
-30003450:	eb001aed 	bl	3000a00c <acoral_list_del>
+30003450:	eb001b6e 	bl	3000a210 <acoral_list_del>
 				acoral_list_del(&pool->free_list);
 30003454:	e59d300c 	ldr	r3, [sp, #12]
 30003458:	e2833028 	add	r3, r3, #40	; 0x28
 3000345c:	e1a00003 	mov	r0, r3
-30003460:	eb001ae9 	bl	3000a00c <acoral_list_del>
+30003460:	eb001b6a 	bl	3000a210 <acoral_list_del>
 				acoral_free(pool->base_adr);
 30003464:	e59d300c 	ldr	r3, [sp, #12]
 30003468:	e5933000 	ldr	r3, [r3]
 3000346c:	e1a00003 	mov	r0, r3
-30003470:	eb000c00 	bl	30006478 <buddy_free>
+30003470:	eb000c81 	bl	3000667c <buddy_free>
 				pool->base_adr=(void *)acoral_free_res_pool;
 30003474:	e59f305c 	ldr	r3, [pc, #92]	; 300034d8 <acoral_collect_pool+0xf4>
 30003478:	e5932000 	ldr	r2, [r3]
@@ -5417,7 +5417,7 @@ void acoral_collect_pool(acoral_pool_ctrl_t *pool_ctrl){
 300034cc:	e28dd01c 	add	sp, sp, #28
 300034d0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300034d4:	e12fff1e 	bx	lr
-300034d8:	3000f3c4 	.word	0x3000f3c4
+300034d8:	3000f5d0 	.word	0x3000f5d0
 
 300034dc <acoral_get_res>:
 /*================================
@@ -5520,7 +5520,7 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl){
 300035dc:	e59d3014 	ldr	r3, [sp, #20]
 300035e0:	e2833028 	add	r3, r3, #40	; 0x28
 300035e4:	e1a00003 	mov	r0, r3
-300035e8:	eb001a87 	bl	3000a00c <acoral_list_del>
+300035e8:	eb001b08 	bl	3000a210 <acoral_list_del>
 	}
 	acoral_spin_unlock(&pool_ctrl->lock);
 	HAL_EXIT_CRITICAL();
@@ -5570,7 +5570,7 @@ void acoral_release_res(acoral_res_t *res){
 30003650:	1a000002 	bne	30003660 <acoral_release_res+0x58>
 		acoral_printerr("Res release Err\n");
 30003654:	e59f012c 	ldr	r0, [pc, #300]	; 30003788 <acoral_release_res+0x180>
-30003658:	eb001eea 	bl	3000b208 <acoral_print>
+30003658:	eb001f6b 	bl	3000b40c <acoral_print>
 		return;
 3000365c:	ea000045 	b	30003778 <acoral_release_res+0x170>
 	}
@@ -5587,7 +5587,7 @@ void acoral_release_res(acoral_res_t *res){
 3000367c:	9a000002 	bls	3000368c <acoral_release_res+0x84>
 		acoral_printerr("Err Res\n");
 30003680:	e59f0104 	ldr	r0, [pc, #260]	; 3000378c <acoral_release_res+0x184>
-30003684:	eb001edf 	bl	3000b208 <acoral_print>
+30003684:	eb001f60 	bl	3000b40c <acoral_print>
 		return;
 30003688:	ea00003a 	b	30003778 <acoral_release_res+0x170>
 	}
@@ -5600,7 +5600,7 @@ void acoral_release_res(acoral_res_t *res){
 300036a0:	e593300c 	ldr	r3, [r3, #12]
 300036a4:	e1a00002 	mov	r0, r2
 300036a8:	e1a01003 	mov	r1, r3
-300036ac:	eb0028d4 	bl	3000da04 <__aeabi_uidiv>
+300036ac:	eb002955 	bl	3000dc08 <__aeabi_uidiv>
 300036b0:	e1a03000 	mov	r3, r0
 300036b4:	e58d300c 	str	r3, [sp, #12]
 	if(index>=pool->num){
@@ -5611,7 +5611,7 @@ void acoral_release_res(acoral_res_t *res){
 300036c8:	8a000002 	bhi	300036d8 <acoral_release_res+0xd0>
 		acoral_printerr("Err Res\n");
 300036cc:	e59f00b8 	ldr	r0, [pc, #184]	; 3000378c <acoral_release_res+0x184>
-300036d0:	eb001ecc 	bl	3000b208 <acoral_print>
+300036d0:	eb001f4d 	bl	3000b40c <acoral_print>
 		return;
 300036d4:	ea000027 	b	30003778 <acoral_release_res+0x170>
 	}
@@ -5660,7 +5660,7 @@ void acoral_release_res(acoral_res_t *res){
 30003758:	e5933014 	ldr	r3, [r3, #20]
 3000375c:	e1a00002 	mov	r0, r2
 30003760:	e1a01003 	mov	r1, r3
-30003764:	eb001a02 	bl	30009f74 <acoral_list_add>
+30003764:	eb001a83 	bl	3000a178 <acoral_list_add>
 	acoral_spin_unlock(&pool_ctrl->lock);
 	return;
 30003768:	ea000002 	b	30003778 <acoral_release_res+0x170>
@@ -5683,9 +5683,9 @@ void acoral_release_res(acoral_res_t *res){
 30003778:	e28dd01c 	add	sp, sp, #28
 3000377c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003780:	e12fff1e 	bx	lr
-30003784:	3000e288 	.word	0x3000e288
-30003788:	3000e298 	.word	0x3000e298
-3000378c:	3000e2ac 	.word	0x3000e2ac
+30003784:	3000e48c 	.word	0x3000e48c
+30003788:	3000e49c 	.word	0x3000e49c
+3000378c:	3000e4b0 	.word	0x3000e4b0
 
 30003790 <acoral_get_pool_by_id>:
 /*================================
@@ -5724,7 +5724,7 @@ acoral_pool_t *acoral_get_pool_by_id(acoral_id res_id){
 300037e4:	e1a00003 	mov	r0, r3
 300037e8:	e28dd010 	add	sp, sp, #16
 300037ec:	e12fff1e 	bx	lr
-300037f0:	3000fadc 	.word	0x3000fadc
+300037f0:	3000fce8 	.word	0x3000fce8
 
 300037f4 <acoral_get_free_pool>:
 
@@ -5769,7 +5769,7 @@ acoral_pool_t *acoral_get_free_pool(){
 30003848:	e28dd00c 	add	sp, sp, #12
 3000384c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003850:	e12fff1e 	bx	lr
-30003854:	3000f3c4 	.word	0x3000f3c4
+30003854:	3000f5d0 	.word	0x3000f5d0
 
 30003858 <acoral_get_res_by_id>:
 
@@ -5972,8 +5972,8 @@ void  acoral_pools_init(void)
 }
 30003a48:	e28dd008 	add	sp, sp, #8
 30003a4c:	e12fff1e 	bx	lr
-30003a50:	3000fadc 	.word	0x3000fadc
-30003a54:	3000f3c4 	.word	0x3000f3c4
+30003a50:	3000fce8 	.word	0x3000fce8
+30003a54:	3000f5d0 	.word	0x3000f5d0
 
 30003a58 <acoral_pool_ctrl_init>:
 /*================================
@@ -6031,7 +6031,7 @@ void acoral_pool_ctrl_init(acoral_pool_ctrl_t *pool_ctrl)
 30003aec:	e5922008 	ldr	r2, [r2, #8]
 30003af0:	e0030392 	mul	r3, r2, r3
 30003af4:	e1a00003 	mov	r0, r3
-30003af8:	eb0009fd 	bl	300062f4 <buddy_malloc_size>
+30003af8:	eb000a7e 	bl	300064f8 <buddy_malloc_size>
 30003afc:	e1a03000 	mov	r3, r0
 30003b00:	e58d300c 	str	r3, [sp, #12]
 	if(size<pool_ctrl->size){
@@ -6052,7 +6052,7 @@ void acoral_pool_ctrl_init(acoral_pool_ctrl_t *pool_ctrl)
 30003b2c:	e5933004 	ldr	r3, [r3, #4]
 30003b30:	e59d000c 	ldr	r0, [sp, #12]
 30003b34:	e1a01003 	mov	r1, r3
-30003b38:	eb0027b1 	bl	3000da04 <__aeabi_uidiv>
+30003b38:	eb002832 	bl	3000dc08 <__aeabi_uidiv>
 30003b3c:	e1a03000 	mov	r3, r0
 30003b40:	e1a02003 	mov	r2, r3
 30003b44:	e59d3004 	ldr	r3, [sp, #4]
@@ -6177,13 +6177,13 @@ acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert){
 		acoral_printerr("%s\n",assert);
 30003c60:	e59f0034 	ldr	r0, [pc, #52]	; 30003c9c <acoral_assert_res+0x78>
 30003c64:	e59d1000 	ldr	r1, [sp]
-30003c68:	eb001d66 	bl	3000b208 <acoral_print>
+30003c68:	eb001de7 	bl	3000b40c <acoral_print>
 		acoral_printerr("Err res's id:%x\n",res->id);
 30003c6c:	e59d3004 	ldr	r3, [sp, #4]
 30003c70:	e5933000 	ldr	r3, [r3]
 30003c74:	e59f0024 	ldr	r0, [pc, #36]	; 30003ca0 <acoral_assert_res+0x7c>
 30003c78:	e1a01003 	mov	r1, r3
-30003c7c:	eb001d61 	bl	3000b208 <acoral_print>
+30003c7c:	eb001de2 	bl	3000b40c <acoral_print>
 		return false;
 30003c80:	e3a03000 	mov	r3, #0
 30003c84:	ea000000 	b	30003c8c <acoral_assert_res+0x68>
@@ -6195,8 +6195,8 @@ acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert){
 30003c90:	e28dd00c 	add	sp, sp, #12
 30003c94:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003c98:	e12fff1e 	bx	lr
-30003c9c:	3000e2b8 	.word	0x3000e2b8
-30003ca0:	3000e2bc 	.word	0x3000e2bc
+30003c9c:	3000e4bc 	.word	0x3000e4bc
+30003ca0:	3000e4c0 	.word	0x3000e4c0
 
 30003ca4 <acoral_intr_sys_init>:
 
@@ -6278,7 +6278,7 @@ void acoral_intr_sys_init(){
 30003d40:	e28dd00c 	add	sp, sp, #12
 30003d44:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003d48:	e12fff1e 	bx	lr
-30003d4c:	3000f3e8 	.word	0x3000f3e8
+30003d4c:	3000f5f4 	.word	0x3000f5f4
 30003d50:	3000419c 	.word	0x3000419c
 
 30003d54 <acoral_intr_attach>:
@@ -6326,7 +6326,7 @@ acoral_32 acoral_intr_attach(acoral_vector vector,void (*isr)(acoral_vector)){
 30003dc0:	e1a00003 	mov	r0, r3
 30003dc4:	e28dd010 	add	sp, sp, #16
 30003dc8:	e12fff1e 	bx	lr
-30003dcc:	3000f3e8 	.word	0x3000f3e8
+30003dcc:	3000f5f4 	.word	0x3000f5f4
 
 30003dd0 <acoral_intr_detach>:
 
@@ -6359,7 +6359,7 @@ acoral_32 acoral_intr_detach(acoral_vector vector){
 30003e10:	e1a00003 	mov	r0, r3
 30003e14:	e28dd010 	add	sp, sp, #16
 30003e18:	e12fff1e 	bx	lr
-30003e1c:	3000f3e8 	.word	0x3000f3e8
+30003e1c:	3000f5f4 	.word	0x3000f5f4
 30003e20:	3000419c 	.word	0x3000419c
 
 30003e24 <acoral_intr_unmask>:
@@ -6448,7 +6448,7 @@ void acoral_intr_unmask(acoral_vector vector){
 30003efc:	e28dd014 	add	sp, sp, #20
 30003f00:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003f04:	e12fff1e 	bx	lr
-30003f08:	3000f3e8 	.word	0x3000f3e8
+30003f08:	3000f5f4 	.word	0x3000f5f4
 
 30003f0c <acoral_intr_mask>:
 
@@ -6536,7 +6536,7 @@ void acoral_intr_mask(acoral_vector vector){
 30003fe4:	e28dd014 	add	sp, sp, #20
 30003fe8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003fec:	e12fff1e 	bx	lr
-30003ff0:	3000f3e8 	.word	0x3000f3e8
+30003ff0:	3000f5f4 	.word	0x3000f5f4
 
 30003ff4 <acoral_intr_entry>:
 
@@ -6682,7 +6682,7 @@ void acoral_intr_entry(acoral_vector vector){
 3000418c:	e28dd014 	add	sp, sp, #20
 30004190:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30004194:	e12fff1e 	bx	lr
-30004198:	3000f3e8 	.word	0x3000f3e8
+30004198:	3000f5f4 	.word	0x3000f5f4
 
 3000419c <acoral_default_isr>:
 
@@ -6766,9 +6766,9 @@ void acoral_intr_exit(){
 }
 30004214:	e8bd4008 	pop	{r3, lr}
 30004218:	e12fff1e 	bx	lr
-3000421c:	300103fc 	.word	0x300103fc
-30004220:	3000f3e4 	.word	0x3000f3e4
-30004224:	3000eadc 	.word	0x3000eadc
+3000421c:	30010608 	.word	0x30010608
+30004220:	3000f5f0 	.word	0x3000f5f0
+30004224:	3000ece8 	.word	0x3000ece8
 
 30004228 <acoral_set_intr_enter>:
 
@@ -6799,7 +6799,7 @@ void acoral_set_intr_enter(acoral_vector vector,void (*enter)(acoral_vector)){
 }
 30004268:	e28dd010 	add	sp, sp, #16
 3000426c:	e12fff1e 	bx	lr
-30004270:	3000f3e8 	.word	0x3000f3e8
+30004270:	3000f5f4 	.word	0x3000f5f4
 
 30004274 <acoral_set_intr_exit>:
 
@@ -6830,7 +6830,7 @@ void acoral_set_intr_exit(acoral_vector vector,void (*exit)(acoral_vector)){
 }
 300042b4:	e28dd010 	add	sp, sp, #16
 300042b8:	e12fff1e 	bx	lr
-300042bc:	3000f3e8 	.word	0x3000f3e8
+300042bc:	3000f5f4 	.word	0x3000f5f4
 
 300042c0 <acoral_set_intr_mask>:
 
@@ -6861,7 +6861,7 @@ void acoral_set_intr_mask(acoral_vector vector,void (*mask)(acoral_vector)){
 }
 30004300:	e28dd010 	add	sp, sp, #16
 30004304:	e12fff1e 	bx	lr
-30004308:	3000f3e8 	.word	0x3000f3e8
+30004308:	3000f5f4 	.word	0x3000f5f4
 
 3000430c <acoral_set_intr_unmask>:
 
@@ -6892,7 +6892,7 @@ void acoral_set_intr_unmask(acoral_vector vector,void (*unmask)(acoral_vector)){
 }
 3000434c:	e28dd010 	add	sp, sp, #16
 30004350:	e12fff1e 	bx	lr
-30004354:	3000f3e8 	.word	0x3000f3e8
+30004354:	3000f5f4 	.word	0x3000f5f4
 
 30004358 <acoral_intr_set_type>:
 
@@ -6922,7 +6922,7 @@ void acoral_intr_set_type(acoral_vector vector,acoral_u8 type){
 }
 30004394:	e28dd010 	add	sp, sp, #16
 30004398:	e12fff1e 	bx	lr
-3000439c:	3000f3e8 	.word	0x3000f3e8
+3000439c:	3000f5f4 	.word	0x3000f5f4
 
 300043a0 <acoral_fault_entry>:
 /*===========================                                                                                                                 
@@ -6946,74 +6946,74 @@ void acoral_fault_entry(acoral_u32 lr,acoral_u32 *stack){
 300043c4:	eafffffe 	b	300043c4 <acoral_fault_entry+0x24>
 	acoral_printerr("Exception occur\n");
 300043c8:	e59f00b4 	ldr	r0, [pc, #180]	; 30004484 <acoral_fault_entry+0xe4>
-300043cc:	eb001b8d 	bl	3000b208 <acoral_print>
+300043cc:	eb001c0e 	bl	3000b40c <acoral_print>
 	acoral_printerr("******************\n");
 300043d0:	e59f00b0 	ldr	r0, [pc, #176]	; 30004488 <acoral_fault_entry+0xe8>
-300043d4:	eb001b8b 	bl	3000b208 <acoral_print>
+300043d4:	eb001c0c 	bl	3000b40c <acoral_print>
 	acoral_printerr("CPU:%d\n",acoral_current_cpu);;
 300043d8:	e59f00ac 	ldr	r0, [pc, #172]	; 3000448c <acoral_fault_entry+0xec>
 300043dc:	e3a01000 	mov	r1, #0
-300043e0:	eb001b88 	bl	3000b208 <acoral_print>
+300043e0:	eb001c09 	bl	3000b40c <acoral_print>
 	acoral_printerr("Thread name:%s\n",acoral_cur_thread->name);;
 300043e4:	e59f30a4 	ldr	r3, [pc, #164]	; 30004490 <acoral_fault_entry+0xf0>
 300043e8:	e5933000 	ldr	r3, [r3]
 300043ec:	e5933048 	ldr	r3, [r3, #72]	; 0x48
 300043f0:	e59f009c 	ldr	r0, [pc, #156]	; 30004494 <acoral_fault_entry+0xf4>
 300043f4:	e1a01003 	mov	r1, r3
-300043f8:	eb001b82 	bl	3000b208 <acoral_print>
+300043f8:	eb001c03 	bl	3000b40c <acoral_print>
 	acoral_printerr("Thread prio:%d\n",acoral_cur_thread->prio);;
 300043fc:	e59f308c 	ldr	r3, [pc, #140]	; 30004490 <acoral_fault_entry+0xf0>
 30004400:	e5933000 	ldr	r3, [r3]
 30004404:	e5d33005 	ldrb	r3, [r3, #5]
 30004408:	e59f0088 	ldr	r0, [pc, #136]	; 30004498 <acoral_fault_entry+0xf8>
 3000440c:	e1a01003 	mov	r1, r3
-30004410:	eb001b7c 	bl	3000b208 <acoral_print>
+30004410:	eb001bfd 	bl	3000b40c <acoral_print>
 	acoral_printerr("Thread stack_size:%d\n",acoral_cur_thread->stack_size);;
 30004414:	e59f3074 	ldr	r3, [pc, #116]	; 30004490 <acoral_fault_entry+0xf0>
 30004418:	e5933000 	ldr	r3, [r3]
 3000441c:	e593303c 	ldr	r3, [r3, #60]	; 0x3c
 30004420:	e59f0074 	ldr	r0, [pc, #116]	; 3000449c <acoral_fault_entry+0xfc>
 30004424:	e1a01003 	mov	r1, r3
-30004428:	eb001b76 	bl	3000b208 <acoral_print>
+30004428:	eb001bf7 	bl	3000b40c <acoral_print>
 	acoral_printerr("Thread stack_buttom:0x%x\n",acoral_cur_thread->stack_buttom);;
 3000442c:	e59f305c 	ldr	r3, [pc, #92]	; 30004490 <acoral_fault_entry+0xf0>
 30004430:	e5933000 	ldr	r3, [r3]
 30004434:	e5933038 	ldr	r3, [r3, #56]	; 0x38
 30004438:	e59f0060 	ldr	r0, [pc, #96]	; 300044a0 <acoral_fault_entry+0x100>
 3000443c:	e1a01003 	mov	r1, r3
-30004440:	eb001b70 	bl	3000b208 <acoral_print>
+30004440:	eb001bf1 	bl	3000b40c <acoral_print>
 	acoral_printerr("Thread stack:0x%x\n",acoral_cur_thread->stack);;
 30004444:	e59f3044 	ldr	r3, [pc, #68]	; 30004490 <acoral_fault_entry+0xf0>
 30004448:	e5933000 	ldr	r3, [r3]
 3000444c:	e5933034 	ldr	r3, [r3, #52]	; 0x34
 30004450:	e59f004c 	ldr	r0, [pc, #76]	; 300044a4 <acoral_fault_entry+0x104>
 30004454:	e1a01003 	mov	r1, r3
-30004458:	eb001b6a 	bl	3000b208 <acoral_print>
+30004458:	eb001beb 	bl	3000b40c <acoral_print>
 	acoral_printerr("Pc:0x%x\n",lr);
 3000445c:	e59f0044 	ldr	r0, [pc, #68]	; 300044a8 <acoral_fault_entry+0x108>
 30004460:	e59d1004 	ldr	r1, [sp, #4]
-30004464:	eb001b67 	bl	3000b208 <acoral_print>
+30004464:	eb001be8 	bl	3000b40c <acoral_print>
 	acoral_printerr("Stack:0x%x\n",stack);
 30004468:	e59f003c 	ldr	r0, [pc, #60]	; 300044ac <acoral_fault_entry+0x10c>
 3000446c:	e59d1000 	ldr	r1, [sp]
-30004470:	eb001b64 	bl	3000b208 <acoral_print>
+30004470:	eb001be5 	bl	3000b40c <acoral_print>
 	acoral_printerr("******************\n");
 30004474:	e59f000c 	ldr	r0, [pc, #12]	; 30004488 <acoral_fault_entry+0xe8>
-30004478:	eb001b62 	bl	3000b208 <acoral_print>
+30004478:	eb001be3 	bl	3000b40c <acoral_print>
 	while(1);
 3000447c:	eafffffe 	b	3000447c <acoral_fault_entry+0xdc>
-30004480:	3000eadc 	.word	0x3000eadc
-30004484:	3000e2d0 	.word	0x3000e2d0
-30004488:	3000e2e4 	.word	0x3000e2e4
-3000448c:	3000e2f8 	.word	0x3000e2f8
-30004490:	300103f8 	.word	0x300103f8
-30004494:	3000e300 	.word	0x3000e300
-30004498:	3000e310 	.word	0x3000e310
-3000449c:	3000e320 	.word	0x3000e320
-300044a0:	3000e338 	.word	0x3000e338
-300044a4:	3000e354 	.word	0x3000e354
-300044a8:	3000e368 	.word	0x3000e368
-300044ac:	3000e374 	.word	0x3000e374
+30004480:	3000ece8 	.word	0x3000ece8
+30004484:	3000e4d4 	.word	0x3000e4d4
+30004488:	3000e4e8 	.word	0x3000e4e8
+3000448c:	3000e4fc 	.word	0x3000e4fc
+30004490:	30010604 	.word	0x30010604
+30004494:	3000e504 	.word	0x3000e504
+30004498:	3000e514 	.word	0x3000e514
+3000449c:	3000e524 	.word	0x3000e524
+300044a0:	3000e53c 	.word	0x3000e53c
+300044a4:	3000e558 	.word	0x3000e558
+300044a8:	3000e56c 	.word	0x3000e56c
+300044ac:	3000e578 	.word	0x3000e578
 
 300044b0 <acoral_time_sys_init>:
 /*  pegasus   0719*/
@@ -7043,8 +7043,8 @@ void acoral_time_sys_init(){
 	acoral_spin_init(&timeout_queue.head.lock);
 }
 300044e0:	e12fff1e 	bx	lr
-300044e4:	30010368 	.word	0x30010368
-300044e8:	300103e4 	.word	0x300103e4
+300044e4:	30010574 	.word	0x30010574
+300044e8:	300105f0 	.word	0x300105f0
 
 300044ec <acoral_get_ticks>:
 
@@ -7056,7 +7056,7 @@ acoral_time acoral_get_ticks(){
 }
 300044f4:	e1a00003 	mov	r0, r3
 300044f8:	e12fff1e 	bx	lr
-300044fc:	3000ee44 	.word	0x3000ee44
+300044fc:	3000f050 	.word	0x3000f050
 
 30004500 <acoral_set_ticks>:
 
@@ -7070,7 +7070,7 @@ void acoral_set_ticks(acoral_time time){
 }
 30004514:	e28dd008 	add	sp, sp, #8
 30004518:	e12fff1e 	bx	lr
-3000451c:	3000ee44 	.word	0x3000ee44
+3000451c:	3000f050 	.word	0x3000f050
 
 30004520 <acoral_ticks_init>:
 
@@ -7093,7 +7093,7 @@ void acoral_ticks_init(){
 }
 30004548:	e8bd4008 	pop	{r3, lr}
 3000454c:	e12fff1e 	bx	lr
-30004550:	3000ee44 	.word	0x3000ee44
+30004550:	3000f050 	.word	0x3000f050
 30004554:	30004558 	.word	0x30004558
 
 30004558 <acoral_ticks_entry>:
@@ -7132,8 +7132,8 @@ void acoral_ticks_entry(acoral_vector vector){
 30004594:	e28dd00c 	add	sp, sp, #12
 30004598:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000459c:	e12fff1e 	bx	lr
-300045a0:	3000ee44 	.word	0x3000ee44
-300045a4:	3000eadc 	.word	0x3000eadc
+300045a0:	3000f050 	.word	0x3000f050
+300045a4:	3000ece8 	.word	0x3000ece8
 
 300045a8 <acoral_delayqueue_add>:
 
@@ -7230,7 +7230,7 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 30004670:	e5933004 	ldr	r3, [r3, #4]
 30004674:	e1a00002 	mov	r0, r2
 30004678:	e1a01003 	mov	r1, r3
-3000467c:	eb00163c 	bl	30009f74 <acoral_list_add>
+3000467c:	eb0016bd 	bl	3000a178 <acoral_list_add>
 	/* 插入等待任务后，后继等待任务时间处理*/
 	if(tmp != head){
 30004680:	e59d2010 	ldr	r2, [sp, #16]
@@ -7331,7 +7331,7 @@ void time_delay_deal(){
 3000477c:	e59d300c 	ldr	r3, [sp, #12]
 30004780:	e2833020 	add	r3, r3, #32
 30004784:	e1a00003 	mov	r0, r3
-30004788:	eb00161f 	bl	3000a00c <acoral_list_del>
+30004788:	eb0016a0 	bl	3000a210 <acoral_list_del>
 #ifndef CFG_TICKS_PRIVATE
 		acoral_spin_unlock(&tmp->lock);
 		acoral_spin_unlock(&head->lock);
@@ -7383,9 +7383,9 @@ void time_delay_deal(){
 300047d0:	e28dd014 	add	sp, sp, #20
 300047d4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300047d8:	e12fff1e 	bx	lr
-300047dc:	30010368 	.word	0x30010368
-300047e0:	3000e380 	.word	0x3000e380
-300047e4:	3000e390 	.word	0x3000e390
+300047dc:	30010574 	.word	0x30010574
+300047e0:	3000e584 	.word	0x3000e584
+300047e4:	3000e594 	.word	0x3000e594
 
 300047e8 <timeout_queue_add>:
 /*================================
@@ -7469,7 +7469,7 @@ void timeout_queue_add(acoral_thread_t *new)
 30004894:	e5933004 	ldr	r3, [r3, #4]
 30004898:	e1a00002 	mov	r0, r2
 3000489c:	e1a01003 	mov	r1, r3
-300048a0:	eb0015b3 	bl	30009f74 <acoral_list_add>
+300048a0:	eb001634 	bl	3000a178 <acoral_list_add>
 	/* 插入等待任务后，后继等待任务时间处理*/
 	if(tmp != head){
 300048a4:	e59d2010 	ldr	r2, [sp, #16]
@@ -7498,7 +7498,7 @@ void timeout_queue_add(acoral_thread_t *new)
 300048e0:	e28dd02c 	add	sp, sp, #44	; 0x2c
 300048e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300048e8:	e12fff1e 	bx	lr
-300048ec:	300103e4 	.word	0x300103e4
+300048ec:	300105f0 	.word	0x300105f0
 
 300048f0 <timeout_queue_del>:
 /*================================
@@ -7535,7 +7535,7 @@ void timeout_queue_del(acoral_thread_t *new)
 3000492c:	e59d3004 	ldr	r3, [sp, #4]
 30004930:	e2833018 	add	r3, r3, #24
 30004934:	e1a00003 	mov	r0, r3
-30004938:	eb0015b3 	bl	3000a00c <acoral_list_del>
+30004938:	eb001634 	bl	3000a210 <acoral_list_del>
 	acoral_spin_unlock(&q->lock);
 	acoral_spin_unlock(&p->lock);
 	return;
@@ -7639,7 +7639,7 @@ void timeout_delay_deal()
 30004a0c:	e59d300c 	ldr	r3, [sp, #12]
 30004a10:	e2833018 	add	r3, r3, #24
 30004a14:	e1a00003 	mov	r0, r3
-30004a18:	eb00157b 	bl	3000a00c <acoral_list_del>
+30004a18:	eb0015fc 	bl	3000a210 <acoral_list_del>
 #ifndef CFG_TICKS_PRIVATE
 		acoral_spin_unlock(&tmp->lock);
 		acoral_spin_unlock(&head->lock);
@@ -7686,8 +7686,8 @@ void timeout_delay_deal()
 30004a4c:	e28dd014 	add	sp, sp, #20
 30004a50:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30004a54:	e12fff1e 	bx	lr
-30004a58:	300103e4 	.word	0x300103e4
-30004a5c:	3000e3a4 	.word	0x3000e3a4
+30004a58:	300105f0 	.word	0x300105f0
+30004a5c:	3000e5a8 	.word	0x3000e5a8
 
 30004a60 <acoral_mem_sys_init>:
 #include<mem.h>
@@ -7706,15 +7706,15 @@ void acoral_mem_sys_init(){
 30004a6c:	e59f3018 	ldr	r3, [pc, #24]	; 30004a8c <acoral_mem_sys_init+0x2c>
 30004a70:	e1a00002 	mov	r0, r2
 30004a74:	e1a01003 	mov	r1, r3
-30004a78:	eb0002b3 	bl	3000554c <buddy_init>
+30004a78:	eb000334 	bl	30005750 <buddy_init>
 #ifdef CFG_MEM2
   	acoral_mem_init2();
-30004a7c:	eb000916 	bl	30006edc <v_mem_init>
+30004a7c:	eb000997 	bl	300070e0 <v_mem_init>
 #endif
 }
 30004a80:	e8bd4008 	pop	{r3, lr}
 30004a84:	e12fff1e 	bx	lr
-30004a88:	30010424 	.word	0x30010424
+30004a88:	30010630 	.word	0x30010630
 30004a8c:	33eff000 	.word	0x33eff000
 
 30004a90 <spin_lock_intr_save>:
@@ -7796,7 +7796,7 @@ void spin_lock_stamp(acoral_spinlock_t *v){
 }
 30004b2c:	e28dd008 	add	sp, sp, #8
 30004b30:	e12fff1e 	bx	lr
-30004b34:	3000f3e4 	.word	0x3000f3e4
+30004b34:	3000f5f0 	.word	0x3000f5f0
 
 30004b38 <spin_unlock_stamp>:
 
@@ -7853,12 +7853,12 @@ void acoral_evt_pool_init(){
 30004ba8:	ebfffbaa 	bl	30003a58 <acoral_pool_ctrl_init>
 #ifdef CFG_MSG
 	acoral_msg_sys_init();
-30004bac:	eb000b7a 	bl	3000799c <acoral_msg_sys_init>
+30004bac:	eb000bfb 	bl	30007ba0 <acoral_msg_sys_init>
 #endif
 }
 30004bb0:	e8bd4008 	pop	{r3, lr}
 30004bb4:	e12fff1e 	bx	lr
-30004bb8:	30010374 	.word	0x30010374
+30004bb8:	30010580 	.word	0x30010580
 
 30004bbc <acoral_alloc_evt>:
 
@@ -7872,7 +7872,7 @@ acoral_evt_t *acoral_alloc_evt(){
 30004bcc:	e1a00003 	mov	r0, r3
 30004bd0:	e8bd4008 	pop	{r3, lr}
 30004bd4:	e12fff1e 	bx	lr
-30004bd8:	30010374 	.word	0x30010374
+30004bd8:	30010580 	.word	0x30010580
 
 30004bdc <acoral_evt_init>:
 
@@ -8022,7 +8022,7 @@ void acoral_evt_queue_add(acoral_evt_t *evt,acoral_thread_t *new){
 30004d3c:	e5933004 	ldr	r3, [r3, #4]
 30004d40:	e1a00002 	mov	r0, r2
 30004d44:	e1a01003 	mov	r1, r3
-30004d48:	eb001489 	bl	30009f74 <acoral_list_add>
+30004d48:	eb00150a 	bl	3000a178 <acoral_list_add>
 }
 30004d4c:	e28dd01c 	add	sp, sp, #28
 30004d50:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
@@ -8038,7 +8038,7 @@ void acoral_evt_queue_del(acoral_thread_t *thread){
 30004d64:	e59d3004 	ldr	r3, [sp, #4]
 30004d68:	e2833020 	add	r3, r3, #32
 30004d6c:	e1a00003 	mov	r0, r3
-30004d70:	eb0014a5 	bl	3000a00c <acoral_list_del>
+30004d70:	eb001526 	bl	3000a210 <acoral_list_del>
 	thread->evt=NULL;
 30004d74:	e59d3004 	ldr	r3, [sp, #4]
 30004d78:	e3a02000 	mov	r2, #0
@@ -8228,7 +8228,7 @@ acoral_u32 acoral_mutex_del(acoral_evt_t *evt, acoral_u32 opt)
 30004f10 <acoral_mutex_trypend>:
  *  the appliation for mutex
  *      信号号申请操作
- *  优先级继承的优先级反转解决
+ *  	  非阻塞式
  *=============================*/
 acoral_u32 acoral_mutex_trypend(acoral_evt_t *evt)
 {
@@ -8317,7 +8317,7 @@ acoral_u32 acoral_mutex_trypend(acoral_evt_t *evt)
 30004fd8:	e28dd014 	add	sp, sp, #20
 30004fdc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30004fe0:	e12fff1e 	bx	lr
-30004fe4:	300103f8 	.word	0x300103f8
+30004fe4:	30010604 	.word	0x30010604
 
 30004fe8 <acoral_mutex_pend>:
  *  the appliation for mutex
@@ -8342,10 +8342,10 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 30005004:	da000001 	ble	30005010 <acoral_mutex_pend+0x28>
 		return MUTEX_ERR_INTR;
 30005008:	e3a03005 	mov	r3, #5
-3000500c:	ea000080 	b	30005214 <acoral_mutex_pend+0x22c>
+3000500c:	ea000087 	b	30005230 <acoral_mutex_pend+0x248>
 	
 	cur=acoral_cur_thread;
-30005010:	e59f320c 	ldr	r3, [pc, #524]	; 30005224 <acoral_mutex_pend+0x23c>
+30005010:	e59f3228 	ldr	r3, [pc, #552]	; 30005240 <acoral_mutex_pend+0x258>
 30005014:	e5933000 	ldr	r3, [r3]
 30005018:	e58d3014 	str	r3, [sp, #20]
 	
@@ -8365,7 +8365,7 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 30005038:	ebfff1ab 	bl	300016ec <HAL_INTR_RESTORE>
 		return MUTEX_ERR_NULL;
 3000503c:	e3a03002 	mov	r3, #2
-30005040:	ea000073 	b	30005214 <acoral_mutex_pend+0x22c>
+30005040:	ea00007a 	b	30005230 <acoral_mutex_pend+0x248>
 	}
 	
 	if ((acoral_u8)(evt->count & MUTEX_L_MASK) == MUTEX_AVAI)
@@ -8400,14571 +8400,14779 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 30005098:	ebfff193 	bl	300016ec <HAL_INTR_RESTORE>
 		return MUTEX_SUCCED;
 3000509c:	e3a03000 	mov	r3, #0
-300050a0:	ea00005b 	b	30005214 <acoral_mutex_pend+0x22c>
+300050a0:	ea000062 	b	30005230 <acoral_mutex_pend+0x248>
 	}
 	
 	/* 互斥量已被占有*/
-	/* 这里要看进程是否一个核上的*/
-	/* 是一个核上的任务才有可能发生优先级反转*/
 	highPrio = (acoral_u8)(evt->count >> 8);
 300050a4:	e59d3004 	ldr	r3, [sp, #4]
 300050a8:	e593300c 	ldr	r3, [r3, #12]
 300050ac:	e1a03443 	asr	r3, r3, #8
 300050b0:	e5cd300e 	strb	r3, [sp, #14]
-	ownerPrio = (acoral_u8)(evt->count & MUTEX_L_MASK);
-300050b4:	e59d3004 	ldr	r3, [sp, #4]
-300050b8:	e593300c 	ldr	r3, [r3, #12]
-300050bc:	e5cd300f 	strb	r3, [sp, #15]
 	thread = (acoral_thread_t*)evt->data;
-300050c0:	e59d3004 	ldr	r3, [sp, #4]
-300050c4:	e5933020 	ldr	r3, [r3, #32]
-300050c8:	e58d3010 	str	r3, [sp, #16]
+300050b4:	e59d3004 	ldr	r3, [sp, #4]
+300050b8:	e5933020 	ldr	r3, [r3, #32]
+300050bc:	e58d3010 	str	r3, [sp, #16]
 
-	if (thread->prio != highPrio&&ownerPrio>cur->prio)
-300050cc:	e59d3010 	ldr	r3, [sp, #16]
-300050d0:	e5d33005 	ldrb	r3, [r3, #5]
-300050d4:	e5dd200e 	ldrb	r2, [sp, #14]
-300050d8:	e1520003 	cmp	r2, r3
-300050dc:	0a00000e 	beq	3000511c <acoral_mutex_pend+0x134>
-300050e0:	e59d3014 	ldr	r3, [sp, #20]
-300050e4:	e5d33005 	ldrb	r3, [r3, #5]
-300050e8:	e5dd200f 	ldrb	r2, [sp, #15]
-300050ec:	e1520003 	cmp	r2, r3
-300050f0:	9a000009 	bls	3000511c <acoral_mutex_pend+0x134>
+	if (thread->prio>cur->prio)
+300050c0:	e59d3010 	ldr	r3, [sp, #16]
+300050c4:	e5d32005 	ldrb	r2, [r3, #5]
+300050c8:	e59d3014 	ldr	r3, [sp, #20]
+300050cc:	e5d33005 	ldrb	r3, [r3, #5]
+300050d0:	e1520003 	cmp	r2, r3
+300050d4:	9a000017 	bls	30005138 <acoral_mutex_pend+0x150>
 	{
-		/*有可能优先级反转，提升拥有者优先级*/
-		if(highPrio==0)
-300050f4:	e5dd300e 	ldrb	r3, [sp, #14]
-300050f8:	e3530000 	cmp	r3, #0
-300050fc:	1a000002 	bne	3000510c <acoral_mutex_pend+0x124>
+		/*有可能优先级反转，继承最高优先级*/
+		if(cur->prio<highPrio)
+300050d8:	e59d3014 	ldr	r3, [sp, #20]
+300050dc:	e5d33005 	ldrb	r3, [r3, #5]
+300050e0:	e5dd200e 	ldrb	r2, [sp, #14]
+300050e4:	e1520003 	cmp	r2, r3
+300050e8:	9a00000e 	bls	30005128 <acoral_mutex_pend+0x140>
+		{
 			highPrio=cur->prio;
-30005100:	e59d3014 	ldr	r3, [sp, #20]
-30005104:	e5d33005 	ldrb	r3, [r3, #5]
-30005108:	e5cd300e 	strb	r3, [sp, #14]
+300050ec:	e59d3014 	ldr	r3, [sp, #20]
+300050f0:	e5d33005 	ldrb	r3, [r3, #5]
+300050f4:	e5cd300e 	strb	r3, [sp, #14]
+			evt->count &= ~MUTEX_U_MASK;
+300050f8:	e59d3004 	ldr	r3, [sp, #4]
+300050fc:	e593300c 	ldr	r3, [r3, #12]
+30005100:	e3c32cff 	bic	r2, r3, #65280	; 0xff00
+30005104:	e59d3004 	ldr	r3, [sp, #4]
+30005108:	e583200c 	str	r2, [r3, #12]
+			evt->count |= highPrio << 8;
+3000510c:	e59d3004 	ldr	r3, [sp, #4]
+30005110:	e593200c 	ldr	r2, [r3, #12]
+30005114:	e5dd300e 	ldrb	r3, [sp, #14]
+30005118:	e1a03403 	lsl	r3, r3, #8
+3000511c:	e1822003 	orr	r2, r2, r3
+30005120:	e59d3004 	ldr	r3, [sp, #4]
+30005124:	e583200c 	str	r2, [r3, #12]
+		}
 		acoral_thread_change_prio(thread,highPrio);
-3000510c:	e5dd300e 	ldrb	r3, [sp, #14]
-30005110:	e59d0010 	ldr	r0, [sp, #16]
-30005114:	e1a01003 	mov	r1, r3
-30005118:	ebfff654 	bl	30002a70 <acoral_thread_change_prio>
+30005128:	e5dd300e 	ldrb	r3, [sp, #14]
+3000512c:	e59d0010 	ldr	r0, [sp, #16]
+30005130:	e1a01003 	mov	r1, r3
+30005134:	ebfff64d 	bl	30002a70 <acoral_thread_change_prio>
 	}
 	/*不需要或不能提高优先级*/
 	acoral_unrdy_thread(cur);
-3000511c:	e59d0014 	ldr	r0, [sp, #20]
-30005120:	ebfff69b 	bl	30002b94 <acoral_unrdy_thread>
+30005138:	e59d0014 	ldr	r0, [sp, #20]
+3000513c:	ebfff694 	bl	30002b94 <acoral_unrdy_thread>
 	acoral_evt_queue_add(evt,cur);
-30005124:	e59d0004 	ldr	r0, [sp, #4]
-30005128:	e59d1014 	ldr	r1, [sp, #20]
-3000512c:	ebfffed8 	bl	30004c94 <acoral_evt_queue_add>
+30005140:	e59d0004 	ldr	r0, [sp, #4]
+30005144:	e59d1014 	ldr	r1, [sp, #20]
+30005148:	ebfffed1 	bl	30004c94 <acoral_evt_queue_add>
 	if (timeout > 0)
-30005130:	e59d3000 	ldr	r3, [sp]
-30005134:	e3530000 	cmp	r3, #0
-30005138:	0a00000f 	beq	3000517c <acoral_mutex_pend+0x194>
+3000514c:	e59d3000 	ldr	r3, [sp]
+30005150:	e3530000 	cmp	r3, #0
+30005154:	0a00000f 	beq	30005198 <acoral_mutex_pend+0x1b0>
 	{
 		/*加载到超时队列*/
 		cur->delay = TIME_TO_TICKS(timeout);
-3000513c:	e59d2000 	ldr	r2, [sp]
-30005140:	e1a03002 	mov	r3, r2
-30005144:	e1a03103 	lsl	r3, r3, #2
-30005148:	e0833002 	add	r3, r3, r2
-3000514c:	e1a02103 	lsl	r2, r3, #2
-30005150:	e0833002 	add	r3, r3, r2
-30005154:	e1a03103 	lsl	r3, r3, #2
-30005158:	e1a02003 	mov	r2, r3
-3000515c:	e59f30c4 	ldr	r3, [pc, #196]	; 30005228 <acoral_mutex_pend+0x240>
-30005160:	e0831392 	umull	r1, r3, r2, r3
-30005164:	e1a03323 	lsr	r3, r3, #6
-30005168:	e1a02003 	mov	r2, r3
-3000516c:	e59d3014 	ldr	r3, [sp, #20]
-30005170:	e5832040 	str	r2, [r3, #64]	; 0x40
+30005158:	e59d2000 	ldr	r2, [sp]
+3000515c:	e1a03002 	mov	r3, r2
+30005160:	e1a03103 	lsl	r3, r3, #2
+30005164:	e0833002 	add	r3, r3, r2
+30005168:	e1a02103 	lsl	r2, r3, #2
+3000516c:	e0833002 	add	r3, r3, r2
+30005170:	e1a03103 	lsl	r3, r3, #2
+30005174:	e1a02003 	mov	r2, r3
+30005178:	e59f30c4 	ldr	r3, [pc, #196]	; 30005244 <acoral_mutex_pend+0x25c>
+3000517c:	e0831392 	umull	r1, r3, r2, r3
+30005180:	e1a03323 	lsr	r3, r3, #6
+30005184:	e1a02003 	mov	r2, r3
+30005188:	e59d3014 	ldr	r3, [sp, #20]
+3000518c:	e5832040 	str	r2, [r3, #64]	; 0x40
 		timeout_queue_add(cur);
-30005174:	e59d0014 	ldr	r0, [sp, #20]
-30005178:	ebfffd9a 	bl	300047e8 <timeout_queue_add>
+30005190:	e59d0014 	ldr	r0, [sp, #20]
+30005194:	ebfffd93 	bl	300047e8 <timeout_queue_add>
 	}
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-3000517c:	e59d0008 	ldr	r0, [sp, #8]
-30005180:	ebfff159 	bl	300016ec <HAL_INTR_RESTORE>
+30005198:	e59d0008 	ldr	r0, [sp, #8]
+3000519c:	ebfff152 	bl	300016ec <HAL_INTR_RESTORE>
 	acoral_sched();
-30005184:	ebfff49b 	bl	300023f8 <acoral_sched>
+300051a0:	ebfff494 	bl	300023f8 <acoral_sched>
 	HAL_ENTER_CRITICAL();
-30005188:	ebfff159 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-3000518c:	e1a03000 	mov	r3, r0
-30005190:	e58d3008 	str	r3, [sp, #8]
+300051a4:	ebfff152 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300051a8:	e1a03000 	mov	r3, r0
+300051ac:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_lock(&evt->spin_lock);
 	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
-30005194:	e59d3004 	ldr	r3, [sp, #4]
-30005198:	e5932020 	ldr	r2, [r3, #32]
-3000519c:	e59d3014 	ldr	r3, [sp, #20]
-300051a0:	e1520003 	cmp	r2, r3
-300051a4:	0a00000c 	beq	300051dc <acoral_mutex_pend+0x1f4>
-300051a8:	e59d3000 	ldr	r3, [sp]
-300051ac:	e3530000 	cmp	r3, #0
-300051b0:	0a000009 	beq	300051dc <acoral_mutex_pend+0x1f4>
-300051b4:	e59d3014 	ldr	r3, [sp, #20]
-300051b8:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-300051bc:	e3530000 	cmp	r3, #0
-300051c0:	ca000005 	bgt	300051dc <acoral_mutex_pend+0x1f4>
+300051b0:	e59d3004 	ldr	r3, [sp, #4]
+300051b4:	e5932020 	ldr	r2, [r3, #32]
+300051b8:	e59d3014 	ldr	r3, [sp, #20]
+300051bc:	e1520003 	cmp	r2, r3
+300051c0:	0a00000c 	beq	300051f8 <acoral_mutex_pend+0x210>
+300051c4:	e59d3000 	ldr	r3, [sp]
+300051c8:	e3530000 	cmp	r3, #0
+300051cc:	0a000009 	beq	300051f8 <acoral_mutex_pend+0x210>
+300051d0:	e59d3014 	ldr	r3, [sp, #20]
+300051d4:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+300051d8:	e3530000 	cmp	r3, #0
+300051dc:	ca000005 	bgt	300051f8 <acoral_mutex_pend+0x210>
 		acoral_printk("Time Out Return\n");
 		acoral_evt_queue_del(cur);
-300051c4:	e59d0014 	ldr	r0, [sp, #20]
-300051c8:	ebfffee2 	bl	30004d58 <acoral_evt_queue_del>
+300051e0:	e59d0014 	ldr	r0, [sp, #20]
+300051e4:	ebfffedb 	bl	30004d58 <acoral_evt_queue_del>
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-300051cc:	e59d0008 	ldr	r0, [sp, #8]
-300051d0:	ebfff145 	bl	300016ec <HAL_INTR_RESTORE>
+300051e8:	e59d0008 	ldr	r0, [sp, #8]
+300051ec:	ebfff13e 	bl	300016ec <HAL_INTR_RESTORE>
 		return MUTEX_ERR_TIMEOUT;
-300051d4:	e3a03007 	mov	r3, #7
-300051d8:	ea00000d 	b	30005214 <acoral_mutex_pend+0x22c>
+300051f0:	e3a03007 	mov	r3, #7
+300051f4:	ea00000d 	b	30005230 <acoral_mutex_pend+0x248>
 	}
 
 	//---------------
 	// modify by pegasus 0804: timeout_queue_del [+]
 	timeout_queue_del(cur);
-300051dc:	e59d0014 	ldr	r0, [sp, #20]
-300051e0:	ebfffdc2 	bl	300048f0 <timeout_queue_del>
+300051f8:	e59d0014 	ldr	r0, [sp, #20]
+300051fc:	ebfffdbb 	bl	300048f0 <timeout_queue_del>
 
 	if(evt->data!=cur){
-300051e4:	e59d3004 	ldr	r3, [sp, #4]
-300051e8:	e5932020 	ldr	r2, [r3, #32]
-300051ec:	e59d3014 	ldr	r3, [sp, #20]
-300051f0:	e1520003 	cmp	r2, r3
-300051f4:	0a000005 	beq	30005210 <acoral_mutex_pend+0x228>
+30005200:	e59d3004 	ldr	r3, [sp, #4]
+30005204:	e5932020 	ldr	r2, [r3, #32]
+30005208:	e59d3014 	ldr	r3, [sp, #20]
+3000520c:	e1520003 	cmp	r2, r3
+30005210:	0a000005 	beq	3000522c <acoral_mutex_pend+0x244>
 		acoral_printk("Err Ready Return\n");
 		acoral_evt_queue_del(cur);
-300051f8:	e59d0014 	ldr	r0, [sp, #20]
-300051fc:	ebfffed5 	bl	30004d58 <acoral_evt_queue_del>
+30005214:	e59d0014 	ldr	r0, [sp, #20]
+30005218:	ebfffece 	bl	30004d58 <acoral_evt_queue_del>
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-30005200:	e59d0008 	ldr	r0, [sp, #8]
-30005204:	ebfff138 	bl	300016ec <HAL_INTR_RESTORE>
+3000521c:	e59d0008 	ldr	r0, [sp, #8]
+30005220:	ebfff131 	bl	300016ec <HAL_INTR_RESTORE>
 		return MUTEX_ERR_RDY;
-30005208:	e3a03008 	mov	r3, #8
-3000520c:	ea000000 	b	30005214 <acoral_mutex_pend+0x22c>
+30005224:	e3a03008 	mov	r3, #8
+30005228:	ea000000 	b	30005230 <acoral_mutex_pend+0x248>
 	}
 	
 	return MUTEX_SUCCED;
-30005210:	e3a03000 	mov	r3, #0
+3000522c:	e3a03000 	mov	r3, #0
 }
-30005214:	e1a00003 	mov	r0, r3
-30005218:	e28dd01c 	add	sp, sp, #28
-3000521c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30005220:	e12fff1e 	bx	lr
-30005224:	300103f8 	.word	0x300103f8
-30005228:	10624dd3 	.word	0x10624dd3
+30005230:	e1a00003 	mov	r0, r3
+30005234:	e28dd01c 	add	sp, sp, #28
+30005238:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000523c:	e12fff1e 	bx	lr
+30005240:	30010604 	.word	0x30010604
+30005244:	10624dd3 	.word	0x10624dd3
 
-3000522c <acoral_mutex_post>:
+30005248 <acoral_mutex_pend2>:
+ *  the appliation for mutex
+ *      信号号申请操作
+ *  优先级天花板的优先级反转解决
+ *=============================*/
+acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
+{
+30005248:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000524c:	e24dd01c 	sub	sp, sp, #28
+30005250:	e58d0004 	str	r0, [sp, #4]
+30005254:	e58d1000 	str	r1, [sp]
+	acoral_u8        highPrio;
+	acoral_u8        ownerPrio;
+	acoral_thread_t *thread;
+	acoral_thread_t *cur;
+
+	if(acoral_intr_nesting>0)
+30005258:	ebfff140 	bl	30001760 <hal_get_intr_nesting_comm>
+3000525c:	e1a03000 	mov	r3, r0
+30005260:	e3530000 	cmp	r3, #0
+30005264:	da000001 	ble	30005270 <acoral_mutex_pend2+0x28>
+		return MUTEX_ERR_INTR;
+30005268:	e3a03005 	mov	r3, #5
+3000526c:	ea000069 	b	30005418 <acoral_mutex_pend2+0x1d0>
+	
+	cur=acoral_cur_thread;
+30005270:	e59f31b0 	ldr	r3, [pc, #432]	; 30005428 <acoral_mutex_pend2+0x1e0>
+30005274:	e5933000 	ldr	r3, [r3]
+30005278:	e58d3014 	str	r3, [sp, #20]
+	
+	HAL_ENTER_CRITICAL();
+3000527c:	ebfff11c 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30005280:	e1a03000 	mov	r3, r0
+30005284:	e58d3008 	str	r3, [sp, #8]
+	acoral_spin_lock(&evt->spin_lock);
+	if (NULL== evt)
+30005288:	e59d3004 	ldr	r3, [sp, #4]
+3000528c:	e3530000 	cmp	r3, #0
+30005290:	1a000003 	bne	300052a4 <acoral_mutex_pend2+0x5c>
+	{
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+30005294:	e59d0008 	ldr	r0, [sp, #8]
+30005298:	ebfff113 	bl	300016ec <HAL_INTR_RESTORE>
+		return MUTEX_ERR_NULL;
+3000529c:	e3a03002 	mov	r3, #2
+300052a0:	ea00005c 	b	30005418 <acoral_mutex_pend2+0x1d0>
+	}
+	
+	if ((acoral_u8)(evt->count & MUTEX_L_MASK) == MUTEX_AVAI)
+300052a4:	e59d3004 	ldr	r3, [sp, #4]
+300052a8:	e593300c 	ldr	r3, [r3, #12]
+300052ac:	e20330ff 	and	r3, r3, #255	; 0xff
+300052b0:	e35300ff 	cmp	r3, #255	; 0xff
+300052b4:	1a000019 	bne	30005320 <acoral_mutex_pend2+0xd8>
+	{
+		/* 申请成功*/
+		evt->count &= MUTEX_U_MASK;
+300052b8:	e59d3004 	ldr	r3, [sp, #4]
+300052bc:	e593300c 	ldr	r3, [r3, #12]
+300052c0:	e2032cff 	and	r2, r3, #65280	; 0xff00
+300052c4:	e59d3004 	ldr	r3, [sp, #4]
+300052c8:	e583200c 	str	r2, [r3, #12]
+		evt->count |= cur->prio;
+300052cc:	e59d3004 	ldr	r3, [sp, #4]
+300052d0:	e593200c 	ldr	r2, [r3, #12]
+300052d4:	e59d3014 	ldr	r3, [sp, #20]
+300052d8:	e5d33005 	ldrb	r3, [r3, #5]
+300052dc:	e1822003 	orr	r2, r2, r3
+300052e0:	e59d3004 	ldr	r3, [sp, #4]
+300052e4:	e583200c 	str	r2, [r3, #12]
+		evt->data = (void*)cur;
+300052e8:	e59d3004 	ldr	r3, [sp, #4]
+300052ec:	e59d2014 	ldr	r2, [sp, #20]
+300052f0:	e5832020 	str	r2, [r3, #32]
+
+		/*提升至天花板优先级*/
+		cur->prio = (evt->count & MUTEX_CEILING_MASK)>> 16;
+300052f4:	e59d3004 	ldr	r3, [sp, #4]
+300052f8:	e593300c 	ldr	r3, [r3, #12]
+300052fc:	e20338ff 	and	r3, r3, #16711680	; 0xff0000
+30005300:	e1a03843 	asr	r3, r3, #16
+30005304:	e20320ff 	and	r2, r3, #255	; 0xff
+30005308:	e59d3014 	ldr	r3, [sp, #20]
+3000530c:	e5c32005 	strb	r2, [r3, #5]
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+30005310:	e59d0008 	ldr	r0, [sp, #8]
+30005314:	ebfff0f4 	bl	300016ec <HAL_INTR_RESTORE>
+		return MUTEX_SUCCED;
+30005318:	e3a03000 	mov	r3, #0
+3000531c:	ea00003d 	b	30005418 <acoral_mutex_pend2+0x1d0>
+	}
+	
+	/* 互斥量已被占有*/
+	acoral_unrdy_thread(cur);
+30005320:	e59d0014 	ldr	r0, [sp, #20]
+30005324:	ebfff61a 	bl	30002b94 <acoral_unrdy_thread>
+	acoral_evt_queue_add(evt,cur);
+30005328:	e59d0004 	ldr	r0, [sp, #4]
+3000532c:	e59d1014 	ldr	r1, [sp, #20]
+30005330:	ebfffe57 	bl	30004c94 <acoral_evt_queue_add>
+	if (timeout > 0)
+30005334:	e59d3000 	ldr	r3, [sp]
+30005338:	e3530000 	cmp	r3, #0
+3000533c:	0a00000f 	beq	30005380 <acoral_mutex_pend2+0x138>
+	{
+		/*加载到超时队列*/
+		cur->delay = TIME_TO_TICKS(timeout);
+30005340:	e59d2000 	ldr	r2, [sp]
+30005344:	e1a03002 	mov	r3, r2
+30005348:	e1a03103 	lsl	r3, r3, #2
+3000534c:	e0833002 	add	r3, r3, r2
+30005350:	e1a02103 	lsl	r2, r3, #2
+30005354:	e0833002 	add	r3, r3, r2
+30005358:	e1a03103 	lsl	r3, r3, #2
+3000535c:	e1a02003 	mov	r2, r3
+30005360:	e59f30c4 	ldr	r3, [pc, #196]	; 3000542c <acoral_mutex_pend2+0x1e4>
+30005364:	e0831392 	umull	r1, r3, r2, r3
+30005368:	e1a03323 	lsr	r3, r3, #6
+3000536c:	e1a02003 	mov	r2, r3
+30005370:	e59d3014 	ldr	r3, [sp, #20]
+30005374:	e5832040 	str	r2, [r3, #64]	; 0x40
+		timeout_queue_add(cur);
+30005378:	e59d0014 	ldr	r0, [sp, #20]
+3000537c:	ebfffd19 	bl	300047e8 <timeout_queue_add>
+	}
+	acoral_spin_unlock(&evt->spin_lock);
+	HAL_EXIT_CRITICAL();
+30005380:	e59d0008 	ldr	r0, [sp, #8]
+30005384:	ebfff0d8 	bl	300016ec <HAL_INTR_RESTORE>
+	acoral_sched();
+30005388:	ebfff41a 	bl	300023f8 <acoral_sched>
+	HAL_ENTER_CRITICAL();
+3000538c:	ebfff0d8 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30005390:	e1a03000 	mov	r3, r0
+30005394:	e58d3008 	str	r3, [sp, #8]
+	acoral_spin_lock(&evt->spin_lock);
+	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
+30005398:	e59d3004 	ldr	r3, [sp, #4]
+3000539c:	e5932020 	ldr	r2, [r3, #32]
+300053a0:	e59d3014 	ldr	r3, [sp, #20]
+300053a4:	e1520003 	cmp	r2, r3
+300053a8:	0a00000c 	beq	300053e0 <acoral_mutex_pend2+0x198>
+300053ac:	e59d3000 	ldr	r3, [sp]
+300053b0:	e3530000 	cmp	r3, #0
+300053b4:	0a000009 	beq	300053e0 <acoral_mutex_pend2+0x198>
+300053b8:	e59d3014 	ldr	r3, [sp, #20]
+300053bc:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+300053c0:	e3530000 	cmp	r3, #0
+300053c4:	ca000005 	bgt	300053e0 <acoral_mutex_pend2+0x198>
+		acoral_printk("Time Out Return\n");
+		acoral_evt_queue_del(cur);
+300053c8:	e59d0014 	ldr	r0, [sp, #20]
+300053cc:	ebfffe61 	bl	30004d58 <acoral_evt_queue_del>
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+300053d0:	e59d0008 	ldr	r0, [sp, #8]
+300053d4:	ebfff0c4 	bl	300016ec <HAL_INTR_RESTORE>
+		return MUTEX_ERR_TIMEOUT;
+300053d8:	e3a03007 	mov	r3, #7
+300053dc:	ea00000d 	b	30005418 <acoral_mutex_pend2+0x1d0>
+	}
+
+	//---------------
+	// modify by pegasus 0804: timeout_queue_del [+]
+	timeout_queue_del(cur);
+300053e0:	e59d0014 	ldr	r0, [sp, #20]
+300053e4:	ebfffd41 	bl	300048f0 <timeout_queue_del>
+
+	if(evt->data!=cur){
+300053e8:	e59d3004 	ldr	r3, [sp, #4]
+300053ec:	e5932020 	ldr	r2, [r3, #32]
+300053f0:	e59d3014 	ldr	r3, [sp, #20]
+300053f4:	e1520003 	cmp	r2, r3
+300053f8:	0a000005 	beq	30005414 <acoral_mutex_pend2+0x1cc>
+		acoral_printk("Err Ready Return\n");
+		acoral_evt_queue_del(cur);
+300053fc:	e59d0014 	ldr	r0, [sp, #20]
+30005400:	ebfffe54 	bl	30004d58 <acoral_evt_queue_del>
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+30005404:	e59d0008 	ldr	r0, [sp, #8]
+30005408:	ebfff0b7 	bl	300016ec <HAL_INTR_RESTORE>
+		return MUTEX_ERR_RDY;
+3000540c:	e3a03008 	mov	r3, #8
+30005410:	ea000000 	b	30005418 <acoral_mutex_pend2+0x1d0>
+	}
+	
+	return MUTEX_SUCCED;
+30005414:	e3a03000 	mov	r3, #0
+}
+30005418:	e1a00003 	mov	r0, r3
+3000541c:	e28dd01c 	add	sp, sp, #28
+30005420:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30005424:	e12fff1e 	bx	lr
+30005428:	30010604 	.word	0x30010604
+3000542c:	10624dd3 	.word	0x10624dd3
+
+30005430 <acoral_mutex_post>:
 /*============================
  *  post a mutex to thread
  *     信号量的释放
  *===========================*/
 acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 {
-3000522c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30005230:	e24dd01c 	sub	sp, sp, #28
-30005234:	e58d0004 	str	r0, [sp, #4]
+30005430:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30005434:	e24dd01c 	sub	sp, sp, #28
+30005438:	e58d0004 	str	r0, [sp, #4]
 	acoral_u8             ownerPrio;
 	acoral_u8             highPrio;
 	acoral_thread_t      *thread;
 	acoral_thread_t      *cur;
 
 	HAL_ENTER_CRITICAL();
-30005238:	ebfff12d 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-3000523c:	e1a03000 	mov	r3, r0
-30005240:	e58d3008 	str	r3, [sp, #8]
+3000543c:	ebfff0ac 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30005440:	e1a03000 	mov	r3, r0
+30005444:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_lock(&evt->spin_lock);
 
 	if ( NULL == evt )
-30005244:	e59d3004 	ldr	r3, [sp, #4]
-30005248:	e3530000 	cmp	r3, #0
-3000524c:	1a000005 	bne	30005268 <acoral_mutex_post+0x3c>
+30005448:	e59d3004 	ldr	r3, [sp, #4]
+3000544c:	e3530000 	cmp	r3, #0
+30005450:	1a000005 	bne	3000546c <acoral_mutex_post+0x3c>
 	{
 		acoral_printerr("mutex NULL\n");
-30005250:	e59f0170 	ldr	r0, [pc, #368]	; 300053c8 <acoral_mutex_post+0x19c>
-30005254:	eb0017eb 	bl	3000b208 <acoral_print>
+30005454:	e59f0170 	ldr	r0, [pc, #368]	; 300055cc <acoral_mutex_post+0x19c>
+30005458:	eb0017eb 	bl	3000b40c <acoral_print>
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-30005258:	e59d0008 	ldr	r0, [sp, #8]
-3000525c:	ebfff122 	bl	300016ec <HAL_INTR_RESTORE>
+3000545c:	e59d0008 	ldr	r0, [sp, #8]
+30005460:	ebfff0a1 	bl	300016ec <HAL_INTR_RESTORE>
 		return MUTEX_ERR_NULL;   /*error*/
-30005260:	e3a03002 	mov	r3, #2
-30005264:	ea000053 	b	300053b8 <acoral_mutex_post+0x18c>
+30005464:	e3a03002 	mov	r3, #2
+30005468:	ea000053 	b	300055bc <acoral_mutex_post+0x18c>
 	}
 	
 	highPrio  = (acoral_u8)(evt->count >> 8);
-30005268:	e59d3004 	ldr	r3, [sp, #4]
-3000526c:	e593300c 	ldr	r3, [r3, #12]
-30005270:	e1a03443 	asr	r3, r3, #8
-30005274:	e5cd300f 	strb	r3, [sp, #15]
+3000546c:	e59d3004 	ldr	r3, [sp, #4]
+30005470:	e593300c 	ldr	r3, [r3, #12]
+30005474:	e1a03443 	asr	r3, r3, #8
+30005478:	e5cd300f 	strb	r3, [sp, #15]
 	ownerPrio = (acoral_u8)(evt->count & MUTEX_L_MASK);
-30005278:	e59d3004 	ldr	r3, [sp, #4]
-3000527c:	e593300c 	ldr	r3, [r3, #12]
-30005280:	e5cd300e 	strb	r3, [sp, #14]
+3000547c:	e59d3004 	ldr	r3, [sp, #4]
+30005480:	e593300c 	ldr	r3, [r3, #12]
+30005484:	e5cd300e 	strb	r3, [sp, #14]
 	cur=acoral_cur_thread;
-30005284:	e59f3140 	ldr	r3, [pc, #320]	; 300053cc <acoral_mutex_post+0x1a0>
-30005288:	e5933000 	ldr	r3, [r3]
-3000528c:	e58d3014 	str	r3, [sp, #20]
+30005488:	e59f3140 	ldr	r3, [pc, #320]	; 300055d0 <acoral_mutex_post+0x1a0>
+3000548c:	e5933000 	ldr	r3, [r3]
+30005490:	e58d3014 	str	r3, [sp, #20]
 	if (highPrio!=0&&cur->prio != highPrio && cur->prio != ownerPrio )
-30005290:	e5dd300f 	ldrb	r3, [sp, #15]
-30005294:	e3530000 	cmp	r3, #0
-30005298:	0a00000f 	beq	300052dc <acoral_mutex_post+0xb0>
-3000529c:	e59d3014 	ldr	r3, [sp, #20]
-300052a0:	e5d33005 	ldrb	r3, [r3, #5]
-300052a4:	e5dd200f 	ldrb	r2, [sp, #15]
-300052a8:	e1520003 	cmp	r2, r3
-300052ac:	0a00000a 	beq	300052dc <acoral_mutex_post+0xb0>
-300052b0:	e59d3014 	ldr	r3, [sp, #20]
-300052b4:	e5d33005 	ldrb	r3, [r3, #5]
-300052b8:	e5dd200e 	ldrb	r2, [sp, #14]
-300052bc:	e1520003 	cmp	r2, r3
-300052c0:	0a000005 	beq	300052dc <acoral_mutex_post+0xb0>
+30005494:	e5dd300f 	ldrb	r3, [sp, #15]
+30005498:	e3530000 	cmp	r3, #0
+3000549c:	0a00000f 	beq	300054e0 <acoral_mutex_post+0xb0>
+300054a0:	e59d3014 	ldr	r3, [sp, #20]
+300054a4:	e5d33005 	ldrb	r3, [r3, #5]
+300054a8:	e5dd200f 	ldrb	r2, [sp, #15]
+300054ac:	e1520003 	cmp	r2, r3
+300054b0:	0a00000a 	beq	300054e0 <acoral_mutex_post+0xb0>
+300054b4:	e59d3014 	ldr	r3, [sp, #20]
+300054b8:	e5d33005 	ldrb	r3, [r3, #5]
+300054bc:	e5dd200e 	ldrb	r2, [sp, #14]
+300054c0:	e1520003 	cmp	r2, r3
+300054c4:	0a000005 	beq	300054e0 <acoral_mutex_post+0xb0>
 	{
 		acoral_printerr("mutex prio err\n");
-300052c4:	e59f0104 	ldr	r0, [pc, #260]	; 300053d0 <acoral_mutex_post+0x1a4>
-300052c8:	eb0017ce 	bl	3000b208 <acoral_print>
+300054c8:	e59f0104 	ldr	r0, [pc, #260]	; 300055d4 <acoral_mutex_post+0x1a4>
+300054cc:	eb0017ce 	bl	3000b40c <acoral_print>
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-300052cc:	e59d0008 	ldr	r0, [sp, #8]
-300052d0:	ebfff105 	bl	300016ec <HAL_INTR_RESTORE>
+300054d0:	e59d0008 	ldr	r0, [sp, #8]
+300054d4:	ebfff084 	bl	300016ec <HAL_INTR_RESTORE>
 		return MUTEX_ERR_UNDEF;
-300052d4:	e3a03006 	mov	r3, #6
-300052d8:	ea000036 	b	300053b8 <acoral_mutex_post+0x18c>
+300054d8:	e3a03006 	mov	r3, #6
+300054dc:	ea000036 	b	300055bc <acoral_mutex_post+0x18c>
 	}
 	cur->evt=NULL;	
-300052dc:	e59d3014 	ldr	r3, [sp, #20]
-300052e0:	e3a02000 	mov	r2, #0
-300052e4:	e5832030 	str	r2, [r3, #48]	; 0x30
+300054e0:	e59d3014 	ldr	r3, [sp, #20]
+300054e4:	e3a02000 	mov	r2, #0
+300054e8:	e5832030 	str	r2, [r3, #48]	; 0x30
 	if (cur->prio != ownerPrio)
-300052e8:	e59d3014 	ldr	r3, [sp, #20]
-300052ec:	e5d33005 	ldrb	r3, [r3, #5]
-300052f0:	e5dd200e 	ldrb	r2, [sp, #14]
-300052f4:	e1520003 	cmp	r2, r3
-300052f8:	0a000002 	beq	30005308 <acoral_mutex_post+0xdc>
+300054ec:	e59d3014 	ldr	r3, [sp, #20]
+300054f0:	e5d33005 	ldrb	r3, [r3, #5]
+300054f4:	e5dd200e 	ldrb	r2, [sp, #14]
+300054f8:	e1520003 	cmp	r2, r3
+300054fc:	0a000002 	beq	3000550c <acoral_mutex_post+0xdc>
 	{
 		/* 提升过优先级，进行优先级复原*/
 		acoral_change_prio_self(ownerPrio);
-300052fc:	e5dd300e 	ldrb	r3, [sp, #14]
-30005300:	e1a00003 	mov	r0, r3
-30005304:	ebfff5f8 	bl	30002aec <acoral_change_prio_self>
+30005500:	e5dd300e 	ldrb	r3, [sp, #14]
+30005504:	e1a00003 	mov	r0, r3
+30005508:	ebfff577 	bl	30002aec <acoral_change_prio_self>
 	}
     
 	thread =acoral_evt_high_thread(evt);
-30005308:	e59d0004 	ldr	r0, [sp, #4]
-3000530c:	ebfffe4c 	bl	30004c44 <acoral_evt_high_thread>
-30005310:	e1a03000 	mov	r3, r0
-30005314:	e58d3010 	str	r3, [sp, #16]
+3000550c:	e59d0004 	ldr	r0, [sp, #4]
+30005510:	ebfffdcb 	bl	30004c44 <acoral_evt_high_thread>
+30005514:	e1a03000 	mov	r3, r0
+30005518:	e58d3010 	str	r3, [sp, #16]
 	if (thread==NULL){
-30005318:	e59d3010 	ldr	r3, [sp, #16]
-3000531c:	e3530000 	cmp	r3, #0
-30005320:	1a00000b 	bne	30005354 <acoral_mutex_post+0x128>
+3000551c:	e59d3010 	ldr	r3, [sp, #16]
+30005520:	e3530000 	cmp	r3, #0
+30005524:	1a00000b 	bne	30005558 <acoral_mutex_post+0x128>
 			evt->count |= MUTEX_AVAI;
-30005324:	e59d3004 	ldr	r3, [sp, #4]
-30005328:	e593300c 	ldr	r3, [r3, #12]
-3000532c:	e38320ff 	orr	r2, r3, #255	; 0xff
-30005330:	e59d3004 	ldr	r3, [sp, #4]
-30005334:	e583200c 	str	r2, [r3, #12]
+30005528:	e59d3004 	ldr	r3, [sp, #4]
+3000552c:	e593300c 	ldr	r3, [r3, #12]
+30005530:	e38320ff 	orr	r2, r3, #255	; 0xff
+30005534:	e59d3004 	ldr	r3, [sp, #4]
+30005538:	e583200c 	str	r2, [r3, #12]
 			evt->data = NULL;
-30005338:	e59d3004 	ldr	r3, [sp, #4]
-3000533c:	e3a02000 	mov	r2, #0
-30005340:	e5832020 	str	r2, [r3, #32]
+3000553c:	e59d3004 	ldr	r3, [sp, #4]
+30005540:	e3a02000 	mov	r2, #0
+30005544:	e5832020 	str	r2, [r3, #32]
 			acoral_spin_unlock(&evt->spin_lock);
 			HAL_EXIT_CRITICAL();
-30005344:	e59d0008 	ldr	r0, [sp, #8]
-30005348:	ebfff0e7 	bl	300016ec <HAL_INTR_RESTORE>
+30005548:	e59d0008 	ldr	r0, [sp, #8]
+3000554c:	ebfff066 	bl	300016ec <HAL_INTR_RESTORE>
 			return MUTEX_SUCCED;
-3000534c:	e3a03000 	mov	r3, #0
-30005350:	ea000018 	b	300053b8 <acoral_mutex_post+0x18c>
+30005550:	e3a03000 	mov	r3, #0
+30005554:	ea000018 	b	300055bc <acoral_mutex_post+0x18c>
 	}
 	timeout_queue_del(thread);
-30005354:	e59d0010 	ldr	r0, [sp, #16]
-30005358:	ebfffd64 	bl	300048f0 <timeout_queue_del>
+30005558:	e59d0010 	ldr	r0, [sp, #16]
+3000555c:	ebfffce3 	bl	300048f0 <timeout_queue_del>
 	acoral_evt_queue_del(thread);
-3000535c:	e59d0010 	ldr	r0, [sp, #16]
-30005360:	ebfffe7c 	bl	30004d58 <acoral_evt_queue_del>
+30005560:	e59d0010 	ldr	r0, [sp, #16]
+30005564:	ebfffdfb 	bl	30004d58 <acoral_evt_queue_del>
 #ifdef CFG_TEST
 	acoral_print("%d post %d\n",cur->prio,thread->prio);
 #endif
 	evt->count &= MUTEX_U_MASK;
-30005364:	e59d3004 	ldr	r3, [sp, #4]
-30005368:	e593300c 	ldr	r3, [r3, #12]
-3000536c:	e2032cff 	and	r2, r3, #65280	; 0xff00
-30005370:	e59d3004 	ldr	r3, [sp, #4]
-30005374:	e583200c 	str	r2, [r3, #12]
+30005568:	e59d3004 	ldr	r3, [sp, #4]
+3000556c:	e593300c 	ldr	r3, [r3, #12]
+30005570:	e2032cff 	and	r2, r3, #65280	; 0xff00
+30005574:	e59d3004 	ldr	r3, [sp, #4]
+30005578:	e583200c 	str	r2, [r3, #12]
 	evt->count |= thread->prio;
-30005378:	e59d3004 	ldr	r3, [sp, #4]
-3000537c:	e593200c 	ldr	r2, [r3, #12]
-30005380:	e59d3010 	ldr	r3, [sp, #16]
-30005384:	e5d33005 	ldrb	r3, [r3, #5]
-30005388:	e1822003 	orr	r2, r2, r3
-3000538c:	e59d3004 	ldr	r3, [sp, #4]
-30005390:	e583200c 	str	r2, [r3, #12]
+3000557c:	e59d3004 	ldr	r3, [sp, #4]
+30005580:	e593200c 	ldr	r2, [r3, #12]
+30005584:	e59d3010 	ldr	r3, [sp, #16]
+30005588:	e5d33005 	ldrb	r3, [r3, #5]
+3000558c:	e1822003 	orr	r2, r2, r3
+30005590:	e59d3004 	ldr	r3, [sp, #4]
+30005594:	e583200c 	str	r2, [r3, #12]
 	evt->data = thread;
-30005394:	e59d3004 	ldr	r3, [sp, #4]
-30005398:	e59d2010 	ldr	r2, [sp, #16]
-3000539c:	e5832020 	str	r2, [r3, #32]
+30005598:	e59d3004 	ldr	r3, [sp, #4]
+3000559c:	e59d2010 	ldr	r2, [sp, #16]
+300055a0:	e5832020 	str	r2, [r3, #32]
 	acoral_rdy_thread(thread);
-300053a0:	e59d0010 	ldr	r0, [sp, #16]
-300053a4:	ebfff5eb 	bl	30002b58 <acoral_rdy_thread>
+300055a4:	e59d0010 	ldr	r0, [sp, #16]
+300055a8:	ebfff56a 	bl	30002b58 <acoral_rdy_thread>
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-300053a8:	e59d0008 	ldr	r0, [sp, #8]
-300053ac:	ebfff0ce 	bl	300016ec <HAL_INTR_RESTORE>
+300055ac:	e59d0008 	ldr	r0, [sp, #8]
+300055b0:	ebfff04d 	bl	300016ec <HAL_INTR_RESTORE>
 	acoral_sched();
-300053b0:	ebfff410 	bl	300023f8 <acoral_sched>
+300055b4:	ebfff38f 	bl	300023f8 <acoral_sched>
 	return MUTEX_SUCCED;
-300053b4:	e3a03000 	mov	r3, #0
+300055b8:	e3a03000 	mov	r3, #0
 }
-300053b8:	e1a00003 	mov	r0, r3
-300053bc:	e28dd01c 	add	sp, sp, #28
-300053c0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300053c4:	e12fff1e 	bx	lr
-300053c8:	3000e3b4 	.word	0x3000e3b4
-300053cc:	300103f8 	.word	0x300103f8
-300053d0:	3000e3c0 	.word	0x3000e3c0
+300055bc:	e1a00003 	mov	r0, r3
+300055c0:	e28dd01c 	add	sp, sp, #28
+300055c4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300055c8:	e12fff1e 	bx	lr
+300055cc:	3000e5b8 	.word	0x3000e5b8
+300055d0:	30010604 	.word	0x30010604
+300055d4:	3000e5c4 	.word	0x3000e5c4
 
-300053d4 <buddy_scan>:
+300055d8 <buddy_scan>:
 }acoral_block_ctr_t;
 
 acoral_block_ctr_t *acoral_mem_ctrl;
 acoral_block_t *acoral_mem_blocks;
 
 void buddy_scan(){
-300053d4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300053d8:	e24dd01c 	sub	sp, sp, #28
+300055d8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300055dc:	e24dd01c 	sub	sp, sp, #28
 	acoral_u32 i,k,num,n;	
 	acoral_u32 max_level=acoral_mem_ctrl->level;
-300053dc:	e59f314c 	ldr	r3, [pc, #332]	; 30005530 <buddy_scan+0x15c>
-300053e0:	e5933000 	ldr	r3, [r3]
-300053e4:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-300053e8:	e1a03c03 	lsl	r3, r3, #24
-300053ec:	e1a03c43 	asr	r3, r3, #24
-300053f0:	e58d3014 	str	r3, [sp, #20]
+300055e0:	e59f314c 	ldr	r3, [pc, #332]	; 30005734 <buddy_scan+0x15c>
+300055e4:	e5933000 	ldr	r3, [r3]
+300055e8:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+300055ec:	e1a03c03 	lsl	r3, r3, #24
+300055f0:	e1a03c43 	asr	r3, r3, #24
+300055f4:	e58d3014 	str	r3, [sp, #20]
 	for(i=0;i<max_level;i++){
-300053f4:	e3a03000 	mov	r3, #0
-300053f8:	e58d3004 	str	r3, [sp, #4]
-300053fc:	ea00003c 	b	300054f4 <buddy_scan+0x120>
+300055f8:	e3a03000 	mov	r3, #0
+300055fc:	e58d3004 	str	r3, [sp, #4]
+30005600:	ea00003c 	b	300056f8 <buddy_scan+0x120>
 		acoral_print("Level%d\r\n",i); 	
-30005400:	e59f012c 	ldr	r0, [pc, #300]	; 30005534 <buddy_scan+0x160>
-30005404:	e59d1004 	ldr	r1, [sp, #4]
-30005408:	eb00177e 	bl	3000b208 <acoral_print>
+30005604:	e59f012c 	ldr	r0, [pc, #300]	; 30005738 <buddy_scan+0x160>
+30005608:	e59d1004 	ldr	r1, [sp, #4]
+3000560c:	eb00177e 	bl	3000b40c <acoral_print>
 		acoral_prints("bitmap:"); 	
-3000540c:	e59f0124 	ldr	r0, [pc, #292]	; 30005538 <buddy_scan+0x164>
-30005410:	eb00179f 	bl	3000b294 <acoral_prints>
+30005610:	e59f0124 	ldr	r0, [pc, #292]	; 3000573c <buddy_scan+0x164>
+30005614:	eb00179f 	bl	3000b498 <acoral_prints>
 		num=acoral_mem_ctrl->num[i];
-30005414:	e59f3114 	ldr	r3, [pc, #276]	; 30005530 <buddy_scan+0x15c>
-30005418:	e5933000 	ldr	r3, [r3]
-3000541c:	e59d2004 	ldr	r2, [sp, #4]
-30005420:	e282202a 	add	r2, r2, #42	; 0x2a
-30005424:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005428:	e58d300c 	str	r3, [sp, #12]
+30005618:	e59f3114 	ldr	r3, [pc, #276]	; 30005734 <buddy_scan+0x15c>
+3000561c:	e5933000 	ldr	r3, [r3]
+30005620:	e59d2004 	ldr	r2, [sp, #4]
+30005624:	e282202a 	add	r2, r2, #42	; 0x2a
+30005628:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+3000562c:	e58d300c 	str	r3, [sp, #12]
 		for(k=0;k<num;){
-3000542c:	e3a03000 	mov	r3, #0
-30005430:	e58d3008 	str	r3, [sp, #8]
-30005434:	ea00001d 	b	300054b0 <buddy_scan+0xdc>
+30005630:	e3a03000 	mov	r3, #0
+30005634:	e58d3008 	str	r3, [sp, #8]
+30005638:	ea00001d 	b	300056b4 <buddy_scan+0xdc>
 			for(n=0;n<8&&k<num;n++,k++){
-30005438:	e3a03000 	mov	r3, #0
-3000543c:	e58d3010 	str	r3, [sp, #16]
-30005440:	ea000011 	b	3000548c <buddy_scan+0xb8>
+3000563c:	e3a03000 	mov	r3, #0
+30005640:	e58d3010 	str	r3, [sp, #16]
+30005644:	ea000011 	b	30005690 <buddy_scan+0xb8>
 				acoral_print("%x ",acoral_mem_ctrl->bitmap[i][k]); 
-30005444:	e59f30e4 	ldr	r3, [pc, #228]	; 30005530 <buddy_scan+0x15c>
-30005448:	e5933000 	ldr	r3, [r3]
-3000544c:	e59d2004 	ldr	r2, [sp, #4]
-30005450:	e282200e 	add	r2, r2, #14
-30005454:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005458:	e59d3008 	ldr	r3, [sp, #8]
-3000545c:	e1a03103 	lsl	r3, r3, #2
-30005460:	e0823003 	add	r3, r2, r3
-30005464:	e5933000 	ldr	r3, [r3]
-30005468:	e59f00cc 	ldr	r0, [pc, #204]	; 3000553c <buddy_scan+0x168>
-3000546c:	e1a01003 	mov	r1, r3
-30005470:	eb001764 	bl	3000b208 <acoral_print>
+30005648:	e59f30e4 	ldr	r3, [pc, #228]	; 30005734 <buddy_scan+0x15c>
+3000564c:	e5933000 	ldr	r3, [r3]
+30005650:	e59d2004 	ldr	r2, [sp, #4]
+30005654:	e282200e 	add	r2, r2, #14
+30005658:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+3000565c:	e59d3008 	ldr	r3, [sp, #8]
+30005660:	e1a03103 	lsl	r3, r3, #2
+30005664:	e0823003 	add	r3, r2, r3
+30005668:	e5933000 	ldr	r3, [r3]
+3000566c:	e59f00cc 	ldr	r0, [pc, #204]	; 30005740 <buddy_scan+0x168>
+30005670:	e1a01003 	mov	r1, r3
+30005674:	eb001764 	bl	3000b40c <acoral_print>
 	for(i=0;i<max_level;i++){
 		acoral_print("Level%d\r\n",i); 	
 		acoral_prints("bitmap:"); 	
 		num=acoral_mem_ctrl->num[i];
 		for(k=0;k<num;){
 			for(n=0;n<8&&k<num;n++,k++){
-30005474:	e59d3010 	ldr	r3, [sp, #16]
-30005478:	e2833001 	add	r3, r3, #1
-3000547c:	e58d3010 	str	r3, [sp, #16]
-30005480:	e59d3008 	ldr	r3, [sp, #8]
-30005484:	e2833001 	add	r3, r3, #1
-30005488:	e58d3008 	str	r3, [sp, #8]
-3000548c:	e59d3010 	ldr	r3, [sp, #16]
-30005490:	e3530007 	cmp	r3, #7
-30005494:	8a000003 	bhi	300054a8 <buddy_scan+0xd4>
-30005498:	e59d2008 	ldr	r2, [sp, #8]
-3000549c:	e59d300c 	ldr	r3, [sp, #12]
-300054a0:	e1520003 	cmp	r2, r3
-300054a4:	3affffe6 	bcc	30005444 <buddy_scan+0x70>
+30005678:	e59d3010 	ldr	r3, [sp, #16]
+3000567c:	e2833001 	add	r3, r3, #1
+30005680:	e58d3010 	str	r3, [sp, #16]
+30005684:	e59d3008 	ldr	r3, [sp, #8]
+30005688:	e2833001 	add	r3, r3, #1
+3000568c:	e58d3008 	str	r3, [sp, #8]
+30005690:	e59d3010 	ldr	r3, [sp, #16]
+30005694:	e3530007 	cmp	r3, #7
+30005698:	8a000003 	bhi	300056ac <buddy_scan+0xd4>
+3000569c:	e59d2008 	ldr	r2, [sp, #8]
+300056a0:	e59d300c 	ldr	r3, [sp, #12]
+300056a4:	e1520003 	cmp	r2, r3
+300056a8:	3affffe6 	bcc	30005648 <buddy_scan+0x70>
 				acoral_print("%x ",acoral_mem_ctrl->bitmap[i][k]); 
 			}	
 			acoral_prints("\r\n"); 	
-300054a8:	e59f0090 	ldr	r0, [pc, #144]	; 30005540 <buddy_scan+0x16c>
-300054ac:	eb001778 	bl	3000b294 <acoral_prints>
+300056ac:	e59f0090 	ldr	r0, [pc, #144]	; 30005744 <buddy_scan+0x16c>
+300056b0:	eb001778 	bl	3000b498 <acoral_prints>
 	acoral_u32 max_level=acoral_mem_ctrl->level;
 	for(i=0;i<max_level;i++){
 		acoral_print("Level%d\r\n",i); 	
 		acoral_prints("bitmap:"); 	
 		num=acoral_mem_ctrl->num[i];
 		for(k=0;k<num;){
-300054b0:	e59d2008 	ldr	r2, [sp, #8]
-300054b4:	e59d300c 	ldr	r3, [sp, #12]
-300054b8:	e1520003 	cmp	r2, r3
-300054bc:	3affffdd 	bcc	30005438 <buddy_scan+0x64>
+300056b4:	e59d2008 	ldr	r2, [sp, #8]
+300056b8:	e59d300c 	ldr	r3, [sp, #12]
+300056bc:	e1520003 	cmp	r2, r3
+300056c0:	3affffdd 	bcc	3000563c <buddy_scan+0x64>
 			for(n=0;n<8&&k<num;n++,k++){
 				acoral_print("%x ",acoral_mem_ctrl->bitmap[i][k]); 
 			}	
 			acoral_prints("\r\n"); 	
 		}
 		acoral_print("Free Block head:%d\r\n",acoral_mem_ctrl->free_cur[i]); 	
-300054c0:	e59f3068 	ldr	r3, [pc, #104]	; 30005530 <buddy_scan+0x15c>
-300054c4:	e5933000 	ldr	r3, [r3]
-300054c8:	e59d2004 	ldr	r2, [sp, #4]
-300054cc:	e282201c 	add	r2, r2, #28
-300054d0:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-300054d4:	e59f0068 	ldr	r0, [pc, #104]	; 30005544 <buddy_scan+0x170>
-300054d8:	e1a01003 	mov	r1, r3
-300054dc:	eb001749 	bl	3000b208 <acoral_print>
+300056c4:	e59f3068 	ldr	r3, [pc, #104]	; 30005734 <buddy_scan+0x15c>
+300056c8:	e5933000 	ldr	r3, [r3]
+300056cc:	e59d2004 	ldr	r2, [sp, #4]
+300056d0:	e282201c 	add	r2, r2, #28
+300056d4:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+300056d8:	e59f0068 	ldr	r0, [pc, #104]	; 30005748 <buddy_scan+0x170>
+300056dc:	e1a01003 	mov	r1, r3
+300056e0:	eb001749 	bl	3000b40c <acoral_print>
 		acoral_prints("\r\n"); 	
-300054e0:	e59f0058 	ldr	r0, [pc, #88]	; 30005540 <buddy_scan+0x16c>
-300054e4:	eb00176a 	bl	3000b294 <acoral_prints>
+300056e4:	e59f0058 	ldr	r0, [pc, #88]	; 30005744 <buddy_scan+0x16c>
+300056e8:	eb00176a 	bl	3000b498 <acoral_prints>
 acoral_block_t *acoral_mem_blocks;
 
 void buddy_scan(){
 	acoral_u32 i,k,num,n;	
 	acoral_u32 max_level=acoral_mem_ctrl->level;
 	for(i=0;i<max_level;i++){
-300054e8:	e59d3004 	ldr	r3, [sp, #4]
-300054ec:	e2833001 	add	r3, r3, #1
-300054f0:	e58d3004 	str	r3, [sp, #4]
-300054f4:	e59d2004 	ldr	r2, [sp, #4]
-300054f8:	e59d3014 	ldr	r3, [sp, #20]
-300054fc:	e1520003 	cmp	r2, r3
-30005500:	3affffbe 	bcc	30005400 <buddy_scan+0x2c>
+300056ec:	e59d3004 	ldr	r3, [sp, #4]
+300056f0:	e2833001 	add	r3, r3, #1
+300056f4:	e58d3004 	str	r3, [sp, #4]
+300056f8:	e59d2004 	ldr	r2, [sp, #4]
+300056fc:	e59d3014 	ldr	r3, [sp, #20]
+30005700:	e1520003 	cmp	r2, r3
+30005704:	3affffbe 	bcc	30005604 <buddy_scan+0x2c>
 			acoral_prints("\r\n"); 	
 		}
 		acoral_print("Free Block head:%d\r\n",acoral_mem_ctrl->free_cur[i]); 	
 		acoral_prints("\r\n"); 	
 	}
 	acoral_print("Free Mem Block Number:%d\r\n",acoral_mem_ctrl->free_num); 	
-30005504:	e59f3024 	ldr	r3, [pc, #36]	; 30005530 <buddy_scan+0x15c>
-30005508:	e5933000 	ldr	r3, [r3]
-3000550c:	e59330f0 	ldr	r3, [r3, #240]	; 0xf0
-30005510:	e59f0030 	ldr	r0, [pc, #48]	; 30005548 <buddy_scan+0x174>
-30005514:	e1a01003 	mov	r1, r3
-30005518:	eb00173a 	bl	3000b208 <acoral_print>
+30005708:	e59f3024 	ldr	r3, [pc, #36]	; 30005734 <buddy_scan+0x15c>
+3000570c:	e5933000 	ldr	r3, [r3]
+30005710:	e59330f0 	ldr	r3, [r3, #240]	; 0xf0
+30005714:	e59f0030 	ldr	r0, [pc, #48]	; 3000574c <buddy_scan+0x174>
+30005718:	e1a01003 	mov	r1, r3
+3000571c:	eb00173a 	bl	3000b40c <acoral_print>
 	acoral_print("\r\n"); 	
-3000551c:	e59f001c 	ldr	r0, [pc, #28]	; 30005540 <buddy_scan+0x16c>
-30005520:	eb001738 	bl	3000b208 <acoral_print>
+30005720:	e59f001c 	ldr	r0, [pc, #28]	; 30005744 <buddy_scan+0x16c>
+30005724:	eb001738 	bl	3000b40c <acoral_print>
 }
-30005524:	e28dd01c 	add	sp, sp, #28
-30005528:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000552c:	e12fff1e 	bx	lr
-30005530:	30010344 	.word	0x30010344
-30005534:	3000e3d0 	.word	0x3000e3d0
-30005538:	3000e3dc 	.word	0x3000e3dc
-3000553c:	3000e3e4 	.word	0x3000e3e4
-30005540:	3000e3e8 	.word	0x3000e3e8
-30005544:	3000e3ec 	.word	0x3000e3ec
-30005548:	3000e404 	.word	0x3000e404
+30005728:	e28dd01c 	add	sp, sp, #28
+3000572c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30005730:	e12fff1e 	bx	lr
+30005734:	30010550 	.word	0x30010550
+30005738:	3000e5d4 	.word	0x3000e5d4
+3000573c:	3000e5e0 	.word	0x3000e5e0
+30005740:	3000e5e8 	.word	0x3000e5e8
+30005744:	3000e5ec 	.word	0x3000e5ec
+30005748:	3000e5f0 	.word	0x3000e5f0
+3000574c:	3000e608 	.word	0x3000e608
 
-3000554c <buddy_init>:
+30005750 <buddy_init>:
 
 acoral_err buddy_init(acoral_u32 start_adr,acoral_u32 end_adr){
-3000554c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30005550:	e24dd03c 	sub	sp, sp, #60	; 0x3c
-30005554:	e58d0004 	str	r0, [sp, #4]
-30005558:	e58d1000 	str	r1, [sp]
+30005750:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30005754:	e24dd03c 	sub	sp, sp, #60	; 0x3c
+30005758:	e58d0004 	str	r0, [sp, #4]
+3000575c:	e58d1000 	str	r1, [sp]
 	acoral_32 i,k;
 	acoral_u32 resize_size;
 	acoral_u32 save_adr;
 	acoral_u32 index;
 	acoral_u32 num=1;
-3000555c:	e3a03001 	mov	r3, #1
-30005560:	e58d3020 	str	r3, [sp, #32]
+30005760:	e3a03001 	mov	r3, #1
+30005764:	e58d3020 	str	r3, [sp, #32]
 	acoral_u32 adjust_level=1;
-30005564:	e3a03001 	mov	r3, #1
-30005568:	e58d3024 	str	r3, [sp, #36]	; 0x24
+30005768:	e3a03001 	mov	r3, #1
+3000576c:	e58d3024 	str	r3, [sp, #36]	; 0x24
 	acoral_32 level=0;
-3000556c:	e3a03000 	mov	r3, #0
-30005570:	e58d3028 	str	r3, [sp, #40]	; 0x28
+30005770:	e3a03000 	mov	r3, #0
+30005774:	e58d3028 	str	r3, [sp, #40]	; 0x28
 	acoral_u32 max_num,o_num;
 	acoral_u32 cur;
 	start_adr+=3;
-30005574:	e59d3004 	ldr	r3, [sp, #4]
-30005578:	e2833003 	add	r3, r3, #3
-3000557c:	e58d3004 	str	r3, [sp, #4]
+30005778:	e59d3004 	ldr	r3, [sp, #4]
+3000577c:	e2833003 	add	r3, r3, #3
+30005780:	e58d3004 	str	r3, [sp, #4]
 	start_adr&=~(4-1);		
-30005580:	e59d3004 	ldr	r3, [sp, #4]
-30005584:	e3c33003 	bic	r3, r3, #3
-30005588:	e58d3004 	str	r3, [sp, #4]
+30005784:	e59d3004 	ldr	r3, [sp, #4]
+30005788:	e3c33003 	bic	r3, r3, #3
+3000578c:	e58d3004 	str	r3, [sp, #4]
 	end_adr&=~(4-1);		
-3000558c:	e59d3000 	ldr	r3, [sp]
-30005590:	e3c33003 	bic	r3, r3, #3
-30005594:	e58d3000 	str	r3, [sp]
+30005790:	e59d3000 	ldr	r3, [sp]
+30005794:	e3c33003 	bic	r3, r3, #3
+30005798:	e58d3000 	str	r3, [sp]
 	resize_size=BLOCK_SIZE;
-30005598:	e3a03080 	mov	r3, #128	; 0x80
-3000559c:	e58d3014 	str	r3, [sp, #20]
+3000579c:	e3a03080 	mov	r3, #128	; 0x80
+300057a0:	e58d3014 	str	r3, [sp, #20]
 	end_adr=end_adr - sizeof(acoral_block_ctr_t);
-300055a0:	e59d3000 	ldr	r3, [sp]
-300055a4:	e24330fc 	sub	r3, r3, #252	; 0xfc
-300055a8:	e58d3000 	str	r3, [sp]
+300057a4:	e59d3000 	ldr	r3, [sp]
+300057a8:	e24330fc 	sub	r3, r3, #252	; 0xfc
+300057ac:	e58d3000 	str	r3, [sp]
 	end_adr&=~(4-1);
-300055ac:	e59d3000 	ldr	r3, [sp]
-300055b0:	e3c33003 	bic	r3, r3, #3
-300055b4:	e58d3000 	str	r3, [sp]
+300057b0:	e59d3000 	ldr	r3, [sp]
+300057b4:	e3c33003 	bic	r3, r3, #3
+300057b8:	e58d3000 	str	r3, [sp]
 	acoral_mem_ctrl=(acoral_block_ctr_t *)end_adr;
-300055b8:	e59d2000 	ldr	r2, [sp]
-300055bc:	e59f3720 	ldr	r3, [pc, #1824]	; 30005ce4 <buddy_init+0x798>
-300055c0:	e5832000 	str	r2, [r3]
+300057bc:	e59d2000 	ldr	r2, [sp]
+300057c0:	e59f3720 	ldr	r3, [pc, #1824]	; 30005ee8 <buddy_init+0x798>
+300057c4:	e5832000 	str	r2, [r3]
 	/*如果内存这么少，不适合分配*/
 	if(start_adr>end_adr||end_adr-start_adr<BLOCK_SIZE){
-300055c4:	e59d2004 	ldr	r2, [sp, #4]
-300055c8:	e59d3000 	ldr	r3, [sp]
-300055cc:	e1520003 	cmp	r2, r3
-300055d0:	8a000004 	bhi	300055e8 <buddy_init+0x9c>
-300055d4:	e59d2000 	ldr	r2, [sp]
-300055d8:	e59d3004 	ldr	r3, [sp, #4]
-300055dc:	e0633002 	rsb	r3, r3, r2
-300055e0:	e353007f 	cmp	r3, #127	; 0x7f
-300055e4:	8a000005 	bhi	30005600 <buddy_init+0xb4>
+300057c8:	e59d2004 	ldr	r2, [sp, #4]
+300057cc:	e59d3000 	ldr	r3, [sp]
+300057d0:	e1520003 	cmp	r2, r3
+300057d4:	8a000004 	bhi	300057ec <buddy_init+0x9c>
+300057d8:	e59d2000 	ldr	r2, [sp]
+300057dc:	e59d3004 	ldr	r3, [sp, #4]
+300057e0:	e0633002 	rsb	r3, r3, r2
+300057e4:	e353007f 	cmp	r3, #127	; 0x7f
+300057e8:	8a000005 	bhi	30005804 <buddy_init+0xb4>
 		acoral_mem_ctrl->state=MEM_NO_ALLOC;
-300055e8:	e59f36f4 	ldr	r3, [pc, #1780]	; 30005ce4 <buddy_init+0x798>
-300055ec:	e5933000 	ldr	r3, [r3]
-300055f0:	e3a02000 	mov	r2, #0
-300055f4:	e5c320e1 	strb	r2, [r3, #225]	; 0xe1
+300057ec:	e59f36f4 	ldr	r3, [pc, #1780]	; 30005ee8 <buddy_init+0x798>
+300057f0:	e5933000 	ldr	r3, [r3]
+300057f4:	e3a02000 	mov	r2, #0
+300057f8:	e5c320e1 	strb	r2, [r3, #225]	; 0xe1
 		return -1;
-300055f8:	e3e03000 	mvn	r3, #0
-300055fc:	ea0001b4 	b	30005cd4 <buddy_init+0x788>
+300057fc:	e3e03000 	mvn	r3, #0
+30005800:	ea0001b4 	b	30005ed8 <buddy_init+0x788>
 	}
 	acoral_mem_ctrl->state=MEM_OK;
-30005600:	e59f36dc 	ldr	r3, [pc, #1756]	; 30005ce4 <buddy_init+0x798>
-30005604:	e5933000 	ldr	r3, [r3]
-30005608:	e3a02001 	mov	r2, #1
-3000560c:	e5c320e1 	strb	r2, [r3, #225]	; 0xe1
+30005804:	e59f36dc 	ldr	r3, [pc, #1756]	; 30005ee8 <buddy_init+0x798>
+30005808:	e5933000 	ldr	r3, [r3]
+3000580c:	e3a02001 	mov	r2, #1
+30005810:	e5c320e1 	strb	r2, [r3, #225]	; 0xe1
 	while(1){
 		if(end_adr<=start_adr+resize_size)
-30005610:	e59d2004 	ldr	r2, [sp, #4]
-30005614:	e59d3014 	ldr	r3, [sp, #20]
-30005618:	e0822003 	add	r2, r2, r3
-3000561c:	e59d3000 	ldr	r3, [sp]
-30005620:	e1520003 	cmp	r2, r3
-30005624:	3a00000e 	bcc	30005664 <buddy_init+0x118>
+30005814:	e59d2004 	ldr	r2, [sp, #4]
+30005818:	e59d3014 	ldr	r3, [sp, #20]
+3000581c:	e0822003 	add	r2, r2, r3
+30005820:	e59d3000 	ldr	r3, [sp]
+30005824:	e1520003 	cmp	r2, r3
+30005828:	3a00000e 	bcc	30005868 <buddy_init+0x118>
 			break;
 		resize_size=resize_size<<1;
 		num=num<<1;
 		adjust_level++;
 	}
 	acoral_mem_blocks=(acoral_block_t *)end_adr-num;
-30005628:	e59d2000 	ldr	r2, [sp]
-3000562c:	e59d3020 	ldr	r3, [sp, #32]
-30005630:	e0633002 	rsb	r3, r3, r2
-30005634:	e1a02003 	mov	r2, r3
-30005638:	e59f36a8 	ldr	r3, [pc, #1704]	; 30005ce8 <buddy_init+0x79c>
-3000563c:	e5832000 	str	r2, [r3]
+3000582c:	e59d2000 	ldr	r2, [sp]
+30005830:	e59d3020 	ldr	r3, [sp, #32]
+30005834:	e0633002 	rsb	r3, r3, r2
+30005838:	e1a02003 	mov	r2, r3
+3000583c:	e59f36a8 	ldr	r3, [pc, #1704]	; 30005eec <buddy_init+0x79c>
+30005840:	e5832000 	str	r2, [r3]
 	save_adr=(acoral_u32)acoral_mem_blocks;
-30005640:	e59f36a0 	ldr	r3, [pc, #1696]	; 30005ce8 <buddy_init+0x79c>
-30005644:	e5933000 	ldr	r3, [r3]
-30005648:	e58d3018 	str	r3, [sp, #24]
+30005844:	e59f36a0 	ldr	r3, [pc, #1696]	; 30005eec <buddy_init+0x79c>
+30005848:	e5933000 	ldr	r3, [r3]
+3000584c:	e58d3018 	str	r3, [sp, #24]
 	level=adjust_level;
-3000564c:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-30005650:	e58d3028 	str	r3, [sp, #40]	; 0x28
+30005850:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+30005854:	e58d3028 	str	r3, [sp, #40]	; 0x28
 	if(adjust_level>LEVEL)
-30005654:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-30005658:	e353000e 	cmp	r3, #14
-3000565c:	8a00000a 	bhi	3000568c <buddy_init+0x140>
-30005660:	ea00000b 	b	30005694 <buddy_init+0x148>
+30005858:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+3000585c:	e353000e 	cmp	r3, #14
+30005860:	8a00000a 	bhi	30005890 <buddy_init+0x140>
+30005864:	ea00000b 	b	30005898 <buddy_init+0x148>
 	}
 	acoral_mem_ctrl->state=MEM_OK;
 	while(1){
 		if(end_adr<=start_adr+resize_size)
 			break;
 		resize_size=resize_size<<1;
-30005664:	e59d3014 	ldr	r3, [sp, #20]
-30005668:	e1a03083 	lsl	r3, r3, #1
-3000566c:	e58d3014 	str	r3, [sp, #20]
+30005868:	e59d3014 	ldr	r3, [sp, #20]
+3000586c:	e1a03083 	lsl	r3, r3, #1
+30005870:	e58d3014 	str	r3, [sp, #20]
 		num=num<<1;
-30005670:	e59d3020 	ldr	r3, [sp, #32]
-30005674:	e1a03083 	lsl	r3, r3, #1
-30005678:	e58d3020 	str	r3, [sp, #32]
+30005874:	e59d3020 	ldr	r3, [sp, #32]
+30005878:	e1a03083 	lsl	r3, r3, #1
+3000587c:	e58d3020 	str	r3, [sp, #32]
 		adjust_level++;
-3000567c:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-30005680:	e2833001 	add	r3, r3, #1
-30005684:	e58d3024 	str	r3, [sp, #36]	; 0x24
+30005880:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+30005884:	e2833001 	add	r3, r3, #1
+30005888:	e58d3024 	str	r3, [sp, #36]	; 0x24
 	}
-30005688:	eaffffe0 	b	30005610 <buddy_init+0xc4>
+3000588c:	eaffffe0 	b	30005814 <buddy_init+0xc4>
 	acoral_mem_blocks=(acoral_block_t *)end_adr-num;
 	save_adr=(acoral_u32)acoral_mem_blocks;
 	level=adjust_level;
 	if(adjust_level>LEVEL)
 		level=LEVEL;
-3000568c:	e3a0300e 	mov	r3, #14
-30005690:	e58d3028 	str	r3, [sp, #40]	; 0x28
+30005890:	e3a0300e 	mov	r3, #14
+30005894:	e58d3028 	str	r3, [sp, #40]	; 0x28
 	num=num/32; 
-30005694:	e59d3020 	ldr	r3, [sp, #32]
-30005698:	e1a032a3 	lsr	r3, r3, #5
-3000569c:	e58d3020 	str	r3, [sp, #32]
+30005898:	e59d3020 	ldr	r3, [sp, #32]
+3000589c:	e1a032a3 	lsr	r3, r3, #5
+300058a0:	e58d3020 	str	r3, [sp, #32]
 	for(i=0;i<level-1;i++){
-300056a0:	e3a03000 	mov	r3, #0
-300056a4:	e58d300c 	str	r3, [sp, #12]
-300056a8:	ea00004e 	b	300057e8 <buddy_init+0x29c>
+300058a4:	e3a03000 	mov	r3, #0
+300058a8:	e58d300c 	str	r3, [sp, #12]
+300058ac:	ea00004e 	b	300059ec <buddy_init+0x29c>
 		num=num>>1;
-300056ac:	e59d3020 	ldr	r3, [sp, #32]
-300056b0:	e1a030a3 	lsr	r3, r3, #1
-300056b4:	e58d3020 	str	r3, [sp, #32]
+300058b0:	e59d3020 	ldr	r3, [sp, #32]
+300058b4:	e1a030a3 	lsr	r3, r3, #1
+300058b8:	e58d3020 	str	r3, [sp, #32]
 		if(num==0)
-300056b8:	e59d3020 	ldr	r3, [sp, #32]
-300056bc:	e3530000 	cmp	r3, #0
-300056c0:	1a000001 	bne	300056cc <buddy_init+0x180>
+300058bc:	e59d3020 	ldr	r3, [sp, #32]
+300058c0:	e3530000 	cmp	r3, #0
+300058c4:	1a000001 	bne	300058d0 <buddy_init+0x180>
 			num=1;
-300056c4:	e3a03001 	mov	r3, #1
-300056c8:	e58d3020 	str	r3, [sp, #32]
+300058c8:	e3a03001 	mov	r3, #1
+300058cc:	e58d3020 	str	r3, [sp, #32]
 		save_adr-=num*4;
-300056cc:	e59d3020 	ldr	r3, [sp, #32]
-300056d0:	e1a03103 	lsl	r3, r3, #2
-300056d4:	e59d2018 	ldr	r2, [sp, #24]
-300056d8:	e0633002 	rsb	r3, r3, r2
-300056dc:	e58d3018 	str	r3, [sp, #24]
+300058d0:	e59d3020 	ldr	r3, [sp, #32]
+300058d4:	e1a03103 	lsl	r3, r3, #2
+300058d8:	e59d2018 	ldr	r2, [sp, #24]
+300058dc:	e0633002 	rsb	r3, r3, r2
+300058e0:	e58d3018 	str	r3, [sp, #24]
 		save_adr&=~(4-1);
-300056e0:	e59d3018 	ldr	r3, [sp, #24]
-300056e4:	e3c33003 	bic	r3, r3, #3
-300056e8:	e58d3018 	str	r3, [sp, #24]
+300058e4:	e59d3018 	ldr	r3, [sp, #24]
+300058e8:	e3c33003 	bic	r3, r3, #3
+300058ec:	e58d3018 	str	r3, [sp, #24]
 		acoral_mem_ctrl->bitmap[i]=(acoral_u32 *)save_adr;
-300056ec:	e59f35f0 	ldr	r3, [pc, #1520]	; 30005ce4 <buddy_init+0x798>
-300056f0:	e5933000 	ldr	r3, [r3]
-300056f4:	e59d200c 	ldr	r2, [sp, #12]
-300056f8:	e59d1018 	ldr	r1, [sp, #24]
-300056fc:	e282200e 	add	r2, r2, #14
-30005700:	e7831102 	str	r1, [r3, r2, lsl #2]
+300058f0:	e59f35f0 	ldr	r3, [pc, #1520]	; 30005ee8 <buddy_init+0x798>
+300058f4:	e5933000 	ldr	r3, [r3]
+300058f8:	e59d200c 	ldr	r2, [sp, #12]
+300058fc:	e59d1018 	ldr	r1, [sp, #24]
+30005900:	e282200e 	add	r2, r2, #14
+30005904:	e7831102 	str	r1, [r3, r2, lsl #2]
 		acoral_mem_ctrl->num[i]=num;
-30005704:	e59f35d8 	ldr	r3, [pc, #1496]	; 30005ce4 <buddy_init+0x798>
-30005708:	e5933000 	ldr	r3, [r3]
-3000570c:	e59d200c 	ldr	r2, [sp, #12]
-30005710:	e282202a 	add	r2, r2, #42	; 0x2a
-30005714:	e59d1020 	ldr	r1, [sp, #32]
-30005718:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005908:	e59f35d8 	ldr	r3, [pc, #1496]	; 30005ee8 <buddy_init+0x798>
+3000590c:	e5933000 	ldr	r3, [r3]
+30005910:	e59d200c 	ldr	r2, [sp, #12]
+30005914:	e282202a 	add	r2, r2, #42	; 0x2a
+30005918:	e59d1020 	ldr	r1, [sp, #32]
+3000591c:	e7831102 	str	r1, [r3, r2, lsl #2]
 		save_adr-=num*4;
-3000571c:	e59d3020 	ldr	r3, [sp, #32]
-30005720:	e1a03103 	lsl	r3, r3, #2
-30005724:	e59d2018 	ldr	r2, [sp, #24]
-30005728:	e0633002 	rsb	r3, r3, r2
-3000572c:	e58d3018 	str	r3, [sp, #24]
+30005920:	e59d3020 	ldr	r3, [sp, #32]
+30005924:	e1a03103 	lsl	r3, r3, #2
+30005928:	e59d2018 	ldr	r2, [sp, #24]
+3000592c:	e0633002 	rsb	r3, r3, r2
+30005930:	e58d3018 	str	r3, [sp, #24]
 		save_adr&=~(4-1);
-30005730:	e59d3018 	ldr	r3, [sp, #24]
-30005734:	e3c33003 	bic	r3, r3, #3
-30005738:	e58d3018 	str	r3, [sp, #24]
+30005934:	e59d3018 	ldr	r3, [sp, #24]
+30005938:	e3c33003 	bic	r3, r3, #3
+3000593c:	e58d3018 	str	r3, [sp, #24]
 		acoral_mem_ctrl->free_list[i]=(acoral_32 *)save_adr;
-3000573c:	e59f35a0 	ldr	r3, [pc, #1440]	; 30005ce4 <buddy_init+0x798>
-30005740:	e5933000 	ldr	r3, [r3]
-30005744:	e59d200c 	ldr	r2, [sp, #12]
-30005748:	e59d1018 	ldr	r1, [sp, #24]
-3000574c:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005940:	e59f35a0 	ldr	r3, [pc, #1440]	; 30005ee8 <buddy_init+0x798>
+30005944:	e5933000 	ldr	r3, [r3]
+30005948:	e59d200c 	ldr	r2, [sp, #12]
+3000594c:	e59d1018 	ldr	r1, [sp, #24]
+30005950:	e7831102 	str	r1, [r3, r2, lsl #2]
 		for(k=0;k<num;k++){
-30005750:	e3a03000 	mov	r3, #0
-30005754:	e58d3010 	str	r3, [sp, #16]
-30005758:	ea000015 	b	300057b4 <buddy_init+0x268>
+30005954:	e3a03000 	mov	r3, #0
+30005958:	e58d3010 	str	r3, [sp, #16]
+3000595c:	ea000015 	b	300059b8 <buddy_init+0x268>
 			acoral_mem_ctrl->bitmap[i][k]=0;;
-3000575c:	e59f3580 	ldr	r3, [pc, #1408]	; 30005ce4 <buddy_init+0x798>
-30005760:	e5933000 	ldr	r3, [r3]
-30005764:	e59d200c 	ldr	r2, [sp, #12]
-30005768:	e282200e 	add	r2, r2, #14
-3000576c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005770:	e59d3010 	ldr	r3, [sp, #16]
-30005774:	e1a03103 	lsl	r3, r3, #2
-30005778:	e0823003 	add	r3, r2, r3
-3000577c:	e3a02000 	mov	r2, #0
-30005780:	e5832000 	str	r2, [r3]
+30005960:	e59f3580 	ldr	r3, [pc, #1408]	; 30005ee8 <buddy_init+0x798>
+30005964:	e5933000 	ldr	r3, [r3]
+30005968:	e59d200c 	ldr	r2, [sp, #12]
+3000596c:	e282200e 	add	r2, r2, #14
+30005970:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005974:	e59d3010 	ldr	r3, [sp, #16]
+30005978:	e1a03103 	lsl	r3, r3, #2
+3000597c:	e0823003 	add	r3, r2, r3
+30005980:	e3a02000 	mov	r2, #0
+30005984:	e5832000 	str	r2, [r3]
 			acoral_mem_ctrl->free_list[i][k]=-1;
-30005784:	e59f3558 	ldr	r3, [pc, #1368]	; 30005ce4 <buddy_init+0x798>
-30005788:	e5933000 	ldr	r3, [r3]
-3000578c:	e59d200c 	ldr	r2, [sp, #12]
-30005790:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005794:	e59d3010 	ldr	r3, [sp, #16]
-30005798:	e1a03103 	lsl	r3, r3, #2
-3000579c:	e0823003 	add	r3, r2, r3
-300057a0:	e3e02000 	mvn	r2, #0
-300057a4:	e5832000 	str	r2, [r3]
+30005988:	e59f3558 	ldr	r3, [pc, #1368]	; 30005ee8 <buddy_init+0x798>
+3000598c:	e5933000 	ldr	r3, [r3]
+30005990:	e59d200c 	ldr	r2, [sp, #12]
+30005994:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005998:	e59d3010 	ldr	r3, [sp, #16]
+3000599c:	e1a03103 	lsl	r3, r3, #2
+300059a0:	e0823003 	add	r3, r2, r3
+300059a4:	e3e02000 	mvn	r2, #0
+300059a8:	e5832000 	str	r2, [r3]
 		acoral_mem_ctrl->bitmap[i]=(acoral_u32 *)save_adr;
 		acoral_mem_ctrl->num[i]=num;
 		save_adr-=num*4;
 		save_adr&=~(4-1);
 		acoral_mem_ctrl->free_list[i]=(acoral_32 *)save_adr;
 		for(k=0;k<num;k++){
-300057a8:	e59d3010 	ldr	r3, [sp, #16]
-300057ac:	e2833001 	add	r3, r3, #1
-300057b0:	e58d3010 	str	r3, [sp, #16]
-300057b4:	e59d2010 	ldr	r2, [sp, #16]
-300057b8:	e59d3020 	ldr	r3, [sp, #32]
-300057bc:	e1520003 	cmp	r2, r3
-300057c0:	3affffe5 	bcc	3000575c <buddy_init+0x210>
+300059ac:	e59d3010 	ldr	r3, [sp, #16]
+300059b0:	e2833001 	add	r3, r3, #1
+300059b4:	e58d3010 	str	r3, [sp, #16]
+300059b8:	e59d2010 	ldr	r2, [sp, #16]
+300059bc:	e59d3020 	ldr	r3, [sp, #32]
+300059c0:	e1520003 	cmp	r2, r3
+300059c4:	3affffe5 	bcc	30005960 <buddy_init+0x210>
 			acoral_mem_ctrl->bitmap[i][k]=0;;
 			acoral_mem_ctrl->free_list[i][k]=-1;
 		}
 		acoral_mem_ctrl->free_cur[i]=-1;
-300057c4:	e59f3518 	ldr	r3, [pc, #1304]	; 30005ce4 <buddy_init+0x798>
-300057c8:	e5933000 	ldr	r3, [r3]
-300057cc:	e59d200c 	ldr	r2, [sp, #12]
-300057d0:	e282201c 	add	r2, r2, #28
-300057d4:	e3e01000 	mvn	r1, #0
-300057d8:	e7831102 	str	r1, [r3, r2, lsl #2]
+300059c8:	e59f3518 	ldr	r3, [pc, #1304]	; 30005ee8 <buddy_init+0x798>
+300059cc:	e5933000 	ldr	r3, [r3]
+300059d0:	e59d200c 	ldr	r2, [sp, #12]
+300059d4:	e282201c 	add	r2, r2, #28
+300059d8:	e3e01000 	mvn	r1, #0
+300059dc:	e7831102 	str	r1, [r3, r2, lsl #2]
 	save_adr=(acoral_u32)acoral_mem_blocks;
 	level=adjust_level;
 	if(adjust_level>LEVEL)
 		level=LEVEL;
 	num=num/32; 
 	for(i=0;i<level-1;i++){
-300057dc:	e59d300c 	ldr	r3, [sp, #12]
-300057e0:	e2833001 	add	r3, r3, #1
-300057e4:	e58d300c 	str	r3, [sp, #12]
-300057e8:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-300057ec:	e2432001 	sub	r2, r3, #1
-300057f0:	e59d300c 	ldr	r3, [sp, #12]
-300057f4:	e1520003 	cmp	r2, r3
-300057f8:	caffffab 	bgt	300056ac <buddy_init+0x160>
+300059e0:	e59d300c 	ldr	r3, [sp, #12]
+300059e4:	e2833001 	add	r3, r3, #1
+300059e8:	e58d300c 	str	r3, [sp, #12]
+300059ec:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+300059f0:	e2432001 	sub	r2, r3, #1
+300059f4:	e59d300c 	ldr	r3, [sp, #12]
+300059f8:	e1520003 	cmp	r2, r3
+300059fc:	caffffab 	bgt	300058b0 <buddy_init+0x160>
 			acoral_mem_ctrl->bitmap[i][k]=0;;
 			acoral_mem_ctrl->free_list[i][k]=-1;
 		}
 		acoral_mem_ctrl->free_cur[i]=-1;
 	}
 	if(num==0)
-300057fc:	e59d3020 	ldr	r3, [sp, #32]
-30005800:	e3530000 	cmp	r3, #0
-30005804:	1a000001 	bne	30005810 <buddy_init+0x2c4>
+30005a00:	e59d3020 	ldr	r3, [sp, #32]
+30005a04:	e3530000 	cmp	r3, #0
+30005a08:	1a000001 	bne	30005a14 <buddy_init+0x2c4>
 		num=1;
-30005808:	e3a03001 	mov	r3, #1
-3000580c:	e58d3020 	str	r3, [sp, #32]
+30005a0c:	e3a03001 	mov	r3, #1
+30005a10:	e58d3020 	str	r3, [sp, #32]
 	save_adr-=num*4;
-30005810:	e59d3020 	ldr	r3, [sp, #32]
-30005814:	e1a03103 	lsl	r3, r3, #2
-30005818:	e59d2018 	ldr	r2, [sp, #24]
-3000581c:	e0633002 	rsb	r3, r3, r2
-30005820:	e58d3018 	str	r3, [sp, #24]
+30005a14:	e59d3020 	ldr	r3, [sp, #32]
+30005a18:	e1a03103 	lsl	r3, r3, #2
+30005a1c:	e59d2018 	ldr	r2, [sp, #24]
+30005a20:	e0633002 	rsb	r3, r3, r2
+30005a24:	e58d3018 	str	r3, [sp, #24]
 	save_adr&=~(4-1);
-30005824:	e59d3018 	ldr	r3, [sp, #24]
-30005828:	e3c33003 	bic	r3, r3, #3
-3000582c:	e58d3018 	str	r3, [sp, #24]
+30005a28:	e59d3018 	ldr	r3, [sp, #24]
+30005a2c:	e3c33003 	bic	r3, r3, #3
+30005a30:	e58d3018 	str	r3, [sp, #24]
 	acoral_mem_ctrl->bitmap[i]=(acoral_u32 *)save_adr;
-30005830:	e59f34ac 	ldr	r3, [pc, #1196]	; 30005ce4 <buddy_init+0x798>
-30005834:	e5933000 	ldr	r3, [r3]
-30005838:	e59d200c 	ldr	r2, [sp, #12]
-3000583c:	e59d1018 	ldr	r1, [sp, #24]
-30005840:	e282200e 	add	r2, r2, #14
-30005844:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005a34:	e59f34ac 	ldr	r3, [pc, #1196]	; 30005ee8 <buddy_init+0x798>
+30005a38:	e5933000 	ldr	r3, [r3]
+30005a3c:	e59d200c 	ldr	r2, [sp, #12]
+30005a40:	e59d1018 	ldr	r1, [sp, #24]
+30005a44:	e282200e 	add	r2, r2, #14
+30005a48:	e7831102 	str	r1, [r3, r2, lsl #2]
 	acoral_mem_ctrl->num[i]=num;
-30005848:	e59f3494 	ldr	r3, [pc, #1172]	; 30005ce4 <buddy_init+0x798>
-3000584c:	e5933000 	ldr	r3, [r3]
-30005850:	e59d200c 	ldr	r2, [sp, #12]
-30005854:	e282202a 	add	r2, r2, #42	; 0x2a
-30005858:	e59d1020 	ldr	r1, [sp, #32]
-3000585c:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005a4c:	e59f3494 	ldr	r3, [pc, #1172]	; 30005ee8 <buddy_init+0x798>
+30005a50:	e5933000 	ldr	r3, [r3]
+30005a54:	e59d200c 	ldr	r2, [sp, #12]
+30005a58:	e282202a 	add	r2, r2, #42	; 0x2a
+30005a5c:	e59d1020 	ldr	r1, [sp, #32]
+30005a60:	e7831102 	str	r1, [r3, r2, lsl #2]
 	save_adr-=num*4;
-30005860:	e59d3020 	ldr	r3, [sp, #32]
-30005864:	e1a03103 	lsl	r3, r3, #2
-30005868:	e59d2018 	ldr	r2, [sp, #24]
-3000586c:	e0633002 	rsb	r3, r3, r2
-30005870:	e58d3018 	str	r3, [sp, #24]
+30005a64:	e59d3020 	ldr	r3, [sp, #32]
+30005a68:	e1a03103 	lsl	r3, r3, #2
+30005a6c:	e59d2018 	ldr	r2, [sp, #24]
+30005a70:	e0633002 	rsb	r3, r3, r2
+30005a74:	e58d3018 	str	r3, [sp, #24]
 	save_adr&=~(4-1);
-30005874:	e59d3018 	ldr	r3, [sp, #24]
-30005878:	e3c33003 	bic	r3, r3, #3
-3000587c:	e58d3018 	str	r3, [sp, #24]
+30005a78:	e59d3018 	ldr	r3, [sp, #24]
+30005a7c:	e3c33003 	bic	r3, r3, #3
+30005a80:	e58d3018 	str	r3, [sp, #24]
 	acoral_mem_ctrl->free_list[i]=(acoral_32 *)save_adr;
-30005880:	e59f345c 	ldr	r3, [pc, #1116]	; 30005ce4 <buddy_init+0x798>
-30005884:	e5933000 	ldr	r3, [r3]
-30005888:	e59d200c 	ldr	r2, [sp, #12]
-3000588c:	e59d1018 	ldr	r1, [sp, #24]
-30005890:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005a84:	e59f345c 	ldr	r3, [pc, #1116]	; 30005ee8 <buddy_init+0x798>
+30005a88:	e5933000 	ldr	r3, [r3]
+30005a8c:	e59d200c 	ldr	r2, [sp, #12]
+30005a90:	e59d1018 	ldr	r1, [sp, #24]
+30005a94:	e7831102 	str	r1, [r3, r2, lsl #2]
 	for(k=0;k<num;k++){
-30005894:	e3a03000 	mov	r3, #0
-30005898:	e58d3010 	str	r3, [sp, #16]
-3000589c:	ea000015 	b	300058f8 <buddy_init+0x3ac>
+30005a98:	e3a03000 	mov	r3, #0
+30005a9c:	e58d3010 	str	r3, [sp, #16]
+30005aa0:	ea000015 	b	30005afc <buddy_init+0x3ac>
 		acoral_mem_ctrl->bitmap[i][k]=0;;
-300058a0:	e59f343c 	ldr	r3, [pc, #1084]	; 30005ce4 <buddy_init+0x798>
-300058a4:	e5933000 	ldr	r3, [r3]
-300058a8:	e59d200c 	ldr	r2, [sp, #12]
-300058ac:	e282200e 	add	r2, r2, #14
-300058b0:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-300058b4:	e59d3010 	ldr	r3, [sp, #16]
-300058b8:	e1a03103 	lsl	r3, r3, #2
-300058bc:	e0823003 	add	r3, r2, r3
-300058c0:	e3a02000 	mov	r2, #0
-300058c4:	e5832000 	str	r2, [r3]
+30005aa4:	e59f343c 	ldr	r3, [pc, #1084]	; 30005ee8 <buddy_init+0x798>
+30005aa8:	e5933000 	ldr	r3, [r3]
+30005aac:	e59d200c 	ldr	r2, [sp, #12]
+30005ab0:	e282200e 	add	r2, r2, #14
+30005ab4:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005ab8:	e59d3010 	ldr	r3, [sp, #16]
+30005abc:	e1a03103 	lsl	r3, r3, #2
+30005ac0:	e0823003 	add	r3, r2, r3
+30005ac4:	e3a02000 	mov	r2, #0
+30005ac8:	e5832000 	str	r2, [r3]
 		acoral_mem_ctrl->free_list[i][k]=-1;
-300058c8:	e59f3414 	ldr	r3, [pc, #1044]	; 30005ce4 <buddy_init+0x798>
-300058cc:	e5933000 	ldr	r3, [r3]
-300058d0:	e59d200c 	ldr	r2, [sp, #12]
-300058d4:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-300058d8:	e59d3010 	ldr	r3, [sp, #16]
-300058dc:	e1a03103 	lsl	r3, r3, #2
-300058e0:	e0823003 	add	r3, r2, r3
-300058e4:	e3e02000 	mvn	r2, #0
-300058e8:	e5832000 	str	r2, [r3]
+30005acc:	e59f3414 	ldr	r3, [pc, #1044]	; 30005ee8 <buddy_init+0x798>
+30005ad0:	e5933000 	ldr	r3, [r3]
+30005ad4:	e59d200c 	ldr	r2, [sp, #12]
+30005ad8:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005adc:	e59d3010 	ldr	r3, [sp, #16]
+30005ae0:	e1a03103 	lsl	r3, r3, #2
+30005ae4:	e0823003 	add	r3, r2, r3
+30005ae8:	e3e02000 	mvn	r2, #0
+30005aec:	e5832000 	str	r2, [r3]
 	acoral_mem_ctrl->bitmap[i]=(acoral_u32 *)save_adr;
 	acoral_mem_ctrl->num[i]=num;
 	save_adr-=num*4;
 	save_adr&=~(4-1);
 	acoral_mem_ctrl->free_list[i]=(acoral_32 *)save_adr;
 	for(k=0;k<num;k++){
-300058ec:	e59d3010 	ldr	r3, [sp, #16]
-300058f0:	e2833001 	add	r3, r3, #1
-300058f4:	e58d3010 	str	r3, [sp, #16]
-300058f8:	e59d2010 	ldr	r2, [sp, #16]
-300058fc:	e59d3020 	ldr	r3, [sp, #32]
-30005900:	e1520003 	cmp	r2, r3
-30005904:	3affffe5 	bcc	300058a0 <buddy_init+0x354>
+30005af0:	e59d3010 	ldr	r3, [sp, #16]
+30005af4:	e2833001 	add	r3, r3, #1
+30005af8:	e58d3010 	str	r3, [sp, #16]
+30005afc:	e59d2010 	ldr	r2, [sp, #16]
+30005b00:	e59d3020 	ldr	r3, [sp, #32]
+30005b04:	e1520003 	cmp	r2, r3
+30005b08:	3affffe5 	bcc	30005aa4 <buddy_init+0x354>
 		acoral_mem_ctrl->bitmap[i][k]=0;;
 		acoral_mem_ctrl->free_list[i][k]=-1;
 	}
 	acoral_mem_ctrl->free_cur[i]=-1;
-30005908:	e59f33d4 	ldr	r3, [pc, #980]	; 30005ce4 <buddy_init+0x798>
-3000590c:	e5933000 	ldr	r3, [r3]
-30005910:	e59d200c 	ldr	r2, [sp, #12]
-30005914:	e282201c 	add	r2, r2, #28
-30005918:	e3e01000 	mvn	r1, #0
-3000591c:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005b0c:	e59f33d4 	ldr	r3, [pc, #980]	; 30005ee8 <buddy_init+0x798>
+30005b10:	e5933000 	ldr	r3, [r3]
+30005b14:	e59d200c 	ldr	r2, [sp, #12]
+30005b18:	e282201c 	add	r2, r2, #28
+30005b1c:	e3e01000 	mvn	r1, #0
+30005b20:	e7831102 	str	r1, [r3, r2, lsl #2]
 
 	/*如果减去刚才bitmap用的内存刚好是下一level*/
 	if(save_adr<=(start_adr+(resize_size>>1)))
-30005920:	e59d3014 	ldr	r3, [sp, #20]
-30005924:	e1a020a3 	lsr	r2, r3, #1
-30005928:	e59d3004 	ldr	r3, [sp, #4]
-3000592c:	e0822003 	add	r2, r2, r3
-30005930:	e59d3018 	ldr	r3, [sp, #24]
-30005934:	e1520003 	cmp	r2, r3
-30005938:	3a000002 	bcc	30005948 <buddy_init+0x3fc>
+30005b24:	e59d3014 	ldr	r3, [sp, #20]
+30005b28:	e1a020a3 	lsr	r2, r3, #1
+30005b2c:	e59d3004 	ldr	r3, [sp, #4]
+30005b30:	e0822003 	add	r2, r2, r3
+30005b34:	e59d3018 	ldr	r3, [sp, #24]
+30005b38:	e1520003 	cmp	r2, r3
+30005b3c:	3a000002 	bcc	30005b4c <buddy_init+0x3fc>
 		adjust_level--;
-3000593c:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-30005940:	e2433001 	sub	r3, r3, #1
-30005944:	e58d3024 	str	r3, [sp, #36]	; 0x24
+30005b40:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+30005b44:	e2433001 	sub	r3, r3, #1
+30005b48:	e58d3024 	str	r3, [sp, #36]	; 0x24
 	if(adjust_level>LEVEL)
-30005948:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-3000594c:	e353000e 	cmp	r3, #14
-30005950:	9a000001 	bls	3000595c <buddy_init+0x410>
+30005b4c:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+30005b50:	e353000e 	cmp	r3, #14
+30005b54:	9a000001 	bls	30005b60 <buddy_init+0x410>
 		level=LEVEL;
-30005954:	e3a0300e 	mov	r3, #14
-30005958:	e58d3028 	str	r3, [sp, #40]	; 0x28
+30005b58:	e3a0300e 	mov	r3, #14
+30005b5c:	e58d3028 	str	r3, [sp, #40]	; 0x28
 	acoral_mem_ctrl->level=level;
-3000595c:	e59f3380 	ldr	r3, [pc, #896]	; 30005ce4 <buddy_init+0x798>
-30005960:	e5933000 	ldr	r3, [r3]
-30005964:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005968:	e20220ff 	and	r2, r2, #255	; 0xff
-3000596c:	e5c320e0 	strb	r2, [r3, #224]	; 0xe0
+30005b60:	e59f3380 	ldr	r3, [pc, #896]	; 30005ee8 <buddy_init+0x798>
+30005b64:	e5933000 	ldr	r3, [r3]
+30005b68:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005b6c:	e20220ff 	and	r2, r2, #255	; 0xff
+30005b70:	e5c320e0 	strb	r2, [r3, #224]	; 0xe0
 	acoral_mem_ctrl->start_adr=start_adr;
-30005970:	e59f336c 	ldr	r3, [pc, #876]	; 30005ce4 <buddy_init+0x798>
-30005974:	e5933000 	ldr	r3, [r3]
-30005978:	e59d2004 	ldr	r2, [sp, #4]
-3000597c:	e58320e4 	str	r2, [r3, #228]	; 0xe4
+30005b74:	e59f336c 	ldr	r3, [pc, #876]	; 30005ee8 <buddy_init+0x798>
+30005b78:	e5933000 	ldr	r3, [r3]
+30005b7c:	e59d2004 	ldr	r2, [sp, #4]
+30005b80:	e58320e4 	str	r2, [r3, #228]	; 0xe4
 	num=(save_adr-start_adr)>>BLOCK_SHIFT;
-30005980:	e59d2018 	ldr	r2, [sp, #24]
-30005984:	e59d3004 	ldr	r3, [sp, #4]
-30005988:	e0633002 	rsb	r3, r3, r2
-3000598c:	e1a033a3 	lsr	r3, r3, #7
-30005990:	e58d3020 	str	r3, [sp, #32]
+30005b84:	e59d2018 	ldr	r2, [sp, #24]
+30005b88:	e59d3004 	ldr	r3, [sp, #4]
+30005b8c:	e0633002 	rsb	r3, r3, r2
+30005b90:	e1a033a3 	lsr	r3, r3, #7
+30005b94:	e58d3020 	str	r3, [sp, #32]
 	acoral_mem_ctrl->end_adr=start_adr+(num<<BLOCK_SHIFT);
-30005994:	e59f3348 	ldr	r3, [pc, #840]	; 30005ce4 <buddy_init+0x798>
-30005998:	e5933000 	ldr	r3, [r3]
-3000599c:	e59d2020 	ldr	r2, [sp, #32]
-300059a0:	e1a01382 	lsl	r1, r2, #7
-300059a4:	e59d2004 	ldr	r2, [sp, #4]
-300059a8:	e0812002 	add	r2, r1, r2
-300059ac:	e58320e8 	str	r2, [r3, #232]	; 0xe8
+30005b98:	e59f3348 	ldr	r3, [pc, #840]	; 30005ee8 <buddy_init+0x798>
+30005b9c:	e5933000 	ldr	r3, [r3]
+30005ba0:	e59d2020 	ldr	r2, [sp, #32]
+30005ba4:	e1a01382 	lsl	r1, r2, #7
+30005ba8:	e59d2004 	ldr	r2, [sp, #4]
+30005bac:	e0812002 	add	r2, r1, r2
+30005bb0:	e58320e8 	str	r2, [r3, #232]	; 0xe8
 	acoral_mem_ctrl->block_num=num;
-300059b0:	e59f332c 	ldr	r3, [pc, #812]	; 30005ce4 <buddy_init+0x798>
-300059b4:	e5933000 	ldr	r3, [r3]
-300059b8:	e59d2020 	ldr	r2, [sp, #32]
-300059bc:	e58320ec 	str	r2, [r3, #236]	; 0xec
+30005bb4:	e59f332c 	ldr	r3, [pc, #812]	; 30005ee8 <buddy_init+0x798>
+30005bb8:	e5933000 	ldr	r3, [r3]
+30005bbc:	e59d2020 	ldr	r2, [sp, #32]
+30005bc0:	e58320ec 	str	r2, [r3, #236]	; 0xec
 	acoral_mem_ctrl->free_num=num;
-300059c0:	e59f331c 	ldr	r3, [pc, #796]	; 30005ce4 <buddy_init+0x798>
-300059c4:	e5933000 	ldr	r3, [r3]
-300059c8:	e59d2020 	ldr	r2, [sp, #32]
-300059cc:	e58320f0 	str	r2, [r3, #240]	; 0xf0
+30005bc4:	e59f331c 	ldr	r3, [pc, #796]	; 30005ee8 <buddy_init+0x798>
+30005bc8:	e5933000 	ldr	r3, [r3]
+30005bcc:	e59d2020 	ldr	r2, [sp, #32]
+30005bd0:	e58320f0 	str	r2, [r3, #240]	; 0xf0
 	acoral_mem_ctrl->block_size=BLOCK_SIZE;
-300059d0:	e59f330c 	ldr	r3, [pc, #780]	; 30005ce4 <buddy_init+0x798>
-300059d4:	e5933000 	ldr	r3, [r3]
-300059d8:	e3a02080 	mov	r2, #128	; 0x80
-300059dc:	e58320f4 	str	r2, [r3, #244]	; 0xf4
+30005bd4:	e59f330c 	ldr	r3, [pc, #780]	; 30005ee8 <buddy_init+0x798>
+30005bd8:	e5933000 	ldr	r3, [r3]
+30005bdc:	e3a02080 	mov	r2, #128	; 0x80
+30005be0:	e58320f4 	str	r2, [r3, #244]	; 0xf4
 
 	i=0;
-300059e0:	e3a03000 	mov	r3, #0
-300059e4:	e58d300c 	str	r3, [sp, #12]
+30005be4:	e3a03000 	mov	r3, #0
+30005be8:	e58d300c 	str	r3, [sp, #12]
 	max_num=1<<level-1;
-300059e8:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-300059ec:	e2433001 	sub	r3, r3, #1
-300059f0:	e3a02001 	mov	r2, #1
-300059f4:	e1a03312 	lsl	r3, r2, r3
-300059f8:	e58d302c 	str	r3, [sp, #44]	; 0x2c
+30005bec:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+30005bf0:	e2433001 	sub	r3, r3, #1
+30005bf4:	e3a02001 	mov	r2, #1
+30005bf8:	e1a03312 	lsl	r3, r2, r3
+30005bfc:	e58d302c 	str	r3, [sp, #44]	; 0x2c
 	o_num=0;
-300059fc:	e3a03000 	mov	r3, #0
-30005a00:	e58d3030 	str	r3, [sp, #48]	; 0x30
+30005c00:	e3a03000 	mov	r3, #0
+30005c04:	e58d3030 	str	r3, [sp, #48]	; 0x30
 	if(num>0)
-30005a04:	e59d3020 	ldr	r3, [sp, #32]
-30005a08:	e3530000 	cmp	r3, #0
-30005a0c:	0a000007 	beq	30005a30 <buddy_init+0x4e4>
+30005c08:	e59d3020 	ldr	r3, [sp, #32]
+30005c0c:	e3530000 	cmp	r3, #0
+30005c10:	0a000007 	beq	30005c34 <buddy_init+0x4e4>
 		acoral_mem_ctrl->free_cur[level-1]=0;
-30005a10:	e59f32cc 	ldr	r3, [pc, #716]	; 30005ce4 <buddy_init+0x798>
-30005a14:	e5933000 	ldr	r3, [r3]
-30005a18:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005a1c:	e2422001 	sub	r2, r2, #1
-30005a20:	e282201c 	add	r2, r2, #28
-30005a24:	e3a01000 	mov	r1, #0
-30005a28:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005c14:	e59f32cc 	ldr	r3, [pc, #716]	; 30005ee8 <buddy_init+0x798>
+30005c18:	e5933000 	ldr	r3, [r3]
+30005c1c:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005c20:	e2422001 	sub	r2, r2, #1
+30005c24:	e282201c 	add	r2, r2, #28
+30005c28:	e3a01000 	mov	r1, #0
+30005c2c:	e7831102 	str	r1, [r3, r2, lsl #2]
 	else
 		acoral_mem_ctrl->free_cur[level-1]=-1;
 
 	while(num>=max_num*32){
-30005a2c:	ea00002a 	b	30005adc <buddy_init+0x590>
+30005c30:	ea00002a 	b	30005ce0 <buddy_init+0x590>
 	max_num=1<<level-1;
 	o_num=0;
 	if(num>0)
 		acoral_mem_ctrl->free_cur[level-1]=0;
 	else
 		acoral_mem_ctrl->free_cur[level-1]=-1;
-30005a30:	e59f32ac 	ldr	r3, [pc, #684]	; 30005ce4 <buddy_init+0x798>
-30005a34:	e5933000 	ldr	r3, [r3]
-30005a38:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005a3c:	e2422001 	sub	r2, r2, #1
-30005a40:	e282201c 	add	r2, r2, #28
-30005a44:	e3e01000 	mvn	r1, #0
-30005a48:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005c34:	e59f32ac 	ldr	r3, [pc, #684]	; 30005ee8 <buddy_init+0x798>
+30005c38:	e5933000 	ldr	r3, [r3]
+30005c3c:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005c40:	e2422001 	sub	r2, r2, #1
+30005c44:	e282201c 	add	r2, r2, #28
+30005c48:	e3e01000 	mvn	r1, #0
+30005c4c:	e7831102 	str	r1, [r3, r2, lsl #2]
 
 	while(num>=max_num*32){
-30005a4c:	ea000022 	b	30005adc <buddy_init+0x590>
+30005c50:	ea000022 	b	30005ce0 <buddy_init+0x590>
 		acoral_mem_ctrl->bitmap[level-1][i]=-1;;
-30005a50:	e59f328c 	ldr	r3, [pc, #652]	; 30005ce4 <buddy_init+0x798>
-30005a54:	e5933000 	ldr	r3, [r3]
-30005a58:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005a5c:	e2422001 	sub	r2, r2, #1
-30005a60:	e282200e 	add	r2, r2, #14
-30005a64:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005a68:	e59d300c 	ldr	r3, [sp, #12]
-30005a6c:	e1a03103 	lsl	r3, r3, #2
-30005a70:	e0823003 	add	r3, r2, r3
-30005a74:	e3e02000 	mvn	r2, #0
-30005a78:	e5832000 	str	r2, [r3]
+30005c54:	e59f328c 	ldr	r3, [pc, #652]	; 30005ee8 <buddy_init+0x798>
+30005c58:	e5933000 	ldr	r3, [r3]
+30005c5c:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005c60:	e2422001 	sub	r2, r2, #1
+30005c64:	e282200e 	add	r2, r2, #14
+30005c68:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005c6c:	e59d300c 	ldr	r3, [sp, #12]
+30005c70:	e1a03103 	lsl	r3, r3, #2
+30005c74:	e0823003 	add	r3, r2, r3
+30005c78:	e3e02000 	mvn	r2, #0
+30005c7c:	e5832000 	str	r2, [r3]
 		acoral_mem_ctrl->free_list[level-1][i]=i+1;
-30005a7c:	e59f3260 	ldr	r3, [pc, #608]	; 30005ce4 <buddy_init+0x798>
-30005a80:	e5933000 	ldr	r3, [r3]
-30005a84:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005a88:	e2422001 	sub	r2, r2, #1
-30005a8c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005a90:	e59d300c 	ldr	r3, [sp, #12]
-30005a94:	e1a03103 	lsl	r3, r3, #2
-30005a98:	e0823003 	add	r3, r2, r3
-30005a9c:	e59d200c 	ldr	r2, [sp, #12]
-30005aa0:	e2822001 	add	r2, r2, #1
-30005aa4:	e5832000 	str	r2, [r3]
+30005c80:	e59f3260 	ldr	r3, [pc, #608]	; 30005ee8 <buddy_init+0x798>
+30005c84:	e5933000 	ldr	r3, [r3]
+30005c88:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005c8c:	e2422001 	sub	r2, r2, #1
+30005c90:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005c94:	e59d300c 	ldr	r3, [sp, #12]
+30005c98:	e1a03103 	lsl	r3, r3, #2
+30005c9c:	e0823003 	add	r3, r2, r3
+30005ca0:	e59d200c 	ldr	r2, [sp, #12]
+30005ca4:	e2822001 	add	r2, r2, #1
+30005ca8:	e5832000 	str	r2, [r3]
 		num-=max_num*32;
-30005aa8:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005aac:	e1a03283 	lsl	r3, r3, #5
-30005ab0:	e59d2020 	ldr	r2, [sp, #32]
-30005ab4:	e0633002 	rsb	r3, r3, r2
-30005ab8:	e58d3020 	str	r3, [sp, #32]
+30005cac:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005cb0:	e1a03283 	lsl	r3, r3, #5
+30005cb4:	e59d2020 	ldr	r2, [sp, #32]
+30005cb8:	e0633002 	rsb	r3, r3, r2
+30005cbc:	e58d3020 	str	r3, [sp, #32]
 		o_num+=max_num*32;
-30005abc:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005ac0:	e1a03283 	lsl	r3, r3, #5
-30005ac4:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
-30005ac8:	e0823003 	add	r3, r2, r3
-30005acc:	e58d3030 	str	r3, [sp, #48]	; 0x30
+30005cc0:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005cc4:	e1a03283 	lsl	r3, r3, #5
+30005cc8:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
+30005ccc:	e0823003 	add	r3, r2, r3
+30005cd0:	e58d3030 	str	r3, [sp, #48]	; 0x30
 		i++;
-30005ad0:	e59d300c 	ldr	r3, [sp, #12]
-30005ad4:	e2833001 	add	r3, r3, #1
-30005ad8:	e58d300c 	str	r3, [sp, #12]
+30005cd4:	e59d300c 	ldr	r3, [sp, #12]
+30005cd8:	e2833001 	add	r3, r3, #1
+30005cdc:	e58d300c 	str	r3, [sp, #12]
 	if(num>0)
 		acoral_mem_ctrl->free_cur[level-1]=0;
 	else
 		acoral_mem_ctrl->free_cur[level-1]=-1;
 
 	while(num>=max_num*32){
-30005adc:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005ae0:	e1a02283 	lsl	r2, r3, #5
-30005ae4:	e59d3020 	ldr	r3, [sp, #32]
-30005ae8:	e1520003 	cmp	r2, r3
-30005aec:	9affffd7 	bls	30005a50 <buddy_init+0x504>
+30005ce0:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005ce4:	e1a02283 	lsl	r2, r3, #5
+30005ce8:	e59d3020 	ldr	r3, [sp, #32]
+30005cec:	e1520003 	cmp	r2, r3
+30005cf0:	9affffd7 	bls	30005c54 <buddy_init+0x504>
 		acoral_mem_ctrl->free_list[level-1][i]=i+1;
 		num-=max_num*32;
 		o_num+=max_num*32;
 		i++;
 	}
 	if(num==0)
-30005af0:	e59d3020 	ldr	r3, [sp, #32]
-30005af4:	e3530000 	cmp	r3, #0
-30005af8:	1a000021 	bne	30005b84 <buddy_init+0x638>
+30005cf4:	e59d3020 	ldr	r3, [sp, #32]
+30005cf8:	e3530000 	cmp	r3, #0
+30005cfc:	1a000021 	bne	30005d88 <buddy_init+0x638>
 		acoral_mem_ctrl->free_list[level-1][i-1]=-1;
-30005afc:	e59f31e0 	ldr	r3, [pc, #480]	; 30005ce4 <buddy_init+0x798>
-30005b00:	e5933000 	ldr	r3, [r3]
-30005b04:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005b08:	e2422001 	sub	r2, r2, #1
-30005b0c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005b10:	e59d300c 	ldr	r3, [sp, #12]
-30005b14:	e2433001 	sub	r3, r3, #1
-30005b18:	e1a03103 	lsl	r3, r3, #2
-30005b1c:	e0823003 	add	r3, r2, r3
-30005b20:	e3e02000 	mvn	r2, #0
-30005b24:	e5832000 	str	r2, [r3]
+30005d00:	e59f31e0 	ldr	r3, [pc, #480]	; 30005ee8 <buddy_init+0x798>
+30005d04:	e5933000 	ldr	r3, [r3]
+30005d08:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005d0c:	e2422001 	sub	r2, r2, #1
+30005d10:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005d14:	e59d300c 	ldr	r3, [sp, #12]
+30005d18:	e2433001 	sub	r3, r3, #1
+30005d1c:	e1a03103 	lsl	r3, r3, #2
+30005d20:	e0823003 	add	r3, r2, r3
+30005d24:	e3e02000 	mvn	r2, #0
+30005d28:	e5832000 	str	r2, [r3]
 	while(num>=max_num){
-30005b28:	ea000015 	b	30005b84 <buddy_init+0x638>
+30005d2c:	ea000015 	b	30005d88 <buddy_init+0x638>
 		index=o_num>>level-1;
-30005b2c:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-30005b30:	e2433001 	sub	r3, r3, #1
-30005b34:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
-30005b38:	e1a03332 	lsr	r3, r2, r3
-30005b3c:	e58d301c 	str	r3, [sp, #28]
+30005d30:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+30005d34:	e2433001 	sub	r3, r3, #1
+30005d38:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
+30005d3c:	e1a03332 	lsr	r3, r2, r3
+30005d40:	e58d301c 	str	r3, [sp, #28]
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level-1]);
-30005b40:	e59f319c 	ldr	r3, [pc, #412]	; 30005ce4 <buddy_init+0x798>
-30005b44:	e5933000 	ldr	r3, [r3]
-30005b48:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005b4c:	e2422001 	sub	r2, r2, #1
-30005b50:	e282200e 	add	r2, r2, #14
-30005b54:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005b58:	e59d001c 	ldr	r0, [sp, #28]
-30005b5c:	e1a01003 	mov	r1, r3
-30005b60:	eb001034 	bl	30009c38 <acoral_set_bit>
+30005d44:	e59f319c 	ldr	r3, [pc, #412]	; 30005ee8 <buddy_init+0x798>
+30005d48:	e5933000 	ldr	r3, [r3]
+30005d4c:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005d50:	e2422001 	sub	r2, r2, #1
+30005d54:	e282200e 	add	r2, r2, #14
+30005d58:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30005d5c:	e59d001c 	ldr	r0, [sp, #28]
+30005d60:	e1a01003 	mov	r1, r3
+30005d64:	eb001034 	bl	30009e3c <acoral_set_bit>
 		num-=max_num;
-30005b64:	e59d2020 	ldr	r2, [sp, #32]
-30005b68:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005b6c:	e0633002 	rsb	r3, r3, r2
-30005b70:	e58d3020 	str	r3, [sp, #32]
+30005d68:	e59d2020 	ldr	r2, [sp, #32]
+30005d6c:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005d70:	e0633002 	rsb	r3, r3, r2
+30005d74:	e58d3020 	str	r3, [sp, #32]
 		o_num+=max_num;
-30005b74:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
-30005b78:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005b7c:	e0823003 	add	r3, r2, r3
-30005b80:	e58d3030 	str	r3, [sp, #48]	; 0x30
+30005d78:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
+30005d7c:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005d80:	e0823003 	add	r3, r2, r3
+30005d84:	e58d3030 	str	r3, [sp, #48]	; 0x30
 		o_num+=max_num*32;
 		i++;
 	}
 	if(num==0)
 		acoral_mem_ctrl->free_list[level-1][i-1]=-1;
 	while(num>=max_num){
-30005b84:	e59d2020 	ldr	r2, [sp, #32]
-30005b88:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005b8c:	e1520003 	cmp	r2, r3
-30005b90:	2affffe5 	bcs	30005b2c <buddy_init+0x5e0>
+30005d88:	e59d2020 	ldr	r2, [sp, #32]
+30005d8c:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005d90:	e1520003 	cmp	r2, r3
+30005d94:	2affffe5 	bcs	30005d30 <buddy_init+0x5e0>
 		index=o_num>>level-1;
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level-1]);
 		num-=max_num;
 		o_num+=max_num;
 	}
 	acoral_mem_ctrl->free_list[level-1][i]=-1;
-30005b94:	e59f3148 	ldr	r3, [pc, #328]	; 30005ce4 <buddy_init+0x798>
-30005b98:	e5933000 	ldr	r3, [r3]
-30005b9c:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005ba0:	e2422001 	sub	r2, r2, #1
-30005ba4:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005ba8:	e59d300c 	ldr	r3, [sp, #12]
-30005bac:	e1a03103 	lsl	r3, r3, #2
-30005bb0:	e0823003 	add	r3, r2, r3
-30005bb4:	e3e02000 	mvn	r2, #0
-30005bb8:	e5832000 	str	r2, [r3]
+30005d98:	e59f3148 	ldr	r3, [pc, #328]	; 30005ee8 <buddy_init+0x798>
+30005d9c:	e5933000 	ldr	r3, [r3]
+30005da0:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005da4:	e2422001 	sub	r2, r2, #1
+30005da8:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005dac:	e59d300c 	ldr	r3, [sp, #12]
+30005db0:	e1a03103 	lsl	r3, r3, #2
+30005db4:	e0823003 	add	r3, r2, r3
+30005db8:	e3e02000 	mvn	r2, #0
+30005dbc:	e5832000 	str	r2, [r3]
 
 	
 	while(--level>0){
-30005bbc:	ea00003b 	b	30005cb0 <buddy_init+0x764>
+30005dc0:	ea00003b 	b	30005eb4 <buddy_init+0x764>
 		index=o_num>>level;
-30005bc0:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
-30005bc4:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-30005bc8:	e1a03332 	lsr	r3, r2, r3
-30005bcc:	e58d301c 	str	r3, [sp, #28]
+30005dc4:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
+30005dc8:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+30005dcc:	e1a03332 	lsr	r3, r2, r3
+30005dd0:	e58d301c 	str	r3, [sp, #28]
 		if(num==0)
-30005bd0:	e59d3020 	ldr	r3, [sp, #32]
-30005bd4:	e3530000 	cmp	r3, #0
-30005bd8:	0a00003b 	beq	30005ccc <buddy_init+0x780>
+30005dd4:	e59d3020 	ldr	r3, [sp, #32]
+30005dd8:	e3530000 	cmp	r3, #0
+30005ddc:	0a00003b 	beq	30005ed0 <buddy_init+0x780>
 			break;
 		cur=index/32;
-30005bdc:	e59d301c 	ldr	r3, [sp, #28]
-30005be0:	e1a032a3 	lsr	r3, r3, #5
-30005be4:	e58d3034 	str	r3, [sp, #52]	; 0x34
+30005de0:	e59d301c 	ldr	r3, [sp, #28]
+30005de4:	e1a032a3 	lsr	r3, r3, #5
+30005de8:	e58d3034 	str	r3, [sp, #52]	; 0x34
 		max_num=1<<level-1;
-30005be8:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-30005bec:	e2433001 	sub	r3, r3, #1
-30005bf0:	e3a02001 	mov	r2, #1
-30005bf4:	e1a03312 	lsl	r3, r2, r3
-30005bf8:	e58d302c 	str	r3, [sp, #44]	; 0x2c
+30005dec:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+30005df0:	e2433001 	sub	r3, r3, #1
+30005df4:	e3a02001 	mov	r2, #1
+30005df8:	e1a03312 	lsl	r3, r2, r3
+30005dfc:	e58d302c 	str	r3, [sp, #44]	; 0x2c
 		if(num>=max_num){
-30005bfc:	e59d2020 	ldr	r2, [sp, #32]
-30005c00:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005c04:	e1520003 	cmp	r2, r3
-30005c08:	3a000028 	bcc	30005cb0 <buddy_init+0x764>
+30005e00:	e59d2020 	ldr	r2, [sp, #32]
+30005e04:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005e08:	e1520003 	cmp	r2, r3
+30005e0c:	3a000028 	bcc	30005eb4 <buddy_init+0x764>
 			acoral_mem_blocks[BLOCK_INDEX(o_num)].level=-1;	
-30005c0c:	e59f30d4 	ldr	r3, [pc, #212]	; 30005ce8 <buddy_init+0x79c>
-30005c10:	e5932000 	ldr	r2, [r3]
-30005c14:	e59d3030 	ldr	r3, [sp, #48]	; 0x30
-30005c18:	e1a030a3 	lsr	r3, r3, #1
-30005c1c:	e0823003 	add	r3, r2, r3
-30005c20:	e3e02000 	mvn	r2, #0
-30005c24:	e5c32000 	strb	r2, [r3]
+30005e10:	e59f30d4 	ldr	r3, [pc, #212]	; 30005eec <buddy_init+0x79c>
+30005e14:	e5932000 	ldr	r2, [r3]
+30005e18:	e59d3030 	ldr	r3, [sp, #48]	; 0x30
+30005e1c:	e1a030a3 	lsr	r3, r3, #1
+30005e20:	e0823003 	add	r3, r2, r3
+30005e24:	e3e02000 	mvn	r2, #0
+30005e28:	e5c32000 	strb	r2, [r3]
 			acoral_set_bit(index,acoral_mem_ctrl->bitmap[level-1]);
-30005c28:	e59f30b4 	ldr	r3, [pc, #180]	; 30005ce4 <buddy_init+0x798>
-30005c2c:	e5933000 	ldr	r3, [r3]
-30005c30:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005c34:	e2422001 	sub	r2, r2, #1
-30005c38:	e282200e 	add	r2, r2, #14
-30005c3c:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005c40:	e59d001c 	ldr	r0, [sp, #28]
-30005c44:	e1a01003 	mov	r1, r3
-30005c48:	eb000ffa 	bl	30009c38 <acoral_set_bit>
+30005e2c:	e59f30b4 	ldr	r3, [pc, #180]	; 30005ee8 <buddy_init+0x798>
+30005e30:	e5933000 	ldr	r3, [r3]
+30005e34:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005e38:	e2422001 	sub	r2, r2, #1
+30005e3c:	e282200e 	add	r2, r2, #14
+30005e40:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30005e44:	e59d001c 	ldr	r0, [sp, #28]
+30005e48:	e1a01003 	mov	r1, r3
+30005e4c:	eb000ffa 	bl	30009e3c <acoral_set_bit>
 			acoral_mem_ctrl->free_list[level-1][cur]=-1;	
-30005c4c:	e59f3090 	ldr	r3, [pc, #144]	; 30005ce4 <buddy_init+0x798>
-30005c50:	e5933000 	ldr	r3, [r3]
-30005c54:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005c58:	e2422001 	sub	r2, r2, #1
-30005c5c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005c60:	e59d3034 	ldr	r3, [sp, #52]	; 0x34
-30005c64:	e1a03103 	lsl	r3, r3, #2
-30005c68:	e0823003 	add	r3, r2, r3
-30005c6c:	e3e02000 	mvn	r2, #0
-30005c70:	e5832000 	str	r2, [r3]
+30005e50:	e59f3090 	ldr	r3, [pc, #144]	; 30005ee8 <buddy_init+0x798>
+30005e54:	e5933000 	ldr	r3, [r3]
+30005e58:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005e5c:	e2422001 	sub	r2, r2, #1
+30005e60:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005e64:	e59d3034 	ldr	r3, [sp, #52]	; 0x34
+30005e68:	e1a03103 	lsl	r3, r3, #2
+30005e6c:	e0823003 	add	r3, r2, r3
+30005e70:	e3e02000 	mvn	r2, #0
+30005e74:	e5832000 	str	r2, [r3]
 			acoral_mem_ctrl->free_cur[level-1]=cur;	
-30005c74:	e59f3068 	ldr	r3, [pc, #104]	; 30005ce4 <buddy_init+0x798>
-30005c78:	e5933000 	ldr	r3, [r3]
-30005c7c:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
-30005c80:	e2422001 	sub	r2, r2, #1
-30005c84:	e59d1034 	ldr	r1, [sp, #52]	; 0x34
-30005c88:	e282201c 	add	r2, r2, #28
-30005c8c:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005e78:	e59f3068 	ldr	r3, [pc, #104]	; 30005ee8 <buddy_init+0x798>
+30005e7c:	e5933000 	ldr	r3, [r3]
+30005e80:	e59d2028 	ldr	r2, [sp, #40]	; 0x28
+30005e84:	e2422001 	sub	r2, r2, #1
+30005e88:	e59d1034 	ldr	r1, [sp, #52]	; 0x34
+30005e8c:	e282201c 	add	r2, r2, #28
+30005e90:	e7831102 	str	r1, [r3, r2, lsl #2]
 			o_num+=max_num;
-30005c90:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
-30005c94:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005c98:	e0823003 	add	r3, r2, r3
-30005c9c:	e58d3030 	str	r3, [sp, #48]	; 0x30
+30005e94:	e59d2030 	ldr	r2, [sp, #48]	; 0x30
+30005e98:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005e9c:	e0823003 	add	r3, r2, r3
+30005ea0:	e58d3030 	str	r3, [sp, #48]	; 0x30
 			num-=max_num;
-30005ca0:	e59d2020 	ldr	r2, [sp, #32]
-30005ca4:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
-30005ca8:	e0633002 	rsb	r3, r3, r2
-30005cac:	e58d3020 	str	r3, [sp, #32]
+30005ea4:	e59d2020 	ldr	r2, [sp, #32]
+30005ea8:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+30005eac:	e0633002 	rsb	r3, r3, r2
+30005eb0:	e58d3020 	str	r3, [sp, #32]
 		o_num+=max_num;
 	}
 	acoral_mem_ctrl->free_list[level-1][i]=-1;
 
 	
 	while(--level>0){
-30005cb0:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-30005cb4:	e2433001 	sub	r3, r3, #1
-30005cb8:	e58d3028 	str	r3, [sp, #40]	; 0x28
-30005cbc:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-30005cc0:	e3530000 	cmp	r3, #0
-30005cc4:	caffffbd 	bgt	30005bc0 <buddy_init+0x674>
-30005cc8:	ea000000 	b	30005cd0 <buddy_init+0x784>
+30005eb4:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+30005eb8:	e2433001 	sub	r3, r3, #1
+30005ebc:	e58d3028 	str	r3, [sp, #40]	; 0x28
+30005ec0:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+30005ec4:	e3530000 	cmp	r3, #0
+30005ec8:	caffffbd 	bgt	30005dc4 <buddy_init+0x674>
+30005ecc:	ea000000 	b	30005ed4 <buddy_init+0x784>
 		index=o_num>>level;
 		if(num==0)
 			break;
-30005ccc:	e1a00000 	nop			; (mov r0, r0)
+30005ed0:	e1a00000 	nop			; (mov r0, r0)
 			o_num+=max_num;
 			num-=max_num;
 		}
 	}
 	acoral_spin_init(&acoral_mem_ctrl->lock);
 	return 0;
-30005cd0:	e3a03000 	mov	r3, #0
+30005ed4:	e3a03000 	mov	r3, #0
 }
-30005cd4:	e1a00003 	mov	r0, r3
-30005cd8:	e28dd03c 	add	sp, sp, #60	; 0x3c
-30005cdc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30005ce0:	e12fff1e 	bx	lr
-30005ce4:	30010344 	.word	0x30010344
-30005ce8:	3000fa98 	.word	0x3000fa98
+30005ed8:	e1a00003 	mov	r0, r3
+30005edc:	e28dd03c 	add	sp, sp, #60	; 0x3c
+30005ee0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30005ee4:	e12fff1e 	bx	lr
+30005ee8:	30010550 	.word	0x30010550
+30005eec:	3000fca4 	.word	0x3000fca4
 
-30005cec <recus_malloc>:
+30005ef0 <recus_malloc>:
 
 static acoral_32 recus_malloc(level){
-30005cec:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30005cf0:	e24dd01c 	sub	sp, sp, #28
-30005cf4:	e58d0004 	str	r0, [sp, #4]
+30005ef0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30005ef4:	e24dd01c 	sub	sp, sp, #28
+30005ef8:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 index;
 	acoral_32 cur;
 	acoral_32 num;
 	if(level>=acoral_mem_ctrl->level)
-30005cf8:	e59f328c 	ldr	r3, [pc, #652]	; 30005f8c <recus_malloc+0x2a0>
-30005cfc:	e5933000 	ldr	r3, [r3]
-30005d00:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-30005d04:	e1a03c03 	lsl	r3, r3, #24
-30005d08:	e1a02c43 	asr	r2, r3, #24
-30005d0c:	e59d3004 	ldr	r3, [sp, #4]
-30005d10:	e1520003 	cmp	r2, r3
-30005d14:	ca000001 	bgt	30005d20 <recus_malloc+0x34>
+30005efc:	e59f328c 	ldr	r3, [pc, #652]	; 30006190 <recus_malloc+0x2a0>
+30005f00:	e5933000 	ldr	r3, [r3]
+30005f04:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+30005f08:	e1a03c03 	lsl	r3, r3, #24
+30005f0c:	e1a02c43 	asr	r2, r3, #24
+30005f10:	e59d3004 	ldr	r3, [sp, #4]
+30005f14:	e1520003 	cmp	r2, r3
+30005f18:	ca000001 	bgt	30005f24 <recus_malloc+0x34>
 		return -1;
-30005d18:	e3e03000 	mvn	r3, #0
-30005d1c:	ea000096 	b	30005f7c <recus_malloc+0x290>
+30005f1c:	e3e03000 	mvn	r3, #0
+30005f20:	ea000096 	b	30006180 <recus_malloc+0x290>
 	cur=acoral_mem_ctrl->free_cur[level];
-30005d20:	e59f3264 	ldr	r3, [pc, #612]	; 30005f8c <recus_malloc+0x2a0>
-30005d24:	e5933000 	ldr	r3, [r3]
-30005d28:	e59d2004 	ldr	r2, [sp, #4]
-30005d2c:	e282201c 	add	r2, r2, #28
-30005d30:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005d34:	e58d3010 	str	r3, [sp, #16]
+30005f24:	e59f3264 	ldr	r3, [pc, #612]	; 30006190 <recus_malloc+0x2a0>
+30005f28:	e5933000 	ldr	r3, [r3]
+30005f2c:	e59d2004 	ldr	r2, [sp, #4]
+30005f30:	e282201c 	add	r2, r2, #28
+30005f34:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30005f38:	e58d3010 	str	r3, [sp, #16]
 	if(cur<0){
-30005d38:	e59d3010 	ldr	r3, [sp, #16]
-30005d3c:	e3530000 	cmp	r3, #0
-30005d40:	aa00002b 	bge	30005df4 <recus_malloc+0x108>
+30005f3c:	e59d3010 	ldr	r3, [sp, #16]
+30005f40:	e3530000 	cmp	r3, #0
+30005f44:	aa00002b 	bge	30005ff8 <recus_malloc+0x108>
 		num=recus_malloc(level+1);
-30005d44:	e59d3004 	ldr	r3, [sp, #4]
-30005d48:	e2833001 	add	r3, r3, #1
-30005d4c:	e1a00003 	mov	r0, r3
-30005d50:	ebffffe5 	bl	30005cec <recus_malloc>
-30005d54:	e1a03000 	mov	r3, r0
-30005d58:	e58d3014 	str	r3, [sp, #20]
+30005f48:	e59d3004 	ldr	r3, [sp, #4]
+30005f4c:	e2833001 	add	r3, r3, #1
+30005f50:	e1a00003 	mov	r0, r3
+30005f54:	ebffffe5 	bl	30005ef0 <recus_malloc>
+30005f58:	e1a03000 	mov	r3, r0
+30005f5c:	e58d3014 	str	r3, [sp, #20]
 		if(num<0)
-30005d5c:	e59d3014 	ldr	r3, [sp, #20]
-30005d60:	e3530000 	cmp	r3, #0
-30005d64:	aa000001 	bge	30005d70 <recus_malloc+0x84>
+30005f60:	e59d3014 	ldr	r3, [sp, #20]
+30005f64:	e3530000 	cmp	r3, #0
+30005f68:	aa000001 	bge	30005f74 <recus_malloc+0x84>
 			return -1;
-30005d68:	e3e03000 	mvn	r3, #0
-30005d6c:	ea000082 	b	30005f7c <recus_malloc+0x290>
+30005f6c:	e3e03000 	mvn	r3, #0
+30005f70:	ea000082 	b	30006180 <recus_malloc+0x290>
 		index=num>>level+1;
-30005d70:	e59d3004 	ldr	r3, [sp, #4]
-30005d74:	e2833001 	add	r3, r3, #1
-30005d78:	e59d2014 	ldr	r2, [sp, #20]
-30005d7c:	e1a03352 	asr	r3, r2, r3
-30005d80:	e58d300c 	str	r3, [sp, #12]
+30005f74:	e59d3004 	ldr	r3, [sp, #4]
+30005f78:	e2833001 	add	r3, r3, #1
+30005f7c:	e59d2014 	ldr	r2, [sp, #20]
+30005f80:	e1a03352 	asr	r3, r2, r3
+30005f84:	e58d300c 	str	r3, [sp, #12]
 		cur=index/32;
-30005d84:	e59d300c 	ldr	r3, [sp, #12]
-30005d88:	e1a032a3 	lsr	r3, r3, #5
-30005d8c:	e58d3010 	str	r3, [sp, #16]
+30005f88:	e59d300c 	ldr	r3, [sp, #12]
+30005f8c:	e1a032a3 	lsr	r3, r3, #5
+30005f90:	e58d3010 	str	r3, [sp, #16]
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
-30005d90:	e59f31f4 	ldr	r3, [pc, #500]	; 30005f8c <recus_malloc+0x2a0>
-30005d94:	e5933000 	ldr	r3, [r3]
-30005d98:	e59d2004 	ldr	r2, [sp, #4]
-30005d9c:	e282200e 	add	r2, r2, #14
-30005da0:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005da4:	e59d000c 	ldr	r0, [sp, #12]
-30005da8:	e1a01003 	mov	r1, r3
-30005dac:	eb000fa1 	bl	30009c38 <acoral_set_bit>
+30005f94:	e59f31f4 	ldr	r3, [pc, #500]	; 30006190 <recus_malloc+0x2a0>
+30005f98:	e5933000 	ldr	r3, [r3]
+30005f9c:	e59d2004 	ldr	r2, [sp, #4]
+30005fa0:	e282200e 	add	r2, r2, #14
+30005fa4:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30005fa8:	e59d000c 	ldr	r0, [sp, #12]
+30005fac:	e1a01003 	mov	r1, r3
+30005fb0:	eb000fa1 	bl	30009e3c <acoral_set_bit>
 		acoral_mem_ctrl->free_list[level][cur]=-1;
-30005db0:	e59f31d4 	ldr	r3, [pc, #468]	; 30005f8c <recus_malloc+0x2a0>
-30005db4:	e5933000 	ldr	r3, [r3]
-30005db8:	e59d2004 	ldr	r2, [sp, #4]
-30005dbc:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005dc0:	e59d3010 	ldr	r3, [sp, #16]
-30005dc4:	e1a03103 	lsl	r3, r3, #2
-30005dc8:	e0823003 	add	r3, r2, r3
-30005dcc:	e3e02000 	mvn	r2, #0
-30005dd0:	e5832000 	str	r2, [r3]
+30005fb4:	e59f31d4 	ldr	r3, [pc, #468]	; 30006190 <recus_malloc+0x2a0>
+30005fb8:	e5933000 	ldr	r3, [r3]
+30005fbc:	e59d2004 	ldr	r2, [sp, #4]
+30005fc0:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30005fc4:	e59d3010 	ldr	r3, [sp, #16]
+30005fc8:	e1a03103 	lsl	r3, r3, #2
+30005fcc:	e0823003 	add	r3, r2, r3
+30005fd0:	e3e02000 	mvn	r2, #0
+30005fd4:	e5832000 	str	r2, [r3]
 		acoral_mem_ctrl->free_cur[level]=cur;
-30005dd4:	e59f31b0 	ldr	r3, [pc, #432]	; 30005f8c <recus_malloc+0x2a0>
-30005dd8:	e5933000 	ldr	r3, [r3]
-30005ddc:	e59d2004 	ldr	r2, [sp, #4]
-30005de0:	e282201c 	add	r2, r2, #28
-30005de4:	e59d1010 	ldr	r1, [sp, #16]
-30005de8:	e7831102 	str	r1, [r3, r2, lsl #2]
+30005fd8:	e59f31b0 	ldr	r3, [pc, #432]	; 30006190 <recus_malloc+0x2a0>
+30005fdc:	e5933000 	ldr	r3, [r3]
+30005fe0:	e59d2004 	ldr	r2, [sp, #4]
+30005fe4:	e282201c 	add	r2, r2, #28
+30005fe8:	e59d1010 	ldr	r1, [sp, #16]
+30005fec:	e7831102 	str	r1, [r3, r2, lsl #2]
 		return num;
-30005dec:	e59d3014 	ldr	r3, [sp, #20]
-30005df0:	ea000061 	b	30005f7c <recus_malloc+0x290>
+30005ff0:	e59d3014 	ldr	r3, [sp, #20]
+30005ff4:	ea000061 	b	30006180 <recus_malloc+0x290>
 	}
 	index=acoral_ffs(acoral_mem_ctrl->bitmap[level][cur]);
-30005df4:	e59f3190 	ldr	r3, [pc, #400]	; 30005f8c <recus_malloc+0x2a0>
-30005df8:	e5933000 	ldr	r3, [r3]
-30005dfc:	e59d2004 	ldr	r2, [sp, #4]
-30005e00:	e282200e 	add	r2, r2, #14
-30005e04:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005e08:	e59d3010 	ldr	r3, [sp, #16]
-30005e0c:	e1a03103 	lsl	r3, r3, #2
-30005e10:	e0823003 	add	r3, r2, r3
-30005e14:	e5933000 	ldr	r3, [r3]
-30005e18:	e1a00003 	mov	r0, r3
-30005e1c:	eb000f2a 	bl	30009acc <acoral_ffs>
-30005e20:	e1a03000 	mov	r3, r0
-30005e24:	e58d300c 	str	r3, [sp, #12]
+30005ff8:	e59f3190 	ldr	r3, [pc, #400]	; 30006190 <recus_malloc+0x2a0>
+30005ffc:	e5933000 	ldr	r3, [r3]
+30006000:	e59d2004 	ldr	r2, [sp, #4]
+30006004:	e282200e 	add	r2, r2, #14
+30006008:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+3000600c:	e59d3010 	ldr	r3, [sp, #16]
+30006010:	e1a03103 	lsl	r3, r3, #2
+30006014:	e0823003 	add	r3, r2, r3
+30006018:	e5933000 	ldr	r3, [r3]
+3000601c:	e1a00003 	mov	r0, r3
+30006020:	eb000f2a 	bl	30009cd0 <acoral_ffs>
+30006024:	e1a03000 	mov	r3, r0
+30006028:	e58d300c 	str	r3, [sp, #12]
 	index=cur*32+index;
-30005e28:	e59d3010 	ldr	r3, [sp, #16]
-30005e2c:	e1a03283 	lsl	r3, r3, #5
-30005e30:	e59d200c 	ldr	r2, [sp, #12]
-30005e34:	e0823003 	add	r3, r2, r3
-30005e38:	e58d300c 	str	r3, [sp, #12]
+3000602c:	e59d3010 	ldr	r3, [sp, #16]
+30006030:	e1a03283 	lsl	r3, r3, #5
+30006034:	e59d200c 	ldr	r2, [sp, #12]
+30006038:	e0823003 	add	r3, r2, r3
+3000603c:	e58d300c 	str	r3, [sp, #12]
 	acoral_clear_bit(index,acoral_mem_ctrl->bitmap[level]);
-30005e3c:	e59f3148 	ldr	r3, [pc, #328]	; 30005f8c <recus_malloc+0x2a0>
-30005e40:	e5933000 	ldr	r3, [r3]
-30005e44:	e59d2004 	ldr	r2, [sp, #4]
-30005e48:	e282200e 	add	r2, r2, #14
-30005e4c:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005e50:	e59d000c 	ldr	r0, [sp, #12]
-30005e54:	e1a01003 	mov	r1, r3
-30005e58:	eb000f8e 	bl	30009c98 <acoral_clear_bit>
+30006040:	e59f3148 	ldr	r3, [pc, #328]	; 30006190 <recus_malloc+0x2a0>
+30006044:	e5933000 	ldr	r3, [r3]
+30006048:	e59d2004 	ldr	r2, [sp, #4]
+3000604c:	e282200e 	add	r2, r2, #14
+30006050:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30006054:	e59d000c 	ldr	r0, [sp, #12]
+30006058:	e1a01003 	mov	r1, r3
+3000605c:	eb000f8e 	bl	30009e9c <acoral_clear_bit>
 	if(acoral_mem_ctrl->bitmap[level][cur]==0)
-30005e5c:	e59f3128 	ldr	r3, [pc, #296]	; 30005f8c <recus_malloc+0x2a0>
-30005e60:	e5933000 	ldr	r3, [r3]
-30005e64:	e59d2004 	ldr	r2, [sp, #4]
-30005e68:	e282200e 	add	r2, r2, #14
-30005e6c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30005e70:	e59d3010 	ldr	r3, [sp, #16]
-30005e74:	e1a03103 	lsl	r3, r3, #2
-30005e78:	e0823003 	add	r3, r2, r3
-30005e7c:	e5933000 	ldr	r3, [r3]
-30005e80:	e3530000 	cmp	r3, #0
-30005e84:	1a00000c 	bne	30005ebc <recus_malloc+0x1d0>
+30006060:	e59f3128 	ldr	r3, [pc, #296]	; 30006190 <recus_malloc+0x2a0>
+30006064:	e5933000 	ldr	r3, [r3]
+30006068:	e59d2004 	ldr	r2, [sp, #4]
+3000606c:	e282200e 	add	r2, r2, #14
+30006070:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30006074:	e59d3010 	ldr	r3, [sp, #16]
+30006078:	e1a03103 	lsl	r3, r3, #2
+3000607c:	e0823003 	add	r3, r2, r3
+30006080:	e5933000 	ldr	r3, [r3]
+30006084:	e3530000 	cmp	r3, #0
+30006088:	1a00000c 	bne	300060c0 <recus_malloc+0x1d0>
 		acoral_mem_ctrl->free_cur[level]=acoral_mem_ctrl->free_list[level][cur];
-30005e88:	e59f30fc 	ldr	r3, [pc, #252]	; 30005f8c <recus_malloc+0x2a0>
-30005e8c:	e5933000 	ldr	r3, [r3]
-30005e90:	e59d2004 	ldr	r2, [sp, #4]
-30005e94:	e59f10f0 	ldr	r1, [pc, #240]	; 30005f8c <recus_malloc+0x2a0>
-30005e98:	e5911000 	ldr	r1, [r1]
-30005e9c:	e59d0004 	ldr	r0, [sp, #4]
-30005ea0:	e7910100 	ldr	r0, [r1, r0, lsl #2]
-30005ea4:	e59d1010 	ldr	r1, [sp, #16]
-30005ea8:	e1a01101 	lsl	r1, r1, #2
-30005eac:	e0801001 	add	r1, r0, r1
-30005eb0:	e5911000 	ldr	r1, [r1]
-30005eb4:	e282201c 	add	r2, r2, #28
-30005eb8:	e7831102 	str	r1, [r3, r2, lsl #2]
+3000608c:	e59f30fc 	ldr	r3, [pc, #252]	; 30006190 <recus_malloc+0x2a0>
+30006090:	e5933000 	ldr	r3, [r3]
+30006094:	e59d2004 	ldr	r2, [sp, #4]
+30006098:	e59f10f0 	ldr	r1, [pc, #240]	; 30006190 <recus_malloc+0x2a0>
+3000609c:	e5911000 	ldr	r1, [r1]
+300060a0:	e59d0004 	ldr	r0, [sp, #4]
+300060a4:	e7910100 	ldr	r0, [r1, r0, lsl #2]
+300060a8:	e59d1010 	ldr	r1, [sp, #16]
+300060ac:	e1a01101 	lsl	r1, r1, #2
+300060b0:	e0801001 	add	r1, r0, r1
+300060b4:	e5911000 	ldr	r1, [r1]
+300060b8:	e282201c 	add	r2, r2, #28
+300060bc:	e7831102 	str	r1, [r3, r2, lsl #2]
 	num=index<<level+1;
-30005ebc:	e59d3004 	ldr	r3, [sp, #4]
-30005ec0:	e2833001 	add	r3, r3, #1
-30005ec4:	e59d200c 	ldr	r2, [sp, #12]
-30005ec8:	e1a03312 	lsl	r3, r2, r3
-30005ecc:	e58d3014 	str	r3, [sp, #20]
+300060c0:	e59d3004 	ldr	r3, [sp, #4]
+300060c4:	e2833001 	add	r3, r3, #1
+300060c8:	e59d200c 	ldr	r2, [sp, #12]
+300060cc:	e1a03312 	lsl	r3, r2, r3
+300060d0:	e58d3014 	str	r3, [sp, #20]
 	/*最高level情况*/
 	if(level==acoral_mem_ctrl->level-1){
-30005ed0:	e59f30b4 	ldr	r3, [pc, #180]	; 30005f8c <recus_malloc+0x2a0>
-30005ed4:	e5933000 	ldr	r3, [r3]
-30005ed8:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-30005edc:	e1a03c03 	lsl	r3, r3, #24
-30005ee0:	e1a03c43 	asr	r3, r3, #24
-30005ee4:	e2432001 	sub	r2, r3, #1
-30005ee8:	e59d3004 	ldr	r3, [sp, #4]
-30005eec:	e1520003 	cmp	r2, r3
-30005ef0:	1a000010 	bne	30005f38 <recus_malloc+0x24c>
+300060d4:	e59f30b4 	ldr	r3, [pc, #180]	; 30006190 <recus_malloc+0x2a0>
+300060d8:	e5933000 	ldr	r3, [r3]
+300060dc:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+300060e0:	e1a03c03 	lsl	r3, r3, #24
+300060e4:	e1a03c43 	asr	r3, r3, #24
+300060e8:	e2432001 	sub	r2, r3, #1
+300060ec:	e59d3004 	ldr	r3, [sp, #4]
+300060f0:	e1520003 	cmp	r2, r3
+300060f4:	1a000010 	bne	3000613c <recus_malloc+0x24c>
 		if((num>>1)+(1<<level)>acoral_mem_ctrl->block_num)
-30005ef4:	e59d3014 	ldr	r3, [sp, #20]
-30005ef8:	e1a020c3 	asr	r2, r3, #1
-30005efc:	e3a01001 	mov	r1, #1
-30005f00:	e59d3004 	ldr	r3, [sp, #4]
-30005f04:	e1a03311 	lsl	r3, r1, r3
-30005f08:	e0823003 	add	r3, r2, r3
-30005f0c:	e1a02003 	mov	r2, r3
-30005f10:	e59f3074 	ldr	r3, [pc, #116]	; 30005f8c <recus_malloc+0x2a0>
-30005f14:	e5933000 	ldr	r3, [r3]
-30005f18:	e59330ec 	ldr	r3, [r3, #236]	; 0xec
-30005f1c:	e1520003 	cmp	r2, r3
-30005f20:	9a000001 	bls	30005f2c <recus_malloc+0x240>
+300060f8:	e59d3014 	ldr	r3, [sp, #20]
+300060fc:	e1a020c3 	asr	r2, r3, #1
+30006100:	e3a01001 	mov	r1, #1
+30006104:	e59d3004 	ldr	r3, [sp, #4]
+30006108:	e1a03311 	lsl	r3, r1, r3
+3000610c:	e0823003 	add	r3, r2, r3
+30006110:	e1a02003 	mov	r2, r3
+30006114:	e59f3074 	ldr	r3, [pc, #116]	; 30006190 <recus_malloc+0x2a0>
+30006118:	e5933000 	ldr	r3, [r3]
+3000611c:	e59330ec 	ldr	r3, [r3, #236]	; 0xec
+30006120:	e1520003 	cmp	r2, r3
+30006124:	9a000001 	bls	30006130 <recus_malloc+0x240>
 			return -1;
-30005f24:	e3e03000 	mvn	r3, #0
-30005f28:	ea000013 	b	30005f7c <recus_malloc+0x290>
+30006128:	e3e03000 	mvn	r3, #0
+3000612c:	ea000013 	b	30006180 <recus_malloc+0x290>
 		return num>>1;
-30005f2c:	e59d3014 	ldr	r3, [sp, #20]
-30005f30:	e1a030c3 	asr	r3, r3, #1
-30005f34:	ea000010 	b	30005f7c <recus_malloc+0x290>
+30006130:	e59d3014 	ldr	r3, [sp, #20]
+30006134:	e1a030c3 	asr	r3, r3, #1
+30006138:	ea000010 	b	30006180 <recus_malloc+0x290>
 	}
 	if(acoral_mem_blocks[BLOCK_INDEX(num)].level>=0)
-30005f38:	e59f3050 	ldr	r3, [pc, #80]	; 30005f90 <recus_malloc+0x2a4>
-30005f3c:	e5932000 	ldr	r2, [r3]
-30005f40:	e59d3014 	ldr	r3, [sp, #20]
-30005f44:	e1a030c3 	asr	r3, r3, #1
-30005f48:	e0823003 	add	r3, r2, r3
-30005f4c:	e5d33000 	ldrb	r3, [r3]
-30005f50:	e1a03c03 	lsl	r3, r3, #24
-30005f54:	e1a03c43 	asr	r3, r3, #24
-30005f58:	e3530000 	cmp	r3, #0
-30005f5c:	ba000005 	blt	30005f78 <recus_malloc+0x28c>
+3000613c:	e59f3050 	ldr	r3, [pc, #80]	; 30006194 <recus_malloc+0x2a4>
+30006140:	e5932000 	ldr	r2, [r3]
+30006144:	e59d3014 	ldr	r3, [sp, #20]
+30006148:	e1a030c3 	asr	r3, r3, #1
+3000614c:	e0823003 	add	r3, r2, r3
+30006150:	e5d33000 	ldrb	r3, [r3]
+30006154:	e1a03c03 	lsl	r3, r3, #24
+30006158:	e1a03c43 	asr	r3, r3, #24
+3000615c:	e3530000 	cmp	r3, #0
+30006160:	ba000005 	blt	3000617c <recus_malloc+0x28c>
 		return num+(1<<level);
-30005f60:	e3a02001 	mov	r2, #1
-30005f64:	e59d3004 	ldr	r3, [sp, #4]
-30005f68:	e1a02312 	lsl	r2, r2, r3
-30005f6c:	e59d3014 	ldr	r3, [sp, #20]
-30005f70:	e0823003 	add	r3, r2, r3
-30005f74:	ea000000 	b	30005f7c <recus_malloc+0x290>
+30006164:	e3a02001 	mov	r2, #1
+30006168:	e59d3004 	ldr	r3, [sp, #4]
+3000616c:	e1a02312 	lsl	r2, r2, r3
+30006170:	e59d3014 	ldr	r3, [sp, #20]
+30006174:	e0823003 	add	r3, r2, r3
+30006178:	ea000000 	b	30006180 <recus_malloc+0x290>
 	else
 		return num;
-30005f78:	e59d3014 	ldr	r3, [sp, #20]
+3000617c:	e59d3014 	ldr	r3, [sp, #20]
 }
-30005f7c:	e1a00003 	mov	r0, r3
-30005f80:	e28dd01c 	add	sp, sp, #28
-30005f84:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30005f88:	e12fff1e 	bx	lr
-30005f8c:	30010344 	.word	0x30010344
-30005f90:	3000fa98 	.word	0x3000fa98
+30006180:	e1a00003 	mov	r0, r3
+30006184:	e28dd01c 	add	sp, sp, #28
+30006188:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000618c:	e12fff1e 	bx	lr
+30006190:	30010550 	.word	0x30010550
+30006194:	3000fca4 	.word	0x3000fca4
 
-30005f94 <r_malloc>:
+30006198 <r_malloc>:
 
 static void *r_malloc(acoral_u8 level){
-30005f94:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30005f98:	e24dd01c 	sub	sp, sp, #28
-30005f9c:	e1a03000 	mov	r3, r0
-30005fa0:	e5cd3007 	strb	r3, [sp, #7]
+30006198:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000619c:	e24dd01c 	sub	sp, sp, #28
+300061a0:	e1a03000 	mov	r3, r0
+300061a4:	e5cd3007 	strb	r3, [sp, #7]
 	acoral_sr cpu_sr;
 	acoral_u32 index;
 	acoral_32 num,cur;
 	HAL_ENTER_CRITICAL();
-30005fa4:	ebffedd2 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30005fa8:	e1a03000 	mov	r3, r0
-30005fac:	e58d3008 	str	r3, [sp, #8]
+300061a8:	ebffed51 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300061ac:	e1a03000 	mov	r3, r0
+300061b0:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_lock(&acoral_mem_ctrl->lock);
 	acoral_mem_ctrl->free_num-=1<<level;
-30005fb0:	e59f3334 	ldr	r3, [pc, #820]	; 300062ec <r_malloc+0x358>
-30005fb4:	e5933000 	ldr	r3, [r3]
-30005fb8:	e59f232c 	ldr	r2, [pc, #812]	; 300062ec <r_malloc+0x358>
-30005fbc:	e5922000 	ldr	r2, [r2]
-30005fc0:	e59210f0 	ldr	r1, [r2, #240]	; 0xf0
-30005fc4:	e5dd2007 	ldrb	r2, [sp, #7]
-30005fc8:	e3a00001 	mov	r0, #1
-30005fcc:	e1a02210 	lsl	r2, r0, r2
-30005fd0:	e0622001 	rsb	r2, r2, r1
-30005fd4:	e58320f0 	str	r2, [r3, #240]	; 0xf0
+300061b4:	e59f3334 	ldr	r3, [pc, #820]	; 300064f0 <r_malloc+0x358>
+300061b8:	e5933000 	ldr	r3, [r3]
+300061bc:	e59f232c 	ldr	r2, [pc, #812]	; 300064f0 <r_malloc+0x358>
+300061c0:	e5922000 	ldr	r2, [r2]
+300061c4:	e59210f0 	ldr	r1, [r2, #240]	; 0xf0
+300061c8:	e5dd2007 	ldrb	r2, [sp, #7]
+300061cc:	e3a00001 	mov	r0, #1
+300061d0:	e1a02210 	lsl	r2, r0, r2
+300061d4:	e0622001 	rsb	r2, r2, r1
+300061d8:	e58320f0 	str	r2, [r3, #240]	; 0xf0
 	cur=acoral_mem_ctrl->free_cur[level];
-30005fd8:	e59f330c 	ldr	r3, [pc, #780]	; 300062ec <r_malloc+0x358>
-30005fdc:	e5933000 	ldr	r3, [r3]
-30005fe0:	e5dd2007 	ldrb	r2, [sp, #7]
-30005fe4:	e282201c 	add	r2, r2, #28
-30005fe8:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30005fec:	e58d3014 	str	r3, [sp, #20]
+300061dc:	e59f330c 	ldr	r3, [pc, #780]	; 300064f0 <r_malloc+0x358>
+300061e0:	e5933000 	ldr	r3, [r3]
+300061e4:	e5dd2007 	ldrb	r2, [sp, #7]
+300061e8:	e282201c 	add	r2, r2, #28
+300061ec:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+300061f0:	e58d3014 	str	r3, [sp, #20]
 	if(cur<0){
-30005ff0:	e59d3014 	ldr	r3, [sp, #20]
-30005ff4:	e3530000 	cmp	r3, #0
-30005ff8:	aa00003f 	bge	300060fc <r_malloc+0x168>
+300061f4:	e59d3014 	ldr	r3, [sp, #20]
+300061f8:	e3530000 	cmp	r3, #0
+300061fc:	aa00003f 	bge	30006300 <r_malloc+0x168>
 		num=recus_malloc(level+1);
-30005ffc:	e5dd3007 	ldrb	r3, [sp, #7]
-30006000:	e2833001 	add	r3, r3, #1
-30006004:	e1a00003 	mov	r0, r3
-30006008:	ebffff37 	bl	30005cec <recus_malloc>
-3000600c:	e1a03000 	mov	r3, r0
-30006010:	e58d3010 	str	r3, [sp, #16]
+30006200:	e5dd3007 	ldrb	r3, [sp, #7]
+30006204:	e2833001 	add	r3, r3, #1
+30006208:	e1a00003 	mov	r0, r3
+3000620c:	ebffff37 	bl	30005ef0 <recus_malloc>
+30006210:	e1a03000 	mov	r3, r0
+30006214:	e58d3010 	str	r3, [sp, #16]
 		if(num<0){
-30006014:	e59d3010 	ldr	r3, [sp, #16]
-30006018:	e3530000 	cmp	r3, #0
-3000601c:	aa000003 	bge	30006030 <r_malloc+0x9c>
+30006218:	e59d3010 	ldr	r3, [sp, #16]
+3000621c:	e3530000 	cmp	r3, #0
+30006220:	aa000003 	bge	30006234 <r_malloc+0x9c>
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
-30006020:	e59d0008 	ldr	r0, [sp, #8]
-30006024:	ebffedb0 	bl	300016ec <HAL_INTR_RESTORE>
+30006224:	e59d0008 	ldr	r0, [sp, #8]
+30006228:	ebffed2f 	bl	300016ec <HAL_INTR_RESTORE>
 			return NULL;
-30006028:	e3a03000 	mov	r3, #0
-3000602c:	ea0000aa 	b	300062dc <r_malloc+0x348>
+3000622c:	e3a03000 	mov	r3, #0
+30006230:	ea0000aa 	b	300064e0 <r_malloc+0x348>
 		}
 		index=num>>level+1;
-30006030:	e5dd3007 	ldrb	r3, [sp, #7]
-30006034:	e2833001 	add	r3, r3, #1
-30006038:	e59d2010 	ldr	r2, [sp, #16]
-3000603c:	e1a03352 	asr	r3, r2, r3
-30006040:	e58d300c 	str	r3, [sp, #12]
+30006234:	e5dd3007 	ldrb	r3, [sp, #7]
+30006238:	e2833001 	add	r3, r3, #1
+3000623c:	e59d2010 	ldr	r2, [sp, #16]
+30006240:	e1a03352 	asr	r3, r2, r3
+30006244:	e58d300c 	str	r3, [sp, #12]
 		cur=index/32;
-30006044:	e59d300c 	ldr	r3, [sp, #12]
-30006048:	e1a032a3 	lsr	r3, r3, #5
-3000604c:	e58d3014 	str	r3, [sp, #20]
+30006248:	e59d300c 	ldr	r3, [sp, #12]
+3000624c:	e1a032a3 	lsr	r3, r3, #5
+30006250:	e58d3014 	str	r3, [sp, #20]
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
-30006050:	e59f3294 	ldr	r3, [pc, #660]	; 300062ec <r_malloc+0x358>
-30006054:	e5933000 	ldr	r3, [r3]
-30006058:	e5dd2007 	ldrb	r2, [sp, #7]
-3000605c:	e282200e 	add	r2, r2, #14
-30006060:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30006064:	e59d000c 	ldr	r0, [sp, #12]
-30006068:	e1a01003 	mov	r1, r3
-3000606c:	eb000ef1 	bl	30009c38 <acoral_set_bit>
+30006254:	e59f3294 	ldr	r3, [pc, #660]	; 300064f0 <r_malloc+0x358>
+30006258:	e5933000 	ldr	r3, [r3]
+3000625c:	e5dd2007 	ldrb	r2, [sp, #7]
+30006260:	e282200e 	add	r2, r2, #14
+30006264:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30006268:	e59d000c 	ldr	r0, [sp, #12]
+3000626c:	e1a01003 	mov	r1, r3
+30006270:	eb000ef1 	bl	30009e3c <acoral_set_bit>
 		acoral_mem_ctrl->free_list[level][cur]=-1;
-30006070:	e59f3274 	ldr	r3, [pc, #628]	; 300062ec <r_malloc+0x358>
-30006074:	e5933000 	ldr	r3, [r3]
-30006078:	e5dd2007 	ldrb	r2, [sp, #7]
-3000607c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30006080:	e59d3014 	ldr	r3, [sp, #20]
-30006084:	e1a03103 	lsl	r3, r3, #2
-30006088:	e0823003 	add	r3, r2, r3
-3000608c:	e3e02000 	mvn	r2, #0
-30006090:	e5832000 	str	r2, [r3]
+30006274:	e59f3274 	ldr	r3, [pc, #628]	; 300064f0 <r_malloc+0x358>
+30006278:	e5933000 	ldr	r3, [r3]
+3000627c:	e5dd2007 	ldrb	r2, [sp, #7]
+30006280:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30006284:	e59d3014 	ldr	r3, [sp, #20]
+30006288:	e1a03103 	lsl	r3, r3, #2
+3000628c:	e0823003 	add	r3, r2, r3
+30006290:	e3e02000 	mvn	r2, #0
+30006294:	e5832000 	str	r2, [r3]
 		acoral_mem_ctrl->free_cur[level]=cur;
-30006094:	e59f3250 	ldr	r3, [pc, #592]	; 300062ec <r_malloc+0x358>
-30006098:	e5933000 	ldr	r3, [r3]
-3000609c:	e5dd2007 	ldrb	r2, [sp, #7]
-300060a0:	e282201c 	add	r2, r2, #28
-300060a4:	e59d1014 	ldr	r1, [sp, #20]
-300060a8:	e7831102 	str	r1, [r3, r2, lsl #2]
+30006298:	e59f3250 	ldr	r3, [pc, #592]	; 300064f0 <r_malloc+0x358>
+3000629c:	e5933000 	ldr	r3, [r3]
+300062a0:	e5dd2007 	ldrb	r2, [sp, #7]
+300062a4:	e282201c 	add	r2, r2, #28
+300062a8:	e59d1014 	ldr	r1, [sp, #20]
+300062ac:	e7831102 	str	r1, [r3, r2, lsl #2]
 		if((num&0x1)==0)
-300060ac:	e59d3010 	ldr	r3, [sp, #16]
-300060b0:	e2033001 	and	r3, r3, #1
-300060b4:	e3530000 	cmp	r3, #0
-300060b8:	1a000006 	bne	300060d8 <r_malloc+0x144>
+300062b0:	e59d3010 	ldr	r3, [sp, #16]
+300062b4:	e2033001 	and	r3, r3, #1
+300062b8:	e3530000 	cmp	r3, #0
+300062bc:	1a000006 	bne	300062dc <r_malloc+0x144>
 			acoral_mem_blocks[BLOCK_INDEX(num)].level=level;
-300060bc:	e59f322c 	ldr	r3, [pc, #556]	; 300062f0 <r_malloc+0x35c>
-300060c0:	e5932000 	ldr	r2, [r3]
-300060c4:	e59d3010 	ldr	r3, [sp, #16]
-300060c8:	e1a030c3 	asr	r3, r3, #1
-300060cc:	e0823003 	add	r3, r2, r3
-300060d0:	e5dd2007 	ldrb	r2, [sp, #7]
-300060d4:	e5c32000 	strb	r2, [r3]
+300062c0:	e59f322c 	ldr	r3, [pc, #556]	; 300064f4 <r_malloc+0x35c>
+300062c4:	e5932000 	ldr	r2, [r3]
+300062c8:	e59d3010 	ldr	r3, [sp, #16]
+300062cc:	e1a030c3 	asr	r3, r3, #1
+300062d0:	e0823003 	add	r3, r2, r3
+300062d4:	e5dd2007 	ldrb	r2, [sp, #7]
+300062d8:	e5c32000 	strb	r2, [r3]
 #endif
 #ifdef CFG_TEST_MEM
 		buddy_scan();
 #endif
 		acoral_spin_unlock(&acoral_mem_ctrl->lock);
 		HAL_EXIT_CRITICAL();
-300060d8:	e59d0008 	ldr	r0, [sp, #8]
-300060dc:	ebffed82 	bl	300016ec <HAL_INTR_RESTORE>
+300062dc:	e59d0008 	ldr	r0, [sp, #8]
+300062e0:	ebffed01 	bl	300016ec <HAL_INTR_RESTORE>
 		return (void *)(acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT));
-300060e0:	e59f3204 	ldr	r3, [pc, #516]	; 300062ec <r_malloc+0x358>
-300060e4:	e5933000 	ldr	r3, [r3]
-300060e8:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
-300060ec:	e59d3010 	ldr	r3, [sp, #16]
-300060f0:	e1a03383 	lsl	r3, r3, #7
-300060f4:	e0823003 	add	r3, r2, r3
-300060f8:	ea000077 	b	300062dc <r_malloc+0x348>
+300062e4:	e59f3204 	ldr	r3, [pc, #516]	; 300064f0 <r_malloc+0x358>
+300062e8:	e5933000 	ldr	r3, [r3]
+300062ec:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
+300062f0:	e59d3010 	ldr	r3, [sp, #16]
+300062f4:	e1a03383 	lsl	r3, r3, #7
+300062f8:	e0823003 	add	r3, r2, r3
+300062fc:	ea000077 	b	300064e0 <r_malloc+0x348>
 	}
 	index=acoral_ffs(acoral_mem_ctrl->bitmap[level][cur]);
-300060fc:	e59f31e8 	ldr	r3, [pc, #488]	; 300062ec <r_malloc+0x358>
-30006100:	e5933000 	ldr	r3, [r3]
-30006104:	e5dd2007 	ldrb	r2, [sp, #7]
-30006108:	e282200e 	add	r2, r2, #14
-3000610c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30006110:	e59d3014 	ldr	r3, [sp, #20]
-30006114:	e1a03103 	lsl	r3, r3, #2
-30006118:	e0823003 	add	r3, r2, r3
-3000611c:	e5933000 	ldr	r3, [r3]
-30006120:	e1a00003 	mov	r0, r3
-30006124:	eb000e68 	bl	30009acc <acoral_ffs>
-30006128:	e1a03000 	mov	r3, r0
-3000612c:	e58d300c 	str	r3, [sp, #12]
+30006300:	e59f31e8 	ldr	r3, [pc, #488]	; 300064f0 <r_malloc+0x358>
+30006304:	e5933000 	ldr	r3, [r3]
+30006308:	e5dd2007 	ldrb	r2, [sp, #7]
+3000630c:	e282200e 	add	r2, r2, #14
+30006310:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30006314:	e59d3014 	ldr	r3, [sp, #20]
+30006318:	e1a03103 	lsl	r3, r3, #2
+3000631c:	e0823003 	add	r3, r2, r3
+30006320:	e5933000 	ldr	r3, [r3]
+30006324:	e1a00003 	mov	r0, r3
+30006328:	eb000e68 	bl	30009cd0 <acoral_ffs>
+3000632c:	e1a03000 	mov	r3, r0
+30006330:	e58d300c 	str	r3, [sp, #12]
 	index=index+cur*32;
-30006130:	e59d3014 	ldr	r3, [sp, #20]
-30006134:	e1a03283 	lsl	r3, r3, #5
-30006138:	e59d200c 	ldr	r2, [sp, #12]
-3000613c:	e0823003 	add	r3, r2, r3
-30006140:	e58d300c 	str	r3, [sp, #12]
+30006334:	e59d3014 	ldr	r3, [sp, #20]
+30006338:	e1a03283 	lsl	r3, r3, #5
+3000633c:	e59d200c 	ldr	r2, [sp, #12]
+30006340:	e0823003 	add	r3, r2, r3
+30006344:	e58d300c 	str	r3, [sp, #12]
 	acoral_clear_bit(index,acoral_mem_ctrl->bitmap[level]);
-30006144:	e59f31a0 	ldr	r3, [pc, #416]	; 300062ec <r_malloc+0x358>
-30006148:	e5933000 	ldr	r3, [r3]
-3000614c:	e5dd2007 	ldrb	r2, [sp, #7]
-30006150:	e282200e 	add	r2, r2, #14
-30006154:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30006158:	e59d000c 	ldr	r0, [sp, #12]
-3000615c:	e1a01003 	mov	r1, r3
-30006160:	eb000ecc 	bl	30009c98 <acoral_clear_bit>
+30006348:	e59f31a0 	ldr	r3, [pc, #416]	; 300064f0 <r_malloc+0x358>
+3000634c:	e5933000 	ldr	r3, [r3]
+30006350:	e5dd2007 	ldrb	r2, [sp, #7]
+30006354:	e282200e 	add	r2, r2, #14
+30006358:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+3000635c:	e59d000c 	ldr	r0, [sp, #12]
+30006360:	e1a01003 	mov	r1, r3
+30006364:	eb000ecc 	bl	30009e9c <acoral_clear_bit>
 	if(acoral_mem_ctrl->bitmap[level][cur]==0){
-30006164:	e59f3180 	ldr	r3, [pc, #384]	; 300062ec <r_malloc+0x358>
-30006168:	e5933000 	ldr	r3, [r3]
-3000616c:	e5dd2007 	ldrb	r2, [sp, #7]
-30006170:	e282200e 	add	r2, r2, #14
-30006174:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30006178:	e59d3014 	ldr	r3, [sp, #20]
-3000617c:	e1a03103 	lsl	r3, r3, #2
-30006180:	e0823003 	add	r3, r2, r3
-30006184:	e5933000 	ldr	r3, [r3]
-30006188:	e3530000 	cmp	r3, #0
-3000618c:	1a00000c 	bne	300061c4 <r_malloc+0x230>
+30006368:	e59f3180 	ldr	r3, [pc, #384]	; 300064f0 <r_malloc+0x358>
+3000636c:	e5933000 	ldr	r3, [r3]
+30006370:	e5dd2007 	ldrb	r2, [sp, #7]
+30006374:	e282200e 	add	r2, r2, #14
+30006378:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+3000637c:	e59d3014 	ldr	r3, [sp, #20]
+30006380:	e1a03103 	lsl	r3, r3, #2
+30006384:	e0823003 	add	r3, r2, r3
+30006388:	e5933000 	ldr	r3, [r3]
+3000638c:	e3530000 	cmp	r3, #0
+30006390:	1a00000c 	bne	300063c8 <r_malloc+0x230>
 		acoral_mem_ctrl->free_cur[level]=acoral_mem_ctrl->free_list[level][cur];
-30006190:	e59f3154 	ldr	r3, [pc, #340]	; 300062ec <r_malloc+0x358>
-30006194:	e5933000 	ldr	r3, [r3]
-30006198:	e5dd2007 	ldrb	r2, [sp, #7]
-3000619c:	e59f1148 	ldr	r1, [pc, #328]	; 300062ec <r_malloc+0x358>
-300061a0:	e5911000 	ldr	r1, [r1]
-300061a4:	e5dd0007 	ldrb	r0, [sp, #7]
-300061a8:	e7910100 	ldr	r0, [r1, r0, lsl #2]
-300061ac:	e59d1014 	ldr	r1, [sp, #20]
-300061b0:	e1a01101 	lsl	r1, r1, #2
-300061b4:	e0801001 	add	r1, r0, r1
-300061b8:	e5911000 	ldr	r1, [r1]
-300061bc:	e282201c 	add	r2, r2, #28
-300061c0:	e7831102 	str	r1, [r3, r2, lsl #2]
+30006394:	e59f3154 	ldr	r3, [pc, #340]	; 300064f0 <r_malloc+0x358>
+30006398:	e5933000 	ldr	r3, [r3]
+3000639c:	e5dd2007 	ldrb	r2, [sp, #7]
+300063a0:	e59f1148 	ldr	r1, [pc, #328]	; 300064f0 <r_malloc+0x358>
+300063a4:	e5911000 	ldr	r1, [r1]
+300063a8:	e5dd0007 	ldrb	r0, [sp, #7]
+300063ac:	e7910100 	ldr	r0, [r1, r0, lsl #2]
+300063b0:	e59d1014 	ldr	r1, [sp, #20]
+300063b4:	e1a01101 	lsl	r1, r1, #2
+300063b8:	e0801001 	add	r1, r0, r1
+300063bc:	e5911000 	ldr	r1, [r1]
+300063c0:	e282201c 	add	r2, r2, #28
+300063c4:	e7831102 	str	r1, [r3, r2, lsl #2]
 	}
 	if(level==acoral_mem_ctrl->level-1){
-300061c4:	e5dd2007 	ldrb	r2, [sp, #7]
-300061c8:	e59f311c 	ldr	r3, [pc, #284]	; 300062ec <r_malloc+0x358>
-300061cc:	e5933000 	ldr	r3, [r3]
-300061d0:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-300061d4:	e1a03c03 	lsl	r3, r3, #24
-300061d8:	e1a03c43 	asr	r3, r3, #24
-300061dc:	e2433001 	sub	r3, r3, #1
-300061e0:	e1520003 	cmp	r2, r3
-300061e4:	1a000012 	bne	30006234 <r_malloc+0x2a0>
+300063c8:	e5dd2007 	ldrb	r2, [sp, #7]
+300063cc:	e59f311c 	ldr	r3, [pc, #284]	; 300064f0 <r_malloc+0x358>
+300063d0:	e5933000 	ldr	r3, [r3]
+300063d4:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+300063d8:	e1a03c03 	lsl	r3, r3, #24
+300063dc:	e1a03c43 	asr	r3, r3, #24
+300063e0:	e2433001 	sub	r3, r3, #1
+300063e4:	e1520003 	cmp	r2, r3
+300063e8:	1a000012 	bne	30006438 <r_malloc+0x2a0>
 		num=index<<level;
-300061e8:	e5dd3007 	ldrb	r3, [sp, #7]
-300061ec:	e59d200c 	ldr	r2, [sp, #12]
-300061f0:	e1a03312 	lsl	r3, r2, r3
-300061f4:	e58d3010 	str	r3, [sp, #16]
+300063ec:	e5dd3007 	ldrb	r3, [sp, #7]
+300063f0:	e59d200c 	ldr	r2, [sp, #12]
+300063f4:	e1a03312 	lsl	r3, r2, r3
+300063f8:	e58d3010 	str	r3, [sp, #16]
 		if(num+(1<<level)>acoral_mem_ctrl->block_num){
-300061f8:	e5dd3007 	ldrb	r3, [sp, #7]
-300061fc:	e3a02001 	mov	r2, #1
-30006200:	e1a02312 	lsl	r2, r2, r3
-30006204:	e59d3010 	ldr	r3, [sp, #16]
-30006208:	e0823003 	add	r3, r2, r3
-3000620c:	e1a02003 	mov	r2, r3
-30006210:	e59f30d4 	ldr	r3, [pc, #212]	; 300062ec <r_malloc+0x358>
-30006214:	e5933000 	ldr	r3, [r3]
-30006218:	e59330ec 	ldr	r3, [r3, #236]	; 0xec
-3000621c:	e1520003 	cmp	r2, r3
-30006220:	9a000019 	bls	3000628c <r_malloc+0x2f8>
+300063fc:	e5dd3007 	ldrb	r3, [sp, #7]
+30006400:	e3a02001 	mov	r2, #1
+30006404:	e1a02312 	lsl	r2, r2, r3
+30006408:	e59d3010 	ldr	r3, [sp, #16]
+3000640c:	e0823003 	add	r3, r2, r3
+30006410:	e1a02003 	mov	r2, r3
+30006414:	e59f30d4 	ldr	r3, [pc, #212]	; 300064f0 <r_malloc+0x358>
+30006418:	e5933000 	ldr	r3, [r3]
+3000641c:	e59330ec 	ldr	r3, [r3, #236]	; 0xec
+30006420:	e1520003 	cmp	r2, r3
+30006424:	9a000019 	bls	30006490 <r_malloc+0x2f8>
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
-30006224:	e59d0008 	ldr	r0, [sp, #8]
-30006228:	ebffed2f 	bl	300016ec <HAL_INTR_RESTORE>
+30006428:	e59d0008 	ldr	r0, [sp, #8]
+3000642c:	ebffecae 	bl	300016ec <HAL_INTR_RESTORE>
 			return NULL; 
-3000622c:	e3a03000 	mov	r3, #0
-30006230:	ea000029 	b	300062dc <r_malloc+0x348>
+30006430:	e3a03000 	mov	r3, #0
+30006434:	ea000029 	b	300064e0 <r_malloc+0x348>
 		}
 	}
 	else{
 		num=index<<level+1;
-30006234:	e5dd3007 	ldrb	r3, [sp, #7]
-30006238:	e2833001 	add	r3, r3, #1
-3000623c:	e59d200c 	ldr	r2, [sp, #12]
-30006240:	e1a03312 	lsl	r3, r2, r3
-30006244:	e58d3010 	str	r3, [sp, #16]
+30006438:	e5dd3007 	ldrb	r3, [sp, #7]
+3000643c:	e2833001 	add	r3, r3, #1
+30006440:	e59d200c 	ldr	r2, [sp, #12]
+30006444:	e1a03312 	lsl	r3, r2, r3
+30006448:	e58d3010 	str	r3, [sp, #16]
 		if(acoral_mem_blocks[BLOCK_INDEX(num)].level>=0)
-30006248:	e59f30a0 	ldr	r3, [pc, #160]	; 300062f0 <r_malloc+0x35c>
-3000624c:	e5932000 	ldr	r2, [r3]
-30006250:	e59d3010 	ldr	r3, [sp, #16]
-30006254:	e1a030c3 	asr	r3, r3, #1
-30006258:	e0823003 	add	r3, r2, r3
-3000625c:	e5d33000 	ldrb	r3, [r3]
-30006260:	e1a03c03 	lsl	r3, r3, #24
-30006264:	e1a03c43 	asr	r3, r3, #24
-30006268:	e3530000 	cmp	r3, #0
-3000626c:	ba000007 	blt	30006290 <r_malloc+0x2fc>
+3000644c:	e59f30a0 	ldr	r3, [pc, #160]	; 300064f4 <r_malloc+0x35c>
+30006450:	e5932000 	ldr	r2, [r3]
+30006454:	e59d3010 	ldr	r3, [sp, #16]
+30006458:	e1a030c3 	asr	r3, r3, #1
+3000645c:	e0823003 	add	r3, r2, r3
+30006460:	e5d33000 	ldrb	r3, [r3]
+30006464:	e1a03c03 	lsl	r3, r3, #24
+30006468:	e1a03c43 	asr	r3, r3, #24
+3000646c:	e3530000 	cmp	r3, #0
+30006470:	ba000007 	blt	30006494 <r_malloc+0x2fc>
 			num+=(1<<level);
-30006270:	e5dd3007 	ldrb	r3, [sp, #7]
-30006274:	e3a02001 	mov	r2, #1
-30006278:	e1a03312 	lsl	r3, r2, r3
-3000627c:	e59d2010 	ldr	r2, [sp, #16]
-30006280:	e0823003 	add	r3, r2, r3
-30006284:	e58d3010 	str	r3, [sp, #16]
-30006288:	ea000000 	b	30006290 <r_malloc+0x2fc>
+30006474:	e5dd3007 	ldrb	r3, [sp, #7]
+30006478:	e3a02001 	mov	r2, #1
+3000647c:	e1a03312 	lsl	r3, r2, r3
+30006480:	e59d2010 	ldr	r2, [sp, #16]
+30006484:	e0823003 	add	r3, r2, r3
+30006488:	e58d3010 	str	r3, [sp, #16]
+3000648c:	ea000000 	b	30006494 <r_malloc+0x2fc>
 	if(level==acoral_mem_ctrl->level-1){
 		num=index<<level;
 		if(num+(1<<level)>acoral_mem_ctrl->block_num){
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return NULL; 
-3000628c:	e1a00000 	nop			; (mov r0, r0)
+30006490:	e1a00000 	nop			; (mov r0, r0)
 	else{
 		num=index<<level+1;
 		if(acoral_mem_blocks[BLOCK_INDEX(num)].level>=0)
 			num+=(1<<level);
 	}
 	if((num&0x1)==0)
-30006290:	e59d3010 	ldr	r3, [sp, #16]
-30006294:	e2033001 	and	r3, r3, #1
-30006298:	e3530000 	cmp	r3, #0
-3000629c:	1a000006 	bne	300062bc <r_malloc+0x328>
+30006494:	e59d3010 	ldr	r3, [sp, #16]
+30006498:	e2033001 	and	r3, r3, #1
+3000649c:	e3530000 	cmp	r3, #0
+300064a0:	1a000006 	bne	300064c0 <r_malloc+0x328>
 		acoral_mem_blocks[BLOCK_INDEX(num)].level=level;
-300062a0:	e59f3048 	ldr	r3, [pc, #72]	; 300062f0 <r_malloc+0x35c>
-300062a4:	e5932000 	ldr	r2, [r3]
-300062a8:	e59d3010 	ldr	r3, [sp, #16]
-300062ac:	e1a030c3 	asr	r3, r3, #1
-300062b0:	e0823003 	add	r3, r2, r3
-300062b4:	e5dd2007 	ldrb	r2, [sp, #7]
-300062b8:	e5c32000 	strb	r2, [r3]
+300064a4:	e59f3048 	ldr	r3, [pc, #72]	; 300064f4 <r_malloc+0x35c>
+300064a8:	e5932000 	ldr	r2, [r3]
+300064ac:	e59d3010 	ldr	r3, [sp, #16]
+300064b0:	e1a030c3 	asr	r3, r3, #1
+300064b4:	e0823003 	add	r3, r2, r3
+300064b8:	e5dd2007 	ldrb	r2, [sp, #7]
+300064bc:	e5c32000 	strb	r2, [r3]
 #endif
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif
 	acoral_spin_unlock(&acoral_mem_ctrl->lock);
 	HAL_EXIT_CRITICAL();
-300062bc:	e59d0008 	ldr	r0, [sp, #8]
-300062c0:	ebffed09 	bl	300016ec <HAL_INTR_RESTORE>
+300064c0:	e59d0008 	ldr	r0, [sp, #8]
+300064c4:	ebffec88 	bl	300016ec <HAL_INTR_RESTORE>
 	return (void *)(acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT));
-300062c4:	e59f3020 	ldr	r3, [pc, #32]	; 300062ec <r_malloc+0x358>
-300062c8:	e5933000 	ldr	r3, [r3]
-300062cc:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
-300062d0:	e59d3010 	ldr	r3, [sp, #16]
-300062d4:	e1a03383 	lsl	r3, r3, #7
-300062d8:	e0823003 	add	r3, r2, r3
+300064c8:	e59f3020 	ldr	r3, [pc, #32]	; 300064f0 <r_malloc+0x358>
+300064cc:	e5933000 	ldr	r3, [r3]
+300064d0:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
+300064d4:	e59d3010 	ldr	r3, [sp, #16]
+300064d8:	e1a03383 	lsl	r3, r3, #7
+300064dc:	e0823003 	add	r3, r2, r3
 }
-300062dc:	e1a00003 	mov	r0, r3
-300062e0:	e28dd01c 	add	sp, sp, #28
-300062e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300062e8:	e12fff1e 	bx	lr
-300062ec:	30010344 	.word	0x30010344
-300062f0:	3000fa98 	.word	0x3000fa98
+300064e0:	e1a00003 	mov	r0, r3
+300064e4:	e28dd01c 	add	sp, sp, #28
+300064e8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300064ec:	e12fff1e 	bx	lr
+300064f0:	30010550 	.word	0x30010550
+300064f4:	3000fca4 	.word	0x3000fca4
 
-300062f4 <buddy_malloc_size>:
+300064f8 <buddy_malloc_size>:
 
 acoral_u32 buddy_malloc_size(acoral_u32 size){
-300062f4:	e24dd018 	sub	sp, sp, #24
-300062f8:	e58d0004 	str	r0, [sp, #4]
+300064f8:	e24dd018 	sub	sp, sp, #24
+300064fc:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 resize_size;	
 	acoral_u8 level=0;	
-300062fc:	e3a03000 	mov	r3, #0
-30006300:	e5cd3013 	strb	r3, [sp, #19]
+30006500:	e3a03000 	mov	r3, #0
+30006504:	e5cd3013 	strb	r3, [sp, #19]
 	acoral_u32 num=1;	
-30006304:	e3a03001 	mov	r3, #1
-30006308:	e58d3014 	str	r3, [sp, #20]
+30006508:	e3a03001 	mov	r3, #1
+3000650c:	e58d3014 	str	r3, [sp, #20]
 	resize_size=BLOCK_SIZE;
-3000630c:	e3a03080 	mov	r3, #128	; 0x80
-30006310:	e58d300c 	str	r3, [sp, #12]
+30006510:	e3a03080 	mov	r3, #128	; 0x80
+30006514:	e58d300c 	str	r3, [sp, #12]
 	if(acoral_mem_ctrl->state==MEM_NO_ALLOC)
-30006314:	e59f3078 	ldr	r3, [pc, #120]	; 30006394 <buddy_malloc_size+0xa0>
-30006318:	e5933000 	ldr	r3, [r3]
-3000631c:	e5d330e1 	ldrb	r3, [r3, #225]	; 0xe1
-30006320:	e3530000 	cmp	r3, #0
-30006324:	1a00000a 	bne	30006354 <buddy_malloc_size+0x60>
+30006518:	e59f3078 	ldr	r3, [pc, #120]	; 30006598 <buddy_malloc_size+0xa0>
+3000651c:	e5933000 	ldr	r3, [r3]
+30006520:	e5d330e1 	ldrb	r3, [r3, #225]	; 0xe1
+30006524:	e3530000 	cmp	r3, #0
+30006528:	1a00000a 	bne	30006558 <buddy_malloc_size+0x60>
 		return 0;
-30006328:	e3a03000 	mov	r3, #0
-3000632c:	ea000015 	b	30006388 <buddy_malloc_size+0x94>
+3000652c:	e3a03000 	mov	r3, #0
+30006530:	ea000015 	b	3000658c <buddy_malloc_size+0x94>
 	while(resize_size<size&&level<acoral_mem_ctrl->level){
 		num=num<<1;
-30006330:	e59d3014 	ldr	r3, [sp, #20]
-30006334:	e1a03083 	lsl	r3, r3, #1
-30006338:	e58d3014 	str	r3, [sp, #20]
+30006534:	e59d3014 	ldr	r3, [sp, #20]
+30006538:	e1a03083 	lsl	r3, r3, #1
+3000653c:	e58d3014 	str	r3, [sp, #20]
 		level++;
-3000633c:	e5dd3013 	ldrb	r3, [sp, #19]
-30006340:	e2833001 	add	r3, r3, #1
-30006344:	e5cd3013 	strb	r3, [sp, #19]
+30006540:	e5dd3013 	ldrb	r3, [sp, #19]
+30006544:	e2833001 	add	r3, r3, #1
+30006548:	e5cd3013 	strb	r3, [sp, #19]
 		resize_size=resize_size<<1;
-30006348:	e59d300c 	ldr	r3, [sp, #12]
-3000634c:	e1a03083 	lsl	r3, r3, #1
-30006350:	e58d300c 	str	r3, [sp, #12]
+3000654c:	e59d300c 	ldr	r3, [sp, #12]
+30006550:	e1a03083 	lsl	r3, r3, #1
+30006554:	e58d300c 	str	r3, [sp, #12]
 	acoral_u8 level=0;	
 	acoral_u32 num=1;	
 	resize_size=BLOCK_SIZE;
 	if(acoral_mem_ctrl->state==MEM_NO_ALLOC)
 		return 0;
 	while(resize_size<size&&level<acoral_mem_ctrl->level){
-30006354:	e59d200c 	ldr	r2, [sp, #12]
-30006358:	e59d3004 	ldr	r3, [sp, #4]
-3000635c:	e1520003 	cmp	r2, r3
-30006360:	2a000007 	bcs	30006384 <buddy_malloc_size+0x90>
-30006364:	e5dd2013 	ldrb	r2, [sp, #19]
-30006368:	e59f3024 	ldr	r3, [pc, #36]	; 30006394 <buddy_malloc_size+0xa0>
-3000636c:	e5933000 	ldr	r3, [r3]
-30006370:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-30006374:	e1a03c03 	lsl	r3, r3, #24
-30006378:	e1a03c43 	asr	r3, r3, #24
-3000637c:	e1520003 	cmp	r2, r3
-30006380:	baffffea 	blt	30006330 <buddy_malloc_size+0x3c>
+30006558:	e59d200c 	ldr	r2, [sp, #12]
+3000655c:	e59d3004 	ldr	r3, [sp, #4]
+30006560:	e1520003 	cmp	r2, r3
+30006564:	2a000007 	bcs	30006588 <buddy_malloc_size+0x90>
+30006568:	e5dd2013 	ldrb	r2, [sp, #19]
+3000656c:	e59f3024 	ldr	r3, [pc, #36]	; 30006598 <buddy_malloc_size+0xa0>
+30006570:	e5933000 	ldr	r3, [r3]
+30006574:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+30006578:	e1a03c03 	lsl	r3, r3, #24
+3000657c:	e1a03c43 	asr	r3, r3, #24
+30006580:	e1520003 	cmp	r2, r3
+30006584:	baffffea 	blt	30006534 <buddy_malloc_size+0x3c>
 		num=num<<1;
 		level++;
 		resize_size=resize_size<<1;
 	}
 	return resize_size;
-30006384:	e59d300c 	ldr	r3, [sp, #12]
+30006588:	e59d300c 	ldr	r3, [sp, #12]
 }
-30006388:	e1a00003 	mov	r0, r3
-3000638c:	e28dd018 	add	sp, sp, #24
-30006390:	e12fff1e 	bx	lr
-30006394:	30010344 	.word	0x30010344
+3000658c:	e1a00003 	mov	r0, r3
+30006590:	e28dd018 	add	sp, sp, #24
+30006594:	e12fff1e 	bx	lr
+30006598:	30010550 	.word	0x30010550
 
-30006398 <buddy_malloc>:
+3000659c <buddy_malloc>:
 
 void *buddy_malloc(acoral_u32 size){
-30006398:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000639c:	e24dd01c 	sub	sp, sp, #28
-300063a0:	e58d0004 	str	r0, [sp, #4]
+3000659c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300065a0:	e24dd01c 	sub	sp, sp, #28
+300065a4:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 resize_size;	
 	acoral_u8 level=0;	
-300063a4:	e3a03000 	mov	r3, #0
-300063a8:	e5cd3013 	strb	r3, [sp, #19]
+300065a8:	e3a03000 	mov	r3, #0
+300065ac:	e5cd3013 	strb	r3, [sp, #19]
 	acoral_u32 num=1;	
-300063ac:	e3a03001 	mov	r3, #1
-300063b0:	e58d3014 	str	r3, [sp, #20]
+300065b0:	e3a03001 	mov	r3, #1
+300065b4:	e58d3014 	str	r3, [sp, #20]
 	resize_size=BLOCK_SIZE;
-300063b4:	e3a03080 	mov	r3, #128	; 0x80
-300063b8:	e58d300c 	str	r3, [sp, #12]
+300065b8:	e3a03080 	mov	r3, #128	; 0x80
+300065bc:	e58d300c 	str	r3, [sp, #12]
 	if(acoral_mem_ctrl->state==MEM_NO_ALLOC)
-300063bc:	e59f30b0 	ldr	r3, [pc, #176]	; 30006474 <buddy_malloc+0xdc>
-300063c0:	e5933000 	ldr	r3, [r3]
-300063c4:	e5d330e1 	ldrb	r3, [r3, #225]	; 0xe1
-300063c8:	e3530000 	cmp	r3, #0
-300063cc:	1a00000a 	bne	300063fc <buddy_malloc+0x64>
+300065c0:	e59f30b0 	ldr	r3, [pc, #176]	; 30006678 <buddy_malloc+0xdc>
+300065c4:	e5933000 	ldr	r3, [r3]
+300065c8:	e5d330e1 	ldrb	r3, [r3, #225]	; 0xe1
+300065cc:	e3530000 	cmp	r3, #0
+300065d0:	1a00000a 	bne	30006600 <buddy_malloc+0x64>
 		return NULL;
-300063d0:	e3a03000 	mov	r3, #0
-300063d4:	ea000022 	b	30006464 <buddy_malloc+0xcc>
+300065d4:	e3a03000 	mov	r3, #0
+300065d8:	ea000022 	b	30006668 <buddy_malloc+0xcc>
 	while(resize_size<size){
 		num=num<<1;
-300063d8:	e59d3014 	ldr	r3, [sp, #20]
-300063dc:	e1a03083 	lsl	r3, r3, #1
-300063e0:	e58d3014 	str	r3, [sp, #20]
+300065dc:	e59d3014 	ldr	r3, [sp, #20]
+300065e0:	e1a03083 	lsl	r3, r3, #1
+300065e4:	e58d3014 	str	r3, [sp, #20]
 		level++;
-300063e4:	e5dd3013 	ldrb	r3, [sp, #19]
-300063e8:	e2833001 	add	r3, r3, #1
-300063ec:	e5cd3013 	strb	r3, [sp, #19]
+300065e8:	e5dd3013 	ldrb	r3, [sp, #19]
+300065ec:	e2833001 	add	r3, r3, #1
+300065f0:	e5cd3013 	strb	r3, [sp, #19]
 		resize_size=resize_size<<1;
-300063f0:	e59d300c 	ldr	r3, [sp, #12]
-300063f4:	e1a03083 	lsl	r3, r3, #1
-300063f8:	e58d300c 	str	r3, [sp, #12]
+300065f4:	e59d300c 	ldr	r3, [sp, #12]
+300065f8:	e1a03083 	lsl	r3, r3, #1
+300065fc:	e58d300c 	str	r3, [sp, #12]
 	acoral_u8 level=0;	
 	acoral_u32 num=1;	
 	resize_size=BLOCK_SIZE;
 	if(acoral_mem_ctrl->state==MEM_NO_ALLOC)
 		return NULL;
 	while(resize_size<size){
-300063fc:	e59d200c 	ldr	r2, [sp, #12]
-30006400:	e59d3004 	ldr	r3, [sp, #4]
-30006404:	e1520003 	cmp	r2, r3
-30006408:	3afffff2 	bcc	300063d8 <buddy_malloc+0x40>
+30006600:	e59d200c 	ldr	r2, [sp, #12]
+30006604:	e59d3004 	ldr	r3, [sp, #4]
+30006608:	e1520003 	cmp	r2, r3
+3000660c:	3afffff2 	bcc	300065dc <buddy_malloc+0x40>
 		num=num<<1;
 		level++;
 		resize_size=resize_size<<1;
 	}
 	if(num>acoral_mem_ctrl->free_num)
-3000640c:	e59f3060 	ldr	r3, [pc, #96]	; 30006474 <buddy_malloc+0xdc>
-30006410:	e5933000 	ldr	r3, [r3]
-30006414:	e59320f0 	ldr	r2, [r3, #240]	; 0xf0
-30006418:	e59d3014 	ldr	r3, [sp, #20]
-3000641c:	e1520003 	cmp	r2, r3
-30006420:	2a000001 	bcs	3000642c <buddy_malloc+0x94>
+30006610:	e59f3060 	ldr	r3, [pc, #96]	; 30006678 <buddy_malloc+0xdc>
+30006614:	e5933000 	ldr	r3, [r3]
+30006618:	e59320f0 	ldr	r2, [r3, #240]	; 0xf0
+3000661c:	e59d3014 	ldr	r3, [sp, #20]
+30006620:	e1520003 	cmp	r2, r3
+30006624:	2a000001 	bcs	30006630 <buddy_malloc+0x94>
 		return NULL;
-30006424:	e3a03000 	mov	r3, #0
-30006428:	ea00000d 	b	30006464 <buddy_malloc+0xcc>
+30006628:	e3a03000 	mov	r3, #0
+3000662c:	ea00000d 	b	30006668 <buddy_malloc+0xcc>
 	if(level>=acoral_mem_ctrl->level)
-3000642c:	e5dd2013 	ldrb	r2, [sp, #19]
-30006430:	e59f303c 	ldr	r3, [pc, #60]	; 30006474 <buddy_malloc+0xdc>
-30006434:	e5933000 	ldr	r3, [r3]
-30006438:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-3000643c:	e1a03c03 	lsl	r3, r3, #24
-30006440:	e1a03c43 	asr	r3, r3, #24
-30006444:	e1520003 	cmp	r2, r3
-30006448:	ba000001 	blt	30006454 <buddy_malloc+0xbc>
+30006630:	e5dd2013 	ldrb	r2, [sp, #19]
+30006634:	e59f303c 	ldr	r3, [pc, #60]	; 30006678 <buddy_malloc+0xdc>
+30006638:	e5933000 	ldr	r3, [r3]
+3000663c:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+30006640:	e1a03c03 	lsl	r3, r3, #24
+30006644:	e1a03c43 	asr	r3, r3, #24
+30006648:	e1520003 	cmp	r2, r3
+3000664c:	ba000001 	blt	30006658 <buddy_malloc+0xbc>
 		return NULL;	
-3000644c:	e3a03000 	mov	r3, #0
-30006450:	ea000003 	b	30006464 <buddy_malloc+0xcc>
+30006650:	e3a03000 	mov	r3, #0
+30006654:	ea000003 	b	30006668 <buddy_malloc+0xcc>
 	return r_malloc(level);
-30006454:	e5dd3013 	ldrb	r3, [sp, #19]
-30006458:	e1a00003 	mov	r0, r3
-3000645c:	ebfffecc 	bl	30005f94 <r_malloc>
-30006460:	e1a03000 	mov	r3, r0
+30006658:	e5dd3013 	ldrb	r3, [sp, #19]
+3000665c:	e1a00003 	mov	r0, r3
+30006660:	ebfffecc 	bl	30006198 <r_malloc>
+30006664:	e1a03000 	mov	r3, r0
 }
-30006464:	e1a00003 	mov	r0, r3
-30006468:	e28dd01c 	add	sp, sp, #28
-3000646c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30006470:	e12fff1e 	bx	lr
-30006474:	30010344 	.word	0x30010344
+30006668:	e1a00003 	mov	r0, r3
+3000666c:	e28dd01c 	add	sp, sp, #28
+30006670:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30006674:	e12fff1e 	bx	lr
+30006678:	30010550 	.word	0x30010550
 
-30006478 <buddy_free>:
+3000667c <buddy_free>:
 
 void buddy_free(void *ptr){
-30006478:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000647c:	e24dd02c 	sub	sp, sp, #44	; 0x2c
-30006480:	e58d0004 	str	r0, [sp, #4]
+3000667c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30006680:	e24dd02c 	sub	sp, sp, #44	; 0x2c
+30006684:	e58d0004 	str	r0, [sp, #4]
 	acoral_32 cur;
 	acoral_u32 index;
 	acoral_u32 num;
 	acoral_u32 max_level;
 	acoral_u32 adr;
 	adr=(acoral_u32)ptr;
-30006484:	e59d3004 	ldr	r3, [sp, #4]
-30006488:	e58d3024 	str	r3, [sp, #36]	; 0x24
+30006688:	e59d3004 	ldr	r3, [sp, #4]
+3000668c:	e58d3024 	str	r3, [sp, #36]	; 0x24
 	if(acoral_mem_ctrl->state==MEM_NO_ALLOC)
-3000648c:	e59f348c 	ldr	r3, [pc, #1164]	; 30006920 <buddy_free+0x4a8>
-30006490:	e5933000 	ldr	r3, [r3]
-30006494:	e5d330e1 	ldrb	r3, [r3, #225]	; 0xe1
-30006498:	e3530000 	cmp	r3, #0
-3000649c:	0a00011b 	beq	30006910 <buddy_free+0x498>
+30006690:	e59f348c 	ldr	r3, [pc, #1164]	; 30006b24 <buddy_free+0x4a8>
+30006694:	e5933000 	ldr	r3, [r3]
+30006698:	e5d330e1 	ldrb	r3, [r3, #225]	; 0xe1
+3000669c:	e3530000 	cmp	r3, #0
+300066a0:	0a00011b 	beq	30006b14 <buddy_free+0x498>
 		return;
 	if(ptr==NULL||adr<acoral_mem_ctrl->start_adr||adr+BLOCK_SIZE>acoral_mem_ctrl->end_adr){
-300064a0:	e59d3004 	ldr	r3, [sp, #4]
-300064a4:	e3530000 	cmp	r3, #0
-300064a8:	0a00000c 	beq	300064e0 <buddy_free+0x68>
-300064ac:	e59f346c 	ldr	r3, [pc, #1132]	; 30006920 <buddy_free+0x4a8>
-300064b0:	e5933000 	ldr	r3, [r3]
-300064b4:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
-300064b8:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-300064bc:	e1520003 	cmp	r2, r3
-300064c0:	8a000006 	bhi	300064e0 <buddy_free+0x68>
-300064c4:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-300064c8:	e2832080 	add	r2, r3, #128	; 0x80
-300064cc:	e59f344c 	ldr	r3, [pc, #1100]	; 30006920 <buddy_free+0x4a8>
-300064d0:	e5933000 	ldr	r3, [r3]
-300064d4:	e59330e8 	ldr	r3, [r3, #232]	; 0xe8
-300064d8:	e1520003 	cmp	r2, r3
-300064dc:	9a000003 	bls	300064f0 <buddy_free+0x78>
+300066a4:	e59d3004 	ldr	r3, [sp, #4]
+300066a8:	e3530000 	cmp	r3, #0
+300066ac:	0a00000c 	beq	300066e4 <buddy_free+0x68>
+300066b0:	e59f346c 	ldr	r3, [pc, #1132]	; 30006b24 <buddy_free+0x4a8>
+300066b4:	e5933000 	ldr	r3, [r3]
+300066b8:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
+300066bc:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+300066c0:	e1520003 	cmp	r2, r3
+300066c4:	8a000006 	bhi	300066e4 <buddy_free+0x68>
+300066c8:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+300066cc:	e2832080 	add	r2, r3, #128	; 0x80
+300066d0:	e59f344c 	ldr	r3, [pc, #1100]	; 30006b24 <buddy_free+0x4a8>
+300066d4:	e5933000 	ldr	r3, [r3]
+300066d8:	e59330e8 	ldr	r3, [r3, #232]	; 0xe8
+300066dc:	e1520003 	cmp	r2, r3
+300066e0:	9a000003 	bls	300066f4 <buddy_free+0x78>
 		acoral_printerr("Invalid Free Address:0x%x\n",ptr);
-300064e0:	e59f043c 	ldr	r0, [pc, #1084]	; 30006924 <buddy_free+0x4ac>
-300064e4:	e59d1004 	ldr	r1, [sp, #4]
-300064e8:	eb001346 	bl	3000b208 <acoral_print>
+300066e4:	e59f043c 	ldr	r0, [pc, #1084]	; 30006b28 <buddy_free+0x4ac>
+300066e8:	e59d1004 	ldr	r1, [sp, #4]
+300066ec:	eb001346 	bl	3000b40c <acoral_print>
 		return;
-300064ec:	ea000108 	b	30006914 <buddy_free+0x49c>
+300066f0:	ea000108 	b	30006b18 <buddy_free+0x49c>
 	}
 	max_level=acoral_mem_ctrl->level;
-300064f0:	e59f3428 	ldr	r3, [pc, #1064]	; 30006920 <buddy_free+0x4a8>
-300064f4:	e5933000 	ldr	r3, [r3]
-300064f8:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
-300064fc:	e1a03c03 	lsl	r3, r3, #24
-30006500:	e1a03c43 	asr	r3, r3, #24
-30006504:	e58d3020 	str	r3, [sp, #32]
+300066f4:	e59f3428 	ldr	r3, [pc, #1064]	; 30006b24 <buddy_free+0x4a8>
+300066f8:	e5933000 	ldr	r3, [r3]
+300066fc:	e5d330e0 	ldrb	r3, [r3, #224]	; 0xe0
+30006700:	e1a03c03 	lsl	r3, r3, #24
+30006704:	e1a03c43 	asr	r3, r3, #24
+30006708:	e58d3020 	str	r3, [sp, #32]
 	num=(adr-acoral_mem_ctrl->start_adr)>>BLOCK_SHIFT;
-30006508:	e59f3410 	ldr	r3, [pc, #1040]	; 30006920 <buddy_free+0x4a8>
-3000650c:	e5933000 	ldr	r3, [r3]
-30006510:	e59330e4 	ldr	r3, [r3, #228]	; 0xe4
-30006514:	e59d2024 	ldr	r2, [sp, #36]	; 0x24
-30006518:	e0633002 	rsb	r3, r3, r2
-3000651c:	e1a033a3 	lsr	r3, r3, #7
-30006520:	e58d301c 	str	r3, [sp, #28]
+3000670c:	e59f3410 	ldr	r3, [pc, #1040]	; 30006b24 <buddy_free+0x4a8>
+30006710:	e5933000 	ldr	r3, [r3]
+30006714:	e59330e4 	ldr	r3, [r3, #228]	; 0xe4
+30006718:	e59d2024 	ldr	r2, [sp, #36]	; 0x24
+3000671c:	e0633002 	rsb	r3, r3, r2
+30006720:	e1a033a3 	lsr	r3, r3, #7
+30006724:	e58d301c 	str	r3, [sp, #28]
 	/*如果不是block整数倍，肯定是非法地址*/
 	if(adr!=acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT)){
-30006524:	e59f33f4 	ldr	r3, [pc, #1012]	; 30006920 <buddy_free+0x4a8>
-30006528:	e5933000 	ldr	r3, [r3]
-3000652c:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
-30006530:	e59d301c 	ldr	r3, [sp, #28]
-30006534:	e1a03383 	lsl	r3, r3, #7
-30006538:	e0822003 	add	r2, r2, r3
-3000653c:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-30006540:	e1520003 	cmp	r2, r3
-30006544:	0a000003 	beq	30006558 <buddy_free+0xe0>
+30006728:	e59f33f4 	ldr	r3, [pc, #1012]	; 30006b24 <buddy_free+0x4a8>
+3000672c:	e5933000 	ldr	r3, [r3]
+30006730:	e59320e4 	ldr	r2, [r3, #228]	; 0xe4
+30006734:	e59d301c 	ldr	r3, [sp, #28]
+30006738:	e1a03383 	lsl	r3, r3, #7
+3000673c:	e0822003 	add	r2, r2, r3
+30006740:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+30006744:	e1520003 	cmp	r2, r3
+30006748:	0a000003 	beq	3000675c <buddy_free+0xe0>
 		acoral_printerr("Invalid Free Address:0x%x\n",ptr);
-30006548:	e59f03d4 	ldr	r0, [pc, #980]	; 30006924 <buddy_free+0x4ac>
-3000654c:	e59d1004 	ldr	r1, [sp, #4]
-30006550:	eb00132c 	bl	3000b208 <acoral_print>
+3000674c:	e59f03d4 	ldr	r0, [pc, #980]	; 30006b28 <buddy_free+0x4ac>
+30006750:	e59d1004 	ldr	r1, [sp, #4]
+30006754:	eb00132c 	bl	3000b40c <acoral_print>
 		return;
-30006554:	ea0000ee 	b	30006914 <buddy_free+0x49c>
+30006758:	ea0000ee 	b	30006b18 <buddy_free+0x49c>
 	}
 	HAL_ENTER_CRITICAL();
-30006558:	ebffec65 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-3000655c:	e1a03000 	mov	r3, r0
-30006560:	e58d300c 	str	r3, [sp, #12]
+3000675c:	ebffebe4 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30006760:	e1a03000 	mov	r3, r0
+30006764:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&acoral_mem_ctrl->lock);
 	if(num&0x1){
-30006564:	e59d301c 	ldr	r3, [sp, #28]
-30006568:	e2033001 	and	r3, r3, #1
-3000656c:	e20330ff 	and	r3, r3, #255	; 0xff
-30006570:	e3530000 	cmp	r3, #0
-30006574:	0a00003c 	beq	3000666c <buddy_free+0x1f4>
+30006768:	e59d301c 	ldr	r3, [sp, #28]
+3000676c:	e2033001 	and	r3, r3, #1
+30006770:	e20330ff 	and	r3, r3, #255	; 0xff
+30006774:	e3530000 	cmp	r3, #0
+30006778:	0a00003c 	beq	30006870 <buddy_free+0x1f4>
 		level=0;
-30006578:	e3a03000 	mov	r3, #0
-3000657c:	e5cd3012 	strb	r3, [sp, #18]
+3000677c:	e3a03000 	mov	r3, #0
+30006780:	e5cd3012 	strb	r3, [sp, #18]
 		/*下面是地址检查*/
 		index=num>>1;
-30006580:	e59d301c 	ldr	r3, [sp, #28]
-30006584:	e1a030a3 	lsr	r3, r3, #1
-30006588:	e58d3018 	str	r3, [sp, #24]
+30006784:	e59d301c 	ldr	r3, [sp, #28]
+30006788:	e1a030a3 	lsr	r3, r3, #1
+3000678c:	e58d3018 	str	r3, [sp, #24]
 		buddy_level=acoral_mem_blocks[BLOCK_INDEX(num)].level;
-3000658c:	e59f3394 	ldr	r3, [pc, #916]	; 30006928 <buddy_free+0x4b0>
-30006590:	e5932000 	ldr	r2, [r3]
-30006594:	e59d301c 	ldr	r3, [sp, #28]
-30006598:	e1a030a3 	lsr	r3, r3, #1
-3000659c:	e0823003 	add	r3, r2, r3
-300065a0:	e5d33000 	ldrb	r3, [r3]
-300065a4:	e5cd3013 	strb	r3, [sp, #19]
+30006790:	e59f3394 	ldr	r3, [pc, #916]	; 30006b2c <buddy_free+0x4b0>
+30006794:	e5932000 	ldr	r2, [r3]
+30006798:	e59d301c 	ldr	r3, [sp, #28]
+3000679c:	e1a030a3 	lsr	r3, r3, #1
+300067a0:	e0823003 	add	r3, r2, r3
+300067a4:	e5d33000 	ldrb	r3, [r3]
+300067a8:	e5cd3013 	strb	r3, [sp, #19]
 		if(buddy_level>0){
-300065a8:	e1dd31d3 	ldrsb	r3, [sp, #19]
-300065ac:	e3530000 	cmp	r3, #0
-300065b0:	da000005 	ble	300065cc <buddy_free+0x154>
+300067ac:	e1dd31d3 	ldrsb	r3, [sp, #19]
+300067b0:	e3530000 	cmp	r3, #0
+300067b4:	da000005 	ble	300067d0 <buddy_free+0x154>
 			acoral_printerr("Invalid Free Address:0x%x\n",ptr);
-300065b4:	e59f0368 	ldr	r0, [pc, #872]	; 30006924 <buddy_free+0x4ac>
-300065b8:	e59d1004 	ldr	r1, [sp, #4]
-300065bc:	eb001311 	bl	3000b208 <acoral_print>
+300067b8:	e59f0368 	ldr	r0, [pc, #872]	; 30006b28 <buddy_free+0x4ac>
+300067bc:	e59d1004 	ldr	r1, [sp, #4]
+300067c0:	eb001311 	bl	3000b40c <acoral_print>
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
-300065c0:	e59d000c 	ldr	r0, [sp, #12]
-300065c4:	ebffec48 	bl	300016ec <HAL_INTR_RESTORE>
+300067c4:	e59d000c 	ldr	r0, [sp, #12]
+300067c8:	ebffebc7 	bl	300016ec <HAL_INTR_RESTORE>
 			return;
-300065c8:	ea0000d1 	b	30006914 <buddy_free+0x49c>
+300067cc:	ea0000d1 	b	30006b18 <buddy_free+0x49c>
 		}
 		/*伙伴分配出去，如果对应的位为1,肯定是回收过一次了*/
 		if(buddy_level==0&&acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
-300065cc:	e1dd31d3 	ldrsb	r3, [sp, #19]
-300065d0:	e3530000 	cmp	r3, #0
-300065d4:	1a000010 	bne	3000661c <buddy_free+0x1a4>
-300065d8:	e59f3340 	ldr	r3, [pc, #832]	; 30006920 <buddy_free+0x4a8>
-300065dc:	e5933000 	ldr	r3, [r3]
-300065e0:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300065e4:	e282200e 	add	r2, r2, #14
-300065e8:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-300065ec:	e59d0018 	ldr	r0, [sp, #24]
-300065f0:	e1a01003 	mov	r1, r3
-300065f4:	eb000dc0 	bl	30009cfc <acoral_get_bit>
-300065f8:	e1a03000 	mov	r3, r0
-300065fc:	e3530000 	cmp	r3, #0
-30006600:	0a000005 	beq	3000661c <buddy_free+0x1a4>
+300067d0:	e1dd31d3 	ldrsb	r3, [sp, #19]
+300067d4:	e3530000 	cmp	r3, #0
+300067d8:	1a000010 	bne	30006820 <buddy_free+0x1a4>
+300067dc:	e59f3340 	ldr	r3, [pc, #832]	; 30006b24 <buddy_free+0x4a8>
+300067e0:	e5933000 	ldr	r3, [r3]
+300067e4:	e1dd21d2 	ldrsb	r2, [sp, #18]
+300067e8:	e282200e 	add	r2, r2, #14
+300067ec:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+300067f0:	e59d0018 	ldr	r0, [sp, #24]
+300067f4:	e1a01003 	mov	r1, r3
+300067f8:	eb000dc0 	bl	30009f00 <acoral_get_bit>
+300067fc:	e1a03000 	mov	r3, r0
+30006800:	e3530000 	cmp	r3, #0
+30006804:	0a000005 	beq	30006820 <buddy_free+0x1a4>
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-30006604:	e59f0320 	ldr	r0, [pc, #800]	; 3000692c <buddy_free+0x4b4>
-30006608:	e59d1004 	ldr	r1, [sp, #4]
-3000660c:	eb0012fd 	bl	3000b208 <acoral_print>
+30006808:	e59f0320 	ldr	r0, [pc, #800]	; 30006b30 <buddy_free+0x4b4>
+3000680c:	e59d1004 	ldr	r1, [sp, #4]
+30006810:	eb0012fd 	bl	3000b40c <acoral_print>
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
-30006610:	e59d000c 	ldr	r0, [sp, #12]
-30006614:	ebffec34 	bl	300016ec <HAL_INTR_RESTORE>
+30006814:	e59d000c 	ldr	r0, [sp, #12]
+30006818:	ebffebb3 	bl	300016ec <HAL_INTR_RESTORE>
 			return;
-30006618:	ea0000bd 	b	30006914 <buddy_free+0x49c>
+3000681c:	ea0000bd 	b	30006b18 <buddy_free+0x49c>
 		}
 		/*伙伴没有分配出去了，如果对应的位为0,肯定是回收过一次了*/
 		if(buddy_level<0&&!acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
-3000661c:	e1dd31d3 	ldrsb	r3, [sp, #19]
-30006620:	e3530000 	cmp	r3, #0
-30006624:	aa000032 	bge	300066f4 <buddy_free+0x27c>
-30006628:	e59f32f0 	ldr	r3, [pc, #752]	; 30006920 <buddy_free+0x4a8>
-3000662c:	e5933000 	ldr	r3, [r3]
-30006630:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006634:	e282200e 	add	r2, r2, #14
-30006638:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-3000663c:	e59d0018 	ldr	r0, [sp, #24]
-30006640:	e1a01003 	mov	r1, r3
-30006644:	eb000dac 	bl	30009cfc <acoral_get_bit>
-30006648:	e1a03000 	mov	r3, r0
-3000664c:	e3530000 	cmp	r3, #0
-30006650:	1a000029 	bne	300066fc <buddy_free+0x284>
+30006820:	e1dd31d3 	ldrsb	r3, [sp, #19]
+30006824:	e3530000 	cmp	r3, #0
+30006828:	aa000032 	bge	300068f8 <buddy_free+0x27c>
+3000682c:	e59f32f0 	ldr	r3, [pc, #752]	; 30006b24 <buddy_free+0x4a8>
+30006830:	e5933000 	ldr	r3, [r3]
+30006834:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006838:	e282200e 	add	r2, r2, #14
+3000683c:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30006840:	e59d0018 	ldr	r0, [sp, #24]
+30006844:	e1a01003 	mov	r1, r3
+30006848:	eb000dac 	bl	30009f00 <acoral_get_bit>
+3000684c:	e1a03000 	mov	r3, r0
+30006850:	e3530000 	cmp	r3, #0
+30006854:	1a000029 	bne	30006900 <buddy_free+0x284>
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-30006654:	e59f02d0 	ldr	r0, [pc, #720]	; 3000692c <buddy_free+0x4b4>
-30006658:	e59d1004 	ldr	r1, [sp, #4]
-3000665c:	eb0012e9 	bl	3000b208 <acoral_print>
+30006858:	e59f02d0 	ldr	r0, [pc, #720]	; 30006b30 <buddy_free+0x4b4>
+3000685c:	e59d1004 	ldr	r1, [sp, #4]
+30006860:	eb0012e9 	bl	3000b40c <acoral_print>
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
-30006660:	e59d000c 	ldr	r0, [sp, #12]
-30006664:	ebffec20 	bl	300016ec <HAL_INTR_RESTORE>
+30006864:	e59d000c 	ldr	r0, [sp, #12]
+30006868:	ebffeb9f 	bl	300016ec <HAL_INTR_RESTORE>
 			return;
-30006668:	ea0000a9 	b	30006914 <buddy_free+0x49c>
+3000686c:	ea0000a9 	b	30006b18 <buddy_free+0x49c>
 		}
 	}else{
 		level=acoral_mem_blocks[BLOCK_INDEX(num)].level;
-3000666c:	e59f32b4 	ldr	r3, [pc, #692]	; 30006928 <buddy_free+0x4b0>
-30006670:	e5932000 	ldr	r2, [r3]
-30006674:	e59d301c 	ldr	r3, [sp, #28]
-30006678:	e1a030a3 	lsr	r3, r3, #1
-3000667c:	e0823003 	add	r3, r2, r3
-30006680:	e5d33000 	ldrb	r3, [r3]
-30006684:	e5cd3012 	strb	r3, [sp, #18]
+30006870:	e59f32b4 	ldr	r3, [pc, #692]	; 30006b2c <buddy_free+0x4b0>
+30006874:	e5932000 	ldr	r2, [r3]
+30006878:	e59d301c 	ldr	r3, [sp, #28]
+3000687c:	e1a030a3 	lsr	r3, r3, #1
+30006880:	e0823003 	add	r3, r2, r3
+30006884:	e5d33000 	ldrb	r3, [r3]
+30006888:	e5cd3012 	strb	r3, [sp, #18]
 		/*已经释放*/
 		if(level<0){
-30006688:	e1dd31d2 	ldrsb	r3, [sp, #18]
-3000668c:	e3530000 	cmp	r3, #0
-30006690:	aa000005 	bge	300066ac <buddy_free+0x234>
+3000688c:	e1dd31d2 	ldrsb	r3, [sp, #18]
+30006890:	e3530000 	cmp	r3, #0
+30006894:	aa000005 	bge	300068b0 <buddy_free+0x234>
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-30006694:	e59f0290 	ldr	r0, [pc, #656]	; 3000692c <buddy_free+0x4b4>
-30006698:	e59d1004 	ldr	r1, [sp, #4]
-3000669c:	eb0012d9 	bl	3000b208 <acoral_print>
+30006898:	e59f0290 	ldr	r0, [pc, #656]	; 30006b30 <buddy_free+0x4b4>
+3000689c:	e59d1004 	ldr	r1, [sp, #4]
+300068a0:	eb0012d9 	bl	3000b40c <acoral_print>
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
-300066a0:	e59d000c 	ldr	r0, [sp, #12]
-300066a4:	ebffec10 	bl	300016ec <HAL_INTR_RESTORE>
+300068a4:	e59d000c 	ldr	r0, [sp, #12]
+300068a8:	ebffeb8f 	bl	300016ec <HAL_INTR_RESTORE>
 			return;
-300066a8:	ea000099 	b	30006914 <buddy_free+0x49c>
+300068ac:	ea000099 	b	30006b18 <buddy_free+0x49c>
 		}	
 		acoral_mem_ctrl->free_num+=1<<level;
-300066ac:	e59f326c 	ldr	r3, [pc, #620]	; 30006920 <buddy_free+0x4a8>
-300066b0:	e5933000 	ldr	r3, [r3]
-300066b4:	e59f2264 	ldr	r2, [pc, #612]	; 30006920 <buddy_free+0x4a8>
-300066b8:	e5922000 	ldr	r2, [r2]
-300066bc:	e59210f0 	ldr	r1, [r2, #240]	; 0xf0
-300066c0:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300066c4:	e3a00001 	mov	r0, #1
-300066c8:	e1a02210 	lsl	r2, r0, r2
-300066cc:	e0812002 	add	r2, r1, r2
-300066d0:	e58320f0 	str	r2, [r3, #240]	; 0xf0
+300068b0:	e59f326c 	ldr	r3, [pc, #620]	; 30006b24 <buddy_free+0x4a8>
+300068b4:	e5933000 	ldr	r3, [r3]
+300068b8:	e59f2264 	ldr	r2, [pc, #612]	; 30006b24 <buddy_free+0x4a8>
+300068bc:	e5922000 	ldr	r2, [r2]
+300068c0:	e59210f0 	ldr	r1, [r2, #240]	; 0xf0
+300068c4:	e1dd21d2 	ldrsb	r2, [sp, #18]
+300068c8:	e3a00001 	mov	r0, #1
+300068cc:	e1a02210 	lsl	r2, r0, r2
+300068d0:	e0812002 	add	r2, r1, r2
+300068d4:	e58320f0 	str	r2, [r3, #240]	; 0xf0
 		acoral_mem_blocks[BLOCK_INDEX(num)].level=-1;
-300066d4:	e59f324c 	ldr	r3, [pc, #588]	; 30006928 <buddy_free+0x4b0>
-300066d8:	e5932000 	ldr	r2, [r3]
-300066dc:	e59d301c 	ldr	r3, [sp, #28]
-300066e0:	e1a030a3 	lsr	r3, r3, #1
-300066e4:	e0823003 	add	r3, r2, r3
-300066e8:	e3e02000 	mvn	r2, #0
-300066ec:	e5c32000 	strb	r2, [r3]
-300066f0:	ea000002 	b	30006700 <buddy_free+0x288>
+300068d8:	e59f324c 	ldr	r3, [pc, #588]	; 30006b2c <buddy_free+0x4b0>
+300068dc:	e5932000 	ldr	r2, [r3]
+300068e0:	e59d301c 	ldr	r3, [sp, #28]
+300068e4:	e1a030a3 	lsr	r3, r3, #1
+300068e8:	e0823003 	add	r3, r2, r3
+300068ec:	e3e02000 	mvn	r2, #0
+300068f0:	e5c32000 	strb	r2, [r3]
+300068f4:	ea000002 	b	30006904 <buddy_free+0x288>
 		/*伙伴没有分配出去了，如果对应的位为0,肯定是回收过一次了*/
 		if(buddy_level<0&&!acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
 			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return;
-300066f4:	e1a00000 	nop			; (mov r0, r0)
-300066f8:	ea000000 	b	30006700 <buddy_free+0x288>
-300066fc:	e1a00000 	nop			; (mov r0, r0)
+300068f8:	e1a00000 	nop			; (mov r0, r0)
+300068fc:	ea000000 	b	30006904 <buddy_free+0x288>
+30006900:	e1a00000 	nop			; (mov r0, r0)
 		acoral_mem_blocks[BLOCK_INDEX(num)].level=-1;
 	}
 #ifdef CFG_TEST
 	acoral_print("Free-level:%d,num:%d\n",level,num);
 #endif
 	if(level==max_level-1){
-30006700:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006704:	e59d3020 	ldr	r3, [sp, #32]
-30006708:	e2433001 	sub	r3, r3, #1
-3000670c:	e1520003 	cmp	r2, r3
-30006710:	1a00000e 	bne	30006750 <buddy_free+0x2d8>
+30006904:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006908:	e59d3020 	ldr	r3, [sp, #32]
+3000690c:	e2433001 	sub	r3, r3, #1
+30006910:	e1520003 	cmp	r2, r3
+30006914:	1a00000e 	bne	30006954 <buddy_free+0x2d8>
 		index=num>>level;
-30006714:	e1dd31d2 	ldrsb	r3, [sp, #18]
-30006718:	e59d201c 	ldr	r2, [sp, #28]
-3000671c:	e1a03332 	lsr	r3, r2, r3
-30006720:	e58d3018 	str	r3, [sp, #24]
+30006918:	e1dd31d2 	ldrsb	r3, [sp, #18]
+3000691c:	e59d201c 	ldr	r2, [sp, #28]
+30006920:	e1a03332 	lsr	r3, r2, r3
+30006924:	e58d3018 	str	r3, [sp, #24]
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
-30006724:	e59f31f4 	ldr	r3, [pc, #500]	; 30006920 <buddy_free+0x4a8>
-30006728:	e5933000 	ldr	r3, [r3]
-3000672c:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006730:	e282200e 	add	r2, r2, #14
-30006734:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30006738:	e59d0018 	ldr	r0, [sp, #24]
-3000673c:	e1a01003 	mov	r1, r3
-30006740:	eb000d3c 	bl	30009c38 <acoral_set_bit>
+30006928:	e59f31f4 	ldr	r3, [pc, #500]	; 30006b24 <buddy_free+0x4a8>
+3000692c:	e5933000 	ldr	r3, [r3]
+30006930:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006934:	e282200e 	add	r2, r2, #14
+30006938:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+3000693c:	e59d0018 	ldr	r0, [sp, #24]
+30006940:	e1a01003 	mov	r1, r3
+30006944:	eb000d3c 	bl	30009e3c <acoral_set_bit>
 		HAL_EXIT_CRITICAL();
-30006744:	e59d000c 	ldr	r0, [sp, #12]
-30006748:	ebffebe7 	bl	300016ec <HAL_INTR_RESTORE>
+30006948:	e59d000c 	ldr	r0, [sp, #12]
+3000694c:	ebffeb66 	bl	300016ec <HAL_INTR_RESTORE>
 		acoral_spin_unlock(&acoral_mem_ctrl->lock);
 		return;
-3000674c:	ea000070 	b	30006914 <buddy_free+0x49c>
+30006950:	ea000070 	b	30006b18 <buddy_free+0x49c>
 	}
 	index=num>>1+level;
-30006750:	e1dd31d2 	ldrsb	r3, [sp, #18]
-30006754:	e2833001 	add	r3, r3, #1
-30006758:	e59d201c 	ldr	r2, [sp, #28]
-3000675c:	e1a03332 	lsr	r3, r2, r3
-30006760:	e58d3018 	str	r3, [sp, #24]
+30006954:	e1dd31d2 	ldrsb	r3, [sp, #18]
+30006958:	e2833001 	add	r3, r3, #1
+3000695c:	e59d201c 	ldr	r2, [sp, #28]
+30006960:	e1a03332 	lsr	r3, r2, r3
+30006964:	e58d3018 	str	r3, [sp, #24]
 	while(level<max_level){
-30006764:	ea000060 	b	300068ec <buddy_free+0x474>
+30006968:	ea000060 	b	30006af0 <buddy_free+0x474>
 		cur=index/32;
-30006768:	e59d3018 	ldr	r3, [sp, #24]
-3000676c:	e1a032a3 	lsr	r3, r3, #5
-30006770:	e58d3014 	str	r3, [sp, #20]
+3000696c:	e59d3018 	ldr	r3, [sp, #24]
+30006970:	e1a032a3 	lsr	r3, r3, #5
+30006974:	e58d3014 	str	r3, [sp, #20]
 		if(!acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
-30006774:	e59f31a4 	ldr	r3, [pc, #420]	; 30006920 <buddy_free+0x4a8>
-30006778:	e5933000 	ldr	r3, [r3]
-3000677c:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006780:	e282200e 	add	r2, r2, #14
-30006784:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30006788:	e59d0018 	ldr	r0, [sp, #24]
-3000678c:	e1a01003 	mov	r1, r3
-30006790:	eb000d59 	bl	30009cfc <acoral_get_bit>
-30006794:	e1a03000 	mov	r3, r0
-30006798:	e3530000 	cmp	r3, #0
-3000679c:	1a00002a 	bne	3000684c <buddy_free+0x3d4>
+30006978:	e59f31a4 	ldr	r3, [pc, #420]	; 30006b24 <buddy_free+0x4a8>
+3000697c:	e5933000 	ldr	r3, [r3]
+30006980:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006984:	e282200e 	add	r2, r2, #14
+30006988:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+3000698c:	e59d0018 	ldr	r0, [sp, #24]
+30006990:	e1a01003 	mov	r1, r3
+30006994:	eb000d59 	bl	30009f00 <acoral_get_bit>
+30006998:	e1a03000 	mov	r3, r0
+3000699c:	e3530000 	cmp	r3, #0
+300069a0:	1a00002a 	bne	30006a50 <buddy_free+0x3d4>
 			acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
-300067a0:	e59f3178 	ldr	r3, [pc, #376]	; 30006920 <buddy_free+0x4a8>
-300067a4:	e5933000 	ldr	r3, [r3]
-300067a8:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300067ac:	e282200e 	add	r2, r2, #14
-300067b0:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-300067b4:	e59d0018 	ldr	r0, [sp, #24]
-300067b8:	e1a01003 	mov	r1, r3
-300067bc:	eb000d1d 	bl	30009c38 <acoral_set_bit>
+300069a4:	e59f3178 	ldr	r3, [pc, #376]	; 30006b24 <buddy_free+0x4a8>
+300069a8:	e5933000 	ldr	r3, [r3]
+300069ac:	e1dd21d2 	ldrsb	r2, [sp, #18]
+300069b0:	e282200e 	add	r2, r2, #14
+300069b4:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+300069b8:	e59d0018 	ldr	r0, [sp, #24]
+300069bc:	e1a01003 	mov	r1, r3
+300069c0:	eb000d1d 	bl	30009e3c <acoral_set_bit>
 			if(acoral_mem_ctrl->free_cur[level]<0||cur<acoral_mem_ctrl->free_cur[level]){
-300067c0:	e59f3158 	ldr	r3, [pc, #344]	; 30006920 <buddy_free+0x4a8>
-300067c4:	e5933000 	ldr	r3, [r3]
-300067c8:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300067cc:	e282201c 	add	r2, r2, #28
-300067d0:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-300067d4:	e3530000 	cmp	r3, #0
-300067d8:	ba000007 	blt	300067fc <buddy_free+0x384>
-300067dc:	e59f313c 	ldr	r3, [pc, #316]	; 30006920 <buddy_free+0x4a8>
-300067e0:	e5933000 	ldr	r3, [r3]
-300067e4:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300067e8:	e282201c 	add	r2, r2, #28
-300067ec:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-300067f0:	e59d3014 	ldr	r3, [sp, #20]
-300067f4:	e1520003 	cmp	r2, r3
-300067f8:	da000040 	ble	30006900 <buddy_free+0x488>
+300069c4:	e59f3158 	ldr	r3, [pc, #344]	; 30006b24 <buddy_free+0x4a8>
+300069c8:	e5933000 	ldr	r3, [r3]
+300069cc:	e1dd21d2 	ldrsb	r2, [sp, #18]
+300069d0:	e282201c 	add	r2, r2, #28
+300069d4:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+300069d8:	e3530000 	cmp	r3, #0
+300069dc:	ba000007 	blt	30006a00 <buddy_free+0x384>
+300069e0:	e59f313c 	ldr	r3, [pc, #316]	; 30006b24 <buddy_free+0x4a8>
+300069e4:	e5933000 	ldr	r3, [r3]
+300069e8:	e1dd21d2 	ldrsb	r2, [sp, #18]
+300069ec:	e282201c 	add	r2, r2, #28
+300069f0:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+300069f4:	e59d3014 	ldr	r3, [sp, #20]
+300069f8:	e1520003 	cmp	r2, r3
+300069fc:	da000040 	ble	30006b04 <buddy_free+0x488>
 				acoral_mem_ctrl->free_list[level][cur]=acoral_mem_ctrl->free_cur[level];	
-300067fc:	e59f311c 	ldr	r3, [pc, #284]	; 30006920 <buddy_free+0x4a8>
-30006800:	e5933000 	ldr	r3, [r3]
-30006804:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006808:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-3000680c:	e59d3014 	ldr	r3, [sp, #20]
-30006810:	e1a03103 	lsl	r3, r3, #2
-30006814:	e0823003 	add	r3, r2, r3
-30006818:	e59f2100 	ldr	r2, [pc, #256]	; 30006920 <buddy_free+0x4a8>
-3000681c:	e5922000 	ldr	r2, [r2]
-30006820:	e1dd11d2 	ldrsb	r1, [sp, #18]
-30006824:	e281101c 	add	r1, r1, #28
-30006828:	e7922101 	ldr	r2, [r2, r1, lsl #2]
-3000682c:	e5832000 	str	r2, [r3]
+30006a00:	e59f311c 	ldr	r3, [pc, #284]	; 30006b24 <buddy_free+0x4a8>
+30006a04:	e5933000 	ldr	r3, [r3]
+30006a08:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006a0c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30006a10:	e59d3014 	ldr	r3, [sp, #20]
+30006a14:	e1a03103 	lsl	r3, r3, #2
+30006a18:	e0823003 	add	r3, r2, r3
+30006a1c:	e59f2100 	ldr	r2, [pc, #256]	; 30006b24 <buddy_free+0x4a8>
+30006a20:	e5922000 	ldr	r2, [r2]
+30006a24:	e1dd11d2 	ldrsb	r1, [sp, #18]
+30006a28:	e281101c 	add	r1, r1, #28
+30006a2c:	e7922101 	ldr	r2, [r2, r1, lsl #2]
+30006a30:	e5832000 	str	r2, [r3]
 				acoral_mem_ctrl->free_cur[level]=cur;	
-30006830:	e59f30e8 	ldr	r3, [pc, #232]	; 30006920 <buddy_free+0x4a8>
-30006834:	e5933000 	ldr	r3, [r3]
-30006838:	e1dd21d2 	ldrsb	r2, [sp, #18]
-3000683c:	e282201c 	add	r2, r2, #28
-30006840:	e59d1014 	ldr	r1, [sp, #20]
-30006844:	e7831102 	str	r1, [r3, r2, lsl #2]
+30006a34:	e59f30e8 	ldr	r3, [pc, #232]	; 30006b24 <buddy_free+0x4a8>
+30006a38:	e5933000 	ldr	r3, [r3]
+30006a3c:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006a40:	e282201c 	add	r2, r2, #28
+30006a44:	e59d1014 	ldr	r1, [sp, #20]
+30006a48:	e7831102 	str	r1, [r3, r2, lsl #2]
 			}
 			break;
-30006848:	ea00002d 	b	30006904 <buddy_free+0x48c>
+30006a4c:	ea00002d 	b	30006b08 <buddy_free+0x48c>
 		}
 		/*有个伙伴是空闲的，向上级回收*/
 		acoral_clear_bit(index,acoral_mem_ctrl->bitmap[level]);
-3000684c:	e59f30cc 	ldr	r3, [pc, #204]	; 30006920 <buddy_free+0x4a8>
-30006850:	e5933000 	ldr	r3, [r3]
-30006854:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006858:	e282200e 	add	r2, r2, #14
-3000685c:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-30006860:	e59d0018 	ldr	r0, [sp, #24]
-30006864:	e1a01003 	mov	r1, r3
-30006868:	eb000d0a 	bl	30009c98 <acoral_clear_bit>
+30006a50:	e59f30cc 	ldr	r3, [pc, #204]	; 30006b24 <buddy_free+0x4a8>
+30006a54:	e5933000 	ldr	r3, [r3]
+30006a58:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006a5c:	e282200e 	add	r2, r2, #14
+30006a60:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+30006a64:	e59d0018 	ldr	r0, [sp, #24]
+30006a68:	e1a01003 	mov	r1, r3
+30006a6c:	eb000d0a 	bl	30009e9c <acoral_clear_bit>
 		if(cur==acoral_mem_ctrl->free_cur[level])
-3000686c:	e59f30ac 	ldr	r3, [pc, #172]	; 30006920 <buddy_free+0x4a8>
-30006870:	e5933000 	ldr	r3, [r3]
-30006874:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006878:	e282201c 	add	r2, r2, #28
-3000687c:	e7932102 	ldr	r2, [r3, r2, lsl #2]
-30006880:	e59d3014 	ldr	r3, [sp, #20]
-30006884:	e1520003 	cmp	r2, r3
-30006888:	1a00000c 	bne	300068c0 <buddy_free+0x448>
+30006a70:	e59f30ac 	ldr	r3, [pc, #172]	; 30006b24 <buddy_free+0x4a8>
+30006a74:	e5933000 	ldr	r3, [r3]
+30006a78:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006a7c:	e282201c 	add	r2, r2, #28
+30006a80:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+30006a84:	e59d3014 	ldr	r3, [sp, #20]
+30006a88:	e1520003 	cmp	r2, r3
+30006a8c:	1a00000c 	bne	30006ac4 <buddy_free+0x448>
 			acoral_mem_ctrl->free_cur[level]=acoral_mem_ctrl->free_list[level][cur];	
-3000688c:	e59f308c 	ldr	r3, [pc, #140]	; 30006920 <buddy_free+0x4a8>
-30006890:	e5933000 	ldr	r3, [r3]
-30006894:	e1dd21d2 	ldrsb	r2, [sp, #18]
-30006898:	e59f1080 	ldr	r1, [pc, #128]	; 30006920 <buddy_free+0x4a8>
-3000689c:	e5911000 	ldr	r1, [r1]
-300068a0:	e1dd01d2 	ldrsb	r0, [sp, #18]
-300068a4:	e7910100 	ldr	r0, [r1, r0, lsl #2]
-300068a8:	e59d1014 	ldr	r1, [sp, #20]
-300068ac:	e1a01101 	lsl	r1, r1, #2
-300068b0:	e0801001 	add	r1, r0, r1
-300068b4:	e5911000 	ldr	r1, [r1]
-300068b8:	e282201c 	add	r2, r2, #28
-300068bc:	e7831102 	str	r1, [r3, r2, lsl #2]
+30006a90:	e59f308c 	ldr	r3, [pc, #140]	; 30006b24 <buddy_free+0x4a8>
+30006a94:	e5933000 	ldr	r3, [r3]
+30006a98:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006a9c:	e59f1080 	ldr	r1, [pc, #128]	; 30006b24 <buddy_free+0x4a8>
+30006aa0:	e5911000 	ldr	r1, [r1]
+30006aa4:	e1dd01d2 	ldrsb	r0, [sp, #18]
+30006aa8:	e7910100 	ldr	r0, [r1, r0, lsl #2]
+30006aac:	e59d1014 	ldr	r1, [sp, #20]
+30006ab0:	e1a01101 	lsl	r1, r1, #2
+30006ab4:	e0801001 	add	r1, r0, r1
+30006ab8:	e5911000 	ldr	r1, [r1]
+30006abc:	e282201c 	add	r2, r2, #28
+30006ac0:	e7831102 	str	r1, [r3, r2, lsl #2]
 		level++;
-300068c0:	e5dd3012 	ldrb	r3, [sp, #18]
-300068c4:	e2833001 	add	r3, r3, #1
-300068c8:	e5cd3012 	strb	r3, [sp, #18]
+30006ac4:	e5dd3012 	ldrb	r3, [sp, #18]
+30006ac8:	e2833001 	add	r3, r3, #1
+30006acc:	e5cd3012 	strb	r3, [sp, #18]
 		if(level<max_level-1)
-300068cc:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300068d0:	e59d3020 	ldr	r3, [sp, #32]
-300068d4:	e2433001 	sub	r3, r3, #1
-300068d8:	e1520003 	cmp	r2, r3
-300068dc:	2a000002 	bcs	300068ec <buddy_free+0x474>
+30006ad0:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006ad4:	e59d3020 	ldr	r3, [sp, #32]
+30006ad8:	e2433001 	sub	r3, r3, #1
+30006adc:	e1520003 	cmp	r2, r3
+30006ae0:	2a000002 	bcs	30006af0 <buddy_free+0x474>
 			index=index>>1;
-300068e0:	e59d3018 	ldr	r3, [sp, #24]
-300068e4:	e1a030a3 	lsr	r3, r3, #1
-300068e8:	e58d3018 	str	r3, [sp, #24]
+30006ae4:	e59d3018 	ldr	r3, [sp, #24]
+30006ae8:	e1a030a3 	lsr	r3, r3, #1
+30006aec:	e58d3018 	str	r3, [sp, #24]
 		HAL_EXIT_CRITICAL();
 		acoral_spin_unlock(&acoral_mem_ctrl->lock);
 		return;
 	}
 	index=num>>1+level;
 	while(level<max_level){
-300068ec:	e1dd21d2 	ldrsb	r2, [sp, #18]
-300068f0:	e59d3020 	ldr	r3, [sp, #32]
-300068f4:	e1520003 	cmp	r2, r3
-300068f8:	3affff9a 	bcc	30006768 <buddy_free+0x2f0>
-300068fc:	ea000000 	b	30006904 <buddy_free+0x48c>
+30006af0:	e1dd21d2 	ldrsb	r2, [sp, #18]
+30006af4:	e59d3020 	ldr	r3, [sp, #32]
+30006af8:	e1520003 	cmp	r2, r3
+30006afc:	3affff9a 	bcc	3000696c <buddy_free+0x2f0>
+30006b00:	ea000000 	b	30006b08 <buddy_free+0x48c>
 			acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
 			if(acoral_mem_ctrl->free_cur[level]<0||cur<acoral_mem_ctrl->free_cur[level]){
 				acoral_mem_ctrl->free_list[level][cur]=acoral_mem_ctrl->free_cur[level];	
 				acoral_mem_ctrl->free_cur[level]=cur;	
 			}
 			break;
-30006900:	e1a00000 	nop			; (mov r0, r0)
+30006b04:	e1a00000 	nop			; (mov r0, r0)
 			acoral_mem_ctrl->free_cur[level]=acoral_mem_ctrl->free_list[level][cur];	
 		level++;
 		if(level<max_level-1)
 			index=index>>1;
 	}
 	HAL_EXIT_CRITICAL();
-30006904:	e59d000c 	ldr	r0, [sp, #12]
-30006908:	ebffeb77 	bl	300016ec <HAL_INTR_RESTORE>
-3000690c:	ea000000 	b	30006914 <buddy_free+0x49c>
+30006b08:	e59d000c 	ldr	r0, [sp, #12]
+30006b0c:	ebffeaf6 	bl	300016ec <HAL_INTR_RESTORE>
+30006b10:	ea000000 	b	30006b18 <buddy_free+0x49c>
 	acoral_u32 num;
 	acoral_u32 max_level;
 	acoral_u32 adr;
 	adr=(acoral_u32)ptr;
 	if(acoral_mem_ctrl->state==MEM_NO_ALLOC)
 		return;
-30006910:	e1a00000 	nop			; (mov r0, r0)
+30006b14:	e1a00000 	nop			; (mov r0, r0)
 	HAL_EXIT_CRITICAL();
 	acoral_spin_unlock(&acoral_mem_ctrl->lock);
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif
 }
-30006914:	e28dd02c 	add	sp, sp, #44	; 0x2c
-30006918:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000691c:	e12fff1e 	bx	lr
-30006920:	30010344 	.word	0x30010344
-30006924:	3000e420 	.word	0x3000e420
-30006928:	3000fa98 	.word	0x3000fa98
-3000692c:	3000e43c 	.word	0x3000e43c
+30006b18:	e28dd02c 	add	sp, sp, #44	; 0x2c
+30006b1c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30006b20:	e12fff1e 	bx	lr
+30006b24:	30010550 	.word	0x30010550
+30006b28:	3000e624 	.word	0x3000e624
+30006b2c:	3000fca4 	.word	0x3000fca4
+30006b30:	3000e640 	.word	0x3000e640
 
-30006930 <r_malloc>:
+30006b34 <r_malloc>:
 	acoral_u32 alloc_size;
 #endif
 	acoral_u8 mem_state;
 }mem_ctrl;
 
 static void *r_malloc(acoral_32 size){
-30006930:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30006934:	e24dd01c 	sub	sp, sp, #28
-30006938:	e58d0004 	str	r0, [sp, #4]
+30006b34:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30006b38:	e24dd01c 	sub	sp, sp, #28
+30006b3c:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 * tp;
 	acoral_8 * ctp;
 	acoral_u32 b_size;
 	size=size+4;
-3000693c:	e59d3004 	ldr	r3, [sp, #4]
-30006940:	e2833004 	add	r3, r3, #4
-30006944:	e58d3004 	str	r3, [sp, #4]
+30006b40:	e59d3004 	ldr	r3, [sp, #4]
+30006b44:	e2833004 	add	r3, r3, #4
+30006b48:	e58d3004 	str	r3, [sp, #4]
 	while(acoral_mutex_pend(&mem_ctrl.mutex, 0)!=MUTEX_SUCCED)
-30006948:	ea000000 	b	30006950 <r_malloc+0x20>
+30006b4c:	ea000000 	b	30006b54 <r_malloc+0x20>
 		acoral_suspend_self();
-3000694c:	ebffef98 	bl	300027b4 <acoral_suspend_self>
+30006b50:	ebffef17 	bl	300027b4 <acoral_suspend_self>
 static void *r_malloc(acoral_32 size){
 	acoral_u32 * tp;
 	acoral_8 * ctp;
 	acoral_u32 b_size;
 	size=size+4;
 	while(acoral_mutex_pend(&mem_ctrl.mutex, 0)!=MUTEX_SUCCED)
-30006950:	e59f0284 	ldr	r0, [pc, #644]	; 30006bdc <r_malloc+0x2ac>
-30006954:	e3a01000 	mov	r1, #0
-30006958:	ebfff9a2 	bl	30004fe8 <acoral_mutex_pend>
-3000695c:	e1a03000 	mov	r3, r0
-30006960:	e3530000 	cmp	r3, #0
-30006964:	1afffff8 	bne	3000694c <r_malloc+0x1c>
+30006b54:	e59f0284 	ldr	r0, [pc, #644]	; 30006de0 <r_malloc+0x2ac>
+30006b58:	e3a01000 	mov	r1, #0
+30006b5c:	ebfff921 	bl	30004fe8 <acoral_mutex_pend>
+30006b60:	e1a03000 	mov	r3, r0
+30006b64:	e3530000 	cmp	r3, #0
+30006b68:	1afffff8 	bne	30006b50 <r_malloc+0x1c>
 #ifdef CFG_TEST
 	mem_ctrl.alloc_size+=size;
 	mem_ctrl.alloc_num++;
 	acoral_print("In malloc:%d\n",size);
 #endif
 	tp=mem_ctrl.freep_p;
-30006968:	e59f326c 	ldr	r3, [pc, #620]	; 30006bdc <r_malloc+0x2ac>
-3000696c:	e593302c 	ldr	r3, [r3, #44]	; 0x2c
-30006970:	e58d300c 	str	r3, [sp, #12]
+30006b6c:	e59f326c 	ldr	r3, [pc, #620]	; 30006de0 <r_malloc+0x2ac>
+30006b70:	e593302c 	ldr	r3, [r3, #44]	; 0x2c
+30006b74:	e58d300c 	str	r3, [sp, #12]
 	ctp=(acoral_8 *)tp;
-30006974:	e59d300c 	ldr	r3, [sp, #12]
-30006978:	e58d3010 	str	r3, [sp, #16]
+30006b78:	e59d300c 	ldr	r3, [sp, #12]
+30006b7c:	e58d3010 	str	r3, [sp, #16]
 	while(ctp<mem_ctrl.top_p){
-3000697c:	ea00003f 	b	30006a80 <r_malloc+0x150>
+30006b80:	ea00003f 	b	30006c84 <r_malloc+0x150>
              b_size=BLOCK_SIZE(*tp);
-30006980:	e59d300c 	ldr	r3, [sp, #12]
-30006984:	e5933000 	ldr	r3, [r3]
-30006988:	e1a03423 	lsr	r3, r3, #8
-3000698c:	e58d3014 	str	r3, [sp, #20]
+30006b84:	e59d300c 	ldr	r3, [sp, #12]
+30006b88:	e5933000 	ldr	r3, [r3]
+30006b8c:	e1a03423 	lsr	r3, r3, #8
+30006b90:	e58d3014 	str	r3, [sp, #20]
 	     if(b_size==0){
-30006990:	e59d3014 	ldr	r3, [sp, #20]
-30006994:	e3530000 	cmp	r3, #0
-30006998:	1a000006 	bne	300069b8 <r_malloc+0x88>
+30006b94:	e59d3014 	ldr	r3, [sp, #20]
+30006b98:	e3530000 	cmp	r3, #0
+30006b9c:	1a000006 	bne	30006bbc <r_malloc+0x88>
 			acoral_printerr("Err address is 0x%x,size should not be 0",tp);
-3000699c:	e59f023c 	ldr	r0, [pc, #572]	; 30006be0 <r_malloc+0x2b0>
-300069a0:	e59d100c 	ldr	r1, [sp, #12]
-300069a4:	eb001217 	bl	3000b208 <acoral_print>
+30006ba0:	e59f023c 	ldr	r0, [pc, #572]	; 30006de4 <r_malloc+0x2b0>
+30006ba4:	e59d100c 	ldr	r1, [sp, #12]
+30006ba8:	eb001217 	bl	3000b40c <acoral_print>
 			acoral_mutex_post(&mem_ctrl.mutex);
-300069a8:	e59f022c 	ldr	r0, [pc, #556]	; 30006bdc <r_malloc+0x2ac>
-300069ac:	ebfffa1e 	bl	3000522c <acoral_mutex_post>
+30006bac:	e59f022c 	ldr	r0, [pc, #556]	; 30006de0 <r_malloc+0x2ac>
+30006bb0:	ebfffa1e 	bl	30005430 <acoral_mutex_post>
 			return NULL;
-300069b0:	e3a03000 	mov	r3, #0
-300069b4:	ea000084 	b	30006bcc <r_malloc+0x29c>
+30006bb4:	e3a03000 	mov	r3, #0
+30006bb8:	ea000084 	b	30006dd0 <r_malloc+0x29c>
 	     }
 	     if(BLOCK_USED(*tp)||b_size<size){
-300069b8:	e59d300c 	ldr	r3, [sp, #12]
-300069bc:	e5933000 	ldr	r3, [r3]
-300069c0:	e2033001 	and	r3, r3, #1
-300069c4:	e20330ff 	and	r3, r3, #255	; 0xff
-300069c8:	e3530000 	cmp	r3, #0
-300069cc:	1a000003 	bne	300069e0 <r_malloc+0xb0>
-300069d0:	e59d2004 	ldr	r2, [sp, #4]
-300069d4:	e59d3014 	ldr	r3, [sp, #20]
-300069d8:	e1520003 	cmp	r2, r3
-300069dc:	9a000006 	bls	300069fc <r_malloc+0xcc>
+30006bbc:	e59d300c 	ldr	r3, [sp, #12]
+30006bc0:	e5933000 	ldr	r3, [r3]
+30006bc4:	e2033001 	and	r3, r3, #1
+30006bc8:	e20330ff 	and	r3, r3, #255	; 0xff
+30006bcc:	e3530000 	cmp	r3, #0
+30006bd0:	1a000003 	bne	30006be4 <r_malloc+0xb0>
+30006bd4:	e59d2004 	ldr	r2, [sp, #4]
+30006bd8:	e59d3014 	ldr	r3, [sp, #20]
+30006bdc:	e1520003 	cmp	r2, r3
+30006be0:	9a000006 	bls	30006c00 <r_malloc+0xcc>
         	ctp=ctp+b_size;
-300069e0:	e59d2010 	ldr	r2, [sp, #16]
-300069e4:	e59d3014 	ldr	r3, [sp, #20]
-300069e8:	e0823003 	add	r3, r2, r3
-300069ec:	e58d3010 	str	r3, [sp, #16]
+30006be4:	e59d2010 	ldr	r2, [sp, #16]
+30006be8:	e59d3014 	ldr	r3, [sp, #20]
+30006bec:	e0823003 	add	r3, r2, r3
+30006bf0:	e58d3010 	str	r3, [sp, #16]
 		tp=(acoral_u32 *)ctp;
-300069f0:	e59d3010 	ldr	r3, [sp, #16]
-300069f4:	e58d300c 	str	r3, [sp, #12]
+30006bf4:	e59d3010 	ldr	r3, [sp, #16]
+30006bf8:	e58d300c 	str	r3, [sp, #12]
 	     if(b_size==0){
 			acoral_printerr("Err address is 0x%x,size should not be 0",tp);
 			acoral_mutex_post(&mem_ctrl.mutex);
 			return NULL;
 	     }
 	     if(BLOCK_USED(*tp)||b_size<size){
-300069f8:	ea000020 	b	30006a80 <r_malloc+0x150>
+30006bfc:	ea000020 	b	30006c84 <r_malloc+0x150>
         	ctp=ctp+b_size;
 		tp=(acoral_u32 *)ctp;
 	     }
 	     else
 	     {
 		BLOCK_SET_USED(tp,size);
-300069fc:	e59d3004 	ldr	r3, [sp, #4]
-30006a00:	e1a03403 	lsl	r3, r3, #8
-30006a04:	e38330cd 	orr	r3, r3, #205	; 0xcd
-30006a08:	e1a02003 	mov	r2, r3
-30006a0c:	e59d300c 	ldr	r3, [sp, #12]
-30006a10:	e5832000 	str	r2, [r3]
+30006c00:	e59d3004 	ldr	r3, [sp, #4]
+30006c04:	e1a03403 	lsl	r3, r3, #8
+30006c08:	e38330cd 	orr	r3, r3, #205	; 0xcd
+30006c0c:	e1a02003 	mov	r2, r3
+30006c10:	e59d300c 	ldr	r3, [sp, #12]
+30006c14:	e5832000 	str	r2, [r3]
 		ctp=ctp+size;
-30006a14:	e59d3004 	ldr	r3, [sp, #4]
-30006a18:	e59d2010 	ldr	r2, [sp, #16]
-30006a1c:	e0823003 	add	r3, r2, r3
-30006a20:	e58d3010 	str	r3, [sp, #16]
+30006c18:	e59d3004 	ldr	r3, [sp, #4]
+30006c1c:	e59d2010 	ldr	r2, [sp, #16]
+30006c20:	e0823003 	add	r3, r2, r3
+30006c24:	e58d3010 	str	r3, [sp, #16]
 		tp=(acoral_u32 *)ctp;
-30006a24:	e59d3010 	ldr	r3, [sp, #16]
-30006a28:	e58d300c 	str	r3, [sp, #12]
+30006c28:	e59d3010 	ldr	r3, [sp, #16]
+30006c2c:	e58d300c 	str	r3, [sp, #12]
 		if(b_size-size>0)
-30006a2c:	e59d2004 	ldr	r2, [sp, #4]
-30006a30:	e59d3014 	ldr	r3, [sp, #20]
-30006a34:	e1520003 	cmp	r2, r3
-30006a38:	0a000006 	beq	30006a58 <r_malloc+0x128>
+30006c30:	e59d2004 	ldr	r2, [sp, #4]
+30006c34:	e59d3014 	ldr	r3, [sp, #20]
+30006c38:	e1520003 	cmp	r2, r3
+30006c3c:	0a000006 	beq	30006c5c <r_malloc+0x128>
 			BLOCK_SET_FREE(tp,b_size-size);
-30006a3c:	e59d3004 	ldr	r3, [sp, #4]
-30006a40:	e59d2014 	ldr	r2, [sp, #20]
-30006a44:	e0633002 	rsb	r3, r3, r2
-30006a48:	e1a03403 	lsl	r3, r3, #8
-30006a4c:	e38320cc 	orr	r2, r3, #204	; 0xcc
-30006a50:	e59d300c 	ldr	r3, [sp, #12]
-30006a54:	e5832000 	str	r2, [r3]
+30006c40:	e59d3004 	ldr	r3, [sp, #4]
+30006c44:	e59d2014 	ldr	r2, [sp, #20]
+30006c48:	e0633002 	rsb	r3, r3, r2
+30006c4c:	e1a03403 	lsl	r3, r3, #8
+30006c50:	e38320cc 	orr	r2, r3, #204	; 0xcc
+30006c54:	e59d300c 	ldr	r3, [sp, #12]
+30006c58:	e5832000 	str	r2, [r3]
 		mem_ctrl.freep_p=tp;
-30006a58:	e59f317c 	ldr	r3, [pc, #380]	; 30006bdc <r_malloc+0x2ac>
-30006a5c:	e59d200c 	ldr	r2, [sp, #12]
-30006a60:	e583202c 	str	r2, [r3, #44]	; 0x2c
+30006c5c:	e59f317c 	ldr	r3, [pc, #380]	; 30006de0 <r_malloc+0x2ac>
+30006c60:	e59d200c 	ldr	r2, [sp, #12]
+30006c64:	e583202c 	str	r2, [r3, #44]	; 0x2c
 #ifdef CFG_TEST_MEM2
 		acoral_print("After malloc\n");
 		v_mem_scan();
 		acoral_print("...................\n");
 #endif
 		acoral_mutex_post(&mem_ctrl.mutex);
-30006a64:	e59f0170 	ldr	r0, [pc, #368]	; 30006bdc <r_malloc+0x2ac>
-30006a68:	ebfff9ef 	bl	3000522c <acoral_mutex_post>
+30006c68:	e59f0170 	ldr	r0, [pc, #368]	; 30006de0 <r_malloc+0x2ac>
+30006c6c:	ebfff9ef 	bl	30005430 <acoral_mutex_post>
 	        return (void *)(ctp-size+4);	
-30006a6c:	e59d3004 	ldr	r3, [sp, #4]
-30006a70:	e2632004 	rsb	r2, r3, #4
-30006a74:	e59d3010 	ldr	r3, [sp, #16]
-30006a78:	e0823003 	add	r3, r2, r3
-30006a7c:	ea000052 	b	30006bcc <r_malloc+0x29c>
+30006c70:	e59d3004 	ldr	r3, [sp, #4]
+30006c74:	e2632004 	rsb	r2, r3, #4
+30006c78:	e59d3010 	ldr	r3, [sp, #16]
+30006c7c:	e0823003 	add	r3, r2, r3
+30006c80:	ea000052 	b	30006dd0 <r_malloc+0x29c>
 	mem_ctrl.alloc_num++;
 	acoral_print("In malloc:%d\n",size);
 #endif
 	tp=mem_ctrl.freep_p;
 	ctp=(acoral_8 *)tp;
 	while(ctp<mem_ctrl.top_p){
-30006a80:	e59f3154 	ldr	r3, [pc, #340]	; 30006bdc <r_malloc+0x2ac>
-30006a84:	e5932024 	ldr	r2, [r3, #36]	; 0x24
-30006a88:	e59d3010 	ldr	r3, [sp, #16]
-30006a8c:	e1520003 	cmp	r2, r3
-30006a90:	8affffba 	bhi	30006980 <r_malloc+0x50>
+30006c84:	e59f3154 	ldr	r3, [pc, #340]	; 30006de0 <r_malloc+0x2ac>
+30006c88:	e5932024 	ldr	r2, [r3, #36]	; 0x24
+30006c8c:	e59d3010 	ldr	r3, [sp, #16]
+30006c90:	e1520003 	cmp	r2, r3
+30006c94:	8affffba 	bhi	30006b84 <r_malloc+0x50>
 #endif
 		acoral_mutex_post(&mem_ctrl.mutex);
 	        return (void *)(ctp-size+4);	
 	     }
 	}
     	ctp=mem_ctrl.down_p;
-30006a94:	e59f3140 	ldr	r3, [pc, #320]	; 30006bdc <r_malloc+0x2ac>
-30006a98:	e5933028 	ldr	r3, [r3, #40]	; 0x28
-30006a9c:	e58d3010 	str	r3, [sp, #16]
+30006c98:	e59f3140 	ldr	r3, [pc, #320]	; 30006de0 <r_malloc+0x2ac>
+30006c9c:	e5933028 	ldr	r3, [r3, #40]	; 0x28
+30006ca0:	e58d3010 	str	r3, [sp, #16]
 	tp=(acoral_u32 *)ctp;
-30006aa0:	e59d3010 	ldr	r3, [sp, #16]
-30006aa4:	e58d300c 	str	r3, [sp, #12]
+30006ca4:	e59d3010 	ldr	r3, [sp, #16]
+30006ca8:	e58d300c 	str	r3, [sp, #12]
 	while(tp<mem_ctrl.freep_p){
-30006aa8:	ea00003f 	b	30006bac <r_malloc+0x27c>
+30006cac:	ea00003f 	b	30006db0 <r_malloc+0x27c>
 	     b_size=BLOCK_SIZE(*tp);
-30006aac:	e59d300c 	ldr	r3, [sp, #12]
-30006ab0:	e5933000 	ldr	r3, [r3]
-30006ab4:	e1a03423 	lsr	r3, r3, #8
-30006ab8:	e58d3014 	str	r3, [sp, #20]
+30006cb0:	e59d300c 	ldr	r3, [sp, #12]
+30006cb4:	e5933000 	ldr	r3, [r3]
+30006cb8:	e1a03423 	lsr	r3, r3, #8
+30006cbc:	e58d3014 	str	r3, [sp, #20]
 	     if(b_size==0){
-30006abc:	e59d3014 	ldr	r3, [sp, #20]
-30006ac0:	e3530000 	cmp	r3, #0
-30006ac4:	1a000006 	bne	30006ae4 <r_malloc+0x1b4>
+30006cc0:	e59d3014 	ldr	r3, [sp, #20]
+30006cc4:	e3530000 	cmp	r3, #0
+30006cc8:	1a000006 	bne	30006ce8 <r_malloc+0x1b4>
 			acoral_printerr("Err address is 0x%x,size should not be 0",tp);
-30006ac8:	e59f0110 	ldr	r0, [pc, #272]	; 30006be0 <r_malloc+0x2b0>
-30006acc:	e59d100c 	ldr	r1, [sp, #12]
-30006ad0:	eb0011cc 	bl	3000b208 <acoral_print>
+30006ccc:	e59f0110 	ldr	r0, [pc, #272]	; 30006de4 <r_malloc+0x2b0>
+30006cd0:	e59d100c 	ldr	r1, [sp, #12]
+30006cd4:	eb0011cc 	bl	3000b40c <acoral_print>
 			acoral_mutex_post(&mem_ctrl.mutex);
-30006ad4:	e59f0100 	ldr	r0, [pc, #256]	; 30006bdc <r_malloc+0x2ac>
-30006ad8:	ebfff9d3 	bl	3000522c <acoral_mutex_post>
+30006cd8:	e59f0100 	ldr	r0, [pc, #256]	; 30006de0 <r_malloc+0x2ac>
+30006cdc:	ebfff9d3 	bl	30005430 <acoral_mutex_post>
 			return NULL;
-30006adc:	e3a03000 	mov	r3, #0
-30006ae0:	ea000039 	b	30006bcc <r_malloc+0x29c>
+30006ce0:	e3a03000 	mov	r3, #0
+30006ce4:	ea000039 	b	30006dd0 <r_malloc+0x29c>
 	     }
 	     if(BLOCK_USED(*tp)||b_size<size){
-30006ae4:	e59d300c 	ldr	r3, [sp, #12]
-30006ae8:	e5933000 	ldr	r3, [r3]
-30006aec:	e2033001 	and	r3, r3, #1
-30006af0:	e20330ff 	and	r3, r3, #255	; 0xff
-30006af4:	e3530000 	cmp	r3, #0
-30006af8:	1a000003 	bne	30006b0c <r_malloc+0x1dc>
-30006afc:	e59d2004 	ldr	r2, [sp, #4]
-30006b00:	e59d3014 	ldr	r3, [sp, #20]
-30006b04:	e1520003 	cmp	r2, r3
-30006b08:	9a000006 	bls	30006b28 <r_malloc+0x1f8>
+30006ce8:	e59d300c 	ldr	r3, [sp, #12]
+30006cec:	e5933000 	ldr	r3, [r3]
+30006cf0:	e2033001 	and	r3, r3, #1
+30006cf4:	e20330ff 	and	r3, r3, #255	; 0xff
+30006cf8:	e3530000 	cmp	r3, #0
+30006cfc:	1a000003 	bne	30006d10 <r_malloc+0x1dc>
+30006d00:	e59d2004 	ldr	r2, [sp, #4]
+30006d04:	e59d3014 	ldr	r3, [sp, #20]
+30006d08:	e1520003 	cmp	r2, r3
+30006d0c:	9a000006 	bls	30006d2c <r_malloc+0x1f8>
         	ctp=ctp+b_size;
-30006b0c:	e59d2010 	ldr	r2, [sp, #16]
-30006b10:	e59d3014 	ldr	r3, [sp, #20]
-30006b14:	e0823003 	add	r3, r2, r3
-30006b18:	e58d3010 	str	r3, [sp, #16]
+30006d10:	e59d2010 	ldr	r2, [sp, #16]
+30006d14:	e59d3014 	ldr	r3, [sp, #20]
+30006d18:	e0823003 	add	r3, r2, r3
+30006d1c:	e58d3010 	str	r3, [sp, #16]
 		tp=(acoral_u32 *)ctp;
-30006b1c:	e59d3010 	ldr	r3, [sp, #16]
-30006b20:	e58d300c 	str	r3, [sp, #12]
+30006d20:	e59d3010 	ldr	r3, [sp, #16]
+30006d24:	e58d300c 	str	r3, [sp, #12]
 	     if(b_size==0){
 			acoral_printerr("Err address is 0x%x,size should not be 0",tp);
 			acoral_mutex_post(&mem_ctrl.mutex);
 			return NULL;
 	     }
 	     if(BLOCK_USED(*tp)||b_size<size){
-30006b24:	ea000020 	b	30006bac <r_malloc+0x27c>
+30006d28:	ea000020 	b	30006db0 <r_malloc+0x27c>
         	ctp=ctp+b_size;
 		tp=(acoral_u32 *)ctp;
 	     }
 	     else
 	     {
 		BLOCK_SET_USED(tp,size);
-30006b28:	e59d3004 	ldr	r3, [sp, #4]
-30006b2c:	e1a03403 	lsl	r3, r3, #8
-30006b30:	e38330cd 	orr	r3, r3, #205	; 0xcd
-30006b34:	e1a02003 	mov	r2, r3
-30006b38:	e59d300c 	ldr	r3, [sp, #12]
-30006b3c:	e5832000 	str	r2, [r3]
+30006d2c:	e59d3004 	ldr	r3, [sp, #4]
+30006d30:	e1a03403 	lsl	r3, r3, #8
+30006d34:	e38330cd 	orr	r3, r3, #205	; 0xcd
+30006d38:	e1a02003 	mov	r2, r3
+30006d3c:	e59d300c 	ldr	r3, [sp, #12]
+30006d40:	e5832000 	str	r2, [r3]
 		ctp=ctp+size;
-30006b40:	e59d3004 	ldr	r3, [sp, #4]
-30006b44:	e59d2010 	ldr	r2, [sp, #16]
-30006b48:	e0823003 	add	r3, r2, r3
-30006b4c:	e58d3010 	str	r3, [sp, #16]
+30006d44:	e59d3004 	ldr	r3, [sp, #4]
+30006d48:	e59d2010 	ldr	r2, [sp, #16]
+30006d4c:	e0823003 	add	r3, r2, r3
+30006d50:	e58d3010 	str	r3, [sp, #16]
 		tp=(acoral_u32 *)ctp;
-30006b50:	e59d3010 	ldr	r3, [sp, #16]
-30006b54:	e58d300c 	str	r3, [sp, #12]
+30006d54:	e59d3010 	ldr	r3, [sp, #16]
+30006d58:	e58d300c 	str	r3, [sp, #12]
 		if(b_size-size>0)
-30006b58:	e59d2004 	ldr	r2, [sp, #4]
-30006b5c:	e59d3014 	ldr	r3, [sp, #20]
-30006b60:	e1520003 	cmp	r2, r3
-30006b64:	0a000006 	beq	30006b84 <r_malloc+0x254>
+30006d5c:	e59d2004 	ldr	r2, [sp, #4]
+30006d60:	e59d3014 	ldr	r3, [sp, #20]
+30006d64:	e1520003 	cmp	r2, r3
+30006d68:	0a000006 	beq	30006d88 <r_malloc+0x254>
 			BLOCK_SET_FREE(tp,b_size-size);
-30006b68:	e59d3004 	ldr	r3, [sp, #4]
-30006b6c:	e59d2014 	ldr	r2, [sp, #20]
-30006b70:	e0633002 	rsb	r3, r3, r2
-30006b74:	e1a03403 	lsl	r3, r3, #8
-30006b78:	e38320cc 	orr	r2, r3, #204	; 0xcc
-30006b7c:	e59d300c 	ldr	r3, [sp, #12]
-30006b80:	e5832000 	str	r2, [r3]
+30006d6c:	e59d3004 	ldr	r3, [sp, #4]
+30006d70:	e59d2014 	ldr	r2, [sp, #20]
+30006d74:	e0633002 	rsb	r3, r3, r2
+30006d78:	e1a03403 	lsl	r3, r3, #8
+30006d7c:	e38320cc 	orr	r2, r3, #204	; 0xcc
+30006d80:	e59d300c 	ldr	r3, [sp, #12]
+30006d84:	e5832000 	str	r2, [r3]
 		mem_ctrl.freep_p=tp;
-30006b84:	e59f3050 	ldr	r3, [pc, #80]	; 30006bdc <r_malloc+0x2ac>
-30006b88:	e59d200c 	ldr	r2, [sp, #12]
-30006b8c:	e583202c 	str	r2, [r3, #44]	; 0x2c
+30006d88:	e59f3050 	ldr	r3, [pc, #80]	; 30006de0 <r_malloc+0x2ac>
+30006d8c:	e59d200c 	ldr	r2, [sp, #12]
+30006d90:	e583202c 	str	r2, [r3, #44]	; 0x2c
 #ifdef CFG_TEST_MEM2
 		acoral_print("After malloc\n");
 		v_mem_scan();
 		acoral_print("...................\n");
 #endif
 		acoral_mutex_post(&mem_ctrl.mutex);
-30006b90:	e59f0044 	ldr	r0, [pc, #68]	; 30006bdc <r_malloc+0x2ac>
-30006b94:	ebfff9a4 	bl	3000522c <acoral_mutex_post>
+30006d94:	e59f0044 	ldr	r0, [pc, #68]	; 30006de0 <r_malloc+0x2ac>
+30006d98:	ebfff9a4 	bl	30005430 <acoral_mutex_post>
 	        return (void *)(ctp-size+4);	
-30006b98:	e59d3004 	ldr	r3, [sp, #4]
-30006b9c:	e2632004 	rsb	r2, r3, #4
-30006ba0:	e59d3010 	ldr	r3, [sp, #16]
-30006ba4:	e0823003 	add	r3, r2, r3
-30006ba8:	ea000007 	b	30006bcc <r_malloc+0x29c>
+30006d9c:	e59d3004 	ldr	r3, [sp, #4]
+30006da0:	e2632004 	rsb	r2, r3, #4
+30006da4:	e59d3010 	ldr	r3, [sp, #16]
+30006da8:	e0823003 	add	r3, r2, r3
+30006dac:	ea000007 	b	30006dd0 <r_malloc+0x29c>
 	        return (void *)(ctp-size+4);	
 	     }
 	}
     	ctp=mem_ctrl.down_p;
 	tp=(acoral_u32 *)ctp;
 	while(tp<mem_ctrl.freep_p){
-30006bac:	e59f3028 	ldr	r3, [pc, #40]	; 30006bdc <r_malloc+0x2ac>
-30006bb0:	e593202c 	ldr	r2, [r3, #44]	; 0x2c
-30006bb4:	e59d300c 	ldr	r3, [sp, #12]
-30006bb8:	e1520003 	cmp	r2, r3
-30006bbc:	8affffba 	bhi	30006aac <r_malloc+0x17c>
+30006db0:	e59f3028 	ldr	r3, [pc, #40]	; 30006de0 <r_malloc+0x2ac>
+30006db4:	e593202c 	ldr	r2, [r3, #44]	; 0x2c
+30006db8:	e59d300c 	ldr	r3, [sp, #12]
+30006dbc:	e1520003 	cmp	r2, r3
+30006dc0:	8affffba 	bhi	30006cb0 <r_malloc+0x17c>
 	acoral_print("...................\n");
 #endif
 #ifdef CFG_TEST
 	mem_ctrl.alloc_size-=size;
 #endif
 	acoral_mutex_post(&mem_ctrl.mutex);
-30006bc0:	e59f0014 	ldr	r0, [pc, #20]	; 30006bdc <r_malloc+0x2ac>
-30006bc4:	ebfff998 	bl	3000522c <acoral_mutex_post>
+30006dc4:	e59f0014 	ldr	r0, [pc, #20]	; 30006de0 <r_malloc+0x2ac>
+30006dc8:	ebfff998 	bl	30005430 <acoral_mutex_post>
 	return NULL;
-30006bc8:	e3a03000 	mov	r3, #0
+30006dcc:	e3a03000 	mov	r3, #0
 }
-30006bcc:	e1a00003 	mov	r0, r3
-30006bd0:	e28dd01c 	add	sp, sp, #28
-30006bd4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30006bd8:	e12fff1e 	bx	lr
-30006bdc:	3000f980 	.word	0x3000f980
-30006be0:	3000e45c 	.word	0x3000e45c
+30006dd0:	e1a00003 	mov	r0, r3
+30006dd4:	e28dd01c 	add	sp, sp, #28
+30006dd8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30006ddc:	e12fff1e 	bx	lr
+30006de0:	3000fb8c 	.word	0x3000fb8c
+30006de4:	3000e660 	.word	0x3000e660
 
-30006be4 <v_malloc>:
+30006de8 <v_malloc>:
 
 void * v_malloc(acoral_32 size){
-30006be4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30006be8:	e24dd00c 	sub	sp, sp, #12
-30006bec:	e58d0004 	str	r0, [sp, #4]
+30006de8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30006dec:	e24dd00c 	sub	sp, sp, #12
+30006df0:	e58d0004 	str	r0, [sp, #4]
 	if(mem_ctrl.mem_state==0)
-30006bf0:	e59f303c 	ldr	r3, [pc, #60]	; 30006c34 <v_malloc+0x50>
-30006bf4:	e5d33030 	ldrb	r3, [r3, #48]	; 0x30
-30006bf8:	e3530000 	cmp	r3, #0
-30006bfc:	1a000001 	bne	30006c08 <v_malloc+0x24>
+30006df4:	e59f303c 	ldr	r3, [pc, #60]	; 30006e38 <v_malloc+0x50>
+30006df8:	e5d33030 	ldrb	r3, [r3, #48]	; 0x30
+30006dfc:	e3530000 	cmp	r3, #0
+30006e00:	1a000001 	bne	30006e0c <v_malloc+0x24>
 		return NULL;
-30006c00:	e3a03000 	mov	r3, #0
-30006c04:	ea000006 	b	30006c24 <v_malloc+0x40>
+30006e04:	e3a03000 	mov	r3, #0
+30006e08:	ea000006 	b	30006e28 <v_malloc+0x40>
 	size=(size+3)&~3;
-30006c08:	e59d3004 	ldr	r3, [sp, #4]
-30006c0c:	e2833003 	add	r3, r3, #3
-30006c10:	e3c33003 	bic	r3, r3, #3
-30006c14:	e58d3004 	str	r3, [sp, #4]
+30006e0c:	e59d3004 	ldr	r3, [sp, #4]
+30006e10:	e2833003 	add	r3, r3, #3
+30006e14:	e3c33003 	bic	r3, r3, #3
+30006e18:	e58d3004 	str	r3, [sp, #4]
     return r_malloc(size);
-30006c18:	e59d0004 	ldr	r0, [sp, #4]
-30006c1c:	ebffff43 	bl	30006930 <r_malloc>
-30006c20:	e1a03000 	mov	r3, r0
+30006e1c:	e59d0004 	ldr	r0, [sp, #4]
+30006e20:	ebffff43 	bl	30006b34 <r_malloc>
+30006e24:	e1a03000 	mov	r3, r0
 }
-30006c24:	e1a00003 	mov	r0, r3
-30006c28:	e28dd00c 	add	sp, sp, #12
-30006c2c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30006c30:	e12fff1e 	bx	lr
-30006c34:	3000f980 	.word	0x3000f980
+30006e28:	e1a00003 	mov	r0, r3
+30006e2c:	e28dd00c 	add	sp, sp, #12
+30006e30:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30006e34:	e12fff1e 	bx	lr
+30006e38:	3000fb8c 	.word	0x3000fb8c
 
-30006c38 <v_free>:
+30006e3c <v_free>:
 
 void v_free(void * p){
-30006c38:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30006c3c:	e24dd024 	sub	sp, sp, #36	; 0x24
-30006c40:	e58d0004 	str	r0, [sp, #4]
+30006e3c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30006e40:	e24dd024 	sub	sp, sp, #36	; 0x24
+30006e44:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 * tp,*prev_tp;
 	acoral_8 * ctp;
 	acoral_u32 b_size,size;
 	if(mem_ctrl.mem_state==0)
-30006c44:	e59f327c 	ldr	r3, [pc, #636]	; 30006ec8 <v_free+0x290>
-30006c48:	e5d33030 	ldrb	r3, [r3, #48]	; 0x30
-30006c4c:	e3530000 	cmp	r3, #0
-30006c50:	0a000098 	beq	30006eb8 <v_free+0x280>
+30006e48:	e59f327c 	ldr	r3, [pc, #636]	; 300070cc <v_free+0x290>
+30006e4c:	e5d33030 	ldrb	r3, [r3, #48]	; 0x30
+30006e50:	e3530000 	cmp	r3, #0
+30006e54:	0a000098 	beq	300070bc <v_free+0x280>
 		return;
 	p=(acoral_8 *)p-4;
-30006c54:	e59d3004 	ldr	r3, [sp, #4]
-30006c58:	e2433004 	sub	r3, r3, #4
-30006c5c:	e58d3004 	str	r3, [sp, #4]
+30006e58:	e59d3004 	ldr	r3, [sp, #4]
+30006e5c:	e2433004 	sub	r3, r3, #4
+30006e60:	e58d3004 	str	r3, [sp, #4]
 	tp=(acoral_u32 *)p;
-30006c60:	e59d3004 	ldr	r3, [sp, #4]
-30006c64:	e58d300c 	str	r3, [sp, #12]
+30006e64:	e59d3004 	ldr	r3, [sp, #4]
+30006e68:	e58d300c 	str	r3, [sp, #12]
 	while(acoral_mutex_pend(&mem_ctrl.mutex, 0)!=0) //周期性任务
-30006c68:	ea000000 	b	30006c70 <v_free+0x38>
+30006e6c:	ea000000 	b	30006e74 <v_free+0x38>
 		acoral_suspend_self();
-30006c6c:	ebffeed0 	bl	300027b4 <acoral_suspend_self>
+30006e70:	ebffee4f 	bl	300027b4 <acoral_suspend_self>
 	acoral_u32 b_size,size;
 	if(mem_ctrl.mem_state==0)
 		return;
 	p=(acoral_8 *)p-4;
 	tp=(acoral_u32 *)p;
 	while(acoral_mutex_pend(&mem_ctrl.mutex, 0)!=0) //周期性任务
-30006c70:	e59f0250 	ldr	r0, [pc, #592]	; 30006ec8 <v_free+0x290>
-30006c74:	e3a01000 	mov	r1, #0
-30006c78:	ebfff8da 	bl	30004fe8 <acoral_mutex_pend>
-30006c7c:	e1a03000 	mov	r3, r0
-30006c80:	e3530000 	cmp	r3, #0
-30006c84:	1afffff8 	bne	30006c6c <v_free+0x34>
+30006e74:	e59f0250 	ldr	r0, [pc, #592]	; 300070cc <v_free+0x290>
+30006e78:	e3a01000 	mov	r1, #0
+30006e7c:	ebfff859 	bl	30004fe8 <acoral_mutex_pend>
+30006e80:	e1a03000 	mov	r3, r0
+30006e84:	e3530000 	cmp	r3, #0
+30006e88:	1afffff8 	bne	30006e70 <v_free+0x34>
 		acoral_suspend_self();
 	if(p==NULL||(acoral_8 *)p<mem_ctrl.down_p||(acoral_8 *)p>=mem_ctrl.top_p||!BLOCK_CHECK(*tp)){
-30006c88:	e59d3004 	ldr	r3, [sp, #4]
-30006c8c:	e3530000 	cmp	r3, #0
-30006c90:	0a00000e 	beq	30006cd0 <v_free+0x98>
-30006c94:	e59f322c 	ldr	r3, [pc, #556]	; 30006ec8 <v_free+0x290>
-30006c98:	e5932028 	ldr	r2, [r3, #40]	; 0x28
-30006c9c:	e59d3004 	ldr	r3, [sp, #4]
-30006ca0:	e1520003 	cmp	r2, r3
-30006ca4:	8a000009 	bhi	30006cd0 <v_free+0x98>
-30006ca8:	e59f3218 	ldr	r3, [pc, #536]	; 30006ec8 <v_free+0x290>
-30006cac:	e5932024 	ldr	r2, [r3, #36]	; 0x24
-30006cb0:	e59d3004 	ldr	r3, [sp, #4]
-30006cb4:	e1520003 	cmp	r2, r3
-30006cb8:	9a000004 	bls	30006cd0 <v_free+0x98>
-30006cbc:	e59d300c 	ldr	r3, [sp, #12]
-30006cc0:	e5933000 	ldr	r3, [r3]
-30006cc4:	e20330fe 	and	r3, r3, #254	; 0xfe
-30006cc8:	e35300cc 	cmp	r3, #204	; 0xcc
-30006ccc:	0a000003 	beq	30006ce0 <v_free+0xa8>
+30006e8c:	e59d3004 	ldr	r3, [sp, #4]
+30006e90:	e3530000 	cmp	r3, #0
+30006e94:	0a00000e 	beq	30006ed4 <v_free+0x98>
+30006e98:	e59f322c 	ldr	r3, [pc, #556]	; 300070cc <v_free+0x290>
+30006e9c:	e5932028 	ldr	r2, [r3, #40]	; 0x28
+30006ea0:	e59d3004 	ldr	r3, [sp, #4]
+30006ea4:	e1520003 	cmp	r2, r3
+30006ea8:	8a000009 	bhi	30006ed4 <v_free+0x98>
+30006eac:	e59f3218 	ldr	r3, [pc, #536]	; 300070cc <v_free+0x290>
+30006eb0:	e5932024 	ldr	r2, [r3, #36]	; 0x24
+30006eb4:	e59d3004 	ldr	r3, [sp, #4]
+30006eb8:	e1520003 	cmp	r2, r3
+30006ebc:	9a000004 	bls	30006ed4 <v_free+0x98>
+30006ec0:	e59d300c 	ldr	r3, [sp, #12]
+30006ec4:	e5933000 	ldr	r3, [r3]
+30006ec8:	e20330fe 	and	r3, r3, #254	; 0xfe
+30006ecc:	e35300cc 	cmp	r3, #204	; 0xcc
+30006ed0:	0a000003 	beq	30006ee4 <v_free+0xa8>
 		acoral_printerr("Invalide Free address:0x%x\n",tp);
-30006cd0:	e59f01f4 	ldr	r0, [pc, #500]	; 30006ecc <v_free+0x294>
-30006cd4:	e59d100c 	ldr	r1, [sp, #12]
-30006cd8:	eb00114a 	bl	3000b208 <acoral_print>
+30006ed4:	e59f01f4 	ldr	r0, [pc, #500]	; 300070d0 <v_free+0x294>
+30006ed8:	e59d100c 	ldr	r1, [sp, #12]
+30006edc:	eb00114a 	bl	3000b40c <acoral_print>
 		return;
-30006cdc:	ea000076 	b	30006ebc <v_free+0x284>
+30006ee0:	ea000076 	b	300070c0 <v_free+0x284>
 	}
 	if(BLOCK_FREE(*tp)){
-30006ce0:	e59d300c 	ldr	r3, [sp, #12]
-30006ce4:	e5933000 	ldr	r3, [r3]
-30006ce8:	e2033001 	and	r3, r3, #1
-30006cec:	e3530000 	cmp	r3, #0
-30006cf0:	1a000003 	bne	30006d04 <v_free+0xcc>
+30006ee4:	e59d300c 	ldr	r3, [sp, #12]
+30006ee8:	e5933000 	ldr	r3, [r3]
+30006eec:	e2033001 	and	r3, r3, #1
+30006ef0:	e3530000 	cmp	r3, #0
+30006ef4:	1a000003 	bne	30006f08 <v_free+0xcc>
 		acoral_printerr("Address:0x%x have been freed\n",tp);
-30006cf4:	e59f01d4 	ldr	r0, [pc, #468]	; 30006ed0 <v_free+0x298>
-30006cf8:	e59d100c 	ldr	r1, [sp, #12]
-30006cfc:	eb001141 	bl	3000b208 <acoral_print>
+30006ef8:	e59f01d4 	ldr	r0, [pc, #468]	; 300070d4 <v_free+0x298>
+30006efc:	e59d100c 	ldr	r1, [sp, #12]
+30006f00:	eb001141 	bl	3000b40c <acoral_print>
 		return;
-30006d00:	ea00006d 	b	30006ebc <v_free+0x284>
+30006f04:	ea00006d 	b	300070c0 <v_free+0x284>
 	}
 	prev_tp=tp;
-30006d04:	e59d300c 	ldr	r3, [sp, #12]
-30006d08:	e58d3010 	str	r3, [sp, #16]
+30006f08:	e59d300c 	ldr	r3, [sp, #12]
+30006f0c:	e58d3010 	str	r3, [sp, #16]
 	ctp=(acoral_8 *)tp;
-30006d0c:	e59d300c 	ldr	r3, [sp, #12]
-30006d10:	e58d3014 	str	r3, [sp, #20]
+30006f10:	e59d300c 	ldr	r3, [sp, #12]
+30006f14:	e58d3014 	str	r3, [sp, #20]
     b_size=BLOCK_SIZE(*tp);
-30006d14:	e59d300c 	ldr	r3, [sp, #12]
-30006d18:	e5933000 	ldr	r3, [r3]
-30006d1c:	e1a03423 	lsr	r3, r3, #8
-30006d20:	e58d3018 	str	r3, [sp, #24]
+30006f18:	e59d300c 	ldr	r3, [sp, #12]
+30006f1c:	e5933000 	ldr	r3, [r3]
+30006f20:	e1a03423 	lsr	r3, r3, #8
+30006f24:	e58d3018 	str	r3, [sp, #24]
 #ifdef CFG_TEST_MEM2
 	acoral_print("...................\n");
 	acoral_print("Before free\n");
 	v_mem_scan();
 #endif
    	ctp=ctp+b_size;
-30006d24:	e59d2014 	ldr	r2, [sp, #20]
-30006d28:	e59d3018 	ldr	r3, [sp, #24]
-30006d2c:	e0823003 	add	r3, r2, r3
-30006d30:	e58d3014 	str	r3, [sp, #20]
+30006f28:	e59d2014 	ldr	r2, [sp, #20]
+30006f2c:	e59d3018 	ldr	r3, [sp, #24]
+30006f30:	e0823003 	add	r3, r2, r3
+30006f34:	e58d3014 	str	r3, [sp, #20]
 	tp=(acoral_u32 *)ctp;
-30006d34:	e59d3014 	ldr	r3, [sp, #20]
-30006d38:	e58d300c 	str	r3, [sp, #12]
+30006f38:	e59d3014 	ldr	r3, [sp, #20]
+30006f3c:	e58d300c 	str	r3, [sp, #12]
 	if(BLOCK_FREE(*tp)){
-30006d3c:	e59d300c 	ldr	r3, [sp, #12]
-30006d40:	e5933000 	ldr	r3, [r3]
-30006d44:	e2033001 	and	r3, r3, #1
-30006d48:	e3530000 	cmp	r3, #0
-30006d4c:	1a000013 	bne	30006da0 <v_free+0x168>
+30006f40:	e59d300c 	ldr	r3, [sp, #12]
+30006f44:	e5933000 	ldr	r3, [r3]
+30006f48:	e2033001 	and	r3, r3, #1
+30006f4c:	e3530000 	cmp	r3, #0
+30006f50:	1a000013 	bne	30006fa4 <v_free+0x168>
 		size=BLOCK_SIZE(*tp);
-30006d50:	e59d300c 	ldr	r3, [sp, #12]
-30006d54:	e5933000 	ldr	r3, [r3]
-30006d58:	e1a03423 	lsr	r3, r3, #8
-30006d5c:	e58d301c 	str	r3, [sp, #28]
+30006f54:	e59d300c 	ldr	r3, [sp, #12]
+30006f58:	e5933000 	ldr	r3, [r3]
+30006f5c:	e1a03423 	lsr	r3, r3, #8
+30006f60:	e58d301c 	str	r3, [sp, #28]
 		if(size==0){
-30006d60:	e59d301c 	ldr	r3, [sp, #28]
-30006d64:	e3530000 	cmp	r3, #0
-30006d68:	1a000005 	bne	30006d84 <v_free+0x14c>
+30006f64:	e59d301c 	ldr	r3, [sp, #28]
+30006f68:	e3530000 	cmp	r3, #0
+30006f6c:	1a000005 	bne	30006f88 <v_free+0x14c>
 			acoral_printerr("Err address is 0x%x,size should not be 0",tp);
-30006d6c:	e59f0160 	ldr	r0, [pc, #352]	; 30006ed4 <v_free+0x29c>
-30006d70:	e59d100c 	ldr	r1, [sp, #12]
-30006d74:	eb001123 	bl	3000b208 <acoral_print>
+30006f70:	e59f0160 	ldr	r0, [pc, #352]	; 300070d8 <v_free+0x29c>
+30006f74:	e59d100c 	ldr	r1, [sp, #12]
+30006f78:	eb001123 	bl	3000b40c <acoral_print>
 			acoral_mutex_post(&mem_ctrl.mutex);
-30006d78:	e59f0148 	ldr	r0, [pc, #328]	; 30006ec8 <v_free+0x290>
-30006d7c:	ebfff92a 	bl	3000522c <acoral_mutex_post>
+30006f7c:	e59f0148 	ldr	r0, [pc, #328]	; 300070cc <v_free+0x290>
+30006f80:	ebfff92a 	bl	30005430 <acoral_mutex_post>
 			return;
-30006d80:	ea00004d 	b	30006ebc <v_free+0x284>
+30006f84:	ea00004d 	b	300070c0 <v_free+0x284>
 		}
 		b_size+=size;
-30006d84:	e59d2018 	ldr	r2, [sp, #24]
-30006d88:	e59d301c 	ldr	r3, [sp, #28]
-30006d8c:	e0823003 	add	r3, r2, r3
-30006d90:	e58d3018 	str	r3, [sp, #24]
+30006f88:	e59d2018 	ldr	r2, [sp, #24]
+30006f8c:	e59d301c 	ldr	r3, [sp, #28]
+30006f90:	e0823003 	add	r3, r2, r3
+30006f94:	e58d3018 	str	r3, [sp, #24]
 		BLOCK_CLEAR(tp);
-30006d94:	e59d300c 	ldr	r3, [sp, #12]
-30006d98:	e3a02000 	mov	r2, #0
-30006d9c:	e5832000 	str	r2, [r3]
+30006f98:	e59d300c 	ldr	r3, [sp, #12]
+30006f9c:	e3a02000 	mov	r2, #0
+30006fa0:	e5832000 	str	r2, [r3]
 	}
 	BLOCK_SET_FREE(prev_tp,b_size);
-30006da0:	e59d3018 	ldr	r3, [sp, #24]
-30006da4:	e1a03403 	lsl	r3, r3, #8
-30006da8:	e38320cc 	orr	r2, r3, #204	; 0xcc
-30006dac:	e59d3010 	ldr	r3, [sp, #16]
-30006db0:	e5832000 	str	r2, [r3]
+30006fa4:	e59d3018 	ldr	r3, [sp, #24]
+30006fa8:	e1a03403 	lsl	r3, r3, #8
+30006fac:	e38320cc 	orr	r2, r3, #204	; 0xcc
+30006fb0:	e59d3010 	ldr	r3, [sp, #16]
+30006fb4:	e5832000 	str	r2, [r3]
 	mem_ctrl.freep_p=prev_tp;
-30006db4:	e59f310c 	ldr	r3, [pc, #268]	; 30006ec8 <v_free+0x290>
-30006db8:	e59d2010 	ldr	r2, [sp, #16]
-30006dbc:	e583202c 	str	r2, [r3, #44]	; 0x2c
+30006fb8:	e59f310c 	ldr	r3, [pc, #268]	; 300070cc <v_free+0x290>
+30006fbc:	e59d2010 	ldr	r2, [sp, #16]
+30006fc0:	e583202c 	str	r2, [r3, #44]	; 0x2c
 	if(p==mem_ctrl.down_p){
-30006dc0:	e59f3100 	ldr	r3, [pc, #256]	; 30006ec8 <v_free+0x290>
-30006dc4:	e5932028 	ldr	r2, [r3, #40]	; 0x28
-30006dc8:	e59d3004 	ldr	r3, [sp, #4]
-30006dcc:	e1520003 	cmp	r2, r3
-30006dd0:	1a000002 	bne	30006de0 <v_free+0x1a8>
+30006fc4:	e59f3100 	ldr	r3, [pc, #256]	; 300070cc <v_free+0x290>
+30006fc8:	e5932028 	ldr	r2, [r3, #40]	; 0x28
+30006fcc:	e59d3004 	ldr	r3, [sp, #4]
+30006fd0:	e1520003 	cmp	r2, r3
+30006fd4:	1a000002 	bne	30006fe4 <v_free+0x1a8>
 #ifdef CFG_TEST_MEM2
 		acoral_print("After free\n");
 		v_mem_scan();
 		acoral_print("...................\n");
 #endif
 		acoral_mutex_post(&mem_ctrl.mutex);
-30006dd4:	e59f00ec 	ldr	r0, [pc, #236]	; 30006ec8 <v_free+0x290>
-30006dd8:	ebfff913 	bl	3000522c <acoral_mutex_post>
+30006fd8:	e59f00ec 	ldr	r0, [pc, #236]	; 300070cc <v_free+0x290>
+30006fdc:	ebfff913 	bl	30005430 <acoral_mutex_post>
 		return;
-30006ddc:	ea000036 	b	30006ebc <v_free+0x284>
+30006fe0:	ea000036 	b	300070c0 <v_free+0x284>
 	}
 	ctp=mem_ctrl.down_p;
-30006de0:	e59f30e0 	ldr	r3, [pc, #224]	; 30006ec8 <v_free+0x290>
-30006de4:	e5933028 	ldr	r3, [r3, #40]	; 0x28
-30006de8:	e58d3014 	str	r3, [sp, #20]
+30006fe4:	e59f30e0 	ldr	r3, [pc, #224]	; 300070cc <v_free+0x290>
+30006fe8:	e5933028 	ldr	r3, [r3, #40]	; 0x28
+30006fec:	e58d3014 	str	r3, [sp, #20]
 	tp=(acoral_u32 *)ctp;
-30006dec:	e59d3014 	ldr	r3, [sp, #20]
-30006df0:	e58d300c 	str	r3, [sp, #12]
+30006ff0:	e59d3014 	ldr	r3, [sp, #20]
+30006ff4:	e58d300c 	str	r3, [sp, #12]
 	while(ctp<(acoral_8 *)p){
-30006df4:	ea000014 	b	30006e4c <v_free+0x214>
+30006ff8:	ea000014 	b	30007050 <v_free+0x214>
 	     size=BLOCK_SIZE(*tp);
-30006df8:	e59d300c 	ldr	r3, [sp, #12]
-30006dfc:	e5933000 	ldr	r3, [r3]
-30006e00:	e1a03423 	lsr	r3, r3, #8
-30006e04:	e58d301c 	str	r3, [sp, #28]
+30006ffc:	e59d300c 	ldr	r3, [sp, #12]
+30007000:	e5933000 	ldr	r3, [r3]
+30007004:	e1a03423 	lsr	r3, r3, #8
+30007008:	e58d301c 	str	r3, [sp, #28]
 	     if(size==0){
-30006e08:	e59d301c 	ldr	r3, [sp, #28]
-30006e0c:	e3530000 	cmp	r3, #0
-30006e10:	1a000005 	bne	30006e2c <v_free+0x1f4>
+3000700c:	e59d301c 	ldr	r3, [sp, #28]
+30007010:	e3530000 	cmp	r3, #0
+30007014:	1a000005 	bne	30007030 <v_free+0x1f4>
 			acoral_printerr("err address is 0x%x,size should not be 0",tp);
-30006e14:	e59f00bc 	ldr	r0, [pc, #188]	; 30006ed8 <v_free+0x2a0>
-30006e18:	e59d100c 	ldr	r1, [sp, #12]
-30006e1c:	eb0010f9 	bl	3000b208 <acoral_print>
+30007018:	e59f00bc 	ldr	r0, [pc, #188]	; 300070dc <v_free+0x2a0>
+3000701c:	e59d100c 	ldr	r1, [sp, #12]
+30007020:	eb0010f9 	bl	3000b40c <acoral_print>
 			acoral_mutex_post(&mem_ctrl.mutex);
-30006e20:	e59f00a0 	ldr	r0, [pc, #160]	; 30006ec8 <v_free+0x290>
-30006e24:	ebfff900 	bl	3000522c <acoral_mutex_post>
+30007024:	e59f00a0 	ldr	r0, [pc, #160]	; 300070cc <v_free+0x290>
+30007028:	ebfff900 	bl	30005430 <acoral_mutex_post>
 			return;
-30006e28:	ea000023 	b	30006ebc <v_free+0x284>
+3000702c:	ea000023 	b	300070c0 <v_free+0x284>
              }
 	     ctp=ctp+size;
-30006e2c:	e59d2014 	ldr	r2, [sp, #20]
-30006e30:	e59d301c 	ldr	r3, [sp, #28]
-30006e34:	e0823003 	add	r3, r2, r3
-30006e38:	e58d3014 	str	r3, [sp, #20]
+30007030:	e59d2014 	ldr	r2, [sp, #20]
+30007034:	e59d301c 	ldr	r3, [sp, #28]
+30007038:	e0823003 	add	r3, r2, r3
+3000703c:	e58d3014 	str	r3, [sp, #20]
 	     prev_tp=tp;
-30006e3c:	e59d300c 	ldr	r3, [sp, #12]
-30006e40:	e58d3010 	str	r3, [sp, #16]
+30007040:	e59d300c 	ldr	r3, [sp, #12]
+30007044:	e58d3010 	str	r3, [sp, #16]
 	     tp=(acoral_u32 *)ctp;
-30006e44:	e59d3014 	ldr	r3, [sp, #20]
-30006e48:	e58d300c 	str	r3, [sp, #12]
+30007048:	e59d3014 	ldr	r3, [sp, #20]
+3000704c:	e58d300c 	str	r3, [sp, #12]
 		acoral_mutex_post(&mem_ctrl.mutex);
 		return;
 	}
 	ctp=mem_ctrl.down_p;
 	tp=(acoral_u32 *)ctp;
 	while(ctp<(acoral_8 *)p){
-30006e4c:	e59d3004 	ldr	r3, [sp, #4]
-30006e50:	e59d2014 	ldr	r2, [sp, #20]
-30006e54:	e1520003 	cmp	r2, r3
-30006e58:	3affffe6 	bcc	30006df8 <v_free+0x1c0>
+30007050:	e59d3004 	ldr	r3, [sp, #4]
+30007054:	e59d2014 	ldr	r2, [sp, #20]
+30007058:	e1520003 	cmp	r2, r3
+3000705c:	3affffe6 	bcc	30006ffc <v_free+0x1c0>
              }
 	     ctp=ctp+size;
 	     prev_tp=tp;
 	     tp=(acoral_u32 *)ctp;
 	}
 	if(BLOCK_FREE(*prev_tp)){
-30006e5c:	e59d3010 	ldr	r3, [sp, #16]
-30006e60:	e5933000 	ldr	r3, [r3]
-30006e64:	e2033001 	and	r3, r3, #1
-30006e68:	e3530000 	cmp	r3, #0
-30006e6c:	1a00000e 	bne	30006eac <v_free+0x274>
+30007060:	e59d3010 	ldr	r3, [sp, #16]
+30007064:	e5933000 	ldr	r3, [r3]
+30007068:	e2033001 	and	r3, r3, #1
+3000706c:	e3530000 	cmp	r3, #0
+30007070:	1a00000e 	bne	300070b0 <v_free+0x274>
 		tp=(acoral_u32*)p;
-30006e70:	e59d3004 	ldr	r3, [sp, #4]
-30006e74:	e58d300c 	str	r3, [sp, #12]
+30007074:	e59d3004 	ldr	r3, [sp, #4]
+30007078:	e58d300c 	str	r3, [sp, #12]
 		BLOCK_CLEAR(tp);
-30006e78:	e59d300c 	ldr	r3, [sp, #12]
-30006e7c:	e3a02000 	mov	r2, #0
-30006e80:	e5832000 	str	r2, [r3]
+3000707c:	e59d300c 	ldr	r3, [sp, #12]
+30007080:	e3a02000 	mov	r2, #0
+30007084:	e5832000 	str	r2, [r3]
 		BLOCK_SET_FREE(prev_tp,b_size+size);
-30006e84:	e59d2018 	ldr	r2, [sp, #24]
-30006e88:	e59d301c 	ldr	r3, [sp, #28]
-30006e8c:	e0823003 	add	r3, r2, r3
-30006e90:	e1a03403 	lsl	r3, r3, #8
-30006e94:	e38320cc 	orr	r2, r3, #204	; 0xcc
-30006e98:	e59d3010 	ldr	r3, [sp, #16]
-30006e9c:	e5832000 	str	r2, [r3]
+30007088:	e59d2018 	ldr	r2, [sp, #24]
+3000708c:	e59d301c 	ldr	r3, [sp, #28]
+30007090:	e0823003 	add	r3, r2, r3
+30007094:	e1a03403 	lsl	r3, r3, #8
+30007098:	e38320cc 	orr	r2, r3, #204	; 0xcc
+3000709c:	e59d3010 	ldr	r3, [sp, #16]
+300070a0:	e5832000 	str	r2, [r3]
 		mem_ctrl.freep_p=prev_tp;
-30006ea0:	e59f3020 	ldr	r3, [pc, #32]	; 30006ec8 <v_free+0x290>
-30006ea4:	e59d2010 	ldr	r2, [sp, #16]
-30006ea8:	e583202c 	str	r2, [r3, #44]	; 0x2c
+300070a4:	e59f3020 	ldr	r3, [pc, #32]	; 300070cc <v_free+0x290>
+300070a8:	e59d2010 	ldr	r2, [sp, #16]
+300070ac:	e583202c 	str	r2, [r3, #44]	; 0x2c
 #ifdef CFG_TEST_MEM2
 	acoral_print("After free\n");
 	v_mem_scan();
 	acoral_print("...................\n");
 #endif
 	acoral_mutex_post(&mem_ctrl.mutex);
-30006eac:	e59f0014 	ldr	r0, [pc, #20]	; 30006ec8 <v_free+0x290>
-30006eb0:	ebfff8dd 	bl	3000522c <acoral_mutex_post>
-30006eb4:	ea000000 	b	30006ebc <v_free+0x284>
+300070b0:	e59f0014 	ldr	r0, [pc, #20]	; 300070cc <v_free+0x290>
+300070b4:	ebfff8dd 	bl	30005430 <acoral_mutex_post>
+300070b8:	ea000000 	b	300070c0 <v_free+0x284>
 void v_free(void * p){
 	acoral_u32 * tp,*prev_tp;
 	acoral_8 * ctp;
 	acoral_u32 b_size,size;
 	if(mem_ctrl.mem_state==0)
 		return;
-30006eb8:	e1a00000 	nop			; (mov r0, r0)
+300070bc:	e1a00000 	nop			; (mov r0, r0)
 	acoral_print("After free\n");
 	v_mem_scan();
 	acoral_print("...................\n");
 #endif
 	acoral_mutex_post(&mem_ctrl.mutex);
 }
-30006ebc:	e28dd024 	add	sp, sp, #36	; 0x24
-30006ec0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30006ec4:	e12fff1e 	bx	lr
-30006ec8:	3000f980 	.word	0x3000f980
-30006ecc:	3000e488 	.word	0x3000e488
-30006ed0:	3000e4a4 	.word	0x3000e4a4
-30006ed4:	3000e45c 	.word	0x3000e45c
-30006ed8:	3000e4c4 	.word	0x3000e4c4
+300070c0:	e28dd024 	add	sp, sp, #36	; 0x24
+300070c4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300070c8:	e12fff1e 	bx	lr
+300070cc:	3000fb8c 	.word	0x3000fb8c
+300070d0:	3000e68c 	.word	0x3000e68c
+300070d4:	3000e6a8 	.word	0x3000e6a8
+300070d8:	3000e660 	.word	0x3000e660
+300070dc:	3000e6c8 	.word	0x3000e6c8
 
-30006edc <v_mem_init>:
+300070e0 <v_mem_init>:
 
 void v_mem_init(){
-30006edc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30006ee0:	e24dd00c 	sub	sp, sp, #12
+300070e0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300070e4:	e24dd00c 	sub	sp, sp, #12
 	acoral_size size;
 	size=acoral_malloc_size(MEM_SIZE);
-30006ee4:	e3a00afa 	mov	r0, #1024000	; 0xfa000
-30006ee8:	ebfffd01 	bl	300062f4 <buddy_malloc_size>
-30006eec:	e1a03000 	mov	r3, r0
-30006ef0:	e58d3004 	str	r3, [sp, #4]
+300070e8:	e3a00afa 	mov	r0, #1024000	; 0xfa000
+300070ec:	ebfffd01 	bl	300064f8 <buddy_malloc_size>
+300070f0:	e1a03000 	mov	r3, r0
+300070f4:	e58d3004 	str	r3, [sp, #4]
 	mem_ctrl.down_p=(acoral_8 *)acoral_malloc(size);
-30006ef4:	e59d0004 	ldr	r0, [sp, #4]
-30006ef8:	ebfffd26 	bl	30006398 <buddy_malloc>
-30006efc:	e1a03000 	mov	r3, r0
-30006f00:	e1a02003 	mov	r2, r3
-30006f04:	e59f3088 	ldr	r3, [pc, #136]	; 30006f94 <v_mem_init+0xb8>
-30006f08:	e5832028 	str	r2, [r3, #40]	; 0x28
+300070f8:	e59d0004 	ldr	r0, [sp, #4]
+300070fc:	ebfffd26 	bl	3000659c <buddy_malloc>
+30007100:	e1a03000 	mov	r3, r0
+30007104:	e1a02003 	mov	r2, r3
+30007108:	e59f3088 	ldr	r3, [pc, #136]	; 30007198 <v_mem_init+0xb8>
+3000710c:	e5832028 	str	r2, [r3, #40]	; 0x28
 	if(mem_ctrl.down_p==NULL){
-30006f0c:	e59f3080 	ldr	r3, [pc, #128]	; 30006f94 <v_mem_init+0xb8>
-30006f10:	e5933028 	ldr	r3, [r3, #40]	; 0x28
-30006f14:	e3530000 	cmp	r3, #0
-30006f18:	1a000003 	bne	30006f2c <v_mem_init+0x50>
+30007110:	e59f3080 	ldr	r3, [pc, #128]	; 30007198 <v_mem_init+0xb8>
+30007114:	e5933028 	ldr	r3, [r3, #40]	; 0x28
+30007118:	e3530000 	cmp	r3, #0
+3000711c:	1a000003 	bne	30007130 <v_mem_init+0x50>
 		mem_ctrl.mem_state=0;
-30006f1c:	e59f3070 	ldr	r3, [pc, #112]	; 30006f94 <v_mem_init+0xb8>
-30006f20:	e3a02000 	mov	r2, #0
-30006f24:	e5c32030 	strb	r2, [r3, #48]	; 0x30
+30007120:	e59f3070 	ldr	r3, [pc, #112]	; 30007198 <v_mem_init+0xb8>
+30007124:	e3a02000 	mov	r2, #0
+30007128:	e5c32030 	strb	r2, [r3, #48]	; 0x30
 		return;
-30006f28:	ea000016 	b	30006f88 <v_mem_init+0xac>
+3000712c:	ea000016 	b	3000718c <v_mem_init+0xac>
 	}
 	else{
 		mem_ctrl.mem_state=1;
-30006f2c:	e59f3060 	ldr	r3, [pc, #96]	; 30006f94 <v_mem_init+0xb8>
-30006f30:	e3a02001 	mov	r2, #1
-30006f34:	e5c32030 	strb	r2, [r3, #48]	; 0x30
+30007130:	e59f3060 	ldr	r3, [pc, #96]	; 30007198 <v_mem_init+0xb8>
+30007134:	e3a02001 	mov	r2, #1
+30007138:	e5c32030 	strb	r2, [r3, #48]	; 0x30
 	}
 	acoral_mutex_init(&mem_ctrl.mutex,0);
-30006f38:	e59f0054 	ldr	r0, [pc, #84]	; 30006f94 <v_mem_init+0xb8>
-30006f3c:	e3a01000 	mov	r1, #0
-30006f40:	ebfff791 	bl	30004d8c <acoral_mutex_init>
+3000713c:	e59f0054 	ldr	r0, [pc, #84]	; 30007198 <v_mem_init+0xb8>
+30007140:	e3a01000 	mov	r1, #0
+30007144:	ebfff710 	bl	30004d8c <acoral_mutex_init>
 	mem_ctrl.top_p=mem_ctrl.down_p+size;
-30006f44:	e59f3048 	ldr	r3, [pc, #72]	; 30006f94 <v_mem_init+0xb8>
-30006f48:	e5932028 	ldr	r2, [r3, #40]	; 0x28
-30006f4c:	e59d3004 	ldr	r3, [sp, #4]
-30006f50:	e0822003 	add	r2, r2, r3
-30006f54:	e59f3038 	ldr	r3, [pc, #56]	; 30006f94 <v_mem_init+0xb8>
-30006f58:	e5832024 	str	r2, [r3, #36]	; 0x24
+30007148:	e59f3048 	ldr	r3, [pc, #72]	; 30007198 <v_mem_init+0xb8>
+3000714c:	e5932028 	ldr	r2, [r3, #40]	; 0x28
+30007150:	e59d3004 	ldr	r3, [sp, #4]
+30007154:	e0822003 	add	r2, r2, r3
+30007158:	e59f3038 	ldr	r3, [pc, #56]	; 30007198 <v_mem_init+0xb8>
+3000715c:	e5832024 	str	r2, [r3, #36]	; 0x24
 	mem_ctrl.freep_p=(acoral_u32 *)mem_ctrl.down_p;
-30006f5c:	e59f3030 	ldr	r3, [pc, #48]	; 30006f94 <v_mem_init+0xb8>
-30006f60:	e5933028 	ldr	r3, [r3, #40]	; 0x28
-30006f64:	e1a02003 	mov	r2, r3
-30006f68:	e59f3024 	ldr	r3, [pc, #36]	; 30006f94 <v_mem_init+0xb8>
-30006f6c:	e583202c 	str	r2, [r3, #44]	; 0x2c
+30007160:	e59f3030 	ldr	r3, [pc, #48]	; 30007198 <v_mem_init+0xb8>
+30007164:	e5933028 	ldr	r3, [r3, #40]	; 0x28
+30007168:	e1a02003 	mov	r2, r3
+3000716c:	e59f3024 	ldr	r3, [pc, #36]	; 30007198 <v_mem_init+0xb8>
+30007170:	e583202c 	str	r2, [r3, #44]	; 0x2c
 	BLOCK_SET_FREE(mem_ctrl.freep_p,size);
-30006f70:	e59f301c 	ldr	r3, [pc, #28]	; 30006f94 <v_mem_init+0xb8>
-30006f74:	e593302c 	ldr	r3, [r3, #44]	; 0x2c
-30006f78:	e59d2004 	ldr	r2, [sp, #4]
-30006f7c:	e1a02402 	lsl	r2, r2, #8
-30006f80:	e38220cc 	orr	r2, r2, #204	; 0xcc
-30006f84:	e5832000 	str	r2, [r3]
+30007174:	e59f301c 	ldr	r3, [pc, #28]	; 30007198 <v_mem_init+0xb8>
+30007178:	e593302c 	ldr	r3, [r3, #44]	; 0x2c
+3000717c:	e59d2004 	ldr	r2, [sp, #4]
+30007180:	e1a02402 	lsl	r2, r2, #8
+30007184:	e38220cc 	orr	r2, r2, #204	; 0xcc
+30007188:	e5832000 	str	r2, [r3]
 #ifdef CFG_TEST
 	mem_ctrl.alloc_size=0;
 	mem_ctrl.alloc_num=0;
 	mem_ctrl.free_num=0;
 #endif
 }
-30006f88:	e28dd00c 	add	sp, sp, #12
-30006f8c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30006f90:	e12fff1e 	bx	lr
-30006f94:	3000f980 	.word	0x3000f980
+3000718c:	e28dd00c 	add	sp, sp, #12
+30007190:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007194:	e12fff1e 	bx	lr
+30007198:	3000fb8c 	.word	0x3000fb8c
 
-30006f98 <v_mem_scan>:
+3000719c <v_mem_scan>:
 
 void v_mem_scan(void){
-30006f98:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30006f9c:	e24dd014 	sub	sp, sp, #20
+3000719c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300071a0:	e24dd014 	sub	sp, sp, #20
         acoral_8 * ctp;
 	acoral_u32 * tp;
 	acoral_u32 size;
 	if(mem_ctrl.mem_state==0){
-30006fa0:	e59f30c0 	ldr	r3, [pc, #192]	; 30007068 <v_mem_scan+0xd0>
-30006fa4:	e5d33030 	ldrb	r3, [r3, #48]	; 0x30
-30006fa8:	e3530000 	cmp	r3, #0
-30006fac:	1a000002 	bne	30006fbc <v_mem_scan+0x24>
+300071a4:	e59f30c0 	ldr	r3, [pc, #192]	; 3000726c <v_mem_scan+0xd0>
+300071a8:	e5d33030 	ldrb	r3, [r3, #48]	; 0x30
+300071ac:	e3530000 	cmp	r3, #0
+300071b0:	1a000002 	bne	300071c0 <v_mem_scan+0x24>
 		acoral_print("Mem Init Err ,so no mem space to malloc\r\n");
-30006fb0:	e59f00b4 	ldr	r0, [pc, #180]	; 3000706c <v_mem_scan+0xd4>
-30006fb4:	eb001093 	bl	3000b208 <acoral_print>
+300071b4:	e59f00b4 	ldr	r0, [pc, #180]	; 30007270 <v_mem_scan+0xd4>
+300071b8:	eb001093 	bl	3000b40c <acoral_print>
 		return;
-30006fb8:	ea000027 	b	3000705c <v_mem_scan+0xc4>
+300071bc:	ea000027 	b	30007260 <v_mem_scan+0xc4>
 	}
 	ctp=mem_ctrl.down_p;
-30006fbc:	e59f30a4 	ldr	r3, [pc, #164]	; 30007068 <v_mem_scan+0xd0>
-30006fc0:	e5933028 	ldr	r3, [r3, #40]	; 0x28
-30006fc4:	e58d3004 	str	r3, [sp, #4]
+300071c0:	e59f30a4 	ldr	r3, [pc, #164]	; 3000726c <v_mem_scan+0xd0>
+300071c4:	e5933028 	ldr	r3, [r3, #40]	; 0x28
+300071c8:	e58d3004 	str	r3, [sp, #4]
 	do{
 		tp=(acoral_u32 *)ctp;
-30006fc8:	e59d3004 	ldr	r3, [sp, #4]
-30006fcc:	e58d3008 	str	r3, [sp, #8]
+300071cc:	e59d3004 	ldr	r3, [sp, #4]
+300071d0:	e58d3008 	str	r3, [sp, #8]
 		size=BLOCK_SIZE(*tp);
-30006fd0:	e59d3008 	ldr	r3, [sp, #8]
-30006fd4:	e5933000 	ldr	r3, [r3]
-30006fd8:	e1a03423 	lsr	r3, r3, #8
-30006fdc:	e58d300c 	str	r3, [sp, #12]
+300071d4:	e59d3008 	ldr	r3, [sp, #8]
+300071d8:	e5933000 	ldr	r3, [r3]
+300071dc:	e1a03423 	lsr	r3, r3, #8
+300071e0:	e58d300c 	str	r3, [sp, #12]
 		if(size==0){
-30006fe0:	e59d300c 	ldr	r3, [sp, #12]
-30006fe4:	e3530000 	cmp	r3, #0
-30006fe8:	1a000003 	bne	30006ffc <v_mem_scan+0x64>
+300071e4:	e59d300c 	ldr	r3, [sp, #12]
+300071e8:	e3530000 	cmp	r3, #0
+300071ec:	1a000003 	bne	30007200 <v_mem_scan+0x64>
 			acoral_print("Err address is 0x%x,size should not be 0\r\n",tp);
-30006fec:	e59f007c 	ldr	r0, [pc, #124]	; 30007070 <v_mem_scan+0xd8>
-30006ff0:	e59d1008 	ldr	r1, [sp, #8]
-30006ff4:	eb001083 	bl	3000b208 <acoral_print>
+300071f0:	e59f007c 	ldr	r0, [pc, #124]	; 30007274 <v_mem_scan+0xd8>
+300071f4:	e59d1008 	ldr	r1, [sp, #8]
+300071f8:	eb001083 	bl	3000b40c <acoral_print>
 			break;
-30006ff8:	ea000017 	b	3000705c <v_mem_scan+0xc4>
+300071fc:	ea000017 	b	30007260 <v_mem_scan+0xc4>
 		}
 		if(BLOCK_USED(*tp)){
-30006ffc:	e59d3008 	ldr	r3, [sp, #8]
-30007000:	e5933000 	ldr	r3, [r3]
-30007004:	e2033001 	and	r3, r3, #1
-30007008:	e20330ff 	and	r3, r3, #255	; 0xff
-3000700c:	e3530000 	cmp	r3, #0
-30007010:	0a000004 	beq	30007028 <v_mem_scan+0x90>
+30007200:	e59d3008 	ldr	r3, [sp, #8]
+30007204:	e5933000 	ldr	r3, [r3]
+30007208:	e2033001 	and	r3, r3, #1
+3000720c:	e20330ff 	and	r3, r3, #255	; 0xff
+30007210:	e3530000 	cmp	r3, #0
+30007214:	0a000004 	beq	3000722c <v_mem_scan+0x90>
 			acoral_print("The address is 0x%x,the block is used and it's size is %d\r\n",tp,size);
-30007014:	e59f0058 	ldr	r0, [pc, #88]	; 30007074 <v_mem_scan+0xdc>
-30007018:	e59d1008 	ldr	r1, [sp, #8]
-3000701c:	e59d200c 	ldr	r2, [sp, #12]
-30007020:	eb001078 	bl	3000b208 <acoral_print>
-30007024:	ea000003 	b	30007038 <v_mem_scan+0xa0>
+30007218:	e59f0058 	ldr	r0, [pc, #88]	; 30007278 <v_mem_scan+0xdc>
+3000721c:	e59d1008 	ldr	r1, [sp, #8]
+30007220:	e59d200c 	ldr	r2, [sp, #12]
+30007224:	eb001078 	bl	3000b40c <acoral_print>
+30007228:	ea000003 	b	3000723c <v_mem_scan+0xa0>
 		}
 		else{
 			
 			acoral_print("The address is 0x%x,the block is unused and it's size is %d\r\n",tp,size);
-30007028:	e59f0048 	ldr	r0, [pc, #72]	; 30007078 <v_mem_scan+0xe0>
-3000702c:	e59d1008 	ldr	r1, [sp, #8]
-30007030:	e59d200c 	ldr	r2, [sp, #12]
-30007034:	eb001073 	bl	3000b208 <acoral_print>
+3000722c:	e59f0048 	ldr	r0, [pc, #72]	; 3000727c <v_mem_scan+0xe0>
+30007230:	e59d1008 	ldr	r1, [sp, #8]
+30007234:	e59d200c 	ldr	r2, [sp, #12]
+30007238:	eb001073 	bl	3000b40c <acoral_print>
 		}
 		ctp=ctp+size;
-30007038:	e59d2004 	ldr	r2, [sp, #4]
-3000703c:	e59d300c 	ldr	r3, [sp, #12]
-30007040:	e0823003 	add	r3, r2, r3
-30007044:	e58d3004 	str	r3, [sp, #4]
+3000723c:	e59d2004 	ldr	r2, [sp, #4]
+30007240:	e59d300c 	ldr	r3, [sp, #12]
+30007244:	e0823003 	add	r3, r2, r3
+30007248:	e58d3004 	str	r3, [sp, #4]
 	}while(ctp<mem_ctrl.top_p);
-30007048:	e59f3018 	ldr	r3, [pc, #24]	; 30007068 <v_mem_scan+0xd0>
-3000704c:	e5932024 	ldr	r2, [r3, #36]	; 0x24
-30007050:	e59d3004 	ldr	r3, [sp, #4]
-30007054:	e1520003 	cmp	r2, r3
-30007058:	8affffda 	bhi	30006fc8 <v_mem_scan+0x30>
+3000724c:	e59f3018 	ldr	r3, [pc, #24]	; 3000726c <v_mem_scan+0xd0>
+30007250:	e5932024 	ldr	r2, [r3, #36]	; 0x24
+30007254:	e59d3004 	ldr	r3, [sp, #4]
+30007258:	e1520003 	cmp	r2, r3
+3000725c:	8affffda 	bhi	300071cc <v_mem_scan+0x30>
 #ifdef CFG_TEST
 	acoral_print("Alloc Size:%d  Free_num:%d  alloc_num:%d\r\n",mem_ctrl.alloc_size,mem_ctrl.free_num,mem_ctrl.alloc_num);
 #endif
 }
-3000705c:	e28dd014 	add	sp, sp, #20
-30007060:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007064:	e12fff1e 	bx	lr
-30007068:	3000f980 	.word	0x3000f980
-3000706c:	3000e4f0 	.word	0x3000e4f0
-30007070:	3000e51c 	.word	0x3000e51c
-30007074:	3000e548 	.word	0x3000e548
-30007078:	3000e584 	.word	0x3000e584
+30007260:	e28dd014 	add	sp, sp, #20
+30007264:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007268:	e12fff1e 	bx	lr
+3000726c:	3000fb8c 	.word	0x3000fb8c
+30007270:	3000e6f4 	.word	0x3000e6f4
+30007274:	3000e720 	.word	0x3000e720
+30007278:	3000e74c 	.word	0x3000e74c
+3000727c:	3000e788 	.word	0x3000e788
 
-3000707c <acoral_mbox_create>:
+30007280 <acoral_mbox_create>:
 /*====================================
  *     create a mailbox
  *       创建一个邮箱
  *====================================*/
 acoral_evt_t *acoral_mbox_create()
 {
-3000707c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007080:	e24dd00c 	sub	sp, sp, #12
+30007280:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007284:	e24dd00c 	sub	sp, sp, #12
   	acoral_evt_t * event;
 	
 	event=acoral_alloc_evt();
-30007084:	ebfff6cc 	bl	30004bbc <acoral_alloc_evt>
-30007088:	e1a03000 	mov	r3, r0
-3000708c:	e58d3004 	str	r3, [sp, #4]
+30007288:	ebfff64b 	bl	30004bbc <acoral_alloc_evt>
+3000728c:	e1a03000 	mov	r3, r0
+30007290:	e58d3004 	str	r3, [sp, #4]
 	if (NULL == event)
-30007090:	e59d3004 	ldr	r3, [sp, #4]
-30007094:	e3530000 	cmp	r3, #0
-30007098:	1a000001 	bne	300070a4 <acoral_mbox_create+0x28>
+30007294:	e59d3004 	ldr	r3, [sp, #4]
+30007298:	e3530000 	cmp	r3, #0
+3000729c:	1a000001 	bne	300072a8 <acoral_mbox_create+0x28>
 		return NULL;
-3000709c:	e3a03000 	mov	r3, #0
-300070a0:	ea00000b 	b	300070d4 <acoral_mbox_create+0x58>
+300072a0:	e3a03000 	mov	r3, #0
+300072a4:	ea00000b 	b	300072d8 <acoral_mbox_create+0x58>
 
 	event->type  = ACORAL_EVENT_MBOX;
-300070a4:	e59d3004 	ldr	r3, [sp, #4]
-300070a8:	e3a02003 	mov	r2, #3
-300070ac:	e5c32004 	strb	r2, [r3, #4]
+300072a8:	e59d3004 	ldr	r3, [sp, #4]
+300072ac:	e3a02003 	mov	r2, #3
+300072b0:	e5c32004 	strb	r2, [r3, #4]
 	event->count = 0x00000000;
-300070b0:	e59d3004 	ldr	r3, [sp, #4]
-300070b4:	e3a02000 	mov	r2, #0
-300070b8:	e583200c 	str	r2, [r3, #12]
+300072b4:	e59d3004 	ldr	r3, [sp, #4]
+300072b8:	e3a02000 	mov	r2, #0
+300072bc:	e583200c 	str	r2, [r3, #12]
 	event->data  = NULL;
-300070bc:	e59d3004 	ldr	r3, [sp, #4]
-300070c0:	e3a02000 	mov	r2, #0
-300070c4:	e5832020 	str	r2, [r3, #32]
+300072c0:	e59d3004 	ldr	r3, [sp, #4]
+300072c4:	e3a02000 	mov	r2, #0
+300072c8:	e5832020 	str	r2, [r3, #32]
 	acoral_evt_init(event);
-300070c8:	e59d0004 	ldr	r0, [sp, #4]
-300070cc:	ebfff6c2 	bl	30004bdc <acoral_evt_init>
+300072cc:	e59d0004 	ldr	r0, [sp, #4]
+300072d0:	ebfff641 	bl	30004bdc <acoral_evt_init>
 	return event;
-300070d0:	e59d3004 	ldr	r3, [sp, #4]
+300072d4:	e59d3004 	ldr	r3, [sp, #4]
 }
-300070d4:	e1a00003 	mov	r0, r3
-300070d8:	e28dd00c 	add	sp, sp, #12
-300070dc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300070e0:	e12fff1e 	bx	lr
+300072d8:	e1a00003 	mov	r0, r3
+300072dc:	e28dd00c 	add	sp, sp, #12
+300072e0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300072e4:	e12fff1e 	bx	lr
 
-300070e4 <acoral_mbox_del>:
+300072e8 <acoral_mbox_del>:
 /*=====================================
  *   delete a mailbox
  *     删除一个邮箱
  *=====================================*/
 acoral_u32 acoral_mbox_del(acoral_evt_t* event)
 {
-300070e4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300070e8:	e24dd00c 	sub	sp, sp, #12
-300070ec:	e58d0004 	str	r0, [sp, #4]
+300072e8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300072ec:	e24dd00c 	sub	sp, sp, #12
+300072f0:	e58d0004 	str	r0, [sp, #4]
 	if (acoral_intr_nesting > 0)
-300070f0:	ebffe99a 	bl	30001760 <hal_get_intr_nesting_comm>
-300070f4:	e1a03000 	mov	r3, r0
-300070f8:	e3530000 	cmp	r3, #0
-300070fc:	da000001 	ble	30007108 <acoral_mbox_del+0x24>
+300072f4:	ebffe919 	bl	30001760 <hal_get_intr_nesting_comm>
+300072f8:	e1a03000 	mov	r3, r0
+300072fc:	e3530000 	cmp	r3, #0
+30007300:	da000001 	ble	3000730c <acoral_mbox_del+0x24>
 		return MBOX_ERR_INTR;
-30007100:	e3a03006 	mov	r3, #6
-30007104:	ea00000e 	b	30007144 <acoral_mbox_del+0x60>
+30007304:	e3a03006 	mov	r3, #6
+30007308:	ea00000e 	b	30007348 <acoral_mbox_del+0x60>
 	
 	if (NULL == event)
-30007108:	e59d3004 	ldr	r3, [sp, #4]
-3000710c:	e3530000 	cmp	r3, #0
-30007110:	1a000001 	bne	3000711c <acoral_mbox_del+0x38>
+3000730c:	e59d3004 	ldr	r3, [sp, #4]
+30007310:	e3530000 	cmp	r3, #0
+30007314:	1a000001 	bne	30007320 <acoral_mbox_del+0x38>
 		return MBOX_ERR_NULL;
-30007114:	e3a03002 	mov	r3, #2
-30007118:	ea000009 	b	30007144 <acoral_mbox_del+0x60>
+30007318:	e3a03002 	mov	r3, #2
+3000731c:	ea000009 	b	30007348 <acoral_mbox_del+0x60>
 
 	if(event->type != ACORAL_EVENT_MBOX)
-3000711c:	e59d3004 	ldr	r3, [sp, #4]
-30007120:	e5d33004 	ldrb	r3, [r3, #4]
-30007124:	e3530003 	cmp	r3, #3
-30007128:	0a000001 	beq	30007134 <acoral_mbox_del+0x50>
+30007320:	e59d3004 	ldr	r3, [sp, #4]
+30007324:	e5d33004 	ldrb	r3, [r3, #4]
+30007328:	e3530003 	cmp	r3, #3
+3000732c:	0a000001 	beq	30007338 <acoral_mbox_del+0x50>
 		return MBOX_ERR_TYPE;
-3000712c:	e3a03004 	mov	r3, #4
-30007130:	ea000003 	b	30007144 <acoral_mbox_del+0x60>
+30007330:	e3a03004 	mov	r3, #4
+30007334:	ea000003 	b	30007348 <acoral_mbox_del+0x60>
 
 	acoral_release_thread((acoral_res_t *)event); 
-30007134:	e59d3004 	ldr	r3, [sp, #4]
-30007138:	e1a00003 	mov	r0, r3
-3000713c:	ebffed72 	bl	3000270c <acoral_release_thread>
+30007338:	e59d3004 	ldr	r3, [sp, #4]
+3000733c:	e1a00003 	mov	r0, r3
+30007340:	ebffecf1 	bl	3000270c <acoral_release_thread>
 	return MBOX_SUCCED;
-30007140:	e3a03000 	mov	r3, #0
+30007344:	e3a03000 	mov	r3, #0
 }
-30007144:	e1a00003 	mov	r0, r3
-30007148:	e28dd00c 	add	sp, sp, #12
-3000714c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007150:	e12fff1e 	bx	lr
+30007348:	e1a00003 	mov	r0, r3
+3000734c:	e28dd00c 	add	sp, sp, #12
+30007350:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007354:	e12fff1e 	bx	lr
 
-30007154 <acoral_mbox_send>:
+30007358 <acoral_mbox_send>:
 /*======================================
  *     send a mail to mailbox
  *       发送邮件至邮箱
  *======================================*/
 acoral_u32 acoral_mbox_send(acoral_evt_t * event, void *msg)
 {
-30007154:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007158:	e24dd014 	sub	sp, sp, #20
-3000715c:	e58d0004 	str	r0, [sp, #4]
-30007160:	e58d1000 	str	r1, [sp]
+30007358:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000735c:	e24dd014 	sub	sp, sp, #20
+30007360:	e58d0004 	str	r0, [sp, #4]
+30007364:	e58d1000 	str	r1, [sp]
 	acoral_thread_t     *thread;
 
 	/*if (acoral_intr_nesting > 0)
 		return MBOX_ERR_INTR;
 	*/
 	if (NULL == event)
-30007164:	e59d3004 	ldr	r3, [sp, #4]
-30007168:	e3530000 	cmp	r3, #0
-3000716c:	1a000001 	bne	30007178 <acoral_mbox_send+0x24>
+30007368:	e59d3004 	ldr	r3, [sp, #4]
+3000736c:	e3530000 	cmp	r3, #0
+30007370:	1a000001 	bne	3000737c <acoral_mbox_send+0x24>
 		return MBOX_ERR_NULL;
-30007170:	e3a03002 	mov	r3, #2
-30007174:	ea000028 	b	3000721c <acoral_mbox_send+0xc8>
+30007374:	e3a03002 	mov	r3, #2
+30007378:	ea000028 	b	30007420 <acoral_mbox_send+0xc8>
 
 	if(event->type != ACORAL_EVENT_MBOX)
-30007178:	e59d3004 	ldr	r3, [sp, #4]
-3000717c:	e5d33004 	ldrb	r3, [r3, #4]
-30007180:	e3530003 	cmp	r3, #3
-30007184:	0a000001 	beq	30007190 <acoral_mbox_send+0x3c>
+3000737c:	e59d3004 	ldr	r3, [sp, #4]
+30007380:	e5d33004 	ldrb	r3, [r3, #4]
+30007384:	e3530003 	cmp	r3, #3
+30007388:	0a000001 	beq	30007394 <acoral_mbox_send+0x3c>
 		return MBOX_ERR_TYPE;
-30007188:	e3a03004 	mov	r3, #4
-3000718c:	ea000022 	b	3000721c <acoral_mbox_send+0xc8>
+3000738c:	e3a03004 	mov	r3, #4
+30007390:	ea000022 	b	30007420 <acoral_mbox_send+0xc8>
 
 	HAL_ENTER_CRITICAL();
-30007190:	ebffe957 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007194:	e1a03000 	mov	r3, r0
-30007198:	e58d3008 	str	r3, [sp, #8]
+30007394:	ebffe8d6 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007398:	e1a03000 	mov	r3, r0
+3000739c:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_lock(&event->spin_lock);
 	if(event->data != NULL)
-3000719c:	e59d3004 	ldr	r3, [sp, #4]
-300071a0:	e5933020 	ldr	r3, [r3, #32]
-300071a4:	e3530000 	cmp	r3, #0
-300071a8:	0a000003 	beq	300071bc <acoral_mbox_send+0x68>
+300073a0:	e59d3004 	ldr	r3, [sp, #4]
+300073a4:	e5933020 	ldr	r3, [r3, #32]
+300073a8:	e3530000 	cmp	r3, #0
+300073ac:	0a000003 	beq	300073c0 <acoral_mbox_send+0x68>
 	{
 		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
-300071ac:	e59d0008 	ldr	r0, [sp, #8]
-300071b0:	ebffe94d 	bl	300016ec <HAL_INTR_RESTORE>
+300073b0:	e59d0008 	ldr	r0, [sp, #8]
+300073b4:	ebffe8cc 	bl	300016ec <HAL_INTR_RESTORE>
 		return MBOX_ERR_MES_EXIST;
-300071b4:	e3a03005 	mov	r3, #5
-300071b8:	ea000017 	b	3000721c <acoral_mbox_send+0xc8>
+300073b8:	e3a03005 	mov	r3, #5
+300073bc:	ea000017 	b	30007420 <acoral_mbox_send+0xc8>
 	}
 	event->data = msg;
-300071bc:	e59d3004 	ldr	r3, [sp, #4]
-300071c0:	e59d2000 	ldr	r2, [sp]
-300071c4:	e5832020 	str	r2, [r3, #32]
+300073c0:	e59d3004 	ldr	r3, [sp, #4]
+300073c4:	e59d2000 	ldr	r2, [sp]
+300073c8:	e5832020 	str	r2, [r3, #32]
 	thread =acoral_evt_high_thread(event);
-300071c8:	e59d0004 	ldr	r0, [sp, #4]
-300071cc:	ebfff69c 	bl	30004c44 <acoral_evt_high_thread>
-300071d0:	e1a03000 	mov	r3, r0
-300071d4:	e58d300c 	str	r3, [sp, #12]
+300073cc:	e59d0004 	ldr	r0, [sp, #4]
+300073d0:	ebfff61b 	bl	30004c44 <acoral_evt_high_thread>
+300073d4:	e1a03000 	mov	r3, r0
+300073d8:	e58d300c 	str	r3, [sp, #12]
 	/* 释放等待进程*/
 	if (thread==NULL)
-300071d8:	e59d300c 	ldr	r3, [sp, #12]
-300071dc:	e3530000 	cmp	r3, #0
-300071e0:	1a000003 	bne	300071f4 <acoral_mbox_send+0xa0>
+300073dc:	e59d300c 	ldr	r3, [sp, #12]
+300073e0:	e3530000 	cmp	r3, #0
+300073e4:	1a000003 	bne	300073f8 <acoral_mbox_send+0xa0>
 	{
 		/* 没有等待队列*/
 		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
-300071e4:	e59d0008 	ldr	r0, [sp, #8]
-300071e8:	ebffe93f 	bl	300016ec <HAL_INTR_RESTORE>
+300073e8:	e59d0008 	ldr	r0, [sp, #8]
+300073ec:	ebffe8be 	bl	300016ec <HAL_INTR_RESTORE>
 		return  MBOX_SUCCED;
-300071ec:	e3a03000 	mov	r3, #0
-300071f0:	ea000009 	b	3000721c <acoral_mbox_send+0xc8>
+300073f0:	e3a03000 	mov	r3, #0
+300073f4:	ea000009 	b	30007420 <acoral_mbox_send+0xc8>
 	}
 	/*释放等待任务*/
 	timeout_queue_del(thread);
-300071f4:	e59d000c 	ldr	r0, [sp, #12]
-300071f8:	ebfff5bc 	bl	300048f0 <timeout_queue_del>
+300073f8:	e59d000c 	ldr	r0, [sp, #12]
+300073fc:	ebfff53b 	bl	300048f0 <timeout_queue_del>
 	acoral_evt_queue_del(thread);
-300071fc:	e59d000c 	ldr	r0, [sp, #12]
-30007200:	ebfff6d4 	bl	30004d58 <acoral_evt_queue_del>
+30007400:	e59d000c 	ldr	r0, [sp, #12]
+30007404:	ebfff653 	bl	30004d58 <acoral_evt_queue_del>
 	acoral_rdy_thread(thread);
-30007204:	e59d000c 	ldr	r0, [sp, #12]
-30007208:	ebffee52 	bl	30002b58 <acoral_rdy_thread>
+30007408:	e59d000c 	ldr	r0, [sp, #12]
+3000740c:	ebffedd1 	bl	30002b58 <acoral_rdy_thread>
 	acoral_spin_unlock(&event->spin_lock);
 	HAL_EXIT_CRITICAL();
-3000720c:	e59d0008 	ldr	r0, [sp, #8]
-30007210:	ebffe935 	bl	300016ec <HAL_INTR_RESTORE>
+30007410:	e59d0008 	ldr	r0, [sp, #8]
+30007414:	ebffe8b4 	bl	300016ec <HAL_INTR_RESTORE>
 	acoral_sched();
-30007214:	ebffec77 	bl	300023f8 <acoral_sched>
+30007418:	ebffebf6 	bl	300023f8 <acoral_sched>
 	return MBOX_SUCCED;
-30007218:	e3a03000 	mov	r3, #0
+3000741c:	e3a03000 	mov	r3, #0
 }
-3000721c:	e1a00003 	mov	r0, r3
-30007220:	e28dd014 	add	sp, sp, #20
-30007224:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007228:	e12fff1e 	bx	lr
+30007420:	e1a00003 	mov	r0, r3
+30007424:	e28dd014 	add	sp, sp, #20
+30007428:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000742c:	e12fff1e 	bx	lr
 
-3000722c <acoral_mbox_recv>:
+30007430 <acoral_mbox_recv>:
 /*======================================
  *    receive  a mail to mailbox
  *       接收邮件从邮箱
  *======================================*/
 void* acoral_mbox_recv(acoral_evt_t * event, acoral_time timeout)
 {
-3000722c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007230:	e24dd01c 	sub	sp, sp, #28
-30007234:	e58d0004 	str	r0, [sp, #4]
-30007238:	e58d1000 	str	r1, [sp]
+30007430:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007434:	e24dd01c 	sub	sp, sp, #28
+30007438:	e58d0004 	str	r0, [sp, #4]
+3000743c:	e58d1000 	str	r1, [sp]
 	void            *msg;
 	acoral_sr         cpu_sr;
 	acoral_thread_t  *cur;
 	
 	if (acoral_intr_nesting > 0)
-3000723c:	ebffe947 	bl	30001760 <hal_get_intr_nesting_comm>
-30007240:	e1a03000 	mov	r3, r0
-30007244:	e3530000 	cmp	r3, #0
-30007248:	da000001 	ble	30007254 <acoral_mbox_recv+0x28>
+30007440:	ebffe8c6 	bl	30001760 <hal_get_intr_nesting_comm>
+30007444:	e1a03000 	mov	r3, r0
+30007448:	e3530000 	cmp	r3, #0
+3000744c:	da000001 	ble	30007458 <acoral_mbox_recv+0x28>
 		return NULL;
-3000724c:	e3a03000 	mov	r3, #0
-30007250:	ea00004d 	b	3000738c <acoral_mbox_recv+0x160>
+30007450:	e3a03000 	mov	r3, #0
+30007454:	ea00004d 	b	30007590 <acoral_mbox_recv+0x160>
 
 	if(event->type!=ACORAL_EVENT_MBOX)
-30007254:	e59d3004 	ldr	r3, [sp, #4]
-30007258:	e5d33004 	ldrb	r3, [r3, #4]
-3000725c:	e3530003 	cmp	r3, #3
-30007260:	0a000001 	beq	3000726c <acoral_mbox_recv+0x40>
+30007458:	e59d3004 	ldr	r3, [sp, #4]
+3000745c:	e5d33004 	ldrb	r3, [r3, #4]
+30007460:	e3530003 	cmp	r3, #3
+30007464:	0a000001 	beq	30007470 <acoral_mbox_recv+0x40>
 		return NULL;
-30007264:	e3a03000 	mov	r3, #0
-30007268:	ea000047 	b	3000738c <acoral_mbox_recv+0x160>
+30007468:	e3a03000 	mov	r3, #0
+3000746c:	ea000047 	b	30007590 <acoral_mbox_recv+0x160>
 	
 	HAL_ENTER_CRITICAL();
-3000726c:	ebffe920 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007270:	e1a03000 	mov	r3, r0
-30007274:	e58d3010 	str	r3, [sp, #16]
+30007470:	ebffe89f 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007474:	e1a03000 	mov	r3, r0
+30007478:	e58d3010 	str	r3, [sp, #16]
 	acoral_spin_lock(&event->spin_lock);
 	if( event->data == NULL)
-30007278:	e59d3004 	ldr	r3, [sp, #4]
-3000727c:	e5933020 	ldr	r3, [r3, #32]
-30007280:	e3530000 	cmp	r3, #0
-30007284:	1a000037 	bne	30007368 <acoral_mbox_recv+0x13c>
+3000747c:	e59d3004 	ldr	r3, [sp, #4]
+30007480:	e5933020 	ldr	r3, [r3, #32]
+30007484:	e3530000 	cmp	r3, #0
+30007488:	1a000037 	bne	3000756c <acoral_mbox_recv+0x13c>
 	{
 		cur = acoral_cur_thread;
-30007288:	e59f310c 	ldr	r3, [pc, #268]	; 3000739c <acoral_mbox_recv+0x170>
-3000728c:	e5933000 	ldr	r3, [r3]
-30007290:	e58d3014 	str	r3, [sp, #20]
+3000748c:	e59f310c 	ldr	r3, [pc, #268]	; 300075a0 <acoral_mbox_recv+0x170>
+30007490:	e5933000 	ldr	r3, [r3]
+30007494:	e58d3014 	str	r3, [sp, #20]
 		if (timeout > 0)
-30007294:	e59d3000 	ldr	r3, [sp]
-30007298:	e3530000 	cmp	r3, #0
-3000729c:	0a00000f 	beq	300072e0 <acoral_mbox_recv+0xb4>
+30007498:	e59d3000 	ldr	r3, [sp]
+3000749c:	e3530000 	cmp	r3, #0
+300074a0:	0a00000f 	beq	300074e4 <acoral_mbox_recv+0xb4>
 		{
 			cur->delay = TIME_TO_TICKS(timeout);
-300072a0:	e59d2000 	ldr	r2, [sp]
-300072a4:	e1a03002 	mov	r3, r2
-300072a8:	e1a03103 	lsl	r3, r3, #2
-300072ac:	e0833002 	add	r3, r3, r2
-300072b0:	e1a02103 	lsl	r2, r3, #2
-300072b4:	e0833002 	add	r3, r3, r2
-300072b8:	e1a03103 	lsl	r3, r3, #2
-300072bc:	e1a02003 	mov	r2, r3
-300072c0:	e59f30d8 	ldr	r3, [pc, #216]	; 300073a0 <acoral_mbox_recv+0x174>
-300072c4:	e0831392 	umull	r1, r3, r2, r3
-300072c8:	e1a03323 	lsr	r3, r3, #6
-300072cc:	e1a02003 	mov	r2, r3
-300072d0:	e59d3014 	ldr	r3, [sp, #20]
-300072d4:	e5832040 	str	r2, [r3, #64]	; 0x40
+300074a4:	e59d2000 	ldr	r2, [sp]
+300074a8:	e1a03002 	mov	r3, r2
+300074ac:	e1a03103 	lsl	r3, r3, #2
+300074b0:	e0833002 	add	r3, r3, r2
+300074b4:	e1a02103 	lsl	r2, r3, #2
+300074b8:	e0833002 	add	r3, r3, r2
+300074bc:	e1a03103 	lsl	r3, r3, #2
+300074c0:	e1a02003 	mov	r2, r3
+300074c4:	e59f30d8 	ldr	r3, [pc, #216]	; 300075a4 <acoral_mbox_recv+0x174>
+300074c8:	e0831392 	umull	r1, r3, r2, r3
+300074cc:	e1a03323 	lsr	r3, r3, #6
+300074d0:	e1a02003 	mov	r2, r3
+300074d4:	e59d3014 	ldr	r3, [sp, #20]
+300074d8:	e5832040 	str	r2, [r3, #64]	; 0x40
 			timeout_queue_add(cur);
-300072d8:	e59d0014 	ldr	r0, [sp, #20]
-300072dc:	ebfff541 	bl	300047e8 <timeout_queue_add>
+300074dc:	e59d0014 	ldr	r0, [sp, #20]
+300074e0:	ebfff4c0 	bl	300047e8 <timeout_queue_add>
 		}
 		acoral_unrdy_thread(cur);
-300072e0:	e59d0014 	ldr	r0, [sp, #20]
-300072e4:	ebffee2a 	bl	30002b94 <acoral_unrdy_thread>
+300074e4:	e59d0014 	ldr	r0, [sp, #20]
+300074e8:	ebffeda9 	bl	30002b94 <acoral_unrdy_thread>
 		acoral_evt_queue_add(event, cur);
-300072e8:	e59d0004 	ldr	r0, [sp, #4]
-300072ec:	e59d1014 	ldr	r1, [sp, #20]
-300072f0:	ebfff667 	bl	30004c94 <acoral_evt_queue_add>
+300074ec:	e59d0004 	ldr	r0, [sp, #4]
+300074f0:	e59d1014 	ldr	r1, [sp, #20]
+300074f4:	ebfff5e6 	bl	30004c94 <acoral_evt_queue_add>
 		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
-300072f4:	e59d0010 	ldr	r0, [sp, #16]
-300072f8:	ebffe8fb 	bl	300016ec <HAL_INTR_RESTORE>
+300074f8:	e59d0010 	ldr	r0, [sp, #16]
+300074fc:	ebffe87a 	bl	300016ec <HAL_INTR_RESTORE>
 		acoral_sched();
-300072fc:	ebffec3d 	bl	300023f8 <acoral_sched>
+30007500:	ebffebbc 	bl	300023f8 <acoral_sched>
 		HAL_ENTER_CRITICAL();
-30007300:	ebffe8fb 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007304:	e1a03000 	mov	r3, r0
-30007308:	e58d3010 	str	r3, [sp, #16]
+30007504:	ebffe87a 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007508:	e1a03000 	mov	r3, r0
+3000750c:	e58d3010 	str	r3, [sp, #16]
 		acoral_spin_lock(&event->spin_lock);
 
 		if (timeout > 0 && cur->delay <= 0)
-3000730c:	e59d3000 	ldr	r3, [sp]
-30007310:	e3530000 	cmp	r3, #0
-30007314:	0a000009 	beq	30007340 <acoral_mbox_recv+0x114>
-30007318:	e59d3014 	ldr	r3, [sp, #20]
-3000731c:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-30007320:	e3530000 	cmp	r3, #0
-30007324:	ca000005 	bgt	30007340 <acoral_mbox_recv+0x114>
+30007510:	e59d3000 	ldr	r3, [sp]
+30007514:	e3530000 	cmp	r3, #0
+30007518:	0a000009 	beq	30007544 <acoral_mbox_recv+0x114>
+3000751c:	e59d3014 	ldr	r3, [sp, #20]
+30007520:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+30007524:	e3530000 	cmp	r3, #0
+30007528:	ca000005 	bgt	30007544 <acoral_mbox_recv+0x114>
 		{
 			acoral_evt_queue_del(cur);
-30007328:	e59d0014 	ldr	r0, [sp, #20]
-3000732c:	ebfff689 	bl	30004d58 <acoral_evt_queue_del>
+3000752c:	e59d0014 	ldr	r0, [sp, #20]
+30007530:	ebfff608 	bl	30004d58 <acoral_evt_queue_del>
 			acoral_spin_unlock(&event->spin_lock);
 			HAL_EXIT_CRITICAL();
-30007330:	e59d0010 	ldr	r0, [sp, #16]
-30007334:	ebffe8ec 	bl	300016ec <HAL_INTR_RESTORE>
+30007534:	e59d0010 	ldr	r0, [sp, #16]
+30007538:	ebffe86b 	bl	300016ec <HAL_INTR_RESTORE>
 			return NULL;
-30007338:	e3a03000 	mov	r3, #0
-3000733c:	ea000012 	b	3000738c <acoral_mbox_recv+0x160>
+3000753c:	e3a03000 	mov	r3, #0
+30007540:	ea000012 	b	30007590 <acoral_mbox_recv+0x160>
 		}
 
 		msg        = event->data;
-30007340:	e59d3004 	ldr	r3, [sp, #4]
-30007344:	e5933020 	ldr	r3, [r3, #32]
-30007348:	e58d300c 	str	r3, [sp, #12]
+30007544:	e59d3004 	ldr	r3, [sp, #4]
+30007548:	e5933020 	ldr	r3, [r3, #32]
+3000754c:	e58d300c 	str	r3, [sp, #12]
 		event->data = NULL;
-3000734c:	e59d3004 	ldr	r3, [sp, #4]
-30007350:	e3a02000 	mov	r2, #0
-30007354:	e5832020 	str	r2, [r3, #32]
+30007550:	e59d3004 	ldr	r3, [sp, #4]
+30007554:	e3a02000 	mov	r2, #0
+30007558:	e5832020 	str	r2, [r3, #32]
 		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
-30007358:	e59d0010 	ldr	r0, [sp, #16]
-3000735c:	ebffe8e2 	bl	300016ec <HAL_INTR_RESTORE>
+3000755c:	e59d0010 	ldr	r0, [sp, #16]
+30007560:	ebffe861 	bl	300016ec <HAL_INTR_RESTORE>
 		return msg;
-30007360:	e59d300c 	ldr	r3, [sp, #12]
-30007364:	ea000008 	b	3000738c <acoral_mbox_recv+0x160>
+30007564:	e59d300c 	ldr	r3, [sp, #12]
+30007568:	ea000008 	b	30007590 <acoral_mbox_recv+0x160>
 	}
 	
 	msg         = event->data;
-30007368:	e59d3004 	ldr	r3, [sp, #4]
-3000736c:	e5933020 	ldr	r3, [r3, #32]
-30007370:	e58d300c 	str	r3, [sp, #12]
+3000756c:	e59d3004 	ldr	r3, [sp, #4]
+30007570:	e5933020 	ldr	r3, [r3, #32]
+30007574:	e58d300c 	str	r3, [sp, #12]
 	event->data = NULL;
-30007374:	e59d3004 	ldr	r3, [sp, #4]
-30007378:	e3a02000 	mov	r2, #0
-3000737c:	e5832020 	str	r2, [r3, #32]
+30007578:	e59d3004 	ldr	r3, [sp, #4]
+3000757c:	e3a02000 	mov	r2, #0
+30007580:	e5832020 	str	r2, [r3, #32]
 	acoral_spin_unlock(&event->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007380:	e59d0010 	ldr	r0, [sp, #16]
-30007384:	ebffe8d8 	bl	300016ec <HAL_INTR_RESTORE>
+30007584:	e59d0010 	ldr	r0, [sp, #16]
+30007588:	ebffe857 	bl	300016ec <HAL_INTR_RESTORE>
 
 	return msg;
-30007388:	e59d300c 	ldr	r3, [sp, #12]
+3000758c:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000738c:	e1a00003 	mov	r0, r3
-30007390:	e28dd01c 	add	sp, sp, #28
-30007394:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007398:	e12fff1e 	bx	lr
-3000739c:	300103f8 	.word	0x300103f8
-300073a0:	10624dd3 	.word	0x10624dd3
+30007590:	e1a00003 	mov	r0, r3
+30007594:	e28dd01c 	add	sp, sp, #28
+30007598:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000759c:	e12fff1e 	bx	lr
+300075a0:	30010604 	.word	0x30010604
+300075a4:	10624dd3 	.word	0x10624dd3
 
-300073a4 <acoral_mbox_tryrecv>:
+300075a8 <acoral_mbox_tryrecv>:
 /*======================================
  *   try receive  a mail to mailbox
  *       接收邮件从邮箱
  *======================================*/
 void* acoral_mbox_tryrecv(acoral_evt_t * event)
 {
-300073a4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300073a8:	e24dd014 	sub	sp, sp, #20
-300073ac:	e58d0004 	str	r0, [sp, #4]
+300075a8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300075ac:	e24dd014 	sub	sp, sp, #20
+300075b0:	e58d0004 	str	r0, [sp, #4]
 	void            *msg;
 	acoral_sr         cpu_sr;
 	
 	if (acoral_intr_nesting > 0)
-300073b0:	ebffe8ea 	bl	30001760 <hal_get_intr_nesting_comm>
-300073b4:	e1a03000 	mov	r3, r0
-300073b8:	e3530000 	cmp	r3, #0
-300073bc:	da000001 	ble	300073c8 <acoral_mbox_tryrecv+0x24>
+300075b4:	ebffe869 	bl	30001760 <hal_get_intr_nesting_comm>
+300075b8:	e1a03000 	mov	r3, r0
+300075bc:	e3530000 	cmp	r3, #0
+300075c0:	da000001 	ble	300075cc <acoral_mbox_tryrecv+0x24>
 		return NULL;
-300073c0:	e3a03000 	mov	r3, #0
-300073c4:	ea000019 	b	30007430 <acoral_mbox_tryrecv+0x8c>
+300075c4:	e3a03000 	mov	r3, #0
+300075c8:	ea000019 	b	30007634 <acoral_mbox_tryrecv+0x8c>
 
 	if(event->type!=ACORAL_EVENT_MBOX)
-300073c8:	e59d3004 	ldr	r3, [sp, #4]
-300073cc:	e5d33004 	ldrb	r3, [r3, #4]
-300073d0:	e3530003 	cmp	r3, #3
-300073d4:	0a000001 	beq	300073e0 <acoral_mbox_tryrecv+0x3c>
+300075cc:	e59d3004 	ldr	r3, [sp, #4]
+300075d0:	e5d33004 	ldrb	r3, [r3, #4]
+300075d4:	e3530003 	cmp	r3, #3
+300075d8:	0a000001 	beq	300075e4 <acoral_mbox_tryrecv+0x3c>
 		return NULL;
-300073d8:	e3a03000 	mov	r3, #0
-300073dc:	ea000013 	b	30007430 <acoral_mbox_tryrecv+0x8c>
+300075dc:	e3a03000 	mov	r3, #0
+300075e0:	ea000013 	b	30007634 <acoral_mbox_tryrecv+0x8c>
 	
 	HAL_ENTER_CRITICAL();
-300073e0:	ebffe8c3 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-300073e4:	e1a03000 	mov	r3, r0
-300073e8:	e58d300c 	str	r3, [sp, #12]
+300075e4:	ebffe842 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300075e8:	e1a03000 	mov	r3, r0
+300075ec:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&event->spin_lock);
 	if( event->data == NULL)
-300073ec:	e59d3004 	ldr	r3, [sp, #4]
-300073f0:	e5933020 	ldr	r3, [r3, #32]
-300073f4:	e3530000 	cmp	r3, #0
-300073f8:	1a000003 	bne	3000740c <acoral_mbox_tryrecv+0x68>
+300075f0:	e59d3004 	ldr	r3, [sp, #4]
+300075f4:	e5933020 	ldr	r3, [r3, #32]
+300075f8:	e3530000 	cmp	r3, #0
+300075fc:	1a000003 	bne	30007610 <acoral_mbox_tryrecv+0x68>
 	{
 		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
-300073fc:	e59d000c 	ldr	r0, [sp, #12]
-30007400:	ebffe8b9 	bl	300016ec <HAL_INTR_RESTORE>
+30007600:	e59d000c 	ldr	r0, [sp, #12]
+30007604:	ebffe838 	bl	300016ec <HAL_INTR_RESTORE>
 		return NULL;
-30007404:	e3a03000 	mov	r3, #0
-30007408:	ea000008 	b	30007430 <acoral_mbox_tryrecv+0x8c>
+30007608:	e3a03000 	mov	r3, #0
+3000760c:	ea000008 	b	30007634 <acoral_mbox_tryrecv+0x8c>
 	}
 	
 	msg         = event->data;
-3000740c:	e59d3004 	ldr	r3, [sp, #4]
-30007410:	e5933020 	ldr	r3, [r3, #32]
-30007414:	e58d3008 	str	r3, [sp, #8]
+30007610:	e59d3004 	ldr	r3, [sp, #4]
+30007614:	e5933020 	ldr	r3, [r3, #32]
+30007618:	e58d3008 	str	r3, [sp, #8]
 	event->data = NULL;
-30007418:	e59d3004 	ldr	r3, [sp, #4]
-3000741c:	e3a02000 	mov	r2, #0
-30007420:	e5832020 	str	r2, [r3, #32]
+3000761c:	e59d3004 	ldr	r3, [sp, #4]
+30007620:	e3a02000 	mov	r2, #0
+30007624:	e5832020 	str	r2, [r3, #32]
 	acoral_spin_unlock(&event->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007424:	e59d000c 	ldr	r0, [sp, #12]
-30007428:	ebffe8af 	bl	300016ec <HAL_INTR_RESTORE>
+30007628:	e59d000c 	ldr	r0, [sp, #12]
+3000762c:	ebffe82e 	bl	300016ec <HAL_INTR_RESTORE>
 
 	return msg;
-3000742c:	e59d3008 	ldr	r3, [sp, #8]
+30007630:	e59d3008 	ldr	r3, [sp, #8]
 }
-30007430:	e1a00003 	mov	r0, r3
-30007434:	e28dd014 	add	sp, sp, #20
-30007438:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000743c:	e12fff1e 	bx	lr
+30007634:	e1a00003 	mov	r0, r3
+30007638:	e28dd014 	add	sp, sp, #20
+3000763c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007640:	e12fff1e 	bx	lr
 
-30007440 <acoral_sem_init>:
+30007644 <acoral_sem_init>:
 #include <timer.h>
 #include <print.h>
 #include <sem.h>
 acoral_thread_t *acoral_evt_high_thread(acoral_evt_t *evt);
 acoral_u32 *acoral_sem_init(acoral_evt_t *evt,acoral_u32 semNum)
 {
-30007440:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007444:	e24dd00c 	sub	sp, sp, #12
-30007448:	e58d0004 	str	r0, [sp, #4]
-3000744c:	e58d1000 	str	r1, [sp]
+30007644:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007648:	e24dd00c 	sub	sp, sp, #12
+3000764c:	e58d0004 	str	r0, [sp, #4]
+30007650:	e58d1000 	str	r1, [sp]
 	if (NULL == evt)
-30007450:	e59d3004 	ldr	r3, [sp, #4]
-30007454:	e3530000 	cmp	r3, #0
-30007458:	1a000001 	bne	30007464 <acoral_sem_init+0x24>
+30007654:	e59d3004 	ldr	r3, [sp, #4]
+30007658:	e3530000 	cmp	r3, #0
+3000765c:	1a000001 	bne	30007668 <acoral_sem_init+0x24>
 	{
 		return NULL;
-3000745c:	e3a03000 	mov	r3, #0
-30007460:	ea00000e 	b	300074a0 <acoral_sem_init+0x60>
+30007660:	e3a03000 	mov	r3, #0
+30007664:	ea00000e 	b	300076a4 <acoral_sem_init+0x60>
 	}
 	semNum = 1 - semNum;  /* 拥有多个资源，0,一个  -1 两个， -2 三个 ....*/
-30007464:	e59d3000 	ldr	r3, [sp]
-30007468:	e2633001 	rsb	r3, r3, #1
-3000746c:	e58d3000 	str	r3, [sp]
+30007668:	e59d3000 	ldr	r3, [sp]
+3000766c:	e2633001 	rsb	r3, r3, #1
+30007670:	e58d3000 	str	r3, [sp]
 	evt->count = semNum;
-30007470:	e59d2000 	ldr	r2, [sp]
-30007474:	e59d3004 	ldr	r3, [sp, #4]
-30007478:	e583200c 	str	r2, [r3, #12]
+30007674:	e59d2000 	ldr	r2, [sp]
+30007678:	e59d3004 	ldr	r3, [sp, #4]
+3000767c:	e583200c 	str	r2, [r3, #12]
 	evt->type  = ACORAL_EVENT_SEM;
-3000747c:	e59d3004 	ldr	r3, [sp, #4]
-30007480:	e3a02000 	mov	r2, #0
-30007484:	e5c32004 	strb	r2, [r3, #4]
+30007680:	e59d3004 	ldr	r3, [sp, #4]
+30007684:	e3a02000 	mov	r2, #0
+30007688:	e5c32004 	strb	r2, [r3, #4]
 	evt->data  = NULL;
-30007488:	e59d3004 	ldr	r3, [sp, #4]
-3000748c:	e3a02000 	mov	r2, #0
-30007490:	e5832020 	str	r2, [r3, #32]
+3000768c:	e59d3004 	ldr	r3, [sp, #4]
+30007690:	e3a02000 	mov	r2, #0
+30007694:	e5832020 	str	r2, [r3, #32]
 	acoral_evt_init(evt);
-30007494:	e59d0004 	ldr	r0, [sp, #4]
-30007498:	ebfff5cf 	bl	30004bdc <acoral_evt_init>
+30007698:	e59d0004 	ldr	r0, [sp, #4]
+3000769c:	ebfff54e 	bl	30004bdc <acoral_evt_init>
 	return SEM_SUCCED;
-3000749c:	e3a03000 	mov	r3, #0
+300076a0:	e3a03000 	mov	r3, #0
 }
-300074a0:	e1a00003 	mov	r0, r3
-300074a4:	e28dd00c 	add	sp, sp, #12
-300074a8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300074ac:	e12fff1e 	bx	lr
+300076a4:	e1a00003 	mov	r0, r3
+300076a8:	e28dd00c 	add	sp, sp, #12
+300076ac:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300076b0:	e12fff1e 	bx	lr
 
-300074b0 <acoral_sem_create>:
+300076b4 <acoral_sem_create>:
 /*============================
  *   the creation of signal
  *   计算信号量的创建
  *============================*/
 acoral_evt_t *acoral_sem_create(acoral_u32 semNum)
 {
-300074b0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300074b4:	e24dd014 	sub	sp, sp, #20
-300074b8:	e58d0004 	str	r0, [sp, #4]
+300076b4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300076b8:	e24dd014 	sub	sp, sp, #20
+300076bc:	e58d0004 	str	r0, [sp, #4]
 	acoral_evt_t *evt;
 	evt = acoral_alloc_evt();
-300074bc:	ebfff5be 	bl	30004bbc <acoral_alloc_evt>
-300074c0:	e1a03000 	mov	r3, r0
-300074c4:	e58d300c 	str	r3, [sp, #12]
+300076c0:	ebfff53d 	bl	30004bbc <acoral_alloc_evt>
+300076c4:	e1a03000 	mov	r3, r0
+300076c8:	e58d300c 	str	r3, [sp, #12]
 	if (NULL == evt)
-300074c8:	e59d300c 	ldr	r3, [sp, #12]
-300074cc:	e3530000 	cmp	r3, #0
-300074d0:	1a000001 	bne	300074dc <acoral_sem_create+0x2c>
+300076cc:	e59d300c 	ldr	r3, [sp, #12]
+300076d0:	e3530000 	cmp	r3, #0
+300076d4:	1a000001 	bne	300076e0 <acoral_sem_create+0x2c>
 	{
 		return NULL;
-300074d4:	e3a03000 	mov	r3, #0
-300074d8:	ea00000e 	b	30007518 <acoral_sem_create+0x68>
+300076d8:	e3a03000 	mov	r3, #0
+300076dc:	ea00000e 	b	3000771c <acoral_sem_create+0x68>
 	}
 	semNum = 1 - semNum;  /* 拥有多个资源，0,一个  -1 两个， -2 三个 ....*/
-300074dc:	e59d3004 	ldr	r3, [sp, #4]
-300074e0:	e2633001 	rsb	r3, r3, #1
-300074e4:	e58d3004 	str	r3, [sp, #4]
+300076e0:	e59d3004 	ldr	r3, [sp, #4]
+300076e4:	e2633001 	rsb	r3, r3, #1
+300076e8:	e58d3004 	str	r3, [sp, #4]
 	evt->count = semNum;
-300074e8:	e59d2004 	ldr	r2, [sp, #4]
-300074ec:	e59d300c 	ldr	r3, [sp, #12]
-300074f0:	e583200c 	str	r2, [r3, #12]
+300076ec:	e59d2004 	ldr	r2, [sp, #4]
+300076f0:	e59d300c 	ldr	r3, [sp, #12]
+300076f4:	e583200c 	str	r2, [r3, #12]
 	evt->type  = ACORAL_EVENT_SEM;
-300074f4:	e59d300c 	ldr	r3, [sp, #12]
-300074f8:	e3a02000 	mov	r2, #0
-300074fc:	e5c32004 	strb	r2, [r3, #4]
+300076f8:	e59d300c 	ldr	r3, [sp, #12]
+300076fc:	e3a02000 	mov	r2, #0
+30007700:	e5c32004 	strb	r2, [r3, #4]
 	evt->data  = NULL;
-30007500:	e59d300c 	ldr	r3, [sp, #12]
-30007504:	e3a02000 	mov	r2, #0
-30007508:	e5832020 	str	r2, [r3, #32]
+30007704:	e59d300c 	ldr	r3, [sp, #12]
+30007708:	e3a02000 	mov	r2, #0
+3000770c:	e5832020 	str	r2, [r3, #32]
 	acoral_evt_init(evt);
-3000750c:	e59d000c 	ldr	r0, [sp, #12]
-30007510:	ebfff5b1 	bl	30004bdc <acoral_evt_init>
+30007710:	e59d000c 	ldr	r0, [sp, #12]
+30007714:	ebfff530 	bl	30004bdc <acoral_evt_init>
 	return evt;
-30007514:	e59d300c 	ldr	r3, [sp, #12]
+30007718:	e59d300c 	ldr	r3, [sp, #12]
 }
-30007518:	e1a00003 	mov	r0, r3
-3000751c:	e28dd014 	add	sp, sp, #20
-30007520:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007524:	e12fff1e 	bx	lr
+3000771c:	e1a00003 	mov	r0, r3
+30007720:	e28dd014 	add	sp, sp, #20
+30007724:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007728:	e12fff1e 	bx	lr
 
-30007528 <acoral_sem_del>:
+3000772c <acoral_sem_del>:
 /*============================
  *  the deletion of singal 
  *   计算信号量的删除
  *============================*/
 acoral_u32 acoral_sem_del(acoral_evt_t *evt, acoral_u32 opt)
 {
-30007528:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000752c:	e24dd014 	sub	sp, sp, #20
-30007530:	e58d0004 	str	r0, [sp, #4]
-30007534:	e58d1000 	str	r1, [sp]
+3000772c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007730:	e24dd014 	sub	sp, sp, #20
+30007734:	e58d0004 	str	r0, [sp, #4]
+30007738:	e58d1000 	str	r1, [sp]
 	acoral_sr            cpu_sr;
 	acoral_thread_t     *thread;
 	if (acoral_intr_nesting)
-30007538:	ebffe888 	bl	30001760 <hal_get_intr_nesting_comm>
-3000753c:	e1a03000 	mov	r3, r0
-30007540:	e3530000 	cmp	r3, #0
-30007544:	0a000001 	beq	30007550 <acoral_sem_del+0x28>
+3000773c:	ebffe807 	bl	30001760 <hal_get_intr_nesting_comm>
+30007740:	e1a03000 	mov	r3, r0
+30007744:	e3530000 	cmp	r3, #0
+30007748:	0a000001 	beq	30007754 <acoral_sem_del+0x28>
 	{
 		return SEM_ERR_INTR;
-30007548:	e3a03006 	mov	r3, #6
-3000754c:	ea00001d 	b	300075c8 <acoral_sem_del+0xa0>
+3000774c:	e3a03006 	mov	r3, #6
+30007750:	ea00001d 	b	300077cc <acoral_sem_del+0xa0>
 	}
 	/* 参数检测*/
 	if (NULL == evt)
-30007550:	e59d3004 	ldr	r3, [sp, #4]
-30007554:	e3530000 	cmp	r3, #0
-30007558:	1a000001 	bne	30007564 <acoral_sem_del+0x3c>
+30007754:	e59d3004 	ldr	r3, [sp, #4]
+30007758:	e3530000 	cmp	r3, #0
+3000775c:	1a000001 	bne	30007768 <acoral_sem_del+0x3c>
 		return SEM_ERR_NULL; /* error*/
-3000755c:	e3a03002 	mov	r3, #2
-30007560:	ea000018 	b	300075c8 <acoral_sem_del+0xa0>
+30007760:	e3a03002 	mov	r3, #2
+30007764:	ea000018 	b	300077cc <acoral_sem_del+0xa0>
 	if ( evt->type != ACORAL_EVENT_SEM )
-30007564:	e59d3004 	ldr	r3, [sp, #4]
-30007568:	e5d33004 	ldrb	r3, [r3, #4]
-3000756c:	e3530000 	cmp	r3, #0
-30007570:	0a000001 	beq	3000757c <acoral_sem_del+0x54>
+30007768:	e59d3004 	ldr	r3, [sp, #4]
+3000776c:	e5d33004 	ldrb	r3, [r3, #4]
+30007770:	e3530000 	cmp	r3, #0
+30007774:	0a000001 	beq	30007780 <acoral_sem_del+0x54>
 		return SEM_ERR_TYPE; /* error*/
-30007574:	e3a03004 	mov	r3, #4
-30007578:	ea000012 	b	300075c8 <acoral_sem_del+0xa0>
+30007778:	e3a03004 	mov	r3, #4
+3000777c:	ea000012 	b	300077cc <acoral_sem_del+0xa0>
 
 	HAL_ENTER_CRITICAL();
-3000757c:	ebffe85c 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007580:	e1a03000 	mov	r3, r0
-30007584:	e58d3008 	str	r3, [sp, #8]
+30007780:	ebffe7db 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007784:	e1a03000 	mov	r3, r0
+30007788:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_lock(&evt->spin_lock);
 	thread =acoral_evt_high_thread(evt);
-30007588:	e59d0004 	ldr	r0, [sp, #4]
-3000758c:	ebfff5ac 	bl	30004c44 <acoral_evt_high_thread>
-30007590:	e1a03000 	mov	r3, r0
-30007594:	e58d300c 	str	r3, [sp, #12]
+3000778c:	e59d0004 	ldr	r0, [sp, #4]
+30007790:	ebfff52b 	bl	30004c44 <acoral_evt_high_thread>
+30007794:	e1a03000 	mov	r3, r0
+30007798:	e58d300c 	str	r3, [sp, #12]
 	if (thread==NULL)
-30007598:	e59d300c 	ldr	r3, [sp, #12]
-3000759c:	e3530000 	cmp	r3, #0
-300075a0:	1a000005 	bne	300075bc <acoral_sem_del+0x94>
+3000779c:	e59d300c 	ldr	r3, [sp, #12]
+300077a0:	e3530000 	cmp	r3, #0
+300077a4:	1a000005 	bne	300077c0 <acoral_sem_del+0x94>
 	{
 		/*队列上无等待任务*/
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-300075a4:	e59d0008 	ldr	r0, [sp, #8]
-300075a8:	ebffe84f 	bl	300016ec <HAL_INTR_RESTORE>
+300077a8:	e59d0008 	ldr	r0, [sp, #8]
+300077ac:	ebffe7ce 	bl	300016ec <HAL_INTR_RESTORE>
 		evt = NULL;
-300075ac:	e3a03000 	mov	r3, #0
-300075b0:	e58d3004 	str	r3, [sp, #4]
+300077b0:	e3a03000 	mov	r3, #0
+300077b4:	e58d3004 	str	r3, [sp, #4]
 		return SEM_ERR_UNDEF;
-300075b4:	e3a03007 	mov	r3, #7
-300075b8:	ea000002 	b	300075c8 <acoral_sem_del+0xa0>
+300077b8:	e3a03007 	mov	r3, #7
+300077bc:	ea000002 	b	300077cc <acoral_sem_del+0xa0>
 	}
 	else
 	{
 		/*有等待任务*/
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-300075bc:	e59d0008 	ldr	r0, [sp, #8]
-300075c0:	ebffe849 	bl	300016ec <HAL_INTR_RESTORE>
+300077c0:	e59d0008 	ldr	r0, [sp, #8]
+300077c4:	ebffe7c8 	bl	300016ec <HAL_INTR_RESTORE>
 		return SEM_ERR_TASK_EXIST; /*error*/
-300075c4:	e3a03005 	mov	r3, #5
+300077c8:	e3a03005 	mov	r3, #5
 	}
 }
-300075c8:	e1a00003 	mov	r0, r3
-300075cc:	e28dd014 	add	sp, sp, #20
-300075d0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300075d4:	e12fff1e 	bx	lr
+300077cc:	e1a00003 	mov	r0, r3
+300077d0:	e28dd014 	add	sp, sp, #20
+300077d4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300077d8:	e12fff1e 	bx	lr
 
-300075d8 <acoral_sem_trypend>:
+300077dc <acoral_sem_trypend>:
  *  计算信号量的申请
  *  desp: count <= SEM_RES_AVAI  信号量有效 a++
  *        count >  SEM_RES_AVAI  信号量无效 a++ && thread suspend
  *============================*/
 acoral_u32 acoral_sem_trypend(acoral_evt_t *evt)
 {
-300075d8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300075dc:	e24dd014 	sub	sp, sp, #20
-300075e0:	e58d0004 	str	r0, [sp, #4]
+300077dc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300077e0:	e24dd014 	sub	sp, sp, #20
+300077e4:	e58d0004 	str	r0, [sp, #4]
 	acoral_sr cpu_sr;
 
 	if (acoral_intr_nesting)
-300075e4:	ebffe85d 	bl	30001760 <hal_get_intr_nesting_comm>
-300075e8:	e1a03000 	mov	r3, r0
-300075ec:	e3530000 	cmp	r3, #0
-300075f0:	0a000001 	beq	300075fc <acoral_sem_trypend+0x24>
+300077e8:	ebffe7dc 	bl	30001760 <hal_get_intr_nesting_comm>
+300077ec:	e1a03000 	mov	r3, r0
+300077f0:	e3530000 	cmp	r3, #0
+300077f4:	0a000001 	beq	30007800 <acoral_sem_trypend+0x24>
 	{
 		return SEM_ERR_INTR;
-300075f4:	e3a03006 	mov	r3, #6
-300075f8:	ea000020 	b	30007680 <acoral_sem_trypend+0xa8>
+300077f8:	e3a03006 	mov	r3, #6
+300077fc:	ea000020 	b	30007884 <acoral_sem_trypend+0xa8>
 	}
 
 	/* 参数检测 */
 	if (NULL == evt)
-300075fc:	e59d3004 	ldr	r3, [sp, #4]
-30007600:	e3530000 	cmp	r3, #0
-30007604:	1a000001 	bne	30007610 <acoral_sem_trypend+0x38>
+30007800:	e59d3004 	ldr	r3, [sp, #4]
+30007804:	e3530000 	cmp	r3, #0
+30007808:	1a000001 	bne	30007814 <acoral_sem_trypend+0x38>
 	{
 		return SEM_ERR_NULL; /*error*/
-30007608:	e3a03002 	mov	r3, #2
-3000760c:	ea00001b 	b	30007680 <acoral_sem_trypend+0xa8>
+3000780c:	e3a03002 	mov	r3, #2
+30007810:	ea00001b 	b	30007884 <acoral_sem_trypend+0xa8>
 	}
 	if (ACORAL_EVENT_SEM != evt->type)
-30007610:	e59d3004 	ldr	r3, [sp, #4]
-30007614:	e5d33004 	ldrb	r3, [r3, #4]
-30007618:	e3530000 	cmp	r3, #0
-3000761c:	0a000001 	beq	30007628 <acoral_sem_trypend+0x50>
+30007814:	e59d3004 	ldr	r3, [sp, #4]
+30007818:	e5d33004 	ldrb	r3, [r3, #4]
+3000781c:	e3530000 	cmp	r3, #0
+30007820:	0a000001 	beq	3000782c <acoral_sem_trypend+0x50>
 	{
 		return SEM_ERR_TYPE; /*error*/
-30007620:	e3a03004 	mov	r3, #4
-30007624:	ea000015 	b	30007680 <acoral_sem_trypend+0xa8>
+30007824:	e3a03004 	mov	r3, #4
+30007828:	ea000015 	b	30007884 <acoral_sem_trypend+0xa8>
 	}
 
 	/* 计算信号量处理*/
 	HAL_ENTER_CRITICAL();
-30007628:	ebffe831 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-3000762c:	e1a03000 	mov	r3, r0
-30007630:	e58d300c 	str	r3, [sp, #12]
+3000782c:	ebffe7b0 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007830:	e1a03000 	mov	r3, r0
+30007834:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&evt->spin_lock);
 	if ((acoral_8)evt->count <= SEM_RES_AVAI)
-30007634:	e59d3004 	ldr	r3, [sp, #4]
-30007638:	e593300c 	ldr	r3, [r3, #12]
-3000763c:	e20330ff 	and	r3, r3, #255	; 0xff
-30007640:	e1a03c03 	lsl	r3, r3, #24
-30007644:	e1a03c43 	asr	r3, r3, #24
-30007648:	e3530000 	cmp	r3, #0
-3000764c:	ca000008 	bgt	30007674 <acoral_sem_trypend+0x9c>
+30007838:	e59d3004 	ldr	r3, [sp, #4]
+3000783c:	e593300c 	ldr	r3, [r3, #12]
+30007840:	e20330ff 	and	r3, r3, #255	; 0xff
+30007844:	e1a03c03 	lsl	r3, r3, #24
+30007848:	e1a03c43 	asr	r3, r3, #24
+3000784c:	e3530000 	cmp	r3, #0
+30007850:	ca000008 	bgt	30007878 <acoral_sem_trypend+0x9c>
 	{   /* available*/
 		evt->count++;
-30007650:	e59d3004 	ldr	r3, [sp, #4]
-30007654:	e593300c 	ldr	r3, [r3, #12]
-30007658:	e2832001 	add	r2, r3, #1
-3000765c:	e59d3004 	ldr	r3, [sp, #4]
-30007660:	e583200c 	str	r2, [r3, #12]
+30007854:	e59d3004 	ldr	r3, [sp, #4]
+30007858:	e593300c 	ldr	r3, [r3, #12]
+3000785c:	e2832001 	add	r2, r3, #1
+30007860:	e59d3004 	ldr	r3, [sp, #4]
+30007864:	e583200c 	str	r2, [r3, #12]
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-30007664:	e59d000c 	ldr	r0, [sp, #12]
-30007668:	ebffe81f 	bl	300016ec <HAL_INTR_RESTORE>
+30007868:	e59d000c 	ldr	r0, [sp, #12]
+3000786c:	ebffe79e 	bl	300016ec <HAL_INTR_RESTORE>
 		return SEM_SUCCED;
-3000766c:	e3a03000 	mov	r3, #0
-30007670:	ea000002 	b	30007680 <acoral_sem_trypend+0xa8>
+30007870:	e3a03000 	mov	r3, #0
+30007874:	ea000002 	b	30007884 <acoral_sem_trypend+0xa8>
 	}
 
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007674:	e59d000c 	ldr	r0, [sp, #12]
-30007678:	ebffe81b 	bl	300016ec <HAL_INTR_RESTORE>
+30007878:	e59d000c 	ldr	r0, [sp, #12]
+3000787c:	ebffe79a 	bl	300016ec <HAL_INTR_RESTORE>
 	return SEM_ERR_TIMEOUT;
-3000767c:	e3a03008 	mov	r3, #8
+30007880:	e3a03008 	mov	r3, #8
 }
-30007680:	e1a00003 	mov	r0, r3
-30007684:	e28dd014 	add	sp, sp, #20
-30007688:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000768c:	e12fff1e 	bx	lr
+30007884:	e1a00003 	mov	r0, r3
+30007888:	e28dd014 	add	sp, sp, #20
+3000788c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007890:	e12fff1e 	bx	lr
 
-30007690 <acoral_sem_pend>:
+30007894 <acoral_sem_pend>:
  *  计算信号量的申请
  *  desp: count <= SEM_RES_AVAI  信号量有效 a++
  *        count >  SEM_RES_AVAI  信号量无效 a++ && thread suspend
  *============================*/
 acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 {
-30007690:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007694:	e24dd014 	sub	sp, sp, #20
-30007698:	e58d0004 	str	r0, [sp, #4]
-3000769c:	e58d1000 	str	r1, [sp]
+30007894:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007898:	e24dd014 	sub	sp, sp, #20
+3000789c:	e58d0004 	str	r0, [sp, #4]
+300078a0:	e58d1000 	str	r1, [sp]
 	acoral_thread_t *cur = acoral_cur_thread;
-300076a0:	e59f318c 	ldr	r3, [pc, #396]	; 30007834 <acoral_sem_pend+0x1a4>
-300076a4:	e5933000 	ldr	r3, [r3]
-300076a8:	e58d3008 	str	r3, [sp, #8]
+300078a4:	e59f318c 	ldr	r3, [pc, #396]	; 30007a38 <acoral_sem_pend+0x1a4>
+300078a8:	e5933000 	ldr	r3, [r3]
+300078ac:	e58d3008 	str	r3, [sp, #8]
 	acoral_sr cpu_sr;
 
 	if (acoral_intr_nesting)
-300076ac:	ebffe82b 	bl	30001760 <hal_get_intr_nesting_comm>
-300076b0:	e1a03000 	mov	r3, r0
-300076b4:	e3530000 	cmp	r3, #0
-300076b8:	0a000001 	beq	300076c4 <acoral_sem_pend+0x34>
+300078b0:	ebffe7aa 	bl	30001760 <hal_get_intr_nesting_comm>
+300078b4:	e1a03000 	mov	r3, r0
+300078b8:	e3530000 	cmp	r3, #0
+300078bc:	0a000001 	beq	300078c8 <acoral_sem_pend+0x34>
 	{
 		return SEM_ERR_INTR;
-300076bc:	e3a03006 	mov	r3, #6
-300076c0:	ea000057 	b	30007824 <acoral_sem_pend+0x194>
+300078c0:	e3a03006 	mov	r3, #6
+300078c4:	ea000057 	b	30007a28 <acoral_sem_pend+0x194>
 	}
 
 	/* 参数检测 */
 	if (NULL == evt)
-300076c4:	e59d3004 	ldr	r3, [sp, #4]
-300076c8:	e3530000 	cmp	r3, #0
-300076cc:	1a000001 	bne	300076d8 <acoral_sem_pend+0x48>
+300078c8:	e59d3004 	ldr	r3, [sp, #4]
+300078cc:	e3530000 	cmp	r3, #0
+300078d0:	1a000001 	bne	300078dc <acoral_sem_pend+0x48>
 	{
 		return SEM_ERR_NULL; /*error*/
-300076d0:	e3a03002 	mov	r3, #2
-300076d4:	ea000052 	b	30007824 <acoral_sem_pend+0x194>
+300078d4:	e3a03002 	mov	r3, #2
+300078d8:	ea000052 	b	30007a28 <acoral_sem_pend+0x194>
 	}
 	if (ACORAL_EVENT_SEM != evt->type)
-300076d8:	e59d3004 	ldr	r3, [sp, #4]
-300076dc:	e5d33004 	ldrb	r3, [r3, #4]
-300076e0:	e3530000 	cmp	r3, #0
-300076e4:	0a000001 	beq	300076f0 <acoral_sem_pend+0x60>
+300078dc:	e59d3004 	ldr	r3, [sp, #4]
+300078e0:	e5d33004 	ldrb	r3, [r3, #4]
+300078e4:	e3530000 	cmp	r3, #0
+300078e8:	0a000001 	beq	300078f4 <acoral_sem_pend+0x60>
 	{
 		return SEM_ERR_TYPE; /*error*/
-300076e8:	e3a03004 	mov	r3, #4
-300076ec:	ea00004c 	b	30007824 <acoral_sem_pend+0x194>
+300078ec:	e3a03004 	mov	r3, #4
+300078f0:	ea00004c 	b	30007a28 <acoral_sem_pend+0x194>
 	}
 
 	/* 计算信号量处理*/
 	HAL_ENTER_CRITICAL();
-300076f0:	ebffe7ff 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-300076f4:	e1a03000 	mov	r3, r0
-300076f8:	e58d300c 	str	r3, [sp, #12]
+300078f4:	ebffe77e 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300078f8:	e1a03000 	mov	r3, r0
+300078fc:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&evt->spin_lock);
 	if ((acoral_8)evt->count <= SEM_RES_AVAI)
-300076fc:	e59d3004 	ldr	r3, [sp, #4]
-30007700:	e593300c 	ldr	r3, [r3, #12]
-30007704:	e20330ff 	and	r3, r3, #255	; 0xff
-30007708:	e1a03c03 	lsl	r3, r3, #24
-3000770c:	e1a03c43 	asr	r3, r3, #24
-30007710:	e3530000 	cmp	r3, #0
-30007714:	ca000008 	bgt	3000773c <acoral_sem_pend+0xac>
+30007900:	e59d3004 	ldr	r3, [sp, #4]
+30007904:	e593300c 	ldr	r3, [r3, #12]
+30007908:	e20330ff 	and	r3, r3, #255	; 0xff
+3000790c:	e1a03c03 	lsl	r3, r3, #24
+30007910:	e1a03c43 	asr	r3, r3, #24
+30007914:	e3530000 	cmp	r3, #0
+30007918:	ca000008 	bgt	30007940 <acoral_sem_pend+0xac>
 	{   /* available*/
 		evt->count++;
-30007718:	e59d3004 	ldr	r3, [sp, #4]
-3000771c:	e593300c 	ldr	r3, [r3, #12]
-30007720:	e2832001 	add	r2, r3, #1
-30007724:	e59d3004 	ldr	r3, [sp, #4]
-30007728:	e583200c 	str	r2, [r3, #12]
+3000791c:	e59d3004 	ldr	r3, [sp, #4]
+30007920:	e593300c 	ldr	r3, [r3, #12]
+30007924:	e2832001 	add	r2, r3, #1
+30007928:	e59d3004 	ldr	r3, [sp, #4]
+3000792c:	e583200c 	str	r2, [r3, #12]
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-3000772c:	e59d000c 	ldr	r0, [sp, #12]
-30007730:	ebffe7ed 	bl	300016ec <HAL_INTR_RESTORE>
+30007930:	e59d000c 	ldr	r0, [sp, #12]
+30007934:	ebffe76c 	bl	300016ec <HAL_INTR_RESTORE>
 		return SEM_SUCCED;
-30007734:	e3a03000 	mov	r3, #0
-30007738:	ea000039 	b	30007824 <acoral_sem_pend+0x194>
+30007938:	e3a03000 	mov	r3, #0
+3000793c:	ea000039 	b	30007a28 <acoral_sem_pend+0x194>
 	}
 
 	evt->count++;
-3000773c:	e59d3004 	ldr	r3, [sp, #4]
-30007740:	e593300c 	ldr	r3, [r3, #12]
-30007744:	e2832001 	add	r2, r3, #1
-30007748:	e59d3004 	ldr	r3, [sp, #4]
-3000774c:	e583200c 	str	r2, [r3, #12]
+30007940:	e59d3004 	ldr	r3, [sp, #4]
+30007944:	e593300c 	ldr	r3, [r3, #12]
+30007948:	e2832001 	add	r2, r3, #1
+3000794c:	e59d3004 	ldr	r3, [sp, #4]
+30007950:	e583200c 	str	r2, [r3, #12]
 	acoral_unrdy_thread(cur);
-30007750:	e59d0008 	ldr	r0, [sp, #8]
-30007754:	ebffed0e 	bl	30002b94 <acoral_unrdy_thread>
+30007954:	e59d0008 	ldr	r0, [sp, #8]
+30007958:	ebffec8d 	bl	30002b94 <acoral_unrdy_thread>
 	if (timeout > 0)
-30007758:	e59d3000 	ldr	r3, [sp]
-3000775c:	e3530000 	cmp	r3, #0
-30007760:	0a00000f 	beq	300077a4 <acoral_sem_pend+0x114>
+3000795c:	e59d3000 	ldr	r3, [sp]
+30007960:	e3530000 	cmp	r3, #0
+30007964:	0a00000f 	beq	300079a8 <acoral_sem_pend+0x114>
 	{
 		cur->delay = TIME_TO_TICKS(timeout);
-30007764:	e59d2000 	ldr	r2, [sp]
-30007768:	e1a03002 	mov	r3, r2
-3000776c:	e1a03103 	lsl	r3, r3, #2
-30007770:	e0833002 	add	r3, r3, r2
-30007774:	e1a02103 	lsl	r2, r3, #2
-30007778:	e0833002 	add	r3, r3, r2
-3000777c:	e1a03103 	lsl	r3, r3, #2
-30007780:	e1a02003 	mov	r2, r3
-30007784:	e59f30ac 	ldr	r3, [pc, #172]	; 30007838 <acoral_sem_pend+0x1a8>
-30007788:	e0831392 	umull	r1, r3, r2, r3
-3000778c:	e1a03323 	lsr	r3, r3, #6
-30007790:	e1a02003 	mov	r2, r3
-30007794:	e59d3008 	ldr	r3, [sp, #8]
-30007798:	e5832040 	str	r2, [r3, #64]	; 0x40
+30007968:	e59d2000 	ldr	r2, [sp]
+3000796c:	e1a03002 	mov	r3, r2
+30007970:	e1a03103 	lsl	r3, r3, #2
+30007974:	e0833002 	add	r3, r3, r2
+30007978:	e1a02103 	lsl	r2, r3, #2
+3000797c:	e0833002 	add	r3, r3, r2
+30007980:	e1a03103 	lsl	r3, r3, #2
+30007984:	e1a02003 	mov	r2, r3
+30007988:	e59f30ac 	ldr	r3, [pc, #172]	; 30007a3c <acoral_sem_pend+0x1a8>
+3000798c:	e0831392 	umull	r1, r3, r2, r3
+30007990:	e1a03323 	lsr	r3, r3, #6
+30007994:	e1a02003 	mov	r2, r3
+30007998:	e59d3008 	ldr	r3, [sp, #8]
+3000799c:	e5832040 	str	r2, [r3, #64]	; 0x40
 		timeout_queue_add(cur);
-3000779c:	e59d0008 	ldr	r0, [sp, #8]
-300077a0:	ebfff410 	bl	300047e8 <timeout_queue_add>
+300079a0:	e59d0008 	ldr	r0, [sp, #8]
+300079a4:	ebfff38f 	bl	300047e8 <timeout_queue_add>
 	}
 	acoral_evt_queue_add(evt,cur);
-300077a4:	e59d0004 	ldr	r0, [sp, #4]
-300077a8:	e59d1008 	ldr	r1, [sp, #8]
-300077ac:	ebfff538 	bl	30004c94 <acoral_evt_queue_add>
+300079a8:	e59d0004 	ldr	r0, [sp, #4]
+300079ac:	e59d1008 	ldr	r1, [sp, #8]
+300079b0:	ebfff4b7 	bl	30004c94 <acoral_evt_queue_add>
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-300077b0:	e59d000c 	ldr	r0, [sp, #12]
-300077b4:	ebffe7cc 	bl	300016ec <HAL_INTR_RESTORE>
+300079b4:	e59d000c 	ldr	r0, [sp, #12]
+300079b8:	ebffe74b 	bl	300016ec <HAL_INTR_RESTORE>
 	
 	acoral_sched();
-300077b8:	ebffeb0e 	bl	300023f8 <acoral_sched>
+300079bc:	ebffea8d 	bl	300023f8 <acoral_sched>
 
 	HAL_ENTER_CRITICAL();
-300077bc:	ebffe7cc 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-300077c0:	e1a03000 	mov	r3, r0
-300077c4:	e58d300c 	str	r3, [sp, #12]
+300079c0:	ebffe74b 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300079c4:	e1a03000 	mov	r3, r0
+300079c8:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&evt->spin_lock);
 	if(timeout>0 && cur->delay<=0)
-300077c8:	e59d3000 	ldr	r3, [sp]
-300077cc:	e3530000 	cmp	r3, #0
-300077d0:	0a00000e 	beq	30007810 <acoral_sem_pend+0x180>
-300077d4:	e59d3008 	ldr	r3, [sp, #8]
-300077d8:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-300077dc:	e3530000 	cmp	r3, #0
-300077e0:	ca00000a 	bgt	30007810 <acoral_sem_pend+0x180>
+300079cc:	e59d3000 	ldr	r3, [sp]
+300079d0:	e3530000 	cmp	r3, #0
+300079d4:	0a00000e 	beq	30007a14 <acoral_sem_pend+0x180>
+300079d8:	e59d3008 	ldr	r3, [sp, #8]
+300079dc:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+300079e0:	e3530000 	cmp	r3, #0
+300079e4:	ca00000a 	bgt	30007a14 <acoral_sem_pend+0x180>
 	{
 		//--------------
 		// modify by pegasus 0804: count-- [+]
 		evt->count--;
-300077e4:	e59d3004 	ldr	r3, [sp, #4]
-300077e8:	e593300c 	ldr	r3, [r3, #12]
-300077ec:	e2432001 	sub	r2, r3, #1
-300077f0:	e59d3004 	ldr	r3, [sp, #4]
-300077f4:	e583200c 	str	r2, [r3, #12]
+300079e8:	e59d3004 	ldr	r3, [sp, #4]
+300079ec:	e593300c 	ldr	r3, [r3, #12]
+300079f0:	e2432001 	sub	r2, r3, #1
+300079f4:	e59d3004 	ldr	r3, [sp, #4]
+300079f8:	e583200c 	str	r2, [r3, #12]
 		acoral_evt_queue_del(cur);
-300077f8:	e59d0008 	ldr	r0, [sp, #8]
-300077fc:	ebfff555 	bl	30004d58 <acoral_evt_queue_del>
+300079fc:	e59d0008 	ldr	r0, [sp, #8]
+30007a00:	ebfff4d4 	bl	30004d58 <acoral_evt_queue_del>
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-30007800:	e59d000c 	ldr	r0, [sp, #12]
-30007804:	ebffe7b8 	bl	300016ec <HAL_INTR_RESTORE>
+30007a04:	e59d000c 	ldr	r0, [sp, #12]
+30007a08:	ebffe737 	bl	300016ec <HAL_INTR_RESTORE>
 		return SEM_ERR_TIMEOUT;
-30007808:	e3a03008 	mov	r3, #8
-3000780c:	ea000004 	b	30007824 <acoral_sem_pend+0x194>
+30007a0c:	e3a03008 	mov	r3, #8
+30007a10:	ea000004 	b	30007a28 <acoral_sem_pend+0x194>
 	}
 
 	//-------------------
 	// modify by pegasus 0804: timeout_queue_del [+]
 	timeout_queue_del(cur);
-30007810:	e59d0008 	ldr	r0, [sp, #8]
-30007814:	ebfff435 	bl	300048f0 <timeout_queue_del>
+30007a14:	e59d0008 	ldr	r0, [sp, #8]
+30007a18:	ebfff3b4 	bl	300048f0 <timeout_queue_del>
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007818:	e59d000c 	ldr	r0, [sp, #12]
-3000781c:	ebffe7b2 	bl	300016ec <HAL_INTR_RESTORE>
+30007a1c:	e59d000c 	ldr	r0, [sp, #12]
+30007a20:	ebffe731 	bl	300016ec <HAL_INTR_RESTORE>
 	return SEM_SUCCED;
-30007820:	e3a03000 	mov	r3, #0
+30007a24:	e3a03000 	mov	r3, #0
 }
-30007824:	e1a00003 	mov	r0, r3
-30007828:	e28dd014 	add	sp, sp, #20
-3000782c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007830:	e12fff1e 	bx	lr
-30007834:	300103f8 	.word	0x300103f8
-30007838:	10624dd3 	.word	0x10624dd3
+30007a28:	e1a00003 	mov	r0, r3
+30007a2c:	e28dd014 	add	sp, sp, #20
+30007a30:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007a34:	e12fff1e 	bx	lr
+30007a38:	30010604 	.word	0x30010604
+30007a3c:	10624dd3 	.word	0x10624dd3
 
-3000783c <acoral_sem_post>:
+30007a40 <acoral_sem_post>:
  *  计算信号量的释放
  *  desp: count > SEM_RES_NOAVAI 有等待线程 a-- && resume waiting thread.
  *        count <= SEM_RES_NOAVAI 无等待线程 a--
  *===========================*/
 acoral_u32 acoral_sem_post(acoral_evt_t *evt)
 {
-3000783c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007840:	e24dd014 	sub	sp, sp, #20
-30007844:	e58d0004 	str	r0, [sp, #4]
+30007a40:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007a44:	e24dd014 	sub	sp, sp, #20
+30007a48:	e58d0004 	str	r0, [sp, #4]
 	acoral_thread_t     *thread;
 	acoral_sr            cpu_sr;
 
 	/* 参数检测*/
 	if ( NULL == evt)
-30007848:	e59d3004 	ldr	r3, [sp, #4]
-3000784c:	e3530000 	cmp	r3, #0
-30007850:	1a000001 	bne	3000785c <acoral_sem_post+0x20>
+30007a4c:	e59d3004 	ldr	r3, [sp, #4]
+30007a50:	e3530000 	cmp	r3, #0
+30007a54:	1a000001 	bne	30007a60 <acoral_sem_post+0x20>
 	{
 		return SEM_ERR_NULL; /* error*/
-30007854:	e3a03002 	mov	r3, #2
-30007858:	ea000034 	b	30007930 <acoral_sem_post+0xf4>
+30007a58:	e3a03002 	mov	r3, #2
+30007a5c:	ea000034 	b	30007b34 <acoral_sem_post+0xf4>
 	}
 	if (ACORAL_EVENT_SEM != evt->type)
-3000785c:	e59d3004 	ldr	r3, [sp, #4]
-30007860:	e5d33004 	ldrb	r3, [r3, #4]
-30007864:	e3530000 	cmp	r3, #0
-30007868:	0a000001 	beq	30007874 <acoral_sem_post+0x38>
+30007a60:	e59d3004 	ldr	r3, [sp, #4]
+30007a64:	e5d33004 	ldrb	r3, [r3, #4]
+30007a68:	e3530000 	cmp	r3, #0
+30007a6c:	0a000001 	beq	30007a78 <acoral_sem_post+0x38>
 	{
 		return SEM_ERR_TYPE;
-3000786c:	e3a03004 	mov	r3, #4
-30007870:	ea00002e 	b	30007930 <acoral_sem_post+0xf4>
+30007a70:	e3a03004 	mov	r3, #4
+30007a74:	ea00002e 	b	30007b34 <acoral_sem_post+0xf4>
 	}
 
 	HAL_ENTER_CRITICAL();
-30007874:	ebffe79e 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007878:	e1a03000 	mov	r3, r0
-3000787c:	e58d300c 	str	r3, [sp, #12]
+30007a78:	ebffe71d 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007a7c:	e1a03000 	mov	r3, r0
+30007a80:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&evt->spin_lock);
 
 	/* 计算信号量的释放*/
 	if ((acoral_8)evt->count <= SEM_RES_NOAVAI)
-30007880:	e59d3004 	ldr	r3, [sp, #4]
-30007884:	e593300c 	ldr	r3, [r3, #12]
-30007888:	e20330ff 	and	r3, r3, #255	; 0xff
-3000788c:	e1a03c03 	lsl	r3, r3, #24
-30007890:	e1a03c43 	asr	r3, r3, #24
-30007894:	e3530001 	cmp	r3, #1
-30007898:	ca000008 	bgt	300078c0 <acoral_sem_post+0x84>
+30007a84:	e59d3004 	ldr	r3, [sp, #4]
+30007a88:	e593300c 	ldr	r3, [r3, #12]
+30007a8c:	e20330ff 	and	r3, r3, #255	; 0xff
+30007a90:	e1a03c03 	lsl	r3, r3, #24
+30007a94:	e1a03c43 	asr	r3, r3, #24
+30007a98:	e3530001 	cmp	r3, #1
+30007a9c:	ca000008 	bgt	30007ac4 <acoral_sem_post+0x84>
 	{ /* no waiting thread*/
 		evt->count--;
-3000789c:	e59d3004 	ldr	r3, [sp, #4]
-300078a0:	e593300c 	ldr	r3, [r3, #12]
-300078a4:	e2432001 	sub	r2, r3, #1
-300078a8:	e59d3004 	ldr	r3, [sp, #4]
-300078ac:	e583200c 	str	r2, [r3, #12]
+30007aa0:	e59d3004 	ldr	r3, [sp, #4]
+30007aa4:	e593300c 	ldr	r3, [r3, #12]
+30007aa8:	e2432001 	sub	r2, r3, #1
+30007aac:	e59d3004 	ldr	r3, [sp, #4]
+30007ab0:	e583200c 	str	r2, [r3, #12]
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-300078b0:	e59d000c 	ldr	r0, [sp, #12]
-300078b4:	ebffe78c 	bl	300016ec <HAL_INTR_RESTORE>
+30007ab4:	e59d000c 	ldr	r0, [sp, #12]
+30007ab8:	ebffe70b 	bl	300016ec <HAL_INTR_RESTORE>
 		return SEM_SUCCED;
-300078b8:	e3a03000 	mov	r3, #0
-300078bc:	ea00001b 	b	30007930 <acoral_sem_post+0xf4>
+30007abc:	e3a03000 	mov	r3, #0
+30007ac0:	ea00001b 	b	30007b34 <acoral_sem_post+0xf4>
 	}
 	/* 有等待线程*/
 	evt->count--;
-300078c0:	e59d3004 	ldr	r3, [sp, #4]
-300078c4:	e593300c 	ldr	r3, [r3, #12]
-300078c8:	e2432001 	sub	r2, r3, #1
-300078cc:	e59d3004 	ldr	r3, [sp, #4]
-300078d0:	e583200c 	str	r2, [r3, #12]
+30007ac4:	e59d3004 	ldr	r3, [sp, #4]
+30007ac8:	e593300c 	ldr	r3, [r3, #12]
+30007acc:	e2432001 	sub	r2, r3, #1
+30007ad0:	e59d3004 	ldr	r3, [sp, #4]
+30007ad4:	e583200c 	str	r2, [r3, #12]
 	thread =acoral_evt_high_thread(evt);
-300078d4:	e59d0004 	ldr	r0, [sp, #4]
-300078d8:	ebfff4d9 	bl	30004c44 <acoral_evt_high_thread>
-300078dc:	e1a03000 	mov	r3, r0
-300078e0:	e58d3008 	str	r3, [sp, #8]
+30007ad8:	e59d0004 	ldr	r0, [sp, #4]
+30007adc:	ebfff458 	bl	30004c44 <acoral_evt_high_thread>
+30007ae0:	e1a03000 	mov	r3, r0
+30007ae4:	e58d3008 	str	r3, [sp, #8]
 	if (thread==NULL)
-300078e4:	e59d3008 	ldr	r3, [sp, #8]
-300078e8:	e3530000 	cmp	r3, #0
-300078ec:	1a000005 	bne	30007908 <acoral_sem_post+0xcc>
+30007ae8:	e59d3008 	ldr	r3, [sp, #8]
+30007aec:	e3530000 	cmp	r3, #0
+30007af0:	1a000005 	bne	30007b0c <acoral_sem_post+0xcc>
 	{
 		/*应该有等待线程却没有找到*/
 		acoral_printerr("Err Sem post\n");
-300078f0:	e59f0048 	ldr	r0, [pc, #72]	; 30007940 <acoral_sem_post+0x104>
-300078f4:	eb000e43 	bl	3000b208 <acoral_print>
+30007af4:	e59f0048 	ldr	r0, [pc, #72]	; 30007b44 <acoral_sem_post+0x104>
+30007af8:	eb000e43 	bl	3000b40c <acoral_print>
 		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
-300078f8:	e59d000c 	ldr	r0, [sp, #12]
-300078fc:	ebffe77a 	bl	300016ec <HAL_INTR_RESTORE>
+30007afc:	e59d000c 	ldr	r0, [sp, #12]
+30007b00:	ebffe6f9 	bl	300016ec <HAL_INTR_RESTORE>
 		return SEM_ERR_UNDEF;
-30007900:	e3a03007 	mov	r3, #7
-30007904:	ea000009 	b	30007930 <acoral_sem_post+0xf4>
+30007b04:	e3a03007 	mov	r3, #7
+30007b08:	ea000009 	b	30007b34 <acoral_sem_post+0xf4>
 	}
 	timeout_queue_del(thread);
-30007908:	e59d0008 	ldr	r0, [sp, #8]
-3000790c:	ebfff3f7 	bl	300048f0 <timeout_queue_del>
+30007b0c:	e59d0008 	ldr	r0, [sp, #8]
+30007b10:	ebfff376 	bl	300048f0 <timeout_queue_del>
 	/*释放等待任务*/
 	acoral_evt_queue_del(thread);
-30007910:	e59d0008 	ldr	r0, [sp, #8]
-30007914:	ebfff50f 	bl	30004d58 <acoral_evt_queue_del>
+30007b14:	e59d0008 	ldr	r0, [sp, #8]
+30007b18:	ebfff48e 	bl	30004d58 <acoral_evt_queue_del>
 	acoral_rdy_thread(thread);
-30007918:	e59d0008 	ldr	r0, [sp, #8]
-3000791c:	ebffec8d 	bl	30002b58 <acoral_rdy_thread>
+30007b1c:	e59d0008 	ldr	r0, [sp, #8]
+30007b20:	ebffec0c 	bl	30002b58 <acoral_rdy_thread>
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007920:	e59d000c 	ldr	r0, [sp, #12]
-30007924:	ebffe770 	bl	300016ec <HAL_INTR_RESTORE>
+30007b24:	e59d000c 	ldr	r0, [sp, #12]
+30007b28:	ebffe6ef 	bl	300016ec <HAL_INTR_RESTORE>
 	acoral_sched();
-30007928:	ebffeab2 	bl	300023f8 <acoral_sched>
+30007b2c:	ebffea31 	bl	300023f8 <acoral_sched>
 	return SEM_SUCCED;
-3000792c:	e3a03000 	mov	r3, #0
+30007b30:	e3a03000 	mov	r3, #0
 }
-30007930:	e1a00003 	mov	r0, r3
-30007934:	e28dd014 	add	sp, sp, #20
-30007938:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000793c:	e12fff1e 	bx	lr
-30007940:	3000e5c4 	.word	0x3000e5c4
+30007b34:	e1a00003 	mov	r0, r3
+30007b38:	e28dd014 	add	sp, sp, #20
+30007b3c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007b40:	e12fff1e 	bx	lr
+30007b44:	3000e7c8 	.word	0x3000e7c8
 
-30007944 <acoral_sem_getnum>:
+30007b48 <acoral_sem_getnum>:
 /*===================================
  *   get singal's number now
  *     得到当前信号量数目
  *===================================*/
 acoral_32 acoral_sem_getnum(acoral_evt_t* evt)
 {
-30007944:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007948:	e24dd014 	sub	sp, sp, #20
-3000794c:	e58d0004 	str	r0, [sp, #4]
+30007b48:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007b4c:	e24dd014 	sub	sp, sp, #20
+30007b50:	e58d0004 	str	r0, [sp, #4]
 	acoral_32 t;
 	acoral_sr cpu_sr;
 
 	if (NULL == evt)
-30007950:	e59d3004 	ldr	r3, [sp, #4]
-30007954:	e3530000 	cmp	r3, #0
-30007958:	1a000001 	bne	30007964 <acoral_sem_getnum+0x20>
+30007b54:	e59d3004 	ldr	r3, [sp, #4]
+30007b58:	e3530000 	cmp	r3, #0
+30007b5c:	1a000001 	bne	30007b68 <acoral_sem_getnum+0x20>
 		return SEM_ERR_NULL;
-3000795c:	e3a03002 	mov	r3, #2
-30007960:	ea000009 	b	3000798c <acoral_sem_getnum+0x48>
+30007b60:	e3a03002 	mov	r3, #2
+30007b64:	ea000009 	b	30007b90 <acoral_sem_getnum+0x48>
 
 	HAL_ENTER_CRITICAL();
-30007964:	ebffe762 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007968:	e1a03000 	mov	r3, r0
-3000796c:	e58d300c 	str	r3, [sp, #12]
+30007b68:	ebffe6e1 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30007b6c:	e1a03000 	mov	r3, r0
+30007b70:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&evt->spin_lock);
 	t = 1 - (acoral_32)evt->count;
-30007970:	e59d3004 	ldr	r3, [sp, #4]
-30007974:	e593300c 	ldr	r3, [r3, #12]
-30007978:	e2633001 	rsb	r3, r3, #1
-3000797c:	e58d3008 	str	r3, [sp, #8]
+30007b74:	e59d3004 	ldr	r3, [sp, #4]
+30007b78:	e593300c 	ldr	r3, [r3, #12]
+30007b7c:	e2633001 	rsb	r3, r3, #1
+30007b80:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007980:	e59d000c 	ldr	r0, [sp, #12]
-30007984:	ebffe758 	bl	300016ec <HAL_INTR_RESTORE>
+30007b84:	e59d000c 	ldr	r0, [sp, #12]
+30007b88:	ebffe6d7 	bl	300016ec <HAL_INTR_RESTORE>
 	return t;
-30007988:	e59d3008 	ldr	r3, [sp, #8]
+30007b8c:	e59d3008 	ldr	r3, [sp, #8]
 }
-3000798c:	e1a00003 	mov	r0, r3
-30007990:	e28dd014 	add	sp, sp, #20
-30007994:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007998:	e12fff1e 	bx	lr
+30007b90:	e1a00003 	mov	r0, r3
+30007b94:	e28dd014 	add	sp, sp, #20
+30007b98:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007b9c:	e12fff1e 	bx	lr
 
-3000799c <acoral_msg_sys_init>:
+30007ba0 <acoral_msg_sys_init>:
 /*=============================
  *
  *  mssage 机制缓冲池初始化
  *=============================*/
 void acoral_msg_sys_init()
 {
-3000799c:	e92d4008 	push	{r3, lr}
+30007ba0:	e92d4008 	push	{r3, lr}
 	/*初始化全局事件列表头*/
 	acoral_init_list (&(g_msgctr_header.head));
-300079a0:	e59f3094 	ldr	r3, [pc, #148]	; 30007a3c <acoral_msg_sys_init+0xa0>
-300079a4:	e59f2090 	ldr	r2, [pc, #144]	; 30007a3c <acoral_msg_sys_init+0xa0>
-300079a8:	e5832000 	str	r2, [r3]
-300079ac:	e59f3088 	ldr	r3, [pc, #136]	; 30007a3c <acoral_msg_sys_init+0xa0>
-300079b0:	e59f2084 	ldr	r2, [pc, #132]	; 30007a3c <acoral_msg_sys_init+0xa0>
-300079b4:	e5832004 	str	r2, [r3, #4]
+30007ba4:	e59f3094 	ldr	r3, [pc, #148]	; 30007c40 <acoral_msg_sys_init+0xa0>
+30007ba8:	e59f2090 	ldr	r2, [pc, #144]	; 30007c40 <acoral_msg_sys_init+0xa0>
+30007bac:	e5832000 	str	r2, [r3]
+30007bb0:	e59f3088 	ldr	r3, [pc, #136]	; 30007c40 <acoral_msg_sys_init+0xa0>
+30007bb4:	e59f2084 	ldr	r2, [pc, #132]	; 30007c40 <acoral_msg_sys_init+0xa0>
+30007bb8:	e5832004 	str	r2, [r3, #4]
 	g_msgctr_header.data = NULL;
-300079b8:	e59f307c 	ldr	r3, [pc, #124]	; 30007a3c <acoral_msg_sys_init+0xa0>
-300079bc:	e3a02000 	mov	r2, #0
-300079c0:	e5832008 	str	r2, [r3, #8]
+30007bbc:	e59f307c 	ldr	r3, [pc, #124]	; 30007c40 <acoral_msg_sys_init+0xa0>
+30007bc0:	e3a02000 	mov	r2, #0
+30007bc4:	e5832008 	str	r2, [r3, #8]
 	acoral_msgctr_pool_ctrl.type=ACORAL_RES_MST;
-300079c4:	e59f3074 	ldr	r3, [pc, #116]	; 30007a40 <acoral_msg_sys_init+0xa4>
-300079c8:	e3a02006 	mov	r2, #6
-300079cc:	e5832000 	str	r2, [r3]
+30007bc8:	e59f3074 	ldr	r3, [pc, #116]	; 30007c44 <acoral_msg_sys_init+0xa4>
+30007bcc:	e3a02006 	mov	r2, #6
+30007bd0:	e5832000 	str	r2, [r3]
 	acoral_msgctr_pool_ctrl.size=sizeof(acoral_msgctr_t);
-300079d0:	e59f3068 	ldr	r3, [pc, #104]	; 30007a40 <acoral_msg_sys_init+0xa4>
-300079d4:	e3a02030 	mov	r2, #48	; 0x30
-300079d8:	e5832004 	str	r2, [r3, #4]
+30007bd4:	e59f3068 	ldr	r3, [pc, #104]	; 30007c44 <acoral_msg_sys_init+0xa4>
+30007bd8:	e3a02030 	mov	r2, #48	; 0x30
+30007bdc:	e5832004 	str	r2, [r3, #4]
 	acoral_msgctr_pool_ctrl.num_per_pool=10;
-300079dc:	e59f305c 	ldr	r3, [pc, #92]	; 30007a40 <acoral_msg_sys_init+0xa4>
-300079e0:	e3a0200a 	mov	r2, #10
-300079e4:	e5832008 	str	r2, [r3, #8]
+30007be0:	e59f305c 	ldr	r3, [pc, #92]	; 30007c44 <acoral_msg_sys_init+0xa4>
+30007be4:	e3a0200a 	mov	r2, #10
+30007be8:	e5832008 	str	r2, [r3, #8]
 	acoral_msgctr_pool_ctrl.max_pools=4;
-300079e8:	e59f3050 	ldr	r3, [pc, #80]	; 30007a40 <acoral_msg_sys_init+0xa4>
-300079ec:	e3a02004 	mov	r2, #4
-300079f0:	e5832010 	str	r2, [r3, #16]
+30007bec:	e59f3050 	ldr	r3, [pc, #80]	; 30007c44 <acoral_msg_sys_init+0xa4>
+30007bf0:	e3a02004 	mov	r2, #4
+30007bf4:	e5832010 	str	r2, [r3, #16]
 
 	acoral_msg_pool_ctrl.type=ACORAL_RES_MSG;
-300079f4:	e59f3048 	ldr	r3, [pc, #72]	; 30007a44 <acoral_msg_sys_init+0xa8>
-300079f8:	e3a02005 	mov	r2, #5
-300079fc:	e5832000 	str	r2, [r3]
+30007bf8:	e59f3048 	ldr	r3, [pc, #72]	; 30007c48 <acoral_msg_sys_init+0xa8>
+30007bfc:	e3a02005 	mov	r2, #5
+30007c00:	e5832000 	str	r2, [r3]
 	acoral_msg_pool_ctrl.size=sizeof(acoral_msg_t);
-30007a00:	e59f303c 	ldr	r3, [pc, #60]	; 30007a44 <acoral_msg_sys_init+0xa8>
-30007a04:	e3a0201c 	mov	r2, #28
-30007a08:	e5832004 	str	r2, [r3, #4]
+30007c04:	e59f303c 	ldr	r3, [pc, #60]	; 30007c48 <acoral_msg_sys_init+0xa8>
+30007c08:	e3a0201c 	mov	r2, #28
+30007c0c:	e5832004 	str	r2, [r3, #4]
 	acoral_msg_pool_ctrl.num_per_pool=10;
-30007a0c:	e59f3030 	ldr	r3, [pc, #48]	; 30007a44 <acoral_msg_sys_init+0xa8>
-30007a10:	e3a0200a 	mov	r2, #10
-30007a14:	e5832008 	str	r2, [r3, #8]
+30007c10:	e59f3030 	ldr	r3, [pc, #48]	; 30007c48 <acoral_msg_sys_init+0xa8>
+30007c14:	e3a0200a 	mov	r2, #10
+30007c18:	e5832008 	str	r2, [r3, #8]
 	acoral_msg_pool_ctrl.max_pools=4;
-30007a18:	e59f3024 	ldr	r3, [pc, #36]	; 30007a44 <acoral_msg_sys_init+0xa8>
-30007a1c:	e3a02004 	mov	r2, #4
-30007a20:	e5832010 	str	r2, [r3, #16]
+30007c1c:	e59f3024 	ldr	r3, [pc, #36]	; 30007c48 <acoral_msg_sys_init+0xa8>
+30007c20:	e3a02004 	mov	r2, #4
+30007c24:	e5832010 	str	r2, [r3, #16]
 
 	acoral_pool_ctrl_init(&acoral_msgctr_pool_ctrl);
-30007a24:	e59f0014 	ldr	r0, [pc, #20]	; 30007a40 <acoral_msg_sys_init+0xa4>
-30007a28:	ebfff00a 	bl	30003a58 <acoral_pool_ctrl_init>
+30007c28:	e59f0014 	ldr	r0, [pc, #20]	; 30007c44 <acoral_msg_sys_init+0xa4>
+30007c2c:	ebffef89 	bl	30003a58 <acoral_pool_ctrl_init>
 	acoral_pool_ctrl_init(&acoral_msg_pool_ctrl);
-30007a2c:	e59f0010 	ldr	r0, [pc, #16]	; 30007a44 <acoral_msg_sys_init+0xa8>
-30007a30:	ebfff008 	bl	30003a58 <acoral_pool_ctrl_init>
+30007c30:	e59f0010 	ldr	r0, [pc, #16]	; 30007c48 <acoral_msg_sys_init+0xa8>
+30007c34:	ebffef87 	bl	30003a58 <acoral_pool_ctrl_init>
 }
-30007a34:	e8bd4008 	pop	{r3, lr}
-30007a38:	e12fff1e 	bx	lr
-30007a3c:	3000f34c 	.word	0x3000f34c
-30007a40:	300103ac 	.word	0x300103ac
-30007a44:	300102fc 	.word	0x300102fc
+30007c38:	e8bd4008 	pop	{r3, lr}
+30007c3c:	e12fff1e 	bx	lr
+30007c40:	3000f558 	.word	0x3000f558
+30007c44:	300105b8 	.word	0x300105b8
+30007c48:	30010508 	.word	0x30010508
 
-30007a48 <acoral_msgctr_list_queueadd>:
+30007c4c <acoral_msgctr_list_queueadd>:
  *  静态创建的acoral_msgctr_t调用
  *  message container 挂全局队列
  *  在中断中处理 ttl 时使用
  *==============================*/
 void acoral_msgctr_list_queueadd(acoral_msgctr_t* msgctr)
 {
-30007a48:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007a4c:	e24dd00c 	sub	sp, sp, #12
-30007a50:	e58d0004 	str	r0, [sp, #4]
+30007c4c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007c50:	e24dd00c 	sub	sp, sp, #12
+30007c54:	e58d0004 	str	r0, [sp, #4]
   	acoral_list_add2_tail (&msgctr->msgctr_list, &(g_msgctr_header.head));
-30007a54:	e59d3004 	ldr	r3, [sp, #4]
-30007a58:	e283300c 	add	r3, r3, #12
-30007a5c:	e1a00003 	mov	r0, r3
-30007a60:	e59f100c 	ldr	r1, [pc, #12]	; 30007a74 <acoral_msgctr_list_queueadd+0x2c>
-30007a64:	eb000955 	bl	30009fc0 <acoral_list_add2_tail>
+30007c58:	e59d3004 	ldr	r3, [sp, #4]
+30007c5c:	e283300c 	add	r3, r3, #12
+30007c60:	e1a00003 	mov	r0, r3
+30007c64:	e59f100c 	ldr	r1, [pc, #12]	; 30007c78 <acoral_msgctr_list_queueadd+0x2c>
+30007c68:	eb000955 	bl	3000a1c4 <acoral_list_add2_tail>
 }
-30007a68:	e28dd00c 	add	sp, sp, #12
-30007a6c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007a70:	e12fff1e 	bx	lr
-30007a74:	3000f34c 	.word	0x3000f34c
+30007c6c:	e28dd00c 	add	sp, sp, #12
+30007c70:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007c74:	e12fff1e 	bx	lr
+30007c78:	3000f558 	.word	0x3000f558
 
-30007a78 <acoral_alloc_msgctr>:
+30007c7c <acoral_alloc_msgctr>:
 /*==============================
  *
  *  message 分配
  *==============================*/
 acoral_msgctr_t* acoral_alloc_msgctr()
 {
-30007a78:	e92d4008 	push	{r3, lr}
+30007c7c:	e92d4008 	push	{r3, lr}
 	return (acoral_msgctr_t*)acoral_get_res (&acoral_msgctr_pool_ctrl);
-30007a7c:	e59f0010 	ldr	r0, [pc, #16]	; 30007a94 <acoral_alloc_msgctr+0x1c>
-30007a80:	ebffee95 	bl	300034dc <acoral_get_res>
-30007a84:	e1a03000 	mov	r3, r0
+30007c80:	e59f0010 	ldr	r0, [pc, #16]	; 30007c98 <acoral_alloc_msgctr+0x1c>
+30007c84:	ebffee14 	bl	300034dc <acoral_get_res>
+30007c88:	e1a03000 	mov	r3, r0
 }
-30007a88:	e1a00003 	mov	r0, r3
-30007a8c:	e8bd4008 	pop	{r3, lr}
-30007a90:	e12fff1e 	bx	lr
-30007a94:	300103ac 	.word	0x300103ac
+30007c8c:	e1a00003 	mov	r0, r3
+30007c90:	e8bd4008 	pop	{r3, lr}
+30007c94:	e12fff1e 	bx	lr
+30007c98:	300105b8 	.word	0x300105b8
 
-30007a98 <acoral_alloc_msg>:
+30007c9c <acoral_alloc_msg>:
 
 acoral_msg_t* acoral_alloc_msg()
 {
-30007a98:	e92d4008 	push	{r3, lr}
+30007c9c:	e92d4008 	push	{r3, lr}
 	return (acoral_msg_t*)acoral_get_res (&acoral_msg_pool_ctrl);
-30007a9c:	e59f0010 	ldr	r0, [pc, #16]	; 30007ab4 <acoral_alloc_msg+0x1c>
-30007aa0:	ebffee8d 	bl	300034dc <acoral_get_res>
-30007aa4:	e1a03000 	mov	r3, r0
+30007ca0:	e59f0010 	ldr	r0, [pc, #16]	; 30007cb8 <acoral_alloc_msg+0x1c>
+30007ca4:	ebffee0c 	bl	300034dc <acoral_get_res>
+30007ca8:	e1a03000 	mov	r3, r0
 }
-30007aa8:	e1a00003 	mov	r0, r3
-30007aac:	e8bd4008 	pop	{r3, lr}
-30007ab0:	e12fff1e 	bx	lr
-30007ab4:	300102fc 	.word	0x300102fc
+30007cac:	e1a00003 	mov	r0, r3
+30007cb0:	e8bd4008 	pop	{r3, lr}
+30007cb4:	e12fff1e 	bx	lr
+30007cb8:	30010508 	.word	0x30010508
 
-30007ab8 <acoral_msgctr_queue_add>:
+30007cbc <acoral_msgctr_queue_add>:
  *
  *  message 等待队列增加
  *==============================*/
 void acoral_msgctr_queue_add (acoral_msgctr_t* msgctr, 
 		                            acoral_thread_t* thread)
 {   /*需按优先级排序*/
-30007ab8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007abc:	e24dd01c 	sub	sp, sp, #28
-30007ac0:	e58d0004 	str	r0, [sp, #4]
-30007ac4:	e58d1000 	str	r1, [sp]
+30007cbc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007cc0:	e24dd01c 	sub	sp, sp, #28
+30007cc4:	e58d0004 	str	r0, [sp, #4]
+30007cc8:	e58d1000 	str	r1, [sp]
 	/*acoral_list_add2_tail (&thread->waiting, &msgctr->waiting);*/
 	acoral_list_t *p, *q;
 	acoral_thread_t*  ptd;
 	
 	p = &msgctr->waiting;
-30007ac8:	e59d3004 	ldr	r3, [sp, #4]
-30007acc:	e2833020 	add	r3, r3, #32
-30007ad0:	e58d300c 	str	r3, [sp, #12]
+30007ccc:	e59d3004 	ldr	r3, [sp, #4]
+30007cd0:	e2833020 	add	r3, r3, #32
+30007cd4:	e58d300c 	str	r3, [sp, #12]
 	q = p->next;
-30007ad4:	e59d300c 	ldr	r3, [sp, #12]
-30007ad8:	e5933000 	ldr	r3, [r3]
-30007adc:	e58d3010 	str	r3, [sp, #16]
+30007cd8:	e59d300c 	ldr	r3, [sp, #12]
+30007cdc:	e5933000 	ldr	r3, [r3]
+30007ce0:	e58d3010 	str	r3, [sp, #16]
 	for( ; p != q; q=q->next)
-30007ae0:	ea00000b 	b	30007b14 <acoral_msgctr_queue_add+0x5c>
+30007ce4:	ea00000b 	b	30007d18 <acoral_msgctr_queue_add+0x5c>
 	{
 		ptd = list_entry( q, acoral_thread_t, waiting);
-30007ae4:	e59d3010 	ldr	r3, [sp, #16]
-30007ae8:	e2433020 	sub	r3, r3, #32
-30007aec:	e58d3014 	str	r3, [sp, #20]
+30007ce8:	e59d3010 	ldr	r3, [sp, #16]
+30007cec:	e2433020 	sub	r3, r3, #32
+30007cf0:	e58d3014 	str	r3, [sp, #20]
 		if (ptd->prio > thread->prio)
-30007af0:	e59d3014 	ldr	r3, [sp, #20]
-30007af4:	e5d32005 	ldrb	r2, [r3, #5]
-30007af8:	e59d3000 	ldr	r3, [sp]
-30007afc:	e5d33005 	ldrb	r3, [r3, #5]
-30007b00:	e1520003 	cmp	r2, r3
-30007b04:	8a000007 	bhi	30007b28 <acoral_msgctr_queue_add+0x70>
+30007cf4:	e59d3014 	ldr	r3, [sp, #20]
+30007cf8:	e5d32005 	ldrb	r2, [r3, #5]
+30007cfc:	e59d3000 	ldr	r3, [sp]
+30007d00:	e5d33005 	ldrb	r3, [r3, #5]
+30007d04:	e1520003 	cmp	r2, r3
+30007d08:	8a000007 	bhi	30007d2c <acoral_msgctr_queue_add+0x70>
 	acoral_list_t *p, *q;
 	acoral_thread_t*  ptd;
 	
 	p = &msgctr->waiting;
 	q = p->next;
 	for( ; p != q; q=q->next)
-30007b08:	e59d3010 	ldr	r3, [sp, #16]
-30007b0c:	e5933000 	ldr	r3, [r3]
-30007b10:	e58d3010 	str	r3, [sp, #16]
-30007b14:	e59d200c 	ldr	r2, [sp, #12]
-30007b18:	e59d3010 	ldr	r3, [sp, #16]
-30007b1c:	e1520003 	cmp	r2, r3
-30007b20:	1affffef 	bne	30007ae4 <acoral_msgctr_queue_add+0x2c>
-30007b24:	ea000000 	b	30007b2c <acoral_msgctr_queue_add+0x74>
+30007d0c:	e59d3010 	ldr	r3, [sp, #16]
+30007d10:	e5933000 	ldr	r3, [r3]
+30007d14:	e58d3010 	str	r3, [sp, #16]
+30007d18:	e59d200c 	ldr	r2, [sp, #12]
+30007d1c:	e59d3010 	ldr	r3, [sp, #16]
+30007d20:	e1520003 	cmp	r2, r3
+30007d24:	1affffef 	bne	30007ce8 <acoral_msgctr_queue_add+0x2c>
+30007d28:	ea000000 	b	30007d30 <acoral_msgctr_queue_add+0x74>
 	{
 		ptd = list_entry( q, acoral_thread_t, waiting);
 		if (ptd->prio > thread->prio)
 			break;
-30007b28:	e1a00000 	nop			; (mov r0, r0)
+30007d2c:	e1a00000 	nop			; (mov r0, r0)
 	}
 	acoral_list_add( &thread->waiting, q->prev);
-30007b2c:	e59d3000 	ldr	r3, [sp]
-30007b30:	e2832020 	add	r2, r3, #32
-30007b34:	e59d3010 	ldr	r3, [sp, #16]
-30007b38:	e5933004 	ldr	r3, [r3, #4]
-30007b3c:	e1a00002 	mov	r0, r2
-30007b40:	e1a01003 	mov	r1, r3
-30007b44:	eb00090a 	bl	30009f74 <acoral_list_add>
+30007d30:	e59d3000 	ldr	r3, [sp]
+30007d34:	e2832020 	add	r2, r3, #32
+30007d38:	e59d3010 	ldr	r3, [sp, #16]
+30007d3c:	e5933004 	ldr	r3, [r3, #4]
+30007d40:	e1a00002 	mov	r0, r2
+30007d44:	e1a01003 	mov	r1, r3
+30007d48:	eb00090a 	bl	3000a178 <acoral_list_add>
 }
-30007b48:	e28dd01c 	add	sp, sp, #28
-30007b4c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007b50:	e12fff1e 	bx	lr
+30007d4c:	e28dd01c 	add	sp, sp, #28
+30007d50:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007d54:	e12fff1e 	bx	lr
 
-30007b54 <acoral_msg_queue_add>:
+30007d58 <acoral_msg_queue_add>:
 
 void acoral_msg_queue_add (acoral_msgctr_t* msgctr, 
 		                          acoral_msg_t* msg)
 {
-30007b54:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007b58:	e24dd00c 	sub	sp, sp, #12
-30007b5c:	e58d0004 	str	r0, [sp, #4]
-30007b60:	e58d1000 	str	r1, [sp]
+30007d58:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007d5c:	e24dd00c 	sub	sp, sp, #12
+30007d60:	e58d0004 	str	r0, [sp, #4]
+30007d64:	e58d1000 	str	r1, [sp]
 	acoral_list_add2_tail (&msg->msglist, &msgctr->msglist);
-30007b64:	e59d3000 	ldr	r3, [sp]
-30007b68:	e2832004 	add	r2, r3, #4
-30007b6c:	e59d3004 	ldr	r3, [sp, #4]
-30007b70:	e2833028 	add	r3, r3, #40	; 0x28
-30007b74:	e1a00002 	mov	r0, r2
-30007b78:	e1a01003 	mov	r1, r3
-30007b7c:	eb00090f 	bl	30009fc0 <acoral_list_add2_tail>
+30007d68:	e59d3000 	ldr	r3, [sp]
+30007d6c:	e2832004 	add	r2, r3, #4
+30007d70:	e59d3004 	ldr	r3, [sp, #4]
+30007d74:	e2833028 	add	r3, r3, #40	; 0x28
+30007d78:	e1a00002 	mov	r0, r2
+30007d7c:	e1a01003 	mov	r1, r3
+30007d80:	eb00090f 	bl	3000a1c4 <acoral_list_add2_tail>
 }
-30007b80:	e28dd00c 	add	sp, sp, #12
-30007b84:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007b88:	e12fff1e 	bx	lr
+30007d84:	e28dd00c 	add	sp, sp, #12
+30007d88:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30007d8c:	e12fff1e 	bx	lr
 
-30007b8c <acoral_msgctr_init>:
+30007d90 <acoral_msgctr_init>:
 /*==============================
  * The initialize of the message
  *       消息容器初始化
  *==============================*/
 acoral_u32  acoral_msgctr_init(acoral_msgctr_t *msgctr)
 {
-30007b8c:	e24dd008 	sub	sp, sp, #8
-30007b90:	e58d0004 	str	r0, [sp, #4]
+30007d90:	e24dd008 	sub	sp, sp, #8
+30007d94:	e58d0004 	str	r0, [sp, #4]
 	if (msgctr == NULL)
-30007b94:	e59d3004 	ldr	r3, [sp, #4]
-30007b98:	e3530000 	cmp	r3, #0
-30007b9c:	1a000001 	bne	30007ba8 <acoral_msgctr_init+0x1c>
+30007d98:	e59d3004 	ldr	r3, [sp, #4]
+30007d9c:	e3530000 	cmp	r3, #0
+30007da0:	1a000001 	bne	30007dac <acoral_msgctr_init+0x1c>
 		return MST_ERR_NULL;
-30007ba0:	e3a03000 	mov	r3, #0
-30007ba4:	ea000024 	b	30007c3c <acoral_msgctr_init+0xb0>
+30007da4:	e3a03000 	mov	r3, #0
+30007da8:	ea000024 	b	30007e40 <acoral_msgctr_init+0xb0>
 
 	msgctr->name  = NULL;
-30007ba8:	e59d3004 	ldr	r3, [sp, #4]
-30007bac:	e3a02000 	mov	r2, #0
-30007bb0:	e5832004 	str	r2, [r3, #4]
+30007dac:	e59d3004 	ldr	r3, [sp, #4]
+30007db0:	e3a02000 	mov	r2, #0
+30007db4:	e5832004 	str	r2, [r3, #4]
 	msgctr->type  = ACORAL_MSGCTR;
-30007bb4:	e59d3004 	ldr	r3, [sp, #4]
-30007bb8:	e3a02001 	mov	r2, #1
-30007bbc:	e5c32008 	strb	r2, [r3, #8]
+30007db8:	e59d3004 	ldr	r3, [sp, #4]
+30007dbc:	e3a02001 	mov	r2, #1
+30007dc0:	e5c32008 	strb	r2, [r3, #8]
 	msgctr->count = 0;
-30007bc0:	e59d3004 	ldr	r3, [sp, #4]
-30007bc4:	e3a02000 	mov	r2, #0
-30007bc8:	e5832018 	str	r2, [r3, #24]
+30007dc4:	e59d3004 	ldr	r3, [sp, #4]
+30007dc8:	e3a02000 	mov	r2, #0
+30007dcc:	e5832018 	str	r2, [r3, #24]
 	msgctr->wait_thread_num = 0;
-30007bcc:	e59d3004 	ldr	r3, [sp, #4]
-30007bd0:	e3a02000 	mov	r2, #0
-30007bd4:	e583201c 	str	r2, [r3, #28]
+30007dd0:	e59d3004 	ldr	r3, [sp, #4]
+30007dd4:	e3a02000 	mov	r2, #0
+30007dd8:	e583201c 	str	r2, [r3, #28]
 
 	acoral_init_list(&msgctr->msglist);
-30007bd8:	e59d3004 	ldr	r3, [sp, #4]
-30007bdc:	e2832028 	add	r2, r3, #40	; 0x28
-30007be0:	e59d3004 	ldr	r3, [sp, #4]
-30007be4:	e5832028 	str	r2, [r3, #40]	; 0x28
-30007be8:	e59d3004 	ldr	r3, [sp, #4]
-30007bec:	e2832028 	add	r2, r3, #40	; 0x28
-30007bf0:	e59d3004 	ldr	r3, [sp, #4]
-30007bf4:	e583202c 	str	r2, [r3, #44]	; 0x2c
+30007ddc:	e59d3004 	ldr	r3, [sp, #4]
+30007de0:	e2832028 	add	r2, r3, #40	; 0x28
+30007de4:	e59d3004 	ldr	r3, [sp, #4]
+30007de8:	e5832028 	str	r2, [r3, #40]	; 0x28
+30007dec:	e59d3004 	ldr	r3, [sp, #4]
+30007df0:	e2832028 	add	r2, r3, #40	; 0x28
+30007df4:	e59d3004 	ldr	r3, [sp, #4]
+30007df8:	e583202c 	str	r2, [r3, #44]	; 0x2c
 	acoral_init_list(&msgctr->waiting);
-30007bf8:	e59d3004 	ldr	r3, [sp, #4]
-30007bfc:	e2832020 	add	r2, r3, #32
-30007c00:	e59d3004 	ldr	r3, [sp, #4]
-30007c04:	e5832020 	str	r2, [r3, #32]
-30007c08:	e59d3004 	ldr	r3, [sp, #4]
-30007c0c:	e2832020 	add	r2, r3, #32
-30007c10:	e59d3004 	ldr	r3, [sp, #4]
-30007c14:	e5832024 	str	r2, [r3, #36]	; 0x24
+30007dfc:	e59d3004 	ldr	r3, [sp, #4]
+30007e00:	e2832020 	add	r2, r3, #32
+30007e04:	e59d3004 	ldr	r3, [sp, #4]
+30007e08:	e5832020 	str	r2, [r3, #32]
+30007e0c:	e59d3004 	ldr	r3, [sp, #4]
+30007e10:	e2832020 	add	r2, r3, #32
+30007e14:	e59d3004 	ldr	r3, [sp, #4]
+30007e18:	e5832024 	str	r2, [r3, #36]	; 0x24
 	acoral_init_list(&msgctr->msgctr_list);
-30007c18:	e59d3004 	ldr	r3, [sp, #4]
-30007c1c:	e283200c 	add	r2, r3, #12
-30007c20:	e59d3004 	ldr	r3, [sp, #4]
-30007c24:	e583200c 	str	r2, [r3, #12]
-30007c28:	e59d3004 	ldr	r3, [sp, #4]
-30007c2c:	e283200c 	add	r2, r3, #12
-30007c30:	e59d3004 	ldr	r3, [sp, #4]
-30007c34:	e5832010 	str	r2, [r3, #16]
+30007e1c:	e59d3004 	ldr	r3, [sp, #4]
+30007e20:	e283200c 	add	r2, r3, #12
+30007e24:	e59d3004 	ldr	r3, [sp, #4]
+30007e28:	e583200c 	str	r2, [r3, #12]
+30007e2c:	e59d3004 	ldr	r3, [sp, #4]
+30007e30:	e283200c 	add	r2, r3, #12
+30007e34:	e59d3004 	ldr	r3, [sp, #4]
+30007e38:	e5832010 	str	r2, [r3, #16]
 	acoral_spin_init(&msgctr->spin_lock);
 	return MSGCTR_SUCCED;
-30007c38:	e3a03004 	mov	r3, #4
+30007e3c:	e3a03004 	mov	r3, #4
 }
-30007c3c:	e1a00003 	mov	r0, r3
-30007c40:	e28dd008 	add	sp, sp, #8
-30007c44:	e12fff1e 	bx	lr
+30007e40:	e1a00003 	mov	r0, r3
+30007e44:	e28dd008 	add	sp, sp, #8
+30007e48:	e12fff1e 	bx	lr
 
-30007c48 <acoral_msg_init>:
+30007e4c <acoral_msg_init>:
 
 acoral_u32 acoral_msg_init(
 		acoral_msg_t *msg, acoral_u32 id /*= 0*/, acoral_u32 n /*= 0*/, 
 		acoral_u32  nTtl /*= 0*/, void* dat /*= NULL*/)
 {
-30007c48:	e24dd010 	sub	sp, sp, #16
-30007c4c:	e58d000c 	str	r0, [sp, #12]
-30007c50:	e58d1008 	str	r1, [sp, #8]
-30007c54:	e58d2004 	str	r2, [sp, #4]
-30007c58:	e58d3000 	str	r3, [sp]
+30007e4c:	e24dd010 	sub	sp, sp, #16
+30007e50:	e58d000c 	str	r0, [sp, #12]
+30007e54:	e58d1008 	str	r1, [sp, #8]
+30007e58:	e58d2004 	str	r2, [sp, #4]
+30007e5c:	e58d3000 	str	r3, [sp]
 	if (msg == NULL)
-30007c5c:	e59d300c 	ldr	r3, [sp, #12]
-30007c60:	e3530000 	cmp	r3, #0
-30007c64:	1a000001 	bne	30007c70 <acoral_msg_init+0x28>
+30007e60:	e59d300c 	ldr	r3, [sp, #12]
+30007e64:	e3530000 	cmp	r3, #0
+30007e68:	1a000001 	bne	30007e74 <acoral_msg_init+0x28>
 		return MSG_ERR_NULL;
-30007c68:	e3a03007 	mov	r3, #7
-30007c6c:	ea000014 	b	30007cc4 <acoral_msg_init+0x7c>
+30007e6c:	e3a03007 	mov	r3, #7
+30007e70:	ea000014 	b	30007ec8 <acoral_msg_init+0x7c>
 
 	msg->id   =  id;                /*消息标识*/
-30007c70:	e59d300c 	ldr	r3, [sp, #12]
-30007c74:	e59d2008 	ldr	r2, [sp, #8]
-30007c78:	e583200c 	str	r2, [r3, #12]
+30007e74:	e59d300c 	ldr	r3, [sp, #12]
+30007e78:	e59d2008 	ldr	r2, [sp, #8]
+30007e7c:	e583200c 	str	r2, [r3, #12]
 	msg->n    =  n;                 /*消息被接收次数*/
-30007c7c:	e59d300c 	ldr	r3, [sp, #12]
-30007c80:	e59d2004 	ldr	r2, [sp, #4]
-30007c84:	e5832010 	str	r2, [r3, #16]
+30007e80:	e59d300c 	ldr	r3, [sp, #12]
+30007e84:	e59d2004 	ldr	r2, [sp, #4]
+30007e88:	e5832010 	str	r2, [r3, #16]
 	msg->ttl  =  nTtl;              /*消息生存周期*/
-30007c88:	e59d300c 	ldr	r3, [sp, #12]
-30007c8c:	e59d2000 	ldr	r2, [sp]
-30007c90:	e5832014 	str	r2, [r3, #20]
+30007e8c:	e59d300c 	ldr	r3, [sp, #12]
+30007e90:	e59d2000 	ldr	r2, [sp]
+30007e94:	e5832014 	str	r2, [r3, #20]
 	msg->data =  dat;               /*消息指针*/
-30007c94:	e59d300c 	ldr	r3, [sp, #12]
-30007c98:	e59d2010 	ldr	r2, [sp, #16]
-30007c9c:	e5832018 	str	r2, [r3, #24]
+30007e98:	e59d300c 	ldr	r3, [sp, #12]
+30007e9c:	e59d2010 	ldr	r2, [sp, #16]
+30007ea0:	e5832018 	str	r2, [r3, #24]
 	acoral_init_list(&msg->msglist);
-30007ca0:	e59d300c 	ldr	r3, [sp, #12]
-30007ca4:	e2832004 	add	r2, r3, #4
-30007ca8:	e59d300c 	ldr	r3, [sp, #12]
-30007cac:	e5832004 	str	r2, [r3, #4]
-30007cb0:	e59d300c 	ldr	r3, [sp, #12]
-30007cb4:	e2832004 	add	r2, r3, #4
-30007cb8:	e59d300c 	ldr	r3, [sp, #12]
-30007cbc:	e5832008 	str	r2, [r3, #8]
+30007ea4:	e59d300c 	ldr	r3, [sp, #12]
+30007ea8:	e2832004 	add	r2, r3, #4
+30007eac:	e59d300c 	ldr	r3, [sp, #12]
+30007eb0:	e5832004 	str	r2, [r3, #4]
+30007eb4:	e59d300c 	ldr	r3, [sp, #12]
+30007eb8:	e2832004 	add	r2, r3, #4
+30007ebc:	e59d300c 	ldr	r3, [sp, #12]
+30007ec0:	e5832008 	str	r2, [r3, #8]
 	acoral_spin_init(&(msg->msglist.lock));
 	return 0;
-30007cc0:	e3a03000 	mov	r3, #0
+30007ec4:	e3a03000 	mov	r3, #0
 }
-30007cc4:	e1a00003 	mov	r0, r3
-30007cc8:	e28dd010 	add	sp, sp, #16
-30007ccc:	e12fff1e 	bx	lr
+30007ec8:	e1a00003 	mov	r0, r3
+30007ecc:	e28dd010 	add	sp, sp, #16
+30007ed0:	e12fff1e 	bx	lr
 
-30007cd0 <acoral_msg_assign>:
+30007ed4 <acoral_msg_assign>:
 
 acoral_32 acoral_msg_assign(
 		acoral_msg_t* msg, void* dat, acoral_u32 id,
 		acoral_u32 nTtl, acoral_u32 n)
 {
-30007cd0:	e24dd010 	sub	sp, sp, #16
-30007cd4:	e58d000c 	str	r0, [sp, #12]
-30007cd8:	e58d1008 	str	r1, [sp, #8]
-30007cdc:	e58d2004 	str	r2, [sp, #4]
-30007ce0:	e58d3000 	str	r3, [sp]
+30007ed4:	e24dd010 	sub	sp, sp, #16
+30007ed8:	e58d000c 	str	r0, [sp, #12]
+30007edc:	e58d1008 	str	r1, [sp, #8]
+30007ee0:	e58d2004 	str	r2, [sp, #4]
+30007ee4:	e58d3000 	str	r3, [sp]
 	if (msg == NULL)
-30007ce4:	e59d300c 	ldr	r3, [sp, #12]
-30007ce8:	e3530000 	cmp	r3, #0
-30007cec:	1a000001 	bne	30007cf8 <acoral_msg_assign+0x28>
+30007ee8:	e59d300c 	ldr	r3, [sp, #12]
+30007eec:	e3530000 	cmp	r3, #0
+30007ef0:	1a000001 	bne	30007efc <acoral_msg_assign+0x28>
 		return MSG_ERR_NULL;
-30007cf0:	e3a03007 	mov	r3, #7
-30007cf4:	ea00000c 	b	30007d2c <acoral_msg_assign+0x5c>
+30007ef4:	e3a03007 	mov	r3, #7
+30007ef8:	ea00000c 	b	30007f30 <acoral_msg_assign+0x5c>
 
 	msg->id   =  id;                /*消息标识*/
-30007cf8:	e59d300c 	ldr	r3, [sp, #12]
-30007cfc:	e59d2004 	ldr	r2, [sp, #4]
-30007d00:	e583200c 	str	r2, [r3, #12]
+30007efc:	e59d300c 	ldr	r3, [sp, #12]
+30007f00:	e59d2004 	ldr	r2, [sp, #4]
+30007f04:	e583200c 	str	r2, [r3, #12]
 	msg->n    =  n;                 /*消息被接收次数*/
-30007d04:	e59d300c 	ldr	r3, [sp, #12]
-30007d08:	e59d2010 	ldr	r2, [sp, #16]
-30007d0c:	e5832010 	str	r2, [r3, #16]
+30007f08:	e59d300c 	ldr	r3, [sp, #12]
+30007f0c:	e59d2010 	ldr	r2, [sp, #16]
+30007f10:	e5832010 	str	r2, [r3, #16]
 	msg->ttl  =  nTtl;              /*消息生存周期*/
-30007d10:	e59d300c 	ldr	r3, [sp, #12]
-30007d14:	e59d2000 	ldr	r2, [sp]
-30007d18:	e5832014 	str	r2, [r3, #20]
+30007f14:	e59d300c 	ldr	r3, [sp, #12]
+30007f18:	e59d2000 	ldr	r2, [sp]
+30007f1c:	e5832014 	str	r2, [r3, #20]
 	msg->data =  dat;               /*消息指针*/
-30007d1c:	e59d300c 	ldr	r3, [sp, #12]
-30007d20:	e59d2008 	ldr	r2, [sp, #8]
-30007d24:	e5832018 	str	r2, [r3, #24]
+30007f20:	e59d300c 	ldr	r3, [sp, #12]
+30007f24:	e59d2008 	ldr	r2, [sp, #8]
+30007f28:	e5832018 	str	r2, [r3, #24]
 	return 0;
-30007d28:	e3a03000 	mov	r3, #0
+30007f2c:	e3a03000 	mov	r3, #0
 }
-30007d2c:	e1a00003 	mov	r0, r3
-30007d30:	e28dd010 	add	sp, sp, #16
-30007d34:	e12fff1e 	bx	lr
+30007f30:	e1a00003 	mov	r0, r3
+30007f34:	e28dd010 	add	sp, sp, #16
+30007f38:	e12fff1e 	bx	lr
 
-30007d38 <acoral_msgctr_create>:
+30007f3c <acoral_msgctr_create>:
 /*==================================
  *
  *   消息创建
  *==================================*/
 acoral_msgctr_t*  acoral_msgctr_create (acoral_u32 *err)
 {
-30007d38:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007d3c:	e24dd014 	sub	sp, sp, #20
-30007d40:	e58d0004 	str	r0, [sp, #4]
+30007f3c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30007f40:	e24dd014 	sub	sp, sp, #20
+30007f44:	e58d0004 	str	r0, [sp, #4]
 	acoral_msgctr_t *msgctr;
 
 	msgctr = acoral_alloc_msgctr();
-30007d44:	ebffff4b 	bl	30007a78 <acoral_alloc_msgctr>
-30007d48:	e1a03000 	mov	r3, r0
-30007d4c:	e58d300c 	str	r3, [sp, #12]
+30007f48:	ebffff4b 	bl	30007c7c <acoral_alloc_msgctr>
+30007f4c:	e1a03000 	mov	r3, r0
+30007f50:	e58d300c 	str	r3, [sp, #12]
 
 	if (msgctr == NULL)
-30007d50:	e59d300c 	ldr	r3, [sp, #12]
-30007d54:	e3530000 	cmp	r3, #0
-30007d58:	1a000001 	bne	30007d64 <acoral_msgctr_create+0x2c>
+30007f54:	e59d300c 	ldr	r3, [sp, #12]
+30007f58:	e3530000 	cmp	r3, #0
+30007f5c:	1a000001 	bne	30007f68 <acoral_msgctr_create+0x2c>
 		return NULL;
-30007d5c:	e3a03000 	mov	r3, #0
-30007d60:	ea000029 	b	30007e0c <acoral_msgctr_create+0xd4>
+30007f60:	e3a03000 	mov	r3, #0
+30007f64:	ea000029 	b	30008010 <acoral_msgctr_create+0xd4>
 
 	msgctr->name  = NULL;
-30007d64:	e59d300c 	ldr	r3, [sp, #12]
-30007d68:	e3a02000 	mov	r2, #0
-30007d6c:	e5832004 	str	r2, [r3, #4]
+30007f68:	e59d300c 	ldr	r3, [sp, #12]
+30007f6c:	e3a02000 	mov	r2, #0
+30007f70:	e5832004 	str	r2, [r3, #4]
 	msgctr->type  = ACORAL_MSGCTR;
-30007d70:	e59d300c 	ldr	r3, [sp, #12]
-30007d74:	e3a02001 	mov	r2, #1
-30007d78:	e5c32008 	strb	r2, [r3, #8]
+30007f74:	e59d300c 	ldr	r3, [sp, #12]
+30007f78:	e3a02001 	mov	r2, #1
+30007f7c:	e5c32008 	strb	r2, [r3, #8]
 	msgctr->count = 0;
-30007d7c:	e59d300c 	ldr	r3, [sp, #12]
-30007d80:	e3a02000 	mov	r2, #0
-30007d84:	e5832018 	str	r2, [r3, #24]
+30007f80:	e59d300c 	ldr	r3, [sp, #12]
+30007f84:	e3a02000 	mov	r2, #0
+30007f88:	e5832018 	str	r2, [r3, #24]
 	msgctr->wait_thread_num = 0;
-30007d88:	e59d300c 	ldr	r3, [sp, #12]
-30007d8c:	e3a02000 	mov	r2, #0
-30007d90:	e583201c 	str	r2, [r3, #28]
+30007f8c:	e59d300c 	ldr	r3, [sp, #12]
+30007f90:	e3a02000 	mov	r2, #0
+30007f94:	e583201c 	str	r2, [r3, #28]
 
 	acoral_init_list(&msgctr->msgctr_list);
-30007d94:	e59d300c 	ldr	r3, [sp, #12]
-30007d98:	e283200c 	add	r2, r3, #12
-30007d9c:	e59d300c 	ldr	r3, [sp, #12]
-30007da0:	e583200c 	str	r2, [r3, #12]
-30007da4:	e59d300c 	ldr	r3, [sp, #12]
-30007da8:	e283200c 	add	r2, r3, #12
-30007dac:	e59d300c 	ldr	r3, [sp, #12]
-30007db0:	e5832010 	str	r2, [r3, #16]
+30007f98:	e59d300c 	ldr	r3, [sp, #12]
+30007f9c:	e283200c 	add	r2, r3, #12
+30007fa0:	e59d300c 	ldr	r3, [sp, #12]
+30007fa4:	e583200c 	str	r2, [r3, #12]
+30007fa8:	e59d300c 	ldr	r3, [sp, #12]
+30007fac:	e283200c 	add	r2, r3, #12
+30007fb0:	e59d300c 	ldr	r3, [sp, #12]
+30007fb4:	e5832010 	str	r2, [r3, #16]
 	acoral_init_list(&msgctr->msglist);
-30007db4:	e59d300c 	ldr	r3, [sp, #12]
-30007db8:	e2832028 	add	r2, r3, #40	; 0x28
-30007dbc:	e59d300c 	ldr	r3, [sp, #12]
-30007dc0:	e5832028 	str	r2, [r3, #40]	; 0x28
-30007dc4:	e59d300c 	ldr	r3, [sp, #12]
-30007dc8:	e2832028 	add	r2, r3, #40	; 0x28
-30007dcc:	e59d300c 	ldr	r3, [sp, #12]
-30007dd0:	e583202c 	str	r2, [r3, #44]	; 0x2c
+30007fb8:	e59d300c 	ldr	r3, [sp, #12]
+30007fbc:	e2832028 	add	r2, r3, #40	; 0x28
+30007fc0:	e59d300c 	ldr	r3, [sp, #12]
+30007fc4:	e5832028 	str	r2, [r3, #40]	; 0x28
+30007fc8:	e59d300c 	ldr	r3, [sp, #12]
+30007fcc:	e2832028 	add	r2, r3, #40	; 0x28
+30007fd0:	e59d300c 	ldr	r3, [sp, #12]
+30007fd4:	e583202c 	str	r2, [r3, #44]	; 0x2c
 	acoral_init_list(&msgctr->waiting);
-30007dd4:	e59d300c 	ldr	r3, [sp, #12]
-30007dd8:	e2832020 	add	r2, r3, #32
-30007ddc:	e59d300c 	ldr	r3, [sp, #12]
-30007de0:	e5832020 	str	r2, [r3, #32]
-30007de4:	e59d300c 	ldr	r3, [sp, #12]
-30007de8:	e2832020 	add	r2, r3, #32
-30007dec:	e59d300c 	ldr	r3, [sp, #12]
-30007df0:	e5832024 	str	r2, [r3, #36]	; 0x24
+30007fd8:	e59d300c 	ldr	r3, [sp, #12]
+30007fdc:	e2832020 	add	r2, r3, #32
+30007fe0:	e59d300c 	ldr	r3, [sp, #12]
+30007fe4:	e5832020 	str	r2, [r3, #32]
+30007fe8:	e59d300c 	ldr	r3, [sp, #12]
+30007fec:	e2832020 	add	r2, r3, #32
+30007ff0:	e59d300c 	ldr	r3, [sp, #12]
+30007ff4:	e5832024 	str	r2, [r3, #36]	; 0x24
 	acoral_spin_init(&(msgctr->msgctr_list.lock));
 	acoral_spin_init(&(msgctr->msglist.lock));
 	acoral_spin_init(&(msgctr->waiting.lock));
 
 	acoral_spin_init(&msgctr->spin_lock);
 	acoral_list_add2_tail (&msgctr->msgctr_list, &(g_msgctr_header.head));
-30007df4:	e59d300c 	ldr	r3, [sp, #12]
-30007df8:	e283300c 	add	r3, r3, #12
-30007dfc:	e1a00003 	mov	r0, r3
-30007e00:	e59f1014 	ldr	r1, [pc, #20]	; 30007e1c <acoral_msgctr_create+0xe4>
-30007e04:	eb00086d 	bl	30009fc0 <acoral_list_add2_tail>
+30007ff8:	e59d300c 	ldr	r3, [sp, #12]
+30007ffc:	e283300c 	add	r3, r3, #12
+30008000:	e1a00003 	mov	r0, r3
+30008004:	e59f1014 	ldr	r1, [pc, #20]	; 30008020 <acoral_msgctr_create+0xe4>
+30008008:	eb00086d 	bl	3000a1c4 <acoral_list_add2_tail>
 	return msgctr;
-30007e08:	e59d300c 	ldr	r3, [sp, #12]
+3000800c:	e59d300c 	ldr	r3, [sp, #12]
 }
-30007e0c:	e1a00003 	mov	r0, r3
-30007e10:	e28dd014 	add	sp, sp, #20
-30007e14:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007e18:	e12fff1e 	bx	lr
-30007e1c:	3000f34c 	.word	0x3000f34c
+30008010:	e1a00003 	mov	r0, r3
+30008014:	e28dd014 	add	sp, sp, #20
+30008018:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000801c:	e12fff1e 	bx	lr
+30008020:	3000f558 	.word	0x3000f558
 
-30007e20 <acoral_msg_create>:
+30008024 <acoral_msg_create>:
 
 acoral_msg_t* acoral_msg_create (
 		acoral_u32 n, acoral_u32 *err, acoral_u32 id, 
 		acoral_u32 nTtl/* = 0*/, void* dat /*= NULL*/)
 {
-30007e20:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007e24:	e24dd01c 	sub	sp, sp, #28
-30007e28:	e58d000c 	str	r0, [sp, #12]
-30007e2c:	e58d1008 	str	r1, [sp, #8]
-30007e30:	e58d2004 	str	r2, [sp, #4]
-30007e34:	e58d3000 	str	r3, [sp]
+30008024:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008028:	e24dd01c 	sub	sp, sp, #28
+3000802c:	e58d000c 	str	r0, [sp, #12]
+30008030:	e58d1008 	str	r1, [sp, #8]
+30008034:	e58d2004 	str	r2, [sp, #4]
+30008038:	e58d3000 	str	r3, [sp]
 	acoral_msg_t *msg;
 
 	msg = acoral_alloc_msg();
-30007e38:	ebffff16 	bl	30007a98 <acoral_alloc_msg>
-30007e3c:	e1a03000 	mov	r3, r0
-30007e40:	e58d3014 	str	r3, [sp, #20]
+3000803c:	ebffff16 	bl	30007c9c <acoral_alloc_msg>
+30008040:	e1a03000 	mov	r3, r0
+30008044:	e58d3014 	str	r3, [sp, #20]
 
 	if (msg == NULL)
-30007e44:	e59d3014 	ldr	r3, [sp, #20]
-30007e48:	e3530000 	cmp	r3, #0
-30007e4c:	1a000001 	bne	30007e58 <acoral_msg_create+0x38>
+30008048:	e59d3014 	ldr	r3, [sp, #20]
+3000804c:	e3530000 	cmp	r3, #0
+30008050:	1a000001 	bne	3000805c <acoral_msg_create+0x38>
 		return NULL;
-30007e50:	e3a03000 	mov	r3, #0
-30007e54:	ea000014 	b	30007eac <acoral_msg_create+0x8c>
+30008054:	e3a03000 	mov	r3, #0
+30008058:	ea000014 	b	300080b0 <acoral_msg_create+0x8c>
 
 	msg->id   =  id;                 /*消息标识*/
-30007e58:	e59d3014 	ldr	r3, [sp, #20]
-30007e5c:	e59d2004 	ldr	r2, [sp, #4]
-30007e60:	e583200c 	str	r2, [r3, #12]
+3000805c:	e59d3014 	ldr	r3, [sp, #20]
+30008060:	e59d2004 	ldr	r2, [sp, #4]
+30008064:	e583200c 	str	r2, [r3, #12]
 	msg->n    =  n;                  /*消息被接收次数*/
-30007e64:	e59d3014 	ldr	r3, [sp, #20]
-30007e68:	e59d200c 	ldr	r2, [sp, #12]
-30007e6c:	e5832010 	str	r2, [r3, #16]
+30008068:	e59d3014 	ldr	r3, [sp, #20]
+3000806c:	e59d200c 	ldr	r2, [sp, #12]
+30008070:	e5832010 	str	r2, [r3, #16]
 	msg->ttl  =  nTtl;               /*消息生存周期*/
-30007e70:	e59d3014 	ldr	r3, [sp, #20]
-30007e74:	e59d2000 	ldr	r2, [sp]
-30007e78:	e5832014 	str	r2, [r3, #20]
+30008074:	e59d3014 	ldr	r3, [sp, #20]
+30008078:	e59d2000 	ldr	r2, [sp]
+3000807c:	e5832014 	str	r2, [r3, #20]
 	msg->data =  dat;                /*消息指针*/
-30007e7c:	e59d3014 	ldr	r3, [sp, #20]
-30007e80:	e59d2020 	ldr	r2, [sp, #32]
-30007e84:	e5832018 	str	r2, [r3, #24]
+30008080:	e59d3014 	ldr	r3, [sp, #20]
+30008084:	e59d2020 	ldr	r2, [sp, #32]
+30008088:	e5832018 	str	r2, [r3, #24]
 	acoral_init_list(&msg->msglist);
-30007e88:	e59d3014 	ldr	r3, [sp, #20]
-30007e8c:	e2832004 	add	r2, r3, #4
-30007e90:	e59d3014 	ldr	r3, [sp, #20]
-30007e94:	e5832004 	str	r2, [r3, #4]
-30007e98:	e59d3014 	ldr	r3, [sp, #20]
-30007e9c:	e2832004 	add	r2, r3, #4
-30007ea0:	e59d3014 	ldr	r3, [sp, #20]
-30007ea4:	e5832008 	str	r2, [r3, #8]
+3000808c:	e59d3014 	ldr	r3, [sp, #20]
+30008090:	e2832004 	add	r2, r3, #4
+30008094:	e59d3014 	ldr	r3, [sp, #20]
+30008098:	e5832004 	str	r2, [r3, #4]
+3000809c:	e59d3014 	ldr	r3, [sp, #20]
+300080a0:	e2832004 	add	r2, r3, #4
+300080a4:	e59d3014 	ldr	r3, [sp, #20]
+300080a8:	e5832008 	str	r2, [r3, #8]
 	return msg;
-30007ea8:	e59d3014 	ldr	r3, [sp, #20]
+300080ac:	e59d3014 	ldr	r3, [sp, #20]
 }
-30007eac:	e1a00003 	mov	r0, r3
-30007eb0:	e28dd01c 	add	sp, sp, #28
-30007eb4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30007eb8:	e12fff1e 	bx	lr
+300080b0:	e1a00003 	mov	r0, r3
+300080b4:	e28dd01c 	add	sp, sp, #28
+300080b8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300080bc:	e12fff1e 	bx	lr
 
-30007ebc <acoral_msg_send>:
+300080c0 <acoral_msg_send>:
 /*===================================
  * 
  *   消息发送
  *===================================*/
 acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 {
-30007ebc:	e92d4010 	push	{r4, lr}
-30007ec0:	e24dd010 	sub	sp, sp, #16
-30007ec4:	e58d0004 	str	r0, [sp, #4]
-30007ec8:	e58d1000 	str	r1, [sp]
+300080c0:	e92d4010 	push	{r4, lr}
+300080c4:	e24dd010 	sub	sp, sp, #16
+300080c8:	e58d0004 	str	r0, [sp, #4]
+300080cc:	e58d1000 	str	r1, [sp]
 	acoral_sr     cpu_sr;
 	
 /*	if (acoral_intr_nesting > 0)
 		return MST_ERR_INTR;
 */
 	HAL_ENTER_CRITICAL();
-30007ecc:	ebffe608 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30007ed0:	e1a03000 	mov	r3, r0
-30007ed4:	e58d300c 	str	r3, [sp, #12]
+300080d0:	ebffe587 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300080d4:	e1a03000 	mov	r3, r0
+300080d8:	e58d300c 	str	r3, [sp, #12]
 	acoral_spin_lock(&msgctr->spin_lock);
 
 	if (NULL == msgctr)
-30007ed8:	e59d3004 	ldr	r3, [sp, #4]
-30007edc:	e3530000 	cmp	r3, #0
-30007ee0:	1a000003 	bne	30007ef4 <acoral_msg_send+0x38>
+300080dc:	e59d3004 	ldr	r3, [sp, #4]
+300080e0:	e3530000 	cmp	r3, #0
+300080e4:	1a000003 	bne	300080f8 <acoral_msg_send+0x38>
 	{
 		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
-30007ee4:	e59d000c 	ldr	r0, [sp, #12]
-30007ee8:	ebffe5ff 	bl	300016ec <HAL_INTR_RESTORE>
+300080e8:	e59d000c 	ldr	r0, [sp, #12]
+300080ec:	ebffe57e 	bl	300016ec <HAL_INTR_RESTORE>
 		return MST_ERR_NULL;
-30007eec:	e3a03000 	mov	r3, #0
-30007ef0:	ea000032 	b	30007fc0 <acoral_msg_send+0x104>
+300080f0:	e3a03000 	mov	r3, #0
+300080f4:	ea000032 	b	300081c4 <acoral_msg_send+0x104>
 	}
 
 	if (NULL == msg)
-30007ef4:	e59d3000 	ldr	r3, [sp]
-30007ef8:	e3530000 	cmp	r3, #0
-30007efc:	1a000003 	bne	30007f10 <acoral_msg_send+0x54>
+300080f8:	e59d3000 	ldr	r3, [sp]
+300080fc:	e3530000 	cmp	r3, #0
+30008100:	1a000003 	bne	30008114 <acoral_msg_send+0x54>
 	{
 		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
-30007f00:	e59d000c 	ldr	r0, [sp, #12]
-30007f04:	ebffe5f8 	bl	300016ec <HAL_INTR_RESTORE>
+30008104:	e59d000c 	ldr	r0, [sp, #12]
+30008108:	ebffe577 	bl	300016ec <HAL_INTR_RESTORE>
 		return MSG_ERR_NULL;
-30007f08:	e3a03007 	mov	r3, #7
-30007f0c:	ea00002b 	b	30007fc0 <acoral_msg_send+0x104>
+3000810c:	e3a03007 	mov	r3, #7
+30008110:	ea00002b 	b	300081c4 <acoral_msg_send+0x104>
 	}
 
 	/*----------------*/
 	/*   消息数限制*/
 	/*----------------*/
 	if (ACORAL_MESSAGE_MAX_COUNT <= msgctr->count)
-30007f10:	e59d3004 	ldr	r3, [sp, #4]
-30007f14:	e5933018 	ldr	r3, [r3, #24]
-30007f18:	e3530009 	cmp	r3, #9
-30007f1c:	9a000003 	bls	30007f30 <acoral_msg_send+0x74>
+30008114:	e59d3004 	ldr	r3, [sp, #4]
+30008118:	e5933018 	ldr	r3, [r3, #24]
+3000811c:	e3530009 	cmp	r3, #9
+30008120:	9a000003 	bls	30008134 <acoral_msg_send+0x74>
 	{
 		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
-30007f20:	e59d000c 	ldr	r0, [sp, #12]
-30007f24:	ebffe5f0 	bl	300016ec <HAL_INTR_RESTORE>
+30008124:	e59d000c 	ldr	r0, [sp, #12]
+30008128:	ebffe56f 	bl	300016ec <HAL_INTR_RESTORE>
 		return MSG_ERR_COUNT;
-30007f28:	e3a03003 	mov	r3, #3
-30007f2c:	ea000023 	b	30007fc0 <acoral_msg_send+0x104>
+3000812c:	e3a03003 	mov	r3, #3
+30008130:	ea000023 	b	300081c4 <acoral_msg_send+0x104>
 	}
 
 	/*----------------*/
 	/*   增加消息*/
 	/*----------------*/
 	msgctr->count++;
-30007f30:	e59d3004 	ldr	r3, [sp, #4]
-30007f34:	e5933018 	ldr	r3, [r3, #24]
-30007f38:	e2832001 	add	r2, r3, #1
-30007f3c:	e59d3004 	ldr	r3, [sp, #4]
-30007f40:	e5832018 	str	r2, [r3, #24]
+30008134:	e59d3004 	ldr	r3, [sp, #4]
+30008138:	e5933018 	ldr	r3, [r3, #24]
+3000813c:	e2832001 	add	r2, r3, #1
+30008140:	e59d3004 	ldr	r3, [sp, #4]
+30008144:	e5832018 	str	r2, [r3, #24]
 	msg->ttl += acoral_get_ticks();
-30007f44:	e59d3000 	ldr	r3, [sp]
-30007f48:	e5934014 	ldr	r4, [r3, #20]
-30007f4c:	ebfff166 	bl	300044ec <acoral_get_ticks>
-30007f50:	e1a03000 	mov	r3, r0
-30007f54:	e0842003 	add	r2, r4, r3
-30007f58:	e59d3000 	ldr	r3, [sp]
-30007f5c:	e5832014 	str	r2, [r3, #20]
+30008148:	e59d3000 	ldr	r3, [sp]
+3000814c:	e5934014 	ldr	r4, [r3, #20]
+30008150:	ebfff0e5 	bl	300044ec <acoral_get_ticks>
+30008154:	e1a03000 	mov	r3, r0
+30008158:	e0842003 	add	r2, r4, r3
+3000815c:	e59d3000 	ldr	r3, [sp]
+30008160:	e5832014 	str	r2, [r3, #20]
 	acoral_list_add2_tail(&msg->msglist, &msgctr->msglist);
-30007f60:	e59d3000 	ldr	r3, [sp]
-30007f64:	e2832004 	add	r2, r3, #4
-30007f68:	e59d3004 	ldr	r3, [sp, #4]
-30007f6c:	e2833028 	add	r3, r3, #40	; 0x28
-30007f70:	e1a00002 	mov	r0, r2
-30007f74:	e1a01003 	mov	r1, r3
-30007f78:	eb000810 	bl	30009fc0 <acoral_list_add2_tail>
+30008164:	e59d3000 	ldr	r3, [sp]
+30008168:	e2832004 	add	r2, r3, #4
+3000816c:	e59d3004 	ldr	r3, [sp, #4]
+30008170:	e2833028 	add	r3, r3, #40	; 0x28
+30008174:	e1a00002 	mov	r0, r2
+30008178:	e1a01003 	mov	r1, r3
+3000817c:	eb000810 	bl	3000a1c4 <acoral_list_add2_tail>
 
 	/*----------------*/
 	/*   唤醒等待*/
 	/*----------------*/
 	if (msgctr->wait_thread_num > 0)
-30007f7c:	e59d3004 	ldr	r3, [sp, #4]
-30007f80:	e593301c 	ldr	r3, [r3, #28]
-30007f84:	e3530000 	cmp	r3, #0
-30007f88:	0a000008 	beq	30007fb0 <acoral_msg_send+0xf4>
+30008180:	e59d3004 	ldr	r3, [sp, #4]
+30008184:	e593301c 	ldr	r3, [r3, #28]
+30008188:	e3530000 	cmp	r3, #0
+3000818c:	0a000008 	beq	300081b4 <acoral_msg_send+0xf4>
 	{
 		/* 此处将最高优先级唤醒*/
 		wake_up_thread(&msgctr->waiting);
-30007f8c:	e59d3004 	ldr	r3, [sp, #4]
-30007f90:	e2833020 	add	r3, r3, #32
-30007f94:	e1a00003 	mov	r0, r3
-30007f98:	eb000103 	bl	300083ac <wake_up_thread>
+30008190:	e59d3004 	ldr	r3, [sp, #4]
+30008194:	e2833020 	add	r3, r3, #32
+30008198:	e1a00003 	mov	r0, r3
+3000819c:	eb000103 	bl	300085b0 <wake_up_thread>
 		msgctr->wait_thread_num--;
-30007f9c:	e59d3004 	ldr	r3, [sp, #4]
-30007fa0:	e593301c 	ldr	r3, [r3, #28]
-30007fa4:	e2432001 	sub	r2, r3, #1
-30007fa8:	e59d3004 	ldr	r3, [sp, #4]
-30007fac:	e583201c 	str	r2, [r3, #28]
+300081a0:	e59d3004 	ldr	r3, [sp, #4]
+300081a4:	e593301c 	ldr	r3, [r3, #28]
+300081a8:	e2432001 	sub	r2, r3, #1
+300081ac:	e59d3004 	ldr	r3, [sp, #4]
+300081b0:	e583201c 	str	r2, [r3, #28]
 	}
 	acoral_spin_unlock(&msgctr->spin_lock);
 	HAL_EXIT_CRITICAL();
-30007fb0:	e59d000c 	ldr	r0, [sp, #12]
-30007fb4:	ebffe5cc 	bl	300016ec <HAL_INTR_RESTORE>
+300081b4:	e59d000c 	ldr	r0, [sp, #12]
+300081b8:	ebffe54b 	bl	300016ec <HAL_INTR_RESTORE>
 	acoral_sched();
-30007fb8:	ebffe90e 	bl	300023f8 <acoral_sched>
+300081bc:	ebffe88d 	bl	300023f8 <acoral_sched>
 	return MSGCTR_SUCCED;
-30007fbc:	e3a03004 	mov	r3, #4
+300081c0:	e3a03004 	mov	r3, #4
 }
-30007fc0:	e1a00003 	mov	r0, r3
-30007fc4:	e28dd010 	add	sp, sp, #16
-30007fc8:	e8bd4010 	pop	{r4, lr}
-30007fcc:	e12fff1e 	bx	lr
+300081c4:	e1a00003 	mov	r0, r3
+300081c8:	e28dd010 	add	sp, sp, #16
+300081cc:	e8bd4010 	pop	{r4, lr}
+300081d0:	e12fff1e 	bx	lr
 
-30007fd0 <acoral_msg_recv>:
+300081d4 <acoral_msg_recv>:
  *===================================*/
 void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 						acoral_u32  id,
 						acoral_time  timeout,
 						acoral_u32  *err)
 {
-30007fd0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30007fd4:	e24dd02c 	sub	sp, sp, #44	; 0x2c
-30007fd8:	e58d000c 	str	r0, [sp, #12]
-30007fdc:	e58d1008 	str	r1, [sp, #8]
-30007fe0:	e58d2004 	str	r2, [sp, #4]
-30007fe4:	e58d3000 	str	r3, [sp]
+300081d4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300081d8:	e24dd02c 	sub	sp, sp, #44	; 0x2c
+300081dc:	e58d000c 	str	r0, [sp, #12]
+300081e0:	e58d1008 	str	r1, [sp, #8]
+300081e4:	e58d2004 	str	r2, [sp, #4]
+300081e8:	e58d3000 	str	r3, [sp]
 	acoral_sr        cpu_sr;
 	acoral_list_t    *p, *q;
 	acoral_msg_t     *pmsg;
 	acoral_thread_t  *cur;
 
 	if (acoral_intr_nesting > 0)
-30007fe8:	ebffe5dc 	bl	30001760 <hal_get_intr_nesting_comm>
-30007fec:	e1a03000 	mov	r3, r0
-30007ff0:	e3530000 	cmp	r3, #0
-30007ff4:	da000004 	ble	3000800c <acoral_msg_recv+0x3c>
+300081ec:	ebffe55b 	bl	30001760 <hal_get_intr_nesting_comm>
+300081f0:	e1a03000 	mov	r3, r0
+300081f4:	e3530000 	cmp	r3, #0
+300081f8:	da000004 	ble	30008210 <acoral_msg_recv+0x3c>
 	{
 		*err = MST_ERR_INTR;
-30007ff8:	e59d3000 	ldr	r3, [sp]
-30007ffc:	e3a02001 	mov	r2, #1
-30008000:	e5832000 	str	r2, [r3]
+300081fc:	e59d3000 	ldr	r3, [sp]
+30008200:	e3a02001 	mov	r2, #1
+30008204:	e5832000 	str	r2, [r3]
 		return NULL;
-30008004:	e3a03000 	mov	r3, #0
-30008008:	ea000080 	b	30008210 <acoral_msg_recv+0x240>
+30008208:	e3a03000 	mov	r3, #0
+3000820c:	ea000080 	b	30008414 <acoral_msg_recv+0x240>
 	}
 	if (NULL == msgctr)
-3000800c:	e59d300c 	ldr	r3, [sp, #12]
-30008010:	e3530000 	cmp	r3, #0
-30008014:	1a000004 	bne	3000802c <acoral_msg_recv+0x5c>
+30008210:	e59d300c 	ldr	r3, [sp, #12]
+30008214:	e3530000 	cmp	r3, #0
+30008218:	1a000004 	bne	30008230 <acoral_msg_recv+0x5c>
 	{
 		*err = MST_ERR_NULL;
-30008018:	e59d3000 	ldr	r3, [sp]
-3000801c:	e3a02000 	mov	r2, #0
-30008020:	e5832000 	str	r2, [r3]
+3000821c:	e59d3000 	ldr	r3, [sp]
+30008220:	e3a02000 	mov	r2, #0
+30008224:	e5832000 	str	r2, [r3]
 		return NULL;
-30008024:	e3a03000 	mov	r3, #0
-30008028:	ea000078 	b	30008210 <acoral_msg_recv+0x240>
+30008228:	e3a03000 	mov	r3, #0
+3000822c:	ea000078 	b	30008414 <acoral_msg_recv+0x240>
 	}
 
 	cur = acoral_cur_thread;
-3000802c:	e59f31ec 	ldr	r3, [pc, #492]	; 30008220 <acoral_msg_recv+0x250>
-30008030:	e5933000 	ldr	r3, [r3]
-30008034:	e58d3024 	str	r3, [sp, #36]	; 0x24
+30008230:	e59f31ec 	ldr	r3, [pc, #492]	; 30008424 <acoral_msg_recv+0x250>
+30008234:	e5933000 	ldr	r3, [r3]
+30008238:	e58d3024 	str	r3, [sp, #36]	; 0x24
 
 	HAL_ENTER_CRITICAL();
-30008038:	ebffe5ad 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-3000803c:	e1a03000 	mov	r3, r0
-30008040:	e58d3014 	str	r3, [sp, #20]
+3000823c:	ebffe52c 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008240:	e1a03000 	mov	r3, r0
+30008244:	e58d3014 	str	r3, [sp, #20]
 	acoral_spin_lock(&msgctr->spin_lock);
 	if(timeout>0){
-30008044:	e59d3004 	ldr	r3, [sp, #4]
-30008048:	e3530000 	cmp	r3, #0
-3000804c:	0a000013 	beq	300080a0 <acoral_msg_recv+0xd0>
+30008248:	e59d3004 	ldr	r3, [sp, #4]
+3000824c:	e3530000 	cmp	r3, #0
+30008250:	0a000013 	beq	300082a4 <acoral_msg_recv+0xd0>
 		cur->delay = TIME_TO_TICKS(timeout);
-30008050:	e59d2004 	ldr	r2, [sp, #4]
-30008054:	e1a03002 	mov	r3, r2
-30008058:	e1a03103 	lsl	r3, r3, #2
-3000805c:	e0833002 	add	r3, r3, r2
-30008060:	e1a02103 	lsl	r2, r3, #2
-30008064:	e0833002 	add	r3, r3, r2
-30008068:	e1a03103 	lsl	r3, r3, #2
-3000806c:	e1a02003 	mov	r2, r3
-30008070:	e59f31ac 	ldr	r3, [pc, #428]	; 30008224 <acoral_msg_recv+0x254>
-30008074:	e0831392 	umull	r1, r3, r2, r3
-30008078:	e1a03323 	lsr	r3, r3, #6
-3000807c:	e1a02003 	mov	r2, r3
-30008080:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-30008084:	e5832040 	str	r2, [r3, #64]	; 0x40
+30008254:	e59d2004 	ldr	r2, [sp, #4]
+30008258:	e1a03002 	mov	r3, r2
+3000825c:	e1a03103 	lsl	r3, r3, #2
+30008260:	e0833002 	add	r3, r3, r2
+30008264:	e1a02103 	lsl	r2, r3, #2
+30008268:	e0833002 	add	r3, r3, r2
+3000826c:	e1a03103 	lsl	r3, r3, #2
+30008270:	e1a02003 	mov	r2, r3
+30008274:	e59f31ac 	ldr	r3, [pc, #428]	; 30008428 <acoral_msg_recv+0x254>
+30008278:	e0831392 	umull	r1, r3, r2, r3
+3000827c:	e1a03323 	lsr	r3, r3, #6
+30008280:	e1a02003 	mov	r2, r3
+30008284:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+30008288:	e5832040 	str	r2, [r3, #64]	; 0x40
 		timeout_queue_add( cur);
-30008088:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
-3000808c:	ebfff1d5 	bl	300047e8 <timeout_queue_add>
-30008090:	ea000002 	b	300080a0 <acoral_msg_recv+0xd0>
+3000828c:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
+30008290:	ebfff154 	bl	300047e8 <timeout_queue_add>
+30008294:	ea000002 	b	300082a4 <acoral_msg_recv+0xd0>
 		acoral_spin_lock(&msgctr->spin_lock);
 	
 		if (timeout>0&&(acoral_32)cur->delay <=0 )
 			break;
 
 	}
-30008094:	e1a00000 	nop			; (mov r0, r0)
-30008098:	ea000000 	b	300080a0 <acoral_msg_recv+0xd0>
-3000809c:	e1a00000 	nop			; (mov r0, r0)
+30008298:	e1a00000 	nop			; (mov r0, r0)
+3000829c:	ea000000 	b	300082a4 <acoral_msg_recv+0xd0>
+300082a0:	e1a00000 	nop			; (mov r0, r0)
 		cur->delay = TIME_TO_TICKS(timeout);
 		timeout_queue_add( cur);
 	}
 	while(1)
 	{
 		p = &msgctr->msglist;
-300080a0:	e59d300c 	ldr	r3, [sp, #12]
-300080a4:	e2833028 	add	r3, r3, #40	; 0x28
-300080a8:	e58d3018 	str	r3, [sp, #24]
+300082a4:	e59d300c 	ldr	r3, [sp, #12]
+300082a8:	e2833028 	add	r3, r3, #40	; 0x28
+300082ac:	e58d3018 	str	r3, [sp, #24]
 		q = p->next;
-300080ac:	e59d3018 	ldr	r3, [sp, #24]
-300080b0:	e5933000 	ldr	r3, [r3]
-300080b4:	e58d301c 	str	r3, [sp, #28]
+300082b0:	e59d3018 	ldr	r3, [sp, #24]
+300082b4:	e5933000 	ldr	r3, [r3]
+300082b8:	e58d301c 	str	r3, [sp, #28]
 		for( ;p != q; q = q->next)
-300080b8:	ea000026 	b	30008158 <acoral_msg_recv+0x188>
+300082bc:	ea000026 	b	3000835c <acoral_msg_recv+0x188>
 		{
 			pmsg = list_entry( q, acoral_msg_t, msglist);
-300080bc:	e59d301c 	ldr	r3, [sp, #28]
-300080c0:	e2433004 	sub	r3, r3, #4
-300080c4:	e58d3020 	str	r3, [sp, #32]
+300082c0:	e59d301c 	ldr	r3, [sp, #28]
+300082c4:	e2433004 	sub	r3, r3, #4
+300082c8:	e58d3020 	str	r3, [sp, #32]
 			if ( (pmsg->id == id) && (pmsg->n > 0))
-300080c8:	e59d3020 	ldr	r3, [sp, #32]
-300080cc:	e593200c 	ldr	r2, [r3, #12]
-300080d0:	e59d3008 	ldr	r3, [sp, #8]
-300080d4:	e1520003 	cmp	r2, r3
-300080d8:	1a00001b 	bne	3000814c <acoral_msg_recv+0x17c>
-300080dc:	e59d3020 	ldr	r3, [sp, #32]
-300080e0:	e5933010 	ldr	r3, [r3, #16]
-300080e4:	e3530000 	cmp	r3, #0
-300080e8:	0a000017 	beq	3000814c <acoral_msg_recv+0x17c>
+300082cc:	e59d3020 	ldr	r3, [sp, #32]
+300082d0:	e593200c 	ldr	r2, [r3, #12]
+300082d4:	e59d3008 	ldr	r3, [sp, #8]
+300082d8:	e1520003 	cmp	r2, r3
+300082dc:	1a00001b 	bne	30008350 <acoral_msg_recv+0x17c>
+300082e0:	e59d3020 	ldr	r3, [sp, #32]
+300082e4:	e5933010 	ldr	r3, [r3, #16]
+300082e8:	e3530000 	cmp	r3, #0
+300082ec:	0a000017 	beq	30008350 <acoral_msg_recv+0x17c>
 			{
 				/*-----------------*/
 				/* 有接收消息*/
 				/*-----------------*/
 				pmsg->n--;
-300080ec:	e59d3020 	ldr	r3, [sp, #32]
-300080f0:	e5933010 	ldr	r3, [r3, #16]
-300080f4:	e2432001 	sub	r2, r3, #1
-300080f8:	e59d3020 	ldr	r3, [sp, #32]
-300080fc:	e5832010 	str	r2, [r3, #16]
+300082f0:	e59d3020 	ldr	r3, [sp, #32]
+300082f4:	e5933010 	ldr	r3, [r3, #16]
+300082f8:	e2432001 	sub	r2, r3, #1
+300082fc:	e59d3020 	ldr	r3, [sp, #32]
+30008300:	e5832010 	str	r2, [r3, #16]
 				/*-----------------*/
 				/* 延时列表删除*/
 				/*-----------------*/
 				timeout_queue_del(cur);
-30008100:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
-30008104:	ebfff1f9 	bl	300048f0 <timeout_queue_del>
+30008304:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
+30008308:	ebfff178 	bl	300048f0 <timeout_queue_del>
 				dat = pmsg->data;
-30008108:	e59d3020 	ldr	r3, [sp, #32]
-3000810c:	e5933018 	ldr	r3, [r3, #24]
-30008110:	e58d3010 	str	r3, [sp, #16]
+3000830c:	e59d3020 	ldr	r3, [sp, #32]
+30008310:	e5933018 	ldr	r3, [r3, #24]
+30008314:	e58d3010 	str	r3, [sp, #16]
 				acoral_list_del (q);
-30008114:	e59d001c 	ldr	r0, [sp, #28]
-30008118:	eb0007bb 	bl	3000a00c <acoral_list_del>
+30008318:	e59d001c 	ldr	r0, [sp, #28]
+3000831c:	eb0007bb 	bl	3000a210 <acoral_list_del>
 				acoral_release_res ((acoral_res_t *)pmsg);		
-3000811c:	e59d3020 	ldr	r3, [sp, #32]
-30008120:	e1a00003 	mov	r0, r3
-30008124:	ebffed37 	bl	30003608 <acoral_release_res>
+30008320:	e59d3020 	ldr	r3, [sp, #32]
+30008324:	e1a00003 	mov	r0, r3
+30008328:	ebffecb6 	bl	30003608 <acoral_release_res>
 				msgctr->count--;
-30008128:	e59d300c 	ldr	r3, [sp, #12]
-3000812c:	e5933018 	ldr	r3, [r3, #24]
-30008130:	e2432001 	sub	r2, r3, #1
-30008134:	e59d300c 	ldr	r3, [sp, #12]
-30008138:	e5832018 	str	r2, [r3, #24]
+3000832c:	e59d300c 	ldr	r3, [sp, #12]
+30008330:	e5933018 	ldr	r3, [r3, #24]
+30008334:	e2432001 	sub	r2, r3, #1
+30008338:	e59d300c 	ldr	r3, [sp, #12]
+3000833c:	e5832018 	str	r2, [r3, #24]
 				acoral_spin_unlock(&msgctr->spin_lock);
 				HAL_EXIT_CRITICAL();
-3000813c:	e59d0014 	ldr	r0, [sp, #20]
-30008140:	ebffe569 	bl	300016ec <HAL_INTR_RESTORE>
+30008340:	e59d0014 	ldr	r0, [sp, #20]
+30008344:	ebffe4e8 	bl	300016ec <HAL_INTR_RESTORE>
 				return dat;
-30008144:	e59d3010 	ldr	r3, [sp, #16]
-30008148:	ea000030 	b	30008210 <acoral_msg_recv+0x240>
+30008348:	e59d3010 	ldr	r3, [sp, #16]
+3000834c:	ea000030 	b	30008414 <acoral_msg_recv+0x240>
 	}
 	while(1)
 	{
 		p = &msgctr->msglist;
 		q = p->next;
 		for( ;p != q; q = q->next)
-3000814c:	e59d301c 	ldr	r3, [sp, #28]
-30008150:	e5933000 	ldr	r3, [r3]
-30008154:	e58d301c 	str	r3, [sp, #28]
-30008158:	e59d2018 	ldr	r2, [sp, #24]
-3000815c:	e59d301c 	ldr	r3, [sp, #28]
-30008160:	e1520003 	cmp	r2, r3
-30008164:	1affffd4 	bne	300080bc <acoral_msg_recv+0xec>
+30008350:	e59d301c 	ldr	r3, [sp, #28]
+30008354:	e5933000 	ldr	r3, [r3]
+30008358:	e58d301c 	str	r3, [sp, #28]
+3000835c:	e59d2018 	ldr	r2, [sp, #24]
+30008360:	e59d301c 	ldr	r3, [sp, #28]
+30008364:	e1520003 	cmp	r2, r3
+30008368:	1affffd4 	bne	300082c0 <acoral_msg_recv+0xec>
 		}
 	
 		/*-----------------*/
 		/*  没有接收消息*/
 		/*-----------------*/
 		msgctr->wait_thread_num++;
-30008168:	e59d300c 	ldr	r3, [sp, #12]
-3000816c:	e593301c 	ldr	r3, [r3, #28]
-30008170:	e2832001 	add	r2, r3, #1
-30008174:	e59d300c 	ldr	r3, [sp, #12]
-30008178:	e583201c 	str	r2, [r3, #28]
+3000836c:	e59d300c 	ldr	r3, [sp, #12]
+30008370:	e593301c 	ldr	r3, [r3, #28]
+30008374:	e2832001 	add	r2, r3, #1
+30008378:	e59d300c 	ldr	r3, [sp, #12]
+3000837c:	e583201c 	str	r2, [r3, #28]
 		acoral_msgctr_queue_add(msgctr, cur);
-3000817c:	e59d000c 	ldr	r0, [sp, #12]
-30008180:	e59d1024 	ldr	r1, [sp, #36]	; 0x24
-30008184:	ebfffe4b 	bl	30007ab8 <acoral_msgctr_queue_add>
+30008380:	e59d000c 	ldr	r0, [sp, #12]
+30008384:	e59d1024 	ldr	r1, [sp, #36]	; 0x24
+30008388:	ebfffe4b 	bl	30007cbc <acoral_msgctr_queue_add>
 		acoral_unrdy_thread(cur);
-30008188:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
-3000818c:	ebffea80 	bl	30002b94 <acoral_unrdy_thread>
+3000838c:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
+30008390:	ebffe9ff 	bl	30002b94 <acoral_unrdy_thread>
 		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
-30008190:	e59d0014 	ldr	r0, [sp, #20]
-30008194:	ebffe554 	bl	300016ec <HAL_INTR_RESTORE>
+30008394:	e59d0014 	ldr	r0, [sp, #20]
+30008398:	ebffe4d3 	bl	300016ec <HAL_INTR_RESTORE>
 		acoral_sched();
-30008198:	ebffe896 	bl	300023f8 <acoral_sched>
+3000839c:	ebffe815 	bl	300023f8 <acoral_sched>
 		/*-----------------*/
 		/*  看有没有超时*/
 		/*-----------------*/
 		HAL_ENTER_CRITICAL();
-3000819c:	ebffe554 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-300081a0:	e1a03000 	mov	r3, r0
-300081a4:	e58d3014 	str	r3, [sp, #20]
+300083a0:	ebffe4d3 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300083a4:	e1a03000 	mov	r3, r0
+300083a8:	e58d3014 	str	r3, [sp, #20]
 		acoral_spin_lock(&msgctr->spin_lock);
 	
 		if (timeout>0&&(acoral_32)cur->delay <=0 )
-300081a8:	e59d3004 	ldr	r3, [sp, #4]
-300081ac:	e3530000 	cmp	r3, #0
-300081b0:	0affffb7 	beq	30008094 <acoral_msg_recv+0xc4>
-300081b4:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-300081b8:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-300081bc:	e3530000 	cmp	r3, #0
-300081c0:	caffffb5 	bgt	3000809c <acoral_msg_recv+0xcc>
+300083ac:	e59d3004 	ldr	r3, [sp, #4]
+300083b0:	e3530000 	cmp	r3, #0
+300083b4:	0affffb7 	beq	30008298 <acoral_msg_recv+0xc4>
+300083b8:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+300083bc:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+300083c0:	e3530000 	cmp	r3, #0
+300083c4:	caffffb5 	bgt	300082a0 <acoral_msg_recv+0xcc>
 
 	/*---------------*/
 	/*  超时退出*/
 	/*---------------*/
 //	timeout_queue_del(cur);
 	if(msgctr->wait_thread_num>0)
-300081c4:	e59d300c 	ldr	r3, [sp, #12]
-300081c8:	e593301c 	ldr	r3, [r3, #28]
-300081cc:	e3530000 	cmp	r3, #0
-300081d0:	0a000004 	beq	300081e8 <acoral_msg_recv+0x218>
+300083c8:	e59d300c 	ldr	r3, [sp, #12]
+300083cc:	e593301c 	ldr	r3, [r3, #28]
+300083d0:	e3530000 	cmp	r3, #0
+300083d4:	0a000004 	beq	300083ec <acoral_msg_recv+0x218>
 		msgctr->wait_thread_num--;
-300081d4:	e59d300c 	ldr	r3, [sp, #12]
-300081d8:	e593301c 	ldr	r3, [r3, #28]
-300081dc:	e2432001 	sub	r2, r3, #1
-300081e0:	e59d300c 	ldr	r3, [sp, #12]
-300081e4:	e583201c 	str	r2, [r3, #28]
+300083d8:	e59d300c 	ldr	r3, [sp, #12]
+300083dc:	e593301c 	ldr	r3, [r3, #28]
+300083e0:	e2432001 	sub	r2, r3, #1
+300083e4:	e59d300c 	ldr	r3, [sp, #12]
+300083e8:	e583201c 	str	r2, [r3, #28]
 	acoral_list_del(&cur->waiting);
-300081e8:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-300081ec:	e2833020 	add	r3, r3, #32
-300081f0:	e1a00003 	mov	r0, r3
-300081f4:	eb000784 	bl	3000a00c <acoral_list_del>
+300083ec:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+300083f0:	e2833020 	add	r3, r3, #32
+300083f4:	e1a00003 	mov	r0, r3
+300083f8:	eb000784 	bl	3000a210 <acoral_list_del>
 	acoral_spin_unlock(&msgctr->spin_lock);
 	HAL_EXIT_CRITICAL();
-300081f8:	e59d0014 	ldr	r0, [sp, #20]
-300081fc:	ebffe53a 	bl	300016ec <HAL_INTR_RESTORE>
+300083fc:	e59d0014 	ldr	r0, [sp, #20]
+30008400:	ebffe4b9 	bl	300016ec <HAL_INTR_RESTORE>
 	*err = MST_ERR_TIMEOUT;
-30008200:	e59d3000 	ldr	r3, [sp]
-30008204:	e3a02002 	mov	r2, #2
-30008208:	e5832000 	str	r2, [r3]
+30008404:	e59d3000 	ldr	r3, [sp]
+30008408:	e3a02002 	mov	r2, #2
+3000840c:	e5832000 	str	r2, [r3]
 	return NULL;
-3000820c:	e3a03000 	mov	r3, #0
+30008410:	e3a03000 	mov	r3, #0
 
 }
-30008210:	e1a00003 	mov	r0, r3
-30008214:	e28dd02c 	add	sp, sp, #44	; 0x2c
-30008218:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000821c:	e12fff1e 	bx	lr
-30008220:	300103f8 	.word	0x300103f8
-30008224:	10624dd3 	.word	0x10624dd3
+30008414:	e1a00003 	mov	r0, r3
+30008418:	e28dd02c 	add	sp, sp, #44	; 0x2c
+3000841c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008420:	e12fff1e 	bx	lr
+30008424:	30010604 	.word	0x30010604
+30008428:	10624dd3 	.word	0x10624dd3
 
-30008228 <acoral_msgctr_del>:
+3000842c <acoral_msgctr_del>:
 /*===================================
  *
  *  消息删除
  *===================================*/
 acoral_u32 acoral_msgctr_del(acoral_msgctr_t* pmsgctr, acoral_u32 flag)
 {
-30008228:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000822c:	e24dd01c 	sub	sp, sp, #28
-30008230:	e58d0004 	str	r0, [sp, #4]
-30008234:	e58d1000 	str	r1, [sp]
+3000842c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008430:	e24dd01c 	sub	sp, sp, #28
+30008434:	e58d0004 	str	r0, [sp, #4]
+30008438:	e58d1000 	str	r1, [sp]
 	acoral_list_t    *p, *q;
 	acoral_thread_t  *thread;
 	acoral_msg_t     *pmsg;
 	
 	if(NULL == pmsgctr)
-30008238:	e59d3004 	ldr	r3, [sp, #4]
-3000823c:	e3530000 	cmp	r3, #0
-30008240:	1a000001 	bne	3000824c <acoral_msgctr_del+0x24>
+3000843c:	e59d3004 	ldr	r3, [sp, #4]
+30008440:	e3530000 	cmp	r3, #0
+30008444:	1a000001 	bne	30008450 <acoral_msgctr_del+0x24>
 		return MST_ERR_NULL;
-30008244:	e3a03000 	mov	r3, #0
-30008248:	ea000045 	b	30008364 <acoral_msgctr_del+0x13c>
+30008448:	e3a03000 	mov	r3, #0
+3000844c:	ea000045 	b	30008568 <acoral_msgctr_del+0x13c>
 	if (flag == MST_DEL_UNFORCE)
-3000824c:	e59d3000 	ldr	r3, [sp]
-30008250:	e3530000 	cmp	r3, #0
-30008254:	1a00000d 	bne	30008290 <acoral_msgctr_del+0x68>
+30008450:	e59d3000 	ldr	r3, [sp]
+30008454:	e3530000 	cmp	r3, #0
+30008458:	1a00000d 	bne	30008494 <acoral_msgctr_del+0x68>
 	{
 		if ((pmsgctr->count > 0) || (pmsgctr->wait_thread_num > 0))
-30008258:	e59d3004 	ldr	r3, [sp, #4]
-3000825c:	e5933018 	ldr	r3, [r3, #24]
-30008260:	e3530000 	cmp	r3, #0
-30008264:	1a000003 	bne	30008278 <acoral_msgctr_del+0x50>
-30008268:	e59d3004 	ldr	r3, [sp, #4]
-3000826c:	e593301c 	ldr	r3, [r3, #28]
-30008270:	e3530000 	cmp	r3, #0
-30008274:	0a000001 	beq	30008280 <acoral_msgctr_del+0x58>
+3000845c:	e59d3004 	ldr	r3, [sp, #4]
+30008460:	e5933018 	ldr	r3, [r3, #24]
+30008464:	e3530000 	cmp	r3, #0
+30008468:	1a000003 	bne	3000847c <acoral_msgctr_del+0x50>
+3000846c:	e59d3004 	ldr	r3, [sp, #4]
+30008470:	e593301c 	ldr	r3, [r3, #28]
+30008474:	e3530000 	cmp	r3, #0
+30008478:	0a000001 	beq	30008484 <acoral_msgctr_del+0x58>
 			return MST_ERR_UNDEF;
-30008278:	e3a03003 	mov	r3, #3
-3000827c:	ea000038 	b	30008364 <acoral_msgctr_del+0x13c>
+3000847c:	e3a03003 	mov	r3, #3
+30008480:	ea000038 	b	30008568 <acoral_msgctr_del+0x13c>
 		else
 			acoral_release_res((acoral_res_t *)pmsgctr);
-30008280:	e59d3004 	ldr	r3, [sp, #4]
-30008284:	e1a00003 	mov	r0, r3
-30008288:	ebffecde 	bl	30003608 <acoral_release_res>
-3000828c:	ea000033 	b	30008360 <acoral_msgctr_del+0x138>
+30008484:	e59d3004 	ldr	r3, [sp, #4]
+30008488:	e1a00003 	mov	r0, r3
+3000848c:	ebffec5d 	bl	30003608 <acoral_release_res>
+30008490:	ea000033 	b	30008564 <acoral_msgctr_del+0x138>
 	}
 	else
 	{
 		// 释放等待进程
 		if (pmsgctr->wait_thread_num > 0)
-30008290:	e59d3004 	ldr	r3, [sp, #4]
-30008294:	e593301c 	ldr	r3, [r3, #28]
-30008298:	e3530000 	cmp	r3, #0
-3000829c:	0a000012 	beq	300082ec <acoral_msgctr_del+0xc4>
+30008494:	e59d3004 	ldr	r3, [sp, #4]
+30008498:	e593301c 	ldr	r3, [r3, #28]
+3000849c:	e3530000 	cmp	r3, #0
+300084a0:	0a000012 	beq	300084f0 <acoral_msgctr_del+0xc4>
 		{
 			p = &pmsgctr->waiting;
-300082a0:	e59d3004 	ldr	r3, [sp, #4]
-300082a4:	e2833020 	add	r3, r3, #32
-300082a8:	e58d3008 	str	r3, [sp, #8]
+300084a4:	e59d3004 	ldr	r3, [sp, #4]
+300084a8:	e2833020 	add	r3, r3, #32
+300084ac:	e58d3008 	str	r3, [sp, #8]
 			q = p->next;
-300082ac:	e59d3008 	ldr	r3, [sp, #8]
-300082b0:	e5933000 	ldr	r3, [r3]
-300082b4:	e58d300c 	str	r3, [sp, #12]
+300084b0:	e59d3008 	ldr	r3, [sp, #8]
+300084b4:	e5933000 	ldr	r3, [r3]
+300084b8:	e58d300c 	str	r3, [sp, #12]
 			for(; q != p; q = q->next)
-300082b8:	ea000007 	b	300082dc <acoral_msgctr_del+0xb4>
+300084bc:	ea000007 	b	300084e0 <acoral_msgctr_del+0xb4>
 			{
 				thread=list_entry( q, acoral_thread_t, waiting);
-300082bc:	e59d300c 	ldr	r3, [sp, #12]
-300082c0:	e2433020 	sub	r3, r3, #32
-300082c4:	e58d3010 	str	r3, [sp, #16]
+300084c0:	e59d300c 	ldr	r3, [sp, #12]
+300084c4:	e2433020 	sub	r3, r3, #32
+300084c8:	e58d3010 	str	r3, [sp, #16]
 				//acoral_list_del  (&thread->waiting);
 				acoral_rdy_thread(thread);
-300082c8:	e59d0010 	ldr	r0, [sp, #16]
-300082cc:	ebffea21 	bl	30002b58 <acoral_rdy_thread>
+300084cc:	e59d0010 	ldr	r0, [sp, #16]
+300084d0:	ebffe9a0 	bl	30002b58 <acoral_rdy_thread>
 		// 释放等待进程
 		if (pmsgctr->wait_thread_num > 0)
 		{
 			p = &pmsgctr->waiting;
 			q = p->next;
 			for(; q != p; q = q->next)
-300082d0:	e59d300c 	ldr	r3, [sp, #12]
-300082d4:	e5933000 	ldr	r3, [r3]
-300082d8:	e58d300c 	str	r3, [sp, #12]
-300082dc:	e59d200c 	ldr	r2, [sp, #12]
-300082e0:	e59d3008 	ldr	r3, [sp, #8]
-300082e4:	e1520003 	cmp	r2, r3
-300082e8:	1afffff3 	bne	300082bc <acoral_msgctr_del+0x94>
+300084d4:	e59d300c 	ldr	r3, [sp, #12]
+300084d8:	e5933000 	ldr	r3, [r3]
+300084dc:	e58d300c 	str	r3, [sp, #12]
+300084e0:	e59d200c 	ldr	r2, [sp, #12]
+300084e4:	e59d3008 	ldr	r3, [sp, #8]
+300084e8:	e1520003 	cmp	r2, r3
+300084ec:	1afffff3 	bne	300084c0 <acoral_msgctr_del+0x94>
 				acoral_rdy_thread(thread);
 			}
 		}
 		
 		// 释放消息结构
 		if (pmsgctr->count > 0)
-300082ec:	e59d3004 	ldr	r3, [sp, #4]
-300082f0:	e5933018 	ldr	r3, [r3, #24]
-300082f4:	e3530000 	cmp	r3, #0
-300082f8:	0a000015 	beq	30008354 <acoral_msgctr_del+0x12c>
+300084f0:	e59d3004 	ldr	r3, [sp, #4]
+300084f4:	e5933018 	ldr	r3, [r3, #24]
+300084f8:	e3530000 	cmp	r3, #0
+300084fc:	0a000015 	beq	30008558 <acoral_msgctr_del+0x12c>
 		{
 			p = &pmsgctr->msglist;
-300082fc:	e59d3004 	ldr	r3, [sp, #4]
-30008300:	e2833028 	add	r3, r3, #40	; 0x28
-30008304:	e58d3008 	str	r3, [sp, #8]
+30008500:	e59d3004 	ldr	r3, [sp, #4]
+30008504:	e2833028 	add	r3, r3, #40	; 0x28
+30008508:	e58d3008 	str	r3, [sp, #8]
 			q = p->next;
-30008308:	e59d3008 	ldr	r3, [sp, #8]
-3000830c:	e5933000 	ldr	r3, [r3]
-30008310:	e58d300c 	str	r3, [sp, #12]
+3000850c:	e59d3008 	ldr	r3, [sp, #8]
+30008510:	e5933000 	ldr	r3, [r3]
+30008514:	e58d300c 	str	r3, [sp, #12]
 			for( ;p != q; q = p->next)
-30008314:	ea00000a 	b	30008344 <acoral_msgctr_del+0x11c>
+30008518:	ea00000a 	b	30008548 <acoral_msgctr_del+0x11c>
 			{
 				pmsg = list_entry( q, acoral_msg_t, msglist);
-30008318:	e59d300c 	ldr	r3, [sp, #12]
-3000831c:	e2433004 	sub	r3, r3, #4
-30008320:	e58d3014 	str	r3, [sp, #20]
+3000851c:	e59d300c 	ldr	r3, [sp, #12]
+30008520:	e2433004 	sub	r3, r3, #4
+30008524:	e58d3014 	str	r3, [sp, #20]
 				acoral_list_del (q);
-30008324:	e59d000c 	ldr	r0, [sp, #12]
-30008328:	eb000737 	bl	3000a00c <acoral_list_del>
+30008528:	e59d000c 	ldr	r0, [sp, #12]
+3000852c:	eb000737 	bl	3000a210 <acoral_list_del>
 				acoral_release_res ((acoral_res_t *)pmsg);		
-3000832c:	e59d3014 	ldr	r3, [sp, #20]
-30008330:	e1a00003 	mov	r0, r3
-30008334:	ebffecb3 	bl	30003608 <acoral_release_res>
+30008530:	e59d3014 	ldr	r3, [sp, #20]
+30008534:	e1a00003 	mov	r0, r3
+30008538:	ebffec32 	bl	30003608 <acoral_release_res>
 		// 释放消息结构
 		if (pmsgctr->count > 0)
 		{
 			p = &pmsgctr->msglist;
 			q = p->next;
 			for( ;p != q; q = p->next)
-30008338:	e59d3008 	ldr	r3, [sp, #8]
-3000833c:	e5933000 	ldr	r3, [r3]
-30008340:	e58d300c 	str	r3, [sp, #12]
-30008344:	e59d2008 	ldr	r2, [sp, #8]
-30008348:	e59d300c 	ldr	r3, [sp, #12]
-3000834c:	e1520003 	cmp	r2, r3
-30008350:	1afffff0 	bne	30008318 <acoral_msgctr_del+0xf0>
+3000853c:	e59d3008 	ldr	r3, [sp, #8]
+30008540:	e5933000 	ldr	r3, [r3]
+30008544:	e58d300c 	str	r3, [sp, #12]
+30008548:	e59d2008 	ldr	r2, [sp, #8]
+3000854c:	e59d300c 	ldr	r3, [sp, #12]
+30008550:	e1520003 	cmp	r2, r3
+30008554:	1afffff0 	bne	3000851c <acoral_msgctr_del+0xf0>
 				acoral_release_res ((acoral_res_t *)pmsg);		
 			}		
 		}
 		
 		// 释放资源
 		acoral_release_res((acoral_res_t *)pmsgctr);
-30008354:	e59d3004 	ldr	r3, [sp, #4]
-30008358:	e1a00003 	mov	r0, r3
-3000835c:	ebffeca9 	bl	30003608 <acoral_release_res>
-30008360:	eaffffff 	b	30008364 <acoral_msgctr_del+0x13c>
+30008558:	e59d3004 	ldr	r3, [sp, #4]
+3000855c:	e1a00003 	mov	r0, r3
+30008560:	ebffec28 	bl	30003608 <acoral_release_res>
+30008564:	eaffffff 	b	30008568 <acoral_msgctr_del+0x13c>
 	}
 }
-30008364:	e1a00003 	mov	r0, r3
-30008368:	e28dd01c 	add	sp, sp, #28
-3000836c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008370:	e12fff1e 	bx	lr
+30008568:	e1a00003 	mov	r0, r3
+3000856c:	e28dd01c 	add	sp, sp, #28
+30008570:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008574:	e12fff1e 	bx	lr
 
-30008374 <acoral_msg_del>:
+30008578 <acoral_msg_del>:
 
 acoral_u32 acoral_msg_del(acoral_msg_t* pmsg)
 {
-30008374:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008378:	e24dd00c 	sub	sp, sp, #12
-3000837c:	e58d0004 	str	r0, [sp, #4]
+30008578:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000857c:	e24dd00c 	sub	sp, sp, #12
+30008580:	e58d0004 	str	r0, [sp, #4]
 	if (NULL != pmsg)
-30008380:	e59d3004 	ldr	r3, [sp, #4]
-30008384:	e3530000 	cmp	r3, #0
-30008388:	0a000002 	beq	30008398 <acoral_msg_del+0x24>
+30008584:	e59d3004 	ldr	r3, [sp, #4]
+30008588:	e3530000 	cmp	r3, #0
+3000858c:	0a000002 	beq	3000859c <acoral_msg_del+0x24>
 		acoral_release_res ((acoral_res_t *)pmsg);
-3000838c:	e59d3004 	ldr	r3, [sp, #4]
-30008390:	e1a00003 	mov	r0, r3
-30008394:	ebffec9b 	bl	30003608 <acoral_release_res>
+30008590:	e59d3004 	ldr	r3, [sp, #4]
+30008594:	e1a00003 	mov	r0, r3
+30008598:	ebffec1a 	bl	30003608 <acoral_release_res>
 	return 0;
-30008398:	e3a03000 	mov	r3, #0
+3000859c:	e3a03000 	mov	r3, #0
 }
-3000839c:	e1a00003 	mov	r0, r3
-300083a0:	e28dd00c 	add	sp, sp, #12
-300083a4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300083a8:	e12fff1e 	bx	lr
+300085a0:	e1a00003 	mov	r0, r3
+300085a4:	e28dd00c 	add	sp, sp, #12
+300085a8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300085ac:	e12fff1e 	bx	lr
 
-300083ac <wake_up_thread>:
+300085b0 <wake_up_thread>:
 /*==========================
  *
  *  唤醒最高优先等待线程
  *==========================*/
 void wake_up_thread(acoral_list_t  *head)
 {
-300083ac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300083b0:	e24dd01c 	sub	sp, sp, #28
-300083b4:	e58d0004 	str	r0, [sp, #4]
+300085b0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300085b4:	e24dd01c 	sub	sp, sp, #28
+300085b8:	e58d0004 	str	r0, [sp, #4]
 	acoral_list_t    *p, *q;
 	acoral_thread_t  *thread;
 
 	p = head;
-300083b8:	e59d3004 	ldr	r3, [sp, #4]
-300083bc:	e58d300c 	str	r3, [sp, #12]
+300085bc:	e59d3004 	ldr	r3, [sp, #4]
+300085c0:	e58d300c 	str	r3, [sp, #12]
 	q = p->next;
-300083c0:	e59d300c 	ldr	r3, [sp, #12]
-300083c4:	e5933000 	ldr	r3, [r3]
-300083c8:	e58d3010 	str	r3, [sp, #16]
+300085c4:	e59d300c 	ldr	r3, [sp, #12]
+300085c8:	e5933000 	ldr	r3, [r3]
+300085cc:	e58d3010 	str	r3, [sp, #16]
 	thread=list_entry( q, acoral_thread_t, waiting);
-300083cc:	e59d3010 	ldr	r3, [sp, #16]
-300083d0:	e2433020 	sub	r3, r3, #32
-300083d4:	e58d3014 	str	r3, [sp, #20]
+300085d0:	e59d3010 	ldr	r3, [sp, #16]
+300085d4:	e2433020 	sub	r3, r3, #32
+300085d8:	e58d3014 	str	r3, [sp, #20]
 	acoral_list_del  (&thread->waiting);
-300083d8:	e59d3014 	ldr	r3, [sp, #20]
-300083dc:	e2833020 	add	r3, r3, #32
-300083e0:	e1a00003 	mov	r0, r3
-300083e4:	eb000708 	bl	3000a00c <acoral_list_del>
+300085dc:	e59d3014 	ldr	r3, [sp, #20]
+300085e0:	e2833020 	add	r3, r3, #32
+300085e4:	e1a00003 	mov	r0, r3
+300085e8:	eb000708 	bl	3000a210 <acoral_list_del>
 	acoral_rdy_thread(thread);
-300083e8:	e59d0014 	ldr	r0, [sp, #20]
-300083ec:	ebffe9d9 	bl	30002b58 <acoral_rdy_thread>
+300085ec:	e59d0014 	ldr	r0, [sp, #20]
+300085f0:	ebffe958 	bl	30002b58 <acoral_rdy_thread>
 }
-300083f0:	e28dd01c 	add	sp, sp, #28
-300083f4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300083f8:	e12fff1e 	bx	lr
+300085f4:	e28dd01c 	add	sp, sp, #28
+300085f8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300085fc:	e12fff1e 	bx	lr
 
-300083fc <acoral_print_all_msg>:
+30008600 <acoral_print_all_msg>:
 /*======================*/
 /**/
 /*  输出事件容器上全部消息*/
 /*======================*/
 void acoral_print_all_msg(acoral_msgctr_t* msgctr)
 {
-300083fc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008400:	e24dd01c 	sub	sp, sp, #28
-30008404:	e58d0004 	str	r0, [sp, #4]
+30008600:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008604:	e24dd01c 	sub	sp, sp, #28
+30008608:	e58d0004 	str	r0, [sp, #4]
 	acoral_list_t *p, *q;
 	acoral_msg_t  *pmsg;
 
 	acoral_doMsgTtl_checked = DO_CHECKED_TRUE;
-30008408:	e59f3074 	ldr	r3, [pc, #116]	; 30008484 <acoral_print_all_msg+0x88>
-3000840c:	e3a02000 	mov	r2, #0
-30008410:	e5832000 	str	r2, [r3]
+3000860c:	e59f3074 	ldr	r3, [pc, #116]	; 30008688 <acoral_print_all_msg+0x88>
+30008610:	e3a02000 	mov	r2, #0
+30008614:	e5832000 	str	r2, [r3]
 
 	p = &msgctr->msglist;
-30008414:	e59d3004 	ldr	r3, [sp, #4]
-30008418:	e2833028 	add	r3, r3, #40	; 0x28
-3000841c:	e58d300c 	str	r3, [sp, #12]
+30008618:	e59d3004 	ldr	r3, [sp, #4]
+3000861c:	e2833028 	add	r3, r3, #40	; 0x28
+30008620:	e58d300c 	str	r3, [sp, #12]
 	q = p->next;
-30008420:	e59d300c 	ldr	r3, [sp, #12]
-30008424:	e5933000 	ldr	r3, [r3]
-30008428:	e58d3010 	str	r3, [sp, #16]
+30008624:	e59d300c 	ldr	r3, [sp, #12]
+30008628:	e5933000 	ldr	r3, [r3]
+3000862c:	e58d3010 	str	r3, [sp, #16]
 	for( ;p != q; q = q->next)
-3000842c:	ea00000a 	b	3000845c <acoral_print_all_msg+0x60>
+30008630:	ea00000a 	b	30008660 <acoral_print_all_msg+0x60>
 	{
 		pmsg = list_entry( q, acoral_msg_t, msglist);
-30008430:	e59d3010 	ldr	r3, [sp, #16]
-30008434:	e2433004 	sub	r3, r3, #4
-30008438:	e58d3014 	str	r3, [sp, #20]
+30008634:	e59d3010 	ldr	r3, [sp, #16]
+30008638:	e2433004 	sub	r3, r3, #4
+3000863c:	e58d3014 	str	r3, [sp, #20]
 		acoral_print ("\nid = %d", pmsg->id);
-3000843c:	e59d3014 	ldr	r3, [sp, #20]
-30008440:	e593300c 	ldr	r3, [r3, #12]
-30008444:	e59f003c 	ldr	r0, [pc, #60]	; 30008488 <acoral_print_all_msg+0x8c>
-30008448:	e1a01003 	mov	r1, r3
-3000844c:	eb000b6d 	bl	3000b208 <acoral_print>
+30008640:	e59d3014 	ldr	r3, [sp, #20]
+30008644:	e593300c 	ldr	r3, [r3, #12]
+30008648:	e59f003c 	ldr	r0, [pc, #60]	; 3000868c <acoral_print_all_msg+0x8c>
+3000864c:	e1a01003 	mov	r1, r3
+30008650:	eb000b6d 	bl	3000b40c <acoral_print>
 
 	acoral_doMsgTtl_checked = DO_CHECKED_TRUE;
 
 	p = &msgctr->msglist;
 	q = p->next;
 	for( ;p != q; q = q->next)
-30008450:	e59d3010 	ldr	r3, [sp, #16]
-30008454:	e5933000 	ldr	r3, [r3]
-30008458:	e58d3010 	str	r3, [sp, #16]
-3000845c:	e59d200c 	ldr	r2, [sp, #12]
-30008460:	e59d3010 	ldr	r3, [sp, #16]
-30008464:	e1520003 	cmp	r2, r3
-30008468:	1afffff0 	bne	30008430 <acoral_print_all_msg+0x34>
+30008654:	e59d3010 	ldr	r3, [sp, #16]
+30008658:	e5933000 	ldr	r3, [r3]
+3000865c:	e58d3010 	str	r3, [sp, #16]
+30008660:	e59d200c 	ldr	r2, [sp, #12]
+30008664:	e59d3010 	ldr	r3, [sp, #16]
+30008668:	e1520003 	cmp	r2, r3
+3000866c:	1afffff0 	bne	30008634 <acoral_print_all_msg+0x34>
 	{
 		pmsg = list_entry( q, acoral_msg_t, msglist);
 		acoral_print ("\nid = %d", pmsg->id);
 	}
 
 	acoral_doMsgTtl_checked = DO_CHECKED_FALSE;
-3000846c:	e59f3010 	ldr	r3, [pc, #16]	; 30008484 <acoral_print_all_msg+0x88>
-30008470:	e3a02001 	mov	r2, #1
-30008474:	e5832000 	str	r2, [r3]
+30008670:	e59f3010 	ldr	r3, [pc, #16]	; 30008688 <acoral_print_all_msg+0x88>
+30008674:	e3a02001 	mov	r2, #1
+30008678:	e5832000 	str	r2, [r3]
 
 }
-30008478:	e28dd01c 	add	sp, sp, #28
-3000847c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008480:	e12fff1e 	bx	lr
-30008484:	3000ea44 	.word	0x3000ea44
-30008488:	3000e5d4 	.word	0x3000e5d4
+3000867c:	e28dd01c 	add	sp, sp, #28
+30008680:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008684:	e12fff1e 	bx	lr
+30008688:	3000ec50 	.word	0x3000ec50
+3000868c:	3000e7d8 	.word	0x3000e7d8
 
-3000848c <acoral_print_waitThreadsNum>:
+30008690 <acoral_print_waitThreadsNum>:
 /*======================*/
 /**/
 /*  输出等待任务数目*/
 /*======================*/
 void acoral_print_waitThreadsNum(acoral_msgctr_t* msgctr)
 {
-3000848c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008490:	e24dd00c 	sub	sp, sp, #12
-30008494:	e58d0004 	str	r0, [sp, #4]
+30008690:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008694:	e24dd00c 	sub	sp, sp, #12
+30008698:	e58d0004 	str	r0, [sp, #4]
 	acoral_print("\n wait threads mum = %d", msgctr->wait_thread_num);
-30008498:	e59d3004 	ldr	r3, [sp, #4]
-3000849c:	e593301c 	ldr	r3, [r3, #28]
-300084a0:	e59f0010 	ldr	r0, [pc, #16]	; 300084b8 <acoral_print_waitThreadsNum+0x2c>
-300084a4:	e1a01003 	mov	r1, r3
-300084a8:	eb000b56 	bl	3000b208 <acoral_print>
+3000869c:	e59d3004 	ldr	r3, [sp, #4]
+300086a0:	e593301c 	ldr	r3, [r3, #28]
+300086a4:	e59f0010 	ldr	r0, [pc, #16]	; 300086bc <acoral_print_waitThreadsNum+0x2c>
+300086a8:	e1a01003 	mov	r1, r3
+300086ac:	eb000b56 	bl	3000b40c <acoral_print>
 }
-300084ac:	e28dd00c 	add	sp, sp, #12
-300084b0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300084b4:	e12fff1e 	bx	lr
-300084b8:	3000e5e0 	.word	0x3000e5e0
+300086b0:	e28dd00c 	add	sp, sp, #12
+300086b4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300086b8:	e12fff1e 	bx	lr
+300086bc:	3000e7e4 	.word	0x3000e7e4
 
-300084bc <rm_policy_thread_init>:
+300086c0 <rm_policy_thread_init>:
 struct{
 	acoral_u32 num;
 	acoral_fl sum;
 }left[HAL_MAX_CPU];
 
 acoral_id rm_policy_thread_init(acoral_thread_t *thread,void (*route)(void *args),void *args,void *data){
-300084bc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300084c0:	e24dd024 	sub	sp, sp, #36	; 0x24
-300084c4:	e58d000c 	str	r0, [sp, #12]
-300084c8:	e58d1008 	str	r1, [sp, #8]
-300084cc:	e58d2004 	str	r2, [sp, #4]
-300084d0:	e58d3000 	str	r3, [sp]
+300086c0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300086c4:	e24dd024 	sub	sp, sp, #36	; 0x24
+300086c8:	e58d000c 	str	r0, [sp, #12]
+300086cc:	e58d1008 	str	r1, [sp, #8]
+300086d0:	e58d2004 	str	r2, [sp, #4]
+300086d4:	e58d3000 	str	r3, [sp]
 	acoral_sr cpu_sr;
 	acoral_rm_policy_data_t *policy_data;
 	rm_policy_data_t *private_data;
 	policy_data=(acoral_rm_policy_data_t *)data;
-300084d4:	e59d3000 	ldr	r3, [sp]
-300084d8:	e58d3018 	str	r3, [sp, #24]
+300086d8:	e59d3000 	ldr	r3, [sp]
+300086dc:	e58d3018 	str	r3, [sp, #24]
 	private_data=(rm_policy_data_t *)acoral_malloc2(sizeof(rm_policy_data_t));
-300084dc:	e3a0001c 	mov	r0, #28
-300084e0:	ebfff9bf 	bl	30006be4 <v_malloc>
-300084e4:	e1a03000 	mov	r3, r0
-300084e8:	e58d301c 	str	r3, [sp, #28]
+300086e0:	e3a0001c 	mov	r0, #28
+300086e4:	ebfff9bf 	bl	30006de8 <v_malloc>
+300086e8:	e1a03000 	mov	r3, r0
+300086ec:	e58d301c 	str	r3, [sp, #28]
 	if(private_data==NULL){
-300084ec:	e59d301c 	ldr	r3, [sp, #28]
-300084f0:	e3530000 	cmp	r3, #0
-300084f4:	1a00000e 	bne	30008534 <rm_policy_thread_init+0x78>
+300086f0:	e59d301c 	ldr	r3, [sp, #28]
+300086f4:	e3530000 	cmp	r3, #0
+300086f8:	1a00000e 	bne	30008738 <rm_policy_thread_init+0x78>
 		acoral_printerr("No level2 mem space for private_data:%s\n",thread->name);
-300084f8:	e59d300c 	ldr	r3, [sp, #12]
-300084fc:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-30008500:	e59f00f8 	ldr	r0, [pc, #248]	; 30008600 <rm_policy_thread_init+0x144>
-30008504:	e1a01003 	mov	r1, r3
-30008508:	eb000b3e 	bl	3000b208 <acoral_print>
+300086fc:	e59d300c 	ldr	r3, [sp, #12]
+30008700:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+30008704:	e59f00f8 	ldr	r0, [pc, #248]	; 30008804 <rm_policy_thread_init+0x144>
+30008708:	e1a01003 	mov	r1, r3
+3000870c:	eb000b3e 	bl	3000b40c <acoral_print>
 		HAL_ENTER_CRITICAL();
-3000850c:	ebffe478 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30008510:	e1a03000 	mov	r3, r0
-30008514:	e58d3014 	str	r3, [sp, #20]
+30008710:	ebffe3f7 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008714:	e1a03000 	mov	r3, r0
+30008718:	e58d3014 	str	r3, [sp, #20]
 		acoral_release_res((acoral_res_t *)thread);
-30008518:	e59d300c 	ldr	r3, [sp, #12]
-3000851c:	e1a00003 	mov	r0, r3
-30008520:	ebffec38 	bl	30003608 <acoral_release_res>
+3000871c:	e59d300c 	ldr	r3, [sp, #12]
+30008720:	e1a00003 	mov	r0, r3
+30008724:	ebffebb7 	bl	30003608 <acoral_release_res>
 		HAL_EXIT_CRITICAL();
-30008524:	e59d0014 	ldr	r0, [sp, #20]
-30008528:	ebffe46f 	bl	300016ec <HAL_INTR_RESTORE>
+30008728:	e59d0014 	ldr	r0, [sp, #20]
+3000872c:	ebffe3ee 	bl	300016ec <HAL_INTR_RESTORE>
 		return -1;
-3000852c:	e3e03000 	mvn	r3, #0
-30008530:	ea00002e 	b	300085f0 <rm_policy_thread_init+0x134>
+30008730:	e3e03000 	mvn	r3, #0
+30008734:	ea00002e 	b	300087f4 <rm_policy_thread_init+0x134>
 	}
 	private_data->t=100*policy_data->t;
-30008534:	e59d3018 	ldr	r3, [sp, #24]
-30008538:	e5932000 	ldr	r2, [r3]
-3000853c:	e1a03002 	mov	r3, r2
-30008540:	e1a03103 	lsl	r3, r3, #2
-30008544:	e0833002 	add	r3, r3, r2
-30008548:	e1a02103 	lsl	r2, r3, #2
-3000854c:	e0833002 	add	r3, r3, r2
-30008550:	e1a03103 	lsl	r3, r3, #2
-30008554:	e1a02003 	mov	r2, r3
-30008558:	e59d301c 	ldr	r3, [sp, #28]
-3000855c:	e583200c 	str	r2, [r3, #12]
+30008738:	e59d3018 	ldr	r3, [sp, #24]
+3000873c:	e5932000 	ldr	r2, [r3]
+30008740:	e1a03002 	mov	r3, r2
+30008744:	e1a03103 	lsl	r3, r3, #2
+30008748:	e0833002 	add	r3, r3, r2
+3000874c:	e1a02103 	lsl	r2, r3, #2
+30008750:	e0833002 	add	r3, r3, r2
+30008754:	e1a03103 	lsl	r3, r3, #2
+30008758:	e1a02003 	mov	r2, r3
+3000875c:	e59d301c 	ldr	r3, [sp, #28]
+30008760:	e583200c 	str	r2, [r3, #12]
 	private_data->lt=private_data->t;
-30008560:	e59d301c 	ldr	r3, [sp, #28]
-30008564:	e593200c 	ldr	r2, [r3, #12]
-30008568:	e59d301c 	ldr	r3, [sp, #28]
-3000856c:	e5832010 	str	r2, [r3, #16]
+30008764:	e59d301c 	ldr	r3, [sp, #28]
+30008768:	e593200c 	ldr	r2, [r3, #12]
+3000876c:	e59d301c 	ldr	r3, [sp, #28]
+30008770:	e5832010 	str	r2, [r3, #16]
 	private_data->e=100*policy_data->e;
-30008570:	e59d3018 	ldr	r3, [sp, #24]
-30008574:	e5932004 	ldr	r2, [r3, #4]
-30008578:	e1a03002 	mov	r3, r2
-3000857c:	e1a03103 	lsl	r3, r3, #2
-30008580:	e0833002 	add	r3, r3, r2
-30008584:	e1a02103 	lsl	r2, r3, #2
-30008588:	e0833002 	add	r3, r3, r2
-3000858c:	e1a03103 	lsl	r3, r3, #2
-30008590:	e1a02003 	mov	r2, r3
-30008594:	e59d301c 	ldr	r3, [sp, #28]
-30008598:	e5832014 	str	r2, [r3, #20]
+30008774:	e59d3018 	ldr	r3, [sp, #24]
+30008778:	e5932004 	ldr	r2, [r3, #4]
+3000877c:	e1a03002 	mov	r3, r2
+30008780:	e1a03103 	lsl	r3, r3, #2
+30008784:	e0833002 	add	r3, r3, r2
+30008788:	e1a02103 	lsl	r2, r3, #2
+3000878c:	e0833002 	add	r3, r3, r2
+30008790:	e1a03103 	lsl	r3, r3, #2
+30008794:	e1a02003 	mov	r2, r3
+30008798:	e59d301c 	ldr	r3, [sp, #28]
+3000879c:	e5832014 	str	r2, [r3, #20]
 	private_data->le=private_data->e;
-3000859c:	e59d301c 	ldr	r3, [sp, #28]
-300085a0:	e5932014 	ldr	r2, [r3, #20]
-300085a4:	e59d301c 	ldr	r3, [sp, #28]
-300085a8:	e5832018 	str	r2, [r3, #24]
+300087a0:	e59d301c 	ldr	r3, [sp, #28]
+300087a4:	e5932014 	ldr	r2, [r3, #20]
+300087a8:	e59d301c 	ldr	r3, [sp, #28]
+300087ac:	e5832018 	str	r2, [r3, #24]
 	private_data->period_data.args=args;
-300085ac:	e59d301c 	ldr	r3, [sp, #28]
-300085b0:	e59d2004 	ldr	r2, [sp, #4]
-300085b4:	e5832008 	str	r2, [r3, #8]
+300087b0:	e59d301c 	ldr	r3, [sp, #28]
+300087b4:	e59d2004 	ldr	r2, [sp, #4]
+300087b8:	e5832008 	str	r2, [r3, #8]
 	private_data->period_data.route=route;
-300085b8:	e59d301c 	ldr	r3, [sp, #28]
-300085bc:	e59d2008 	ldr	r2, [sp, #8]
-300085c0:	e5832004 	str	r2, [r3, #4]
+300087bc:	e59d301c 	ldr	r3, [sp, #28]
+300087c0:	e59d2008 	ldr	r2, [sp, #8]
+300087c4:	e5832004 	str	r2, [r3, #4]
 	private_data->period_data.time=private_data->t;
-300085c4:	e59d301c 	ldr	r3, [sp, #28]
-300085c8:	e593200c 	ldr	r2, [r3, #12]
-300085cc:	e59d301c 	ldr	r3, [sp, #28]
-300085d0:	e5832000 	str	r2, [r3]
+300087c8:	e59d301c 	ldr	r3, [sp, #28]
+300087cc:	e593200c 	ldr	r2, [r3, #12]
+300087d0:	e59d301c 	ldr	r3, [sp, #28]
+300087d4:	e5832000 	str	r2, [r3]
 	thread->private_data=private_data;
-300085d4:	e59d300c 	ldr	r3, [sp, #12]
-300085d8:	e59d201c 	ldr	r2, [sp, #28]
-300085dc:	e5832050 	str	r2, [r3, #80]	; 0x50
+300087d8:	e59d300c 	ldr	r3, [sp, #12]
+300087dc:	e59d201c 	ldr	r2, [sp, #28]
+300087e0:	e5832050 	str	r2, [r3, #80]	; 0x50
 	rm_queue_ascend_add(thread);
-300085e0:	e59d000c 	ldr	r0, [sp, #12]
-300085e4:	eb000021 	bl	30008670 <rm_queue_ascend_add>
+300087e4:	e59d000c 	ldr	r0, [sp, #12]
+300087e8:	eb000021 	bl	30008874 <rm_queue_ascend_add>
 	return thread->res.id;
-300085e8:	e59d300c 	ldr	r3, [sp, #12]
-300085ec:	e5933000 	ldr	r3, [r3]
+300087ec:	e59d300c 	ldr	r3, [sp, #12]
+300087f0:	e5933000 	ldr	r3, [r3]
 }
-300085f0:	e1a00003 	mov	r0, r3
-300085f4:	e28dd024 	add	sp, sp, #36	; 0x24
-300085f8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300085fc:	e12fff1e 	bx	lr
-30008600:	3000e5f8 	.word	0x3000e5f8
+300087f4:	e1a00003 	mov	r0, r3
+300087f8:	e28dd024 	add	sp, sp, #36	; 0x24
+300087fc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008800:	e12fff1e 	bx	lr
+30008804:	3000e7fc 	.word	0x3000e7fc
 
-30008604 <rm_policy_thread_release>:
+30008808 <rm_policy_thread_release>:
 
 void rm_policy_thread_release(acoral_thread_t *thread){
-30008604:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008608:	e24dd00c 	sub	sp, sp, #12
-3000860c:	e58d0004 	str	r0, [sp, #4]
+30008808:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000880c:	e24dd00c 	sub	sp, sp, #12
+30008810:	e58d0004 	str	r0, [sp, #4]
 	acoral_printk("Release Rm thread\n");
 	acoral_free2(thread->private_data);	
-30008610:	e59d3004 	ldr	r3, [sp, #4]
-30008614:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008618:	e1a00003 	mov	r0, r3
-3000861c:	ebfff985 	bl	30006c38 <v_free>
+30008814:	e59d3004 	ldr	r3, [sp, #4]
+30008818:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+3000881c:	e1a00003 	mov	r0, r3
+30008820:	ebfff985 	bl	30006e3c <v_free>
 }
-30008620:	e28dd00c 	add	sp, sp, #12
-30008624:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008628:	e12fff1e 	bx	lr
+30008824:	e28dd00c 	add	sp, sp, #12
+30008828:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000882c:	e12fff1e 	bx	lr
 
-3000862c <rm_discard_thread>:
+30008830 <rm_discard_thread>:
 
 void rm_discard_thread(acoral_thread_t *thread){
-3000862c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008630:	e24dd00c 	sub	sp, sp, #12
-30008634:	e58d0004 	str	r0, [sp, #4]
+30008830:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008834:	e24dd00c 	sub	sp, sp, #12
+30008838:	e58d0004 	str	r0, [sp, #4]
 	acoral_list_del(&thread->ready);
-30008638:	e59d3004 	ldr	r3, [sp, #4]
-3000863c:	e2833010 	add	r3, r3, #16
-30008640:	e1a00003 	mov	r0, r3
-30008644:	eb000670 	bl	3000a00c <acoral_list_del>
+3000883c:	e59d3004 	ldr	r3, [sp, #4]
+30008840:	e2833010 	add	r3, r3, #16
+30008844:	e1a00003 	mov	r0, r3
+30008848:	eb000670 	bl	3000a210 <acoral_list_del>
 	acoral_free2(thread->private_data);	
-30008648:	e59d3004 	ldr	r3, [sp, #4]
-3000864c:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008650:	e1a00003 	mov	r0, r3
-30008654:	ebfff977 	bl	30006c38 <v_free>
+3000884c:	e59d3004 	ldr	r3, [sp, #4]
+30008850:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30008854:	e1a00003 	mov	r0, r3
+30008858:	ebfff977 	bl	30006e3c <v_free>
 	acoral_release_res((acoral_res_t *)thread);
-30008658:	e59d3004 	ldr	r3, [sp, #4]
-3000865c:	e1a00003 	mov	r0, r3
-30008660:	ebffebe8 	bl	30003608 <acoral_release_res>
+3000885c:	e59d3004 	ldr	r3, [sp, #4]
+30008860:	e1a00003 	mov	r0, r3
+30008864:	ebffeb67 	bl	30003608 <acoral_release_res>
 }
-30008664:	e28dd00c 	add	sp, sp, #12
-30008668:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000866c:	e12fff1e 	bx	lr
+30008868:	e28dd00c 	add	sp, sp, #12
+3000886c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008870:	e12fff1e 	bx	lr
 
-30008670 <rm_queue_ascend_add>:
+30008874 <rm_queue_ascend_add>:
 
 void rm_queue_ascend_add(acoral_thread_t *new){
-30008670:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008674:	e24dd024 	sub	sp, sp, #36	; 0x24
-30008678:	e58d0004 	str	r0, [sp, #4]
+30008874:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008878:	e24dd024 	sub	sp, sp, #36	; 0x24
+3000887c:	e58d0004 	str	r0, [sp, #4]
       rm_policy_data_t *new_data;
       rm_policy_data_t *old_data;
       acoral_thread_t * thread;
       acoral_list_t *tmp,*head;
       head=&rm_queue->head;
-3000867c:	e59f309c 	ldr	r3, [pc, #156]	; 30008720 <rm_queue_ascend_add+0xb0>
-30008680:	e5933000 	ldr	r3, [r3]
-30008684:	e58d301c 	str	r3, [sp, #28]
+30008880:	e59f309c 	ldr	r3, [pc, #156]	; 30008924 <rm_queue_ascend_add+0xb0>
+30008884:	e5933000 	ldr	r3, [r3]
+30008888:	e58d301c 	str	r3, [sp, #28]
       new_data=new->private_data; 
-30008688:	e59d3004 	ldr	r3, [sp, #4]
-3000868c:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008690:	e58d300c 	str	r3, [sp, #12]
+3000888c:	e59d3004 	ldr	r3, [sp, #4]
+30008890:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30008894:	e58d300c 	str	r3, [sp, #12]
       for (tmp=head->next;tmp!=head; tmp=tmp->next){
-30008694:	e59d301c 	ldr	r3, [sp, #28]
-30008698:	e5933000 	ldr	r3, [r3]
-3000869c:	e58d3018 	str	r3, [sp, #24]
-300086a0:	ea00000e 	b	300086e0 <rm_queue_ascend_add+0x70>
+30008898:	e59d301c 	ldr	r3, [sp, #28]
+3000889c:	e5933000 	ldr	r3, [r3]
+300088a0:	e58d3018 	str	r3, [sp, #24]
+300088a4:	ea00000e 	b	300088e4 <rm_queue_ascend_add+0x70>
 		thread =list_entry(tmp, acoral_thread_t,ready);
-300086a4:	e59d3018 	ldr	r3, [sp, #24]
-300086a8:	e2433010 	sub	r3, r3, #16
-300086ac:	e58d3014 	str	r3, [sp, #20]
+300088a8:	e59d3018 	ldr	r3, [sp, #24]
+300088ac:	e2433010 	sub	r3, r3, #16
+300088b0:	e58d3014 	str	r3, [sp, #20]
 		old_data=thread->private_data;
-300086b0:	e59d3014 	ldr	r3, [sp, #20]
-300086b4:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-300086b8:	e58d3010 	str	r3, [sp, #16]
+300088b4:	e59d3014 	ldr	r3, [sp, #20]
+300088b8:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+300088bc:	e58d3010 	str	r3, [sp, #16]
       	        if(old_data->lt>new_data->lt)
-300086bc:	e59d3010 	ldr	r3, [sp, #16]
-300086c0:	e5932010 	ldr	r2, [r3, #16]
-300086c4:	e59d300c 	ldr	r3, [sp, #12]
-300086c8:	e5933010 	ldr	r3, [r3, #16]
-300086cc:	e1520003 	cmp	r2, r3
-300086d0:	8a000007 	bhi	300086f4 <rm_queue_ascend_add+0x84>
+300088c0:	e59d3010 	ldr	r3, [sp, #16]
+300088c4:	e5932010 	ldr	r2, [r3, #16]
+300088c8:	e59d300c 	ldr	r3, [sp, #12]
+300088cc:	e5933010 	ldr	r3, [r3, #16]
+300088d0:	e1520003 	cmp	r2, r3
+300088d4:	8a000007 	bhi	300088f8 <rm_queue_ascend_add+0x84>
       rm_policy_data_t *old_data;
       acoral_thread_t * thread;
       acoral_list_t *tmp,*head;
       head=&rm_queue->head;
       new_data=new->private_data; 
       for (tmp=head->next;tmp!=head; tmp=tmp->next){
-300086d4:	e59d3018 	ldr	r3, [sp, #24]
-300086d8:	e5933000 	ldr	r3, [r3]
-300086dc:	e58d3018 	str	r3, [sp, #24]
-300086e0:	e59d2018 	ldr	r2, [sp, #24]
-300086e4:	e59d301c 	ldr	r3, [sp, #28]
-300086e8:	e1520003 	cmp	r2, r3
-300086ec:	1affffec 	bne	300086a4 <rm_queue_ascend_add+0x34>
-300086f0:	ea000000 	b	300086f8 <rm_queue_ascend_add+0x88>
+300088d8:	e59d3018 	ldr	r3, [sp, #24]
+300088dc:	e5933000 	ldr	r3, [r3]
+300088e0:	e58d3018 	str	r3, [sp, #24]
+300088e4:	e59d2018 	ldr	r2, [sp, #24]
+300088e8:	e59d301c 	ldr	r3, [sp, #28]
+300088ec:	e1520003 	cmp	r2, r3
+300088f0:	1affffec 	bne	300088a8 <rm_queue_ascend_add+0x34>
+300088f4:	ea000000 	b	300088fc <rm_queue_ascend_add+0x88>
 		thread =list_entry(tmp, acoral_thread_t,ready);
 		old_data=thread->private_data;
       	        if(old_data->lt>new_data->lt)
 			break;		  
-300086f4:	e1a00000 	nop			; (mov r0, r0)
+300088f8:	e1a00000 	nop			; (mov r0, r0)
      }
      acoral_list_add(&new->ready,tmp->prev);
-300086f8:	e59d3004 	ldr	r3, [sp, #4]
-300086fc:	e2832010 	add	r2, r3, #16
-30008700:	e59d3018 	ldr	r3, [sp, #24]
-30008704:	e5933004 	ldr	r3, [r3, #4]
-30008708:	e1a00002 	mov	r0, r2
-3000870c:	e1a01003 	mov	r1, r3
-30008710:	eb000617 	bl	30009f74 <acoral_list_add>
+300088fc:	e59d3004 	ldr	r3, [sp, #4]
+30008900:	e2832010 	add	r2, r3, #16
+30008904:	e59d3018 	ldr	r3, [sp, #24]
+30008908:	e5933004 	ldr	r3, [r3, #4]
+3000890c:	e1a00002 	mov	r0, r2
+30008910:	e1a01003 	mov	r1, r3
+30008914:	eb000617 	bl	3000a178 <acoral_list_add>
 }
-30008714:	e28dd024 	add	sp, sp, #36	; 0x24
-30008718:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000871c:	e12fff1e 	bx	lr
-30008720:	3000ea4c 	.word	0x3000ea4c
+30008918:	e28dd024 	add	sp, sp, #36	; 0x24
+3000891c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008920:	e12fff1e 	bx	lr
+30008924:	3000ec58 	.word	0x3000ec58
 
-30008724 <rm_check>:
+30008928 <rm_check>:
 
 acoral_u8 rm_check(acoral_thread_t *thread,acoral_u32 cpu){
-30008724:	e92d4010 	push	{r4, lr}
-30008728:	e24dd010 	sub	sp, sp, #16
-3000872c:	e58d0004 	str	r0, [sp, #4]
-30008730:	e58d1000 	str	r1, [sp]
+30008928:	e92d4010 	push	{r4, lr}
+3000892c:	e24dd010 	sub	sp, sp, #16
+30008930:	e58d0004 	str	r0, [sp, #4]
+30008934:	e58d1000 	str	r1, [sp]
 	rm_policy_data_t *data;
 	acoral_fl tmp;
 	data=thread->private_data;
-30008734:	e59d3004 	ldr	r3, [sp, #4]
-30008738:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-3000873c:	e58d3008 	str	r3, [sp, #8]
+30008938:	e59d3004 	ldr	r3, [sp, #4]
+3000893c:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30008940:	e58d3008 	str	r3, [sp, #8]
 	tmp=(acoral_fl)data->e/(acoral_fl)data->t;		
-30008740:	e59d3008 	ldr	r3, [sp, #8]
-30008744:	e5933014 	ldr	r3, [r3, #20]
-30008748:	e1a00003 	mov	r0, r3
-3000874c:	eb001564 	bl	3000dce4 <__aeabi_ui2f>
-30008750:	e1a04000 	mov	r4, r0
-30008754:	e59d3008 	ldr	r3, [sp, #8]
-30008758:	e593300c 	ldr	r3, [r3, #12]
-3000875c:	e1a00003 	mov	r0, r3
-30008760:	eb00155f 	bl	3000dce4 <__aeabi_ui2f>
-30008764:	e1a03000 	mov	r3, r0
-30008768:	e1a00004 	mov	r0, r4
-3000876c:	e1a01003 	mov	r1, r3
-30008770:	eb0015fa 	bl	3000df60 <__aeabi_fdiv>
-30008774:	e1a03000 	mov	r3, r0
-30008778:	e58d300c 	str	r3, [sp, #12]
+30008944:	e59d3008 	ldr	r3, [sp, #8]
+30008948:	e5933014 	ldr	r3, [r3, #20]
+3000894c:	e1a00003 	mov	r0, r3
+30008950:	eb001564 	bl	3000dee8 <__aeabi_ui2f>
+30008954:	e1a04000 	mov	r4, r0
+30008958:	e59d3008 	ldr	r3, [sp, #8]
+3000895c:	e593300c 	ldr	r3, [r3, #12]
+30008960:	e1a00003 	mov	r0, r3
+30008964:	eb00155f 	bl	3000dee8 <__aeabi_ui2f>
+30008968:	e1a03000 	mov	r3, r0
+3000896c:	e1a00004 	mov	r0, r4
+30008970:	e1a01003 	mov	r1, r3
+30008974:	eb0015fa 	bl	3000e164 <__aeabi_fdiv>
+30008978:	e1a03000 	mov	r3, r0
+3000897c:	e58d300c 	str	r3, [sp, #12]
 	if(left[cpu].sum+tmp<right[left[cpu].num]){
-3000877c:	e59d1000 	ldr	r1, [sp]
-30008780:	e59f20ec 	ldr	r2, [pc, #236]	; 30008874 <rm_check+0x150>
-30008784:	e3a03004 	mov	r3, #4
-30008788:	e1a01181 	lsl	r1, r1, #3
-3000878c:	e0812002 	add	r2, r1, r2
-30008790:	e0823003 	add	r3, r2, r3
-30008794:	e5933000 	ldr	r3, [r3]
-30008798:	e1a00003 	mov	r0, r3
-3000879c:	e59d100c 	ldr	r1, [sp, #12]
-300087a0:	eb0014e0 	bl	3000db28 <__addsf3>
-300087a4:	e1a03000 	mov	r3, r0
-300087a8:	e1a02003 	mov	r2, r3
-300087ac:	e59d1000 	ldr	r1, [sp]
-300087b0:	e59f30bc 	ldr	r3, [pc, #188]	; 30008874 <rm_check+0x150>
-300087b4:	e7931181 	ldr	r1, [r3, r1, lsl #3]
-300087b8:	e59f30b8 	ldr	r3, [pc, #184]	; 30008878 <rm_check+0x154>
-300087bc:	e7933101 	ldr	r3, [r3, r1, lsl #2]
-300087c0:	e3a01000 	mov	r1, #0
-300087c4:	e1a04001 	mov	r4, r1
-300087c8:	e1a00002 	mov	r0, r2
-300087cc:	e1a01003 	mov	r1, r3
-300087d0:	eb001667 	bl	3000e174 <__aeabi_fcmplt>
-300087d4:	e1a03000 	mov	r3, r0
-300087d8:	e3530000 	cmp	r3, #0
-300087dc:	0a000001 	beq	300087e8 <rm_check+0xc4>
-300087e0:	e3a03001 	mov	r3, #1
-300087e4:	e1a04003 	mov	r4, r3
-300087e8:	e20430ff 	and	r3, r4, #255	; 0xff
-300087ec:	e3530000 	cmp	r3, #0
-300087f0:	0a00001a 	beq	30008860 <rm_check+0x13c>
+30008980:	e59d1000 	ldr	r1, [sp]
+30008984:	e59f20ec 	ldr	r2, [pc, #236]	; 30008a78 <rm_check+0x150>
+30008988:	e3a03004 	mov	r3, #4
+3000898c:	e1a01181 	lsl	r1, r1, #3
+30008990:	e0812002 	add	r2, r1, r2
+30008994:	e0823003 	add	r3, r2, r3
+30008998:	e5933000 	ldr	r3, [r3]
+3000899c:	e1a00003 	mov	r0, r3
+300089a0:	e59d100c 	ldr	r1, [sp, #12]
+300089a4:	eb0014e0 	bl	3000dd2c <__addsf3>
+300089a8:	e1a03000 	mov	r3, r0
+300089ac:	e1a02003 	mov	r2, r3
+300089b0:	e59d1000 	ldr	r1, [sp]
+300089b4:	e59f30bc 	ldr	r3, [pc, #188]	; 30008a78 <rm_check+0x150>
+300089b8:	e7931181 	ldr	r1, [r3, r1, lsl #3]
+300089bc:	e59f30b8 	ldr	r3, [pc, #184]	; 30008a7c <rm_check+0x154>
+300089c0:	e7933101 	ldr	r3, [r3, r1, lsl #2]
+300089c4:	e3a01000 	mov	r1, #0
+300089c8:	e1a04001 	mov	r4, r1
+300089cc:	e1a00002 	mov	r0, r2
+300089d0:	e1a01003 	mov	r1, r3
+300089d4:	eb001667 	bl	3000e378 <__aeabi_fcmplt>
+300089d8:	e1a03000 	mov	r3, r0
+300089dc:	e3530000 	cmp	r3, #0
+300089e0:	0a000001 	beq	300089ec <rm_check+0xc4>
+300089e4:	e3a03001 	mov	r3, #1
+300089e8:	e1a04003 	mov	r4, r3
+300089ec:	e20430ff 	and	r3, r4, #255	; 0xff
+300089f0:	e3530000 	cmp	r3, #0
+300089f4:	0a00001a 	beq	30008a64 <rm_check+0x13c>
 		left[cpu].sum+=tmp;
-300087f4:	e59d4000 	ldr	r4, [sp]
-300087f8:	e59d1000 	ldr	r1, [sp]
-300087fc:	e59f2070 	ldr	r2, [pc, #112]	; 30008874 <rm_check+0x150>
-30008800:	e3a03004 	mov	r3, #4
-30008804:	e1a01181 	lsl	r1, r1, #3
-30008808:	e0812002 	add	r2, r1, r2
-3000880c:	e0823003 	add	r3, r2, r3
-30008810:	e5933000 	ldr	r3, [r3]
-30008814:	e1a00003 	mov	r0, r3
-30008818:	e59d100c 	ldr	r1, [sp, #12]
-3000881c:	eb0014c1 	bl	3000db28 <__addsf3>
-30008820:	e1a03000 	mov	r3, r0
-30008824:	e1a02003 	mov	r2, r3
-30008828:	e59f1044 	ldr	r1, [pc, #68]	; 30008874 <rm_check+0x150>
-3000882c:	e3a03004 	mov	r3, #4
-30008830:	e1a00184 	lsl	r0, r4, #3
-30008834:	e0801001 	add	r1, r0, r1
-30008838:	e0813003 	add	r3, r1, r3
-3000883c:	e5832000 	str	r2, [r3]
+300089f8:	e59d4000 	ldr	r4, [sp]
+300089fc:	e59d1000 	ldr	r1, [sp]
+30008a00:	e59f2070 	ldr	r2, [pc, #112]	; 30008a78 <rm_check+0x150>
+30008a04:	e3a03004 	mov	r3, #4
+30008a08:	e1a01181 	lsl	r1, r1, #3
+30008a0c:	e0812002 	add	r2, r1, r2
+30008a10:	e0823003 	add	r3, r2, r3
+30008a14:	e5933000 	ldr	r3, [r3]
+30008a18:	e1a00003 	mov	r0, r3
+30008a1c:	e59d100c 	ldr	r1, [sp, #12]
+30008a20:	eb0014c1 	bl	3000dd2c <__addsf3>
+30008a24:	e1a03000 	mov	r3, r0
+30008a28:	e1a02003 	mov	r2, r3
+30008a2c:	e59f1044 	ldr	r1, [pc, #68]	; 30008a78 <rm_check+0x150>
+30008a30:	e3a03004 	mov	r3, #4
+30008a34:	e1a00184 	lsl	r0, r4, #3
+30008a38:	e0801001 	add	r1, r0, r1
+30008a3c:	e0813003 	add	r3, r1, r3
+30008a40:	e5832000 	str	r2, [r3]
 		left[cpu].num++;
-30008840:	e59d3000 	ldr	r3, [sp]
-30008844:	e59f2028 	ldr	r2, [pc, #40]	; 30008874 <rm_check+0x150>
-30008848:	e7922183 	ldr	r2, [r2, r3, lsl #3]
-3000884c:	e2821001 	add	r1, r2, #1
-30008850:	e59f201c 	ldr	r2, [pc, #28]	; 30008874 <rm_check+0x150>
-30008854:	e7821183 	str	r1, [r2, r3, lsl #3]
+30008a44:	e59d3000 	ldr	r3, [sp]
+30008a48:	e59f2028 	ldr	r2, [pc, #40]	; 30008a78 <rm_check+0x150>
+30008a4c:	e7922183 	ldr	r2, [r2, r3, lsl #3]
+30008a50:	e2821001 	add	r1, r2, #1
+30008a54:	e59f201c 	ldr	r2, [pc, #28]	; 30008a78 <rm_check+0x150>
+30008a58:	e7821183 	str	r1, [r2, r3, lsl #3]
 		return 1;
-30008858:	e3a03001 	mov	r3, #1
-3000885c:	ea000000 	b	30008864 <rm_check+0x140>
+30008a5c:	e3a03001 	mov	r3, #1
+30008a60:	ea000000 	b	30008a68 <rm_check+0x140>
 	}
 	return 0;
-30008860:	e3a03000 	mov	r3, #0
+30008a64:	e3a03000 	mov	r3, #0
 }
-30008864:	e1a00003 	mov	r0, r3
-30008868:	e28dd010 	add	sp, sp, #16
-3000886c:	e8bd4010 	pop	{r4, lr}
-30008870:	e12fff1e 	bx	lr
-30008874:	3000fab4 	.word	0x3000fab4
-30008878:	3000ea50 	.word	0x3000ea50
+30008a68:	e1a00003 	mov	r0, r3
+30008a6c:	e28dd010 	add	sp, sp, #16
+30008a70:	e8bd4010 	pop	{r4, lr}
+30008a74:	e12fff1e 	bx	lr
+30008a78:	3000fcc0 	.word	0x3000fcc0
+30008a7c:	3000ec5c 	.word	0x3000ec5c
 
-3000887c <rm_thread_dispatch>:
+30008a80 <rm_thread_dispatch>:
 
 void rm_thread_dispatch(){
-3000887c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008880:	e24dd01c 	sub	sp, sp, #28
+30008a80:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008a84:	e24dd01c 	sub	sp, sp, #28
 	acoral_sr cpu_sr;
 	acoral_u32 i;
 	acoral_thread_t * thread;
 	acoral_list_t *tmp,*head;
 	HAL_ENTER_CRITICAL();
-30008884:	ebffe39a 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30008888:	e1a03000 	mov	r3, r0
-3000888c:	e58d3004 	str	r3, [sp, #4]
+30008a88:	ebffe319 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008a8c:	e1a03000 	mov	r3, r0
+30008a90:	e58d3004 	str	r3, [sp, #4]
 	head=&rm_queue->head;
-30008890:	e59f3120 	ldr	r3, [pc, #288]	; 300089b8 <rm_thread_dispatch+0x13c>
-30008894:	e5933000 	ldr	r3, [r3]
-30008898:	e58d3014 	str	r3, [sp, #20]
+30008a94:	e59f3120 	ldr	r3, [pc, #288]	; 30008bbc <rm_thread_dispatch+0x13c>
+30008a98:	e5933000 	ldr	r3, [r3]
+30008a9c:	e58d3014 	str	r3, [sp, #20]
 	for (tmp=head->next;tmp!=head;){
-3000889c:	e59d3014 	ldr	r3, [sp, #20]
-300088a0:	e5933000 	ldr	r3, [r3]
-300088a4:	e58d3010 	str	r3, [sp, #16]
-300088a8:	ea000039 	b	30008994 <rm_thread_dispatch+0x118>
+30008aa0:	e59d3014 	ldr	r3, [sp, #20]
+30008aa4:	e5933000 	ldr	r3, [r3]
+30008aa8:	e58d3010 	str	r3, [sp, #16]
+30008aac:	ea000039 	b	30008b98 <rm_thread_dispatch+0x118>
 		thread =list_entry(tmp, acoral_thread_t,ready);
-300088ac:	e59d3010 	ldr	r3, [sp, #16]
-300088b0:	e2433010 	sub	r3, r3, #16
-300088b4:	e58d300c 	str	r3, [sp, #12]
+30008ab0:	e59d3010 	ldr	r3, [sp, #16]
+30008ab4:	e2433010 	sub	r3, r3, #16
+30008ab8:	e58d300c 	str	r3, [sp, #12]
 		tmp=tmp->next;
-300088b8:	e59d3010 	ldr	r3, [sp, #16]
-300088bc:	e5933000 	ldr	r3, [r3]
-300088c0:	e58d3010 	str	r3, [sp, #16]
+30008abc:	e59d3010 	ldr	r3, [sp, #16]
+30008ac0:	e5933000 	ldr	r3, [r3]
+30008ac4:	e58d3010 	str	r3, [sp, #16]
 		if(prio>=ACORAL_HARD_RT_PRIO_MAX){
-300088c4:	e59f30f0 	ldr	r3, [pc, #240]	; 300089bc <rm_thread_dispatch+0x140>
-300088c8:	e5933000 	ldr	r3, [r3]
-300088cc:	e3530001 	cmp	r3, #1
-300088d0:	9a000007 	bls	300088f4 <rm_thread_dispatch+0x78>
+30008ac8:	e59f30f0 	ldr	r3, [pc, #240]	; 30008bc0 <rm_thread_dispatch+0x140>
+30008acc:	e5933000 	ldr	r3, [r3]
+30008ad0:	e3530001 	cmp	r3, #1
+30008ad4:	9a000007 	bls	30008af8 <rm_thread_dispatch+0x78>
 				acoral_printerr("RM thread %s Err,Prio is not enough\n",thread->name);
-300088d4:	e59d300c 	ldr	r3, [sp, #12]
-300088d8:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-300088dc:	e59f00dc 	ldr	r0, [pc, #220]	; 300089c0 <rm_thread_dispatch+0x144>
-300088e0:	e1a01003 	mov	r1, r3
-300088e4:	eb000a47 	bl	3000b208 <acoral_print>
+30008ad8:	e59d300c 	ldr	r3, [sp, #12]
+30008adc:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+30008ae0:	e59f00dc 	ldr	r0, [pc, #220]	; 30008bc4 <rm_thread_dispatch+0x144>
+30008ae4:	e1a01003 	mov	r1, r3
+30008ae8:	eb000a47 	bl	3000b40c <acoral_print>
 				/*这个线程还没初始化，包括它的stack,lock等,原来是用acoral_release_thread导致很多错误*/
 				rm_discard_thread(thread);
-300088e8:	e59d000c 	ldr	r0, [sp, #12]
-300088ec:	ebffff4e 	bl	3000862c <rm_discard_thread>
-300088f0:	ea000027 	b	30008994 <rm_thread_dispatch+0x118>
+30008aec:	e59d000c 	ldr	r0, [sp, #12]
+30008af0:	ebffff4e 	bl	30008830 <rm_discard_thread>
+30008af4:	ea000027 	b	30008b98 <rm_thread_dispatch+0x118>
 		}else{
 			thread->prio=prio;
-300088f4:	e59f30c0 	ldr	r3, [pc, #192]	; 300089bc <rm_thread_dispatch+0x140>
-300088f8:	e5933000 	ldr	r3, [r3]
-300088fc:	e20320ff 	and	r2, r3, #255	; 0xff
-30008900:	e59d300c 	ldr	r3, [sp, #12]
-30008904:	e5c32005 	strb	r2, [r3, #5]
+30008af8:	e59f30c0 	ldr	r3, [pc, #192]	; 30008bc0 <rm_thread_dispatch+0x140>
+30008afc:	e5933000 	ldr	r3, [r3]
+30008b00:	e20320ff 	and	r2, r3, #255	; 0xff
+30008b04:	e59d300c 	ldr	r3, [sp, #12]
+30008b08:	e5c32005 	strb	r2, [r3, #5]
 			prio++;
-30008908:	e59f30ac 	ldr	r3, [pc, #172]	; 300089bc <rm_thread_dispatch+0x140>
-3000890c:	e5933000 	ldr	r3, [r3]
-30008910:	e2832001 	add	r2, r3, #1
-30008914:	e59f30a0 	ldr	r3, [pc, #160]	; 300089bc <rm_thread_dispatch+0x140>
-30008918:	e5832000 	str	r2, [r3]
+30008b0c:	e59f30ac 	ldr	r3, [pc, #172]	; 30008bc0 <rm_thread_dispatch+0x140>
+30008b10:	e5933000 	ldr	r3, [r3]
+30008b14:	e2832001 	add	r2, r3, #1
+30008b18:	e59f30a0 	ldr	r3, [pc, #160]	; 30008bc0 <rm_thread_dispatch+0x140>
+30008b1c:	e5832000 	str	r2, [r3]
 			for(i=0;i<HAL_MAX_CPU;i++){
-3000891c:	e3a03000 	mov	r3, #0
-30008920:	e58d3008 	str	r3, [sp, #8]
-30008924:	ea00000d 	b	30008960 <rm_thread_dispatch+0xe4>
+30008b20:	e3a03000 	mov	r3, #0
+30008b24:	e58d3008 	str	r3, [sp, #8]
+30008b28:	ea00000d 	b	30008b64 <rm_thread_dispatch+0xe4>
 				if(rm_check(thread,i)){
-30008928:	e59d000c 	ldr	r0, [sp, #12]
-3000892c:	e59d1008 	ldr	r1, [sp, #8]
-30008930:	ebffff7b 	bl	30008724 <rm_check>
-30008934:	e1a03000 	mov	r3, r0
-30008938:	e3530000 	cmp	r3, #0
-3000893c:	0a000004 	beq	30008954 <rm_thread_dispatch+0xd8>
+30008b2c:	e59d000c 	ldr	r0, [sp, #12]
+30008b30:	e59d1008 	ldr	r1, [sp, #8]
+30008b34:	ebffff7b 	bl	30008928 <rm_check>
+30008b38:	e1a03000 	mov	r3, r0
+30008b3c:	e3530000 	cmp	r3, #0
+30008b40:	0a000004 	beq	30008b58 <rm_thread_dispatch+0xd8>
 					thread->cpu=i;
-30008940:	e59d3008 	ldr	r3, [sp, #8]
-30008944:	e20320ff 	and	r2, r3, #255	; 0xff
-30008948:	e59d300c 	ldr	r3, [sp, #12]
-3000894c:	e5c32006 	strb	r2, [r3, #6]
+30008b44:	e59d3008 	ldr	r3, [sp, #8]
+30008b48:	e20320ff 	and	r2, r3, #255	; 0xff
+30008b4c:	e59d300c 	ldr	r3, [sp, #12]
+30008b50:	e5c32006 	strb	r2, [r3, #6]
 					break;
-30008950:	ea000005 	b	3000896c <rm_thread_dispatch+0xf0>
+30008b54:	ea000005 	b	30008b70 <rm_thread_dispatch+0xf0>
 				/*这个线程还没初始化，包括它的stack,lock等,原来是用acoral_release_thread导致很多错误*/
 				rm_discard_thread(thread);
 		}else{
 			thread->prio=prio;
 			prio++;
 			for(i=0;i<HAL_MAX_CPU;i++){
-30008954:	e59d3008 	ldr	r3, [sp, #8]
-30008958:	e2833001 	add	r3, r3, #1
-3000895c:	e58d3008 	str	r3, [sp, #8]
-30008960:	e59d3008 	ldr	r3, [sp, #8]
-30008964:	e3530000 	cmp	r3, #0
-30008968:	0affffee 	beq	30008928 <rm_thread_dispatch+0xac>
+30008b58:	e59d3008 	ldr	r3, [sp, #8]
+30008b5c:	e2833001 	add	r3, r3, #1
+30008b60:	e58d3008 	str	r3, [sp, #8]
+30008b64:	e59d3008 	ldr	r3, [sp, #8]
+30008b68:	e3530000 	cmp	r3, #0
+30008b6c:	0affffee 	beq	30008b2c <rm_thread_dispatch+0xac>
 				if(rm_check(thread,i)){
 					thread->cpu=i;
 					break;
 				}
 			}
 			if(i==HAL_MAX_CPU){
-3000896c:	e59d3008 	ldr	r3, [sp, #8]
-30008970:	e3530001 	cmp	r3, #1
-30008974:	1a000006 	bne	30008994 <rm_thread_dispatch+0x118>
+30008b70:	e59d3008 	ldr	r3, [sp, #8]
+30008b74:	e3530001 	cmp	r3, #1
+30008b78:	1a000006 	bne	30008b98 <rm_thread_dispatch+0x118>
 				acoral_printerr("Discard thread %s\n",thread->name);
-30008978:	e59d300c 	ldr	r3, [sp, #12]
-3000897c:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-30008980:	e59f003c 	ldr	r0, [pc, #60]	; 300089c4 <rm_thread_dispatch+0x148>
-30008984:	e1a01003 	mov	r1, r3
-30008988:	eb000a1e 	bl	3000b208 <acoral_print>
+30008b7c:	e59d300c 	ldr	r3, [sp, #12]
+30008b80:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+30008b84:	e59f003c 	ldr	r0, [pc, #60]	; 30008bc8 <rm_thread_dispatch+0x148>
+30008b88:	e1a01003 	mov	r1, r3
+30008b8c:	eb000a1e 	bl	3000b40c <acoral_print>
 				/*这个线程还没初始化，包括它的stack,lock等*/
 				rm_discard_thread(thread);
-3000898c:	e59d000c 	ldr	r0, [sp, #12]
-30008990:	ebffff25 	bl	3000862c <rm_discard_thread>
+30008b90:	e59d000c 	ldr	r0, [sp, #12]
+30008b94:	ebffff25 	bl	30008830 <rm_discard_thread>
 	acoral_u32 i;
 	acoral_thread_t * thread;
 	acoral_list_t *tmp,*head;
 	HAL_ENTER_CRITICAL();
 	head=&rm_queue->head;
 	for (tmp=head->next;tmp!=head;){
-30008994:	e59d2010 	ldr	r2, [sp, #16]
-30008998:	e59d3014 	ldr	r3, [sp, #20]
-3000899c:	e1520003 	cmp	r2, r3
-300089a0:	1affffc1 	bne	300088ac <rm_thread_dispatch+0x30>
+30008b98:	e59d2010 	ldr	r2, [sp, #16]
+30008b9c:	e59d3014 	ldr	r3, [sp, #20]
+30008ba0:	e1520003 	cmp	r2, r3
+30008ba4:	1affffc1 	bne	30008ab0 <rm_thread_dispatch+0x30>
 				/*这个线程还没初始化，包括它的stack,lock等*/
 				rm_discard_thread(thread);
 			}
 		} 
 	}
 	HAL_EXIT_CRITICAL();
-300089a4:	e59d0004 	ldr	r0, [sp, #4]
-300089a8:	ebffe34f 	bl	300016ec <HAL_INTR_RESTORE>
+30008ba8:	e59d0004 	ldr	r0, [sp, #4]
+30008bac:	ebffe2ce 	bl	300016ec <HAL_INTR_RESTORE>
 	return;
 }
-300089ac:	e28dd01c 	add	sp, sp, #28
-300089b0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300089b4:	e12fff1e 	bx	lr
-300089b8:	3000ea4c 	.word	0x3000ea4c
-300089bc:	3000ea48 	.word	0x3000ea48
-300089c0:	3000e624 	.word	0x3000e624
-300089c4:	3000e64c 	.word	0x3000e64c
+30008bb0:	e28dd01c 	add	sp, sp, #28
+30008bb4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008bb8:	e12fff1e 	bx	lr
+30008bbc:	3000ec58 	.word	0x3000ec58
+30008bc0:	3000ec54 	.word	0x3000ec54
+30008bc4:	3000e828 	.word	0x3000e828
+30008bc8:	3000e850 	.word	0x3000e850
 
-300089c8 <rm_init>:
+30008bcc <rm_init>:
 
 void rm_init(){
-300089c8:	e24dd008 	sub	sp, sp, #8
+30008bcc:	e24dd008 	sub	sp, sp, #8
       acoral_u32 i;
       acoral_init_list(&rm_queue->head);
-300089cc:	e59f307c 	ldr	r3, [pc, #124]	; 30008a50 <rm_init+0x88>
-300089d0:	e5933000 	ldr	r3, [r3]
-300089d4:	e59f2074 	ldr	r2, [pc, #116]	; 30008a50 <rm_init+0x88>
-300089d8:	e5922000 	ldr	r2, [r2]
-300089dc:	e5832000 	str	r2, [r3]
-300089e0:	e59f3068 	ldr	r3, [pc, #104]	; 30008a50 <rm_init+0x88>
-300089e4:	e5933000 	ldr	r3, [r3]
-300089e8:	e59f2060 	ldr	r2, [pc, #96]	; 30008a50 <rm_init+0x88>
-300089ec:	e5922000 	ldr	r2, [r2]
-300089f0:	e5832004 	str	r2, [r3, #4]
+30008bd0:	e59f307c 	ldr	r3, [pc, #124]	; 30008c54 <rm_init+0x88>
+30008bd4:	e5933000 	ldr	r3, [r3]
+30008bd8:	e59f2074 	ldr	r2, [pc, #116]	; 30008c54 <rm_init+0x88>
+30008bdc:	e5922000 	ldr	r2, [r2]
+30008be0:	e5832000 	str	r2, [r3]
+30008be4:	e59f3068 	ldr	r3, [pc, #104]	; 30008c54 <rm_init+0x88>
+30008be8:	e5933000 	ldr	r3, [r3]
+30008bec:	e59f2060 	ldr	r2, [pc, #96]	; 30008c54 <rm_init+0x88>
+30008bf0:	e5922000 	ldr	r2, [r2]
+30008bf4:	e5832004 	str	r2, [r3, #4]
       for(i=0;i<HAL_MAX_CPU;i++){
-300089f4:	e3a03000 	mov	r3, #0
-300089f8:	e58d3004 	str	r3, [sp, #4]
-300089fc:	ea00000e 	b	30008a3c <rm_init+0x74>
+30008bf8:	e3a03000 	mov	r3, #0
+30008bfc:	e58d3004 	str	r3, [sp, #4]
+30008c00:	ea00000e 	b	30008c40 <rm_init+0x74>
 		left[i].sum=0;
-30008a00:	e59d1004 	ldr	r1, [sp, #4]
-30008a04:	e59f2048 	ldr	r2, [pc, #72]	; 30008a54 <rm_init+0x8c>
-30008a08:	e3a03004 	mov	r3, #4
-30008a0c:	e1a01181 	lsl	r1, r1, #3
-30008a10:	e0812002 	add	r2, r1, r2
-30008a14:	e0823003 	add	r3, r2, r3
-30008a18:	e59f2038 	ldr	r2, [pc, #56]	; 30008a58 <rm_init+0x90>
-30008a1c:	e5832000 	str	r2, [r3]
+30008c04:	e59d1004 	ldr	r1, [sp, #4]
+30008c08:	e59f2048 	ldr	r2, [pc, #72]	; 30008c58 <rm_init+0x8c>
+30008c0c:	e3a03004 	mov	r3, #4
+30008c10:	e1a01181 	lsl	r1, r1, #3
+30008c14:	e0812002 	add	r2, r1, r2
+30008c18:	e0823003 	add	r3, r2, r3
+30008c1c:	e59f2038 	ldr	r2, [pc, #56]	; 30008c5c <rm_init+0x90>
+30008c20:	e5832000 	str	r2, [r3]
 		left[i].num=0;
-30008a20:	e59d2004 	ldr	r2, [sp, #4]
-30008a24:	e59f3028 	ldr	r3, [pc, #40]	; 30008a54 <rm_init+0x8c>
-30008a28:	e3a01000 	mov	r1, #0
-30008a2c:	e7831182 	str	r1, [r3, r2, lsl #3]
+30008c24:	e59d2004 	ldr	r2, [sp, #4]
+30008c28:	e59f3028 	ldr	r3, [pc, #40]	; 30008c58 <rm_init+0x8c>
+30008c2c:	e3a01000 	mov	r1, #0
+30008c30:	e7831182 	str	r1, [r3, r2, lsl #3]
 }
 
 void rm_init(){
       acoral_u32 i;
       acoral_init_list(&rm_queue->head);
       for(i=0;i<HAL_MAX_CPU;i++){
-30008a30:	e59d3004 	ldr	r3, [sp, #4]
-30008a34:	e2833001 	add	r3, r3, #1
-30008a38:	e58d3004 	str	r3, [sp, #4]
-30008a3c:	e59d3004 	ldr	r3, [sp, #4]
-30008a40:	e3530000 	cmp	r3, #0
-30008a44:	0affffed 	beq	30008a00 <rm_init+0x38>
+30008c34:	e59d3004 	ldr	r3, [sp, #4]
+30008c38:	e2833001 	add	r3, r3, #1
+30008c3c:	e58d3004 	str	r3, [sp, #4]
+30008c40:	e59d3004 	ldr	r3, [sp, #4]
+30008c44:	e3530000 	cmp	r3, #0
+30008c48:	0affffed 	beq	30008c04 <rm_init+0x38>
 		left[i].sum=0;
 		left[i].num=0;
       }
 }
-30008a48:	e28dd008 	add	sp, sp, #8
-30008a4c:	e12fff1e 	bx	lr
-30008a50:	3000ea4c 	.word	0x3000ea4c
-30008a54:	3000fab4 	.word	0x3000fab4
-30008a58:	00000000 	.word	0x00000000
+30008c4c:	e28dd008 	add	sp, sp, #8
+30008c50:	e12fff1e 	bx	lr
+30008c54:	3000ec58 	.word	0x3000ec58
+30008c58:	3000fcc0 	.word	0x3000fcc0
+30008c5c:	00000000 	.word	0x00000000
 
-30008a5c <rm_policy_init>:
+30008c60 <rm_policy_init>:
 
 acoral_sched_policy_t rm_policy;
 void rm_policy_init(){
-30008a5c:	e92d4008 	push	{r3, lr}
+30008c60:	e92d4008 	push	{r3, lr}
 	rm_init();
-30008a60:	ebffffd8 	bl	300089c8 <rm_init>
+30008c64:	ebffffd8 	bl	30008bcc <rm_init>
 	rm_policy.type=ACORAL_SCHED_POLICY_RM;
-30008a64:	e59f3044 	ldr	r3, [pc, #68]	; 30008ab0 <rm_policy_init+0x54>
-30008a68:	e3a02017 	mov	r2, #23
-30008a6c:	e5c32008 	strb	r2, [r3, #8]
+30008c68:	e59f3044 	ldr	r3, [pc, #68]	; 30008cb4 <rm_policy_init+0x54>
+30008c6c:	e3a02017 	mov	r2, #23
+30008c70:	e5c32008 	strb	r2, [r3, #8]
 	rm_policy.policy_thread_init=rm_policy_thread_init;
-30008a70:	e59f3038 	ldr	r3, [pc, #56]	; 30008ab0 <rm_policy_init+0x54>
-30008a74:	e59f2038 	ldr	r2, [pc, #56]	; 30008ab4 <rm_policy_init+0x58>
-30008a78:	e583200c 	str	r2, [r3, #12]
+30008c74:	e59f3038 	ldr	r3, [pc, #56]	; 30008cb4 <rm_policy_init+0x54>
+30008c78:	e59f2038 	ldr	r2, [pc, #56]	; 30008cb8 <rm_policy_init+0x58>
+30008c7c:	e583200c 	str	r2, [r3, #12]
 	rm_policy.policy_thread_release=rm_policy_thread_release;
-30008a7c:	e59f302c 	ldr	r3, [pc, #44]	; 30008ab0 <rm_policy_init+0x54>
-30008a80:	e59f2030 	ldr	r2, [pc, #48]	; 30008ab8 <rm_policy_init+0x5c>
-30008a84:	e5832010 	str	r2, [r3, #16]
+30008c80:	e59f302c 	ldr	r3, [pc, #44]	; 30008cb4 <rm_policy_init+0x54>
+30008c84:	e59f2030 	ldr	r2, [pc, #48]	; 30008cbc <rm_policy_init+0x5c>
+30008c88:	e5832010 	str	r2, [r3, #16]
 	rm_policy.delay_deal=NULL;
-30008a88:	e59f3020 	ldr	r3, [pc, #32]	; 30008ab0 <rm_policy_init+0x54>
-30008a8c:	e3a02000 	mov	r2, #0
-30008a90:	e5832014 	str	r2, [r3, #20]
+30008c8c:	e59f3020 	ldr	r3, [pc, #32]	; 30008cb4 <rm_policy_init+0x54>
+30008c90:	e3a02000 	mov	r2, #0
+30008c94:	e5832014 	str	r2, [r3, #20]
 	rm_policy.name="rm";
-30008a94:	e59f3014 	ldr	r3, [pc, #20]	; 30008ab0 <rm_policy_init+0x54>
-30008a98:	e59f201c 	ldr	r2, [pc, #28]	; 30008abc <rm_policy_init+0x60>
-30008a9c:	e5832018 	str	r2, [r3, #24]
+30008c98:	e59f3014 	ldr	r3, [pc, #20]	; 30008cb4 <rm_policy_init+0x54>
+30008c9c:	e59f201c 	ldr	r2, [pc, #28]	; 30008cc0 <rm_policy_init+0x60>
+30008ca0:	e5832018 	str	r2, [r3, #24]
 	acoral_register_sched_policy(&rm_policy);
-30008aa0:	e59f0008 	ldr	r0, [pc, #8]	; 30008ab0 <rm_policy_init+0x54>
-30008aa4:	ebffe4e7 	bl	30001e48 <acoral_register_sched_policy>
+30008ca4:	e59f0008 	ldr	r0, [pc, #8]	; 30008cb4 <rm_policy_init+0x54>
+30008ca8:	ebffe466 	bl	30001e48 <acoral_register_sched_policy>
 }
-30008aa8:	e8bd4008 	pop	{r3, lr}
-30008aac:	e12fff1e 	bx	lr
-30008ab0:	30010348 	.word	0x30010348
-30008ab4:	300084bc 	.word	0x300084bc
-30008ab8:	30008604 	.word	0x30008604
-30008abc:	3000e660 	.word	0x3000e660
+30008cac:	e8bd4008 	pop	{r3, lr}
+30008cb0:	e12fff1e 	bx	lr
+30008cb4:	30010554 	.word	0x30010554
+30008cb8:	300086c0 	.word	0x300086c0
+30008cbc:	30008808 	.word	0x30008808
+30008cc0:	3000e864 	.word	0x3000e864
 
-30008ac0 <rm_end>:
+30008cc4 <rm_end>:
 
 void rm_end(){
-30008ac0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008ac4:	e24dd024 	sub	sp, sp, #36	; 0x24
+30008cc4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008cc8:	e24dd024 	sub	sp, sp, #36	; 0x24
       acoral_sr cpu_sr;
       acoral_thread_t * thread;
       rm_policy_data_t *private_data;
       acoral_list_t *tmp,*head;
       rm_thread_dispatch();
-30008ac8:	ebffff6b 	bl	3000887c <rm_thread_dispatch>
+30008ccc:	ebffff6b 	bl	30008a80 <rm_thread_dispatch>
       HAL_ENTER_CRITICAL();
-30008acc:	ebffe308 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30008ad0:	e1a03000 	mov	r3, r0
-30008ad4:	e58d300c 	str	r3, [sp, #12]
+30008cd0:	ebffe287 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008cd4:	e1a03000 	mov	r3, r0
+30008cd8:	e58d300c 	str	r3, [sp, #12]
       head=&rm_queue->head;
-30008ad8:	e59f3090 	ldr	r3, [pc, #144]	; 30008b70 <rm_end+0xb0>
-30008adc:	e5933000 	ldr	r3, [r3]
-30008ae0:	e58d301c 	str	r3, [sp, #28]
+30008cdc:	e59f3090 	ldr	r3, [pc, #144]	; 30008d74 <rm_end+0xb0>
+30008ce0:	e5933000 	ldr	r3, [r3]
+30008ce4:	e58d301c 	str	r3, [sp, #28]
       for (tmp=head->next;tmp!=head;){
-30008ae4:	e59d301c 	ldr	r3, [sp, #28]
-30008ae8:	e5933000 	ldr	r3, [r3]
-30008aec:	e58d3018 	str	r3, [sp, #24]
-30008af0:	ea000015 	b	30008b4c <rm_end+0x8c>
+30008ce8:	e59d301c 	ldr	r3, [sp, #28]
+30008cec:	e5933000 	ldr	r3, [r3]
+30008cf0:	e58d3018 	str	r3, [sp, #24]
+30008cf4:	ea000015 	b	30008d50 <rm_end+0x8c>
 	  thread =list_entry(tmp, acoral_thread_t,ready);
-30008af4:	e59d3018 	ldr	r3, [sp, #24]
-30008af8:	e2433010 	sub	r3, r3, #16
-30008afc:	e58d3010 	str	r3, [sp, #16]
+30008cf8:	e59d3018 	ldr	r3, [sp, #24]
+30008cfc:	e2433010 	sub	r3, r3, #16
+30008d00:	e58d3010 	str	r3, [sp, #16]
 	  tmp=tmp->next;
-30008b00:	e59d3018 	ldr	r3, [sp, #24]
-30008b04:	e5933000 	ldr	r3, [r3]
-30008b08:	e58d3018 	str	r3, [sp, #24]
+30008d04:	e59d3018 	ldr	r3, [sp, #24]
+30008d08:	e5933000 	ldr	r3, [r3]
+30008d0c:	e58d3018 	str	r3, [sp, #24]
 	  acoral_list_del(&thread->ready); /*从队列上取下线程*/
-30008b0c:	e59d3010 	ldr	r3, [sp, #16]
-30008b10:	e2833010 	add	r3, r3, #16
-30008b14:	e1a00003 	mov	r0, r3
-30008b18:	eb00053b 	bl	3000a00c <acoral_list_del>
+30008d10:	e59d3010 	ldr	r3, [sp, #16]
+30008d14:	e2833010 	add	r3, r3, #16
+30008d18:	e1a00003 	mov	r0, r3
+30008d1c:	eb00053b 	bl	3000a210 <acoral_list_del>
 	  private_data=thread->private_data;
-30008b1c:	e59d3010 	ldr	r3, [sp, #16]
-30008b20:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008b24:	e58d3014 	str	r3, [sp, #20]
+30008d20:	e59d3010 	ldr	r3, [sp, #16]
+30008d24:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30008d28:	e58d3014 	str	r3, [sp, #20]
 	  acoral_policy_thread_init(ACORAL_SCHED_POLICY_PERIOD,thread,private_data->period_data.route,private_data->period_data.args,NULL);
-30008b28:	e59d3014 	ldr	r3, [sp, #20]
-30008b2c:	e5932004 	ldr	r2, [r3, #4]
-30008b30:	e59d3014 	ldr	r3, [sp, #20]
-30008b34:	e5933008 	ldr	r3, [r3, #8]
-30008b38:	e3a01000 	mov	r1, #0
-30008b3c:	e58d1000 	str	r1, [sp]
-30008b40:	e3a00016 	mov	r0, #22
-30008b44:	e59d1010 	ldr	r1, [sp, #16]
-30008b48:	ebffe48e 	bl	30001d88 <acoral_policy_thread_init>
+30008d2c:	e59d3014 	ldr	r3, [sp, #20]
+30008d30:	e5932004 	ldr	r2, [r3, #4]
+30008d34:	e59d3014 	ldr	r3, [sp, #20]
+30008d38:	e5933008 	ldr	r3, [r3, #8]
+30008d3c:	e3a01000 	mov	r1, #0
+30008d40:	e58d1000 	str	r1, [sp]
+30008d44:	e3a00016 	mov	r0, #22
+30008d48:	e59d1010 	ldr	r1, [sp, #16]
+30008d4c:	ebffe40d 	bl	30001d88 <acoral_policy_thread_init>
       rm_policy_data_t *private_data;
       acoral_list_t *tmp,*head;
       rm_thread_dispatch();
       HAL_ENTER_CRITICAL();
       head=&rm_queue->head;
       for (tmp=head->next;tmp!=head;){
-30008b4c:	e59d2018 	ldr	r2, [sp, #24]
-30008b50:	e59d301c 	ldr	r3, [sp, #28]
-30008b54:	e1520003 	cmp	r2, r3
-30008b58:	1affffe5 	bne	30008af4 <rm_end+0x34>
+30008d50:	e59d2018 	ldr	r2, [sp, #24]
+30008d54:	e59d301c 	ldr	r3, [sp, #28]
+30008d58:	e1520003 	cmp	r2, r3
+30008d5c:	1affffe5 	bne	30008cf8 <rm_end+0x34>
 	  tmp=tmp->next;
 	  acoral_list_del(&thread->ready); /*从队列上取下线程*/
 	  private_data=thread->private_data;
 	  acoral_policy_thread_init(ACORAL_SCHED_POLICY_PERIOD,thread,private_data->period_data.route,private_data->period_data.args,NULL);
      }
      HAL_EXIT_CRITICAL();
-30008b5c:	e59d000c 	ldr	r0, [sp, #12]
-30008b60:	ebffe2e1 	bl	300016ec <HAL_INTR_RESTORE>
+30008d60:	e59d000c 	ldr	r0, [sp, #12]
+30008d64:	ebffe260 	bl	300016ec <HAL_INTR_RESTORE>
 }
-30008b64:	e28dd024 	add	sp, sp, #36	; 0x24
-30008b68:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008b6c:	e12fff1e 	bx	lr
-30008b70:	3000ea4c 	.word	0x3000ea4c
+30008d68:	e28dd024 	add	sp, sp, #36	; 0x24
+30008d6c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008d70:	e12fff1e 	bx	lr
+30008d74:	3000ec58 	.word	0x3000ec58
 
-30008b74 <period_policy_thread_init>:
+30008d78 <period_policy_thread_init>:
 #include<policy.h>
 #include<mem.h>
 #include<timer.h>
 #include<period_thrd.h>
 acoral_queue_t period_delay_queue;
 acoral_id period_policy_thread_init(acoral_thread_t *thread,void (*route)(void *args),void *args,void *data){
-30008b74:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008b78:	e24dd024 	sub	sp, sp, #36	; 0x24
-30008b7c:	e58d000c 	str	r0, [sp, #12]
-30008b80:	e58d1008 	str	r1, [sp, #8]
-30008b84:	e58d2004 	str	r2, [sp, #4]
-30008b88:	e58d3000 	str	r3, [sp]
+30008d78:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008d7c:	e24dd024 	sub	sp, sp, #36	; 0x24
+30008d80:	e58d000c 	str	r0, [sp, #12]
+30008d84:	e58d1008 	str	r1, [sp, #8]
+30008d88:	e58d2004 	str	r2, [sp, #4]
+30008d8c:	e58d3000 	str	r3, [sp]
 	acoral_sr cpu_sr;
 	acoral_u32 prio;
 	acoral_period_policy_data_t *policy_data;
 	period_policy_data_t *private_data;
 	if(thread->policy==ACORAL_SCHED_POLICY_PERIOD){
-30008b8c:	e59d300c 	ldr	r3, [sp, #12]
-30008b90:	e5d3300c 	ldrb	r3, [r3, #12]
-30008b94:	e3530016 	cmp	r3, #22
-30008b98:	1a000040 	bne	30008ca0 <period_policy_thread_init+0x12c>
+30008d90:	e59d300c 	ldr	r3, [sp, #12]
+30008d94:	e5d3300c 	ldrb	r3, [r3, #12]
+30008d98:	e3530016 	cmp	r3, #22
+30008d9c:	1a000040 	bne	30008ea4 <period_policy_thread_init+0x12c>
 		policy_data=(acoral_period_policy_data_t *)data;
-30008b9c:	e59d3000 	ldr	r3, [sp]
-30008ba0:	e58d3018 	str	r3, [sp, #24]
+30008da0:	e59d3000 	ldr	r3, [sp]
+30008da4:	e58d3018 	str	r3, [sp, #24]
 		thread->cpu=policy_data->cpu;
-30008ba4:	e59d3018 	ldr	r3, [sp, #24]
-30008ba8:	e5d32000 	ldrb	r2, [r3]
-30008bac:	e59d300c 	ldr	r3, [sp, #12]
-30008bb0:	e5c32006 	strb	r2, [r3, #6]
+30008da8:	e59d3018 	ldr	r3, [sp, #24]
+30008dac:	e5d32000 	ldrb	r2, [r3]
+30008db0:	e59d300c 	ldr	r3, [sp, #12]
+30008db4:	e5c32006 	strb	r2, [r3, #6]
 		prio=policy_data->prio;
-30008bb4:	e59d3018 	ldr	r3, [sp, #24]
-30008bb8:	e5d33001 	ldrb	r3, [r3, #1]
-30008bbc:	e58d3014 	str	r3, [sp, #20]
+30008db8:	e59d3018 	ldr	r3, [sp, #24]
+30008dbc:	e5d33001 	ldrb	r3, [r3, #1]
+30008dc0:	e58d3014 	str	r3, [sp, #20]
 		if(policy_data->prio_type==ACORAL_BASE_PRIO){
-30008bc0:	e59d3018 	ldr	r3, [sp, #24]
-30008bc4:	e5d33002 	ldrb	r3, [r3, #2]
-30008bc8:	e1a03c03 	lsl	r3, r3, #24
-30008bcc:	e1a03c43 	asr	r3, r3, #24
-30008bd0:	e3530002 	cmp	r3, #2
-30008bd4:	1a000007 	bne	30008bf8 <period_policy_thread_init+0x84>
+30008dc4:	e59d3018 	ldr	r3, [sp, #24]
+30008dc8:	e5d33002 	ldrb	r3, [r3, #2]
+30008dcc:	e1a03c03 	lsl	r3, r3, #24
+30008dd0:	e1a03c43 	asr	r3, r3, #24
+30008dd4:	e3530002 	cmp	r3, #2
+30008dd8:	1a000007 	bne	30008dfc <period_policy_thread_init+0x84>
 			prio+=ACORAL_BASE_PRIO_MIN;
-30008bd8:	e59d3014 	ldr	r3, [sp, #20]
-30008bdc:	e2833002 	add	r3, r3, #2
-30008be0:	e58d3014 	str	r3, [sp, #20]
+30008ddc:	e59d3014 	ldr	r3, [sp, #20]
+30008de0:	e2833002 	add	r3, r3, #2
+30008de4:	e58d3014 	str	r3, [sp, #20]
 			if(prio>=ACORAL_BASE_PRIO_MAX)
-30008be4:	e59d3014 	ldr	r3, [sp, #20]
-30008be8:	e3530026 	cmp	r3, #38	; 0x26
-30008bec:	9a000001 	bls	30008bf8 <period_policy_thread_init+0x84>
+30008de8:	e59d3014 	ldr	r3, [sp, #20]
+30008dec:	e3530026 	cmp	r3, #38	; 0x26
+30008df0:	9a000001 	bls	30008dfc <period_policy_thread_init+0x84>
 				prio=ACORAL_BASE_PRIO_MAX-1;
-30008bf0:	e3a03026 	mov	r3, #38	; 0x26
-30008bf4:	e58d3014 	str	r3, [sp, #20]
+30008df4:	e3a03026 	mov	r3, #38	; 0x26
+30008df8:	e58d3014 	str	r3, [sp, #20]
 		}
 		thread->prio=prio;
-30008bf8:	e59d3014 	ldr	r3, [sp, #20]
-30008bfc:	e20320ff 	and	r2, r3, #255	; 0xff
-30008c00:	e59d300c 	ldr	r3, [sp, #12]
-30008c04:	e5c32005 	strb	r2, [r3, #5]
+30008dfc:	e59d3014 	ldr	r3, [sp, #20]
+30008e00:	e20320ff 	and	r2, r3, #255	; 0xff
+30008e04:	e59d300c 	ldr	r3, [sp, #12]
+30008e08:	e5c32005 	strb	r2, [r3, #5]
 		private_data=(period_policy_data_t *)acoral_malloc2(sizeof(period_policy_data_t));
-30008c08:	e3a0000c 	mov	r0, #12
-30008c0c:	ebfff7f4 	bl	30006be4 <v_malloc>
-30008c10:	e1a03000 	mov	r3, r0
-30008c14:	e58d301c 	str	r3, [sp, #28]
+30008e0c:	e3a0000c 	mov	r0, #12
+30008e10:	ebfff7f4 	bl	30006de8 <v_malloc>
+30008e14:	e1a03000 	mov	r3, r0
+30008e18:	e58d301c 	str	r3, [sp, #28]
 		if(private_data==NULL){
-30008c18:	e59d301c 	ldr	r3, [sp, #28]
-30008c1c:	e3530000 	cmp	r3, #0
-30008c20:	1a00000e 	bne	30008c60 <period_policy_thread_init+0xec>
+30008e1c:	e59d301c 	ldr	r3, [sp, #28]
+30008e20:	e3530000 	cmp	r3, #0
+30008e24:	1a00000e 	bne	30008e64 <period_policy_thread_init+0xec>
 			acoral_printerr("No level2 mem space for private_data:%s\n",thread->name);
-30008c24:	e59d300c 	ldr	r3, [sp, #12]
-30008c28:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-30008c2c:	e59f0118 	ldr	r0, [pc, #280]	; 30008d4c <period_policy_thread_init+0x1d8>
-30008c30:	e1a01003 	mov	r1, r3
-30008c34:	eb000973 	bl	3000b208 <acoral_print>
+30008e28:	e59d300c 	ldr	r3, [sp, #12]
+30008e2c:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+30008e30:	e59f0118 	ldr	r0, [pc, #280]	; 30008f50 <period_policy_thread_init+0x1d8>
+30008e34:	e1a01003 	mov	r1, r3
+30008e38:	eb000973 	bl	3000b40c <acoral_print>
 			HAL_ENTER_CRITICAL();
-30008c38:	ebffe2ad 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30008c3c:	e1a03000 	mov	r3, r0
-30008c40:	e58d3010 	str	r3, [sp, #16]
+30008e3c:	ebffe22c 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008e40:	e1a03000 	mov	r3, r0
+30008e44:	e58d3010 	str	r3, [sp, #16]
 			acoral_release_res((acoral_res_t *)thread);
-30008c44:	e59d300c 	ldr	r3, [sp, #12]
-30008c48:	e1a00003 	mov	r0, r3
-30008c4c:	ebffea6d 	bl	30003608 <acoral_release_res>
+30008e48:	e59d300c 	ldr	r3, [sp, #12]
+30008e4c:	e1a00003 	mov	r0, r3
+30008e50:	ebffe9ec 	bl	30003608 <acoral_release_res>
 			HAL_EXIT_CRITICAL();
-30008c50:	e59d0010 	ldr	r0, [sp, #16]
-30008c54:	ebffe2a4 	bl	300016ec <HAL_INTR_RESTORE>
+30008e54:	e59d0010 	ldr	r0, [sp, #16]
+30008e58:	ebffe223 	bl	300016ec <HAL_INTR_RESTORE>
 			return -1;
-30008c58:	e3e03000 	mvn	r3, #0
-30008c5c:	ea000036 	b	30008d3c <period_policy_thread_init+0x1c8>
+30008e5c:	e3e03000 	mvn	r3, #0
+30008e60:	ea000036 	b	30008f40 <period_policy_thread_init+0x1c8>
 		}
 		private_data->time=policy_data->time;
-30008c60:	e59d3018 	ldr	r3, [sp, #24]
-30008c64:	e5932004 	ldr	r2, [r3, #4]
-30008c68:	e59d301c 	ldr	r3, [sp, #28]
-30008c6c:	e5832000 	str	r2, [r3]
+30008e64:	e59d3018 	ldr	r3, [sp, #24]
+30008e68:	e5932004 	ldr	r2, [r3, #4]
+30008e6c:	e59d301c 	ldr	r3, [sp, #28]
+30008e70:	e5832000 	str	r2, [r3]
 		private_data->route=route;
-30008c70:	e59d301c 	ldr	r3, [sp, #28]
-30008c74:	e59d2008 	ldr	r2, [sp, #8]
-30008c78:	e5832004 	str	r2, [r3, #4]
+30008e74:	e59d301c 	ldr	r3, [sp, #28]
+30008e78:	e59d2008 	ldr	r2, [sp, #8]
+30008e7c:	e5832004 	str	r2, [r3, #4]
 		private_data->args=args;
-30008c7c:	e59d301c 	ldr	r3, [sp, #28]
-30008c80:	e59d2004 	ldr	r2, [sp, #4]
-30008c84:	e5832008 	str	r2, [r3, #8]
+30008e80:	e59d301c 	ldr	r3, [sp, #28]
+30008e84:	e59d2004 	ldr	r2, [sp, #4]
+30008e88:	e5832008 	str	r2, [r3, #8]
 		thread->private_data=private_data;
-30008c88:	e59d300c 	ldr	r3, [sp, #12]
-30008c8c:	e59d201c 	ldr	r2, [sp, #28]
-30008c90:	e5832050 	str	r2, [r3, #80]	; 0x50
+30008e8c:	e59d300c 	ldr	r3, [sp, #12]
+30008e90:	e59d201c 	ldr	r2, [sp, #28]
+30008e94:	e5832050 	str	r2, [r3, #80]	; 0x50
 		thread->cpu_mask=-1;
-30008c94:	e59d300c 	ldr	r3, [sp, #12]
-30008c98:	e3e02000 	mvn	r2, #0
-30008c9c:	e5832008 	str	r2, [r3, #8]
+30008e98:	e59d300c 	ldr	r3, [sp, #12]
+30008e9c:	e3e02000 	mvn	r2, #0
+30008ea0:	e5832008 	str	r2, [r3, #8]
 	}
 	if(acoral_thread_init(thread,route,period_thread_exit,args)!=0){
-30008ca0:	e59f30a8 	ldr	r3, [pc, #168]	; 30008d50 <period_policy_thread_init+0x1dc>
-30008ca4:	e59d000c 	ldr	r0, [sp, #12]
-30008ca8:	e59d1008 	ldr	r1, [sp, #8]
-30008cac:	e1a02003 	mov	r2, r3
-30008cb0:	e59d3004 	ldr	r3, [sp, #4]
-30008cb4:	ebffe7e9 	bl	30002c60 <acoral_thread_init>
-30008cb8:	e1a03000 	mov	r3, r0
-30008cbc:	e3530000 	cmp	r3, #0
-30008cc0:	0a00000e 	beq	30008d00 <period_policy_thread_init+0x18c>
+30008ea4:	e59f30a8 	ldr	r3, [pc, #168]	; 30008f54 <period_policy_thread_init+0x1dc>
+30008ea8:	e59d000c 	ldr	r0, [sp, #12]
+30008eac:	e59d1008 	ldr	r1, [sp, #8]
+30008eb0:	e1a02003 	mov	r2, r3
+30008eb4:	e59d3004 	ldr	r3, [sp, #4]
+30008eb8:	ebffe768 	bl	30002c60 <acoral_thread_init>
+30008ebc:	e1a03000 	mov	r3, r0
+30008ec0:	e3530000 	cmp	r3, #0
+30008ec4:	0a00000e 	beq	30008f04 <period_policy_thread_init+0x18c>
 		acoral_printerr("No thread stack:%s\n",thread->name);
-30008cc4:	e59d300c 	ldr	r3, [sp, #12]
-30008cc8:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-30008ccc:	e59f0080 	ldr	r0, [pc, #128]	; 30008d54 <period_policy_thread_init+0x1e0>
-30008cd0:	e1a01003 	mov	r1, r3
-30008cd4:	eb00094b 	bl	3000b208 <acoral_print>
+30008ec8:	e59d300c 	ldr	r3, [sp, #12]
+30008ecc:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+30008ed0:	e59f0080 	ldr	r0, [pc, #128]	; 30008f58 <period_policy_thread_init+0x1e0>
+30008ed4:	e1a01003 	mov	r1, r3
+30008ed8:	eb00094b 	bl	3000b40c <acoral_print>
 		HAL_ENTER_CRITICAL();
-30008cd8:	ebffe285 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30008cdc:	e1a03000 	mov	r3, r0
-30008ce0:	e58d3010 	str	r3, [sp, #16]
+30008edc:	ebffe204 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008ee0:	e1a03000 	mov	r3, r0
+30008ee4:	e58d3010 	str	r3, [sp, #16]
 		acoral_release_res((acoral_res_t *)thread);
-30008ce4:	e59d300c 	ldr	r3, [sp, #12]
-30008ce8:	e1a00003 	mov	r0, r3
-30008cec:	ebffea45 	bl	30003608 <acoral_release_res>
+30008ee8:	e59d300c 	ldr	r3, [sp, #12]
+30008eec:	e1a00003 	mov	r0, r3
+30008ef0:	ebffe9c4 	bl	30003608 <acoral_release_res>
 		HAL_EXIT_CRITICAL();
-30008cf0:	e59d0010 	ldr	r0, [sp, #16]
-30008cf4:	ebffe27c 	bl	300016ec <HAL_INTR_RESTORE>
+30008ef4:	e59d0010 	ldr	r0, [sp, #16]
+30008ef8:	ebffe1fb 	bl	300016ec <HAL_INTR_RESTORE>
 		return -1;
-30008cf8:	e3e03000 	mvn	r3, #0
-30008cfc:	ea00000e 	b	30008d3c <period_policy_thread_init+0x1c8>
+30008efc:	e3e03000 	mvn	r3, #0
+30008f00:	ea00000e 	b	30008f40 <period_policy_thread_init+0x1c8>
 	}
         /*将线程就绪，并重新调度*/
 	acoral_resume_thread(thread);
-30008d00:	e59d000c 	ldr	r0, [sp, #12]
-30008d04:	ebffe6cc 	bl	3000283c <acoral_resume_thread>
+30008f04:	e59d000c 	ldr	r0, [sp, #12]
+30008f08:	ebffe64b 	bl	3000283c <acoral_resume_thread>
 	HAL_ENTER_CRITICAL();
-30008d08:	ebffe279 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30008d0c:	e1a03000 	mov	r3, r0
-30008d10:	e58d3010 	str	r3, [sp, #16]
+30008f0c:	ebffe1f8 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30008f10:	e1a03000 	mov	r3, r0
+30008f14:	e58d3010 	str	r3, [sp, #16]
 	period_thread_delay(thread,((period_policy_data_t *)thread->private_data)->time);
-30008d14:	e59d300c 	ldr	r3, [sp, #12]
-30008d18:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008d1c:	e5933000 	ldr	r3, [r3]
-30008d20:	e59d000c 	ldr	r0, [sp, #12]
-30008d24:	e1a01003 	mov	r1, r3
-30008d28:	eb000057 	bl	30008e8c <period_thread_delay>
+30008f18:	e59d300c 	ldr	r3, [sp, #12]
+30008f1c:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30008f20:	e5933000 	ldr	r3, [r3]
+30008f24:	e59d000c 	ldr	r0, [sp, #12]
+30008f28:	e1a01003 	mov	r1, r3
+30008f2c:	eb000057 	bl	30009090 <period_thread_delay>
 	HAL_EXIT_CRITICAL();
-30008d2c:	e59d0010 	ldr	r0, [sp, #16]
-30008d30:	ebffe26d 	bl	300016ec <HAL_INTR_RESTORE>
+30008f30:	e59d0010 	ldr	r0, [sp, #16]
+30008f34:	ebffe1ec 	bl	300016ec <HAL_INTR_RESTORE>
 	return thread->res.id;
-30008d34:	e59d300c 	ldr	r3, [sp, #12]
-30008d38:	e5933000 	ldr	r3, [r3]
+30008f38:	e59d300c 	ldr	r3, [sp, #12]
+30008f3c:	e5933000 	ldr	r3, [r3]
 }
-30008d3c:	e1a00003 	mov	r0, r3
-30008d40:	e28dd024 	add	sp, sp, #36	; 0x24
-30008d44:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008d48:	e12fff1e 	bx	lr
-30008d4c:	3000e664 	.word	0x3000e664
-30008d50:	3000906c 	.word	0x3000906c
-30008d54:	3000e690 	.word	0x3000e690
+30008f40:	e1a00003 	mov	r0, r3
+30008f44:	e28dd024 	add	sp, sp, #36	; 0x24
+30008f48:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008f4c:	e12fff1e 	bx	lr
+30008f50:	3000e868 	.word	0x3000e868
+30008f54:	30009270 	.word	0x30009270
+30008f58:	3000e894 	.word	0x3000e894
 
-30008d58 <period_policy_thread_release>:
+30008f5c <period_policy_thread_release>:
 
 void period_policy_thread_release(acoral_thread_t *thread){
-30008d58:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008d5c:	e24dd00c 	sub	sp, sp, #12
-30008d60:	e58d0004 	str	r0, [sp, #4]
+30008f5c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008f60:	e24dd00c 	sub	sp, sp, #12
+30008f64:	e58d0004 	str	r0, [sp, #4]
 	acoral_free2(thread->private_data);	
-30008d64:	e59d3004 	ldr	r3, [sp, #4]
-30008d68:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008d6c:	e1a00003 	mov	r0, r3
-30008d70:	ebfff7b0 	bl	30006c38 <v_free>
+30008f68:	e59d3004 	ldr	r3, [sp, #4]
+30008f6c:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30008f70:	e1a00003 	mov	r0, r3
+30008f74:	ebfff7b0 	bl	30006e3c <v_free>
 }
-30008d74:	e28dd00c 	add	sp, sp, #12
-30008d78:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008d7c:	e12fff1e 	bx	lr
+30008f78:	e28dd00c 	add	sp, sp, #12
+30008f7c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30008f80:	e12fff1e 	bx	lr
 
-30008d80 <acoral_periodqueue_add>:
+30008f84 <acoral_periodqueue_add>:
 
 void acoral_periodqueue_add(acoral_thread_t *new){
-30008d80:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008d84:	e24dd024 	sub	sp, sp, #36	; 0x24
-30008d88:	e58d0004 	str	r0, [sp, #4]
+30008f84:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30008f88:	e24dd024 	sub	sp, sp, #36	; 0x24
+30008f8c:	e58d0004 	str	r0, [sp, #4]
 	acoral_list_t   *tmp,*head;
 	acoral_thread_t *thread;
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
-30008d8c:	e59d3004 	ldr	r3, [sp, #4]
-30008d90:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-30008d94:	e58d301c 	str	r3, [sp, #28]
+30008f90:	e59d3004 	ldr	r3, [sp, #4]
+30008f94:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+30008f98:	e58d301c 	str	r3, [sp, #28]
 	head=&period_delay_queue.head;
-30008d98:	e59f30e8 	ldr	r3, [pc, #232]	; 30008e88 <acoral_periodqueue_add+0x108>
-30008d9c:	e58d3010 	str	r3, [sp, #16]
+30008f9c:	e59f30e8 	ldr	r3, [pc, #232]	; 3000908c <acoral_periodqueue_add+0x108>
+30008fa0:	e58d3010 	str	r3, [sp, #16]
 	acoral_spin_lock(&head->lock);
 	new->state|=ACORAL_THREAD_STATE_DELAY;
-30008da0:	e59d3004 	ldr	r3, [sp, #4]
-30008da4:	e5d33004 	ldrb	r3, [r3, #4]
-30008da8:	e3833020 	orr	r3, r3, #32
-30008dac:	e20320ff 	and	r2, r3, #255	; 0xff
-30008db0:	e59d3004 	ldr	r3, [sp, #4]
-30008db4:	e5c32004 	strb	r2, [r3, #4]
+30008fa4:	e59d3004 	ldr	r3, [sp, #4]
+30008fa8:	e5d33004 	ldrb	r3, [r3, #4]
+30008fac:	e3833020 	orr	r3, r3, #32
+30008fb0:	e20320ff 	and	r2, r3, #255	; 0xff
+30008fb4:	e59d3004 	ldr	r3, [sp, #4]
+30008fb8:	e5c32004 	strb	r2, [r3, #4]
 	for (tmp=head->next;delay2=delay,tmp!=head; tmp=tmp->next){
-30008db8:	e59d3010 	ldr	r3, [sp, #16]
-30008dbc:	e5933000 	ldr	r3, [r3]
-30008dc0:	e58d300c 	str	r3, [sp, #12]
-30008dc4:	ea00000d 	b	30008e00 <acoral_periodqueue_add+0x80>
+30008fbc:	e59d3010 	ldr	r3, [sp, #16]
+30008fc0:	e5933000 	ldr	r3, [r3]
+30008fc4:	e58d300c 	str	r3, [sp, #12]
+30008fc8:	ea00000d 	b	30009004 <acoral_periodqueue_add+0x80>
 		thread = list_entry (tmp, acoral_thread_t, waiting);
-30008dc8:	e59d300c 	ldr	r3, [sp, #12]
-30008dcc:	e2433020 	sub	r3, r3, #32
-30008dd0:	e58d3014 	str	r3, [sp, #20]
+30008fcc:	e59d300c 	ldr	r3, [sp, #12]
+30008fd0:	e2433020 	sub	r3, r3, #32
+30008fd4:	e58d3014 	str	r3, [sp, #20]
 		delay  = delay-thread->delay;
-30008dd4:	e59d3014 	ldr	r3, [sp, #20]
-30008dd8:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-30008ddc:	e59d201c 	ldr	r2, [sp, #28]
-30008de0:	e0633002 	rsb	r3, r3, r2
-30008de4:	e58d301c 	str	r3, [sp, #28]
+30008fd8:	e59d3014 	ldr	r3, [sp, #20]
+30008fdc:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+30008fe0:	e59d201c 	ldr	r2, [sp, #28]
+30008fe4:	e0633002 	rsb	r3, r3, r2
+30008fe8:	e58d301c 	str	r3, [sp, #28]
 		if (delay < 0)
-30008de8:	e59d301c 	ldr	r3, [sp, #28]
-30008dec:	e3530000 	cmp	r3, #0
-30008df0:	ba000009 	blt	30008e1c <acoral_periodqueue_add+0x9c>
+30008fec:	e59d301c 	ldr	r3, [sp, #28]
+30008ff0:	e3530000 	cmp	r3, #0
+30008ff4:	ba000009 	blt	30009020 <acoral_periodqueue_add+0x9c>
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
 	head=&period_delay_queue.head;
 	acoral_spin_lock(&head->lock);
 	new->state|=ACORAL_THREAD_STATE_DELAY;
 	for (tmp=head->next;delay2=delay,tmp!=head; tmp=tmp->next){
-30008df4:	e59d300c 	ldr	r3, [sp, #12]
-30008df8:	e5933000 	ldr	r3, [r3]
-30008dfc:	e58d300c 	str	r3, [sp, #12]
-30008e00:	e59d301c 	ldr	r3, [sp, #28]
-30008e04:	e58d3018 	str	r3, [sp, #24]
-30008e08:	e59d200c 	ldr	r2, [sp, #12]
-30008e0c:	e59d3010 	ldr	r3, [sp, #16]
-30008e10:	e1520003 	cmp	r2, r3
-30008e14:	1affffeb 	bne	30008dc8 <acoral_periodqueue_add+0x48>
-30008e18:	ea000000 	b	30008e20 <acoral_periodqueue_add+0xa0>
+30008ff8:	e59d300c 	ldr	r3, [sp, #12]
+30008ffc:	e5933000 	ldr	r3, [r3]
+30009000:	e58d300c 	str	r3, [sp, #12]
+30009004:	e59d301c 	ldr	r3, [sp, #28]
+30009008:	e58d3018 	str	r3, [sp, #24]
+3000900c:	e59d200c 	ldr	r2, [sp, #12]
+30009010:	e59d3010 	ldr	r3, [sp, #16]
+30009014:	e1520003 	cmp	r2, r3
+30009018:	1affffeb 	bne	30008fcc <acoral_periodqueue_add+0x48>
+3000901c:	ea000000 	b	30009024 <acoral_periodqueue_add+0xa0>
 		thread = list_entry (tmp, acoral_thread_t, waiting);
 		delay  = delay-thread->delay;
 		if (delay < 0)
 			break;
-30008e1c:	e1a00000 	nop			; (mov r0, r0)
+30009020:	e1a00000 	nop			; (mov r0, r0)
 	}
 	new->delay = delay2;
-30008e20:	e59d3004 	ldr	r3, [sp, #4]
-30008e24:	e59d2018 	ldr	r2, [sp, #24]
-30008e28:	e5832040 	str	r2, [r3, #64]	; 0x40
+30009024:	e59d3004 	ldr	r3, [sp, #4]
+30009028:	e59d2018 	ldr	r2, [sp, #24]
+3000902c:	e5832040 	str	r2, [r3, #64]	; 0x40
 	acoral_list_add(&new->waiting,tmp->prev);
-30008e2c:	e59d3004 	ldr	r3, [sp, #4]
-30008e30:	e2832020 	add	r2, r3, #32
-30008e34:	e59d300c 	ldr	r3, [sp, #12]
-30008e38:	e5933004 	ldr	r3, [r3, #4]
-30008e3c:	e1a00002 	mov	r0, r2
-30008e40:	e1a01003 	mov	r1, r3
-30008e44:	eb00044a 	bl	30009f74 <acoral_list_add>
+30009030:	e59d3004 	ldr	r3, [sp, #4]
+30009034:	e2832020 	add	r2, r3, #32
+30009038:	e59d300c 	ldr	r3, [sp, #12]
+3000903c:	e5933004 	ldr	r3, [r3, #4]
+30009040:	e1a00002 	mov	r0, r2
+30009044:	e1a01003 	mov	r1, r3
+30009048:	eb00044a 	bl	3000a178 <acoral_list_add>
 	/* 插入等待任务后，后继等待任务时间处理*/
 	if(tmp != head){
-30008e48:	e59d200c 	ldr	r2, [sp, #12]
-30008e4c:	e59d3010 	ldr	r3, [sp, #16]
-30008e50:	e1520003 	cmp	r2, r3
-30008e54:	0a000008 	beq	30008e7c <acoral_periodqueue_add+0xfc>
+3000904c:	e59d200c 	ldr	r2, [sp, #12]
+30009050:	e59d3010 	ldr	r3, [sp, #16]
+30009054:	e1520003 	cmp	r2, r3
+30009058:	0a000008 	beq	30009080 <acoral_periodqueue_add+0xfc>
 		thread = list_entry(tmp, acoral_thread_t, waiting);
-30008e58:	e59d300c 	ldr	r3, [sp, #12]
-30008e5c:	e2433020 	sub	r3, r3, #32
-30008e60:	e58d3014 	str	r3, [sp, #20]
+3000905c:	e59d300c 	ldr	r3, [sp, #12]
+30009060:	e2433020 	sub	r3, r3, #32
+30009064:	e58d3014 	str	r3, [sp, #20]
 		thread->delay-=delay2;
-30008e64:	e59d3014 	ldr	r3, [sp, #20]
-30008e68:	e5932040 	ldr	r2, [r3, #64]	; 0x40
-30008e6c:	e59d3018 	ldr	r3, [sp, #24]
-30008e70:	e0632002 	rsb	r2, r3, r2
-30008e74:	e59d3014 	ldr	r3, [sp, #20]
-30008e78:	e5832040 	str	r2, [r3, #64]	; 0x40
+30009068:	e59d3014 	ldr	r3, [sp, #20]
+3000906c:	e5932040 	ldr	r2, [r3, #64]	; 0x40
+30009070:	e59d3018 	ldr	r3, [sp, #24]
+30009074:	e0632002 	rsb	r2, r3, r2
+30009078:	e59d3014 	ldr	r3, [sp, #20]
+3000907c:	e5832040 	str	r2, [r3, #64]	; 0x40
 	}
 	acoral_spin_unlock(&head->lock);
 }
-30008e7c:	e28dd024 	add	sp, sp, #36	; 0x24
-30008e80:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008e84:	e12fff1e 	bx	lr
-30008e88:	3000fac0 	.word	0x3000fac0
+30009080:	e28dd024 	add	sp, sp, #36	; 0x24
+30009084:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009088:	e12fff1e 	bx	lr
+3000908c:	3000fccc 	.word	0x3000fccc
 
-30008e8c <period_thread_delay>:
+30009090 <period_thread_delay>:
 
 void period_thread_delay(acoral_thread_t* thread,acoral_time time){
-30008e8c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008e90:	e24dd00c 	sub	sp, sp, #12
-30008e94:	e58d0004 	str	r0, [sp, #4]
-30008e98:	e58d1000 	str	r1, [sp]
+30009090:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009094:	e24dd00c 	sub	sp, sp, #12
+30009098:	e58d0004 	str	r0, [sp, #4]
+3000909c:	e58d1000 	str	r1, [sp]
 	thread->delay=TIME_TO_TICKS(time);
-30008e9c:	e59d2000 	ldr	r2, [sp]
-30008ea0:	e1a03002 	mov	r3, r2
-30008ea4:	e1a03103 	lsl	r3, r3, #2
-30008ea8:	e0833002 	add	r3, r3, r2
-30008eac:	e1a02103 	lsl	r2, r3, #2
-30008eb0:	e0833002 	add	r3, r3, r2
-30008eb4:	e1a03103 	lsl	r3, r3, #2
-30008eb8:	e1a02003 	mov	r2, r3
-30008ebc:	e59f3024 	ldr	r3, [pc, #36]	; 30008ee8 <period_thread_delay+0x5c>
-30008ec0:	e0831392 	umull	r1, r3, r2, r3
-30008ec4:	e1a03323 	lsr	r3, r3, #6
-30008ec8:	e1a02003 	mov	r2, r3
-30008ecc:	e59d3004 	ldr	r3, [sp, #4]
-30008ed0:	e5832040 	str	r2, [r3, #64]	; 0x40
+300090a0:	e59d2000 	ldr	r2, [sp]
+300090a4:	e1a03002 	mov	r3, r2
+300090a8:	e1a03103 	lsl	r3, r3, #2
+300090ac:	e0833002 	add	r3, r3, r2
+300090b0:	e1a02103 	lsl	r2, r3, #2
+300090b4:	e0833002 	add	r3, r3, r2
+300090b8:	e1a03103 	lsl	r3, r3, #2
+300090bc:	e1a02003 	mov	r2, r3
+300090c0:	e59f3024 	ldr	r3, [pc, #36]	; 300090ec <period_thread_delay+0x5c>
+300090c4:	e0831392 	umull	r1, r3, r2, r3
+300090c8:	e1a03323 	lsr	r3, r3, #6
+300090cc:	e1a02003 	mov	r2, r3
+300090d0:	e59d3004 	ldr	r3, [sp, #4]
+300090d4:	e5832040 	str	r2, [r3, #64]	; 0x40
 	acoral_periodqueue_add(thread);
-30008ed4:	e59d0004 	ldr	r0, [sp, #4]
-30008ed8:	ebffffa8 	bl	30008d80 <acoral_periodqueue_add>
+300090d8:	e59d0004 	ldr	r0, [sp, #4]
+300090dc:	ebffffa8 	bl	30008f84 <acoral_periodqueue_add>
 }
-30008edc:	e28dd00c 	add	sp, sp, #12
-30008ee0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30008ee4:	e12fff1e 	bx	lr
-30008ee8:	10624dd3 	.word	0x10624dd3
+300090e0:	e28dd00c 	add	sp, sp, #12
+300090e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300090e8:	e12fff1e 	bx	lr
+300090ec:	10624dd3 	.word	0x10624dd3
 
-30008eec <period_delay_deal>:
+300090f0 <period_delay_deal>:
 
 void period_delay_deal(){
-30008eec:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30008ef0:	e24dd01c 	sub	sp, sp, #28
+300090f0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300090f4:	e24dd01c 	sub	sp, sp, #28
 	acoral_list_t *tmp,*tmp1,*head;
 	acoral_thread_t * thread;
 	period_policy_data_t * private_data;
 	head=&period_delay_queue.head;
-30008ef4:	e59f3160 	ldr	r3, [pc, #352]	; 3000905c <period_delay_deal+0x170>
-30008ef8:	e58d300c 	str	r3, [sp, #12]
+300090f8:	e59f3160 	ldr	r3, [pc, #352]	; 30009260 <period_delay_deal+0x170>
+300090fc:	e58d300c 	str	r3, [sp, #12]
 	if(acoral_list_empty(head))
-30008efc:	e59d300c 	ldr	r3, [sp, #12]
-30008f00:	e5932000 	ldr	r2, [r3]
-30008f04:	e59d300c 	ldr	r3, [sp, #12]
-30008f08:	e1520003 	cmp	r2, r3
-30008f0c:	0a00004c 	beq	30009044 <period_delay_deal+0x158>
+30009100:	e59d300c 	ldr	r3, [sp, #12]
+30009104:	e5932000 	ldr	r2, [r3]
+30009108:	e59d300c 	ldr	r3, [sp, #12]
+3000910c:	e1520003 	cmp	r2, r3
+30009110:	0a00004c 	beq	30009248 <period_delay_deal+0x158>
 	    	return;
 	thread=list_entry(head->next,acoral_thread_t,waiting);
-30008f10:	e59d300c 	ldr	r3, [sp, #12]
-30008f14:	e5933000 	ldr	r3, [r3]
-30008f18:	e2433020 	sub	r3, r3, #32
-30008f1c:	e58d3010 	str	r3, [sp, #16]
+30009114:	e59d300c 	ldr	r3, [sp, #12]
+30009118:	e5933000 	ldr	r3, [r3]
+3000911c:	e2433020 	sub	r3, r3, #32
+30009120:	e58d3010 	str	r3, [sp, #16]
 	ACORAL_ASSERT(thread,"in period thread deal");
-30008f20:	e59d2010 	ldr	r2, [sp, #16]
-30008f24:	e59f3134 	ldr	r3, [pc, #308]	; 30009060 <period_delay_deal+0x174>
-30008f28:	e1a00002 	mov	r0, r2
-30008f2c:	e1a01003 	mov	r1, r3
-30008f30:	ebffeb3b 	bl	30003c24 <acoral_assert_res>
+30009124:	e59d2010 	ldr	r2, [sp, #16]
+30009128:	e59f3134 	ldr	r3, [pc, #308]	; 30009264 <period_delay_deal+0x174>
+3000912c:	e1a00002 	mov	r0, r2
+30009130:	e1a01003 	mov	r1, r3
+30009134:	ebffeaba 	bl	30003c24 <acoral_assert_res>
 	thread->delay--;
-30008f34:	e59d3010 	ldr	r3, [sp, #16]
-30008f38:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-30008f3c:	e2432001 	sub	r2, r3, #1
-30008f40:	e59d3010 	ldr	r3, [sp, #16]
-30008f44:	e5832040 	str	r2, [r3, #64]	; 0x40
+30009138:	e59d3010 	ldr	r3, [sp, #16]
+3000913c:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+30009140:	e2432001 	sub	r2, r3, #1
+30009144:	e59d3010 	ldr	r3, [sp, #16]
+30009148:	e5832040 	str	r2, [r3, #64]	; 0x40
 	for(tmp=head->next;tmp!=head;){
-30008f48:	e59d300c 	ldr	r3, [sp, #12]
-30008f4c:	e5933000 	ldr	r3, [r3]
-30008f50:	e58d3004 	str	r3, [sp, #4]
-30008f54:	ea000035 	b	30009030 <period_delay_deal+0x144>
+3000914c:	e59d300c 	ldr	r3, [sp, #12]
+30009150:	e5933000 	ldr	r3, [r3]
+30009154:	e58d3004 	str	r3, [sp, #4]
+30009158:	ea000035 	b	30009234 <period_delay_deal+0x144>
 		thread=list_entry(tmp,acoral_thread_t,waiting);
-30008f58:	e59d3004 	ldr	r3, [sp, #4]
-30008f5c:	e2433020 	sub	r3, r3, #32
-30008f60:	e58d3010 	str	r3, [sp, #16]
+3000915c:	e59d3004 	ldr	r3, [sp, #4]
+30009160:	e2433020 	sub	r3, r3, #32
+30009164:	e58d3010 	str	r3, [sp, #16]
 		ACORAL_ASSERT(thread,"in period thread deal ");
-30008f64:	e59d2010 	ldr	r2, [sp, #16]
-30008f68:	e59f30f4 	ldr	r3, [pc, #244]	; 30009064 <period_delay_deal+0x178>
-30008f6c:	e1a00002 	mov	r0, r2
-30008f70:	e1a01003 	mov	r1, r3
-30008f74:	ebffeb2a 	bl	30003c24 <acoral_assert_res>
+30009168:	e59d2010 	ldr	r2, [sp, #16]
+3000916c:	e59f30f4 	ldr	r3, [pc, #244]	; 30009268 <period_delay_deal+0x178>
+30009170:	e1a00002 	mov	r0, r2
+30009174:	e1a01003 	mov	r1, r3
+30009178:	ebffeaa9 	bl	30003c24 <acoral_assert_res>
 		if(thread->delay>0)
-30008f78:	e59d3010 	ldr	r3, [sp, #16]
-30008f7c:	e5933040 	ldr	r3, [r3, #64]	; 0x40
-30008f80:	e3530000 	cmp	r3, #0
-30008f84:	ca000030 	bgt	3000904c <period_delay_deal+0x160>
+3000917c:	e59d3010 	ldr	r3, [sp, #16]
+30009180:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+30009184:	e3530000 	cmp	r3, #0
+30009188:	ca000030 	bgt	30009250 <period_delay_deal+0x160>
 		    break;
 		private_data=thread->private_data;
-30008f88:	e59d3010 	ldr	r3, [sp, #16]
-30008f8c:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30008f90:	e58d3014 	str	r3, [sp, #20]
+3000918c:	e59d3010 	ldr	r3, [sp, #16]
+30009190:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30009194:	e58d3014 	str	r3, [sp, #20]
 		/*防止add判断delay时取下thread*/
 		acoral_spin_lock(&head->lock);
 		tmp1=tmp->next;
-30008f94:	e59d3004 	ldr	r3, [sp, #4]
-30008f98:	e5933000 	ldr	r3, [r3]
-30008f9c:	e58d3008 	str	r3, [sp, #8]
+30009198:	e59d3004 	ldr	r3, [sp, #4]
+3000919c:	e5933000 	ldr	r3, [r3]
+300091a0:	e58d3008 	str	r3, [sp, #8]
 		acoral_list_del(&thread->waiting);
-30008fa0:	e59d3010 	ldr	r3, [sp, #16]
-30008fa4:	e2833020 	add	r3, r3, #32
-30008fa8:	e1a00003 	mov	r0, r3
-30008fac:	eb000416 	bl	3000a00c <acoral_list_del>
+300091a4:	e59d3010 	ldr	r3, [sp, #16]
+300091a8:	e2833020 	add	r3, r3, #32
+300091ac:	e1a00003 	mov	r0, r3
+300091b0:	eb000416 	bl	3000a210 <acoral_list_del>
 		tmp=tmp1;
-30008fb0:	e59d3008 	ldr	r3, [sp, #8]
-30008fb4:	e58d3004 	str	r3, [sp, #4]
+300091b4:	e59d3008 	ldr	r3, [sp, #8]
+300091b8:	e58d3004 	str	r3, [sp, #4]
 		acoral_spin_unlock(&head->lock);
 		if(thread->state&ACORAL_THREAD_STATE_SUSPEND){
-30008fb8:	e59d3010 	ldr	r3, [sp, #16]
-30008fbc:	e5d33004 	ldrb	r3, [r3, #4]
-30008fc0:	e2033002 	and	r3, r3, #2
-30008fc4:	e3530000 	cmp	r3, #0
-30008fc8:	0a000013 	beq	3000901c <period_delay_deal+0x130>
+300091bc:	e59d3010 	ldr	r3, [sp, #16]
+300091c0:	e5d33004 	ldrb	r3, [r3, #4]
+300091c4:	e2033002 	and	r3, r3, #2
+300091c8:	e3530000 	cmp	r3, #0
+300091cc:	0a000013 	beq	30009220 <period_delay_deal+0x130>
 			thread->stack=(acoral_u32 *)((acoral_8 *)thread->stack_buttom+thread->stack_size-4);
-30008fcc:	e59d3010 	ldr	r3, [sp, #16]
-30008fd0:	e5932038 	ldr	r2, [r3, #56]	; 0x38
-30008fd4:	e59d3010 	ldr	r3, [sp, #16]
-30008fd8:	e593303c 	ldr	r3, [r3, #60]	; 0x3c
-30008fdc:	e2433004 	sub	r3, r3, #4
-30008fe0:	e0822003 	add	r2, r2, r3
-30008fe4:	e59d3010 	ldr	r3, [sp, #16]
-30008fe8:	e5832034 	str	r2, [r3, #52]	; 0x34
+300091d0:	e59d3010 	ldr	r3, [sp, #16]
+300091d4:	e5932038 	ldr	r2, [r3, #56]	; 0x38
+300091d8:	e59d3010 	ldr	r3, [sp, #16]
+300091dc:	e593303c 	ldr	r3, [r3, #60]	; 0x3c
+300091e0:	e2433004 	sub	r3, r3, #4
+300091e4:	e0822003 	add	r2, r2, r3
+300091e8:	e59d3010 	ldr	r3, [sp, #16]
+300091ec:	e5832034 	str	r2, [r3, #52]	; 0x34
 			HAL_STACK_INIT(&thread->stack,private_data->route,period_thread_exit,private_data->args);
-30008fec:	e59d3010 	ldr	r3, [sp, #16]
-30008ff0:	e2831034 	add	r1, r3, #52	; 0x34
-30008ff4:	e59d3014 	ldr	r3, [sp, #20]
-30008ff8:	e5932004 	ldr	r2, [r3, #4]
-30008ffc:	e59d3014 	ldr	r3, [sp, #20]
-30009000:	e5933008 	ldr	r3, [r3, #8]
-30009004:	e1a00001 	mov	r0, r1
-30009008:	e1a01002 	mov	r1, r2
-3000900c:	e59f2054 	ldr	r2, [pc, #84]	; 30009068 <period_delay_deal+0x17c>
-30009010:	ebffdcaa 	bl	300002c0 <hal_stack_init>
+300091f0:	e59d3010 	ldr	r3, [sp, #16]
+300091f4:	e2831034 	add	r1, r3, #52	; 0x34
+300091f8:	e59d3014 	ldr	r3, [sp, #20]
+300091fc:	e5932004 	ldr	r2, [r3, #4]
+30009200:	e59d3014 	ldr	r3, [sp, #20]
+30009204:	e5933008 	ldr	r3, [r3, #8]
+30009208:	e1a00001 	mov	r0, r1
+3000920c:	e1a01002 	mov	r1, r2
+30009210:	e59f2054 	ldr	r2, [pc, #84]	; 3000926c <period_delay_deal+0x17c>
+30009214:	ebffdc29 	bl	300002c0 <hal_stack_init>
 			acoral_rdy_thread(thread);
-30009014:	e59d0010 	ldr	r0, [sp, #16]
-30009018:	ebffe6ce 	bl	30002b58 <acoral_rdy_thread>
+30009218:	e59d0010 	ldr	r0, [sp, #16]
+3000921c:	ebffe64d 	bl	30002b58 <acoral_rdy_thread>
 		}
 		period_thread_delay(thread,private_data->time);
-3000901c:	e59d3014 	ldr	r3, [sp, #20]
-30009020:	e5933000 	ldr	r3, [r3]
-30009024:	e59d0010 	ldr	r0, [sp, #16]
-30009028:	e1a01003 	mov	r1, r3
-3000902c:	ebffff96 	bl	30008e8c <period_thread_delay>
+30009220:	e59d3014 	ldr	r3, [sp, #20]
+30009224:	e5933000 	ldr	r3, [r3]
+30009228:	e59d0010 	ldr	r0, [sp, #16]
+3000922c:	e1a01003 	mov	r1, r3
+30009230:	ebffff96 	bl	30009090 <period_thread_delay>
 	if(acoral_list_empty(head))
 	    	return;
 	thread=list_entry(head->next,acoral_thread_t,waiting);
 	ACORAL_ASSERT(thread,"in period thread deal");
 	thread->delay--;
 	for(tmp=head->next;tmp!=head;){
-30009030:	e59d2004 	ldr	r2, [sp, #4]
-30009034:	e59d300c 	ldr	r3, [sp, #12]
-30009038:	e1520003 	cmp	r2, r3
-3000903c:	1affffc5 	bne	30008f58 <period_delay_deal+0x6c>
-30009040:	ea000002 	b	30009050 <period_delay_deal+0x164>
+30009234:	e59d2004 	ldr	r2, [sp, #4]
+30009238:	e59d300c 	ldr	r3, [sp, #12]
+3000923c:	e1520003 	cmp	r2, r3
+30009240:	1affffc5 	bne	3000915c <period_delay_deal+0x6c>
+30009244:	ea000002 	b	30009254 <period_delay_deal+0x164>
 	acoral_list_t *tmp,*tmp1,*head;
 	acoral_thread_t * thread;
 	period_policy_data_t * private_data;
 	head=&period_delay_queue.head;
 	if(acoral_list_empty(head))
 	    	return;
-30009044:	e1a00000 	nop			; (mov r0, r0)
-30009048:	ea000000 	b	30009050 <period_delay_deal+0x164>
+30009248:	e1a00000 	nop			; (mov r0, r0)
+3000924c:	ea000000 	b	30009254 <period_delay_deal+0x164>
 	thread->delay--;
 	for(tmp=head->next;tmp!=head;){
 		thread=list_entry(tmp,acoral_thread_t,waiting);
 		ACORAL_ASSERT(thread,"in period thread deal ");
 		if(thread->delay>0)
 		    break;
-3000904c:	e1a00000 	nop			; (mov r0, r0)
+30009250:	e1a00000 	nop			; (mov r0, r0)
 			HAL_STACK_INIT(&thread->stack,private_data->route,period_thread_exit,private_data->args);
 			acoral_rdy_thread(thread);
 		}
 		period_thread_delay(thread,private_data->time);
 	}
 }
-30009050:	e28dd01c 	add	sp, sp, #28
-30009054:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009058:	e12fff1e 	bx	lr
-3000905c:	3000fac0 	.word	0x3000fac0
-30009060:	3000e6a4 	.word	0x3000e6a4
-30009064:	3000e6bc 	.word	0x3000e6bc
-30009068:	3000906c 	.word	0x3000906c
+30009254:	e28dd01c 	add	sp, sp, #28
+30009258:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000925c:	e12fff1e 	bx	lr
+30009260:	3000fccc 	.word	0x3000fccc
+30009264:	3000e8a8 	.word	0x3000e8a8
+30009268:	3000e8c0 	.word	0x3000e8c0
+3000926c:	30009270 	.word	0x30009270
 
-3000906c <period_thread_exit>:
+30009270 <period_thread_exit>:
 
 void period_thread_exit(){
-3000906c:	e92d4008 	push	{r3, lr}
+30009270:	e92d4008 	push	{r3, lr}
 	acoral_suspend_self();
-30009070:	ebffe5cf 	bl	300027b4 <acoral_suspend_self>
+30009274:	ebffe54e 	bl	300027b4 <acoral_suspend_self>
 }
-30009074:	e8bd4008 	pop	{r3, lr}
-30009078:	e12fff1e 	bx	lr
+30009278:	e8bd4008 	pop	{r3, lr}
+3000927c:	e12fff1e 	bx	lr
 
-3000907c <period_policy_init>:
+30009280 <period_policy_init>:
 
 acoral_sched_policy_t period_policy;
 void period_policy_init(){
-3000907c:	e92d4008 	push	{r3, lr}
+30009280:	e92d4008 	push	{r3, lr}
 	acoral_list_init(&period_delay_queue.head);
-30009080:	e59f305c 	ldr	r3, [pc, #92]	; 300090e4 <period_policy_init+0x68>
-30009084:	e59f2058 	ldr	r2, [pc, #88]	; 300090e4 <period_policy_init+0x68>
-30009088:	e5832000 	str	r2, [r3]
-3000908c:	e59f3050 	ldr	r3, [pc, #80]	; 300090e4 <period_policy_init+0x68>
-30009090:	e59f204c 	ldr	r2, [pc, #76]	; 300090e4 <period_policy_init+0x68>
-30009094:	e5832004 	str	r2, [r3, #4]
+30009284:	e59f305c 	ldr	r3, [pc, #92]	; 300092e8 <period_policy_init+0x68>
+30009288:	e59f2058 	ldr	r2, [pc, #88]	; 300092e8 <period_policy_init+0x68>
+3000928c:	e5832000 	str	r2, [r3]
+30009290:	e59f3050 	ldr	r3, [pc, #80]	; 300092e8 <period_policy_init+0x68>
+30009294:	e59f204c 	ldr	r2, [pc, #76]	; 300092e8 <period_policy_init+0x68>
+30009298:	e5832004 	str	r2, [r3, #4]
 	acoral_spin_init(&period_delay_queue.head.lock);
 	period_policy.type=ACORAL_SCHED_POLICY_PERIOD;
-30009098:	e59f3048 	ldr	r3, [pc, #72]	; 300090e8 <period_policy_init+0x6c>
-3000909c:	e3a02016 	mov	r2, #22
-300090a0:	e5c32008 	strb	r2, [r3, #8]
+3000929c:	e59f3048 	ldr	r3, [pc, #72]	; 300092ec <period_policy_init+0x6c>
+300092a0:	e3a02016 	mov	r2, #22
+300092a4:	e5c32008 	strb	r2, [r3, #8]
 	period_policy.policy_thread_init=period_policy_thread_init;
-300090a4:	e59f303c 	ldr	r3, [pc, #60]	; 300090e8 <period_policy_init+0x6c>
-300090a8:	e59f203c 	ldr	r2, [pc, #60]	; 300090ec <period_policy_init+0x70>
-300090ac:	e583200c 	str	r2, [r3, #12]
+300092a8:	e59f303c 	ldr	r3, [pc, #60]	; 300092ec <period_policy_init+0x6c>
+300092ac:	e59f203c 	ldr	r2, [pc, #60]	; 300092f0 <period_policy_init+0x70>
+300092b0:	e583200c 	str	r2, [r3, #12]
 	period_policy.policy_thread_release=period_policy_thread_release;
-300090b0:	e59f3030 	ldr	r3, [pc, #48]	; 300090e8 <period_policy_init+0x6c>
-300090b4:	e59f2034 	ldr	r2, [pc, #52]	; 300090f0 <period_policy_init+0x74>
-300090b8:	e5832010 	str	r2, [r3, #16]
+300092b4:	e59f3030 	ldr	r3, [pc, #48]	; 300092ec <period_policy_init+0x6c>
+300092b8:	e59f2034 	ldr	r2, [pc, #52]	; 300092f4 <period_policy_init+0x74>
+300092bc:	e5832010 	str	r2, [r3, #16]
 	period_policy.delay_deal=period_delay_deal;
-300090bc:	e59f3024 	ldr	r3, [pc, #36]	; 300090e8 <period_policy_init+0x6c>
-300090c0:	e59f202c 	ldr	r2, [pc, #44]	; 300090f4 <period_policy_init+0x78>
-300090c4:	e5832014 	str	r2, [r3, #20]
+300092c0:	e59f3024 	ldr	r3, [pc, #36]	; 300092ec <period_policy_init+0x6c>
+300092c4:	e59f202c 	ldr	r2, [pc, #44]	; 300092f8 <period_policy_init+0x78>
+300092c8:	e5832014 	str	r2, [r3, #20]
 	period_policy.name="period";
-300090c8:	e59f3018 	ldr	r3, [pc, #24]	; 300090e8 <period_policy_init+0x6c>
-300090cc:	e59f2024 	ldr	r2, [pc, #36]	; 300090f8 <period_policy_init+0x7c>
-300090d0:	e5832018 	str	r2, [r3, #24]
+300092cc:	e59f3018 	ldr	r3, [pc, #24]	; 300092ec <period_policy_init+0x6c>
+300092d0:	e59f2024 	ldr	r2, [pc, #36]	; 300092fc <period_policy_init+0x7c>
+300092d4:	e5832018 	str	r2, [r3, #24]
 	acoral_register_sched_policy(&period_policy);
-300090d4:	e59f000c 	ldr	r0, [pc, #12]	; 300090e8 <period_policy_init+0x6c>
-300090d8:	ebffe35a 	bl	30001e48 <acoral_register_sched_policy>
+300092d8:	e59f000c 	ldr	r0, [pc, #12]	; 300092ec <period_policy_init+0x6c>
+300092dc:	ebffe2d9 	bl	30001e48 <acoral_register_sched_policy>
 }
-300090dc:	e8bd4008 	pop	{r3, lr}
-300090e0:	e12fff1e 	bx	lr
-300090e4:	3000fac0 	.word	0x3000fac0
-300090e8:	30010400 	.word	0x30010400
-300090ec:	30008b74 	.word	0x30008b74
-300090f0:	30008d58 	.word	0x30008d58
-300090f4:	30008eec 	.word	0x30008eec
-300090f8:	3000e6d4 	.word	0x3000e6d4
+300092e0:	e8bd4008 	pop	{r3, lr}
+300092e4:	e12fff1e 	bx	lr
+300092e8:	3000fccc 	.word	0x3000fccc
+300092ec:	3001060c 	.word	0x3001060c
+300092f0:	30008d78 	.word	0x30008d78
+300092f4:	30008f5c 	.word	0x30008f5c
+300092f8:	300090f0 	.word	0x300090f0
+300092fc:	3000e8d8 	.word	0x3000e8d8
 
-300090fc <slice_policy_thread_init>:
+30009300 <slice_policy_thread_init>:
 #include<policy.h>
 #include<timer.h>
 #include<mem.h>
 #include<slice_thrd.h>
 acoral_sched_policy_t slice_policy;
 acoral_id slice_policy_thread_init(acoral_thread_t *thread,void (*route)(void *args),void *args,void *data){
-300090fc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009100:	e24dd024 	sub	sp, sp, #36	; 0x24
-30009104:	e58d000c 	str	r0, [sp, #12]
-30009108:	e58d1008 	str	r1, [sp, #8]
-3000910c:	e58d2004 	str	r2, [sp, #4]
-30009110:	e58d3000 	str	r3, [sp]
+30009300:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009304:	e24dd024 	sub	sp, sp, #36	; 0x24
+30009308:	e58d000c 	str	r0, [sp, #12]
+3000930c:	e58d1008 	str	r1, [sp, #8]
+30009310:	e58d2004 	str	r2, [sp, #4]
+30009314:	e58d3000 	str	r3, [sp]
 	acoral_sr cpu_sr;
 	acoral_u32 prio;
 	acoral_slice_policy_data_t *policy_data;
 	slice_policy_data_t *private_data;
 	if(thread->policy==ACORAL_SCHED_POLICY_SLICE){
-30009114:	e59d300c 	ldr	r3, [sp, #12]
-30009118:	e5d3300c 	ldrb	r3, [r3, #12]
-3000911c:	e3530018 	cmp	r3, #24
-30009120:	1a000046 	bne	30009240 <slice_policy_thread_init+0x144>
+30009318:	e59d300c 	ldr	r3, [sp, #12]
+3000931c:	e5d3300c 	ldrb	r3, [r3, #12]
+30009320:	e3530018 	cmp	r3, #24
+30009324:	1a000046 	bne	30009444 <slice_policy_thread_init+0x144>
 		policy_data=(acoral_slice_policy_data_t *)data;
-30009124:	e59d3000 	ldr	r3, [sp]
-30009128:	e58d3018 	str	r3, [sp, #24]
+30009328:	e59d3000 	ldr	r3, [sp]
+3000932c:	e58d3018 	str	r3, [sp, #24]
 		thread->cpu=policy_data->cpu;
-3000912c:	e59d3018 	ldr	r3, [sp, #24]
-30009130:	e5d32000 	ldrb	r2, [r3]
-30009134:	e59d300c 	ldr	r3, [sp, #12]
-30009138:	e5c32006 	strb	r2, [r3, #6]
+30009330:	e59d3018 	ldr	r3, [sp, #24]
+30009334:	e5d32000 	ldrb	r2, [r3]
+30009338:	e59d300c 	ldr	r3, [sp, #12]
+3000933c:	e5c32006 	strb	r2, [r3, #6]
 		prio=policy_data->prio;
-3000913c:	e59d3018 	ldr	r3, [sp, #24]
-30009140:	e5d33001 	ldrb	r3, [r3, #1]
-30009144:	e58d3014 	str	r3, [sp, #20]
+30009340:	e59d3018 	ldr	r3, [sp, #24]
+30009344:	e5d33001 	ldrb	r3, [r3, #1]
+30009348:	e58d3014 	str	r3, [sp, #20]
 		if(policy_data->prio_type==ACORAL_BASE_PRIO){
-30009148:	e59d3018 	ldr	r3, [sp, #24]
-3000914c:	e5d33002 	ldrb	r3, [r3, #2]
-30009150:	e3530002 	cmp	r3, #2
-30009154:	1a000007 	bne	30009178 <slice_policy_thread_init+0x7c>
+3000934c:	e59d3018 	ldr	r3, [sp, #24]
+30009350:	e5d33002 	ldrb	r3, [r3, #2]
+30009354:	e3530002 	cmp	r3, #2
+30009358:	1a000007 	bne	3000937c <slice_policy_thread_init+0x7c>
 			prio+=ACORAL_BASE_PRIO_MIN;
-30009158:	e59d3014 	ldr	r3, [sp, #20]
-3000915c:	e2833002 	add	r3, r3, #2
-30009160:	e58d3014 	str	r3, [sp, #20]
+3000935c:	e59d3014 	ldr	r3, [sp, #20]
+30009360:	e2833002 	add	r3, r3, #2
+30009364:	e58d3014 	str	r3, [sp, #20]
 			if(prio>=ACORAL_BASE_PRIO_MAX)
-30009164:	e59d3014 	ldr	r3, [sp, #20]
-30009168:	e3530026 	cmp	r3, #38	; 0x26
-3000916c:	9a000001 	bls	30009178 <slice_policy_thread_init+0x7c>
+30009368:	e59d3014 	ldr	r3, [sp, #20]
+3000936c:	e3530026 	cmp	r3, #38	; 0x26
+30009370:	9a000001 	bls	3000937c <slice_policy_thread_init+0x7c>
 				prio=ACORAL_BASE_PRIO_MAX-1;
-30009170:	e3a03026 	mov	r3, #38	; 0x26
-30009174:	e58d3014 	str	r3, [sp, #20]
+30009374:	e3a03026 	mov	r3, #38	; 0x26
+30009378:	e58d3014 	str	r3, [sp, #20]
 		}
 		thread->prio=prio;
-30009178:	e59d3014 	ldr	r3, [sp, #20]
-3000917c:	e20320ff 	and	r2, r3, #255	; 0xff
-30009180:	e59d300c 	ldr	r3, [sp, #12]
-30009184:	e5c32005 	strb	r2, [r3, #5]
+3000937c:	e59d3014 	ldr	r3, [sp, #20]
+30009380:	e20320ff 	and	r2, r3, #255	; 0xff
+30009384:	e59d300c 	ldr	r3, [sp, #12]
+30009388:	e5c32005 	strb	r2, [r3, #5]
 		private_data=(slice_policy_data_t *)acoral_malloc2(sizeof(slice_policy_data_t));
-30009188:	e3a00004 	mov	r0, #4
-3000918c:	ebfff694 	bl	30006be4 <v_malloc>
-30009190:	e1a03000 	mov	r3, r0
-30009194:	e58d301c 	str	r3, [sp, #28]
+3000938c:	e3a00004 	mov	r0, #4
+30009390:	ebfff694 	bl	30006de8 <v_malloc>
+30009394:	e1a03000 	mov	r3, r0
+30009398:	e58d301c 	str	r3, [sp, #28]
 		if(private_data==NULL){
-30009198:	e59d301c 	ldr	r3, [sp, #28]
-3000919c:	e3530000 	cmp	r3, #0
-300091a0:	1a00000e 	bne	300091e0 <slice_policy_thread_init+0xe4>
+3000939c:	e59d301c 	ldr	r3, [sp, #28]
+300093a0:	e3530000 	cmp	r3, #0
+300093a4:	1a00000e 	bne	300093e4 <slice_policy_thread_init+0xe4>
 			acoral_printerr("No level2 mem space for private_data:%s\n",thread->name);
-300091a4:	e59d300c 	ldr	r3, [sp, #12]
-300091a8:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-300091ac:	e59f0108 	ldr	r0, [pc, #264]	; 300092bc <slice_policy_thread_init+0x1c0>
-300091b0:	e1a01003 	mov	r1, r3
-300091b4:	eb000813 	bl	3000b208 <acoral_print>
+300093a8:	e59d300c 	ldr	r3, [sp, #12]
+300093ac:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+300093b0:	e59f0108 	ldr	r0, [pc, #264]	; 300094c0 <slice_policy_thread_init+0x1c0>
+300093b4:	e1a01003 	mov	r1, r3
+300093b8:	eb000813 	bl	3000b40c <acoral_print>
 			HAL_ENTER_CRITICAL();
-300091b8:	ebffe14d 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-300091bc:	e1a03000 	mov	r3, r0
-300091c0:	e58d3010 	str	r3, [sp, #16]
+300093bc:	ebffe0cc 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300093c0:	e1a03000 	mov	r3, r0
+300093c4:	e58d3010 	str	r3, [sp, #16]
 			acoral_release_res((acoral_res_t *)thread);
-300091c4:	e59d300c 	ldr	r3, [sp, #12]
-300091c8:	e1a00003 	mov	r0, r3
-300091cc:	ebffe90d 	bl	30003608 <acoral_release_res>
+300093c8:	e59d300c 	ldr	r3, [sp, #12]
+300093cc:	e1a00003 	mov	r0, r3
+300093d0:	ebffe88c 	bl	30003608 <acoral_release_res>
 			HAL_EXIT_CRITICAL();
-300091d0:	e59d0010 	ldr	r0, [sp, #16]
-300091d4:	ebffe144 	bl	300016ec <HAL_INTR_RESTORE>
+300093d4:	e59d0010 	ldr	r0, [sp, #16]
+300093d8:	ebffe0c3 	bl	300016ec <HAL_INTR_RESTORE>
 			return -1;
-300091d8:	e3e03000 	mvn	r3, #0
-300091dc:	ea000032 	b	300092ac <slice_policy_thread_init+0x1b0>
+300093dc:	e3e03000 	mvn	r3, #0
+300093e0:	ea000032 	b	300094b0 <slice_policy_thread_init+0x1b0>
 		}
 		private_data->slice_ld=TIME_TO_TICKS(policy_data->slice);
-300091e0:	e59d3018 	ldr	r3, [sp, #24]
-300091e4:	e5932004 	ldr	r2, [r3, #4]
-300091e8:	e1a03002 	mov	r3, r2
-300091ec:	e1a03103 	lsl	r3, r3, #2
-300091f0:	e0833002 	add	r3, r3, r2
-300091f4:	e1a02103 	lsl	r2, r3, #2
-300091f8:	e0833002 	add	r3, r3, r2
-300091fc:	e1a03103 	lsl	r3, r3, #2
-30009200:	e1a02003 	mov	r2, r3
-30009204:	e59f30b4 	ldr	r3, [pc, #180]	; 300092c0 <slice_policy_thread_init+0x1c4>
-30009208:	e0831392 	umull	r1, r3, r2, r3
-3000920c:	e1a02323 	lsr	r2, r3, #6
-30009210:	e59d301c 	ldr	r3, [sp, #28]
-30009214:	e5832000 	str	r2, [r3]
+300093e4:	e59d3018 	ldr	r3, [sp, #24]
+300093e8:	e5932004 	ldr	r2, [r3, #4]
+300093ec:	e1a03002 	mov	r3, r2
+300093f0:	e1a03103 	lsl	r3, r3, #2
+300093f4:	e0833002 	add	r3, r3, r2
+300093f8:	e1a02103 	lsl	r2, r3, #2
+300093fc:	e0833002 	add	r3, r3, r2
+30009400:	e1a03103 	lsl	r3, r3, #2
+30009404:	e1a02003 	mov	r2, r3
+30009408:	e59f30b4 	ldr	r3, [pc, #180]	; 300094c4 <slice_policy_thread_init+0x1c4>
+3000940c:	e0831392 	umull	r1, r3, r2, r3
+30009410:	e1a02323 	lsr	r2, r3, #6
+30009414:	e59d301c 	ldr	r3, [sp, #28]
+30009418:	e5832000 	str	r2, [r3]
 		thread->slice=private_data->slice_ld;
-30009218:	e59d301c 	ldr	r3, [sp, #28]
-3000921c:	e5932000 	ldr	r2, [r3]
-30009220:	e59d300c 	ldr	r3, [sp, #12]
-30009224:	e5832044 	str	r2, [r3, #68]	; 0x44
+3000941c:	e59d301c 	ldr	r3, [sp, #28]
+30009420:	e5932000 	ldr	r2, [r3]
+30009424:	e59d300c 	ldr	r3, [sp, #12]
+30009428:	e5832044 	str	r2, [r3, #68]	; 0x44
 		thread->private_data=private_data;
-30009228:	e59d300c 	ldr	r3, [sp, #12]
-3000922c:	e59d201c 	ldr	r2, [sp, #28]
-30009230:	e5832050 	str	r2, [r3, #80]	; 0x50
+3000942c:	e59d300c 	ldr	r3, [sp, #12]
+30009430:	e59d201c 	ldr	r2, [sp, #28]
+30009434:	e5832050 	str	r2, [r3, #80]	; 0x50
 		thread->cpu_mask=-1;
-30009234:	e59d300c 	ldr	r3, [sp, #12]
-30009238:	e3e02000 	mvn	r2, #0
-3000923c:	e5832008 	str	r2, [r3, #8]
+30009438:	e59d300c 	ldr	r3, [sp, #12]
+3000943c:	e3e02000 	mvn	r2, #0
+30009440:	e5832008 	str	r2, [r3, #8]
 	}
 	if(acoral_thread_init(thread,route,acoral_thread_exit,args)!=0){
-30009240:	e59d000c 	ldr	r0, [sp, #12]
-30009244:	e59d1008 	ldr	r1, [sp, #8]
-30009248:	e59f2074 	ldr	r2, [pc, #116]	; 300092c4 <slice_policy_thread_init+0x1c8>
-3000924c:	e59d3004 	ldr	r3, [sp, #4]
-30009250:	ebffe682 	bl	30002c60 <acoral_thread_init>
-30009254:	e1a03000 	mov	r3, r0
-30009258:	e3530000 	cmp	r3, #0
-3000925c:	0a00000e 	beq	3000929c <slice_policy_thread_init+0x1a0>
+30009444:	e59d000c 	ldr	r0, [sp, #12]
+30009448:	e59d1008 	ldr	r1, [sp, #8]
+3000944c:	e59f2074 	ldr	r2, [pc, #116]	; 300094c8 <slice_policy_thread_init+0x1c8>
+30009450:	e59d3004 	ldr	r3, [sp, #4]
+30009454:	ebffe601 	bl	30002c60 <acoral_thread_init>
+30009458:	e1a03000 	mov	r3, r0
+3000945c:	e3530000 	cmp	r3, #0
+30009460:	0a00000e 	beq	300094a0 <slice_policy_thread_init+0x1a0>
 		acoral_printerr("No thread stack:%s\n",thread->name);
-30009260:	e59d300c 	ldr	r3, [sp, #12]
-30009264:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-30009268:	e59f0058 	ldr	r0, [pc, #88]	; 300092c8 <slice_policy_thread_init+0x1cc>
-3000926c:	e1a01003 	mov	r1, r3
-30009270:	eb0007e4 	bl	3000b208 <acoral_print>
+30009464:	e59d300c 	ldr	r3, [sp, #12]
+30009468:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+3000946c:	e59f0058 	ldr	r0, [pc, #88]	; 300094cc <slice_policy_thread_init+0x1cc>
+30009470:	e1a01003 	mov	r1, r3
+30009474:	eb0007e4 	bl	3000b40c <acoral_print>
 		HAL_ENTER_CRITICAL();
-30009274:	ebffe11e 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30009278:	e1a03000 	mov	r3, r0
-3000927c:	e58d3010 	str	r3, [sp, #16]
+30009478:	ebffe09d 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+3000947c:	e1a03000 	mov	r3, r0
+30009480:	e58d3010 	str	r3, [sp, #16]
 		acoral_release_res((acoral_res_t *)thread);
-30009280:	e59d300c 	ldr	r3, [sp, #12]
-30009284:	e1a00003 	mov	r0, r3
-30009288:	ebffe8de 	bl	30003608 <acoral_release_res>
+30009484:	e59d300c 	ldr	r3, [sp, #12]
+30009488:	e1a00003 	mov	r0, r3
+3000948c:	ebffe85d 	bl	30003608 <acoral_release_res>
 		HAL_EXIT_CRITICAL();
-3000928c:	e59d0010 	ldr	r0, [sp, #16]
-30009290:	ebffe115 	bl	300016ec <HAL_INTR_RESTORE>
+30009490:	e59d0010 	ldr	r0, [sp, #16]
+30009494:	ebffe094 	bl	300016ec <HAL_INTR_RESTORE>
 		return -1;
-30009294:	e3e03000 	mvn	r3, #0
-30009298:	ea000003 	b	300092ac <slice_policy_thread_init+0x1b0>
+30009498:	e3e03000 	mvn	r3, #0
+3000949c:	ea000003 	b	300094b0 <slice_policy_thread_init+0x1b0>
 	}
         /*将线程就绪，并重新调度*/
 	acoral_resume_thread(thread);
-3000929c:	e59d000c 	ldr	r0, [sp, #12]
-300092a0:	ebffe565 	bl	3000283c <acoral_resume_thread>
+300094a0:	e59d000c 	ldr	r0, [sp, #12]
+300094a4:	ebffe4e4 	bl	3000283c <acoral_resume_thread>
 	return thread->res.id;
-300092a4:	e59d300c 	ldr	r3, [sp, #12]
-300092a8:	e5933000 	ldr	r3, [r3]
+300094a8:	e59d300c 	ldr	r3, [sp, #12]
+300094ac:	e5933000 	ldr	r3, [r3]
 }
-300092ac:	e1a00003 	mov	r0, r3
-300092b0:	e28dd024 	add	sp, sp, #36	; 0x24
-300092b4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300092b8:	e12fff1e 	bx	lr
-300092bc:	3000e6dc 	.word	0x3000e6dc
-300092c0:	10624dd3 	.word	0x10624dd3
-300092c4:	30002a50 	.word	0x30002a50
-300092c8:	3000e708 	.word	0x3000e708
+300094b0:	e1a00003 	mov	r0, r3
+300094b4:	e28dd024 	add	sp, sp, #36	; 0x24
+300094b8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300094bc:	e12fff1e 	bx	lr
+300094c0:	3000e8e0 	.word	0x3000e8e0
+300094c4:	10624dd3 	.word	0x10624dd3
+300094c8:	30002a50 	.word	0x30002a50
+300094cc:	3000e90c 	.word	0x3000e90c
 
-300092cc <slice_policy_thread_release>:
+300094d0 <slice_policy_thread_release>:
 
 void slice_policy_thread_release(acoral_thread_t *thread){
-300092cc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300092d0:	e24dd00c 	sub	sp, sp, #12
-300092d4:	e58d0004 	str	r0, [sp, #4]
+300094d0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300094d4:	e24dd00c 	sub	sp, sp, #12
+300094d8:	e58d0004 	str	r0, [sp, #4]
 	acoral_free2(thread->private_data);	
-300092d8:	e59d3004 	ldr	r3, [sp, #4]
-300092dc:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-300092e0:	e1a00003 	mov	r0, r3
-300092e4:	ebfff653 	bl	30006c38 <v_free>
+300094dc:	e59d3004 	ldr	r3, [sp, #4]
+300094e0:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+300094e4:	e1a00003 	mov	r0, r3
+300094e8:	ebfff653 	bl	30006e3c <v_free>
 }
-300092e8:	e28dd00c 	add	sp, sp, #12
-300092ec:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300092f0:	e12fff1e 	bx	lr
+300094ec:	e28dd00c 	add	sp, sp, #12
+300094f0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+300094f4:	e12fff1e 	bx	lr
 
-300092f4 <slice_delay_deal>:
+300094f8 <slice_delay_deal>:
 
 void slice_delay_deal(){
-300092f4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300092f8:	e24dd00c 	sub	sp, sp, #12
+300094f8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300094fc:	e24dd00c 	sub	sp, sp, #12
 #ifndef CFG_TICKS_PRIVATE
 	acoral_u32 i;
 	for(i=0;i<HAL_MAX_CPU;i++){
 		cur=acoral_get_running_thread(i);
 #else
 		cur=acoral_cur_thread;
-300092fc:	e59f3068 	ldr	r3, [pc, #104]	; 3000936c <slice_delay_deal+0x78>
-30009300:	e5933000 	ldr	r3, [r3]
-30009304:	e58d3000 	str	r3, [sp]
+30009500:	e59f3068 	ldr	r3, [pc, #104]	; 30009570 <slice_delay_deal+0x78>
+30009504:	e5933000 	ldr	r3, [r3]
+30009508:	e58d3000 	str	r3, [sp]
 #endif
 		if(cur->policy==ACORAL_SCHED_POLICY_SLICE){
-30009308:	e59d3000 	ldr	r3, [sp]
-3000930c:	e5d3300c 	ldrb	r3, [r3, #12]
-30009310:	e3530018 	cmp	r3, #24
-30009314:	1a000011 	bne	30009360 <slice_delay_deal+0x6c>
+3000950c:	e59d3000 	ldr	r3, [sp]
+30009510:	e5d3300c 	ldrb	r3, [r3, #12]
+30009514:	e3530018 	cmp	r3, #24
+30009518:	1a000011 	bne	30009564 <slice_delay_deal+0x6c>
 			cur->slice--;
-30009318:	e59d3000 	ldr	r3, [sp]
-3000931c:	e5933044 	ldr	r3, [r3, #68]	; 0x44
-30009320:	e2432001 	sub	r2, r3, #1
-30009324:	e59d3000 	ldr	r3, [sp]
-30009328:	e5832044 	str	r2, [r3, #68]	; 0x44
+3000951c:	e59d3000 	ldr	r3, [sp]
+30009520:	e5933044 	ldr	r3, [r3, #68]	; 0x44
+30009524:	e2432001 	sub	r2, r3, #1
+30009528:	e59d3000 	ldr	r3, [sp]
+3000952c:	e5832044 	str	r2, [r3, #68]	; 0x44
 			if(cur->slice<=0){
-3000932c:	e59d3000 	ldr	r3, [sp]
-30009330:	e5933044 	ldr	r3, [r3, #68]	; 0x44
-30009334:	e3530000 	cmp	r3, #0
-30009338:	1a000008 	bne	30009360 <slice_delay_deal+0x6c>
+30009530:	e59d3000 	ldr	r3, [sp]
+30009534:	e5933044 	ldr	r3, [r3, #68]	; 0x44
+30009538:	e3530000 	cmp	r3, #0
+3000953c:	1a000008 	bne	30009564 <slice_delay_deal+0x6c>
 				data=(slice_policy_data_t *)cur->private_data;
-3000933c:	e59d3000 	ldr	r3, [sp]
-30009340:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30009344:	e58d3004 	str	r3, [sp, #4]
+30009540:	e59d3000 	ldr	r3, [sp]
+30009544:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30009548:	e58d3004 	str	r3, [sp, #4]
 				cur->slice=data->slice_ld;
-30009348:	e59d3004 	ldr	r3, [sp, #4]
-3000934c:	e5932000 	ldr	r2, [r3]
-30009350:	e59d3000 	ldr	r3, [sp]
-30009354:	e5832044 	str	r2, [r3, #68]	; 0x44
+3000954c:	e59d3004 	ldr	r3, [sp, #4]
+30009550:	e5932000 	ldr	r2, [r3]
+30009554:	e59d3000 	ldr	r3, [sp]
+30009558:	e5832044 	str	r2, [r3, #68]	; 0x44
 				acoral_thread_move2_tail(cur);
-30009358:	e59d0000 	ldr	r0, [sp]
-3000935c:	ebffe61b 	bl	30002bd0 <acoral_thread_move2_tail>
+3000955c:	e59d0000 	ldr	r0, [sp]
+30009560:	ebffe59a 	bl	30002bd0 <acoral_thread_move2_tail>
 			}
 		}
 #ifndef CFG_TICKS_PRIVATE
 	}
 #endif
 }
-30009360:	e28dd00c 	add	sp, sp, #12
-30009364:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009368:	e12fff1e 	bx	lr
-3000936c:	300103f8 	.word	0x300103f8
+30009564:	e28dd00c 	add	sp, sp, #12
+30009568:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000956c:	e12fff1e 	bx	lr
+30009570:	30010604 	.word	0x30010604
 
-30009370 <slice_policy_init>:
+30009574 <slice_policy_init>:
 
 void slice_policy_init(){
-30009370:	e92d4008 	push	{r3, lr}
+30009574:	e92d4008 	push	{r3, lr}
 	slice_policy.type=ACORAL_SCHED_POLICY_SLICE;
-30009374:	e59f3044 	ldr	r3, [pc, #68]	; 300093c0 <slice_policy_init+0x50>
-30009378:	e3a02018 	mov	r2, #24
-3000937c:	e5c32008 	strb	r2, [r3, #8]
+30009578:	e59f3044 	ldr	r3, [pc, #68]	; 300095c4 <slice_policy_init+0x50>
+3000957c:	e3a02018 	mov	r2, #24
+30009580:	e5c32008 	strb	r2, [r3, #8]
 	slice_policy.policy_thread_release=slice_policy_thread_release;
-30009380:	e59f3038 	ldr	r3, [pc, #56]	; 300093c0 <slice_policy_init+0x50>
-30009384:	e59f2038 	ldr	r2, [pc, #56]	; 300093c4 <slice_policy_init+0x54>
-30009388:	e5832010 	str	r2, [r3, #16]
+30009584:	e59f3038 	ldr	r3, [pc, #56]	; 300095c4 <slice_policy_init+0x50>
+30009588:	e59f2038 	ldr	r2, [pc, #56]	; 300095c8 <slice_policy_init+0x54>
+3000958c:	e5832010 	str	r2, [r3, #16]
 	slice_policy.policy_thread_init=slice_policy_thread_init;
-3000938c:	e59f302c 	ldr	r3, [pc, #44]	; 300093c0 <slice_policy_init+0x50>
-30009390:	e59f2030 	ldr	r2, [pc, #48]	; 300093c8 <slice_policy_init+0x58>
-30009394:	e583200c 	str	r2, [r3, #12]
+30009590:	e59f302c 	ldr	r3, [pc, #44]	; 300095c4 <slice_policy_init+0x50>
+30009594:	e59f2030 	ldr	r2, [pc, #48]	; 300095cc <slice_policy_init+0x58>
+30009598:	e583200c 	str	r2, [r3, #12]
 	slice_policy.delay_deal=slice_delay_deal;
-30009398:	e59f3020 	ldr	r3, [pc, #32]	; 300093c0 <slice_policy_init+0x50>
-3000939c:	e59f2028 	ldr	r2, [pc, #40]	; 300093cc <slice_policy_init+0x5c>
-300093a0:	e5832014 	str	r2, [r3, #20]
+3000959c:	e59f3020 	ldr	r3, [pc, #32]	; 300095c4 <slice_policy_init+0x50>
+300095a0:	e59f2028 	ldr	r2, [pc, #40]	; 300095d0 <slice_policy_init+0x5c>
+300095a4:	e5832014 	str	r2, [r3, #20]
 	slice_policy.name="slice";
-300093a4:	e59f3014 	ldr	r3, [pc, #20]	; 300093c0 <slice_policy_init+0x50>
-300093a8:	e59f2020 	ldr	r2, [pc, #32]	; 300093d0 <slice_policy_init+0x60>
-300093ac:	e5832018 	str	r2, [r3, #24]
+300095a8:	e59f3014 	ldr	r3, [pc, #20]	; 300095c4 <slice_policy_init+0x50>
+300095ac:	e59f2020 	ldr	r2, [pc, #32]	; 300095d4 <slice_policy_init+0x60>
+300095b0:	e5832018 	str	r2, [r3, #24]
 	acoral_register_sched_policy(&slice_policy);
-300093b0:	e59f0008 	ldr	r0, [pc, #8]	; 300093c0 <slice_policy_init+0x50>
-300093b4:	ebffe2a3 	bl	30001e48 <acoral_register_sched_policy>
+300095b4:	e59f0008 	ldr	r0, [pc, #8]	; 300095c4 <slice_policy_init+0x50>
+300095b8:	ebffe222 	bl	30001e48 <acoral_register_sched_policy>
 }
-300093b8:	e8bd4008 	pop	{r3, lr}
-300093bc:	e12fff1e 	bx	lr
-300093c0:	3000f960 	.word	0x3000f960
-300093c4:	300092cc 	.word	0x300092cc
-300093c8:	300090fc 	.word	0x300090fc
-300093cc:	300092f4 	.word	0x300092f4
-300093d0:	3000e71c 	.word	0x3000e71c
+300095bc:	e8bd4008 	pop	{r3, lr}
+300095c0:	e12fff1e 	bx	lr
+300095c4:	3000fb6c 	.word	0x3000fb6c
+300095c8:	300094d0 	.word	0x300094d0
+300095cc:	30009300 	.word	0x30009300
+300095d0:	300094f8 	.word	0x300094f8
+300095d4:	3000e920 	.word	0x3000e920
 
-300093d4 <posix_delay_deal>:
+300095d8 <posix_delay_deal>:
 #include<policy.h>
 #include<mem.h>
 #include<timer.h>
 #include<posix_thrd.h>
 #define POSIX_SLICE_RATE 5
 void posix_delay_deal(){
-300093d4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300093d8:	e24dd00c 	sub	sp, sp, #12
+300095d8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+300095dc:	e24dd00c 	sub	sp, sp, #12
 #ifndef CFG_TICKS_PRIVATE
 	acoral_u32 i;
 	for(i=0;i<HAL_MAX_CPU;i++){
 		cur=acoral_get_running_thread(i);
 #else
 		cur=acoral_cur_thread;
-300093dc:	e59f3178 	ldr	r3, [pc, #376]	; 3000955c <posix_delay_deal+0x188>
-300093e0:	e5933000 	ldr	r3, [r3]
-300093e4:	e58d3000 	str	r3, [sp]
+300095e0:	e59f3178 	ldr	r3, [pc, #376]	; 30009760 <posix_delay_deal+0x188>
+300095e4:	e5933000 	ldr	r3, [r3]
+300095e8:	e58d3000 	str	r3, [sp]
 #endif
 		if(cur->policy==ACORAL_SCHED_POLICY_POSIX){
-300093e8:	e59d3000 	ldr	r3, [sp]
-300093ec:	e5d3300c 	ldrb	r3, [r3, #12]
-300093f0:	e3530019 	cmp	r3, #25
-300093f4:	1a000055 	bne	30009550 <posix_delay_deal+0x17c>
+300095ec:	e59d3000 	ldr	r3, [sp]
+300095f0:	e5d3300c 	ldrb	r3, [r3, #12]
+300095f4:	e3530019 	cmp	r3, #25
+300095f8:	1a000055 	bne	30009754 <posix_delay_deal+0x17c>
 			cur->slice--;
-300093f8:	e59d3000 	ldr	r3, [sp]
-300093fc:	e5933044 	ldr	r3, [r3, #68]	; 0x44
-30009400:	e2432001 	sub	r2, r3, #1
-30009404:	e59d3000 	ldr	r3, [sp]
-30009408:	e5832044 	str	r2, [r3, #68]	; 0x44
+300095fc:	e59d3000 	ldr	r3, [sp]
+30009600:	e5933044 	ldr	r3, [r3, #68]	; 0x44
+30009604:	e2432001 	sub	r2, r3, #1
+30009608:	e59d3000 	ldr	r3, [sp]
+3000960c:	e5832044 	str	r2, [r3, #68]	; 0x44
 			if(cur->slice==0){
-3000940c:	e59d3000 	ldr	r3, [sp]
-30009410:	e5933044 	ldr	r3, [r3, #68]	; 0x44
-30009414:	e3530000 	cmp	r3, #0
-30009418:	1a00004c 	bne	30009550 <posix_delay_deal+0x17c>
+30009610:	e59d3000 	ldr	r3, [sp]
+30009614:	e5933044 	ldr	r3, [r3, #68]	; 0x44
+30009618:	e3530000 	cmp	r3, #0
+3000961c:	1a00004c 	bne	30009754 <posix_delay_deal+0x17c>
 				data=(posix_policy_data_t *)cur->private_data;
-3000941c:	e59d3000 	ldr	r3, [sp]
-30009420:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30009424:	e58d3004 	str	r3, [sp, #4]
+30009620:	e59d3000 	ldr	r3, [sp]
+30009624:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30009628:	e58d3004 	str	r3, [sp, #4]
 				data->stair++;
-30009428:	e59d3004 	ldr	r3, [sp, #4]
-3000942c:	e5d33008 	ldrb	r3, [r3, #8]
-30009430:	e2833001 	add	r3, r3, #1
-30009434:	e20320ff 	and	r2, r3, #255	; 0xff
-30009438:	e59d3004 	ldr	r3, [sp, #4]
-3000943c:	e5c32008 	strb	r2, [r3, #8]
+3000962c:	e59d3004 	ldr	r3, [sp, #4]
+30009630:	e5d33008 	ldrb	r3, [r3, #8]
+30009634:	e2833001 	add	r3, r3, #1
+30009638:	e20320ff 	and	r2, r3, #255	; 0xff
+3000963c:	e59d3004 	ldr	r3, [sp, #4]
+30009640:	e5c32008 	strb	r2, [r3, #8]
 				if(data->stair>=ACORAL_POSIX_PRIO_MAX){
-30009440:	e59d3004 	ldr	r3, [sp, #4]
-30009444:	e5d33008 	ldrb	r3, [r3, #8]
-30009448:	e3530044 	cmp	r3, #68	; 0x44
-3000944c:	9a000029 	bls	300094f8 <posix_delay_deal+0x124>
+30009644:	e59d3004 	ldr	r3, [sp, #4]
+30009648:	e5d33008 	ldrb	r3, [r3, #8]
+3000964c:	e3530044 	cmp	r3, #68	; 0x44
+30009650:	9a000029 	bls	300096fc <posix_delay_deal+0x124>
 					if(data->time<ACORAL_POSIX_STAIR_NUM){
-30009450:	e59d3004 	ldr	r3, [sp, #4]
-30009454:	e5d33009 	ldrb	r3, [r3, #9]
-30009458:	e353001d 	cmp	r3, #29
-3000945c:	8a00000c 	bhi	30009494 <posix_delay_deal+0xc0>
+30009654:	e59d3004 	ldr	r3, [sp, #4]
+30009658:	e5d33009 	ldrb	r3, [r3, #9]
+3000965c:	e353001d 	cmp	r3, #29
+30009660:	8a00000c 	bhi	30009698 <posix_delay_deal+0xc0>
 						data->stair=ACORAL_POSIX_PRIO_MIN+data->time;
-30009460:	e59d3004 	ldr	r3, [sp, #4]
-30009464:	e5d33009 	ldrb	r3, [r3, #9]
-30009468:	e2833027 	add	r3, r3, #39	; 0x27
-3000946c:	e20320ff 	and	r2, r3, #255	; 0xff
-30009470:	e59d3004 	ldr	r3, [sp, #4]
-30009474:	e5c32008 	strb	r2, [r3, #8]
+30009664:	e59d3004 	ldr	r3, [sp, #4]
+30009668:	e5d33009 	ldrb	r3, [r3, #9]
+3000966c:	e2833027 	add	r3, r3, #39	; 0x27
+30009670:	e20320ff 	and	r2, r3, #255	; 0xff
+30009674:	e59d3004 	ldr	r3, [sp, #4]
+30009678:	e5c32008 	strb	r2, [r3, #8]
 						data->time++;
-30009478:	e59d3004 	ldr	r3, [sp, #4]
-3000947c:	e5d33009 	ldrb	r3, [r3, #9]
-30009480:	e2833001 	add	r3, r3, #1
-30009484:	e20320ff 	and	r2, r3, #255	; 0xff
-30009488:	e59d3004 	ldr	r3, [sp, #4]
-3000948c:	e5c32009 	strb	r2, [r3, #9]
-30009490:	ea000018 	b	300094f8 <posix_delay_deal+0x124>
+3000967c:	e59d3004 	ldr	r3, [sp, #4]
+30009680:	e5d33009 	ldrb	r3, [r3, #9]
+30009684:	e2833001 	add	r3, r3, #1
+30009688:	e20320ff 	and	r2, r3, #255	; 0xff
+3000968c:	e59d3004 	ldr	r3, [sp, #4]
+30009690:	e5c32009 	strb	r2, [r3, #9]
+30009694:	ea000018 	b	300096fc <posix_delay_deal+0x124>
 					}
 					else{
 						cur->policy=ACORAL_SCHED_POLICY_SLICE;
-30009494:	e59d3000 	ldr	r3, [sp]
-30009498:	e3a02018 	mov	r2, #24
-3000949c:	e5c3200c 	strb	r2, [r3, #12]
+30009698:	e59d3000 	ldr	r3, [sp]
+3000969c:	e3a02018 	mov	r2, #24
+300096a0:	e5c3200c 	strb	r2, [r3, #12]
 						((slice_policy_data_t *)data)->slice_ld=TIME_TO_TICKS(data->time<<POSIX_SLICE_RATE);
-300094a0:	e59d1004 	ldr	r1, [sp, #4]
-300094a4:	e59d3004 	ldr	r3, [sp, #4]
-300094a8:	e5d33009 	ldrb	r3, [r3, #9]
-300094ac:	e1a02283 	lsl	r2, r3, #5
-300094b0:	e1a03002 	mov	r3, r2
-300094b4:	e1a03103 	lsl	r3, r3, #2
-300094b8:	e0833002 	add	r3, r3, r2
-300094bc:	e1a02103 	lsl	r2, r3, #2
-300094c0:	e0833002 	add	r3, r3, r2
-300094c4:	e1a03103 	lsl	r3, r3, #2
-300094c8:	e59f2090 	ldr	r2, [pc, #144]	; 30009560 <posix_delay_deal+0x18c>
-300094cc:	e0c20293 	smull	r0, r2, r3, r2
-300094d0:	e1a02342 	asr	r2, r2, #6
-300094d4:	e1a03fc3 	asr	r3, r3, #31
-300094d8:	e0633002 	rsb	r3, r3, r2
-300094dc:	e5813000 	str	r3, [r1]
+300096a4:	e59d1004 	ldr	r1, [sp, #4]
+300096a8:	e59d3004 	ldr	r3, [sp, #4]
+300096ac:	e5d33009 	ldrb	r3, [r3, #9]
+300096b0:	e1a02283 	lsl	r2, r3, #5
+300096b4:	e1a03002 	mov	r3, r2
+300096b8:	e1a03103 	lsl	r3, r3, #2
+300096bc:	e0833002 	add	r3, r3, r2
+300096c0:	e1a02103 	lsl	r2, r3, #2
+300096c4:	e0833002 	add	r3, r3, r2
+300096c8:	e1a03103 	lsl	r3, r3, #2
+300096cc:	e59f2090 	ldr	r2, [pc, #144]	; 30009764 <posix_delay_deal+0x18c>
+300096d0:	e0c20293 	smull	r0, r2, r3, r2
+300096d4:	e1a02342 	asr	r2, r2, #6
+300096d8:	e1a03fc3 	asr	r3, r3, #31
+300096dc:	e0633002 	rsb	r3, r3, r2
+300096e0:	e5813000 	str	r3, [r1]
 						data->stair--;
-300094e0:	e59d3004 	ldr	r3, [sp, #4]
-300094e4:	e5d33008 	ldrb	r3, [r3, #8]
-300094e8:	e2433001 	sub	r3, r3, #1
-300094ec:	e20320ff 	and	r2, r3, #255	; 0xff
-300094f0:	e59d3004 	ldr	r3, [sp, #4]
-300094f4:	e5c32008 	strb	r2, [r3, #8]
+300096e4:	e59d3004 	ldr	r3, [sp, #4]
+300096e8:	e5d33008 	ldrb	r3, [r3, #8]
+300096ec:	e2433001 	sub	r3, r3, #1
+300096f0:	e20320ff 	and	r2, r3, #255	; 0xff
+300096f4:	e59d3004 	ldr	r3, [sp, #4]
+300096f8:	e5c32008 	strb	r2, [r3, #8]
 					}
 				}
 				cur->slice=TIME_TO_TICKS(data->time<<POSIX_SLICE_RATE);
-300094f8:	e59d3004 	ldr	r3, [sp, #4]
-300094fc:	e5d33009 	ldrb	r3, [r3, #9]
-30009500:	e1a02283 	lsl	r2, r3, #5
-30009504:	e1a03002 	mov	r3, r2
-30009508:	e1a03103 	lsl	r3, r3, #2
-3000950c:	e0833002 	add	r3, r3, r2
-30009510:	e1a02103 	lsl	r2, r3, #2
-30009514:	e0833002 	add	r3, r3, r2
-30009518:	e1a03103 	lsl	r3, r3, #2
-3000951c:	e59f203c 	ldr	r2, [pc, #60]	; 30009560 <posix_delay_deal+0x18c>
-30009520:	e0c21293 	smull	r1, r2, r3, r2
-30009524:	e1a02342 	asr	r2, r2, #6
-30009528:	e1a03fc3 	asr	r3, r3, #31
-3000952c:	e0633002 	rsb	r3, r3, r2
-30009530:	e1a02003 	mov	r2, r3
-30009534:	e59d3000 	ldr	r3, [sp]
-30009538:	e5832044 	str	r2, [r3, #68]	; 0x44
+300096fc:	e59d3004 	ldr	r3, [sp, #4]
+30009700:	e5d33009 	ldrb	r3, [r3, #9]
+30009704:	e1a02283 	lsl	r2, r3, #5
+30009708:	e1a03002 	mov	r3, r2
+3000970c:	e1a03103 	lsl	r3, r3, #2
+30009710:	e0833002 	add	r3, r3, r2
+30009714:	e1a02103 	lsl	r2, r3, #2
+30009718:	e0833002 	add	r3, r3, r2
+3000971c:	e1a03103 	lsl	r3, r3, #2
+30009720:	e59f203c 	ldr	r2, [pc, #60]	; 30009764 <posix_delay_deal+0x18c>
+30009724:	e0c21293 	smull	r1, r2, r3, r2
+30009728:	e1a02342 	asr	r2, r2, #6
+3000972c:	e1a03fc3 	asr	r3, r3, #31
+30009730:	e0633002 	rsb	r3, r3, r2
+30009734:	e1a02003 	mov	r2, r3
+30009738:	e59d3000 	ldr	r3, [sp]
+3000973c:	e5832044 	str	r2, [r3, #68]	; 0x44
 				acoral_thread_change_prio(cur,data->stair);
-3000953c:	e59d3004 	ldr	r3, [sp, #4]
-30009540:	e5d33008 	ldrb	r3, [r3, #8]
-30009544:	e59d0000 	ldr	r0, [sp]
-30009548:	e1a01003 	mov	r1, r3
-3000954c:	ebffe547 	bl	30002a70 <acoral_thread_change_prio>
+30009740:	e59d3004 	ldr	r3, [sp, #4]
+30009744:	e5d33008 	ldrb	r3, [r3, #8]
+30009748:	e59d0000 	ldr	r0, [sp]
+3000974c:	e1a01003 	mov	r1, r3
+30009750:	ebffe4c6 	bl	30002a70 <acoral_thread_change_prio>
 			}
 		}
 #ifndef CFG_TICKS_PRIVATE
 	}
 #endif
 }
-30009550:	e28dd00c 	add	sp, sp, #12
-30009554:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009558:	e12fff1e 	bx	lr
-3000955c:	300103f8 	.word	0x300103f8
-30009560:	10624dd3 	.word	0x10624dd3
+30009754:	e28dd00c 	add	sp, sp, #12
+30009758:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000975c:	e12fff1e 	bx	lr
+30009760:	30010604 	.word	0x30010604
+30009764:	10624dd3 	.word	0x10624dd3
 
-30009564 <acoral_posix_create>:
+30009768 <acoral_posix_create>:
 
 void acoral_posix_create(acoral_id* id,acoral_posix_policy_data_t *data,void (*route)(void *args),void *args){
-30009564:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009568:	e24dd01c 	sub	sp, sp, #28
-3000956c:	e58d000c 	str	r0, [sp, #12]
-30009570:	e58d1008 	str	r1, [sp, #8]
-30009574:	e58d2004 	str	r2, [sp, #4]
-30009578:	e58d3000 	str	r3, [sp]
+30009768:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000976c:	e24dd01c 	sub	sp, sp, #28
+30009770:	e58d000c 	str	r0, [sp, #12]
+30009774:	e58d1008 	str	r1, [sp, #8]
+30009778:	e58d2004 	str	r2, [sp, #4]
+3000977c:	e58d3000 	str	r3, [sp]
 	acoral_thread_t *thread;
 	thread=acoral_alloc_thread();
-3000957c:	ebffe5af 	bl	30002c40 <acoral_alloc_thread>
-30009580:	e1a03000 	mov	r3, r0
-30009584:	e58d3014 	str	r3, [sp, #20]
+30009780:	ebffe52e 	bl	30002c40 <acoral_alloc_thread>
+30009784:	e1a03000 	mov	r3, r0
+30009788:	e58d3014 	str	r3, [sp, #20]
 	if(NULL==thread){
-30009588:	e59d3014 	ldr	r3, [sp, #20]
-3000958c:	e3530000 	cmp	r3, #0
-30009590:	1a000002 	bne	300095a0 <acoral_posix_create+0x3c>
+3000978c:	e59d3014 	ldr	r3, [sp, #20]
+30009790:	e3530000 	cmp	r3, #0
+30009794:	1a000002 	bne	300097a4 <acoral_posix_create+0x3c>
 		acoral_printerr("Alloc Posix thread fail\n");
-30009594:	e59f0084 	ldr	r0, [pc, #132]	; 30009620 <acoral_posix_create+0xbc>
-30009598:	eb00071a 	bl	3000b208 <acoral_print>
+30009798:	e59f0084 	ldr	r0, [pc, #132]	; 30009824 <acoral_posix_create+0xbc>
+3000979c:	eb00071a 	bl	3000b40c <acoral_print>
 		acoral_printk("No Mem Space or Beyond the max thread\n");
 		return ;
-3000959c:	ea00001c 	b	30009614 <acoral_posix_create+0xb0>
+300097a0:	ea00001c 	b	30009818 <acoral_posix_create+0xb0>
 	}
 	thread->stack_size=0;
-300095a0:	e59d3014 	ldr	r3, [sp, #20]
-300095a4:	e3a02000 	mov	r2, #0
-300095a8:	e583203c 	str	r2, [r3, #60]	; 0x3c
+300097a4:	e59d3014 	ldr	r3, [sp, #20]
+300097a8:	e3a02000 	mov	r2, #0
+300097ac:	e583203c 	str	r2, [r3, #60]	; 0x3c
 	thread->stack_buttom=NULL;
-300095ac:	e59d3014 	ldr	r3, [sp, #20]
-300095b0:	e3a02000 	mov	r2, #0
-300095b4:	e5832038 	str	r2, [r3, #56]	; 0x38
+300097b0:	e59d3014 	ldr	r3, [sp, #20]
+300097b4:	e3a02000 	mov	r2, #0
+300097b8:	e5832038 	str	r2, [r3, #56]	; 0x38
 	thread->name=NULL;
-300095b8:	e59d3014 	ldr	r3, [sp, #20]
-300095bc:	e3a02000 	mov	r2, #0
-300095c0:	e5832048 	str	r2, [r3, #72]	; 0x48
+300097bc:	e59d3014 	ldr	r3, [sp, #20]
+300097c0:	e3a02000 	mov	r2, #0
+300097c4:	e5832048 	str	r2, [r3, #72]	; 0x48
 	thread->policy=ACORAL_SCHED_POLICY_POSIX;
-300095c4:	e59d3014 	ldr	r3, [sp, #20]
-300095c8:	e3a02019 	mov	r2, #25
-300095cc:	e5c3200c 	strb	r2, [r3, #12]
+300097c8:	e59d3014 	ldr	r3, [sp, #20]
+300097cc:	e3a02019 	mov	r2, #25
+300097d0:	e5c3200c 	strb	r2, [r3, #12]
 	if(id!=NULL)
-300095d0:	e59d300c 	ldr	r3, [sp, #12]
-300095d4:	e3530000 	cmp	r3, #0
-300095d8:	0a000008 	beq	30009600 <acoral_posix_create+0x9c>
+300097d4:	e59d300c 	ldr	r3, [sp, #12]
+300097d8:	e3530000 	cmp	r3, #0
+300097dc:	0a000008 	beq	30009804 <acoral_posix_create+0x9c>
 		*id=posix_policy_thread_init(thread,route,args,data);
-300095dc:	e59d0014 	ldr	r0, [sp, #20]
-300095e0:	e59d1004 	ldr	r1, [sp, #4]
-300095e4:	e59d2000 	ldr	r2, [sp]
-300095e8:	e59d3008 	ldr	r3, [sp, #8]
-300095ec:	eb00000c 	bl	30009624 <posix_policy_thread_init>
-300095f0:	e1a02000 	mov	r2, r0
-300095f4:	e59d300c 	ldr	r3, [sp, #12]
-300095f8:	e5832000 	str	r2, [r3]
-300095fc:	ea000004 	b	30009614 <acoral_posix_create+0xb0>
+300097e0:	e59d0014 	ldr	r0, [sp, #20]
+300097e4:	e59d1004 	ldr	r1, [sp, #4]
+300097e8:	e59d2000 	ldr	r2, [sp]
+300097ec:	e59d3008 	ldr	r3, [sp, #8]
+300097f0:	eb00000c 	bl	30009828 <posix_policy_thread_init>
+300097f4:	e1a02000 	mov	r2, r0
+300097f8:	e59d300c 	ldr	r3, [sp, #12]
+300097fc:	e5832000 	str	r2, [r3]
+30009800:	ea000004 	b	30009818 <acoral_posix_create+0xb0>
 	else
 		posix_policy_thread_init(thread,route,args,data);
-30009600:	e59d0014 	ldr	r0, [sp, #20]
-30009604:	e59d1004 	ldr	r1, [sp, #4]
-30009608:	e59d2000 	ldr	r2, [sp]
-3000960c:	e59d3008 	ldr	r3, [sp, #8]
-30009610:	eb000003 	bl	30009624 <posix_policy_thread_init>
+30009804:	e59d0014 	ldr	r0, [sp, #20]
+30009808:	e59d1004 	ldr	r1, [sp, #4]
+3000980c:	e59d2000 	ldr	r2, [sp]
+30009810:	e59d3008 	ldr	r3, [sp, #8]
+30009814:	eb000003 	bl	30009828 <posix_policy_thread_init>
 }
-30009614:	e28dd01c 	add	sp, sp, #28
-30009618:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000961c:	e12fff1e 	bx	lr
-30009620:	3000e724 	.word	0x3000e724
+30009818:	e28dd01c 	add	sp, sp, #28
+3000981c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009820:	e12fff1e 	bx	lr
+30009824:	3000e928 	.word	0x3000e928
 
-30009624 <posix_policy_thread_init>:
+30009828 <posix_policy_thread_init>:
 
 acoral_id posix_policy_thread_init(acoral_thread_t *thread,void (*route)(void *args),void *args,void *data){
-30009624:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009628:	e24dd024 	sub	sp, sp, #36	; 0x24
-3000962c:	e58d000c 	str	r0, [sp, #12]
-30009630:	e58d1008 	str	r1, [sp, #8]
-30009634:	e58d2004 	str	r2, [sp, #4]
-30009638:	e58d3000 	str	r3, [sp]
+30009828:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000982c:	e24dd024 	sub	sp, sp, #36	; 0x24
+30009830:	e58d000c 	str	r0, [sp, #12]
+30009834:	e58d1008 	str	r1, [sp, #8]
+30009838:	e58d2004 	str	r2, [sp, #4]
+3000983c:	e58d3000 	str	r3, [sp]
 	acoral_sr cpu_sr;
 	acoral_posix_policy_data_t *policy_data;
 	posix_policy_data_t *private_data;
 	policy_data=(acoral_posix_policy_data_t *)data;
-3000963c:	e59d3000 	ldr	r3, [sp]
-30009640:	e58d3018 	str	r3, [sp, #24]
+30009840:	e59d3000 	ldr	r3, [sp]
+30009844:	e58d3018 	str	r3, [sp, #24]
 	private_data=(posix_policy_data_t *)posix_malloc(sizeof(posix_policy_data_t));
-30009644:	e3a0000c 	mov	r0, #12
-30009648:	ebfff565 	bl	30006be4 <v_malloc>
-3000964c:	e1a03000 	mov	r3, r0
-30009650:	e58d301c 	str	r3, [sp, #28]
+30009848:	e3a0000c 	mov	r0, #12
+3000984c:	ebfff565 	bl	30006de8 <v_malloc>
+30009850:	e1a03000 	mov	r3, r0
+30009854:	e58d301c 	str	r3, [sp, #28]
 	if(private_data==NULL){
-30009654:	e59d301c 	ldr	r3, [sp, #28]
-30009658:	e3530000 	cmp	r3, #0
-3000965c:	1a00000e 	bne	3000969c <posix_policy_thread_init+0x78>
+30009858:	e59d301c 	ldr	r3, [sp, #28]
+3000985c:	e3530000 	cmp	r3, #0
+30009860:	1a00000e 	bne	300098a0 <posix_policy_thread_init+0x78>
 		acoral_printerr("No mem space for posix private_data:%s\n",thread->name);
-30009660:	e59d300c 	ldr	r3, [sp, #12]
-30009664:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-30009668:	e59f01a4 	ldr	r0, [pc, #420]	; 30009814 <posix_policy_thread_init+0x1f0>
-3000966c:	e1a01003 	mov	r1, r3
-30009670:	eb0006e4 	bl	3000b208 <acoral_print>
+30009864:	e59d300c 	ldr	r3, [sp, #12]
+30009868:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+3000986c:	e59f01a4 	ldr	r0, [pc, #420]	; 30009a18 <posix_policy_thread_init+0x1f0>
+30009870:	e1a01003 	mov	r1, r3
+30009874:	eb0006e4 	bl	3000b40c <acoral_print>
 		HAL_ENTER_CRITICAL();
-30009674:	ebffe01e 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30009678:	e1a03000 	mov	r3, r0
-3000967c:	e58d3014 	str	r3, [sp, #20]
+30009878:	ebffdf9d 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+3000987c:	e1a03000 	mov	r3, r0
+30009880:	e58d3014 	str	r3, [sp, #20]
 		acoral_release_res((acoral_res_t *)thread);
-30009680:	e59d300c 	ldr	r3, [sp, #12]
-30009684:	e1a00003 	mov	r0, r3
-30009688:	ebffe7de 	bl	30003608 <acoral_release_res>
+30009884:	e59d300c 	ldr	r3, [sp, #12]
+30009888:	e1a00003 	mov	r0, r3
+3000988c:	ebffe75d 	bl	30003608 <acoral_release_res>
 		HAL_EXIT_CRITICAL();
-3000968c:	e59d0014 	ldr	r0, [sp, #20]
-30009690:	ebffe015 	bl	300016ec <HAL_INTR_RESTORE>
+30009890:	e59d0014 	ldr	r0, [sp, #20]
+30009894:	ebffdf94 	bl	300016ec <HAL_INTR_RESTORE>
 		return -1;
-30009694:	e3e03000 	mvn	r3, #0
-30009698:	ea000059 	b	30009804 <posix_policy_thread_init+0x1e0>
+30009898:	e3e03000 	mvn	r3, #0
+3000989c:	ea000059 	b	30009a08 <posix_policy_thread_init+0x1e0>
 	}
 	posix_policy_data_init(private_data);
-3000969c:	e59d001c 	ldr	r0, [sp, #28]
-300096a0:	eb000069 	bl	3000984c <posix_policy_data_init>
+300098a0:	e59d001c 	ldr	r0, [sp, #28]
+300098a4:	eb000069 	bl	30009a50 <posix_policy_data_init>
 	if(policy_data!=NULL){
-300096a4:	e59d3018 	ldr	r3, [sp, #24]
-300096a8:	e3530000 	cmp	r3, #0
-300096ac:	0a000014 	beq	30009704 <posix_policy_thread_init+0xe0>
+300098a8:	e59d3018 	ldr	r3, [sp, #24]
+300098ac:	e3530000 	cmp	r3, #0
+300098b0:	0a000014 	beq	30009908 <posix_policy_thread_init+0xe0>
 		private_data->attach_state=policy_data->attach_state;
-300096b0:	e59d3018 	ldr	r3, [sp, #24]
-300096b4:	e5d32004 	ldrb	r2, [r3, #4]
-300096b8:	e59d301c 	ldr	r3, [sp, #28]
-300096bc:	e5c32004 	strb	r2, [r3, #4]
+300098b4:	e59d3018 	ldr	r3, [sp, #24]
+300098b8:	e5d32004 	ldrb	r2, [r3, #4]
+300098bc:	e59d301c 	ldr	r3, [sp, #28]
+300098c0:	e5c32004 	strb	r2, [r3, #4]
 		private_data->cpu_mask=policy_data->cpu_mask;
-300096c0:	e59d3018 	ldr	r3, [sp, #24]
-300096c4:	e5933008 	ldr	r3, [r3, #8]
-300096c8:	e20320ff 	and	r2, r3, #255	; 0xff
-300096cc:	e59d301c 	ldr	r3, [sp, #28]
-300096d0:	e5c32007 	strb	r2, [r3, #7]
+300098c4:	e59d3018 	ldr	r3, [sp, #24]
+300098c8:	e5933008 	ldr	r3, [r3, #8]
+300098cc:	e20320ff 	and	r2, r3, #255	; 0xff
+300098d0:	e59d301c 	ldr	r3, [sp, #28]
+300098d4:	e5c32007 	strb	r2, [r3, #7]
 		private_data->cancel_type=policy_data->cancel_type;
-300096d4:	e59d3018 	ldr	r3, [sp, #24]
-300096d8:	e5d32005 	ldrb	r2, [r3, #5]
-300096dc:	e59d301c 	ldr	r3, [sp, #28]
-300096e0:	e5c32005 	strb	r2, [r3, #5]
+300098d8:	e59d3018 	ldr	r3, [sp, #24]
+300098dc:	e5d32005 	ldrb	r2, [r3, #5]
+300098e0:	e59d301c 	ldr	r3, [sp, #28]
+300098e4:	e5c32005 	strb	r2, [r3, #5]
 		private_data->cancel_enable=policy_data->cancel_enable;
-300096e4:	e59d3018 	ldr	r3, [sp, #24]
-300096e8:	e5d32006 	ldrb	r2, [r3, #6]
-300096ec:	e59d301c 	ldr	r3, [sp, #28]
-300096f0:	e5c32006 	strb	r2, [r3, #6]
+300098e8:	e59d3018 	ldr	r3, [sp, #24]
+300098ec:	e5d32006 	ldrb	r2, [r3, #6]
+300098f0:	e59d301c 	ldr	r3, [sp, #28]
+300098f4:	e5c32006 	strb	r2, [r3, #6]
 		thread->stack_size=policy_data->stack_size;
-300096f4:	e59d3018 	ldr	r3, [sp, #24]
-300096f8:	e593200c 	ldr	r2, [r3, #12]
-300096fc:	e59d300c 	ldr	r3, [sp, #12]
-30009700:	e583203c 	str	r2, [r3, #60]	; 0x3c
+300098f8:	e59d3018 	ldr	r3, [sp, #24]
+300098fc:	e593200c 	ldr	r2, [r3, #12]
+30009900:	e59d300c 	ldr	r3, [sp, #12]
+30009904:	e583203c 	str	r2, [r3, #60]	; 0x3c
 	}
 	thread->private_data=private_data;
-30009704:	e59d300c 	ldr	r3, [sp, #12]
-30009708:	e59d201c 	ldr	r2, [sp, #28]
-3000970c:	e5832050 	str	r2, [r3, #80]	; 0x50
+30009908:	e59d300c 	ldr	r3, [sp, #12]
+3000990c:	e59d201c 	ldr	r2, [sp, #28]
+30009910:	e5832050 	str	r2, [r3, #80]	; 0x50
 	if(thread->stack_size==0)
-30009710:	e59d300c 	ldr	r3, [sp, #12]
-30009714:	e593303c 	ldr	r3, [r3, #60]	; 0x3c
-30009718:	e3530000 	cmp	r3, #0
-3000971c:	1a000002 	bne	3000972c <posix_policy_thread_init+0x108>
+30009914:	e59d300c 	ldr	r3, [sp, #12]
+30009918:	e593303c 	ldr	r3, [r3, #60]	; 0x3c
+3000991c:	e3530000 	cmp	r3, #0
+30009920:	1a000002 	bne	30009930 <posix_policy_thread_init+0x108>
 		thread->stack_size=POSIX_DEFAULT_STACK_SIZE;
-30009720:	e59d300c 	ldr	r3, [sp, #12]
-30009724:	e3a02b05 	mov	r2, #5120	; 0x1400
-30009728:	e583203c 	str	r2, [r3, #60]	; 0x3c
+30009924:	e59d300c 	ldr	r3, [sp, #12]
+30009928:	e3a02b05 	mov	r2, #5120	; 0x1400
+3000992c:	e583203c 	str	r2, [r3, #60]	; 0x3c
 	thread->cpu=-1;
-3000972c:	e59d300c 	ldr	r3, [sp, #12]
-30009730:	e3e02000 	mvn	r2, #0
-30009734:	e5c32006 	strb	r2, [r3, #6]
+30009930:	e59d300c 	ldr	r3, [sp, #12]
+30009934:	e3e02000 	mvn	r2, #0
+30009938:	e5c32006 	strb	r2, [r3, #6]
 	thread->cpu_mask=-1;
-30009738:	e59d300c 	ldr	r3, [sp, #12]
-3000973c:	e3e02000 	mvn	r2, #0
-30009740:	e5832008 	str	r2, [r3, #8]
+3000993c:	e59d300c 	ldr	r3, [sp, #12]
+30009940:	e3e02000 	mvn	r2, #0
+30009944:	e5832008 	str	r2, [r3, #8]
 	thread->prio=private_data->stair;
-30009744:	e59d301c 	ldr	r3, [sp, #28]
-30009748:	e5d32008 	ldrb	r2, [r3, #8]
-3000974c:	e59d300c 	ldr	r3, [sp, #12]
-30009750:	e5c32005 	strb	r2, [r3, #5]
+30009948:	e59d301c 	ldr	r3, [sp, #28]
+3000994c:	e5d32008 	ldrb	r2, [r3, #8]
+30009950:	e59d300c 	ldr	r3, [sp, #12]
+30009954:	e5c32005 	strb	r2, [r3, #5]
 	thread->slice=TIME_TO_TICKS(private_data->time<<POSIX_SLICE_RATE);
-30009754:	e59d301c 	ldr	r3, [sp, #28]
-30009758:	e5d33009 	ldrb	r3, [r3, #9]
-3000975c:	e1a02283 	lsl	r2, r3, #5
-30009760:	e1a03002 	mov	r3, r2
-30009764:	e1a03103 	lsl	r3, r3, #2
-30009768:	e0833002 	add	r3, r3, r2
-3000976c:	e1a02103 	lsl	r2, r3, #2
-30009770:	e0833002 	add	r3, r3, r2
-30009774:	e1a03103 	lsl	r3, r3, #2
-30009778:	e59f2098 	ldr	r2, [pc, #152]	; 30009818 <posix_policy_thread_init+0x1f4>
-3000977c:	e0c21293 	smull	r1, r2, r3, r2
-30009780:	e1a02342 	asr	r2, r2, #6
-30009784:	e1a03fc3 	asr	r3, r3, #31
-30009788:	e0633002 	rsb	r3, r3, r2
-3000978c:	e1a02003 	mov	r2, r3
-30009790:	e59d300c 	ldr	r3, [sp, #12]
-30009794:	e5832044 	str	r2, [r3, #68]	; 0x44
+30009958:	e59d301c 	ldr	r3, [sp, #28]
+3000995c:	e5d33009 	ldrb	r3, [r3, #9]
+30009960:	e1a02283 	lsl	r2, r3, #5
+30009964:	e1a03002 	mov	r3, r2
+30009968:	e1a03103 	lsl	r3, r3, #2
+3000996c:	e0833002 	add	r3, r3, r2
+30009970:	e1a02103 	lsl	r2, r3, #2
+30009974:	e0833002 	add	r3, r3, r2
+30009978:	e1a03103 	lsl	r3, r3, #2
+3000997c:	e59f2098 	ldr	r2, [pc, #152]	; 30009a1c <posix_policy_thread_init+0x1f4>
+30009980:	e0c21293 	smull	r1, r2, r3, r2
+30009984:	e1a02342 	asr	r2, r2, #6
+30009988:	e1a03fc3 	asr	r3, r3, #31
+3000998c:	e0633002 	rsb	r3, r3, r2
+30009990:	e1a02003 	mov	r2, r3
+30009994:	e59d300c 	ldr	r3, [sp, #12]
+30009998:	e5832044 	str	r2, [r3, #68]	; 0x44
 	if(acoral_thread_init(thread,route,acoral_thread_exit,args)!=0){
-30009798:	e59d000c 	ldr	r0, [sp, #12]
-3000979c:	e59d1008 	ldr	r1, [sp, #8]
-300097a0:	e59f2074 	ldr	r2, [pc, #116]	; 3000981c <posix_policy_thread_init+0x1f8>
-300097a4:	e59d3004 	ldr	r3, [sp, #4]
-300097a8:	ebffe52c 	bl	30002c60 <acoral_thread_init>
-300097ac:	e1a03000 	mov	r3, r0
-300097b0:	e3530000 	cmp	r3, #0
-300097b4:	0a00000e 	beq	300097f4 <posix_policy_thread_init+0x1d0>
+3000999c:	e59d000c 	ldr	r0, [sp, #12]
+300099a0:	e59d1008 	ldr	r1, [sp, #8]
+300099a4:	e59f2074 	ldr	r2, [pc, #116]	; 30009a20 <posix_policy_thread_init+0x1f8>
+300099a8:	e59d3004 	ldr	r3, [sp, #4]
+300099ac:	ebffe4ab 	bl	30002c60 <acoral_thread_init>
+300099b0:	e1a03000 	mov	r3, r0
+300099b4:	e3530000 	cmp	r3, #0
+300099b8:	0a00000e 	beq	300099f8 <posix_policy_thread_init+0x1d0>
 		acoral_printerr("No thread stack:%s\n",thread->name);
-300097b8:	e59d300c 	ldr	r3, [sp, #12]
-300097bc:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-300097c0:	e59f0058 	ldr	r0, [pc, #88]	; 30009820 <posix_policy_thread_init+0x1fc>
-300097c4:	e1a01003 	mov	r1, r3
-300097c8:	eb00068e 	bl	3000b208 <acoral_print>
+300099bc:	e59d300c 	ldr	r3, [sp, #12]
+300099c0:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+300099c4:	e59f0058 	ldr	r0, [pc, #88]	; 30009a24 <posix_policy_thread_init+0x1fc>
+300099c8:	e1a01003 	mov	r1, r3
+300099cc:	eb00068e 	bl	3000b40c <acoral_print>
 		HAL_ENTER_CRITICAL();
-300097cc:	ebffdfc8 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-300097d0:	e1a03000 	mov	r3, r0
-300097d4:	e58d3014 	str	r3, [sp, #20]
+300099d0:	ebffdf47 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+300099d4:	e1a03000 	mov	r3, r0
+300099d8:	e58d3014 	str	r3, [sp, #20]
 		acoral_release_res((acoral_res_t *)thread);
-300097d8:	e59d300c 	ldr	r3, [sp, #12]
-300097dc:	e1a00003 	mov	r0, r3
-300097e0:	ebffe788 	bl	30003608 <acoral_release_res>
+300099dc:	e59d300c 	ldr	r3, [sp, #12]
+300099e0:	e1a00003 	mov	r0, r3
+300099e4:	ebffe707 	bl	30003608 <acoral_release_res>
 		HAL_EXIT_CRITICAL();
-300097e4:	e59d0014 	ldr	r0, [sp, #20]
-300097e8:	ebffdfbf 	bl	300016ec <HAL_INTR_RESTORE>
+300099e8:	e59d0014 	ldr	r0, [sp, #20]
+300099ec:	ebffdf3e 	bl	300016ec <HAL_INTR_RESTORE>
 		return -1;
-300097ec:	e3e03000 	mvn	r3, #0
-300097f0:	ea000003 	b	30009804 <posix_policy_thread_init+0x1e0>
+300099f0:	e3e03000 	mvn	r3, #0
+300099f4:	ea000003 	b	30009a08 <posix_policy_thread_init+0x1e0>
 	}
 	acoral_resume_thread(thread);
-300097f4:	e59d000c 	ldr	r0, [sp, #12]
-300097f8:	ebffe40f 	bl	3000283c <acoral_resume_thread>
+300099f8:	e59d000c 	ldr	r0, [sp, #12]
+300099fc:	ebffe38e 	bl	3000283c <acoral_resume_thread>
 	return thread->res.id;
-300097fc:	e59d300c 	ldr	r3, [sp, #12]
-30009800:	e5933000 	ldr	r3, [r3]
+30009a00:	e59d300c 	ldr	r3, [sp, #12]
+30009a04:	e5933000 	ldr	r3, [r3]
 }
-30009804:	e1a00003 	mov	r0, r3
-30009808:	e28dd024 	add	sp, sp, #36	; 0x24
-3000980c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009810:	e12fff1e 	bx	lr
-30009814:	3000e740 	.word	0x3000e740
-30009818:	10624dd3 	.word	0x10624dd3
-3000981c:	30002a50 	.word	0x30002a50
-30009820:	3000e768 	.word	0x3000e768
+30009a08:	e1a00003 	mov	r0, r3
+30009a0c:	e28dd024 	add	sp, sp, #36	; 0x24
+30009a10:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009a14:	e12fff1e 	bx	lr
+30009a18:	3000e944 	.word	0x3000e944
+30009a1c:	10624dd3 	.word	0x10624dd3
+30009a20:	30002a50 	.word	0x30002a50
+30009a24:	3000e96c 	.word	0x3000e96c
 
-30009824 <posix_policy_thread_release>:
+30009a28 <posix_policy_thread_release>:
 
 void posix_policy_thread_release(acoral_thread_t *thread){
-30009824:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009828:	e24dd00c 	sub	sp, sp, #12
-3000982c:	e58d0004 	str	r0, [sp, #4]
+30009a28:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009a2c:	e24dd00c 	sub	sp, sp, #12
+30009a30:	e58d0004 	str	r0, [sp, #4]
 	posix_free(thread->private_data);
-30009830:	e59d3004 	ldr	r3, [sp, #4]
-30009834:	e5933050 	ldr	r3, [r3, #80]	; 0x50
-30009838:	e1a00003 	mov	r0, r3
-3000983c:	ebfff4fd 	bl	30006c38 <v_free>
+30009a34:	e59d3004 	ldr	r3, [sp, #4]
+30009a38:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+30009a3c:	e1a00003 	mov	r0, r3
+30009a40:	ebfff4fd 	bl	30006e3c <v_free>
 }
-30009840:	e28dd00c 	add	sp, sp, #12
-30009844:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009848:	e12fff1e 	bx	lr
+30009a44:	e28dd00c 	add	sp, sp, #12
+30009a48:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009a4c:	e12fff1e 	bx	lr
 
-3000984c <posix_policy_data_init>:
+30009a50 <posix_policy_data_init>:
 
 void posix_policy_data_init(posix_policy_data_t *private_data){
-3000984c:	e24dd008 	sub	sp, sp, #8
-30009850:	e58d0004 	str	r0, [sp, #4]
+30009a50:	e24dd008 	sub	sp, sp, #8
+30009a54:	e58d0004 	str	r0, [sp, #4]
 	private_data->attach_state=POSIX_JOINABLE;
-30009854:	e59d3004 	ldr	r3, [sp, #4]
-30009858:	e3a02001 	mov	r2, #1
-3000985c:	e5c32004 	strb	r2, [r3, #4]
+30009a58:	e59d3004 	ldr	r3, [sp, #4]
+30009a5c:	e3a02001 	mov	r2, #1
+30009a60:	e5c32004 	strb	r2, [r3, #4]
 	private_data->cancel_type=POSIX_CANCEL_DEFER;
-30009860:	e59d3004 	ldr	r3, [sp, #4]
-30009864:	e3a02000 	mov	r2, #0
-30009868:	e5c32005 	strb	r2, [r3, #5]
+30009a64:	e59d3004 	ldr	r3, [sp, #4]
+30009a68:	e3a02000 	mov	r2, #0
+30009a6c:	e5c32005 	strb	r2, [r3, #5]
 	private_data->cancel_enable=true;
-3000986c:	e59d3004 	ldr	r3, [sp, #4]
-30009870:	e3a02001 	mov	r2, #1
-30009874:	e5c32006 	strb	r2, [r3, #6]
+30009a70:	e59d3004 	ldr	r3, [sp, #4]
+30009a74:	e3a02001 	mov	r2, #1
+30009a78:	e5c32006 	strb	r2, [r3, #6]
 	private_data->cpu_mask=0xff;
-30009878:	e59d3004 	ldr	r3, [sp, #4]
-3000987c:	e3e02000 	mvn	r2, #0
-30009880:	e5c32007 	strb	r2, [r3, #7]
+30009a7c:	e59d3004 	ldr	r3, [sp, #4]
+30009a80:	e3e02000 	mvn	r2, #0
+30009a84:	e5c32007 	strb	r2, [r3, #7]
 	private_data->stair=ACORAL_POSIX_PRIO_MIN;
-30009884:	e59d3004 	ldr	r3, [sp, #4]
-30009888:	e3a02027 	mov	r2, #39	; 0x27
-3000988c:	e5c32008 	strb	r2, [r3, #8]
+30009a88:	e59d3004 	ldr	r3, [sp, #4]
+30009a8c:	e3a02027 	mov	r2, #39	; 0x27
+30009a90:	e5c32008 	strb	r2, [r3, #8]
 	private_data->time=1;
-30009890:	e59d3004 	ldr	r3, [sp, #4]
-30009894:	e3a02001 	mov	r2, #1
-30009898:	e5c32009 	strb	r2, [r3, #9]
+30009a94:	e59d3004 	ldr	r3, [sp, #4]
+30009a98:	e3a02001 	mov	r2, #1
+30009a9c:	e5c32009 	strb	r2, [r3, #9]
 }
-3000989c:	e28dd008 	add	sp, sp, #8
-300098a0:	e12fff1e 	bx	lr
+30009aa0:	e28dd008 	add	sp, sp, #8
+30009aa4:	e12fff1e 	bx	lr
 
-300098a4 <posix_policy_init>:
+30009aa8 <posix_policy_init>:
 
 acoral_sched_policy_t posix_policy;
 void posix_policy_init(){
-300098a4:	e92d4008 	push	{r3, lr}
+30009aa8:	e92d4008 	push	{r3, lr}
 	posix_policy.type=ACORAL_SCHED_POLICY_POSIX;
-300098a8:	e59f3044 	ldr	r3, [pc, #68]	; 300098f4 <posix_policy_init+0x50>
-300098ac:	e3a02019 	mov	r2, #25
-300098b0:	e5c32008 	strb	r2, [r3, #8]
+30009aac:	e59f3044 	ldr	r3, [pc, #68]	; 30009af8 <posix_policy_init+0x50>
+30009ab0:	e3a02019 	mov	r2, #25
+30009ab4:	e5c32008 	strb	r2, [r3, #8]
 	posix_policy.policy_thread_init=posix_policy_thread_init;
-300098b4:	e59f3038 	ldr	r3, [pc, #56]	; 300098f4 <posix_policy_init+0x50>
-300098b8:	e59f2038 	ldr	r2, [pc, #56]	; 300098f8 <posix_policy_init+0x54>
-300098bc:	e583200c 	str	r2, [r3, #12]
+30009ab8:	e59f3038 	ldr	r3, [pc, #56]	; 30009af8 <posix_policy_init+0x50>
+30009abc:	e59f2038 	ldr	r2, [pc, #56]	; 30009afc <posix_policy_init+0x54>
+30009ac0:	e583200c 	str	r2, [r3, #12]
 	posix_policy.policy_thread_release=posix_policy_thread_release;
-300098c0:	e59f302c 	ldr	r3, [pc, #44]	; 300098f4 <posix_policy_init+0x50>
-300098c4:	e59f2030 	ldr	r2, [pc, #48]	; 300098fc <posix_policy_init+0x58>
-300098c8:	e5832010 	str	r2, [r3, #16]
+30009ac4:	e59f302c 	ldr	r3, [pc, #44]	; 30009af8 <posix_policy_init+0x50>
+30009ac8:	e59f2030 	ldr	r2, [pc, #48]	; 30009b00 <posix_policy_init+0x58>
+30009acc:	e5832010 	str	r2, [r3, #16]
 	posix_policy.delay_deal=posix_delay_deal;
-300098cc:	e59f3020 	ldr	r3, [pc, #32]	; 300098f4 <posix_policy_init+0x50>
-300098d0:	e59f2028 	ldr	r2, [pc, #40]	; 30009900 <posix_policy_init+0x5c>
-300098d4:	e5832014 	str	r2, [r3, #20]
+30009ad0:	e59f3020 	ldr	r3, [pc, #32]	; 30009af8 <posix_policy_init+0x50>
+30009ad4:	e59f2028 	ldr	r2, [pc, #40]	; 30009b04 <posix_policy_init+0x5c>
+30009ad8:	e5832014 	str	r2, [r3, #20]
 	posix_policy.name="posix";
-300098d8:	e59f3014 	ldr	r3, [pc, #20]	; 300098f4 <posix_policy_init+0x50>
-300098dc:	e59f2020 	ldr	r2, [pc, #32]	; 30009904 <posix_policy_init+0x60>
-300098e0:	e5832018 	str	r2, [r3, #24]
+30009adc:	e59f3014 	ldr	r3, [pc, #20]	; 30009af8 <posix_policy_init+0x50>
+30009ae0:	e59f2020 	ldr	r2, [pc, #32]	; 30009b08 <posix_policy_init+0x60>
+30009ae4:	e5832018 	str	r2, [r3, #24]
 	acoral_register_sched_policy(&posix_policy);
-300098e4:	e59f0008 	ldr	r0, [pc, #8]	; 300098f4 <posix_policy_init+0x50>
-300098e8:	ebffe156 	bl	30001e48 <acoral_register_sched_policy>
+30009ae8:	e59f0008 	ldr	r0, [pc, #8]	; 30009af8 <posix_policy_init+0x50>
+30009aec:	ebffe0d5 	bl	30001e48 <acoral_register_sched_policy>
 }
-300098ec:	e8bd4008 	pop	{r3, lr}
-300098f0:	e12fff1e 	bx	lr
-300098f4:	3000f3c8 	.word	0x3000f3c8
-300098f8:	30009624 	.word	0x30009624
-300098fc:	30009824 	.word	0x30009824
-30009900:	300093d4 	.word	0x300093d4
-30009904:	3000e77c 	.word	0x3000e77c
+30009af0:	e8bd4008 	pop	{r3, lr}
+30009af4:	e12fff1e 	bx	lr
+30009af8:	3000f5d4 	.word	0x3000f5d4
+30009afc:	30009828 	.word	0x30009828
+30009b00:	30009a28 	.word	0x30009a28
+30009b04:	300095d8 	.word	0x300095d8
+30009b08:	3000e980 	.word	0x3000e980
 
-30009908 <delay>:
+30009b0c <delay>:
 #include<hal.h>
 #include<cpu.h>
 #include<policy.h>
 acoral_u32 sample_100ms;
 volatile acoral_u32 sample;
 void delay(){
-30009908:	e24dd008 	sub	sp, sp, #8
+30009b0c:	e24dd008 	sub	sp, sp, #8
 	volatile acoral_32 tmp=0xfff;
-3000990c:	e3a03eff 	mov	r3, #4080	; 0xff0
-30009910:	e283300f 	add	r3, r3, #15
-30009914:	e58d3004 	str	r3, [sp, #4]
+30009b10:	e3a03eff 	mov	r3, #4080	; 0xff0
+30009b14:	e283300f 	add	r3, r3, #15
+30009b18:	e58d3004 	str	r3, [sp, #4]
 	while(tmp-->0);
-30009918:	e59d3004 	ldr	r3, [sp, #4]
-3000991c:	e3530000 	cmp	r3, #0
-30009920:	d3a02000 	movle	r2, #0
-30009924:	c3a02001 	movgt	r2, #1
-30009928:	e20220ff 	and	r2, r2, #255	; 0xff
-3000992c:	e2433001 	sub	r3, r3, #1
-30009930:	e58d3004 	str	r3, [sp, #4]
-30009934:	e3520000 	cmp	r2, #0
-30009938:	1afffff6 	bne	30009918 <delay+0x10>
+30009b1c:	e59d3004 	ldr	r3, [sp, #4]
+30009b20:	e3530000 	cmp	r3, #0
+30009b24:	d3a02000 	movle	r2, #0
+30009b28:	c3a02001 	movgt	r2, #1
+30009b2c:	e20220ff 	and	r2, r2, #255	; 0xff
+30009b30:	e2433001 	sub	r3, r3, #1
+30009b34:	e58d3004 	str	r3, [sp, #4]
+30009b38:	e3520000 	cmp	r2, #0
+30009b3c:	1afffff6 	bne	30009b1c <delay+0x10>
 	sample++;
-3000993c:	e59f3014 	ldr	r3, [pc, #20]	; 30009958 <delay+0x50>
-30009940:	e5933000 	ldr	r3, [r3]
-30009944:	e2832001 	add	r2, r3, #1
-30009948:	e59f3008 	ldr	r3, [pc, #8]	; 30009958 <delay+0x50>
-3000994c:	e5832000 	str	r2, [r3]
+30009b40:	e59f3014 	ldr	r3, [pc, #20]	; 30009b5c <delay+0x50>
+30009b44:	e5933000 	ldr	r3, [r3]
+30009b48:	e2832001 	add	r2, r3, #1
+30009b4c:	e59f3008 	ldr	r3, [pc, #8]	; 30009b5c <delay+0x50>
+30009b50:	e5832000 	str	r2, [r3]
 }
-30009950:	e28dd008 	add	sp, sp, #8
-30009954:	e12fff1e 	bx	lr
-30009958:	3001041c 	.word	0x3001041c
+30009b54:	e28dd008 	add	sp, sp, #8
+30009b58:	e12fff1e 	bx	lr
+30009b5c:	30010628 	.word	0x30010628
 
-3000995c <delay_task>:
+30009b60 <delay_task>:
 
 void delay_task(void *args){
-3000995c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009960:	e24dd00c 	sub	sp, sp, #12
-30009964:	e58d0004 	str	r0, [sp, #4]
+30009b60:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009b64:	e24dd00c 	sub	sp, sp, #12
+30009b68:	e58d0004 	str	r0, [sp, #4]
 	sample=0;
-30009968:	e59f300c 	ldr	r3, [pc, #12]	; 3000997c <delay_task+0x20>
-3000996c:	e3a02000 	mov	r2, #0
-30009970:	e5832000 	str	r2, [r3]
+30009b6c:	e59f300c 	ldr	r3, [pc, #12]	; 30009b80 <delay_task+0x20>
+30009b70:	e3a02000 	mov	r2, #0
+30009b74:	e5832000 	str	r2, [r3]
 	for(;;){
 		delay();
-30009974:	ebffffe3 	bl	30009908 <delay>
+30009b78:	ebffffe3 	bl	30009b0c <delay>
 	}
-30009978:	eafffffd 	b	30009974 <delay_task+0x18>
-3000997c:	3001041c 	.word	0x3001041c
+30009b7c:	eafffffd 	b	30009b78 <delay_task+0x18>
+30009b80:	30010628 	.word	0x30010628
 
-30009980 <acoral_soft_delay>:
+30009b84 <acoral_soft_delay>:
 }
 
 void acoral_soft_delay(acoral_u32 n100ms){
-30009980:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009984:	e24dd014 	sub	sp, sp, #20
-30009988:	e58d0004 	str	r0, [sp, #4]
+30009b84:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009b88:	e24dd014 	sub	sp, sp, #20
+30009b8c:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 i;
 	acoral_u32 tmp=n100ms*sample_100ms;	
-3000998c:	e59f3044 	ldr	r3, [pc, #68]	; 300099d8 <acoral_soft_delay+0x58>
-30009990:	e5932000 	ldr	r2, [r3]
-30009994:	e59d3004 	ldr	r3, [sp, #4]
-30009998:	e0030392 	mul	r3, r2, r3
-3000999c:	e58d300c 	str	r3, [sp, #12]
+30009b90:	e59f3044 	ldr	r3, [pc, #68]	; 30009bdc <acoral_soft_delay+0x58>
+30009b94:	e5932000 	ldr	r2, [r3]
+30009b98:	e59d3004 	ldr	r3, [sp, #4]
+30009b9c:	e0030392 	mul	r3, r2, r3
+30009ba0:	e58d300c 	str	r3, [sp, #12]
 	for(i=0;i<tmp;i++)
-300099a0:	e3a03000 	mov	r3, #0
-300099a4:	e58d3008 	str	r3, [sp, #8]
-300099a8:	ea000003 	b	300099bc <acoral_soft_delay+0x3c>
+30009ba4:	e3a03000 	mov	r3, #0
+30009ba8:	e58d3008 	str	r3, [sp, #8]
+30009bac:	ea000003 	b	30009bc0 <acoral_soft_delay+0x3c>
 		delay();
-300099ac:	ebffffd5 	bl	30009908 <delay>
+30009bb0:	ebffffd5 	bl	30009b0c <delay>
 }
 
 void acoral_soft_delay(acoral_u32 n100ms){
 	acoral_u32 i;
 	acoral_u32 tmp=n100ms*sample_100ms;	
 	for(i=0;i<tmp;i++)
-300099b0:	e59d3008 	ldr	r3, [sp, #8]
-300099b4:	e2833001 	add	r3, r3, #1
-300099b8:	e58d3008 	str	r3, [sp, #8]
-300099bc:	e59d2008 	ldr	r2, [sp, #8]
-300099c0:	e59d300c 	ldr	r3, [sp, #12]
-300099c4:	e1520003 	cmp	r2, r3
-300099c8:	3afffff7 	bcc	300099ac <acoral_soft_delay+0x2c>
+30009bb4:	e59d3008 	ldr	r3, [sp, #8]
+30009bb8:	e2833001 	add	r3, r3, #1
+30009bbc:	e58d3008 	str	r3, [sp, #8]
+30009bc0:	e59d2008 	ldr	r2, [sp, #8]
+30009bc4:	e59d300c 	ldr	r3, [sp, #12]
+30009bc8:	e1520003 	cmp	r2, r3
+30009bcc:	3afffff7 	bcc	30009bb0 <acoral_soft_delay+0x2c>
 		delay();
 }
-300099cc:	e28dd014 	add	sp, sp, #20
-300099d0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-300099d4:	e12fff1e 	bx	lr
-300099d8:	3000fa9c 	.word	0x3000fa9c
+30009bd0:	e28dd014 	add	sp, sp, #20
+30009bd4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009bd8:	e12fff1e 	bx	lr
+30009bdc:	3000fca8 	.word	0x3000fca8
 
-300099dc <soft_delay_init>:
+30009be0 <soft_delay_init>:
 
 void soft_delay_init(){
-300099dc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-300099e0:	e24dd024 	sub	sp, sp, #36	; 0x24
+30009be0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009be4:	e24dd024 	sub	sp, sp, #36	; 0x24
 	acoral_sr cpu_sr;
 	acoral_comm_policy_data_t data;
 	acoral_thread_t *thread;
 	acoral_id tmp_id;
 	data.cpu=acoral_current_cpu;
-300099e4:	e3a03000 	mov	r3, #0
-300099e8:	e5cd3010 	strb	r3, [sp, #16]
+30009be8:	e3a03000 	mov	r3, #0
+30009bec:	e5cd3010 	strb	r3, [sp, #16]
 	data.prio=ACORAL_TMP_PRIO;
-300099ec:	e3a03045 	mov	r3, #69	; 0x45
-300099f0:	e5cd3011 	strb	r3, [sp, #17]
+30009bf0:	e3a03045 	mov	r3, #69	; 0x45
+30009bf4:	e5cd3011 	strb	r3, [sp, #17]
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
-300099f4:	e3a03004 	mov	r3, #4
-300099f8:	e5cd3012 	strb	r3, [sp, #18]
+30009bf8:	e3a03004 	mov	r3, #4
+30009bfc:	e5cd3012 	strb	r3, [sp, #18]
 	tmp_id=acoral_create_thread_ext(delay_task,256,NULL,"softdelay",NULL,ACORAL_SCHED_POLICY_COMM,&data);
-300099fc:	e3a03000 	mov	r3, #0
-30009a00:	e58d3000 	str	r3, [sp]
-30009a04:	e3a03015 	mov	r3, #21
-30009a08:	e58d3004 	str	r3, [sp, #4]
-30009a0c:	e28d3010 	add	r3, sp, #16
-30009a10:	e58d3008 	str	r3, [sp, #8]
-30009a14:	e59f0090 	ldr	r0, [pc, #144]	; 30009aac <soft_delay_init+0xd0>
-30009a18:	e3a01c01 	mov	r1, #256	; 0x100
-30009a1c:	e3a02000 	mov	r2, #0
-30009a20:	e59f3088 	ldr	r3, [pc, #136]	; 30009ab0 <soft_delay_init+0xd4>
-30009a24:	ebffe082 	bl	30001c34 <create_thread_ext>
-30009a28:	e1a03000 	mov	r3, r0
-30009a2c:	e58d301c 	str	r3, [sp, #28]
+30009c00:	e3a03000 	mov	r3, #0
+30009c04:	e58d3000 	str	r3, [sp]
+30009c08:	e3a03015 	mov	r3, #21
+30009c0c:	e58d3004 	str	r3, [sp, #4]
+30009c10:	e28d3010 	add	r3, sp, #16
+30009c14:	e58d3008 	str	r3, [sp, #8]
+30009c18:	e59f0090 	ldr	r0, [pc, #144]	; 30009cb0 <soft_delay_init+0xd0>
+30009c1c:	e3a01c01 	mov	r1, #256	; 0x100
+30009c20:	e3a02000 	mov	r2, #0
+30009c24:	e59f3088 	ldr	r3, [pc, #136]	; 30009cb4 <soft_delay_init+0xd4>
+30009c28:	ebffe001 	bl	30001c34 <create_thread_ext>
+30009c2c:	e1a03000 	mov	r3, r0
+30009c30:	e58d301c 	str	r3, [sp, #28]
 	if(tmp_id==-1)
-30009a30:	e59d301c 	ldr	r3, [sp, #28]
-30009a34:	e3730001 	cmn	r3, #1
-30009a38:	0a000017 	beq	30009a9c <soft_delay_init+0xc0>
+30009c34:	e59d301c 	ldr	r3, [sp, #28]
+30009c38:	e3730001 	cmn	r3, #1
+30009c3c:	0a000017 	beq	30009ca0 <soft_delay_init+0xc0>
 		return;
 	acoral_delay_self(1000);
-30009a3c:	e3a00ffa 	mov	r0, #1000	; 0x3e8
-30009a40:	ebffe3c3 	bl	30002954 <acoral_delay_self>
+30009c40:	e3a00ffa 	mov	r0, #1000	; 0x3e8
+30009c44:	ebffe342 	bl	30002954 <acoral_delay_self>
 	sample_100ms=sample/10;
-30009a44:	e59f3068 	ldr	r3, [pc, #104]	; 30009ab4 <soft_delay_init+0xd8>
-30009a48:	e5932000 	ldr	r2, [r3]
-30009a4c:	e59f3064 	ldr	r3, [pc, #100]	; 30009ab8 <soft_delay_init+0xdc>
-30009a50:	e0831392 	umull	r1, r3, r2, r3
-30009a54:	e1a021a3 	lsr	r2, r3, #3
-30009a58:	e59f305c 	ldr	r3, [pc, #92]	; 30009abc <soft_delay_init+0xe0>
-30009a5c:	e5832000 	str	r2, [r3]
+30009c48:	e59f3068 	ldr	r3, [pc, #104]	; 30009cb8 <soft_delay_init+0xd8>
+30009c4c:	e5932000 	ldr	r2, [r3]
+30009c50:	e59f3064 	ldr	r3, [pc, #100]	; 30009cbc <soft_delay_init+0xdc>
+30009c54:	e0831392 	umull	r1, r3, r2, r3
+30009c58:	e1a021a3 	lsr	r2, r3, #3
+30009c5c:	e59f305c 	ldr	r3, [pc, #92]	; 30009cc0 <soft_delay_init+0xe0>
+30009c60:	e5832000 	str	r2, [r3]
 	/*这里daemo回收进程还没启动，不能使用acoral_kill_thread*/
 	thread=(acoral_thread_t *)acoral_get_res_by_id(tmp_id);
-30009a60:	e59d001c 	ldr	r0, [sp, #28]
-30009a64:	ebffe77b 	bl	30003858 <acoral_get_res_by_id>
-30009a68:	e1a03000 	mov	r3, r0
-30009a6c:	e58d3018 	str	r3, [sp, #24]
+30009c64:	e59d001c 	ldr	r0, [sp, #28]
+30009c68:	ebffe6fa 	bl	30003858 <acoral_get_res_by_id>
+30009c6c:	e1a03000 	mov	r3, r0
+30009c70:	e58d3018 	str	r3, [sp, #24]
 	HAL_ENTER_CRITICAL();
-30009a70:	ebffdf1f 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-30009a74:	e1a03000 	mov	r3, r0
-30009a78:	e58d3014 	str	r3, [sp, #20]
+30009c74:	ebffde9e 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+30009c78:	e1a03000 	mov	r3, r0
+30009c7c:	e58d3014 	str	r3, [sp, #20]
 	acoral_unrdy_thread(thread);
-30009a7c:	e59d0018 	ldr	r0, [sp, #24]
-30009a80:	ebffe443 	bl	30002b94 <acoral_unrdy_thread>
+30009c80:	e59d0018 	ldr	r0, [sp, #24]
+30009c84:	ebffe3c2 	bl	30002b94 <acoral_unrdy_thread>
 	acoral_release_thread((acoral_res_t *)thread);
-30009a84:	e59d3018 	ldr	r3, [sp, #24]
-30009a88:	e1a00003 	mov	r0, r3
-30009a8c:	ebffe31e 	bl	3000270c <acoral_release_thread>
+30009c88:	e59d3018 	ldr	r3, [sp, #24]
+30009c8c:	e1a00003 	mov	r0, r3
+30009c90:	ebffe29d 	bl	3000270c <acoral_release_thread>
 	HAL_EXIT_CRITICAL();
-30009a90:	e59d0014 	ldr	r0, [sp, #20]
-30009a94:	ebffdf14 	bl	300016ec <HAL_INTR_RESTORE>
-30009a98:	ea000000 	b	30009aa0 <soft_delay_init+0xc4>
+30009c94:	e59d0014 	ldr	r0, [sp, #20]
+30009c98:	ebffde93 	bl	300016ec <HAL_INTR_RESTORE>
+30009c9c:	ea000000 	b	30009ca4 <soft_delay_init+0xc4>
 	data.cpu=acoral_current_cpu;
 	data.prio=ACORAL_TMP_PRIO;
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
 	tmp_id=acoral_create_thread_ext(delay_task,256,NULL,"softdelay",NULL,ACORAL_SCHED_POLICY_COMM,&data);
 	if(tmp_id==-1)
 		return;
-30009a9c:	e1a00000 	nop			; (mov r0, r0)
+30009ca0:	e1a00000 	nop			; (mov r0, r0)
 	thread=(acoral_thread_t *)acoral_get_res_by_id(tmp_id);
 	HAL_ENTER_CRITICAL();
 	acoral_unrdy_thread(thread);
 	acoral_release_thread((acoral_res_t *)thread);
 	HAL_EXIT_CRITICAL();
 }
-30009aa0:	e28dd024 	add	sp, sp, #36	; 0x24
-30009aa4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009aa8:	e12fff1e 	bx	lr
-30009aac:	3000995c 	.word	0x3000995c
-30009ab0:	3000e784 	.word	0x3000e784
-30009ab4:	3001041c 	.word	0x3001041c
-30009ab8:	cccccccd 	.word	0xcccccccd
-30009abc:	3000fa9c 	.word	0x3000fa9c
+30009ca4:	e28dd024 	add	sp, sp, #36	; 0x24
+30009ca8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009cac:	e12fff1e 	bx	lr
+30009cb0:	30009b60 	.word	0x30009b60
+30009cb4:	3000e988 	.word	0x3000e988
+30009cb8:	30010628 	.word	0x30010628
+30009cbc:	cccccccd 	.word	0xcccccccd
+30009cc0:	3000fca8 	.word	0x3000fca8
 
-30009ac0 <dummy_print>:
+30009cc4 <dummy_print>:
 #include<type.h>
 acoral_32 dummy_print(const acoral_char *fmt, ...){
-30009ac0:	e92d000f 	push	{r0, r1, r2, r3}
+30009cc4:	e92d000f 	push	{r0, r1, r2, r3}
 }
-30009ac4:	e28dd010 	add	sp, sp, #16
-30009ac8:	e12fff1e 	bx	lr
+30009cc8:	e28dd010 	add	sp, sp, #16
+30009ccc:	e12fff1e 	bx	lr
 
-30009acc <acoral_ffs>:
+30009cd0 <acoral_ffs>:
 #include<type.h>
 #include<bitops.h>
 acoral_u32 acoral_ffs(acoral_u32 word)
 {
-30009acc:	e24dd010 	sub	sp, sp, #16
-30009ad0:	e58d0004 	str	r0, [sp, #4]
+30009cd0:	e24dd010 	sub	sp, sp, #16
+30009cd4:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 k;
 	k = 31;
-30009ad4:	e3a0301f 	mov	r3, #31
-30009ad8:	e58d300c 	str	r3, [sp, #12]
+30009cd8:	e3a0301f 	mov	r3, #31
+30009cdc:	e58d300c 	str	r3, [sp, #12]
 	if (word & 0x0000ffff) { k -= 16; word <<= 16; }
-30009adc:	e59d3004 	ldr	r3, [sp, #4]
-30009ae0:	e1a03803 	lsl	r3, r3, #16
-30009ae4:	e1a03823 	lsr	r3, r3, #16
-30009ae8:	e3530000 	cmp	r3, #0
-30009aec:	0a000005 	beq	30009b08 <acoral_ffs+0x3c>
-30009af0:	e59d300c 	ldr	r3, [sp, #12]
-30009af4:	e2433010 	sub	r3, r3, #16
-30009af8:	e58d300c 	str	r3, [sp, #12]
-30009afc:	e59d3004 	ldr	r3, [sp, #4]
-30009b00:	e1a03803 	lsl	r3, r3, #16
-30009b04:	e58d3004 	str	r3, [sp, #4]
+30009ce0:	e59d3004 	ldr	r3, [sp, #4]
+30009ce4:	e1a03803 	lsl	r3, r3, #16
+30009ce8:	e1a03823 	lsr	r3, r3, #16
+30009cec:	e3530000 	cmp	r3, #0
+30009cf0:	0a000005 	beq	30009d0c <acoral_ffs+0x3c>
+30009cf4:	e59d300c 	ldr	r3, [sp, #12]
+30009cf8:	e2433010 	sub	r3, r3, #16
+30009cfc:	e58d300c 	str	r3, [sp, #12]
+30009d00:	e59d3004 	ldr	r3, [sp, #4]
+30009d04:	e1a03803 	lsl	r3, r3, #16
+30009d08:	e58d3004 	str	r3, [sp, #4]
 	if (word & 0x00ff0000) { k -= 8;  word <<= 8;  }
-30009b08:	e59d3004 	ldr	r3, [sp, #4]
-30009b0c:	e20338ff 	and	r3, r3, #16711680	; 0xff0000
-30009b10:	e3530000 	cmp	r3, #0
-30009b14:	0a000005 	beq	30009b30 <acoral_ffs+0x64>
-30009b18:	e59d300c 	ldr	r3, [sp, #12]
-30009b1c:	e2433008 	sub	r3, r3, #8
-30009b20:	e58d300c 	str	r3, [sp, #12]
-30009b24:	e59d3004 	ldr	r3, [sp, #4]
-30009b28:	e1a03403 	lsl	r3, r3, #8
-30009b2c:	e58d3004 	str	r3, [sp, #4]
+30009d0c:	e59d3004 	ldr	r3, [sp, #4]
+30009d10:	e20338ff 	and	r3, r3, #16711680	; 0xff0000
+30009d14:	e3530000 	cmp	r3, #0
+30009d18:	0a000005 	beq	30009d34 <acoral_ffs+0x64>
+30009d1c:	e59d300c 	ldr	r3, [sp, #12]
+30009d20:	e2433008 	sub	r3, r3, #8
+30009d24:	e58d300c 	str	r3, [sp, #12]
+30009d28:	e59d3004 	ldr	r3, [sp, #4]
+30009d2c:	e1a03403 	lsl	r3, r3, #8
+30009d30:	e58d3004 	str	r3, [sp, #4]
 	if (word & 0x0f000000) { k -= 4;  word <<= 4;  }
-30009b30:	e59d3004 	ldr	r3, [sp, #4]
-30009b34:	e203340f 	and	r3, r3, #251658240	; 0xf000000
-30009b38:	e3530000 	cmp	r3, #0
-30009b3c:	0a000005 	beq	30009b58 <acoral_ffs+0x8c>
-30009b40:	e59d300c 	ldr	r3, [sp, #12]
-30009b44:	e2433004 	sub	r3, r3, #4
-30009b48:	e58d300c 	str	r3, [sp, #12]
-30009b4c:	e59d3004 	ldr	r3, [sp, #4]
-30009b50:	e1a03203 	lsl	r3, r3, #4
-30009b54:	e58d3004 	str	r3, [sp, #4]
+30009d34:	e59d3004 	ldr	r3, [sp, #4]
+30009d38:	e203340f 	and	r3, r3, #251658240	; 0xf000000
+30009d3c:	e3530000 	cmp	r3, #0
+30009d40:	0a000005 	beq	30009d5c <acoral_ffs+0x8c>
+30009d44:	e59d300c 	ldr	r3, [sp, #12]
+30009d48:	e2433004 	sub	r3, r3, #4
+30009d4c:	e58d300c 	str	r3, [sp, #12]
+30009d50:	e59d3004 	ldr	r3, [sp, #4]
+30009d54:	e1a03203 	lsl	r3, r3, #4
+30009d58:	e58d3004 	str	r3, [sp, #4]
 	if (word & 0x30000000) { k -= 2;  word <<= 2;  }
-30009b58:	e59d3004 	ldr	r3, [sp, #4]
-30009b5c:	e2033203 	and	r3, r3, #805306368	; 0x30000000
-30009b60:	e3530000 	cmp	r3, #0
-30009b64:	0a000005 	beq	30009b80 <acoral_ffs+0xb4>
-30009b68:	e59d300c 	ldr	r3, [sp, #12]
-30009b6c:	e2433002 	sub	r3, r3, #2
-30009b70:	e58d300c 	str	r3, [sp, #12]
-30009b74:	e59d3004 	ldr	r3, [sp, #4]
-30009b78:	e1a03103 	lsl	r3, r3, #2
-30009b7c:	e58d3004 	str	r3, [sp, #4]
+30009d5c:	e59d3004 	ldr	r3, [sp, #4]
+30009d60:	e2033203 	and	r3, r3, #805306368	; 0x30000000
+30009d64:	e3530000 	cmp	r3, #0
+30009d68:	0a000005 	beq	30009d84 <acoral_ffs+0xb4>
+30009d6c:	e59d300c 	ldr	r3, [sp, #12]
+30009d70:	e2433002 	sub	r3, r3, #2
+30009d74:	e58d300c 	str	r3, [sp, #12]
+30009d78:	e59d3004 	ldr	r3, [sp, #4]
+30009d7c:	e1a03103 	lsl	r3, r3, #2
+30009d80:	e58d3004 	str	r3, [sp, #4]
 	if (word & 0x40000000) { k -= 1; }
-30009b80:	e59d3004 	ldr	r3, [sp, #4]
-30009b84:	e2033101 	and	r3, r3, #1073741824	; 0x40000000
-30009b88:	e3530000 	cmp	r3, #0
-30009b8c:	0a000002 	beq	30009b9c <acoral_ffs+0xd0>
-30009b90:	e59d300c 	ldr	r3, [sp, #12]
-30009b94:	e2433001 	sub	r3, r3, #1
-30009b98:	e58d300c 	str	r3, [sp, #12]
+30009d84:	e59d3004 	ldr	r3, [sp, #4]
+30009d88:	e2033101 	and	r3, r3, #1073741824	; 0x40000000
+30009d8c:	e3530000 	cmp	r3, #0
+30009d90:	0a000002 	beq	30009da0 <acoral_ffs+0xd0>
+30009d94:	e59d300c 	ldr	r3, [sp, #12]
+30009d98:	e2433001 	sub	r3, r3, #1
+30009d9c:	e58d300c 	str	r3, [sp, #12]
         return k;
-30009b9c:	e59d300c 	ldr	r3, [sp, #12]
+30009da0:	e59d300c 	ldr	r3, [sp, #12]
 }
-30009ba0:	e1a00003 	mov	r0, r3
-30009ba4:	e28dd010 	add	sp, sp, #16
-30009ba8:	e12fff1e 	bx	lr
+30009da4:	e1a00003 	mov	r0, r3
+30009da8:	e28dd010 	add	sp, sp, #16
+30009dac:	e12fff1e 	bx	lr
 
-30009bac <acoral_find_first_bit>:
+30009db0 <acoral_find_first_bit>:
 
 acoral_u32 acoral_find_first_bit(const acoral_u32 *b,acoral_u32 length)
 {
-30009bac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009bb0:	e24dd014 	sub	sp, sp, #20
-30009bb4:	e58d0004 	str	r0, [sp, #4]
-30009bb8:	e58d1000 	str	r1, [sp]
+30009db0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009db4:	e24dd014 	sub	sp, sp, #20
+30009db8:	e58d0004 	str	r0, [sp, #4]
+30009dbc:	e58d1000 	str	r1, [sp]
 	acoral_u32 v;
 	acoral_u32 off;
 
 	for (off = 0; v = b[off], off < length; off++) {
-30009bbc:	e3a03000 	mov	r3, #0
-30009bc0:	e58d300c 	str	r3, [sp, #12]
-30009bc4:	ea000005 	b	30009be0 <acoral_find_first_bit+0x34>
+30009dc0:	e3a03000 	mov	r3, #0
+30009dc4:	e58d300c 	str	r3, [sp, #12]
+30009dc8:	ea000005 	b	30009de4 <acoral_find_first_bit+0x34>
 		if (v)
-30009bc8:	e59d3008 	ldr	r3, [sp, #8]
-30009bcc:	e3530000 	cmp	r3, #0
-30009bd0:	1a00000d 	bne	30009c0c <acoral_find_first_bit+0x60>
+30009dcc:	e59d3008 	ldr	r3, [sp, #8]
+30009dd0:	e3530000 	cmp	r3, #0
+30009dd4:	1a00000d 	bne	30009e10 <acoral_find_first_bit+0x60>
 acoral_u32 acoral_find_first_bit(const acoral_u32 *b,acoral_u32 length)
 {
 	acoral_u32 v;
 	acoral_u32 off;
 
 	for (off = 0; v = b[off], off < length; off++) {
-30009bd4:	e59d300c 	ldr	r3, [sp, #12]
-30009bd8:	e2833001 	add	r3, r3, #1
-30009bdc:	e58d300c 	str	r3, [sp, #12]
-30009be0:	e59d300c 	ldr	r3, [sp, #12]
-30009be4:	e1a02103 	lsl	r2, r3, #2
-30009be8:	e59d3004 	ldr	r3, [sp, #4]
-30009bec:	e0823003 	add	r3, r2, r3
-30009bf0:	e5933000 	ldr	r3, [r3]
-30009bf4:	e58d3008 	str	r3, [sp, #8]
-30009bf8:	e59d200c 	ldr	r2, [sp, #12]
-30009bfc:	e59d3000 	ldr	r3, [sp]
-30009c00:	e1520003 	cmp	r2, r3
-30009c04:	3affffef 	bcc	30009bc8 <acoral_find_first_bit+0x1c>
-30009c08:	ea000000 	b	30009c10 <acoral_find_first_bit+0x64>
+30009dd8:	e59d300c 	ldr	r3, [sp, #12]
+30009ddc:	e2833001 	add	r3, r3, #1
+30009de0:	e58d300c 	str	r3, [sp, #12]
+30009de4:	e59d300c 	ldr	r3, [sp, #12]
+30009de8:	e1a02103 	lsl	r2, r3, #2
+30009dec:	e59d3004 	ldr	r3, [sp, #4]
+30009df0:	e0823003 	add	r3, r2, r3
+30009df4:	e5933000 	ldr	r3, [r3]
+30009df8:	e58d3008 	str	r3, [sp, #8]
+30009dfc:	e59d200c 	ldr	r2, [sp, #12]
+30009e00:	e59d3000 	ldr	r3, [sp]
+30009e04:	e1520003 	cmp	r2, r3
+30009e08:	3affffef 	bcc	30009dcc <acoral_find_first_bit+0x1c>
+30009e0c:	ea000000 	b	30009e14 <acoral_find_first_bit+0x64>
 		if (v)
 			break;
-30009c0c:	e1a00000 	nop			; (mov r0, r0)
+30009e10:	e1a00000 	nop			; (mov r0, r0)
 	}
 	return acoral_ffs(v) + off * 32;
-30009c10:	e59d0008 	ldr	r0, [sp, #8]
-30009c14:	ebffffac 	bl	30009acc <acoral_ffs>
-30009c18:	e1a02000 	mov	r2, r0
-30009c1c:	e59d300c 	ldr	r3, [sp, #12]
-30009c20:	e1a03283 	lsl	r3, r3, #5
-30009c24:	e0823003 	add	r3, r2, r3
+30009e14:	e59d0008 	ldr	r0, [sp, #8]
+30009e18:	ebffffac 	bl	30009cd0 <acoral_ffs>
+30009e1c:	e1a02000 	mov	r2, r0
+30009e20:	e59d300c 	ldr	r3, [sp, #12]
+30009e24:	e1a03283 	lsl	r3, r3, #5
+30009e28:	e0823003 	add	r3, r2, r3
 }
-30009c28:	e1a00003 	mov	r0, r3
-30009c2c:	e28dd014 	add	sp, sp, #20
-30009c30:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009c34:	e12fff1e 	bx	lr
+30009e2c:	e1a00003 	mov	r0, r3
+30009e30:	e28dd014 	add	sp, sp, #20
+30009e34:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009e38:	e12fff1e 	bx	lr
 
-30009c38 <acoral_set_bit>:
+30009e3c <acoral_set_bit>:
 
 void acoral_set_bit(acoral_32 nr,acoral_u32 *bitmap)
 {
-30009c38:	e24dd018 	sub	sp, sp, #24
-30009c3c:	e58d0004 	str	r0, [sp, #4]
-30009c40:	e58d1000 	str	r1, [sp]
+30009e3c:	e24dd018 	sub	sp, sp, #24
+30009e40:	e58d0004 	str	r0, [sp, #4]
+30009e44:	e58d1000 	str	r1, [sp]
 	acoral_u32 oldval, mask = 1UL << (nr & 31);
-30009c44:	e59d3004 	ldr	r3, [sp, #4]
-30009c48:	e203301f 	and	r3, r3, #31
-30009c4c:	e3a02001 	mov	r2, #1
-30009c50:	e1a03312 	lsl	r3, r2, r3
-30009c54:	e58d3010 	str	r3, [sp, #16]
+30009e48:	e59d3004 	ldr	r3, [sp, #4]
+30009e4c:	e203301f 	and	r3, r3, #31
+30009e50:	e3a02001 	mov	r2, #1
+30009e54:	e1a03312 	lsl	r3, r2, r3
+30009e58:	e58d3010 	str	r3, [sp, #16]
 	acoral_u32 *p;
 	p =bitmap+(nr>>5);
-30009c58:	e59d3004 	ldr	r3, [sp, #4]
-30009c5c:	e1a032c3 	asr	r3, r3, #5
-30009c60:	e1a03103 	lsl	r3, r3, #2
-30009c64:	e59d2000 	ldr	r2, [sp]
-30009c68:	e0823003 	add	r3, r2, r3
-30009c6c:	e58d3014 	str	r3, [sp, #20]
+30009e5c:	e59d3004 	ldr	r3, [sp, #4]
+30009e60:	e1a032c3 	asr	r3, r3, #5
+30009e64:	e1a03103 	lsl	r3, r3, #2
+30009e68:	e59d2000 	ldr	r2, [sp]
+30009e6c:	e0823003 	add	r3, r2, r3
+30009e70:	e58d3014 	str	r3, [sp, #20]
 	oldval = *p;
-30009c70:	e59d3014 	ldr	r3, [sp, #20]
-30009c74:	e5933000 	ldr	r3, [r3]
-30009c78:	e58d300c 	str	r3, [sp, #12]
+30009e74:	e59d3014 	ldr	r3, [sp, #20]
+30009e78:	e5933000 	ldr	r3, [r3]
+30009e7c:	e58d300c 	str	r3, [sp, #12]
 	*p = oldval | mask;
-30009c7c:	e59d200c 	ldr	r2, [sp, #12]
-30009c80:	e59d3010 	ldr	r3, [sp, #16]
-30009c84:	e1822003 	orr	r2, r2, r3
-30009c88:	e59d3014 	ldr	r3, [sp, #20]
-30009c8c:	e5832000 	str	r2, [r3]
+30009e80:	e59d200c 	ldr	r2, [sp, #12]
+30009e84:	e59d3010 	ldr	r3, [sp, #16]
+30009e88:	e1822003 	orr	r2, r2, r3
+30009e8c:	e59d3014 	ldr	r3, [sp, #20]
+30009e90:	e5832000 	str	r2, [r3]
 }
-30009c90:	e28dd018 	add	sp, sp, #24
-30009c94:	e12fff1e 	bx	lr
+30009e94:	e28dd018 	add	sp, sp, #24
+30009e98:	e12fff1e 	bx	lr
 
-30009c98 <acoral_clear_bit>:
+30009e9c <acoral_clear_bit>:
 
 void acoral_clear_bit(acoral_32 nr,acoral_u32 *bitmap)
 {
-30009c98:	e24dd018 	sub	sp, sp, #24
-30009c9c:	e58d0004 	str	r0, [sp, #4]
-30009ca0:	e58d1000 	str	r1, [sp]
+30009e9c:	e24dd018 	sub	sp, sp, #24
+30009ea0:	e58d0004 	str	r0, [sp, #4]
+30009ea4:	e58d1000 	str	r1, [sp]
 	acoral_u32 oldval, mask = 1UL << (nr & 31);
-30009ca4:	e59d3004 	ldr	r3, [sp, #4]
-30009ca8:	e203301f 	and	r3, r3, #31
-30009cac:	e3a02001 	mov	r2, #1
-30009cb0:	e1a03312 	lsl	r3, r2, r3
-30009cb4:	e58d3010 	str	r3, [sp, #16]
+30009ea8:	e59d3004 	ldr	r3, [sp, #4]
+30009eac:	e203301f 	and	r3, r3, #31
+30009eb0:	e3a02001 	mov	r2, #1
+30009eb4:	e1a03312 	lsl	r3, r2, r3
+30009eb8:	e58d3010 	str	r3, [sp, #16]
 	acoral_u32 *p;
 	p =bitmap+(nr >> 5);
-30009cb8:	e59d3004 	ldr	r3, [sp, #4]
-30009cbc:	e1a032c3 	asr	r3, r3, #5
-30009cc0:	e1a03103 	lsl	r3, r3, #2
-30009cc4:	e59d2000 	ldr	r2, [sp]
-30009cc8:	e0823003 	add	r3, r2, r3
-30009ccc:	e58d3014 	str	r3, [sp, #20]
+30009ebc:	e59d3004 	ldr	r3, [sp, #4]
+30009ec0:	e1a032c3 	asr	r3, r3, #5
+30009ec4:	e1a03103 	lsl	r3, r3, #2
+30009ec8:	e59d2000 	ldr	r2, [sp]
+30009ecc:	e0823003 	add	r3, r2, r3
+30009ed0:	e58d3014 	str	r3, [sp, #20]
 	oldval = *p;
-30009cd0:	e59d3014 	ldr	r3, [sp, #20]
-30009cd4:	e5933000 	ldr	r3, [r3]
-30009cd8:	e58d300c 	str	r3, [sp, #12]
+30009ed4:	e59d3014 	ldr	r3, [sp, #20]
+30009ed8:	e5933000 	ldr	r3, [r3]
+30009edc:	e58d300c 	str	r3, [sp, #12]
 	*p = oldval &(~mask);
-30009cdc:	e59d3010 	ldr	r3, [sp, #16]
-30009ce0:	e1e02003 	mvn	r2, r3
-30009ce4:	e59d300c 	ldr	r3, [sp, #12]
-30009ce8:	e0022003 	and	r2, r2, r3
-30009cec:	e59d3014 	ldr	r3, [sp, #20]
-30009cf0:	e5832000 	str	r2, [r3]
+30009ee0:	e59d3010 	ldr	r3, [sp, #16]
+30009ee4:	e1e02003 	mvn	r2, r3
+30009ee8:	e59d300c 	ldr	r3, [sp, #12]
+30009eec:	e0022003 	and	r2, r2, r3
+30009ef0:	e59d3014 	ldr	r3, [sp, #20]
+30009ef4:	e5832000 	str	r2, [r3]
 }
-30009cf4:	e28dd018 	add	sp, sp, #24
-30009cf8:	e12fff1e 	bx	lr
+30009ef8:	e28dd018 	add	sp, sp, #24
+30009efc:	e12fff1e 	bx	lr
 
-30009cfc <acoral_get_bit>:
+30009f00 <acoral_get_bit>:
 
 acoral_u32 acoral_get_bit(acoral_32 nr,acoral_u32 *bitmap)
 {
-30009cfc:	e24dd018 	sub	sp, sp, #24
-30009d00:	e58d0004 	str	r0, [sp, #4]
-30009d04:	e58d1000 	str	r1, [sp]
+30009f00:	e24dd018 	sub	sp, sp, #24
+30009f04:	e58d0004 	str	r0, [sp, #4]
+30009f08:	e58d1000 	str	r1, [sp]
 	acoral_u32 oldval, mask = 1UL << (nr & 31);
-30009d08:	e59d3004 	ldr	r3, [sp, #4]
-30009d0c:	e203301f 	and	r3, r3, #31
-30009d10:	e3a02001 	mov	r2, #1
-30009d14:	e1a03312 	lsl	r3, r2, r3
-30009d18:	e58d3010 	str	r3, [sp, #16]
+30009f0c:	e59d3004 	ldr	r3, [sp, #4]
+30009f10:	e203301f 	and	r3, r3, #31
+30009f14:	e3a02001 	mov	r2, #1
+30009f18:	e1a03312 	lsl	r3, r2, r3
+30009f1c:	e58d3010 	str	r3, [sp, #16]
 	acoral_u32 *p;
 	p =bitmap+(nr>>5);
-30009d1c:	e59d3004 	ldr	r3, [sp, #4]
-30009d20:	e1a032c3 	asr	r3, r3, #5
-30009d24:	e1a03103 	lsl	r3, r3, #2
-30009d28:	e59d2000 	ldr	r2, [sp]
-30009d2c:	e0823003 	add	r3, r2, r3
-30009d30:	e58d3014 	str	r3, [sp, #20]
+30009f20:	e59d3004 	ldr	r3, [sp, #4]
+30009f24:	e1a032c3 	asr	r3, r3, #5
+30009f28:	e1a03103 	lsl	r3, r3, #2
+30009f2c:	e59d2000 	ldr	r2, [sp]
+30009f30:	e0823003 	add	r3, r2, r3
+30009f34:	e58d3014 	str	r3, [sp, #20]
 	oldval = *p;
-30009d34:	e59d3014 	ldr	r3, [sp, #20]
-30009d38:	e5933000 	ldr	r3, [r3]
-30009d3c:	e58d300c 	str	r3, [sp, #12]
+30009f38:	e59d3014 	ldr	r3, [sp, #20]
+30009f3c:	e5933000 	ldr	r3, [r3]
+30009f40:	e58d300c 	str	r3, [sp, #12]
 	return oldval & mask;
-30009d40:	e59d200c 	ldr	r2, [sp, #12]
-30009d44:	e59d3010 	ldr	r3, [sp, #16]
-30009d48:	e0023003 	and	r3, r2, r3
+30009f44:	e59d200c 	ldr	r2, [sp, #12]
+30009f48:	e59d3010 	ldr	r3, [sp, #16]
+30009f4c:	e0023003 	and	r3, r2, r3
 }
-30009d4c:	e1a00003 	mov	r0, r3
-30009d50:	e28dd018 	add	sp, sp, #24
-30009d54:	e12fff1e 	bx	lr
+30009f50:	e1a00003 	mov	r0, r3
+30009f54:	e28dd018 	add	sp, sp, #24
+30009f58:	e12fff1e 	bx	lr
 
-30009d58 <acoral_prio_queue_add>:
+30009f5c <acoral_prio_queue_add>:
 #include<queue.h>
 #include<list.h>
 #include<bitops.h>
 void acoral_prio_queue_add(acoral_prio_array_t *array,acoral_u8 prio,acoral_list_t *list){
-30009d58:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009d5c:	e24dd01c 	sub	sp, sp, #28
-30009d60:	e58d000c 	str	r0, [sp, #12]
-30009d64:	e1a03001 	mov	r3, r1
-30009d68:	e58d2004 	str	r2, [sp, #4]
-30009d6c:	e5cd300b 	strb	r3, [sp, #11]
+30009f5c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009f60:	e24dd01c 	sub	sp, sp, #28
+30009f64:	e58d000c 	str	r0, [sp, #12]
+30009f68:	e1a03001 	mov	r3, r1
+30009f6c:	e58d2004 	str	r2, [sp, #4]
+30009f70:	e5cd300b 	strb	r3, [sp, #11]
 	acoral_queue_t *queue;
 	acoral_list_t *head;
 	array->num++;
-30009d70:	e59d300c 	ldr	r3, [sp, #12]
-30009d74:	e5933000 	ldr	r3, [r3]
-30009d78:	e2832001 	add	r2, r3, #1
-30009d7c:	e59d300c 	ldr	r3, [sp, #12]
-30009d80:	e5832000 	str	r2, [r3]
+30009f74:	e59d300c 	ldr	r3, [sp, #12]
+30009f78:	e5933000 	ldr	r3, [r3]
+30009f7c:	e2832001 	add	r2, r3, #1
+30009f80:	e59d300c 	ldr	r3, [sp, #12]
+30009f84:	e5832000 	str	r2, [r3]
         queue=array->queue + prio;
-30009d84:	e59d300c 	ldr	r3, [sp, #12]
-30009d88:	e2831010 	add	r1, r3, #16
-30009d8c:	e5dd200b 	ldrb	r2, [sp, #11]
-30009d90:	e1a03002 	mov	r3, r2
-30009d94:	e1a03083 	lsl	r3, r3, #1
-30009d98:	e0833002 	add	r3, r3, r2
-30009d9c:	e1a03103 	lsl	r3, r3, #2
-30009da0:	e0813003 	add	r3, r1, r3
-30009da4:	e58d3010 	str	r3, [sp, #16]
+30009f88:	e59d300c 	ldr	r3, [sp, #12]
+30009f8c:	e2831010 	add	r1, r3, #16
+30009f90:	e5dd200b 	ldrb	r2, [sp, #11]
+30009f94:	e1a03002 	mov	r3, r2
+30009f98:	e1a03083 	lsl	r3, r3, #1
+30009f9c:	e0833002 	add	r3, r3, r2
+30009fa0:	e1a03103 	lsl	r3, r3, #2
+30009fa4:	e0813003 	add	r3, r1, r3
+30009fa8:	e58d3010 	str	r3, [sp, #16]
 	head=&queue->head;
-30009da8:	e59d3010 	ldr	r3, [sp, #16]
-30009dac:	e58d3014 	str	r3, [sp, #20]
+30009fac:	e59d3010 	ldr	r3, [sp, #16]
+30009fb0:	e58d3014 	str	r3, [sp, #20]
 	acoral_list_add2_tail(list,head);
-30009db0:	e59d0004 	ldr	r0, [sp, #4]
-30009db4:	e59d1014 	ldr	r1, [sp, #20]
-30009db8:	eb000080 	bl	30009fc0 <acoral_list_add2_tail>
+30009fb4:	e59d0004 	ldr	r0, [sp, #4]
+30009fb8:	e59d1014 	ldr	r1, [sp, #20]
+30009fbc:	eb000080 	bl	3000a1c4 <acoral_list_add2_tail>
 	acoral_set_bit(prio,array->bitmap);
-30009dbc:	e5dd200b 	ldrb	r2, [sp, #11]
-30009dc0:	e59d300c 	ldr	r3, [sp, #12]
-30009dc4:	e2833004 	add	r3, r3, #4
-30009dc8:	e1a00002 	mov	r0, r2
-30009dcc:	e1a01003 	mov	r1, r3
-30009dd0:	ebffff98 	bl	30009c38 <acoral_set_bit>
+30009fc0:	e5dd200b 	ldrb	r2, [sp, #11]
+30009fc4:	e59d300c 	ldr	r3, [sp, #12]
+30009fc8:	e2833004 	add	r3, r3, #4
+30009fcc:	e1a00002 	mov	r0, r2
+30009fd0:	e1a01003 	mov	r1, r3
+30009fd4:	ebffff98 	bl	30009e3c <acoral_set_bit>
 }
-30009dd4:	e28dd01c 	add	sp, sp, #28
-30009dd8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009ddc:	e12fff1e 	bx	lr
+30009fd8:	e28dd01c 	add	sp, sp, #28
+30009fdc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30009fe0:	e12fff1e 	bx	lr
 
-30009de0 <acoral_prio_queue_del>:
+30009fe4 <acoral_prio_queue_del>:
 
 void acoral_prio_queue_del(acoral_prio_array_t *array,acoral_u8 prio,acoral_list_t *list){
-30009de0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009de4:	e24dd01c 	sub	sp, sp, #28
-30009de8:	e58d000c 	str	r0, [sp, #12]
-30009dec:	e1a03001 	mov	r3, r1
-30009df0:	e58d2004 	str	r2, [sp, #4]
-30009df4:	e5cd300b 	strb	r3, [sp, #11]
+30009fe4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30009fe8:	e24dd01c 	sub	sp, sp, #28
+30009fec:	e58d000c 	str	r0, [sp, #12]
+30009ff0:	e1a03001 	mov	r3, r1
+30009ff4:	e58d2004 	str	r2, [sp, #4]
+30009ff8:	e5cd300b 	strb	r3, [sp, #11]
 	acoral_queue_t *queue;
 	acoral_list_t *head;
         queue= array->queue + prio;
-30009df8:	e59d300c 	ldr	r3, [sp, #12]
-30009dfc:	e2831010 	add	r1, r3, #16
-30009e00:	e5dd200b 	ldrb	r2, [sp, #11]
-30009e04:	e1a03002 	mov	r3, r2
-30009e08:	e1a03083 	lsl	r3, r3, #1
-30009e0c:	e0833002 	add	r3, r3, r2
-30009e10:	e1a03103 	lsl	r3, r3, #2
-30009e14:	e0813003 	add	r3, r1, r3
-30009e18:	e58d3010 	str	r3, [sp, #16]
+30009ffc:	e59d300c 	ldr	r3, [sp, #12]
+3000a000:	e2831010 	add	r1, r3, #16
+3000a004:	e5dd200b 	ldrb	r2, [sp, #11]
+3000a008:	e1a03002 	mov	r3, r2
+3000a00c:	e1a03083 	lsl	r3, r3, #1
+3000a010:	e0833002 	add	r3, r3, r2
+3000a014:	e1a03103 	lsl	r3, r3, #2
+3000a018:	e0813003 	add	r3, r1, r3
+3000a01c:	e58d3010 	str	r3, [sp, #16]
 	head=&queue->head;
-30009e1c:	e59d3010 	ldr	r3, [sp, #16]
-30009e20:	e58d3014 	str	r3, [sp, #20]
+3000a020:	e59d3010 	ldr	r3, [sp, #16]
+3000a024:	e58d3014 	str	r3, [sp, #20]
 	array->num--;
-30009e24:	e59d300c 	ldr	r3, [sp, #12]
-30009e28:	e5933000 	ldr	r3, [r3]
-30009e2c:	e2432001 	sub	r2, r3, #1
-30009e30:	e59d300c 	ldr	r3, [sp, #12]
-30009e34:	e5832000 	str	r2, [r3]
+3000a028:	e59d300c 	ldr	r3, [sp, #12]
+3000a02c:	e5933000 	ldr	r3, [r3]
+3000a030:	e2432001 	sub	r2, r3, #1
+3000a034:	e59d300c 	ldr	r3, [sp, #12]
+3000a038:	e5832000 	str	r2, [r3]
 	acoral_list_del(list);
-30009e38:	e59d0004 	ldr	r0, [sp, #4]
-30009e3c:	eb000072 	bl	3000a00c <acoral_list_del>
+3000a03c:	e59d0004 	ldr	r0, [sp, #4]
+3000a040:	eb000072 	bl	3000a210 <acoral_list_del>
 	if(acoral_list_empty(head))
-30009e40:	e59d3014 	ldr	r3, [sp, #20]
-30009e44:	e5932000 	ldr	r2, [r3]
-30009e48:	e59d3014 	ldr	r3, [sp, #20]
-30009e4c:	e1520003 	cmp	r2, r3
-30009e50:	1a000005 	bne	30009e6c <acoral_prio_queue_del+0x8c>
+3000a044:	e59d3014 	ldr	r3, [sp, #20]
+3000a048:	e5932000 	ldr	r2, [r3]
+3000a04c:	e59d3014 	ldr	r3, [sp, #20]
+3000a050:	e1520003 	cmp	r2, r3
+3000a054:	1a000005 	bne	3000a070 <acoral_prio_queue_del+0x8c>
 		acoral_clear_bit(prio,array->bitmap);
-30009e54:	e5dd200b 	ldrb	r2, [sp, #11]
-30009e58:	e59d300c 	ldr	r3, [sp, #12]
-30009e5c:	e2833004 	add	r3, r3, #4
-30009e60:	e1a00002 	mov	r0, r2
-30009e64:	e1a01003 	mov	r1, r3
-30009e68:	ebffff8a 	bl	30009c98 <acoral_clear_bit>
+3000a058:	e5dd200b 	ldrb	r2, [sp, #11]
+3000a05c:	e59d300c 	ldr	r3, [sp, #12]
+3000a060:	e2833004 	add	r3, r3, #4
+3000a064:	e1a00002 	mov	r0, r2
+3000a068:	e1a01003 	mov	r1, r3
+3000a06c:	ebffff8a 	bl	30009e9c <acoral_clear_bit>
 }
-30009e6c:	e28dd01c 	add	sp, sp, #28
-30009e70:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009e74:	e12fff1e 	bx	lr
+3000a070:	e28dd01c 	add	sp, sp, #28
+3000a074:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000a078:	e12fff1e 	bx	lr
 
-30009e78 <acoral_get_highprio>:
+3000a07c <acoral_get_highprio>:
 
 acoral_u32 acoral_get_highprio(acoral_prio_array_t *array){
-30009e78:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30009e7c:	e24dd00c 	sub	sp, sp, #12
-30009e80:	e58d0004 	str	r0, [sp, #4]
+3000a07c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000a080:	e24dd00c 	sub	sp, sp, #12
+3000a084:	e58d0004 	str	r0, [sp, #4]
 	return acoral_find_first_bit(array->bitmap,PRIO_BITMAP_SIZE);
-30009e84:	e59d3004 	ldr	r3, [sp, #4]
-30009e88:	e2833004 	add	r3, r3, #4
-30009e8c:	e1a00003 	mov	r0, r3
-30009e90:	e3a01003 	mov	r1, #3
-30009e94:	ebffff44 	bl	30009bac <acoral_find_first_bit>
-30009e98:	e1a03000 	mov	r3, r0
+3000a088:	e59d3004 	ldr	r3, [sp, #4]
+3000a08c:	e2833004 	add	r3, r3, #4
+3000a090:	e1a00003 	mov	r0, r3
+3000a094:	e3a01003 	mov	r1, #3
+3000a098:	ebffff44 	bl	30009db0 <acoral_find_first_bit>
+3000a09c:	e1a03000 	mov	r3, r0
 }
-30009e9c:	e1a00003 	mov	r0, r3
-30009ea0:	e28dd00c 	add	sp, sp, #12
-30009ea4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30009ea8:	e12fff1e 	bx	lr
+3000a0a0:	e1a00003 	mov	r0, r3
+3000a0a4:	e28dd00c 	add	sp, sp, #12
+3000a0a8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000a0ac:	e12fff1e 	bx	lr
 
-30009eac <acoral_prio_queue_init>:
+3000a0b0 <acoral_prio_queue_init>:
 
 void acoral_prio_queue_init(acoral_prio_array_t *array){
-30009eac:	e24dd018 	sub	sp, sp, #24
-30009eb0:	e58d0004 	str	r0, [sp, #4]
+3000a0b0:	e24dd018 	sub	sp, sp, #24
+3000a0b4:	e58d0004 	str	r0, [sp, #4]
   	acoral_u8 i;
 	acoral_queue_t *queue;
 	acoral_list_t *head;
 	array->num=0;
-30009eb4:	e59d3004 	ldr	r3, [sp, #4]
-30009eb8:	e3a02000 	mov	r2, #0
-30009ebc:	e5832000 	str	r2, [r3]
+3000a0b8:	e59d3004 	ldr	r3, [sp, #4]
+3000a0bc:	e3a02000 	mov	r2, #0
+3000a0c0:	e5832000 	str	r2, [r3]
 	for(i=0;i<PRIO_BITMAP_SIZE;i++)
-30009ec0:	e3a03000 	mov	r3, #0
-30009ec4:	e5cd300f 	strb	r3, [sp, #15]
-30009ec8:	ea00000a 	b	30009ef8 <acoral_prio_queue_init+0x4c>
+3000a0c4:	e3a03000 	mov	r3, #0
+3000a0c8:	e5cd300f 	strb	r3, [sp, #15]
+3000a0cc:	ea00000a 	b	3000a0fc <acoral_prio_queue_init+0x4c>
 	    array->bitmap[i]=0;
-30009ecc:	e5dd100f 	ldrb	r1, [sp, #15]
-30009ed0:	e59d2004 	ldr	r2, [sp, #4]
-30009ed4:	e3a03004 	mov	r3, #4
-30009ed8:	e1a01101 	lsl	r1, r1, #2
-30009edc:	e0812002 	add	r2, r1, r2
-30009ee0:	e0823003 	add	r3, r2, r3
-30009ee4:	e3a02000 	mov	r2, #0
-30009ee8:	e5832000 	str	r2, [r3]
+3000a0d0:	e5dd100f 	ldrb	r1, [sp, #15]
+3000a0d4:	e59d2004 	ldr	r2, [sp, #4]
+3000a0d8:	e3a03004 	mov	r3, #4
+3000a0dc:	e1a01101 	lsl	r1, r1, #2
+3000a0e0:	e0812002 	add	r2, r1, r2
+3000a0e4:	e0823003 	add	r3, r2, r3
+3000a0e8:	e3a02000 	mov	r2, #0
+3000a0ec:	e5832000 	str	r2, [r3]
 void acoral_prio_queue_init(acoral_prio_array_t *array){
   	acoral_u8 i;
 	acoral_queue_t *queue;
 	acoral_list_t *head;
 	array->num=0;
 	for(i=0;i<PRIO_BITMAP_SIZE;i++)
-30009eec:	e5dd300f 	ldrb	r3, [sp, #15]
-30009ef0:	e2833001 	add	r3, r3, #1
-30009ef4:	e5cd300f 	strb	r3, [sp, #15]
-30009ef8:	e5dd300f 	ldrb	r3, [sp, #15]
-30009efc:	e3530002 	cmp	r3, #2
-30009f00:	9afffff1 	bls	30009ecc <acoral_prio_queue_init+0x20>
+3000a0f0:	e5dd300f 	ldrb	r3, [sp, #15]
+3000a0f4:	e2833001 	add	r3, r3, #1
+3000a0f8:	e5cd300f 	strb	r3, [sp, #15]
+3000a0fc:	e5dd300f 	ldrb	r3, [sp, #15]
+3000a100:	e3530002 	cmp	r3, #2
+3000a104:	9afffff1 	bls	3000a0d0 <acoral_prio_queue_init+0x20>
 	    array->bitmap[i]=0;
   	for(i=0;i<ACORAL_MAX_PRIO_NUM;i++){
-30009f04:	e3a03000 	mov	r3, #0
-30009f08:	e5cd300f 	strb	r3, [sp, #15]
-30009f0c:	ea000013 	b	30009f60 <acoral_prio_queue_init+0xb4>
+3000a108:	e3a03000 	mov	r3, #0
+3000a10c:	e5cd300f 	strb	r3, [sp, #15]
+3000a110:	ea000013 	b	3000a164 <acoral_prio_queue_init+0xb4>
 	    queue= array->queue + i;
-30009f10:	e59d3004 	ldr	r3, [sp, #4]
-30009f14:	e2831010 	add	r1, r3, #16
-30009f18:	e5dd200f 	ldrb	r2, [sp, #15]
-30009f1c:	e1a03002 	mov	r3, r2
-30009f20:	e1a03083 	lsl	r3, r3, #1
-30009f24:	e0833002 	add	r3, r3, r2
-30009f28:	e1a03103 	lsl	r3, r3, #2
-30009f2c:	e0813003 	add	r3, r1, r3
-30009f30:	e58d3010 	str	r3, [sp, #16]
+3000a114:	e59d3004 	ldr	r3, [sp, #4]
+3000a118:	e2831010 	add	r1, r3, #16
+3000a11c:	e5dd200f 	ldrb	r2, [sp, #15]
+3000a120:	e1a03002 	mov	r3, r2
+3000a124:	e1a03083 	lsl	r3, r3, #1
+3000a128:	e0833002 	add	r3, r3, r2
+3000a12c:	e1a03103 	lsl	r3, r3, #2
+3000a130:	e0813003 	add	r3, r1, r3
+3000a134:	e58d3010 	str	r3, [sp, #16]
 	    head=&queue->head;
-30009f34:	e59d3010 	ldr	r3, [sp, #16]
-30009f38:	e58d3014 	str	r3, [sp, #20]
+3000a138:	e59d3010 	ldr	r3, [sp, #16]
+3000a13c:	e58d3014 	str	r3, [sp, #20]
 	    acoral_init_list(head);
-30009f3c:	e59d3014 	ldr	r3, [sp, #20]
-30009f40:	e59d2014 	ldr	r2, [sp, #20]
-30009f44:	e5832000 	str	r2, [r3]
-30009f48:	e59d3014 	ldr	r3, [sp, #20]
-30009f4c:	e59d2014 	ldr	r2, [sp, #20]
-30009f50:	e5832004 	str	r2, [r3, #4]
+3000a140:	e59d3014 	ldr	r3, [sp, #20]
+3000a144:	e59d2014 	ldr	r2, [sp, #20]
+3000a148:	e5832000 	str	r2, [r3]
+3000a14c:	e59d3014 	ldr	r3, [sp, #20]
+3000a150:	e59d2014 	ldr	r2, [sp, #20]
+3000a154:	e5832004 	str	r2, [r3, #4]
 	acoral_queue_t *queue;
 	acoral_list_t *head;
 	array->num=0;
 	for(i=0;i<PRIO_BITMAP_SIZE;i++)
 	    array->bitmap[i]=0;
   	for(i=0;i<ACORAL_MAX_PRIO_NUM;i++){
-30009f54:	e5dd300f 	ldrb	r3, [sp, #15]
-30009f58:	e2833001 	add	r3, r3, #1
-30009f5c:	e5cd300f 	strb	r3, [sp, #15]
-30009f60:	e5dd300f 	ldrb	r3, [sp, #15]
-30009f64:	e3530046 	cmp	r3, #70	; 0x46
-30009f68:	9affffe8 	bls	30009f10 <acoral_prio_queue_init+0x64>
+3000a158:	e5dd300f 	ldrb	r3, [sp, #15]
+3000a15c:	e2833001 	add	r3, r3, #1
+3000a160:	e5cd300f 	strb	r3, [sp, #15]
+3000a164:	e5dd300f 	ldrb	r3, [sp, #15]
+3000a168:	e3530046 	cmp	r3, #70	; 0x46
+3000a16c:	9affffe8 	bls	3000a114 <acoral_prio_queue_init+0x64>
 	    queue= array->queue + i;
 	    head=&queue->head;
 	    acoral_init_list(head);
 	} 	
 }
-30009f6c:	e28dd018 	add	sp, sp, #24
-30009f70:	e12fff1e 	bx	lr
+3000a170:	e28dd018 	add	sp, sp, #24
+3000a174:	e12fff1e 	bx	lr
 
-30009f74 <acoral_list_add>:
+3000a178 <acoral_list_add>:
 #include<list.h>
 void acoral_list_add(acoral_list_t *new, acoral_list_t *head)
 {
-30009f74:	e24dd008 	sub	sp, sp, #8
-30009f78:	e58d0004 	str	r0, [sp, #4]
-30009f7c:	e58d1000 	str	r1, [sp]
+3000a178:	e24dd008 	sub	sp, sp, #8
+3000a17c:	e58d0004 	str	r0, [sp, #4]
+3000a180:	e58d1000 	str	r1, [sp]
 	new->prev=head;	
-30009f80:	e59d3004 	ldr	r3, [sp, #4]
-30009f84:	e59d2000 	ldr	r2, [sp]
-30009f88:	e5832004 	str	r2, [r3, #4]
+3000a184:	e59d3004 	ldr	r3, [sp, #4]
+3000a188:	e59d2000 	ldr	r2, [sp]
+3000a18c:	e5832004 	str	r2, [r3, #4]
 	new->next=head->next;	
-30009f8c:	e59d3000 	ldr	r3, [sp]
-30009f90:	e5932000 	ldr	r2, [r3]
-30009f94:	e59d3004 	ldr	r3, [sp, #4]
-30009f98:	e5832000 	str	r2, [r3]
+3000a190:	e59d3000 	ldr	r3, [sp]
+3000a194:	e5932000 	ldr	r2, [r3]
+3000a198:	e59d3004 	ldr	r3, [sp, #4]
+3000a19c:	e5832000 	str	r2, [r3]
 	head->next->prev=new;	
-30009f9c:	e59d3000 	ldr	r3, [sp]
-30009fa0:	e5933000 	ldr	r3, [r3]
-30009fa4:	e59d2004 	ldr	r2, [sp, #4]
-30009fa8:	e5832004 	str	r2, [r3, #4]
+3000a1a0:	e59d3000 	ldr	r3, [sp]
+3000a1a4:	e5933000 	ldr	r3, [r3]
+3000a1a8:	e59d2004 	ldr	r2, [sp, #4]
+3000a1ac:	e5832004 	str	r2, [r3, #4]
 	head->next=new;	
-30009fac:	e59d3000 	ldr	r3, [sp]
-30009fb0:	e59d2004 	ldr	r2, [sp, #4]
-30009fb4:	e5832000 	str	r2, [r3]
+3000a1b0:	e59d3000 	ldr	r3, [sp]
+3000a1b4:	e59d2004 	ldr	r2, [sp, #4]
+3000a1b8:	e5832000 	str	r2, [r3]
 }
-30009fb8:	e28dd008 	add	sp, sp, #8
-30009fbc:	e12fff1e 	bx	lr
+3000a1bc:	e28dd008 	add	sp, sp, #8
+3000a1c0:	e12fff1e 	bx	lr
 
-30009fc0 <acoral_list_add2_tail>:
+3000a1c4 <acoral_list_add2_tail>:
 
 void acoral_list_add2_tail(acoral_list_t *new, acoral_list_t *head)
 {
-30009fc0:	e24dd008 	sub	sp, sp, #8
-30009fc4:	e58d0004 	str	r0, [sp, #4]
-30009fc8:	e58d1000 	str	r1, [sp]
+3000a1c4:	e24dd008 	sub	sp, sp, #8
+3000a1c8:	e58d0004 	str	r0, [sp, #4]
+3000a1cc:	e58d1000 	str	r1, [sp]
 	new->prev=head->prev;
-30009fcc:	e59d3000 	ldr	r3, [sp]
-30009fd0:	e5932004 	ldr	r2, [r3, #4]
-30009fd4:	e59d3004 	ldr	r3, [sp, #4]
-30009fd8:	e5832004 	str	r2, [r3, #4]
+3000a1d0:	e59d3000 	ldr	r3, [sp]
+3000a1d4:	e5932004 	ldr	r2, [r3, #4]
+3000a1d8:	e59d3004 	ldr	r3, [sp, #4]
+3000a1dc:	e5832004 	str	r2, [r3, #4]
 	new->next=head;
-30009fdc:	e59d3004 	ldr	r3, [sp, #4]
-30009fe0:	e59d2000 	ldr	r2, [sp]
-30009fe4:	e5832000 	str	r2, [r3]
+3000a1e0:	e59d3004 	ldr	r3, [sp, #4]
+3000a1e4:	e59d2000 	ldr	r2, [sp]
+3000a1e8:	e5832000 	str	r2, [r3]
 	head->prev->next=new;
-30009fe8:	e59d3000 	ldr	r3, [sp]
-30009fec:	e5933004 	ldr	r3, [r3, #4]
-30009ff0:	e59d2004 	ldr	r2, [sp, #4]
-30009ff4:	e5832000 	str	r2, [r3]
+3000a1ec:	e59d3000 	ldr	r3, [sp]
+3000a1f0:	e5933004 	ldr	r3, [r3, #4]
+3000a1f4:	e59d2004 	ldr	r2, [sp, #4]
+3000a1f8:	e5832000 	str	r2, [r3]
 	head->prev=new;
-30009ff8:	e59d3000 	ldr	r3, [sp]
-30009ffc:	e59d2004 	ldr	r2, [sp, #4]
-3000a000:	e5832004 	str	r2, [r3, #4]
+3000a1fc:	e59d3000 	ldr	r3, [sp]
+3000a200:	e59d2004 	ldr	r2, [sp, #4]
+3000a204:	e5832004 	str	r2, [r3, #4]
 }
-3000a004:	e28dd008 	add	sp, sp, #8
-3000a008:	e12fff1e 	bx	lr
+3000a208:	e28dd008 	add	sp, sp, #8
+3000a20c:	e12fff1e 	bx	lr
 
-3000a00c <acoral_list_del>:
+3000a210 <acoral_list_del>:
 
 void acoral_list_del(acoral_list_t *entry)
 {
-3000a00c:	e24dd008 	sub	sp, sp, #8
-3000a010:	e58d0004 	str	r0, [sp, #4]
+3000a210:	e24dd008 	sub	sp, sp, #8
+3000a214:	e58d0004 	str	r0, [sp, #4]
 	entry->prev->next= entry->next;
-3000a014:	e59d3004 	ldr	r3, [sp, #4]
-3000a018:	e5933004 	ldr	r3, [r3, #4]
-3000a01c:	e59d2004 	ldr	r2, [sp, #4]
-3000a020:	e5922000 	ldr	r2, [r2]
-3000a024:	e5832000 	str	r2, [r3]
+3000a218:	e59d3004 	ldr	r3, [sp, #4]
+3000a21c:	e5933004 	ldr	r3, [r3, #4]
+3000a220:	e59d2004 	ldr	r2, [sp, #4]
+3000a224:	e5922000 	ldr	r2, [r2]
+3000a228:	e5832000 	str	r2, [r3]
 	entry->next->prev=entry->prev;
-3000a028:	e59d3004 	ldr	r3, [sp, #4]
-3000a02c:	e5933000 	ldr	r3, [r3]
-3000a030:	e59d2004 	ldr	r2, [sp, #4]
-3000a034:	e5922004 	ldr	r2, [r2, #4]
-3000a038:	e5832004 	str	r2, [r3, #4]
+3000a22c:	e59d3004 	ldr	r3, [sp, #4]
+3000a230:	e5933000 	ldr	r3, [r3]
+3000a234:	e59d2004 	ldr	r2, [sp, #4]
+3000a238:	e5922004 	ldr	r2, [r2, #4]
+3000a23c:	e5832004 	str	r2, [r3, #4]
 	entry->next = entry;
-3000a03c:	e59d3004 	ldr	r3, [sp, #4]
-3000a040:	e59d2004 	ldr	r2, [sp, #4]
-3000a044:	e5832000 	str	r2, [r3]
+3000a240:	e59d3004 	ldr	r3, [sp, #4]
+3000a244:	e59d2004 	ldr	r2, [sp, #4]
+3000a248:	e5832000 	str	r2, [r3]
 	entry->prev = entry;
-3000a048:	e59d3004 	ldr	r3, [sp, #4]
-3000a04c:	e59d2004 	ldr	r2, [sp, #4]
-3000a050:	e5832004 	str	r2, [r3, #4]
+3000a24c:	e59d3004 	ldr	r3, [sp, #4]
+3000a250:	e59d2004 	ldr	r2, [sp, #4]
+3000a254:	e5832004 	str	r2, [r3, #4]
 }
-3000a054:	e28dd008 	add	sp, sp, #8
-3000a058:	e12fff1e 	bx	lr
+3000a258:	e28dd008 	add	sp, sp, #8
+3000a25c:	e12fff1e 	bx	lr
 
-3000a05c <do_div>:
+3000a260 <do_div>:
 #define SPACE	8		/* space if plus */
 #define LEFT	16		/* left justified */
 #define SPECIAL	32		/* 0x */
 #define LARGE	64		/* use 'ABCDEF' instead of 'abcdef' */
 static acoral_32 do_div(acoral_64 *n,acoral_32 base)		
 {								
-3000a05c:	e92d4010 	push	{r4, lr}
-3000a060:	e24dd010 	sub	sp, sp, #16
-3000a064:	e58d0004 	str	r0, [sp, #4]
-3000a068:	e58d1000 	str	r1, [sp]
+3000a260:	e92d4010 	push	{r4, lr}
+3000a264:	e24dd010 	sub	sp, sp, #16
+3000a268:	e58d0004 	str	r0, [sp, #4]
+3000a26c:	e58d1000 	str	r1, [sp]
 	acoral_32 __res;				
 	__res = ((acoral_u32)*n) % (acoral_u32)base;
-3000a06c:	e59d3004 	ldr	r3, [sp, #4]
-3000a070:	e8930018 	ldm	r3, {r3, r4}
-3000a074:	e1a02003 	mov	r2, r3
-3000a078:	e59d3000 	ldr	r3, [sp]
-3000a07c:	e1a00002 	mov	r0, r2
-3000a080:	e1a01003 	mov	r1, r3
-3000a084:	eb000e9b 	bl	3000daf8 <__aeabi_uidivmod>
-3000a088:	e1a03001 	mov	r3, r1
-3000a08c:	e58d300c 	str	r3, [sp, #12]
+3000a270:	e59d3004 	ldr	r3, [sp, #4]
+3000a274:	e8930018 	ldm	r3, {r3, r4}
+3000a278:	e1a02003 	mov	r2, r3
+3000a27c:	e59d3000 	ldr	r3, [sp]
+3000a280:	e1a00002 	mov	r0, r2
+3000a284:	e1a01003 	mov	r1, r3
+3000a288:	eb000e9b 	bl	3000dcfc <__aeabi_uidivmod>
+3000a28c:	e1a03001 	mov	r3, r1
+3000a290:	e58d300c 	str	r3, [sp, #12]
 	*n = ((acoral_u32)*n) / (acoral_u32)base;	
-3000a090:	e59d3004 	ldr	r3, [sp, #4]
-3000a094:	e8930018 	ldm	r3, {r3, r4}
-3000a098:	e1a02003 	mov	r2, r3
-3000a09c:	e59d3000 	ldr	r3, [sp]
-3000a0a0:	e1a00002 	mov	r0, r2
-3000a0a4:	e1a01003 	mov	r1, r3
-3000a0a8:	eb000e55 	bl	3000da04 <__aeabi_uidiv>
-3000a0ac:	e1a03000 	mov	r3, r0
-3000a0b0:	e3a04000 	mov	r4, #0
-3000a0b4:	e59d2004 	ldr	r2, [sp, #4]
-3000a0b8:	e8820018 	stm	r2, {r3, r4}
+3000a294:	e59d3004 	ldr	r3, [sp, #4]
+3000a298:	e8930018 	ldm	r3, {r3, r4}
+3000a29c:	e1a02003 	mov	r2, r3
+3000a2a0:	e59d3000 	ldr	r3, [sp]
+3000a2a4:	e1a00002 	mov	r0, r2
+3000a2a8:	e1a01003 	mov	r1, r3
+3000a2ac:	eb000e55 	bl	3000dc08 <__aeabi_uidiv>
+3000a2b0:	e1a03000 	mov	r3, r0
+3000a2b4:	e3a04000 	mov	r4, #0
+3000a2b8:	e59d2004 	ldr	r2, [sp, #4]
+3000a2bc:	e8820018 	stm	r2, {r3, r4}
 	return __res;					
-3000a0bc:	e59d300c 	ldr	r3, [sp, #12]
+3000a2c0:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000a0c0:	e1a00003 	mov	r0, r3
-3000a0c4:	e28dd010 	add	sp, sp, #16
-3000a0c8:	e8bd4010 	pop	{r4, lr}
-3000a0cc:	e12fff1e 	bx	lr
+3000a2c4:	e1a00003 	mov	r0, r3
+3000a2c8:	e28dd010 	add	sp, sp, #16
+3000a2cc:	e8bd4010 	pop	{r4, lr}
+3000a2d0:	e12fff1e 	bx	lr
 
-3000a0d0 <skip_atoi>:
+3000a2d4 <skip_atoi>:
 
 
 acoral_32 skip_atoi(const acoral_char **s)
     {/*change the string "s" to digit*/
-3000a0d0:	e24dd010 	sub	sp, sp, #16
-3000a0d4:	e58d0004 	str	r0, [sp, #4]
+3000a2d4:	e24dd010 	sub	sp, sp, #16
+3000a2d8:	e58d0004 	str	r0, [sp, #4]
             acoral_32 i=0;
-3000a0d8:	e3a03000 	mov	r3, #0
-3000a0dc:	e58d300c 	str	r3, [sp, #12]
+3000a2dc:	e3a03000 	mov	r3, #0
+3000a2e0:	e58d300c 	str	r3, [sp, #12]
  
             while (IS_DIGIT(**s))
-3000a0e0:	ea00000e 	b	3000a120 <skip_atoi+0x50>
+3000a2e4:	ea00000e 	b	3000a324 <skip_atoi+0x50>
                     i = i*10 + *((*s)++) - '0';
-3000a0e4:	e59d200c 	ldr	r2, [sp, #12]
-3000a0e8:	e1a03002 	mov	r3, r2
-3000a0ec:	e1a03103 	lsl	r3, r3, #2
-3000a0f0:	e0833002 	add	r3, r3, r2
-3000a0f4:	e1a03083 	lsl	r3, r3, #1
-3000a0f8:	e1a01003 	mov	r1, r3
-3000a0fc:	e59d3004 	ldr	r3, [sp, #4]
-3000a100:	e5933000 	ldr	r3, [r3]
-3000a104:	e5d32000 	ldrb	r2, [r3]
-3000a108:	e0812002 	add	r2, r1, r2
-3000a10c:	e2422030 	sub	r2, r2, #48	; 0x30
-3000a110:	e58d200c 	str	r2, [sp, #12]
-3000a114:	e2832001 	add	r2, r3, #1
-3000a118:	e59d3004 	ldr	r3, [sp, #4]
-3000a11c:	e5832000 	str	r2, [r3]
+3000a2e8:	e59d200c 	ldr	r2, [sp, #12]
+3000a2ec:	e1a03002 	mov	r3, r2
+3000a2f0:	e1a03103 	lsl	r3, r3, #2
+3000a2f4:	e0833002 	add	r3, r3, r2
+3000a2f8:	e1a03083 	lsl	r3, r3, #1
+3000a2fc:	e1a01003 	mov	r1, r3
+3000a300:	e59d3004 	ldr	r3, [sp, #4]
+3000a304:	e5933000 	ldr	r3, [r3]
+3000a308:	e5d32000 	ldrb	r2, [r3]
+3000a30c:	e0812002 	add	r2, r1, r2
+3000a310:	e2422030 	sub	r2, r2, #48	; 0x30
+3000a314:	e58d200c 	str	r2, [sp, #12]
+3000a318:	e2832001 	add	r2, r3, #1
+3000a31c:	e59d3004 	ldr	r3, [sp, #4]
+3000a320:	e5832000 	str	r2, [r3]
 
 acoral_32 skip_atoi(const acoral_char **s)
     {/*change the string "s" to digit*/
             acoral_32 i=0;
  
             while (IS_DIGIT(**s))
-3000a120:	e59d3004 	ldr	r3, [sp, #4]
-3000a124:	e5933000 	ldr	r3, [r3]
-3000a128:	e5d33000 	ldrb	r3, [r3]
-3000a12c:	e353002f 	cmp	r3, #47	; 0x2f
-3000a130:	9a000004 	bls	3000a148 <skip_atoi+0x78>
-3000a134:	e59d3004 	ldr	r3, [sp, #4]
-3000a138:	e5933000 	ldr	r3, [r3]
-3000a13c:	e5d33000 	ldrb	r3, [r3]
-3000a140:	e3530038 	cmp	r3, #56	; 0x38
-3000a144:	9affffe6 	bls	3000a0e4 <skip_atoi+0x14>
+3000a324:	e59d3004 	ldr	r3, [sp, #4]
+3000a328:	e5933000 	ldr	r3, [r3]
+3000a32c:	e5d33000 	ldrb	r3, [r3]
+3000a330:	e353002f 	cmp	r3, #47	; 0x2f
+3000a334:	9a000004 	bls	3000a34c <skip_atoi+0x78>
+3000a338:	e59d3004 	ldr	r3, [sp, #4]
+3000a33c:	e5933000 	ldr	r3, [r3]
+3000a340:	e5d33000 	ldrb	r3, [r3]
+3000a344:	e3530038 	cmp	r3, #56	; 0x38
+3000a348:	9affffe6 	bls	3000a2e8 <skip_atoi+0x14>
                     i = i*10 + *((*s)++) - '0';
             return i;
-3000a148:	e59d300c 	ldr	r3, [sp, #12]
+3000a34c:	e59d300c 	ldr	r3, [sp, #12]
 } 
-3000a14c:	e1a00003 	mov	r0, r3
-3000a150:	e28dd010 	add	sp, sp, #16
-3000a154:	e12fff1e 	bx	lr
+3000a350:	e1a00003 	mov	r0, r3
+3000a354:	e28dd010 	add	sp, sp, #16
+3000a358:	e12fff1e 	bx	lr
 
-3000a158 <number>:
+3000a35c <number>:
 
 const acoral_char small_digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
 const acoral_char large_digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 acoral_char * number(acoral_char * buf, acoral_char * end, acoral_64 num, acoral_32 base, acoral_32 size, acoral_32 precision, acoral_32 type)
 {
-3000a158:	e92d4010 	push	{r4, lr}
-3000a15c:	e24dd060 	sub	sp, sp, #96	; 0x60
-3000a160:	e58d000c 	str	r0, [sp, #12]
-3000a164:	e58d1008 	str	r1, [sp, #8]
-3000a168:	e88d000c 	stm	sp, {r2, r3}
+3000a35c:	e92d4010 	push	{r4, lr}
+3000a360:	e24dd060 	sub	sp, sp, #96	; 0x60
+3000a364:	e58d000c 	str	r0, [sp, #12]
+3000a368:	e58d1008 	str	r1, [sp, #8]
+3000a36c:	e88d000c 	stm	sp, {r2, r3}
 	acoral_char c,sign,tmp[66];
 	const acoral_char *digits;
 	acoral_32 i;
 
 	digits = (type & LARGE) ? large_digits : small_digits;
-3000a16c:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a170:	e2033040 	and	r3, r3, #64	; 0x40
-3000a174:	e3530000 	cmp	r3, #0
-3000a178:	0a000001 	beq	3000a184 <number+0x2c>
-3000a17c:	e59f34e4 	ldr	r3, [pc, #1252]	; 3000a668 <number+0x510>
-3000a180:	ea000000 	b	3000a188 <number+0x30>
-3000a184:	e59f34e0 	ldr	r3, [pc, #1248]	; 3000a66c <number+0x514>
-3000a188:	e58d3058 	str	r3, [sp, #88]	; 0x58
+3000a370:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a374:	e2033040 	and	r3, r3, #64	; 0x40
+3000a378:	e3530000 	cmp	r3, #0
+3000a37c:	0a000001 	beq	3000a388 <number+0x2c>
+3000a380:	e59f34e4 	ldr	r3, [pc, #1252]	; 3000a86c <number+0x510>
+3000a384:	ea000000 	b	3000a38c <number+0x30>
+3000a388:	e59f34e0 	ldr	r3, [pc, #1248]	; 3000a870 <number+0x514>
+3000a38c:	e58d3058 	str	r3, [sp, #88]	; 0x58
 	if (type & LEFT)
-3000a18c:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a190:	e2033010 	and	r3, r3, #16
-3000a194:	e3530000 	cmp	r3, #0
-3000a198:	0a000002 	beq	3000a1a8 <number+0x50>
+3000a390:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a394:	e2033010 	and	r3, r3, #16
+3000a398:	e3530000 	cmp	r3, #0
+3000a39c:	0a000002 	beq	3000a3ac <number+0x50>
 		type &= ~ZEROPAD;
-3000a19c:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a1a0:	e3c33001 	bic	r3, r3, #1
-3000a1a4:	e58d3074 	str	r3, [sp, #116]	; 0x74
+3000a3a0:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a3a4:	e3c33001 	bic	r3, r3, #1
+3000a3a8:	e58d3074 	str	r3, [sp, #116]	; 0x74
 	if (base < 2 || base > 36)
-3000a1a8:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
-3000a1ac:	e3530001 	cmp	r3, #1
-3000a1b0:	da000002 	ble	3000a1c0 <number+0x68>
-3000a1b4:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
-3000a1b8:	e3530024 	cmp	r3, #36	; 0x24
-3000a1bc:	da000001 	ble	3000a1c8 <number+0x70>
+3000a3ac:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
+3000a3b0:	e3530001 	cmp	r3, #1
+3000a3b4:	da000002 	ble	3000a3c4 <number+0x68>
+3000a3b8:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
+3000a3bc:	e3530024 	cmp	r3, #36	; 0x24
+3000a3c0:	da000001 	ble	3000a3cc <number+0x70>
 		return 0;
-3000a1c0:	e3a03000 	mov	r3, #0
-3000a1c4:	ea000123 	b	3000a658 <number+0x500>
+3000a3c4:	e3a03000 	mov	r3, #0
+3000a3c8:	ea000123 	b	3000a85c <number+0x500>
 	c = (type & ZEROPAD) ? '0' : ' ';
-3000a1c8:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a1cc:	e2033001 	and	r3, r3, #1
-3000a1d0:	e20330ff 	and	r3, r3, #255	; 0xff
-3000a1d4:	e3530000 	cmp	r3, #0
-3000a1d8:	0a000001 	beq	3000a1e4 <number+0x8c>
-3000a1dc:	e3a03030 	mov	r3, #48	; 0x30
-3000a1e0:	ea000000 	b	3000a1e8 <number+0x90>
-3000a1e4:	e3a03020 	mov	r3, #32
-3000a1e8:	e5cd3056 	strb	r3, [sp, #86]	; 0x56
+3000a3cc:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a3d0:	e2033001 	and	r3, r3, #1
+3000a3d4:	e20330ff 	and	r3, r3, #255	; 0xff
+3000a3d8:	e3530000 	cmp	r3, #0
+3000a3dc:	0a000001 	beq	3000a3e8 <number+0x8c>
+3000a3e0:	e3a03030 	mov	r3, #48	; 0x30
+3000a3e4:	ea000000 	b	3000a3ec <number+0x90>
+3000a3e8:	e3a03020 	mov	r3, #32
+3000a3ec:	e5cd3056 	strb	r3, [sp, #86]	; 0x56
 	sign = 0;
-3000a1ec:	e3a03000 	mov	r3, #0
-3000a1f0:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
+3000a3f0:	e3a03000 	mov	r3, #0
+3000a3f4:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
 	if (type & SIGN) {
-3000a1f4:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a1f8:	e2033002 	and	r3, r3, #2
-3000a1fc:	e3530000 	cmp	r3, #0
-3000a200:	0a000020 	beq	3000a288 <number+0x130>
+3000a3f8:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a3fc:	e2033002 	and	r3, r3, #2
+3000a400:	e3530000 	cmp	r3, #0
+3000a404:	0a000020 	beq	3000a48c <number+0x130>
 		if (num < 0) {
-3000a204:	e89d0018 	ldm	sp, {r3, r4}
-3000a208:	e3530000 	cmp	r3, #0
-3000a20c:	e2d40000 	sbcs	r0, r4, #0
-3000a210:	aa000009 	bge	3000a23c <number+0xe4>
+3000a408:	e89d0018 	ldm	sp, {r3, r4}
+3000a40c:	e3530000 	cmp	r3, #0
+3000a410:	e2d40000 	sbcs	r0, r4, #0
+3000a414:	aa000009 	bge	3000a440 <number+0xe4>
 			sign = '-';
-3000a214:	e3a0302d 	mov	r3, #45	; 0x2d
-3000a218:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
+3000a418:	e3a0302d 	mov	r3, #45	; 0x2d
+3000a41c:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
 			num = -num;
-3000a21c:	e89d0018 	ldm	sp, {r3, r4}
-3000a220:	e2733000 	rsbs	r3, r3, #0
-3000a224:	e2e44000 	rsc	r4, r4, #0
-3000a228:	e88d0018 	stm	sp, {r3, r4}
+3000a420:	e89d0018 	ldm	sp, {r3, r4}
+3000a424:	e2733000 	rsbs	r3, r3, #0
+3000a428:	e2e44000 	rsc	r4, r4, #0
+3000a42c:	e88d0018 	stm	sp, {r3, r4}
 			size--;
-3000a22c:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a230:	e2433001 	sub	r3, r3, #1
-3000a234:	e58d306c 	str	r3, [sp, #108]	; 0x6c
-3000a238:	ea000012 	b	3000a288 <number+0x130>
+3000a430:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a434:	e2433001 	sub	r3, r3, #1
+3000a438:	e58d306c 	str	r3, [sp, #108]	; 0x6c
+3000a43c:	ea000012 	b	3000a48c <number+0x130>
 		} else if (type & PLUS) {
-3000a23c:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a240:	e2033004 	and	r3, r3, #4
-3000a244:	e3530000 	cmp	r3, #0
-3000a248:	0a000005 	beq	3000a264 <number+0x10c>
+3000a440:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a444:	e2033004 	and	r3, r3, #4
+3000a448:	e3530000 	cmp	r3, #0
+3000a44c:	0a000005 	beq	3000a468 <number+0x10c>
 			sign = '+';
-3000a24c:	e3a0302b 	mov	r3, #43	; 0x2b
-3000a250:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
+3000a450:	e3a0302b 	mov	r3, #43	; 0x2b
+3000a454:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
 			size--;
-3000a254:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a258:	e2433001 	sub	r3, r3, #1
-3000a25c:	e58d306c 	str	r3, [sp, #108]	; 0x6c
-3000a260:	ea000008 	b	3000a288 <number+0x130>
+3000a458:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a45c:	e2433001 	sub	r3, r3, #1
+3000a460:	e58d306c 	str	r3, [sp, #108]	; 0x6c
+3000a464:	ea000008 	b	3000a48c <number+0x130>
 		} else if (type & SPACE) {
-3000a264:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a268:	e2033008 	and	r3, r3, #8
-3000a26c:	e3530000 	cmp	r3, #0
-3000a270:	0a000004 	beq	3000a288 <number+0x130>
+3000a468:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a46c:	e2033008 	and	r3, r3, #8
+3000a470:	e3530000 	cmp	r3, #0
+3000a474:	0a000004 	beq	3000a48c <number+0x130>
 			sign = ' ';
-3000a274:	e3a03020 	mov	r3, #32
-3000a278:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
+3000a478:	e3a03020 	mov	r3, #32
+3000a47c:	e5cd3057 	strb	r3, [sp, #87]	; 0x57
 			size--;
-3000a27c:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a280:	e2433001 	sub	r3, r3, #1
-3000a284:	e58d306c 	str	r3, [sp, #108]	; 0x6c
+3000a480:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a484:	e2433001 	sub	r3, r3, #1
+3000a488:	e58d306c 	str	r3, [sp, #108]	; 0x6c
 		}
 	}
 	if (type & SPECIAL) {
-3000a288:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a28c:	e2033020 	and	r3, r3, #32
-3000a290:	e3530000 	cmp	r3, #0
-3000a294:	0a00000c 	beq	3000a2cc <number+0x174>
+3000a48c:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a490:	e2033020 	and	r3, r3, #32
+3000a494:	e3530000 	cmp	r3, #0
+3000a498:	0a00000c 	beq	3000a4d0 <number+0x174>
 		if (base == 16)
-3000a298:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
-3000a29c:	e3530010 	cmp	r3, #16
-3000a2a0:	1a000003 	bne	3000a2b4 <number+0x15c>
+3000a49c:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
+3000a4a0:	e3530010 	cmp	r3, #16
+3000a4a4:	1a000003 	bne	3000a4b8 <number+0x15c>
 			size -= 2;
-3000a2a4:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a2a8:	e2433002 	sub	r3, r3, #2
-3000a2ac:	e58d306c 	str	r3, [sp, #108]	; 0x6c
-3000a2b0:	ea000005 	b	3000a2cc <number+0x174>
+3000a4a8:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a4ac:	e2433002 	sub	r3, r3, #2
+3000a4b0:	e58d306c 	str	r3, [sp, #108]	; 0x6c
+3000a4b4:	ea000005 	b	3000a4d0 <number+0x174>
 		else if (base == 8)
-3000a2b4:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
-3000a2b8:	e3530008 	cmp	r3, #8
-3000a2bc:	1a000002 	bne	3000a2cc <number+0x174>
+3000a4b8:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
+3000a4bc:	e3530008 	cmp	r3, #8
+3000a4c0:	1a000002 	bne	3000a4d0 <number+0x174>
 			size--;
-3000a2c0:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a2c4:	e2433001 	sub	r3, r3, #1
-3000a2c8:	e58d306c 	str	r3, [sp, #108]	; 0x6c
+3000a4c4:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a4c8:	e2433001 	sub	r3, r3, #1
+3000a4cc:	e58d306c 	str	r3, [sp, #108]	; 0x6c
 	}
 	i = 0;
-3000a2cc:	e3a03000 	mov	r3, #0
-3000a2d0:	e58d305c 	str	r3, [sp, #92]	; 0x5c
+3000a4d0:	e3a03000 	mov	r3, #0
+3000a4d4:	e58d305c 	str	r3, [sp, #92]	; 0x5c
 	if (num == 0)
-3000a2d4:	e89d0018 	ldm	sp, {r3, r4}
-3000a2d8:	e1931004 	orrs	r1, r3, r4
-3000a2dc:	1a00001d 	bne	3000a358 <number+0x200>
+3000a4d8:	e89d0018 	ldm	sp, {r3, r4}
+3000a4dc:	e1931004 	orrs	r1, r3, r4
+3000a4e0:	1a00001d 	bne	3000a55c <number+0x200>
 		tmp[i++]='0';
-3000a2e0:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
-3000a2e4:	e3e0304b 	mvn	r3, #75	; 0x4b
-3000a2e8:	e28d0060 	add	r0, sp, #96	; 0x60
-3000a2ec:	e0802002 	add	r2, r0, r2
-3000a2f0:	e0823003 	add	r3, r2, r3
-3000a2f4:	e3a02030 	mov	r2, #48	; 0x30
-3000a2f8:	e5c32000 	strb	r2, [r3]
-3000a2fc:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
-3000a300:	e2833001 	add	r3, r3, #1
-3000a304:	e58d305c 	str	r3, [sp, #92]	; 0x5c
-3000a308:	ea000016 	b	3000a368 <number+0x210>
+3000a4e4:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
+3000a4e8:	e3e0304b 	mvn	r3, #75	; 0x4b
+3000a4ec:	e28d0060 	add	r0, sp, #96	; 0x60
+3000a4f0:	e0802002 	add	r2, r0, r2
+3000a4f4:	e0823003 	add	r3, r2, r3
+3000a4f8:	e3a02030 	mov	r2, #48	; 0x30
+3000a4fc:	e5c32000 	strb	r2, [r3]
+3000a500:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
+3000a504:	e2833001 	add	r3, r3, #1
+3000a508:	e58d305c 	str	r3, [sp, #92]	; 0x5c
+3000a50c:	ea000016 	b	3000a56c <number+0x210>
 	else while (num != 0)
 		tmp[i++] = digits[do_div(&num,base)];
-3000a30c:	e59d405c 	ldr	r4, [sp, #92]	; 0x5c
-3000a310:	e1a0300d 	mov	r3, sp
-3000a314:	e1a00003 	mov	r0, r3
-3000a318:	e59d1068 	ldr	r1, [sp, #104]	; 0x68
-3000a31c:	ebffff4e 	bl	3000a05c <do_div>
-3000a320:	e1a03000 	mov	r3, r0
-3000a324:	e1a02003 	mov	r2, r3
-3000a328:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000a32c:	e0823003 	add	r3, r2, r3
-3000a330:	e5d32000 	ldrb	r2, [r3]
-3000a334:	e3e0304b 	mvn	r3, #75	; 0x4b
-3000a338:	e28d0060 	add	r0, sp, #96	; 0x60
-3000a33c:	e0801004 	add	r1, r0, r4
-3000a340:	e0813003 	add	r3, r1, r3
-3000a344:	e5c32000 	strb	r2, [r3]
-3000a348:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
-3000a34c:	e2833001 	add	r3, r3, #1
-3000a350:	e58d305c 	str	r3, [sp, #92]	; 0x5c
-3000a354:	ea000000 	b	3000a35c <number+0x204>
+3000a510:	e59d405c 	ldr	r4, [sp, #92]	; 0x5c
+3000a514:	e1a0300d 	mov	r3, sp
+3000a518:	e1a00003 	mov	r0, r3
+3000a51c:	e59d1068 	ldr	r1, [sp, #104]	; 0x68
+3000a520:	ebffff4e 	bl	3000a260 <do_div>
+3000a524:	e1a03000 	mov	r3, r0
+3000a528:	e1a02003 	mov	r2, r3
+3000a52c:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000a530:	e0823003 	add	r3, r2, r3
+3000a534:	e5d32000 	ldrb	r2, [r3]
+3000a538:	e3e0304b 	mvn	r3, #75	; 0x4b
+3000a53c:	e28d0060 	add	r0, sp, #96	; 0x60
+3000a540:	e0801004 	add	r1, r0, r4
+3000a544:	e0813003 	add	r3, r1, r3
+3000a548:	e5c32000 	strb	r2, [r3]
+3000a54c:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
+3000a550:	e2833001 	add	r3, r3, #1
+3000a554:	e58d305c 	str	r3, [sp, #92]	; 0x5c
+3000a558:	ea000000 	b	3000a560 <number+0x204>
 			size--;
 	}
 	i = 0;
 	if (num == 0)
 		tmp[i++]='0';
 	else while (num != 0)
-3000a358:	e1a00000 	nop			; (mov r0, r0)
-3000a35c:	e89d0018 	ldm	sp, {r3, r4}
-3000a360:	e1931004 	orrs	r1, r3, r4
-3000a364:	1affffe8 	bne	3000a30c <number+0x1b4>
+3000a55c:	e1a00000 	nop			; (mov r0, r0)
+3000a560:	e89d0018 	ldm	sp, {r3, r4}
+3000a564:	e1931004 	orrs	r1, r3, r4
+3000a568:	1affffe8 	bne	3000a510 <number+0x1b4>
 		tmp[i++] = digits[do_div(&num,base)];
 	if (i > precision)
-3000a368:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
-3000a36c:	e59d3070 	ldr	r3, [sp, #112]	; 0x70
-3000a370:	e1520003 	cmp	r2, r3
-3000a374:	da000001 	ble	3000a380 <number+0x228>
+3000a56c:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
+3000a570:	e59d3070 	ldr	r3, [sp, #112]	; 0x70
+3000a574:	e1520003 	cmp	r2, r3
+3000a578:	da000001 	ble	3000a584 <number+0x228>
 		precision = i;
-3000a378:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
-3000a37c:	e58d3070 	str	r3, [sp, #112]	; 0x70
+3000a57c:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
+3000a580:	e58d3070 	str	r3, [sp, #112]	; 0x70
 	size -= precision;
-3000a380:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
-3000a384:	e59d3070 	ldr	r3, [sp, #112]	; 0x70
-3000a388:	e0633002 	rsb	r3, r3, r2
-3000a38c:	e58d306c 	str	r3, [sp, #108]	; 0x6c
+3000a584:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
+3000a588:	e59d3070 	ldr	r3, [sp, #112]	; 0x70
+3000a58c:	e0633002 	rsb	r3, r3, r2
+3000a590:	e58d306c 	str	r3, [sp, #108]	; 0x6c
 	if (!(type&(ZEROPAD+LEFT))) {
-3000a390:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a394:	e2033011 	and	r3, r3, #17
-3000a398:	e3530000 	cmp	r3, #0
-3000a39c:	1a000014 	bne	3000a3f4 <number+0x29c>
+3000a594:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a598:	e2033011 	and	r3, r3, #17
+3000a59c:	e3530000 	cmp	r3, #0
+3000a5a0:	1a000014 	bne	3000a5f8 <number+0x29c>
 		while(size-->0) {
-3000a3a0:	ea000009 	b	3000a3cc <number+0x274>
+3000a5a4:	ea000009 	b	3000a5d0 <number+0x274>
 			if (buf <= end)
-3000a3a4:	e59d200c 	ldr	r2, [sp, #12]
-3000a3a8:	e59d3008 	ldr	r3, [sp, #8]
-3000a3ac:	e1520003 	cmp	r2, r3
-3000a3b0:	8a000002 	bhi	3000a3c0 <number+0x268>
+3000a5a8:	e59d200c 	ldr	r2, [sp, #12]
+3000a5ac:	e59d3008 	ldr	r3, [sp, #8]
+3000a5b0:	e1520003 	cmp	r2, r3
+3000a5b4:	8a000002 	bhi	3000a5c4 <number+0x268>
 				*buf = ' ';
-3000a3b4:	e59d300c 	ldr	r3, [sp, #12]
-3000a3b8:	e3a02020 	mov	r2, #32
-3000a3bc:	e5c32000 	strb	r2, [r3]
+3000a5b8:	e59d300c 	ldr	r3, [sp, #12]
+3000a5bc:	e3a02020 	mov	r2, #32
+3000a5c0:	e5c32000 	strb	r2, [r3]
 			++buf;
-3000a3c0:	e59d300c 	ldr	r3, [sp, #12]
-3000a3c4:	e2833001 	add	r3, r3, #1
-3000a3c8:	e58d300c 	str	r3, [sp, #12]
+3000a5c4:	e59d300c 	ldr	r3, [sp, #12]
+3000a5c8:	e2833001 	add	r3, r3, #1
+3000a5cc:	e58d300c 	str	r3, [sp, #12]
 		tmp[i++] = digits[do_div(&num,base)];
 	if (i > precision)
 		precision = i;
 	size -= precision;
 	if (!(type&(ZEROPAD+LEFT))) {
 		while(size-->0) {
-3000a3cc:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a3d0:	e3530000 	cmp	r3, #0
-3000a3d4:	d3a03000 	movle	r3, #0
-3000a3d8:	c3a03001 	movgt	r3, #1
-3000a3dc:	e20330ff 	and	r3, r3, #255	; 0xff
-3000a3e0:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
-3000a3e4:	e2422001 	sub	r2, r2, #1
-3000a3e8:	e58d206c 	str	r2, [sp, #108]	; 0x6c
-3000a3ec:	e3530000 	cmp	r3, #0
-3000a3f0:	1affffeb 	bne	3000a3a4 <number+0x24c>
+3000a5d0:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a5d4:	e3530000 	cmp	r3, #0
+3000a5d8:	d3a03000 	movle	r3, #0
+3000a5dc:	c3a03001 	movgt	r3, #1
+3000a5e0:	e20330ff 	and	r3, r3, #255	; 0xff
+3000a5e4:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
+3000a5e8:	e2422001 	sub	r2, r2, #1
+3000a5ec:	e58d206c 	str	r2, [sp, #108]	; 0x6c
+3000a5f0:	e3530000 	cmp	r3, #0
+3000a5f4:	1affffeb 	bne	3000a5a8 <number+0x24c>
 			if (buf <= end)
 				*buf = ' ';
 			++buf;
 		}
 	}
 	if (sign) {
-3000a3f4:	e5dd3057 	ldrb	r3, [sp, #87]	; 0x57
-3000a3f8:	e3530000 	cmp	r3, #0
-3000a3fc:	0a000009 	beq	3000a428 <number+0x2d0>
-		if (buf <= end)
-3000a400:	e59d200c 	ldr	r2, [sp, #12]
-3000a404:	e59d3008 	ldr	r3, [sp, #8]
-3000a408:	e1520003 	cmp	r2, r3
-3000a40c:	8a000002 	bhi	3000a41c <number+0x2c4>
-			*buf = sign;
-3000a410:	e59d300c 	ldr	r3, [sp, #12]
-3000a414:	e5dd2057 	ldrb	r2, [sp, #87]	; 0x57
-3000a418:	e5c32000 	strb	r2, [r3]
-		++buf;
-3000a41c:	e59d300c 	ldr	r3, [sp, #12]
-3000a420:	e2833001 	add	r3, r3, #1
-3000a424:	e58d300c 	str	r3, [sp, #12]
-	}
-	if (type & SPECIAL) {
-3000a428:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a42c:	e2033020 	and	r3, r3, #32
-3000a430:	e3530000 	cmp	r3, #0
-3000a434:	0a000026 	beq	3000a4d4 <number+0x37c>
-		if (base==8) {
-3000a438:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
-3000a43c:	e3530008 	cmp	r3, #8
-3000a440:	1a00000a 	bne	3000a470 <number+0x318>
-			if (buf <= end)
-3000a444:	e59d200c 	ldr	r2, [sp, #12]
-3000a448:	e59d3008 	ldr	r3, [sp, #8]
-3000a44c:	e1520003 	cmp	r2, r3
-3000a450:	8a000002 	bhi	3000a460 <number+0x308>
-				*buf = '0';
-3000a454:	e59d300c 	ldr	r3, [sp, #12]
-3000a458:	e3a02030 	mov	r2, #48	; 0x30
-3000a45c:	e5c32000 	strb	r2, [r3]
-			++buf;
-3000a460:	e59d300c 	ldr	r3, [sp, #12]
-3000a464:	e2833001 	add	r3, r3, #1
-3000a468:	e58d300c 	str	r3, [sp, #12]
-3000a46c:	ea000018 	b	3000a4d4 <number+0x37c>
-		} else if (base==16) {
-3000a470:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
-3000a474:	e3530010 	cmp	r3, #16
-3000a478:	1a000015 	bne	3000a4d4 <number+0x37c>
-			if (buf <= end)
-3000a47c:	e59d200c 	ldr	r2, [sp, #12]
-3000a480:	e59d3008 	ldr	r3, [sp, #8]
-3000a484:	e1520003 	cmp	r2, r3
-3000a488:	8a000002 	bhi	3000a498 <number+0x340>
-				*buf = '0';
-3000a48c:	e59d300c 	ldr	r3, [sp, #12]
-3000a490:	e3a02030 	mov	r2, #48	; 0x30
-3000a494:	e5c32000 	strb	r2, [r3]
-			++buf;
-3000a498:	e59d300c 	ldr	r3, [sp, #12]
-3000a49c:	e2833001 	add	r3, r3, #1
-3000a4a0:	e58d300c 	str	r3, [sp, #12]
-			if (buf <= end)
-3000a4a4:	e59d200c 	ldr	r2, [sp, #12]
-3000a4a8:	e59d3008 	ldr	r3, [sp, #8]
-3000a4ac:	e1520003 	cmp	r2, r3
-3000a4b0:	8a000004 	bhi	3000a4c8 <number+0x370>
-				*buf = digits[33];
-3000a4b4:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000a4b8:	e2833021 	add	r3, r3, #33	; 0x21
-3000a4bc:	e5d32000 	ldrb	r2, [r3]
-3000a4c0:	e59d300c 	ldr	r3, [sp, #12]
-3000a4c4:	e5c32000 	strb	r2, [r3]
-			++buf;
-3000a4c8:	e59d300c 	ldr	r3, [sp, #12]
-3000a4cc:	e2833001 	add	r3, r3, #1
-3000a4d0:	e58d300c 	str	r3, [sp, #12]
-		}
-	}
-	if (!(type & LEFT)) {
-3000a4d4:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
-3000a4d8:	e2033010 	and	r3, r3, #16
-3000a4dc:	e3530000 	cmp	r3, #0
-3000a4e0:	1a000020 	bne	3000a568 <number+0x410>
-		while (size-- > 0) {
-3000a4e4:	ea000009 	b	3000a510 <number+0x3b8>
-			if (buf <= end)
-3000a4e8:	e59d200c 	ldr	r2, [sp, #12]
-3000a4ec:	e59d3008 	ldr	r3, [sp, #8]
-3000a4f0:	e1520003 	cmp	r2, r3
-3000a4f4:	8a000002 	bhi	3000a504 <number+0x3ac>
-				*buf = c;
-3000a4f8:	e59d300c 	ldr	r3, [sp, #12]
-3000a4fc:	e5dd2056 	ldrb	r2, [sp, #86]	; 0x56
-3000a500:	e5c32000 	strb	r2, [r3]
-			++buf;
-3000a504:	e59d300c 	ldr	r3, [sp, #12]
-3000a508:	e2833001 	add	r3, r3, #1
-3000a50c:	e58d300c 	str	r3, [sp, #12]
-				*buf = digits[33];
-			++buf;
-		}
-	}
-	if (!(type & LEFT)) {
-		while (size-- > 0) {
-3000a510:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a514:	e3530000 	cmp	r3, #0
-3000a518:	d3a03000 	movle	r3, #0
-3000a51c:	c3a03001 	movgt	r3, #1
-3000a520:	e20330ff 	and	r3, r3, #255	; 0xff
-3000a524:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
-3000a528:	e2422001 	sub	r2, r2, #1
-3000a52c:	e58d206c 	str	r2, [sp, #108]	; 0x6c
-3000a530:	e3530000 	cmp	r3, #0
-3000a534:	1affffeb 	bne	3000a4e8 <number+0x390>
-			if (buf <= end)
-				*buf = c;
-			++buf;
-		}
-	}
-	while (i < precision--) {
-3000a538:	ea00000b 	b	3000a56c <number+0x414>
-		if (buf <= end)
-3000a53c:	e59d200c 	ldr	r2, [sp, #12]
-3000a540:	e59d3008 	ldr	r3, [sp, #8]
-3000a544:	e1520003 	cmp	r2, r3
-3000a548:	8a000002 	bhi	3000a558 <number+0x400>
-			*buf = '0';
-3000a54c:	e59d300c 	ldr	r3, [sp, #12]
-3000a550:	e3a02030 	mov	r2, #48	; 0x30
-3000a554:	e5c32000 	strb	r2, [r3]
-		++buf;
-3000a558:	e59d300c 	ldr	r3, [sp, #12]
-3000a55c:	e2833001 	add	r3, r3, #1
-3000a560:	e58d300c 	str	r3, [sp, #12]
-3000a564:	ea000000 	b	3000a56c <number+0x414>
-			if (buf <= end)
-				*buf = c;
-			++buf;
-		}
-	}
-	while (i < precision--) {
-3000a568:	e1a00000 	nop			; (mov r0, r0)
-3000a56c:	e59d2070 	ldr	r2, [sp, #112]	; 0x70
-3000a570:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
-3000a574:	e1520003 	cmp	r2, r3
-3000a578:	d3a03000 	movle	r3, #0
-3000a57c:	c3a03001 	movgt	r3, #1
-3000a580:	e20330ff 	and	r3, r3, #255	; 0xff
-3000a584:	e59d2070 	ldr	r2, [sp, #112]	; 0x70
-3000a588:	e2422001 	sub	r2, r2, #1
-3000a58c:	e58d2070 	str	r2, [sp, #112]	; 0x70
-3000a590:	e3530000 	cmp	r3, #0
-3000a594:	1affffe8 	bne	3000a53c <number+0x3e4>
-		if (buf <= end)
-			*buf = '0';
-		++buf;
-	}
-	while (i-- > 0) {
-3000a598:	ea00000e 	b	3000a5d8 <number+0x480>
-		if (buf <= end)
-3000a59c:	e59d200c 	ldr	r2, [sp, #12]
-3000a5a0:	e59d3008 	ldr	r3, [sp, #8]
-3000a5a4:	e1520003 	cmp	r2, r3
-3000a5a8:	8a000007 	bhi	3000a5cc <number+0x474>
-			*buf = tmp[i];
-3000a5ac:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
-3000a5b0:	e3e0304b 	mvn	r3, #75	; 0x4b
-3000a5b4:	e28d0060 	add	r0, sp, #96	; 0x60
-3000a5b8:	e0802002 	add	r2, r0, r2
-3000a5bc:	e0823003 	add	r3, r2, r3
-3000a5c0:	e5d32000 	ldrb	r2, [r3]
-3000a5c4:	e59d300c 	ldr	r3, [sp, #12]
-3000a5c8:	e5c32000 	strb	r2, [r3]
-		++buf;
-3000a5cc:	e59d300c 	ldr	r3, [sp, #12]
-3000a5d0:	e2833001 	add	r3, r3, #1
-3000a5d4:	e58d300c 	str	r3, [sp, #12]
-	while (i < precision--) {
-		if (buf <= end)
-			*buf = '0';
-		++buf;
-	}
-	while (i-- > 0) {
-3000a5d8:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
-3000a5dc:	e3530000 	cmp	r3, #0
-3000a5e0:	d3a03000 	movle	r3, #0
-3000a5e4:	c3a03001 	movgt	r3, #1
-3000a5e8:	e20330ff 	and	r3, r3, #255	; 0xff
-3000a5ec:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
-3000a5f0:	e2422001 	sub	r2, r2, #1
-3000a5f4:	e58d205c 	str	r2, [sp, #92]	; 0x5c
-3000a5f8:	e3530000 	cmp	r3, #0
-3000a5fc:	1affffe6 	bne	3000a59c <number+0x444>
-		if (buf <= end)
-			*buf = tmp[i];
-		++buf;
-	}
-	while (size-- > 0) {
-3000a600:	ea000009 	b	3000a62c <number+0x4d4>
+3000a5f8:	e5dd3057 	ldrb	r3, [sp, #87]	; 0x57
+3000a5fc:	e3530000 	cmp	r3, #0
+3000a600:	0a000009 	beq	3000a62c <number+0x2d0>
 		if (buf <= end)
 3000a604:	e59d200c 	ldr	r2, [sp, #12]
 3000a608:	e59d3008 	ldr	r3, [sp, #8]
 3000a60c:	e1520003 	cmp	r2, r3
-3000a610:	8a000002 	bhi	3000a620 <number+0x4c8>
-			*buf = ' ';
+3000a610:	8a000002 	bhi	3000a620 <number+0x2c4>
+			*buf = sign;
 3000a614:	e59d300c 	ldr	r3, [sp, #12]
-3000a618:	e3a02020 	mov	r2, #32
+3000a618:	e5dd2057 	ldrb	r2, [sp, #87]	; 0x57
 3000a61c:	e5c32000 	strb	r2, [r3]
 		++buf;
 3000a620:	e59d300c 	ldr	r3, [sp, #12]
 3000a624:	e2833001 	add	r3, r3, #1
 3000a628:	e58d300c 	str	r3, [sp, #12]
+	}
+	if (type & SPECIAL) {
+3000a62c:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a630:	e2033020 	and	r3, r3, #32
+3000a634:	e3530000 	cmp	r3, #0
+3000a638:	0a000026 	beq	3000a6d8 <number+0x37c>
+		if (base==8) {
+3000a63c:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
+3000a640:	e3530008 	cmp	r3, #8
+3000a644:	1a00000a 	bne	3000a674 <number+0x318>
+			if (buf <= end)
+3000a648:	e59d200c 	ldr	r2, [sp, #12]
+3000a64c:	e59d3008 	ldr	r3, [sp, #8]
+3000a650:	e1520003 	cmp	r2, r3
+3000a654:	8a000002 	bhi	3000a664 <number+0x308>
+				*buf = '0';
+3000a658:	e59d300c 	ldr	r3, [sp, #12]
+3000a65c:	e3a02030 	mov	r2, #48	; 0x30
+3000a660:	e5c32000 	strb	r2, [r3]
+			++buf;
+3000a664:	e59d300c 	ldr	r3, [sp, #12]
+3000a668:	e2833001 	add	r3, r3, #1
+3000a66c:	e58d300c 	str	r3, [sp, #12]
+3000a670:	ea000018 	b	3000a6d8 <number+0x37c>
+		} else if (base==16) {
+3000a674:	e59d3068 	ldr	r3, [sp, #104]	; 0x68
+3000a678:	e3530010 	cmp	r3, #16
+3000a67c:	1a000015 	bne	3000a6d8 <number+0x37c>
+			if (buf <= end)
+3000a680:	e59d200c 	ldr	r2, [sp, #12]
+3000a684:	e59d3008 	ldr	r3, [sp, #8]
+3000a688:	e1520003 	cmp	r2, r3
+3000a68c:	8a000002 	bhi	3000a69c <number+0x340>
+				*buf = '0';
+3000a690:	e59d300c 	ldr	r3, [sp, #12]
+3000a694:	e3a02030 	mov	r2, #48	; 0x30
+3000a698:	e5c32000 	strb	r2, [r3]
+			++buf;
+3000a69c:	e59d300c 	ldr	r3, [sp, #12]
+3000a6a0:	e2833001 	add	r3, r3, #1
+3000a6a4:	e58d300c 	str	r3, [sp, #12]
+			if (buf <= end)
+3000a6a8:	e59d200c 	ldr	r2, [sp, #12]
+3000a6ac:	e59d3008 	ldr	r3, [sp, #8]
+3000a6b0:	e1520003 	cmp	r2, r3
+3000a6b4:	8a000004 	bhi	3000a6cc <number+0x370>
+				*buf = digits[33];
+3000a6b8:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000a6bc:	e2833021 	add	r3, r3, #33	; 0x21
+3000a6c0:	e5d32000 	ldrb	r2, [r3]
+3000a6c4:	e59d300c 	ldr	r3, [sp, #12]
+3000a6c8:	e5c32000 	strb	r2, [r3]
+			++buf;
+3000a6cc:	e59d300c 	ldr	r3, [sp, #12]
+3000a6d0:	e2833001 	add	r3, r3, #1
+3000a6d4:	e58d300c 	str	r3, [sp, #12]
+		}
+	}
+	if (!(type & LEFT)) {
+3000a6d8:	e59d3074 	ldr	r3, [sp, #116]	; 0x74
+3000a6dc:	e2033010 	and	r3, r3, #16
+3000a6e0:	e3530000 	cmp	r3, #0
+3000a6e4:	1a000020 	bne	3000a76c <number+0x410>
+		while (size-- > 0) {
+3000a6e8:	ea000009 	b	3000a714 <number+0x3b8>
+			if (buf <= end)
+3000a6ec:	e59d200c 	ldr	r2, [sp, #12]
+3000a6f0:	e59d3008 	ldr	r3, [sp, #8]
+3000a6f4:	e1520003 	cmp	r2, r3
+3000a6f8:	8a000002 	bhi	3000a708 <number+0x3ac>
+				*buf = c;
+3000a6fc:	e59d300c 	ldr	r3, [sp, #12]
+3000a700:	e5dd2056 	ldrb	r2, [sp, #86]	; 0x56
+3000a704:	e5c32000 	strb	r2, [r3]
+			++buf;
+3000a708:	e59d300c 	ldr	r3, [sp, #12]
+3000a70c:	e2833001 	add	r3, r3, #1
+3000a710:	e58d300c 	str	r3, [sp, #12]
+				*buf = digits[33];
+			++buf;
+		}
+	}
+	if (!(type & LEFT)) {
+		while (size-- > 0) {
+3000a714:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a718:	e3530000 	cmp	r3, #0
+3000a71c:	d3a03000 	movle	r3, #0
+3000a720:	c3a03001 	movgt	r3, #1
+3000a724:	e20330ff 	and	r3, r3, #255	; 0xff
+3000a728:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
+3000a72c:	e2422001 	sub	r2, r2, #1
+3000a730:	e58d206c 	str	r2, [sp, #108]	; 0x6c
+3000a734:	e3530000 	cmp	r3, #0
+3000a738:	1affffeb 	bne	3000a6ec <number+0x390>
+			if (buf <= end)
+				*buf = c;
+			++buf;
+		}
+	}
+	while (i < precision--) {
+3000a73c:	ea00000b 	b	3000a770 <number+0x414>
+		if (buf <= end)
+3000a740:	e59d200c 	ldr	r2, [sp, #12]
+3000a744:	e59d3008 	ldr	r3, [sp, #8]
+3000a748:	e1520003 	cmp	r2, r3
+3000a74c:	8a000002 	bhi	3000a75c <number+0x400>
+			*buf = '0';
+3000a750:	e59d300c 	ldr	r3, [sp, #12]
+3000a754:	e3a02030 	mov	r2, #48	; 0x30
+3000a758:	e5c32000 	strb	r2, [r3]
+		++buf;
+3000a75c:	e59d300c 	ldr	r3, [sp, #12]
+3000a760:	e2833001 	add	r3, r3, #1
+3000a764:	e58d300c 	str	r3, [sp, #12]
+3000a768:	ea000000 	b	3000a770 <number+0x414>
+			if (buf <= end)
+				*buf = c;
+			++buf;
+		}
+	}
+	while (i < precision--) {
+3000a76c:	e1a00000 	nop			; (mov r0, r0)
+3000a770:	e59d2070 	ldr	r2, [sp, #112]	; 0x70
+3000a774:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
+3000a778:	e1520003 	cmp	r2, r3
+3000a77c:	d3a03000 	movle	r3, #0
+3000a780:	c3a03001 	movgt	r3, #1
+3000a784:	e20330ff 	and	r3, r3, #255	; 0xff
+3000a788:	e59d2070 	ldr	r2, [sp, #112]	; 0x70
+3000a78c:	e2422001 	sub	r2, r2, #1
+3000a790:	e58d2070 	str	r2, [sp, #112]	; 0x70
+3000a794:	e3530000 	cmp	r3, #0
+3000a798:	1affffe8 	bne	3000a740 <number+0x3e4>
+		if (buf <= end)
+			*buf = '0';
+		++buf;
+	}
+	while (i-- > 0) {
+3000a79c:	ea00000e 	b	3000a7dc <number+0x480>
+		if (buf <= end)
+3000a7a0:	e59d200c 	ldr	r2, [sp, #12]
+3000a7a4:	e59d3008 	ldr	r3, [sp, #8]
+3000a7a8:	e1520003 	cmp	r2, r3
+3000a7ac:	8a000007 	bhi	3000a7d0 <number+0x474>
+			*buf = tmp[i];
+3000a7b0:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
+3000a7b4:	e3e0304b 	mvn	r3, #75	; 0x4b
+3000a7b8:	e28d0060 	add	r0, sp, #96	; 0x60
+3000a7bc:	e0802002 	add	r2, r0, r2
+3000a7c0:	e0823003 	add	r3, r2, r3
+3000a7c4:	e5d32000 	ldrb	r2, [r3]
+3000a7c8:	e59d300c 	ldr	r3, [sp, #12]
+3000a7cc:	e5c32000 	strb	r2, [r3]
+		++buf;
+3000a7d0:	e59d300c 	ldr	r3, [sp, #12]
+3000a7d4:	e2833001 	add	r3, r3, #1
+3000a7d8:	e58d300c 	str	r3, [sp, #12]
+	while (i < precision--) {
+		if (buf <= end)
+			*buf = '0';
+		++buf;
+	}
+	while (i-- > 0) {
+3000a7dc:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
+3000a7e0:	e3530000 	cmp	r3, #0
+3000a7e4:	d3a03000 	movle	r3, #0
+3000a7e8:	c3a03001 	movgt	r3, #1
+3000a7ec:	e20330ff 	and	r3, r3, #255	; 0xff
+3000a7f0:	e59d205c 	ldr	r2, [sp, #92]	; 0x5c
+3000a7f4:	e2422001 	sub	r2, r2, #1
+3000a7f8:	e58d205c 	str	r2, [sp, #92]	; 0x5c
+3000a7fc:	e3530000 	cmp	r3, #0
+3000a800:	1affffe6 	bne	3000a7a0 <number+0x444>
+		if (buf <= end)
+			*buf = tmp[i];
+		++buf;
+	}
+	while (size-- > 0) {
+3000a804:	ea000009 	b	3000a830 <number+0x4d4>
+		if (buf <= end)
+3000a808:	e59d200c 	ldr	r2, [sp, #12]
+3000a80c:	e59d3008 	ldr	r3, [sp, #8]
+3000a810:	e1520003 	cmp	r2, r3
+3000a814:	8a000002 	bhi	3000a824 <number+0x4c8>
+			*buf = ' ';
+3000a818:	e59d300c 	ldr	r3, [sp, #12]
+3000a81c:	e3a02020 	mov	r2, #32
+3000a820:	e5c32000 	strb	r2, [r3]
+		++buf;
+3000a824:	e59d300c 	ldr	r3, [sp, #12]
+3000a828:	e2833001 	add	r3, r3, #1
+3000a82c:	e58d300c 	str	r3, [sp, #12]
 	while (i-- > 0) {
 		if (buf <= end)
 			*buf = tmp[i];
 		++buf;
 	}
 	while (size-- > 0) {
-3000a62c:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
-3000a630:	e3530000 	cmp	r3, #0
-3000a634:	d3a03000 	movle	r3, #0
-3000a638:	c3a03001 	movgt	r3, #1
-3000a63c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000a640:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
-3000a644:	e2422001 	sub	r2, r2, #1
-3000a648:	e58d206c 	str	r2, [sp, #108]	; 0x6c
-3000a64c:	e3530000 	cmp	r3, #0
-3000a650:	1affffeb 	bne	3000a604 <number+0x4ac>
+3000a830:	e59d306c 	ldr	r3, [sp, #108]	; 0x6c
+3000a834:	e3530000 	cmp	r3, #0
+3000a838:	d3a03000 	movle	r3, #0
+3000a83c:	c3a03001 	movgt	r3, #1
+3000a840:	e20330ff 	and	r3, r3, #255	; 0xff
+3000a844:	e59d206c 	ldr	r2, [sp, #108]	; 0x6c
+3000a848:	e2422001 	sub	r2, r2, #1
+3000a84c:	e58d206c 	str	r2, [sp, #108]	; 0x6c
+3000a850:	e3530000 	cmp	r3, #0
+3000a854:	1affffeb 	bne	3000a808 <number+0x4ac>
 		if (buf <= end)
 			*buf = ' ';
 		++buf;
 	}
 	return buf;
-3000a654:	e59d300c 	ldr	r3, [sp, #12]
+3000a858:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000a658:	e1a00003 	mov	r0, r3
-3000a65c:	e28dd060 	add	sp, sp, #96	; 0x60
-3000a660:	e8bd4010 	pop	{r4, lr}
-3000a664:	e12fff1e 	bx	lr
-3000a668:	3000e7b8 	.word	0x3000e7b8
-3000a66c:	3000e790 	.word	0x3000e790
+3000a85c:	e1a00003 	mov	r0, r3
+3000a860:	e28dd060 	add	sp, sp, #96	; 0x60
+3000a864:	e8bd4010 	pop	{r4, lr}
+3000a868:	e12fff1e 	bx	lr
+3000a86c:	3000e9bc 	.word	0x3000e9bc
+3000a870:	3000e994 	.word	0x3000e994
 
-3000a670 <vsnprintf>:
+3000a874 <vsnprintf>:
 				   number of acoral_chars for from string */
 	acoral_32 qualifier;		/* 'h', 'l', or 'L' for acoral_32eger fields */
 				/* 'z' support added 23/7/1999 S.H.    */
 				/* 'z' changed to 'Z' --davidm 1/25/99 */
 
 	str = buf;
-3000a670:	e92d4010 	push	{r4, lr}
-3000a674:	e24dd068 	sub	sp, sp, #104	; 0x68
-3000a678:	e58d001c 	str	r0, [sp, #28]
-3000a67c:	e58d1018 	str	r1, [sp, #24]
-3000a680:	e58d2014 	str	r2, [sp, #20]
-3000a684:	e58d3010 	str	r3, [sp, #16]
-3000a688:	e59d301c 	ldr	r3, [sp, #28]
-3000a68c:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000a874:	e92d4010 	push	{r4, lr}
+3000a878:	e24dd068 	sub	sp, sp, #104	; 0x68
+3000a87c:	e58d001c 	str	r0, [sp, #28]
+3000a880:	e58d1018 	str	r1, [sp, #24]
+3000a884:	e58d2014 	str	r2, [sp, #20]
+3000a888:	e58d3010 	str	r3, [sp, #16]
+3000a88c:	e59d301c 	ldr	r3, [sp, #28]
+3000a890:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 	end = buf + size - 1;
-3000a690:	e59d3018 	ldr	r3, [sp, #24]
-3000a694:	e2433001 	sub	r3, r3, #1
-3000a698:	e59d201c 	ldr	r2, [sp, #28]
-3000a69c:	e0823003 	add	r3, r2, r3
-3000a6a0:	e58d3040 	str	r3, [sp, #64]	; 0x40
+3000a894:	e59d3018 	ldr	r3, [sp, #24]
+3000a898:	e2433001 	sub	r3, r3, #1
+3000a89c:	e59d201c 	ldr	r2, [sp, #28]
+3000a8a0:	e0823003 	add	r3, r2, r3
+3000a8a4:	e58d3040 	str	r3, [sp, #64]	; 0x40
 
 	if (end < buf - 1) {
-3000a6a4:	e59d301c 	ldr	r3, [sp, #28]
-3000a6a8:	e2432001 	sub	r2, r3, #1
-3000a6ac:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000a6b0:	e1520003 	cmp	r2, r3
-3000a6b4:	9a0002a0 	bls	3000b13c <vsnprintf+0xacc>
+3000a8a8:	e59d301c 	ldr	r3, [sp, #28]
+3000a8ac:	e2432001 	sub	r2, r3, #1
+3000a8b0:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000a8b4:	e1520003 	cmp	r2, r3
+3000a8b8:	9a0002a0 	bls	3000b340 <vsnprintf+0xacc>
 		end = ((void *) -1);
-3000a6b8:	e3e03000 	mvn	r3, #0
-3000a6bc:	e58d3040 	str	r3, [sp, #64]	; 0x40
+3000a8bc:	e3e03000 	mvn	r3, #0
+3000a8c0:	e58d3040 	str	r3, [sp, #64]	; 0x40
 		size = end - buf + 1;
-3000a6c0:	e59d2040 	ldr	r2, [sp, #64]	; 0x40
-3000a6c4:	e59d301c 	ldr	r3, [sp, #28]
-3000a6c8:	e0633002 	rsb	r3, r3, r2
-3000a6cc:	e2833001 	add	r3, r3, #1
-3000a6d0:	e58d3018 	str	r3, [sp, #24]
+3000a8c4:	e59d2040 	ldr	r2, [sp, #64]	; 0x40
+3000a8c8:	e59d301c 	ldr	r3, [sp, #28]
+3000a8cc:	e0633002 	rsb	r3, r3, r2
+3000a8d0:	e2833001 	add	r3, r3, #1
+3000a8d4:	e58d3018 	str	r3, [sp, #24]
 	}
 
 	for (; *fmt ; ++fmt) {
-3000a6d4:	ea000299 	b	3000b140 <vsnprintf+0xad0>
+3000a8d8:	ea000299 	b	3000b344 <vsnprintf+0xad0>
 		if (*fmt != '%') {
-3000a6d8:	e59d3014 	ldr	r3, [sp, #20]
-3000a6dc:	e5d33000 	ldrb	r3, [r3]
-3000a6e0:	e3530025 	cmp	r3, #37	; 0x25
-3000a6e4:	0a00000b 	beq	3000a718 <vsnprintf+0xa8>
+3000a8dc:	e59d3014 	ldr	r3, [sp, #20]
+3000a8e0:	e5d33000 	ldrb	r3, [r3]
+3000a8e4:	e3530025 	cmp	r3, #37	; 0x25
+3000a8e8:	0a00000b 	beq	3000a91c <vsnprintf+0xa8>
 			if (str <= end)
-3000a6e8:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000a6ec:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000a6f0:	e1520003 	cmp	r2, r3
-3000a6f4:	8a000003 	bhi	3000a708 <vsnprintf+0x98>
+3000a8ec:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000a8f0:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000a8f4:	e1520003 	cmp	r2, r3
+3000a8f8:	8a000003 	bhi	3000a90c <vsnprintf+0x98>
 				*str = *fmt;
-3000a6f8:	e59d3014 	ldr	r3, [sp, #20]
-3000a6fc:	e5d32000 	ldrb	r2, [r3]
-3000a700:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000a704:	e5c32000 	strb	r2, [r3]
+3000a8fc:	e59d3014 	ldr	r3, [sp, #20]
+3000a900:	e5d32000 	ldrb	r2, [r3]
+3000a904:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000a908:	e5c32000 	strb	r2, [r3]
 			++str;
-3000a708:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000a70c:	e2833001 	add	r3, r3, #1
-3000a710:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000a90c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000a910:	e2833001 	add	r3, r3, #1
+3000a914:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 			continue;
-3000a714:	ea000284 	b	3000b12c <vsnprintf+0xabc>
+3000a918:	ea000284 	b	3000b330 <vsnprintf+0xabc>
 		}
 
 		/* process flags */
 		flags = 0;
-3000a718:	e3a03000 	mov	r3, #0
-3000a71c:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000a91c:	e3a03000 	mov	r3, #0
+3000a920:	e58d304c 	str	r3, [sp, #76]	; 0x4c
 		repeat:
 			++fmt;		/* this also skips first '%' */
-3000a720:	e59d3014 	ldr	r3, [sp, #20]
-3000a724:	e2833001 	add	r3, r3, #1
-3000a728:	e58d3014 	str	r3, [sp, #20]
+3000a924:	e59d3014 	ldr	r3, [sp, #20]
+3000a928:	e2833001 	add	r3, r3, #1
+3000a92c:	e58d3014 	str	r3, [sp, #20]
 			switch (*fmt) {
-3000a72c:	e59d3014 	ldr	r3, [sp, #20]
-3000a730:	e5d33000 	ldrb	r3, [r3]
-3000a734:	e2433020 	sub	r3, r3, #32
-3000a738:	e3530010 	cmp	r3, #16
-3000a73c:	979ff103 	ldrls	pc, [pc, r3, lsl #2]
-3000a740:	ea000024 	b	3000a7d8 <vsnprintf+0x168>
-3000a744:	3000a7a8 	.word	0x3000a7a8
-3000a748:	3000a7d8 	.word	0x3000a7d8
-3000a74c:	3000a7d8 	.word	0x3000a7d8
-3000a750:	3000a7b8 	.word	0x3000a7b8
-3000a754:	3000a7d8 	.word	0x3000a7d8
-3000a758:	3000a7d8 	.word	0x3000a7d8
-3000a75c:	3000a7d8 	.word	0x3000a7d8
-3000a760:	3000a7d8 	.word	0x3000a7d8
-3000a764:	3000a7d8 	.word	0x3000a7d8
-3000a768:	3000a7d8 	.word	0x3000a7d8
-3000a76c:	3000a7d8 	.word	0x3000a7d8
-3000a770:	3000a798 	.word	0x3000a798
-3000a774:	3000a7d8 	.word	0x3000a7d8
-3000a778:	3000a788 	.word	0x3000a788
-3000a77c:	3000a7d8 	.word	0x3000a7d8
-3000a780:	3000a7d8 	.word	0x3000a7d8
-3000a784:	3000a7c8 	.word	0x3000a7c8
+3000a930:	e59d3014 	ldr	r3, [sp, #20]
+3000a934:	e5d33000 	ldrb	r3, [r3]
+3000a938:	e2433020 	sub	r3, r3, #32
+3000a93c:	e3530010 	cmp	r3, #16
+3000a940:	979ff103 	ldrls	pc, [pc, r3, lsl #2]
+3000a944:	ea000024 	b	3000a9dc <vsnprintf+0x168>
+3000a948:	3000a9ac 	.word	0x3000a9ac
+3000a94c:	3000a9dc 	.word	0x3000a9dc
+3000a950:	3000a9dc 	.word	0x3000a9dc
+3000a954:	3000a9bc 	.word	0x3000a9bc
+3000a958:	3000a9dc 	.word	0x3000a9dc
+3000a95c:	3000a9dc 	.word	0x3000a9dc
+3000a960:	3000a9dc 	.word	0x3000a9dc
+3000a964:	3000a9dc 	.word	0x3000a9dc
+3000a968:	3000a9dc 	.word	0x3000a9dc
+3000a96c:	3000a9dc 	.word	0x3000a9dc
+3000a970:	3000a9dc 	.word	0x3000a9dc
+3000a974:	3000a99c 	.word	0x3000a99c
+3000a978:	3000a9dc 	.word	0x3000a9dc
+3000a97c:	3000a98c 	.word	0x3000a98c
+3000a980:	3000a9dc 	.word	0x3000a9dc
+3000a984:	3000a9dc 	.word	0x3000a9dc
+3000a988:	3000a9cc 	.word	0x3000a9cc
 				case '-': flags |= LEFT; goto repeat;
-3000a788:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000a78c:	e3833010 	orr	r3, r3, #16
-3000a790:	e58d304c 	str	r3, [sp, #76]	; 0x4c
-3000a794:	eaffffe1 	b	3000a720 <vsnprintf+0xb0>
+3000a98c:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000a990:	e3833010 	orr	r3, r3, #16
+3000a994:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000a998:	eaffffe1 	b	3000a924 <vsnprintf+0xb0>
 				case '+': flags |= PLUS; goto repeat;
-3000a798:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000a79c:	e3833004 	orr	r3, r3, #4
-3000a7a0:	e58d304c 	str	r3, [sp, #76]	; 0x4c
-3000a7a4:	eaffffdd 	b	3000a720 <vsnprintf+0xb0>
+3000a99c:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000a9a0:	e3833004 	orr	r3, r3, #4
+3000a9a4:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000a9a8:	eaffffdd 	b	3000a924 <vsnprintf+0xb0>
 				case ' ': flags |= SPACE; goto repeat;
-3000a7a8:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000a7ac:	e3833008 	orr	r3, r3, #8
-3000a7b0:	e58d304c 	str	r3, [sp, #76]	; 0x4c
-3000a7b4:	eaffffd9 	b	3000a720 <vsnprintf+0xb0>
+3000a9ac:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000a9b0:	e3833008 	orr	r3, r3, #8
+3000a9b4:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000a9b8:	eaffffd9 	b	3000a924 <vsnprintf+0xb0>
 				case '#': flags |= SPECIAL; goto repeat;
-3000a7b8:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000a7bc:	e3833020 	orr	r3, r3, #32
-3000a7c0:	e58d304c 	str	r3, [sp, #76]	; 0x4c
-3000a7c4:	eaffffd5 	b	3000a720 <vsnprintf+0xb0>
+3000a9bc:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000a9c0:	e3833020 	orr	r3, r3, #32
+3000a9c4:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000a9c8:	eaffffd5 	b	3000a924 <vsnprintf+0xb0>
 				case '0': flags |= ZEROPAD; goto repeat;
-3000a7c8:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000a7cc:	e3833001 	orr	r3, r3, #1
-3000a7d0:	e58d304c 	str	r3, [sp, #76]	; 0x4c
-3000a7d4:	eaffffd1 	b	3000a720 <vsnprintf+0xb0>
+3000a9cc:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000a9d0:	e3833001 	orr	r3, r3, #1
+3000a9d4:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000a9d8:	eaffffd1 	b	3000a924 <vsnprintf+0xb0>
 			}
 
 		/* get field width */
 		field_width = -1;
-3000a7d8:	e3e03000 	mvn	r3, #0
-3000a7dc:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000a9dc:	e3e03000 	mvn	r3, #0
+3000a9e0:	e58d3050 	str	r3, [sp, #80]	; 0x50
 		if (IS_DIGIT(*fmt))
-3000a7e0:	e59d3014 	ldr	r3, [sp, #20]
-3000a7e4:	e5d33000 	ldrb	r3, [r3]
-3000a7e8:	e353002f 	cmp	r3, #47	; 0x2f
-3000a7ec:	9a000009 	bls	3000a818 <vsnprintf+0x1a8>
-3000a7f0:	e59d3014 	ldr	r3, [sp, #20]
-3000a7f4:	e5d33000 	ldrb	r3, [r3]
-3000a7f8:	e3530038 	cmp	r3, #56	; 0x38
-3000a7fc:	8a000005 	bhi	3000a818 <vsnprintf+0x1a8>
+3000a9e4:	e59d3014 	ldr	r3, [sp, #20]
+3000a9e8:	e5d33000 	ldrb	r3, [r3]
+3000a9ec:	e353002f 	cmp	r3, #47	; 0x2f
+3000a9f0:	9a000009 	bls	3000aa1c <vsnprintf+0x1a8>
+3000a9f4:	e59d3014 	ldr	r3, [sp, #20]
+3000a9f8:	e5d33000 	ldrb	r3, [r3]
+3000a9fc:	e3530038 	cmp	r3, #56	; 0x38
+3000aa00:	8a000005 	bhi	3000aa1c <vsnprintf+0x1a8>
 			field_width = skip_atoi(&fmt);
-3000a800:	e28d3014 	add	r3, sp, #20
-3000a804:	e1a00003 	mov	r0, r3
-3000a808:	ebfffe30 	bl	3000a0d0 <skip_atoi>
-3000a80c:	e1a03000 	mov	r3, r0
-3000a810:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000aa04:	e28d3014 	add	r3, sp, #20
+3000aa08:	e1a00003 	mov	r0, r3
+3000aa0c:	ebfffe30 	bl	3000a2d4 <skip_atoi>
+3000aa10:	e1a03000 	mov	r3, r0
+3000aa14:	e58d3050 	str	r3, [sp, #80]	; 0x50
 				case '0': flags |= ZEROPAD; goto repeat;
 			}
 
 		/* get field width */
 		field_width = -1;
 		if (IS_DIGIT(*fmt))
-3000a814:	ea000016 	b	3000a874 <vsnprintf+0x204>
+3000aa18:	ea000016 	b	3000aa78 <vsnprintf+0x204>
 			field_width = skip_atoi(&fmt);
 		else if (*fmt == '*') {
-3000a818:	e59d3014 	ldr	r3, [sp, #20]
-3000a81c:	e5d33000 	ldrb	r3, [r3]
-3000a820:	e353002a 	cmp	r3, #42	; 0x2a
-3000a824:	1a000012 	bne	3000a874 <vsnprintf+0x204>
+3000aa1c:	e59d3014 	ldr	r3, [sp, #20]
+3000aa20:	e5d33000 	ldrb	r3, [r3]
+3000aa24:	e353002a 	cmp	r3, #42	; 0x2a
+3000aa28:	1a000012 	bne	3000aa78 <vsnprintf+0x204>
 			++fmt;
-3000a828:	e59d3014 	ldr	r3, [sp, #20]
-3000a82c:	e2833001 	add	r3, r3, #1
-3000a830:	e58d3014 	str	r3, [sp, #20]
+3000aa2c:	e59d3014 	ldr	r3, [sp, #20]
+3000aa30:	e2833001 	add	r3, r3, #1
+3000aa34:	e58d3014 	str	r3, [sp, #20]
 			/* it's the next argument */
 			field_width = va_arg(args, acoral_32);
-3000a834:	e59d3010 	ldr	r3, [sp, #16]
-3000a838:	e2833004 	add	r3, r3, #4
-3000a83c:	e58d3010 	str	r3, [sp, #16]
-3000a840:	e59d3010 	ldr	r3, [sp, #16]
-3000a844:	e2433004 	sub	r3, r3, #4
-3000a848:	e5933000 	ldr	r3, [r3]
-3000a84c:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000aa38:	e59d3010 	ldr	r3, [sp, #16]
+3000aa3c:	e2833004 	add	r3, r3, #4
+3000aa40:	e58d3010 	str	r3, [sp, #16]
+3000aa44:	e59d3010 	ldr	r3, [sp, #16]
+3000aa48:	e2433004 	sub	r3, r3, #4
+3000aa4c:	e5933000 	ldr	r3, [r3]
+3000aa50:	e58d3050 	str	r3, [sp, #80]	; 0x50
 			if (field_width < 0) {
-3000a850:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000a854:	e3530000 	cmp	r3, #0
-3000a858:	aa000005 	bge	3000a874 <vsnprintf+0x204>
+3000aa54:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000aa58:	e3530000 	cmp	r3, #0
+3000aa5c:	aa000005 	bge	3000aa78 <vsnprintf+0x204>
 				field_width = -field_width;
-3000a85c:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000a860:	e2633000 	rsb	r3, r3, #0
-3000a864:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000aa60:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000aa64:	e2633000 	rsb	r3, r3, #0
+3000aa68:	e58d3050 	str	r3, [sp, #80]	; 0x50
 				flags |= LEFT;
-3000a868:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000a86c:	e3833010 	orr	r3, r3, #16
-3000a870:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000aa6c:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000aa70:	e3833010 	orr	r3, r3, #16
+3000aa74:	e58d304c 	str	r3, [sp, #76]	; 0x4c
 			}
 		}
 
 		/* get the precision */
 		precision = -1;
-3000a874:	e3e03000 	mvn	r3, #0
-3000a878:	e58d3054 	str	r3, [sp, #84]	; 0x54
+3000aa78:	e3e03000 	mvn	r3, #0
+3000aa7c:	e58d3054 	str	r3, [sp, #84]	; 0x54
 		if (*fmt == '.') {
-3000a87c:	e59d3014 	ldr	r3, [sp, #20]
-3000a880:	e5d33000 	ldrb	r3, [r3]
-3000a884:	e353002e 	cmp	r3, #46	; 0x2e
-3000a888:	1a000023 	bne	3000a91c <vsnprintf+0x2ac>
+3000aa80:	e59d3014 	ldr	r3, [sp, #20]
+3000aa84:	e5d33000 	ldrb	r3, [r3]
+3000aa88:	e353002e 	cmp	r3, #46	; 0x2e
+3000aa8c:	1a000023 	bne	3000ab20 <vsnprintf+0x2ac>
 			++fmt;	
-3000a88c:	e59d3014 	ldr	r3, [sp, #20]
-3000a890:	e2833001 	add	r3, r3, #1
-3000a894:	e58d3014 	str	r3, [sp, #20]
+3000aa90:	e59d3014 	ldr	r3, [sp, #20]
+3000aa94:	e2833001 	add	r3, r3, #1
+3000aa98:	e58d3014 	str	r3, [sp, #20]
 			if (IS_DIGIT(*fmt))
-3000a898:	e59d3014 	ldr	r3, [sp, #20]
-3000a89c:	e5d33000 	ldrb	r3, [r3]
-3000a8a0:	e353002f 	cmp	r3, #47	; 0x2f
-3000a8a4:	9a000009 	bls	3000a8d0 <vsnprintf+0x260>
-3000a8a8:	e59d3014 	ldr	r3, [sp, #20]
-3000a8ac:	e5d33000 	ldrb	r3, [r3]
-3000a8b0:	e3530038 	cmp	r3, #56	; 0x38
-3000a8b4:	8a000005 	bhi	3000a8d0 <vsnprintf+0x260>
+3000aa9c:	e59d3014 	ldr	r3, [sp, #20]
+3000aaa0:	e5d33000 	ldrb	r3, [r3]
+3000aaa4:	e353002f 	cmp	r3, #47	; 0x2f
+3000aaa8:	9a000009 	bls	3000aad4 <vsnprintf+0x260>
+3000aaac:	e59d3014 	ldr	r3, [sp, #20]
+3000aab0:	e5d33000 	ldrb	r3, [r3]
+3000aab4:	e3530038 	cmp	r3, #56	; 0x38
+3000aab8:	8a000005 	bhi	3000aad4 <vsnprintf+0x260>
 				precision = skip_atoi(&fmt);
-3000a8b8:	e28d3014 	add	r3, sp, #20
-3000a8bc:	e1a00003 	mov	r0, r3
-3000a8c0:	ebfffe02 	bl	3000a0d0 <skip_atoi>
-3000a8c4:	e1a03000 	mov	r3, r0
-3000a8c8:	e58d3054 	str	r3, [sp, #84]	; 0x54
+3000aabc:	e28d3014 	add	r3, sp, #20
+3000aac0:	e1a00003 	mov	r0, r3
+3000aac4:	ebfffe02 	bl	3000a2d4 <skip_atoi>
+3000aac8:	e1a03000 	mov	r3, r0
+3000aacc:	e58d3054 	str	r3, [sp, #84]	; 0x54
 
 		/* get the precision */
 		precision = -1;
 		if (*fmt == '.') {
 			++fmt;	
 			if (IS_DIGIT(*fmt))
-3000a8cc:	ea00000d 	b	3000a908 <vsnprintf+0x298>
+3000aad0:	ea00000d 	b	3000ab0c <vsnprintf+0x298>
 				precision = skip_atoi(&fmt);
 			else if (*fmt == '*') {
-3000a8d0:	e59d3014 	ldr	r3, [sp, #20]
-3000a8d4:	e5d33000 	ldrb	r3, [r3]
-3000a8d8:	e353002a 	cmp	r3, #42	; 0x2a
-3000a8dc:	1a000009 	bne	3000a908 <vsnprintf+0x298>
+3000aad4:	e59d3014 	ldr	r3, [sp, #20]
+3000aad8:	e5d33000 	ldrb	r3, [r3]
+3000aadc:	e353002a 	cmp	r3, #42	; 0x2a
+3000aae0:	1a000009 	bne	3000ab0c <vsnprintf+0x298>
 				++fmt;
-3000a8e0:	e59d3014 	ldr	r3, [sp, #20]
-3000a8e4:	e2833001 	add	r3, r3, #1
-3000a8e8:	e58d3014 	str	r3, [sp, #20]
+3000aae4:	e59d3014 	ldr	r3, [sp, #20]
+3000aae8:	e2833001 	add	r3, r3, #1
+3000aaec:	e58d3014 	str	r3, [sp, #20]
 				/* it's the next argument */
 				precision = va_arg(args, acoral_32);
-3000a8ec:	e59d3010 	ldr	r3, [sp, #16]
-3000a8f0:	e2833004 	add	r3, r3, #4
-3000a8f4:	e58d3010 	str	r3, [sp, #16]
-3000a8f8:	e59d3010 	ldr	r3, [sp, #16]
-3000a8fc:	e2433004 	sub	r3, r3, #4
-3000a900:	e5933000 	ldr	r3, [r3]
-3000a904:	e58d3054 	str	r3, [sp, #84]	; 0x54
+3000aaf0:	e59d3010 	ldr	r3, [sp, #16]
+3000aaf4:	e2833004 	add	r3, r3, #4
+3000aaf8:	e58d3010 	str	r3, [sp, #16]
+3000aafc:	e59d3010 	ldr	r3, [sp, #16]
+3000ab00:	e2433004 	sub	r3, r3, #4
+3000ab04:	e5933000 	ldr	r3, [r3]
+3000ab08:	e58d3054 	str	r3, [sp, #84]	; 0x54
 			}
 			if (precision < 0)
-3000a908:	e59d3054 	ldr	r3, [sp, #84]	; 0x54
-3000a90c:	e3530000 	cmp	r3, #0
-3000a910:	aa000001 	bge	3000a91c <vsnprintf+0x2ac>
+3000ab0c:	e59d3054 	ldr	r3, [sp, #84]	; 0x54
+3000ab10:	e3530000 	cmp	r3, #0
+3000ab14:	aa000001 	bge	3000ab20 <vsnprintf+0x2ac>
 				precision = 0;
-3000a914:	e3a03000 	mov	r3, #0
-3000a918:	e58d3054 	str	r3, [sp, #84]	; 0x54
+3000ab18:	e3a03000 	mov	r3, #0
+3000ab1c:	e58d3054 	str	r3, [sp, #84]	; 0x54
 		}
 
 		/* get the conversion qualifier */
 		qualifier = -1;
-3000a91c:	e3e03000 	mvn	r3, #0
-3000a920:	e58d3058 	str	r3, [sp, #88]	; 0x58
+3000ab20:	e3e03000 	mvn	r3, #0
+3000ab24:	e58d3058 	str	r3, [sp, #88]	; 0x58
 		if (*fmt == 'h' || *fmt == 'l' || *fmt == 'L' || *fmt =='Z') {
-3000a924:	e59d3014 	ldr	r3, [sp, #20]
-3000a928:	e5d33000 	ldrb	r3, [r3]
-3000a92c:	e3530068 	cmp	r3, #104	; 0x68
-3000a930:	0a00000b 	beq	3000a964 <vsnprintf+0x2f4>
-3000a934:	e59d3014 	ldr	r3, [sp, #20]
-3000a938:	e5d33000 	ldrb	r3, [r3]
-3000a93c:	e353006c 	cmp	r3, #108	; 0x6c
-3000a940:	0a000007 	beq	3000a964 <vsnprintf+0x2f4>
-3000a944:	e59d3014 	ldr	r3, [sp, #20]
-3000a948:	e5d33000 	ldrb	r3, [r3]
-3000a94c:	e353004c 	cmp	r3, #76	; 0x4c
-3000a950:	0a000003 	beq	3000a964 <vsnprintf+0x2f4>
-3000a954:	e59d3014 	ldr	r3, [sp, #20]
-3000a958:	e5d33000 	ldrb	r3, [r3]
-3000a95c:	e353005a 	cmp	r3, #90	; 0x5a
-3000a960:	1a000011 	bne	3000a9ac <vsnprintf+0x33c>
+3000ab28:	e59d3014 	ldr	r3, [sp, #20]
+3000ab2c:	e5d33000 	ldrb	r3, [r3]
+3000ab30:	e3530068 	cmp	r3, #104	; 0x68
+3000ab34:	0a00000b 	beq	3000ab68 <vsnprintf+0x2f4>
+3000ab38:	e59d3014 	ldr	r3, [sp, #20]
+3000ab3c:	e5d33000 	ldrb	r3, [r3]
+3000ab40:	e353006c 	cmp	r3, #108	; 0x6c
+3000ab44:	0a000007 	beq	3000ab68 <vsnprintf+0x2f4>
+3000ab48:	e59d3014 	ldr	r3, [sp, #20]
+3000ab4c:	e5d33000 	ldrb	r3, [r3]
+3000ab50:	e353004c 	cmp	r3, #76	; 0x4c
+3000ab54:	0a000003 	beq	3000ab68 <vsnprintf+0x2f4>
+3000ab58:	e59d3014 	ldr	r3, [sp, #20]
+3000ab5c:	e5d33000 	ldrb	r3, [r3]
+3000ab60:	e353005a 	cmp	r3, #90	; 0x5a
+3000ab64:	1a000011 	bne	3000abb0 <vsnprintf+0x33c>
 			qualifier = *fmt;
-3000a964:	e59d3014 	ldr	r3, [sp, #20]
-3000a968:	e5d33000 	ldrb	r3, [r3]
-3000a96c:	e58d3058 	str	r3, [sp, #88]	; 0x58
+3000ab68:	e59d3014 	ldr	r3, [sp, #20]
+3000ab6c:	e5d33000 	ldrb	r3, [r3]
+3000ab70:	e58d3058 	str	r3, [sp, #88]	; 0x58
 			++fmt;
-3000a970:	e59d3014 	ldr	r3, [sp, #20]
-3000a974:	e2833001 	add	r3, r3, #1
-3000a978:	e58d3014 	str	r3, [sp, #20]
+3000ab74:	e59d3014 	ldr	r3, [sp, #20]
+3000ab78:	e2833001 	add	r3, r3, #1
+3000ab7c:	e58d3014 	str	r3, [sp, #20]
 			if (qualifier == 'l' && *fmt == 'l') {
-3000a97c:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000a980:	e353006c 	cmp	r3, #108	; 0x6c
-3000a984:	1a000008 	bne	3000a9ac <vsnprintf+0x33c>
-3000a988:	e59d3014 	ldr	r3, [sp, #20]
-3000a98c:	e5d33000 	ldrb	r3, [r3]
-3000a990:	e353006c 	cmp	r3, #108	; 0x6c
-3000a994:	1a000004 	bne	3000a9ac <vsnprintf+0x33c>
+3000ab80:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000ab84:	e353006c 	cmp	r3, #108	; 0x6c
+3000ab88:	1a000008 	bne	3000abb0 <vsnprintf+0x33c>
+3000ab8c:	e59d3014 	ldr	r3, [sp, #20]
+3000ab90:	e5d33000 	ldrb	r3, [r3]
+3000ab94:	e353006c 	cmp	r3, #108	; 0x6c
+3000ab98:	1a000004 	bne	3000abb0 <vsnprintf+0x33c>
 				qualifier = 'L';
-3000a998:	e3a0304c 	mov	r3, #76	; 0x4c
-3000a99c:	e58d3058 	str	r3, [sp, #88]	; 0x58
+3000ab9c:	e3a0304c 	mov	r3, #76	; 0x4c
+3000aba0:	e58d3058 	str	r3, [sp, #88]	; 0x58
 				++fmt;
-3000a9a0:	e59d3014 	ldr	r3, [sp, #20]
-3000a9a4:	e2833001 	add	r3, r3, #1
-3000a9a8:	e58d3014 	str	r3, [sp, #20]
+3000aba4:	e59d3014 	ldr	r3, [sp, #20]
+3000aba8:	e2833001 	add	r3, r3, #1
+3000abac:	e58d3014 	str	r3, [sp, #20]
 			}
 		}
 
 		/* default base */
 		base = 10;
-3000a9ac:	e3a0300a 	mov	r3, #10
-3000a9b0:	e58d3038 	str	r3, [sp, #56]	; 0x38
+3000abb0:	e3a0300a 	mov	r3, #10
+3000abb4:	e58d3038 	str	r3, [sp, #56]	; 0x38
 
 		switch (*fmt) {
-3000a9b4:	e59d3014 	ldr	r3, [sp, #20]
-3000a9b8:	e5d33000 	ldrb	r3, [r3]
-3000a9bc:	e2433025 	sub	r3, r3, #37	; 0x25
-3000a9c0:	e3530053 	cmp	r3, #83	; 0x53
-3000a9c4:	979ff103 	ldrls	pc, [pc, r3, lsl #2]
-3000a9c8:	ea00014b 	b	3000aefc <vsnprintf+0x88c>
-3000a9cc:	3000ae9c 	.word	0x3000ae9c
-3000a9d0:	3000aefc 	.word	0x3000aefc
-3000a9d4:	3000aefc 	.word	0x3000aefc
-3000a9d8:	3000aefc 	.word	0x3000aefc
-3000a9dc:	3000aefc 	.word	0x3000aefc
-3000a9e0:	3000aefc 	.word	0x3000aefc
-3000a9e4:	3000aefc 	.word	0x3000aefc
-3000a9e8:	3000aefc 	.word	0x3000aefc
-3000a9ec:	3000aefc 	.word	0x3000aefc
-3000a9f0:	3000aefc 	.word	0x3000aefc
-3000a9f4:	3000aefc 	.word	0x3000aefc
-3000a9f8:	3000aefc 	.word	0x3000aefc
-3000a9fc:	3000aefc 	.word	0x3000aefc
-3000aa00:	3000aefc 	.word	0x3000aefc
-3000aa04:	3000aefc 	.word	0x3000aefc
-3000aa08:	3000aefc 	.word	0x3000aefc
-3000aa0c:	3000aefc 	.word	0x3000aefc
-3000aa10:	3000aefc 	.word	0x3000aefc
-3000aa14:	3000aefc 	.word	0x3000aefc
-3000aa18:	3000aefc 	.word	0x3000aefc
-3000aa1c:	3000aefc 	.word	0x3000aefc
-3000aa20:	3000aefc 	.word	0x3000aefc
-3000aa24:	3000aefc 	.word	0x3000aefc
-3000aa28:	3000aefc 	.word	0x3000aefc
-3000aa2c:	3000aefc 	.word	0x3000aefc
-3000aa30:	3000aefc 	.word	0x3000aefc
-3000aa34:	3000aefc 	.word	0x3000aefc
-3000aa38:	3000aefc 	.word	0x3000aefc
-3000aa3c:	3000aefc 	.word	0x3000aefc
-3000aa40:	3000aefc 	.word	0x3000aefc
-3000aa44:	3000aefc 	.word	0x3000aefc
-3000aa48:	3000aefc 	.word	0x3000aefc
-3000aa4c:	3000aefc 	.word	0x3000aefc
-3000aa50:	3000aefc 	.word	0x3000aefc
-3000aa54:	3000aefc 	.word	0x3000aefc
-3000aa58:	3000aefc 	.word	0x3000aefc
-3000aa5c:	3000aefc 	.word	0x3000aefc
-3000aa60:	3000aefc 	.word	0x3000aefc
-3000aa64:	3000aefc 	.word	0x3000aefc
-3000aa68:	3000aefc 	.word	0x3000aefc
-3000aa6c:	3000aefc 	.word	0x3000aefc
-3000aa70:	3000aefc 	.word	0x3000aefc
-3000aa74:	3000aefc 	.word	0x3000aefc
-3000aa78:	3000aefc 	.word	0x3000aefc
-3000aa7c:	3000aefc 	.word	0x3000aefc
-3000aa80:	3000aefc 	.word	0x3000aefc
-3000aa84:	3000aefc 	.word	0x3000aefc
-3000aa88:	3000aefc 	.word	0x3000aefc
-3000aa8c:	3000aefc 	.word	0x3000aefc
-3000aa90:	3000aefc 	.word	0x3000aefc
-3000aa94:	3000aefc 	.word	0x3000aefc
-3000aa98:	3000aed4 	.word	0x3000aed4
-3000aa9c:	3000aefc 	.word	0x3000aefc
-3000aaa0:	3000aefc 	.word	0x3000aefc
-3000aaa4:	3000aefc 	.word	0x3000aefc
-3000aaa8:	3000aefc 	.word	0x3000aefc
-3000aaac:	3000aefc 	.word	0x3000aefc
-3000aab0:	3000aefc 	.word	0x3000aefc
-3000aab4:	3000aefc 	.word	0x3000aefc
-3000aab8:	3000aefc 	.word	0x3000aefc
-3000aabc:	3000aefc 	.word	0x3000aefc
-3000aac0:	3000aefc 	.word	0x3000aefc
-3000aac4:	3000ab1c 	.word	0x3000ab1c
-3000aac8:	3000aeec 	.word	0x3000aeec
-3000aacc:	3000aefc 	.word	0x3000aefc
-3000aad0:	3000aefc 	.word	0x3000aefc
-3000aad4:	3000aefc 	.word	0x3000aefc
-3000aad8:	3000aefc 	.word	0x3000aefc
-3000aadc:	3000aeec 	.word	0x3000aeec
-3000aae0:	3000aefc 	.word	0x3000aefc
-3000aae4:	3000aefc 	.word	0x3000aefc
-3000aae8:	3000aefc 	.word	0x3000aefc
-3000aaec:	3000aefc 	.word	0x3000aefc
-3000aaf0:	3000ade4 	.word	0x3000ade4
-3000aaf4:	3000aec8 	.word	0x3000aec8
-3000aaf8:	3000ad68 	.word	0x3000ad68
-3000aafc:	3000aefc 	.word	0x3000aefc
-3000ab00:	3000aefc 	.word	0x3000aefc
-3000ab04:	3000abfc 	.word	0x3000abfc
-3000ab08:	3000aefc 	.word	0x3000aefc
-3000ab0c:	3000af74 	.word	0x3000af74
-3000ab10:	3000aefc 	.word	0x3000aefc
-3000ab14:	3000aefc 	.word	0x3000aefc
-3000ab18:	3000aee0 	.word	0x3000aee0
+3000abb8:	e59d3014 	ldr	r3, [sp, #20]
+3000abbc:	e5d33000 	ldrb	r3, [r3]
+3000abc0:	e2433025 	sub	r3, r3, #37	; 0x25
+3000abc4:	e3530053 	cmp	r3, #83	; 0x53
+3000abc8:	979ff103 	ldrls	pc, [pc, r3, lsl #2]
+3000abcc:	ea00014b 	b	3000b100 <vsnprintf+0x88c>
+3000abd0:	3000b0a0 	.word	0x3000b0a0
+3000abd4:	3000b100 	.word	0x3000b100
+3000abd8:	3000b100 	.word	0x3000b100
+3000abdc:	3000b100 	.word	0x3000b100
+3000abe0:	3000b100 	.word	0x3000b100
+3000abe4:	3000b100 	.word	0x3000b100
+3000abe8:	3000b100 	.word	0x3000b100
+3000abec:	3000b100 	.word	0x3000b100
+3000abf0:	3000b100 	.word	0x3000b100
+3000abf4:	3000b100 	.word	0x3000b100
+3000abf8:	3000b100 	.word	0x3000b100
+3000abfc:	3000b100 	.word	0x3000b100
+3000ac00:	3000b100 	.word	0x3000b100
+3000ac04:	3000b100 	.word	0x3000b100
+3000ac08:	3000b100 	.word	0x3000b100
+3000ac0c:	3000b100 	.word	0x3000b100
+3000ac10:	3000b100 	.word	0x3000b100
+3000ac14:	3000b100 	.word	0x3000b100
+3000ac18:	3000b100 	.word	0x3000b100
+3000ac1c:	3000b100 	.word	0x3000b100
+3000ac20:	3000b100 	.word	0x3000b100
+3000ac24:	3000b100 	.word	0x3000b100
+3000ac28:	3000b100 	.word	0x3000b100
+3000ac2c:	3000b100 	.word	0x3000b100
+3000ac30:	3000b100 	.word	0x3000b100
+3000ac34:	3000b100 	.word	0x3000b100
+3000ac38:	3000b100 	.word	0x3000b100
+3000ac3c:	3000b100 	.word	0x3000b100
+3000ac40:	3000b100 	.word	0x3000b100
+3000ac44:	3000b100 	.word	0x3000b100
+3000ac48:	3000b100 	.word	0x3000b100
+3000ac4c:	3000b100 	.word	0x3000b100
+3000ac50:	3000b100 	.word	0x3000b100
+3000ac54:	3000b100 	.word	0x3000b100
+3000ac58:	3000b100 	.word	0x3000b100
+3000ac5c:	3000b100 	.word	0x3000b100
+3000ac60:	3000b100 	.word	0x3000b100
+3000ac64:	3000b100 	.word	0x3000b100
+3000ac68:	3000b100 	.word	0x3000b100
+3000ac6c:	3000b100 	.word	0x3000b100
+3000ac70:	3000b100 	.word	0x3000b100
+3000ac74:	3000b100 	.word	0x3000b100
+3000ac78:	3000b100 	.word	0x3000b100
+3000ac7c:	3000b100 	.word	0x3000b100
+3000ac80:	3000b100 	.word	0x3000b100
+3000ac84:	3000b100 	.word	0x3000b100
+3000ac88:	3000b100 	.word	0x3000b100
+3000ac8c:	3000b100 	.word	0x3000b100
+3000ac90:	3000b100 	.word	0x3000b100
+3000ac94:	3000b100 	.word	0x3000b100
+3000ac98:	3000b100 	.word	0x3000b100
+3000ac9c:	3000b0d8 	.word	0x3000b0d8
+3000aca0:	3000b100 	.word	0x3000b100
+3000aca4:	3000b100 	.word	0x3000b100
+3000aca8:	3000b100 	.word	0x3000b100
+3000acac:	3000b100 	.word	0x3000b100
+3000acb0:	3000b100 	.word	0x3000b100
+3000acb4:	3000b100 	.word	0x3000b100
+3000acb8:	3000b100 	.word	0x3000b100
+3000acbc:	3000b100 	.word	0x3000b100
+3000acc0:	3000b100 	.word	0x3000b100
+3000acc4:	3000b100 	.word	0x3000b100
+3000acc8:	3000ad20 	.word	0x3000ad20
+3000accc:	3000b0f0 	.word	0x3000b0f0
+3000acd0:	3000b100 	.word	0x3000b100
+3000acd4:	3000b100 	.word	0x3000b100
+3000acd8:	3000b100 	.word	0x3000b100
+3000acdc:	3000b100 	.word	0x3000b100
+3000ace0:	3000b0f0 	.word	0x3000b0f0
+3000ace4:	3000b100 	.word	0x3000b100
+3000ace8:	3000b100 	.word	0x3000b100
+3000acec:	3000b100 	.word	0x3000b100
+3000acf0:	3000b100 	.word	0x3000b100
+3000acf4:	3000afe8 	.word	0x3000afe8
+3000acf8:	3000b0cc 	.word	0x3000b0cc
+3000acfc:	3000af6c 	.word	0x3000af6c
+3000ad00:	3000b100 	.word	0x3000b100
+3000ad04:	3000b100 	.word	0x3000b100
+3000ad08:	3000ae00 	.word	0x3000ae00
+3000ad0c:	3000b100 	.word	0x3000b100
+3000ad10:	3000b178 	.word	0x3000b178
+3000ad14:	3000b100 	.word	0x3000b100
+3000ad18:	3000b100 	.word	0x3000b100
+3000ad1c:	3000b0e4 	.word	0x3000b0e4
 			case 'c':
 				if (!(flags & LEFT)) {
-3000ab1c:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000ab20:	e2033010 	and	r3, r3, #16
-3000ab24:	e3530000 	cmp	r3, #0
-3000ab28:	1a000010 	bne	3000ab70 <vsnprintf+0x500>
+3000ad20:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000ad24:	e2033010 	and	r3, r3, #16
+3000ad28:	e3530000 	cmp	r3, #0
+3000ad2c:	1a000010 	bne	3000ad74 <vsnprintf+0x500>
 					while (--field_width > 0) {
-3000ab2c:	ea000009 	b	3000ab58 <vsnprintf+0x4e8>
+3000ad30:	ea000009 	b	3000ad5c <vsnprintf+0x4e8>
 						if (str <= end)
-3000ab30:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ab34:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000ab38:	e1520003 	cmp	r2, r3
-3000ab3c:	8a000002 	bhi	3000ab4c <vsnprintf+0x4dc>
+3000ad34:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000ad38:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000ad3c:	e1520003 	cmp	r2, r3
+3000ad40:	8a000002 	bhi	3000ad50 <vsnprintf+0x4dc>
 							*str = ' ';
-3000ab40:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000ab44:	e3a02020 	mov	r2, #32
-3000ab48:	e5c32000 	strb	r2, [r3]
+3000ad44:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000ad48:	e3a02020 	mov	r2, #32
+3000ad4c:	e5c32000 	strb	r2, [r3]
 						++str;
-3000ab4c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000ab50:	e2833001 	add	r3, r3, #1
-3000ab54:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000ad50:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000ad54:	e2833001 	add	r3, r3, #1
+3000ad58:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 		base = 10;
 
 		switch (*fmt) {
 			case 'c':
 				if (!(flags & LEFT)) {
 					while (--field_width > 0) {
-3000ab58:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000ab5c:	e2433001 	sub	r3, r3, #1
-3000ab60:	e58d3050 	str	r3, [sp, #80]	; 0x50
-3000ab64:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000ab68:	e3530000 	cmp	r3, #0
-3000ab6c:	caffffef 	bgt	3000ab30 <vsnprintf+0x4c0>
+3000ad5c:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000ad60:	e2433001 	sub	r3, r3, #1
+3000ad64:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000ad68:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000ad6c:	e3530000 	cmp	r3, #0
+3000ad70:	caffffef 	bgt	3000ad34 <vsnprintf+0x4c0>
 						if (str <= end)
 							*str = ' ';
 						++str;
 					}
 				}
 				c = (acoral_u8) va_arg(args, acoral_32);
-3000ab70:	e59d3010 	ldr	r3, [sp, #16]
-3000ab74:	e2833004 	add	r3, r3, #4
-3000ab78:	e58d3010 	str	r3, [sp, #16]
-3000ab7c:	e59d3010 	ldr	r3, [sp, #16]
-3000ab80:	e2433004 	sub	r3, r3, #4
-3000ab84:	e5933000 	ldr	r3, [r3]
-3000ab88:	e5cd3047 	strb	r3, [sp, #71]	; 0x47
+3000ad74:	e59d3010 	ldr	r3, [sp, #16]
+3000ad78:	e2833004 	add	r3, r3, #4
+3000ad7c:	e58d3010 	str	r3, [sp, #16]
+3000ad80:	e59d3010 	ldr	r3, [sp, #16]
+3000ad84:	e2433004 	sub	r3, r3, #4
+3000ad88:	e5933000 	ldr	r3, [r3]
+3000ad8c:	e5cd3047 	strb	r3, [sp, #71]	; 0x47
 				if (str <= end)
-3000ab8c:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ab90:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000ab94:	e1520003 	cmp	r2, r3
-3000ab98:	8a000002 	bhi	3000aba8 <vsnprintf+0x538>
+3000ad90:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000ad94:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000ad98:	e1520003 	cmp	r2, r3
+3000ad9c:	8a000002 	bhi	3000adac <vsnprintf+0x538>
 					*str = c;
-3000ab9c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000aba0:	e5dd2047 	ldrb	r2, [sp, #71]	; 0x47
-3000aba4:	e5c32000 	strb	r2, [r3]
+3000ada0:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000ada4:	e5dd2047 	ldrb	r2, [sp, #71]	; 0x47
+3000ada8:	e5c32000 	strb	r2, [r3]
 				++str;
-3000aba8:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000abac:	e2833001 	add	r3, r3, #1
-3000abb0:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000adac:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000adb0:	e2833001 	add	r3, r3, #1
+3000adb4:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 				while (--field_width > 0) {
-3000abb4:	ea000009 	b	3000abe0 <vsnprintf+0x570>
+3000adb8:	ea000009 	b	3000ade4 <vsnprintf+0x570>
 					if (str <= end)
-3000abb8:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000abbc:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000abc0:	e1520003 	cmp	r2, r3
-3000abc4:	8a000002 	bhi	3000abd4 <vsnprintf+0x564>
+3000adbc:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000adc0:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000adc4:	e1520003 	cmp	r2, r3
+3000adc8:	8a000002 	bhi	3000add8 <vsnprintf+0x564>
 						*str = ' ';
-3000abc8:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000abcc:	e3a02020 	mov	r2, #32
-3000abd0:	e5c32000 	strb	r2, [r3]
+3000adcc:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000add0:	e3a02020 	mov	r2, #32
+3000add4:	e5c32000 	strb	r2, [r3]
 					++str;
-3000abd4:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000abd8:	e2833001 	add	r3, r3, #1
-3000abdc:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000add8:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000addc:	e2833001 	add	r3, r3, #1
+3000ade0:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 				}
 				c = (acoral_u8) va_arg(args, acoral_32);
 				if (str <= end)
 					*str = c;
 				++str;
 				while (--field_width > 0) {
-3000abe0:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000abe4:	e2433001 	sub	r3, r3, #1
-3000abe8:	e58d3050 	str	r3, [sp, #80]	; 0x50
-3000abec:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000abf0:	e3530000 	cmp	r3, #0
-3000abf4:	caffffef 	bgt	3000abb8 <vsnprintf+0x548>
+3000ade4:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000ade8:	e2433001 	sub	r3, r3, #1
+3000adec:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000adf0:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000adf4:	e3530000 	cmp	r3, #0
+3000adf8:	caffffef 	bgt	3000adbc <vsnprintf+0x548>
 					if (str <= end)
 						*str = ' ';
 					++str;
 				}
 				continue;
-3000abf8:	ea00014b 	b	3000b12c <vsnprintf+0xabc>
+3000adfc:	ea00014b 	b	3000b330 <vsnprintf+0xabc>
 
 			case 's':
 				s = va_arg(args, acoral_char *);
-3000abfc:	e59d3010 	ldr	r3, [sp, #16]
-3000ac00:	e2833004 	add	r3, r3, #4
-3000ac04:	e58d3010 	str	r3, [sp, #16]
-3000ac08:	e59d3010 	ldr	r3, [sp, #16]
-3000ac0c:	e2433004 	sub	r3, r3, #4
-3000ac10:	e5933000 	ldr	r3, [r3]
-3000ac14:	e58d3048 	str	r3, [sp, #72]	; 0x48
+3000ae00:	e59d3010 	ldr	r3, [sp, #16]
+3000ae04:	e2833004 	add	r3, r3, #4
+3000ae08:	e58d3010 	str	r3, [sp, #16]
+3000ae0c:	e59d3010 	ldr	r3, [sp, #16]
+3000ae10:	e2433004 	sub	r3, r3, #4
+3000ae14:	e5933000 	ldr	r3, [r3]
+3000ae18:	e58d3048 	str	r3, [sp, #72]	; 0x48
 				if (!s)
-3000ac18:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
-3000ac1c:	e3530000 	cmp	r3, #0
-3000ac20:	1a000001 	bne	3000ac2c <vsnprintf+0x5bc>
+3000ae1c:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
+3000ae20:	e3530000 	cmp	r3, #0
+3000ae24:	1a000001 	bne	3000ae30 <vsnprintf+0x5bc>
 					s = "<NULL>";
-3000ac24:	e59f3578 	ldr	r3, [pc, #1400]	; 3000b1a4 <vsnprintf+0xb34>
-3000ac28:	e58d3048 	str	r3, [sp, #72]	; 0x48
+3000ae28:	e59f3578 	ldr	r3, [pc, #1400]	; 3000b3a8 <vsnprintf+0xb34>
+3000ae2c:	e58d3048 	str	r3, [sp, #72]	; 0x48
 
 				len = acoral_str_nlen(s, precision);
-3000ac2c:	e59d3054 	ldr	r3, [sp, #84]	; 0x54
-3000ac30:	e59d0048 	ldr	r0, [sp, #72]	; 0x48
-3000ac34:	e1a01003 	mov	r1, r3
-3000ac38:	eb0004c5 	bl	3000bf54 <acoral_str_nlen>
-3000ac3c:	e1a03000 	mov	r3, r0
-3000ac40:	e58d3024 	str	r3, [sp, #36]	; 0x24
+3000ae30:	e59d3054 	ldr	r3, [sp, #84]	; 0x54
+3000ae34:	e59d0048 	ldr	r0, [sp, #72]	; 0x48
+3000ae38:	e1a01003 	mov	r1, r3
+3000ae3c:	eb0004c5 	bl	3000c158 <acoral_str_nlen>
+3000ae40:	e1a03000 	mov	r3, r0
+3000ae44:	e58d3024 	str	r3, [sp, #36]	; 0x24
 
 				if (!(flags & LEFT)) {
-3000ac44:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000ac48:	e2033010 	and	r3, r3, #16
-3000ac4c:	e3530000 	cmp	r3, #0
-3000ac50:	1a000015 	bne	3000acac <vsnprintf+0x63c>
+3000ae48:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000ae4c:	e2033010 	and	r3, r3, #16
+3000ae50:	e3530000 	cmp	r3, #0
+3000ae54:	1a000015 	bne	3000aeb0 <vsnprintf+0x63c>
 					while (len < field_width--) {
-3000ac54:	ea000009 	b	3000ac80 <vsnprintf+0x610>
+3000ae58:	ea000009 	b	3000ae84 <vsnprintf+0x610>
 						if (str <= end)
-3000ac58:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ac5c:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000ac60:	e1520003 	cmp	r2, r3
-3000ac64:	8a000002 	bhi	3000ac74 <vsnprintf+0x604>
+3000ae5c:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000ae60:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000ae64:	e1520003 	cmp	r2, r3
+3000ae68:	8a000002 	bhi	3000ae78 <vsnprintf+0x604>
 							*str = ' ';
-3000ac68:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000ac6c:	e3a02020 	mov	r2, #32
-3000ac70:	e5c32000 	strb	r2, [r3]
+3000ae6c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000ae70:	e3a02020 	mov	r2, #32
+3000ae74:	e5c32000 	strb	r2, [r3]
 						++str;
-3000ac74:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000ac78:	e2833001 	add	r3, r3, #1
-3000ac7c:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000ae78:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000ae7c:	e2833001 	add	r3, r3, #1
+3000ae80:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 					s = "<NULL>";
 
 				len = acoral_str_nlen(s, precision);
 
 				if (!(flags & LEFT)) {
 					while (len < field_width--) {
-3000ac80:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
-3000ac84:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-3000ac88:	e1520003 	cmp	r2, r3
-3000ac8c:	d3a03000 	movle	r3, #0
-3000ac90:	c3a03001 	movgt	r3, #1
-3000ac94:	e20330ff 	and	r3, r3, #255	; 0xff
-3000ac98:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
-3000ac9c:	e2422001 	sub	r2, r2, #1
-3000aca0:	e58d2050 	str	r2, [sp, #80]	; 0x50
-3000aca4:	e3530000 	cmp	r3, #0
-3000aca8:	1affffea 	bne	3000ac58 <vsnprintf+0x5e8>
+3000ae84:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
+3000ae88:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+3000ae8c:	e1520003 	cmp	r2, r3
+3000ae90:	d3a03000 	movle	r3, #0
+3000ae94:	c3a03001 	movgt	r3, #1
+3000ae98:	e20330ff 	and	r3, r3, #255	; 0xff
+3000ae9c:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
+3000aea0:	e2422001 	sub	r2, r2, #1
+3000aea4:	e58d2050 	str	r2, [sp, #80]	; 0x50
+3000aea8:	e3530000 	cmp	r3, #0
+3000aeac:	1affffea 	bne	3000ae5c <vsnprintf+0x5e8>
 						if (str <= end)
 							*str = ' ';
 						++str;
 					}
 				}
 				for (i = 0; i < len; ++i) {
-3000acac:	e3a03000 	mov	r3, #0
-3000acb0:	e58d3034 	str	r3, [sp, #52]	; 0x34
-3000acb4:	ea000010 	b	3000acfc <vsnprintf+0x68c>
+3000aeb0:	e3a03000 	mov	r3, #0
+3000aeb4:	e58d3034 	str	r3, [sp, #52]	; 0x34
+3000aeb8:	ea000010 	b	3000af00 <vsnprintf+0x68c>
 					if (str <= end)
-3000acb8:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000acbc:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000acc0:	e1520003 	cmp	r2, r3
-3000acc4:	8a000003 	bhi	3000acd8 <vsnprintf+0x668>
+3000aebc:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000aec0:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000aec4:	e1520003 	cmp	r2, r3
+3000aec8:	8a000003 	bhi	3000aedc <vsnprintf+0x668>
 						*str = *s;
-3000acc8:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
-3000accc:	e5d32000 	ldrb	r2, [r3]
-3000acd0:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000acd4:	e5c32000 	strb	r2, [r3]
+3000aecc:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
+3000aed0:	e5d32000 	ldrb	r2, [r3]
+3000aed4:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000aed8:	e5c32000 	strb	r2, [r3]
 					++str; ++s;
-3000acd8:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000acdc:	e2833001 	add	r3, r3, #1
-3000ace0:	e58d303c 	str	r3, [sp, #60]	; 0x3c
-3000ace4:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
-3000ace8:	e2833001 	add	r3, r3, #1
-3000acec:	e58d3048 	str	r3, [sp, #72]	; 0x48
+3000aedc:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000aee0:	e2833001 	add	r3, r3, #1
+3000aee4:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000aee8:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
+3000aeec:	e2833001 	add	r3, r3, #1
+3000aef0:	e58d3048 	str	r3, [sp, #72]	; 0x48
 						if (str <= end)
 							*str = ' ';
 						++str;
 					}
 				}
 				for (i = 0; i < len; ++i) {
-3000acf0:	e59d3034 	ldr	r3, [sp, #52]	; 0x34
-3000acf4:	e2833001 	add	r3, r3, #1
-3000acf8:	e58d3034 	str	r3, [sp, #52]	; 0x34
-3000acfc:	e59d2034 	ldr	r2, [sp, #52]	; 0x34
-3000ad00:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-3000ad04:	e1520003 	cmp	r2, r3
-3000ad08:	baffffea 	blt	3000acb8 <vsnprintf+0x648>
+3000aef4:	e59d3034 	ldr	r3, [sp, #52]	; 0x34
+3000aef8:	e2833001 	add	r3, r3, #1
+3000aefc:	e58d3034 	str	r3, [sp, #52]	; 0x34
+3000af00:	e59d2034 	ldr	r2, [sp, #52]	; 0x34
+3000af04:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+3000af08:	e1520003 	cmp	r2, r3
+3000af0c:	baffffea 	blt	3000aebc <vsnprintf+0x648>
 					if (str <= end)
 						*str = *s;
 					++str; ++s;
 				}
 				while (len < field_width--) {
-3000ad0c:	ea000009 	b	3000ad38 <vsnprintf+0x6c8>
+3000af10:	ea000009 	b	3000af3c <vsnprintf+0x6c8>
 					if (str <= end)
-3000ad10:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ad14:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000ad18:	e1520003 	cmp	r2, r3
-3000ad1c:	8a000002 	bhi	3000ad2c <vsnprintf+0x6bc>
+3000af14:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000af18:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000af1c:	e1520003 	cmp	r2, r3
+3000af20:	8a000002 	bhi	3000af30 <vsnprintf+0x6bc>
 						*str = ' ';
-3000ad20:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000ad24:	e3a02020 	mov	r2, #32
-3000ad28:	e5c32000 	strb	r2, [r3]
+3000af24:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000af28:	e3a02020 	mov	r2, #32
+3000af2c:	e5c32000 	strb	r2, [r3]
 					++str;
-3000ad2c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000ad30:	e2833001 	add	r3, r3, #1
-3000ad34:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000af30:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000af34:	e2833001 	add	r3, r3, #1
+3000af38:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 				for (i = 0; i < len; ++i) {
 					if (str <= end)
 						*str = *s;
 					++str; ++s;
 				}
 				while (len < field_width--) {
-3000ad38:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
-3000ad3c:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
-3000ad40:	e1520003 	cmp	r2, r3
-3000ad44:	d3a03000 	movle	r3, #0
-3000ad48:	c3a03001 	movgt	r3, #1
-3000ad4c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000ad50:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
-3000ad54:	e2422001 	sub	r2, r2, #1
-3000ad58:	e58d2050 	str	r2, [sp, #80]	; 0x50
-3000ad5c:	e3530000 	cmp	r3, #0
-3000ad60:	1affffea 	bne	3000ad10 <vsnprintf+0x6a0>
+3000af3c:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
+3000af40:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+3000af44:	e1520003 	cmp	r2, r3
+3000af48:	d3a03000 	movle	r3, #0
+3000af4c:	c3a03001 	movgt	r3, #1
+3000af50:	e20330ff 	and	r3, r3, #255	; 0xff
+3000af54:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
+3000af58:	e2422001 	sub	r2, r2, #1
+3000af5c:	e58d2050 	str	r2, [sp, #80]	; 0x50
+3000af60:	e3530000 	cmp	r3, #0
+3000af64:	1affffea 	bne	3000af14 <vsnprintf+0x6a0>
 					if (str <= end)
 						*str = ' ';
 					++str;
 				}
 				continue;
-3000ad64:	ea0000f0 	b	3000b12c <vsnprintf+0xabc>
+3000af68:	ea0000f0 	b	3000b330 <vsnprintf+0xabc>
 
 			case 'p':
 				if (field_width == -1) {
-3000ad68:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
-3000ad6c:	e3730001 	cmn	r3, #1
-3000ad70:	1a000004 	bne	3000ad88 <vsnprintf+0x718>
+3000af6c:	e59d3050 	ldr	r3, [sp, #80]	; 0x50
+3000af70:	e3730001 	cmn	r3, #1
+3000af74:	1a000004 	bne	3000af8c <vsnprintf+0x718>
 					field_width = 2*sizeof(void *);
-3000ad74:	e3a03008 	mov	r3, #8
-3000ad78:	e58d3050 	str	r3, [sp, #80]	; 0x50
+3000af78:	e3a03008 	mov	r3, #8
+3000af7c:	e58d3050 	str	r3, [sp, #80]	; 0x50
 					flags |= ZEROPAD;
-3000ad7c:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000ad80:	e3833001 	orr	r3, r3, #1
-3000ad84:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000af80:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000af84:	e3833001 	orr	r3, r3, #1
+3000af88:	e58d304c 	str	r3, [sp, #76]	; 0x4c
 				}
 				str = number(str, end,
-3000ad88:	e59d3010 	ldr	r3, [sp, #16]
-3000ad8c:	e2833004 	add	r3, r3, #4
-3000ad90:	e58d3010 	str	r3, [sp, #16]
+3000af8c:	e59d3010 	ldr	r3, [sp, #16]
+3000af90:	e2833004 	add	r3, r3, #4
+3000af94:	e58d3010 	str	r3, [sp, #16]
 						(acoral_u32) va_arg(args, void *),
-3000ad94:	e59d3010 	ldr	r3, [sp, #16]
-3000ad98:	e2433004 	sub	r3, r3, #4
-3000ad9c:	e5933000 	ldr	r3, [r3]
+3000af98:	e59d3010 	ldr	r3, [sp, #16]
+3000af9c:	e2433004 	sub	r3, r3, #4
+3000afa0:	e5933000 	ldr	r3, [r3]
 			case 'p':
 				if (field_width == -1) {
 					field_width = 2*sizeof(void *);
 					flags |= ZEROPAD;
 				}
 				str = number(str, end,
-3000ada0:	e3a04000 	mov	r4, #0
-3000ada4:	e3a02010 	mov	r2, #16
-3000ada8:	e58d2000 	str	r2, [sp]
-3000adac:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
-3000adb0:	e58d2004 	str	r2, [sp, #4]
-3000adb4:	e59d2054 	ldr	r2, [sp, #84]	; 0x54
-3000adb8:	e58d2008 	str	r2, [sp, #8]
-3000adbc:	e59d204c 	ldr	r2, [sp, #76]	; 0x4c
-3000adc0:	e58d200c 	str	r2, [sp, #12]
-3000adc4:	e59d003c 	ldr	r0, [sp, #60]	; 0x3c
-3000adc8:	e59d1040 	ldr	r1, [sp, #64]	; 0x40
-3000adcc:	e1a02003 	mov	r2, r3
-3000add0:	e1a03004 	mov	r3, r4
-3000add4:	ebfffcdf 	bl	3000a158 <number>
-3000add8:	e1a03000 	mov	r3, r0
-3000addc:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000afa4:	e3a04000 	mov	r4, #0
+3000afa8:	e3a02010 	mov	r2, #16
+3000afac:	e58d2000 	str	r2, [sp]
+3000afb0:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
+3000afb4:	e58d2004 	str	r2, [sp, #4]
+3000afb8:	e59d2054 	ldr	r2, [sp, #84]	; 0x54
+3000afbc:	e58d2008 	str	r2, [sp, #8]
+3000afc0:	e59d204c 	ldr	r2, [sp, #76]	; 0x4c
+3000afc4:	e58d200c 	str	r2, [sp, #12]
+3000afc8:	e59d003c 	ldr	r0, [sp, #60]	; 0x3c
+3000afcc:	e59d1040 	ldr	r1, [sp, #64]	; 0x40
+3000afd0:	e1a02003 	mov	r2, r3
+3000afd4:	e1a03004 	mov	r3, r4
+3000afd8:	ebfffcdf 	bl	3000a35c <number>
+3000afdc:	e1a03000 	mov	r3, r0
+3000afe0:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 						(acoral_u32) va_arg(args, void *),
 						16, field_width, precision, flags);
 				continue;
-3000ade0:	ea0000d1 	b	3000b12c <vsnprintf+0xabc>
+3000afe4:	ea0000d1 	b	3000b330 <vsnprintf+0xabc>
 
 
 			case 'n':
 				/* FIXME:
 				* What does C99 say about the overflow case here? */
 				if (qualifier == 'l') {
-3000ade4:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000ade8:	e353006c 	cmp	r3, #108	; 0x6c
-3000adec:	1a00000c 	bne	3000ae24 <vsnprintf+0x7b4>
+3000afe8:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000afec:	e353006c 	cmp	r3, #108	; 0x6c
+3000aff0:	1a00000c 	bne	3000b028 <vsnprintf+0x7b4>
 					acoral_32 * ip = va_arg(args, acoral_32 *);
-3000adf0:	e59d3010 	ldr	r3, [sp, #16]
-3000adf4:	e2833004 	add	r3, r3, #4
-3000adf8:	e58d3010 	str	r3, [sp, #16]
-3000adfc:	e59d3010 	ldr	r3, [sp, #16]
-3000ae00:	e2433004 	sub	r3, r3, #4
-3000ae04:	e5933000 	ldr	r3, [r3]
-3000ae08:	e58d305c 	str	r3, [sp, #92]	; 0x5c
+3000aff4:	e59d3010 	ldr	r3, [sp, #16]
+3000aff8:	e2833004 	add	r3, r3, #4
+3000affc:	e58d3010 	str	r3, [sp, #16]
+3000b000:	e59d3010 	ldr	r3, [sp, #16]
+3000b004:	e2433004 	sub	r3, r3, #4
+3000b008:	e5933000 	ldr	r3, [r3]
+3000b00c:	e58d305c 	str	r3, [sp, #92]	; 0x5c
 					*ip = (str - buf);
-3000ae0c:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ae10:	e59d301c 	ldr	r3, [sp, #28]
-3000ae14:	e0632002 	rsb	r2, r3, r2
-3000ae18:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
-3000ae1c:	e5832000 	str	r2, [r3]
+3000b010:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b014:	e59d301c 	ldr	r3, [sp, #28]
+3000b018:	e0632002 	rsb	r2, r3, r2
+3000b01c:	e59d305c 	ldr	r3, [sp, #92]	; 0x5c
+3000b020:	e5832000 	str	r2, [r3]
 					*ip = (str - buf);
 				} else {
 					acoral_32 * ip = va_arg(args, acoral_32 *);
 					*ip = (str - buf);
 				}
 				continue;
-3000ae20:	ea0000c1 	b	3000b12c <vsnprintf+0xabc>
+3000b024:	ea0000c1 	b	3000b330 <vsnprintf+0xabc>
 				/* FIXME:
 				* What does C99 say about the overflow case here? */
 				if (qualifier == 'l') {
 					acoral_32 * ip = va_arg(args, acoral_32 *);
 					*ip = (str - buf);
 				} else if (qualifier == 'Z') {
-3000ae24:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000ae28:	e353005a 	cmp	r3, #90	; 0x5a
-3000ae2c:	1a00000d 	bne	3000ae68 <vsnprintf+0x7f8>
+3000b028:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000b02c:	e353005a 	cmp	r3, #90	; 0x5a
+3000b030:	1a00000d 	bne	3000b06c <vsnprintf+0x7f8>
 					acoral_u32 * ip = va_arg(args, acoral_u32 *);
-3000ae30:	e59d3010 	ldr	r3, [sp, #16]
-3000ae34:	e2833004 	add	r3, r3, #4
-3000ae38:	e58d3010 	str	r3, [sp, #16]
-3000ae3c:	e59d3010 	ldr	r3, [sp, #16]
-3000ae40:	e2433004 	sub	r3, r3, #4
-3000ae44:	e5933000 	ldr	r3, [r3]
-3000ae48:	e58d3060 	str	r3, [sp, #96]	; 0x60
+3000b034:	e59d3010 	ldr	r3, [sp, #16]
+3000b038:	e2833004 	add	r3, r3, #4
+3000b03c:	e58d3010 	str	r3, [sp, #16]
+3000b040:	e59d3010 	ldr	r3, [sp, #16]
+3000b044:	e2433004 	sub	r3, r3, #4
+3000b048:	e5933000 	ldr	r3, [r3]
+3000b04c:	e58d3060 	str	r3, [sp, #96]	; 0x60
 					*ip = (str - buf);
-3000ae4c:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ae50:	e59d301c 	ldr	r3, [sp, #28]
-3000ae54:	e0633002 	rsb	r3, r3, r2
-3000ae58:	e1a02003 	mov	r2, r3
-3000ae5c:	e59d3060 	ldr	r3, [sp, #96]	; 0x60
-3000ae60:	e5832000 	str	r2, [r3]
+3000b050:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b054:	e59d301c 	ldr	r3, [sp, #28]
+3000b058:	e0633002 	rsb	r3, r3, r2
+3000b05c:	e1a02003 	mov	r2, r3
+3000b060:	e59d3060 	ldr	r3, [sp, #96]	; 0x60
+3000b064:	e5832000 	str	r2, [r3]
 				} else {
 					acoral_32 * ip = va_arg(args, acoral_32 *);
 					*ip = (str - buf);
 				}
 				continue;
-3000ae64:	ea0000b0 	b	3000b12c <vsnprintf+0xabc>
+3000b068:	ea0000b0 	b	3000b330 <vsnprintf+0xabc>
 					*ip = (str - buf);
 				} else if (qualifier == 'Z') {
 					acoral_u32 * ip = va_arg(args, acoral_u32 *);
 					*ip = (str - buf);
 				} else {
 					acoral_32 * ip = va_arg(args, acoral_32 *);
-3000ae68:	e59d3010 	ldr	r3, [sp, #16]
-3000ae6c:	e2833004 	add	r3, r3, #4
-3000ae70:	e58d3010 	str	r3, [sp, #16]
-3000ae74:	e59d3010 	ldr	r3, [sp, #16]
-3000ae78:	e2433004 	sub	r3, r3, #4
-3000ae7c:	e5933000 	ldr	r3, [r3]
-3000ae80:	e58d3064 	str	r3, [sp, #100]	; 0x64
+3000b06c:	e59d3010 	ldr	r3, [sp, #16]
+3000b070:	e2833004 	add	r3, r3, #4
+3000b074:	e58d3010 	str	r3, [sp, #16]
+3000b078:	e59d3010 	ldr	r3, [sp, #16]
+3000b07c:	e2433004 	sub	r3, r3, #4
+3000b080:	e5933000 	ldr	r3, [r3]
+3000b084:	e58d3064 	str	r3, [sp, #100]	; 0x64
 					*ip = (str - buf);
-3000ae84:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000ae88:	e59d301c 	ldr	r3, [sp, #28]
-3000ae8c:	e0632002 	rsb	r2, r3, r2
-3000ae90:	e59d3064 	ldr	r3, [sp, #100]	; 0x64
-3000ae94:	e5832000 	str	r2, [r3]
+3000b088:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b08c:	e59d301c 	ldr	r3, [sp, #28]
+3000b090:	e0632002 	rsb	r2, r3, r2
+3000b094:	e59d3064 	ldr	r3, [sp, #100]	; 0x64
+3000b098:	e5832000 	str	r2, [r3]
 				}
 				continue;
-3000ae98:	ea0000a3 	b	3000b12c <vsnprintf+0xabc>
+3000b09c:	ea0000a3 	b	3000b330 <vsnprintf+0xabc>
 
 			case '%':
 				if (str <= end)
-3000ae9c:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000aea0:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000aea4:	e1520003 	cmp	r2, r3
-3000aea8:	8a000002 	bhi	3000aeb8 <vsnprintf+0x848>
+3000b0a0:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b0a4:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000b0a8:	e1520003 	cmp	r2, r3
+3000b0ac:	8a000002 	bhi	3000b0bc <vsnprintf+0x848>
 					*str = '%';
-3000aeac:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000aeb0:	e3a02025 	mov	r2, #37	; 0x25
-3000aeb4:	e5c32000 	strb	r2, [r3]
+3000b0b0:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b0b4:	e3a02025 	mov	r2, #37	; 0x25
+3000b0b8:	e5c32000 	strb	r2, [r3]
 				++str;
-3000aeb8:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000aebc:	e2833001 	add	r3, r3, #1
-3000aec0:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000b0bc:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b0c0:	e2833001 	add	r3, r3, #1
+3000b0c4:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 				continue;
-3000aec4:	ea000098 	b	3000b12c <vsnprintf+0xabc>
+3000b0c8:	ea000098 	b	3000b330 <vsnprintf+0xabc>
 
 				/* acoral_32eger number formats - set up the flags and "break" */
 			case 'o':
 				base = 8;
-3000aec8:	e3a03008 	mov	r3, #8
-3000aecc:	e58d3038 	str	r3, [sp, #56]	; 0x38
+3000b0cc:	e3a03008 	mov	r3, #8
+3000b0d0:	e58d3038 	str	r3, [sp, #56]	; 0x38
 				break;
-3000aed0:	ea000028 	b	3000af78 <vsnprintf+0x908>
+3000b0d4:	ea000028 	b	3000b17c <vsnprintf+0x908>
 
 			case 'X':
 				flags |= LARGE;
-3000aed4:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000aed8:	e3833040 	orr	r3, r3, #64	; 0x40
-3000aedc:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000b0d8:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000b0dc:	e3833040 	orr	r3, r3, #64	; 0x40
+3000b0e0:	e58d304c 	str	r3, [sp, #76]	; 0x4c
 			case 'x':
 				base = 16;
-3000aee0:	e3a03010 	mov	r3, #16
-3000aee4:	e58d3038 	str	r3, [sp, #56]	; 0x38
+3000b0e4:	e3a03010 	mov	r3, #16
+3000b0e8:	e58d3038 	str	r3, [sp, #56]	; 0x38
 				break;
-3000aee8:	ea000022 	b	3000af78 <vsnprintf+0x908>
+3000b0ec:	ea000022 	b	3000b17c <vsnprintf+0x908>
 
 			case 'd':
 			case 'i':
 				flags |= SIGN;
-3000aeec:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000aef0:	e3833002 	orr	r3, r3, #2
-3000aef4:	e58d304c 	str	r3, [sp, #76]	; 0x4c
+3000b0f0:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000b0f4:	e3833002 	orr	r3, r3, #2
+3000b0f8:	e58d304c 	str	r3, [sp, #76]	; 0x4c
 			case 'u':
 				break;
-3000aef8:	ea00001e 	b	3000af78 <vsnprintf+0x908>
+3000b0fc:	ea00001e 	b	3000b17c <vsnprintf+0x908>
 
 			default:
 				if (str <= end)
-3000aefc:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000af00:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000af04:	e1520003 	cmp	r2, r3
-3000af08:	8a000002 	bhi	3000af18 <vsnprintf+0x8a8>
+3000b100:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b104:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000b108:	e1520003 	cmp	r2, r3
+3000b10c:	8a000002 	bhi	3000b11c <vsnprintf+0x8a8>
 					*str = '%';
-3000af0c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000af10:	e3a02025 	mov	r2, #37	; 0x25
-3000af14:	e5c32000 	strb	r2, [r3]
+3000b110:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b114:	e3a02025 	mov	r2, #37	; 0x25
+3000b118:	e5c32000 	strb	r2, [r3]
 				++str;
-3000af18:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000af1c:	e2833001 	add	r3, r3, #1
-3000af20:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000b11c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b120:	e2833001 	add	r3, r3, #1
+3000b124:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 				if (*fmt) {
-3000af24:	e59d3014 	ldr	r3, [sp, #20]
-3000af28:	e5d33000 	ldrb	r3, [r3]
-3000af2c:	e3530000 	cmp	r3, #0
-3000af30:	0a00000b 	beq	3000af64 <vsnprintf+0x8f4>
+3000b128:	e59d3014 	ldr	r3, [sp, #20]
+3000b12c:	e5d33000 	ldrb	r3, [r3]
+3000b130:	e3530000 	cmp	r3, #0
+3000b134:	0a00000b 	beq	3000b168 <vsnprintf+0x8f4>
 					if (str <= end)
-3000af34:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000af38:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000af3c:	e1520003 	cmp	r2, r3
-3000af40:	8a000003 	bhi	3000af54 <vsnprintf+0x8e4>
+3000b138:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b13c:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000b140:	e1520003 	cmp	r2, r3
+3000b144:	8a000003 	bhi	3000b158 <vsnprintf+0x8e4>
 						*str = *fmt;
-3000af44:	e59d3014 	ldr	r3, [sp, #20]
-3000af48:	e5d32000 	ldrb	r2, [r3]
-3000af4c:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000af50:	e5c32000 	strb	r2, [r3]
+3000b148:	e59d3014 	ldr	r3, [sp, #20]
+3000b14c:	e5d32000 	ldrb	r2, [r3]
+3000b150:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b154:	e5c32000 	strb	r2, [r3]
 					++str;
-3000af54:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000af58:	e2833001 	add	r3, r3, #1
-3000af5c:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000b158:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b15c:	e2833001 	add	r3, r3, #1
+3000b160:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 				} else {
 					--fmt;
 				}
 				continue;
-3000af60:	ea000071 	b	3000b12c <vsnprintf+0xabc>
+3000b164:	ea000071 	b	3000b330 <vsnprintf+0xabc>
 				if (*fmt) {
 					if (str <= end)
 						*str = *fmt;
 					++str;
 				} else {
 					--fmt;
-3000af64:	e59d3014 	ldr	r3, [sp, #20]
-3000af68:	e2433001 	sub	r3, r3, #1
-3000af6c:	e58d3014 	str	r3, [sp, #20]
+3000b168:	e59d3014 	ldr	r3, [sp, #20]
+3000b16c:	e2433001 	sub	r3, r3, #1
+3000b170:	e58d3014 	str	r3, [sp, #20]
 				}
 				continue;
-3000af70:	ea00006d 	b	3000b12c <vsnprintf+0xabc>
+3000b174:	ea00006d 	b	3000b330 <vsnprintf+0xabc>
 
 			case 'd':
 			case 'i':
 				flags |= SIGN;
 			case 'u':
 				break;
-3000af74:	e1a00000 	nop			; (mov r0, r0)
+3000b178:	e1a00000 	nop			; (mov r0, r0)
 				} else {
 					--fmt;
 				}
 				continue;
 		}
 		if (qualifier == 'L')
-3000af78:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000af7c:	e353004c 	cmp	r3, #76	; 0x4c
-3000af80:	1a000008 	bne	3000afa8 <vsnprintf+0x938>
+3000b17c:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000b180:	e353004c 	cmp	r3, #76	; 0x4c
+3000b184:	1a000008 	bne	3000b1ac <vsnprintf+0x938>
 			num = va_arg(args, acoral_64);
-3000af84:	e59d3010 	ldr	r3, [sp, #16]
-3000af88:	e2833008 	add	r3, r3, #8
-3000af8c:	e58d3010 	str	r3, [sp, #16]
-3000af90:	e59d3010 	ldr	r3, [sp, #16]
-3000af94:	e2433008 	sub	r3, r3, #8
-3000af98:	e8930018 	ldm	r3, {r3, r4}
-3000af9c:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000afa0:	e58d402c 	str	r4, [sp, #44]	; 0x2c
-3000afa4:	ea00004f 	b	3000b0e8 <vsnprintf+0xa78>
+3000b188:	e59d3010 	ldr	r3, [sp, #16]
+3000b18c:	e2833008 	add	r3, r3, #8
+3000b190:	e58d3010 	str	r3, [sp, #16]
+3000b194:	e59d3010 	ldr	r3, [sp, #16]
+3000b198:	e2433008 	sub	r3, r3, #8
+3000b19c:	e8930018 	ldm	r3, {r3, r4}
+3000b1a0:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b1a4:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b1a8:	ea00004f 	b	3000b2ec <vsnprintf+0xa78>
 		else if (qualifier == 'l') {
-3000afa8:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000afac:	e353006c 	cmp	r3, #108	; 0x6c
-3000afb0:	1a000011 	bne	3000affc <vsnprintf+0x98c>
+3000b1ac:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000b1b0:	e353006c 	cmp	r3, #108	; 0x6c
+3000b1b4:	1a000011 	bne	3000b200 <vsnprintf+0x98c>
 			num = va_arg(args, acoral_u32);
-3000afb4:	e59d3010 	ldr	r3, [sp, #16]
-3000afb8:	e2833004 	add	r3, r3, #4
-3000afbc:	e58d3010 	str	r3, [sp, #16]
-3000afc0:	e59d3010 	ldr	r3, [sp, #16]
-3000afc4:	e2433004 	sub	r3, r3, #4
-3000afc8:	e5933000 	ldr	r3, [r3]
-3000afcc:	e3a04000 	mov	r4, #0
-3000afd0:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000afd4:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b1b8:	e59d3010 	ldr	r3, [sp, #16]
+3000b1bc:	e2833004 	add	r3, r3, #4
+3000b1c0:	e58d3010 	str	r3, [sp, #16]
+3000b1c4:	e59d3010 	ldr	r3, [sp, #16]
+3000b1c8:	e2433004 	sub	r3, r3, #4
+3000b1cc:	e5933000 	ldr	r3, [r3]
+3000b1d0:	e3a04000 	mov	r4, #0
+3000b1d4:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b1d8:	e58d402c 	str	r4, [sp, #44]	; 0x2c
 			if (flags & SIGN)
-3000afd8:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000afdc:	e2033002 	and	r3, r3, #2
-3000afe0:	e3530000 	cmp	r3, #0
-3000afe4:	0a00003c 	beq	3000b0dc <vsnprintf+0xa6c>
+3000b1dc:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000b1e0:	e2033002 	and	r3, r3, #2
+3000b1e4:	e3530000 	cmp	r3, #0
+3000b1e8:	0a00003c 	beq	3000b2e0 <vsnprintf+0xa6c>
 				num = (acoral_32) num;
-3000afe8:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-3000afec:	e1a04fc3 	asr	r4, r3, #31
-3000aff0:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000aff4:	e58d402c 	str	r4, [sp, #44]	; 0x2c
-3000aff8:	ea00003a 	b	3000b0e8 <vsnprintf+0xa78>
+3000b1ec:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+3000b1f0:	e1a04fc3 	asr	r4, r3, #31
+3000b1f4:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b1f8:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b1fc:	ea00003a 	b	3000b2ec <vsnprintf+0xa78>
 		} else if (qualifier == 'Z') {
-3000affc:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000b000:	e353005a 	cmp	r3, #90	; 0x5a
-3000b004:	1a000009 	bne	3000b030 <vsnprintf+0x9c0>
+3000b200:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000b204:	e353005a 	cmp	r3, #90	; 0x5a
+3000b208:	1a000009 	bne	3000b234 <vsnprintf+0x9c0>
 			num = va_arg(args, acoral_u32);
-3000b008:	e59d3010 	ldr	r3, [sp, #16]
-3000b00c:	e2833004 	add	r3, r3, #4
-3000b010:	e58d3010 	str	r3, [sp, #16]
-3000b014:	e59d3010 	ldr	r3, [sp, #16]
-3000b018:	e2433004 	sub	r3, r3, #4
-3000b01c:	e5933000 	ldr	r3, [r3]
-3000b020:	e3a04000 	mov	r4, #0
-3000b024:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000b028:	e58d402c 	str	r4, [sp, #44]	; 0x2c
-3000b02c:	ea00002d 	b	3000b0e8 <vsnprintf+0xa78>
+3000b20c:	e59d3010 	ldr	r3, [sp, #16]
+3000b210:	e2833004 	add	r3, r3, #4
+3000b214:	e58d3010 	str	r3, [sp, #16]
+3000b218:	e59d3010 	ldr	r3, [sp, #16]
+3000b21c:	e2433004 	sub	r3, r3, #4
+3000b220:	e5933000 	ldr	r3, [r3]
+3000b224:	e3a04000 	mov	r4, #0
+3000b228:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b22c:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b230:	ea00002d 	b	3000b2ec <vsnprintf+0xa78>
 		} else if (qualifier == 'h') {
-3000b030:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
-3000b034:	e3530068 	cmp	r3, #104	; 0x68
-3000b038:	1a000015 	bne	3000b094 <vsnprintf+0xa24>
+3000b234:	e59d3058 	ldr	r3, [sp, #88]	; 0x58
+3000b238:	e3530068 	cmp	r3, #104	; 0x68
+3000b23c:	1a000015 	bne	3000b298 <vsnprintf+0xa24>
 			num = (acoral_u16) va_arg(args, acoral_32);
-3000b03c:	e59d3010 	ldr	r3, [sp, #16]
-3000b040:	e2833004 	add	r3, r3, #4
-3000b044:	e58d3010 	str	r3, [sp, #16]
-3000b048:	e59d3010 	ldr	r3, [sp, #16]
-3000b04c:	e2433004 	sub	r3, r3, #4
-3000b050:	e5933000 	ldr	r3, [r3]
-3000b054:	e1a03803 	lsl	r3, r3, #16
-3000b058:	e1a03823 	lsr	r3, r3, #16
-3000b05c:	e3a04000 	mov	r4, #0
-3000b060:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000b064:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b240:	e59d3010 	ldr	r3, [sp, #16]
+3000b244:	e2833004 	add	r3, r3, #4
+3000b248:	e58d3010 	str	r3, [sp, #16]
+3000b24c:	e59d3010 	ldr	r3, [sp, #16]
+3000b250:	e2433004 	sub	r3, r3, #4
+3000b254:	e5933000 	ldr	r3, [r3]
+3000b258:	e1a03803 	lsl	r3, r3, #16
+3000b25c:	e1a03823 	lsr	r3, r3, #16
+3000b260:	e3a04000 	mov	r4, #0
+3000b264:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b268:	e58d402c 	str	r4, [sp, #44]	; 0x2c
 			if (flags & SIGN)
-3000b068:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000b06c:	e2033002 	and	r3, r3, #2
-3000b070:	e3530000 	cmp	r3, #0
-3000b074:	0a00001a 	beq	3000b0e4 <vsnprintf+0xa74>
+3000b26c:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000b270:	e2033002 	and	r3, r3, #2
+3000b274:	e3530000 	cmp	r3, #0
+3000b278:	0a00001a 	beq	3000b2e8 <vsnprintf+0xa74>
 				num = (acoral_16) num;
-3000b078:	e1dd32b8 	ldrh	r3, [sp, #40]	; 0x28
-3000b07c:	e1a03803 	lsl	r3, r3, #16
-3000b080:	e1a03843 	asr	r3, r3, #16
-3000b084:	e1a04fc3 	asr	r4, r3, #31
-3000b088:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000b08c:	e58d402c 	str	r4, [sp, #44]	; 0x2c
-3000b090:	ea000014 	b	3000b0e8 <vsnprintf+0xa78>
+3000b27c:	e1dd32b8 	ldrh	r3, [sp, #40]	; 0x28
+3000b280:	e1a03803 	lsl	r3, r3, #16
+3000b284:	e1a03843 	asr	r3, r3, #16
+3000b288:	e1a04fc3 	asr	r4, r3, #31
+3000b28c:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b290:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b294:	ea000014 	b	3000b2ec <vsnprintf+0xa78>
 		} else {
 			num = va_arg(args, acoral_u32);
-3000b094:	e59d3010 	ldr	r3, [sp, #16]
-3000b098:	e2833004 	add	r3, r3, #4
-3000b09c:	e58d3010 	str	r3, [sp, #16]
-3000b0a0:	e59d3010 	ldr	r3, [sp, #16]
-3000b0a4:	e2433004 	sub	r3, r3, #4
-3000b0a8:	e5933000 	ldr	r3, [r3]
-3000b0ac:	e3a04000 	mov	r4, #0
-3000b0b0:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000b0b4:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b298:	e59d3010 	ldr	r3, [sp, #16]
+3000b29c:	e2833004 	add	r3, r3, #4
+3000b2a0:	e58d3010 	str	r3, [sp, #16]
+3000b2a4:	e59d3010 	ldr	r3, [sp, #16]
+3000b2a8:	e2433004 	sub	r3, r3, #4
+3000b2ac:	e5933000 	ldr	r3, [r3]
+3000b2b0:	e3a04000 	mov	r4, #0
+3000b2b4:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b2b8:	e58d402c 	str	r4, [sp, #44]	; 0x2c
 			if (flags & SIGN)
-3000b0b8:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
-3000b0bc:	e2033002 	and	r3, r3, #2
-3000b0c0:	e3530000 	cmp	r3, #0
-3000b0c4:	0a000007 	beq	3000b0e8 <vsnprintf+0xa78>
+3000b2bc:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+3000b2c0:	e2033002 	and	r3, r3, #2
+3000b2c4:	e3530000 	cmp	r3, #0
+3000b2c8:	0a000007 	beq	3000b2ec <vsnprintf+0xa78>
 				num = (acoral_32) num;
-3000b0c8:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
-3000b0cc:	e1a04fc3 	asr	r4, r3, #31
-3000b0d0:	e58d3028 	str	r3, [sp, #40]	; 0x28
-3000b0d4:	e58d402c 	str	r4, [sp, #44]	; 0x2c
-3000b0d8:	ea000002 	b	3000b0e8 <vsnprintf+0xa78>
+3000b2cc:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+3000b2d0:	e1a04fc3 	asr	r4, r3, #31
+3000b2d4:	e58d3028 	str	r3, [sp, #40]	; 0x28
+3000b2d8:	e58d402c 	str	r4, [sp, #44]	; 0x2c
+3000b2dc:	ea000002 	b	3000b2ec <vsnprintf+0xa78>
 		if (qualifier == 'L')
 			num = va_arg(args, acoral_64);
 		else if (qualifier == 'l') {
 			num = va_arg(args, acoral_u32);
 			if (flags & SIGN)
 				num = (acoral_32) num;
-3000b0dc:	e1a00000 	nop			; (mov r0, r0)
-3000b0e0:	ea000000 	b	3000b0e8 <vsnprintf+0xa78>
+3000b2e0:	e1a00000 	nop			; (mov r0, r0)
+3000b2e4:	ea000000 	b	3000b2ec <vsnprintf+0xa78>
 		} else if (qualifier == 'Z') {
 			num = va_arg(args, acoral_u32);
 		} else if (qualifier == 'h') {
 			num = (acoral_u16) va_arg(args, acoral_32);
 			if (flags & SIGN)
 				num = (acoral_16) num;
-3000b0e4:	e1a00000 	nop			; (mov r0, r0)
+3000b2e8:	e1a00000 	nop			; (mov r0, r0)
 		} else {
 			num = va_arg(args, acoral_u32);
 			if (flags & SIGN)
 				num = (acoral_32) num;
 		}
 		str = number(str, end, num, base,
-3000b0e8:	e28d4028 	add	r4, sp, #40	; 0x28
-3000b0ec:	e8940018 	ldm	r4, {r3, r4}
-3000b0f0:	e59d2038 	ldr	r2, [sp, #56]	; 0x38
-3000b0f4:	e58d2000 	str	r2, [sp]
-3000b0f8:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
-3000b0fc:	e58d2004 	str	r2, [sp, #4]
-3000b100:	e59d2054 	ldr	r2, [sp, #84]	; 0x54
-3000b104:	e58d2008 	str	r2, [sp, #8]
-3000b108:	e59d204c 	ldr	r2, [sp, #76]	; 0x4c
-3000b10c:	e58d200c 	str	r2, [sp, #12]
-3000b110:	e59d003c 	ldr	r0, [sp, #60]	; 0x3c
-3000b114:	e59d1040 	ldr	r1, [sp, #64]	; 0x40
-3000b118:	e1a02003 	mov	r2, r3
-3000b11c:	e1a03004 	mov	r3, r4
-3000b120:	ebfffc0c 	bl	3000a158 <number>
-3000b124:	e1a03000 	mov	r3, r0
-3000b128:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+3000b2ec:	e28d4028 	add	r4, sp, #40	; 0x28
+3000b2f0:	e8940018 	ldm	r4, {r3, r4}
+3000b2f4:	e59d2038 	ldr	r2, [sp, #56]	; 0x38
+3000b2f8:	e58d2000 	str	r2, [sp]
+3000b2fc:	e59d2050 	ldr	r2, [sp, #80]	; 0x50
+3000b300:	e58d2004 	str	r2, [sp, #4]
+3000b304:	e59d2054 	ldr	r2, [sp, #84]	; 0x54
+3000b308:	e58d2008 	str	r2, [sp, #8]
+3000b30c:	e59d204c 	ldr	r2, [sp, #76]	; 0x4c
+3000b310:	e58d200c 	str	r2, [sp, #12]
+3000b314:	e59d003c 	ldr	r0, [sp, #60]	; 0x3c
+3000b318:	e59d1040 	ldr	r1, [sp, #64]	; 0x40
+3000b31c:	e1a02003 	mov	r2, r3
+3000b320:	e1a03004 	mov	r3, r4
+3000b324:	ebfffc0c 	bl	3000a35c <number>
+3000b328:	e1a03000 	mov	r3, r0
+3000b32c:	e58d303c 	str	r3, [sp, #60]	; 0x3c
 	if (end < buf - 1) {
 		end = ((void *) -1);
 		size = end - buf + 1;
 	}
 
 	for (; *fmt ; ++fmt) {
-3000b12c:	e59d3014 	ldr	r3, [sp, #20]
-3000b130:	e2833001 	add	r3, r3, #1
-3000b134:	e58d3014 	str	r3, [sp, #20]
-3000b138:	ea000000 	b	3000b140 <vsnprintf+0xad0>
-3000b13c:	e1a00000 	nop			; (mov r0, r0)
-3000b140:	e59d3014 	ldr	r3, [sp, #20]
-3000b144:	e5d33000 	ldrb	r3, [r3]
-3000b148:	e3530000 	cmp	r3, #0
-3000b14c:	1afffd61 	bne	3000a6d8 <vsnprintf+0x68>
+3000b330:	e59d3014 	ldr	r3, [sp, #20]
+3000b334:	e2833001 	add	r3, r3, #1
+3000b338:	e58d3014 	str	r3, [sp, #20]
+3000b33c:	ea000000 	b	3000b344 <vsnprintf+0xad0>
+3000b340:	e1a00000 	nop			; (mov r0, r0)
+3000b344:	e59d3014 	ldr	r3, [sp, #20]
+3000b348:	e5d33000 	ldrb	r3, [r3]
+3000b34c:	e3530000 	cmp	r3, #0
+3000b350:	1afffd61 	bne	3000a8dc <vsnprintf+0x68>
 				num = (acoral_32) num;
 		}
 		str = number(str, end, num, base,
 				field_width, precision, flags);
 	}
 	if (str <= end)
-3000b150:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000b154:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000b158:	e1520003 	cmp	r2, r3
-3000b15c:	8a000003 	bhi	3000b170 <vsnprintf+0xb00>
+3000b354:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b358:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000b35c:	e1520003 	cmp	r2, r3
+3000b360:	8a000003 	bhi	3000b374 <vsnprintf+0xb00>
 		*str = '\0';
-3000b160:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000b164:	e3a02000 	mov	r2, #0
-3000b168:	e5c32000 	strb	r2, [r3]
-3000b16c:	ea000005 	b	3000b188 <vsnprintf+0xb18>
+3000b364:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000b368:	e3a02000 	mov	r2, #0
+3000b36c:	e5c32000 	strb	r2, [r3]
+3000b370:	ea000005 	b	3000b38c <vsnprintf+0xb18>
 	else if (size > 0)
-3000b170:	e59d3018 	ldr	r3, [sp, #24]
-3000b174:	e3530000 	cmp	r3, #0
-3000b178:	0a000002 	beq	3000b188 <vsnprintf+0xb18>
+3000b374:	e59d3018 	ldr	r3, [sp, #24]
+3000b378:	e3530000 	cmp	r3, #0
+3000b37c:	0a000002 	beq	3000b38c <vsnprintf+0xb18>
 		/* don't write out a null byte if the buf size is zero */
 		*end = '\0';
-3000b17c:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
-3000b180:	e3a02000 	mov	r2, #0
-3000b184:	e5c32000 	strb	r2, [r3]
+3000b380:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+3000b384:	e3a02000 	mov	r2, #0
+3000b388:	e5c32000 	strb	r2, [r3]
 	/* the trailing null byte doesn't count towards the total
 	* ++str;
 	*/
 	return str-buf;
-3000b188:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000b18c:	e59d301c 	ldr	r3, [sp, #28]
-3000b190:	e0633002 	rsb	r3, r3, r2
+3000b38c:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000b390:	e59d301c 	ldr	r3, [sp, #28]
+3000b394:	e0633002 	rsb	r3, r3, r2
 }
-3000b194:	e1a00003 	mov	r0, r3
-3000b198:	e28dd068 	add	sp, sp, #104	; 0x68
-3000b19c:	e8bd4010 	pop	{r4, lr}
-3000b1a0:	e12fff1e 	bx	lr
-3000b1a4:	3000e7e0 	.word	0x3000e7e0
+3000b398:	e1a00003 	mov	r0, r3
+3000b39c:	e28dd068 	add	sp, sp, #104	; 0x68
+3000b3a0:	e8bd4010 	pop	{r4, lr}
+3000b3a4:	e12fff1e 	bx	lr
+3000b3a8:	3000e9e4 	.word	0x3000e9e4
 
-3000b1a8 <acoral_sprint>:
+3000b3ac <acoral_sprint>:
 
 acoral_32 acoral_sprint(acoral_char * buf, acoral_u32 size, const acoral_char *fmt, ...)
 {
-3000b1a8:	e92d000c 	push	{r2, r3}
-3000b1ac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b1b0:	e24dd014 	sub	sp, sp, #20
-3000b1b4:	e58d0004 	str	r0, [sp, #4]
-3000b1b8:	e58d1000 	str	r1, [sp]
+3000b3ac:	e92d000c 	push	{r2, r3}
+3000b3b0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b3b4:	e24dd014 	sub	sp, sp, #20
+3000b3b8:	e58d0004 	str	r0, [sp, #4]
+3000b3bc:	e58d1000 	str	r1, [sp]
 	acoral_32 i;
 	va_list args;
 	va_start(args, fmt);
-3000b1bc:	e28d3018 	add	r3, sp, #24
-3000b1c0:	e2833004 	add	r3, r3, #4
-3000b1c4:	e58d300c 	str	r3, [sp, #12]
+3000b3c0:	e28d3018 	add	r3, sp, #24
+3000b3c4:	e2833004 	add	r3, r3, #4
+3000b3c8:	e58d300c 	str	r3, [sp, #12]
 	i=vsnprintf(buf,size,fmt,args);
-3000b1c8:	e59d3018 	ldr	r3, [sp, #24]
-3000b1cc:	e59d0004 	ldr	r0, [sp, #4]
-3000b1d0:	e59d1000 	ldr	r1, [sp]
-3000b1d4:	e1a02003 	mov	r2, r3
-3000b1d8:	e59d300c 	ldr	r3, [sp, #12]
-3000b1dc:	ebfffd23 	bl	3000a670 <vsnprintf>
-3000b1e0:	e1a03000 	mov	r3, r0
-3000b1e4:	e58d3008 	str	r3, [sp, #8]
+3000b3cc:	e59d3018 	ldr	r3, [sp, #24]
+3000b3d0:	e59d0004 	ldr	r0, [sp, #4]
+3000b3d4:	e59d1000 	ldr	r1, [sp]
+3000b3d8:	e1a02003 	mov	r2, r3
+3000b3dc:	e59d300c 	ldr	r3, [sp, #12]
+3000b3e0:	ebfffd23 	bl	3000a874 <vsnprintf>
+3000b3e4:	e1a03000 	mov	r3, r0
+3000b3e8:	e58d3008 	str	r3, [sp, #8]
 	va_end(args);
-3000b1e8:	e3a03000 	mov	r3, #0
-3000b1ec:	e58d300c 	str	r3, [sp, #12]
+3000b3ec:	e3a03000 	mov	r3, #0
+3000b3f0:	e58d300c 	str	r3, [sp, #12]
 	return i;
-3000b1f0:	e59d3008 	ldr	r3, [sp, #8]
+3000b3f4:	e59d3008 	ldr	r3, [sp, #8]
 }
-3000b1f4:	e1a00003 	mov	r0, r3
-3000b1f8:	e28dd014 	add	sp, sp, #20
-3000b1fc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b200:	e28dd008 	add	sp, sp, #8
-3000b204:	e12fff1e 	bx	lr
+3000b3f8:	e1a00003 	mov	r0, r3
+3000b3fc:	e28dd014 	add	sp, sp, #20
+3000b400:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b404:	e28dd008 	add	sp, sp, #8
+3000b408:	e12fff1e 	bx	lr
 
-3000b208 <acoral_print>:
+3000b40c <acoral_print>:
 
 acoral_32 acoral_print(const acoral_char *fmt, ...)
 {
-3000b208:	e92d000f 	push	{r0, r1, r2, r3}
-3000b20c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b210:	e24dd014 	sub	sp, sp, #20
+3000b40c:	e92d000f 	push	{r0, r1, r2, r3}
+3000b410:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b414:	e24dd014 	sub	sp, sp, #20
 	va_list args;
 	acoral_32 printed_len;
 	static acoral_char print_buf[256];
 	va_start(args, fmt);
-3000b214:	e28d3018 	add	r3, sp, #24
-3000b218:	e2833004 	add	r3, r3, #4
-3000b21c:	e58d3008 	str	r3, [sp, #8]
+3000b418:	e28d3018 	add	r3, sp, #24
+3000b41c:	e2833004 	add	r3, r3, #4
+3000b420:	e58d3008 	str	r3, [sp, #8]
 	printed_len =vsnprintf(print_buf, sizeof(print_buf), fmt, args);
-3000b220:	e59d3018 	ldr	r3, [sp, #24]
-3000b224:	e59f0060 	ldr	r0, [pc, #96]	; 3000b28c <acoral_print+0x84>
-3000b228:	e3a01c01 	mov	r1, #256	; 0x100
-3000b22c:	e1a02003 	mov	r2, r3
-3000b230:	e59d3008 	ldr	r3, [sp, #8]
-3000b234:	ebfffd0d 	bl	3000a670 <vsnprintf>
-3000b238:	e1a03000 	mov	r3, r0
-3000b23c:	e58d300c 	str	r3, [sp, #12]
+3000b424:	e59d3018 	ldr	r3, [sp, #24]
+3000b428:	e59f0060 	ldr	r0, [pc, #96]	; 3000b490 <acoral_print+0x84>
+3000b42c:	e3a01c01 	mov	r1, #256	; 0x100
+3000b430:	e1a02003 	mov	r2, r3
+3000b434:	e59d3008 	ldr	r3, [sp, #8]
+3000b438:	ebfffd0d 	bl	3000a874 <vsnprintf>
+3000b43c:	e1a03000 	mov	r3, r0
+3000b440:	e58d300c 	str	r3, [sp, #12]
 	va_end(args);
-3000b240:	e3a03000 	mov	r3, #0
-3000b244:	e58d3008 	str	r3, [sp, #8]
+3000b444:	e3a03000 	mov	r3, #0
+3000b448:	e58d3008 	str	r3, [sp, #8]
 	return acoral_dev_write(acoral_cur_thread->console_id,(void *)print_buf,printed_len,0,0);
-3000b248:	e59f3040 	ldr	r3, [pc, #64]	; 3000b290 <acoral_print+0x88>
-3000b24c:	e5933000 	ldr	r3, [r3]
-3000b250:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
-3000b254:	e59d300c 	ldr	r3, [sp, #12]
-3000b258:	e3a01000 	mov	r1, #0
-3000b25c:	e58d1000 	str	r1, [sp]
-3000b260:	e1a00002 	mov	r0, r2
-3000b264:	e59f1020 	ldr	r1, [pc, #32]	; 3000b28c <acoral_print+0x84>
-3000b268:	e1a02003 	mov	r2, r3
-3000b26c:	e3a03000 	mov	r3, #0
-3000b270:	eb000880 	bl	3000d478 <acoral_dev_write>
-3000b274:	e1a03000 	mov	r3, r0
+3000b44c:	e59f3040 	ldr	r3, [pc, #64]	; 3000b494 <acoral_print+0x88>
+3000b450:	e5933000 	ldr	r3, [r3]
+3000b454:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
+3000b458:	e59d300c 	ldr	r3, [sp, #12]
+3000b45c:	e3a01000 	mov	r1, #0
+3000b460:	e58d1000 	str	r1, [sp]
+3000b464:	e1a00002 	mov	r0, r2
+3000b468:	e59f1020 	ldr	r1, [pc, #32]	; 3000b490 <acoral_print+0x84>
+3000b46c:	e1a02003 	mov	r2, r3
+3000b470:	e3a03000 	mov	r3, #0
+3000b474:	eb000880 	bl	3000d67c <acoral_dev_write>
+3000b478:	e1a03000 	mov	r3, r0
 }
-3000b278:	e1a00003 	mov	r0, r3
-3000b27c:	e28dd014 	add	sp, sp, #20
-3000b280:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b284:	e28dd010 	add	sp, sp, #16
-3000b288:	e12fff1e 	bx	lr
-3000b28c:	3000f248 	.word	0x3000f248
-3000b290:	300103f8 	.word	0x300103f8
+3000b47c:	e1a00003 	mov	r0, r3
+3000b480:	e28dd014 	add	sp, sp, #20
+3000b484:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b488:	e28dd010 	add	sp, sp, #16
+3000b48c:	e12fff1e 	bx	lr
+3000b490:	3000f454 	.word	0x3000f454
+3000b494:	30010604 	.word	0x30010604
 
-3000b294 <acoral_prints>:
+3000b498 <acoral_prints>:
 
 acoral_32 acoral_prints(const acoral_char *str)
 {
-3000b294:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b298:	e24dd01c 	sub	sp, sp, #28
-3000b29c:	e58d000c 	str	r0, [sp, #12]
+3000b498:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b49c:	e24dd01c 	sub	sp, sp, #28
+3000b4a0:	e58d000c 	str	r0, [sp, #12]
 	acoral_32 printed_len;
 	printed_len=acoral_str_len(str);  
-3000b2a0:	e59d000c 	ldr	r0, [sp, #12]
-3000b2a4:	eb000115 	bl	3000b700 <acoral_str_len>
-3000b2a8:	e1a03000 	mov	r3, r0
-3000b2ac:	e58d3014 	str	r3, [sp, #20]
+3000b4a4:	e59d000c 	ldr	r0, [sp, #12]
+3000b4a8:	eb000115 	bl	3000b904 <acoral_str_len>
+3000b4ac:	e1a03000 	mov	r3, r0
+3000b4b0:	e58d3014 	str	r3, [sp, #20]
 	return acoral_dev_write(acoral_cur_thread->console_id,(void *)str,printed_len,0,0);
-3000b2b0:	e59f3038 	ldr	r3, [pc, #56]	; 3000b2f0 <acoral_prints+0x5c>
-3000b2b4:	e5933000 	ldr	r3, [r3]
-3000b2b8:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
-3000b2bc:	e59d3014 	ldr	r3, [sp, #20]
-3000b2c0:	e3a01000 	mov	r1, #0
-3000b2c4:	e58d1000 	str	r1, [sp]
-3000b2c8:	e1a00002 	mov	r0, r2
-3000b2cc:	e59d100c 	ldr	r1, [sp, #12]
-3000b2d0:	e1a02003 	mov	r2, r3
-3000b2d4:	e3a03000 	mov	r3, #0
-3000b2d8:	eb000866 	bl	3000d478 <acoral_dev_write>
-3000b2dc:	e1a03000 	mov	r3, r0
+3000b4b4:	e59f3038 	ldr	r3, [pc, #56]	; 3000b4f4 <acoral_prints+0x5c>
+3000b4b8:	e5933000 	ldr	r3, [r3]
+3000b4bc:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
+3000b4c0:	e59d3014 	ldr	r3, [sp, #20]
+3000b4c4:	e3a01000 	mov	r1, #0
+3000b4c8:	e58d1000 	str	r1, [sp]
+3000b4cc:	e1a00002 	mov	r0, r2
+3000b4d0:	e59d100c 	ldr	r1, [sp, #12]
+3000b4d4:	e1a02003 	mov	r2, r3
+3000b4d8:	e3a03000 	mov	r3, #0
+3000b4dc:	eb000866 	bl	3000d67c <acoral_dev_write>
+3000b4e0:	e1a03000 	mov	r3, r0
 }
-3000b2e0:	e1a00003 	mov	r0, r3
-3000b2e4:	e28dd01c 	add	sp, sp, #28
-3000b2e8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b2ec:	e12fff1e 	bx	lr
-3000b2f0:	300103f8 	.word	0x300103f8
+3000b4e4:	e1a00003 	mov	r0, r3
+3000b4e8:	e28dd01c 	add	sp, sp, #28
+3000b4ec:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b4f0:	e12fff1e 	bx	lr
+3000b4f4:	30010604 	.word	0x30010604
 
-3000b2f4 <acoral_getchar>:
+3000b4f8 <acoral_getchar>:
 
 acoral_char acoral_getchar(){
-3000b2f4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b2f8:	e24dd014 	sub	sp, sp, #20
+3000b4f8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b4fc:	e24dd014 	sub	sp, sp, #20
 	acoral_char c;
 	acoral_dev_read(acoral_cur_thread->console_id,&c,1,0,0);
-3000b2fc:	e59f3038 	ldr	r3, [pc, #56]	; 3000b33c <acoral_getchar+0x48>
-3000b300:	e5933000 	ldr	r3, [r3]
-3000b304:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
-3000b308:	e28d300f 	add	r3, sp, #15
-3000b30c:	e3a01000 	mov	r1, #0
-3000b310:	e58d1000 	str	r1, [sp]
-3000b314:	e1a00002 	mov	r0, r2
-3000b318:	e1a01003 	mov	r1, r3
-3000b31c:	e3a02001 	mov	r2, #1
-3000b320:	e3a03000 	mov	r3, #0
-3000b324:	eb000879 	bl	3000d510 <acoral_dev_read>
+3000b500:	e59f3038 	ldr	r3, [pc, #56]	; 3000b540 <acoral_getchar+0x48>
+3000b504:	e5933000 	ldr	r3, [r3]
+3000b508:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
+3000b50c:	e28d300f 	add	r3, sp, #15
+3000b510:	e3a01000 	mov	r1, #0
+3000b514:	e58d1000 	str	r1, [sp]
+3000b518:	e1a00002 	mov	r0, r2
+3000b51c:	e1a01003 	mov	r1, r3
+3000b520:	e3a02001 	mov	r2, #1
+3000b524:	e3a03000 	mov	r3, #0
+3000b528:	eb000879 	bl	3000d714 <acoral_dev_read>
 	return c;
-3000b328:	e5dd300f 	ldrb	r3, [sp, #15]
+3000b52c:	e5dd300f 	ldrb	r3, [sp, #15]
 }
-3000b32c:	e1a00003 	mov	r0, r3
-3000b330:	e28dd014 	add	sp, sp, #20
-3000b334:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b338:	e12fff1e 	bx	lr
-3000b33c:	300103f8 	.word	0x300103f8
+3000b530:	e1a00003 	mov	r0, r3
+3000b534:	e28dd014 	add	sp, sp, #20
+3000b538:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b53c:	e12fff1e 	bx	lr
+3000b540:	30010604 	.word	0x30010604
 
-3000b340 <acoral_putchar>:
+3000b544 <acoral_putchar>:
 
 acoral_char acoral_putchar(acoral_char c){
-3000b340:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b344:	e24dd014 	sub	sp, sp, #20
-3000b348:	e1a03000 	mov	r3, r0
-3000b34c:	e5cd300f 	strb	r3, [sp, #15]
+3000b544:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b548:	e24dd014 	sub	sp, sp, #20
+3000b54c:	e1a03000 	mov	r3, r0
+3000b550:	e5cd300f 	strb	r3, [sp, #15]
 	acoral_dev_write(acoral_cur_thread->console_id,&c,1,0,0);
-3000b350:	e59f3038 	ldr	r3, [pc, #56]	; 3000b390 <acoral_putchar+0x50>
-3000b354:	e5933000 	ldr	r3, [r3]
-3000b358:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
-3000b35c:	e28d300f 	add	r3, sp, #15
-3000b360:	e3a01000 	mov	r1, #0
-3000b364:	e58d1000 	str	r1, [sp]
-3000b368:	e1a00002 	mov	r0, r2
-3000b36c:	e1a01003 	mov	r1, r3
-3000b370:	e3a02001 	mov	r2, #1
-3000b374:	e3a03000 	mov	r3, #0
-3000b378:	eb00083e 	bl	3000d478 <acoral_dev_write>
+3000b554:	e59f3038 	ldr	r3, [pc, #56]	; 3000b594 <acoral_putchar+0x50>
+3000b558:	e5933000 	ldr	r3, [r3]
+3000b55c:	e593204c 	ldr	r2, [r3, #76]	; 0x4c
+3000b560:	e28d300f 	add	r3, sp, #15
+3000b564:	e3a01000 	mov	r1, #0
+3000b568:	e58d1000 	str	r1, [sp]
+3000b56c:	e1a00002 	mov	r0, r2
+3000b570:	e1a01003 	mov	r1, r3
+3000b574:	e3a02001 	mov	r2, #1
+3000b578:	e3a03000 	mov	r3, #0
+3000b57c:	eb00083e 	bl	3000d67c <acoral_dev_write>
 	return c;
-3000b37c:	e5dd300f 	ldrb	r3, [sp, #15]
+3000b580:	e5dd300f 	ldrb	r3, [sp, #15]
 }
-3000b380:	e1a00003 	mov	r0, r3
-3000b384:	e28dd014 	add	sp, sp, #20
-3000b388:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b38c:	e12fff1e 	bx	lr
-3000b390:	300103f8 	.word	0x300103f8
+3000b584:	e1a00003 	mov	r0, r3
+3000b588:	e28dd014 	add	sp, sp, #20
+3000b58c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b590:	e12fff1e 	bx	lr
+3000b594:	30010604 	.word	0x30010604
 
-3000b394 <acoral_debug>:
+3000b598 <acoral_debug>:
 
 static acoral_id console_id=ACORAL_DEV_ERR_ID;
 //======================
 acoral_32 acoral_debug(const acoral_char *fmt, ...)
 {
-3000b394:	e92d000f 	push	{r0, r1, r2, r3}
-3000b398:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b39c:	e24dd014 	sub	sp, sp, #20
+3000b598:	e92d000f 	push	{r0, r1, r2, r3}
+3000b59c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b5a0:	e24dd014 	sub	sp, sp, #20
 	va_list args;
 	acoral_32 printed_len;
 	static acoral_char print_buf[1024];
 	va_start(args, fmt);
-3000b3a0:	e28d3018 	add	r3, sp, #24
-3000b3a4:	e2833004 	add	r3, r3, #4
-3000b3a8:	e58d3008 	str	r3, [sp, #8]
+3000b5a4:	e28d3018 	add	r3, sp, #24
+3000b5a8:	e2833004 	add	r3, r3, #4
+3000b5ac:	e58d3008 	str	r3, [sp, #8]
 	printed_len =vsnprintf(print_buf, sizeof(print_buf), fmt, args);
-3000b3ac:	e59d3018 	ldr	r3, [sp, #24]
-3000b3b0:	e59f0094 	ldr	r0, [pc, #148]	; 3000b44c <acoral_debug+0xb8>
-3000b3b4:	e3a01b01 	mov	r1, #1024	; 0x400
-3000b3b8:	e1a02003 	mov	r2, r3
-3000b3bc:	e59d3008 	ldr	r3, [sp, #8]
-3000b3c0:	ebfffcaa 	bl	3000a670 <vsnprintf>
-3000b3c4:	e1a03000 	mov	r3, r0
-3000b3c8:	e58d300c 	str	r3, [sp, #12]
+3000b5b0:	e59d3018 	ldr	r3, [sp, #24]
+3000b5b4:	e59f0094 	ldr	r0, [pc, #148]	; 3000b650 <acoral_debug+0xb8>
+3000b5b8:	e3a01b01 	mov	r1, #1024	; 0x400
+3000b5bc:	e1a02003 	mov	r2, r3
+3000b5c0:	e59d3008 	ldr	r3, [sp, #8]
+3000b5c4:	ebfffcaa 	bl	3000a874 <vsnprintf>
+3000b5c8:	e1a03000 	mov	r3, r0
+3000b5cc:	e58d300c 	str	r3, [sp, #12]
 	va_end(args);
-3000b3cc:	e3a03000 	mov	r3, #0
-3000b3d0:	e58d3008 	str	r3, [sp, #8]
+3000b5d0:	e3a03000 	mov	r3, #0
+3000b5d4:	e58d3008 	str	r3, [sp, #8]
 	if(console_id==ACORAL_DEV_ERR_ID){
-3000b3d4:	e59f3074 	ldr	r3, [pc, #116]	; 3000b450 <acoral_debug+0xbc>
-3000b3d8:	e5933000 	ldr	r3, [r3]
-3000b3dc:	e3730001 	cmn	r3, #1
-3000b3e0:	1a000009 	bne	3000b40c <acoral_debug+0x78>
+3000b5d8:	e59f3074 	ldr	r3, [pc, #116]	; 3000b654 <acoral_debug+0xbc>
+3000b5dc:	e5933000 	ldr	r3, [r3]
+3000b5e0:	e3730001 	cmn	r3, #1
+3000b5e4:	1a000009 	bne	3000b610 <acoral_debug+0x78>
 		console_id=acoral_dev_open("console");
-3000b3e4:	e59f0068 	ldr	r0, [pc, #104]	; 3000b454 <acoral_debug+0xc0>
-3000b3e8:	eb0007fd 	bl	3000d3e4 <acoral_dev_open>
-3000b3ec:	e1a02000 	mov	r2, r0
-3000b3f0:	e59f3058 	ldr	r3, [pc, #88]	; 3000b450 <acoral_debug+0xbc>
-3000b3f4:	e5832000 	str	r2, [r3]
+3000b5e8:	e59f0068 	ldr	r0, [pc, #104]	; 3000b658 <acoral_debug+0xc0>
+3000b5ec:	eb0007fd 	bl	3000d5e8 <acoral_dev_open>
+3000b5f0:	e1a02000 	mov	r2, r0
+3000b5f4:	e59f3058 	ldr	r3, [pc, #88]	; 3000b654 <acoral_debug+0xbc>
+3000b5f8:	e5832000 	str	r2, [r3]
 		if(console_id==ACORAL_DEV_ERR_ID)
-3000b3f8:	e59f3050 	ldr	r3, [pc, #80]	; 3000b450 <acoral_debug+0xbc>
-3000b3fc:	e5933000 	ldr	r3, [r3]
-3000b400:	e3730001 	cmn	r3, #1
-3000b404:	1a000000 	bne	3000b40c <acoral_debug+0x78>
-3000b408:	ea00000a 	b	3000b438 <acoral_debug+0xa4>
+3000b5fc:	e59f3050 	ldr	r3, [pc, #80]	; 3000b654 <acoral_debug+0xbc>
+3000b600:	e5933000 	ldr	r3, [r3]
+3000b604:	e3730001 	cmn	r3, #1
+3000b608:	1a000000 	bne	3000b610 <acoral_debug+0x78>
+3000b60c:	ea00000a 	b	3000b63c <acoral_debug+0xa4>
 			return;
 	}
 	return acoral_dev_write(console_id,(void *)print_buf,printed_len,0,0);
-3000b40c:	e59f303c 	ldr	r3, [pc, #60]	; 3000b450 <acoral_debug+0xbc>
-3000b410:	e5932000 	ldr	r2, [r3]
-3000b414:	e59d300c 	ldr	r3, [sp, #12]
-3000b418:	e3a01000 	mov	r1, #0
-3000b41c:	e58d1000 	str	r1, [sp]
-3000b420:	e1a00002 	mov	r0, r2
-3000b424:	e59f1020 	ldr	r1, [pc, #32]	; 3000b44c <acoral_debug+0xb8>
-3000b428:	e1a02003 	mov	r2, r3
-3000b42c:	e3a03000 	mov	r3, #0
-3000b430:	eb000810 	bl	3000d478 <acoral_dev_write>
-3000b434:	e1a03000 	mov	r3, r0
+3000b610:	e59f303c 	ldr	r3, [pc, #60]	; 3000b654 <acoral_debug+0xbc>
+3000b614:	e5932000 	ldr	r2, [r3]
+3000b618:	e59d300c 	ldr	r3, [sp, #12]
+3000b61c:	e3a01000 	mov	r1, #0
+3000b620:	e58d1000 	str	r1, [sp]
+3000b624:	e1a00002 	mov	r0, r2
+3000b628:	e59f1020 	ldr	r1, [pc, #32]	; 3000b650 <acoral_debug+0xb8>
+3000b62c:	e1a02003 	mov	r2, r3
+3000b630:	e3a03000 	mov	r3, #0
+3000b634:	eb000810 	bl	3000d67c <acoral_dev_write>
+3000b638:	e1a03000 	mov	r3, r0
 }
-3000b438:	e1a00003 	mov	r0, r3
-3000b43c:	e28dd014 	add	sp, sp, #20
-3000b440:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b444:	e28dd010 	add	sp, sp, #16
-3000b448:	e12fff1e 	bx	lr
-3000b44c:	3000ee48 	.word	0x3000ee48
-3000b450:	3000ea78 	.word	0x3000ea78
-3000b454:	3000e7e8 	.word	0x3000e7e8
+3000b63c:	e1a00003 	mov	r0, r3
+3000b640:	e28dd014 	add	sp, sp, #20
+3000b644:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b648:	e28dd010 	add	sp, sp, #16
+3000b64c:	e12fff1e 	bx	lr
+3000b650:	3000f054 	.word	0x3000f054
+3000b654:	3000ec84 	.word	0x3000ec84
+3000b658:	3000e9ec 	.word	0x3000e9ec
 
-3000b458 <acoral_debugs>:
+3000b65c <acoral_debugs>:
 
 acoral_32 acoral_debugs(const acoral_char *str)
 {
-3000b458:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b45c:	e24dd01c 	sub	sp, sp, #28
-3000b460:	e58d000c 	str	r0, [sp, #12]
+3000b65c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b660:	e24dd01c 	sub	sp, sp, #28
+3000b664:	e58d000c 	str	r0, [sp, #12]
 	acoral_32 printed_len;
 	printed_len=acoral_str_len(str);  
-3000b464:	e59d000c 	ldr	r0, [sp, #12]
-3000b468:	eb0000a4 	bl	3000b700 <acoral_str_len>
-3000b46c:	e1a03000 	mov	r3, r0
-3000b470:	e58d3014 	str	r3, [sp, #20]
+3000b668:	e59d000c 	ldr	r0, [sp, #12]
+3000b66c:	eb0000a4 	bl	3000b904 <acoral_str_len>
+3000b670:	e1a03000 	mov	r3, r0
+3000b674:	e58d3014 	str	r3, [sp, #20]
 	if(console_id==ACORAL_DEV_ERR_ID){
-3000b474:	e59f306c 	ldr	r3, [pc, #108]	; 3000b4e8 <acoral_debugs+0x90>
-3000b478:	e5933000 	ldr	r3, [r3]
-3000b47c:	e3730001 	cmn	r3, #1
-3000b480:	1a000009 	bne	3000b4ac <acoral_debugs+0x54>
+3000b678:	e59f306c 	ldr	r3, [pc, #108]	; 3000b6ec <acoral_debugs+0x90>
+3000b67c:	e5933000 	ldr	r3, [r3]
+3000b680:	e3730001 	cmn	r3, #1
+3000b684:	1a000009 	bne	3000b6b0 <acoral_debugs+0x54>
 		console_id=acoral_dev_open("console");
-3000b484:	e59f0060 	ldr	r0, [pc, #96]	; 3000b4ec <acoral_debugs+0x94>
-3000b488:	eb0007d5 	bl	3000d3e4 <acoral_dev_open>
-3000b48c:	e1a02000 	mov	r2, r0
-3000b490:	e59f3050 	ldr	r3, [pc, #80]	; 3000b4e8 <acoral_debugs+0x90>
-3000b494:	e5832000 	str	r2, [r3]
+3000b688:	e59f0060 	ldr	r0, [pc, #96]	; 3000b6f0 <acoral_debugs+0x94>
+3000b68c:	eb0007d5 	bl	3000d5e8 <acoral_dev_open>
+3000b690:	e1a02000 	mov	r2, r0
+3000b694:	e59f3050 	ldr	r3, [pc, #80]	; 3000b6ec <acoral_debugs+0x90>
+3000b698:	e5832000 	str	r2, [r3]
 		if(console_id==ACORAL_DEV_ERR_ID)
-3000b498:	e59f3048 	ldr	r3, [pc, #72]	; 3000b4e8 <acoral_debugs+0x90>
-3000b49c:	e5933000 	ldr	r3, [r3]
-3000b4a0:	e3730001 	cmn	r3, #1
-3000b4a4:	1a000000 	bne	3000b4ac <acoral_debugs+0x54>
-3000b4a8:	ea00000a 	b	3000b4d8 <acoral_debugs+0x80>
+3000b69c:	e59f3048 	ldr	r3, [pc, #72]	; 3000b6ec <acoral_debugs+0x90>
+3000b6a0:	e5933000 	ldr	r3, [r3]
+3000b6a4:	e3730001 	cmn	r3, #1
+3000b6a8:	1a000000 	bne	3000b6b0 <acoral_debugs+0x54>
+3000b6ac:	ea00000a 	b	3000b6dc <acoral_debugs+0x80>
 			return;
 	}
 	return acoral_dev_write(console_id,(void *)str,printed_len,0,0);
-3000b4ac:	e59f3034 	ldr	r3, [pc, #52]	; 3000b4e8 <acoral_debugs+0x90>
-3000b4b0:	e5932000 	ldr	r2, [r3]
-3000b4b4:	e59d3014 	ldr	r3, [sp, #20]
-3000b4b8:	e3a01000 	mov	r1, #0
-3000b4bc:	e58d1000 	str	r1, [sp]
-3000b4c0:	e1a00002 	mov	r0, r2
-3000b4c4:	e59d100c 	ldr	r1, [sp, #12]
-3000b4c8:	e1a02003 	mov	r2, r3
-3000b4cc:	e3a03000 	mov	r3, #0
-3000b4d0:	eb0007e8 	bl	3000d478 <acoral_dev_write>
-3000b4d4:	e1a03000 	mov	r3, r0
+3000b6b0:	e59f3034 	ldr	r3, [pc, #52]	; 3000b6ec <acoral_debugs+0x90>
+3000b6b4:	e5932000 	ldr	r2, [r3]
+3000b6b8:	e59d3014 	ldr	r3, [sp, #20]
+3000b6bc:	e3a01000 	mov	r1, #0
+3000b6c0:	e58d1000 	str	r1, [sp]
+3000b6c4:	e1a00002 	mov	r0, r2
+3000b6c8:	e59d100c 	ldr	r1, [sp, #12]
+3000b6cc:	e1a02003 	mov	r2, r3
+3000b6d0:	e3a03000 	mov	r3, #0
+3000b6d4:	eb0007e8 	bl	3000d67c <acoral_dev_write>
+3000b6d8:	e1a03000 	mov	r3, r0
 }
-3000b4d8:	e1a00003 	mov	r0, r3
-3000b4dc:	e28dd01c 	add	sp, sp, #28
-3000b4e0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b4e4:	e12fff1e 	bx	lr
-3000b4e8:	3000ea78 	.word	0x3000ea78
-3000b4ec:	3000e7e8 	.word	0x3000e7e8
+3000b6dc:	e1a00003 	mov	r0, r3
+3000b6e0:	e28dd01c 	add	sp, sp, #28
+3000b6e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000b6e8:	e12fff1e 	bx	lr
+3000b6ec:	3000ec84 	.word	0x3000ec84
+3000b6f0:	3000e9ec 	.word	0x3000e9ec
 
-3000b4f0 <acoral_tolower>:
+3000b6f4 <acoral_tolower>:
 #include<string.h>
 
 acoral_u8  acoral_tolower(acoral_u8 c){
-3000b4f0:	e24dd008 	sub	sp, sp, #8
-3000b4f4:	e1a03000 	mov	r3, r0
-3000b4f8:	e5cd3007 	strb	r3, [sp, #7]
+3000b6f4:	e24dd008 	sub	sp, sp, #8
+3000b6f8:	e1a03000 	mov	r3, r0
+3000b6fc:	e5cd3007 	strb	r3, [sp, #7]
       if(IS_LOWER(c))
-3000b4fc:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b500:	e3530060 	cmp	r3, #96	; 0x60
-3000b504:	9a000004 	bls	3000b51c <acoral_tolower+0x2c>
-3000b508:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b50c:	e353007a 	cmp	r3, #122	; 0x7a
-3000b510:	8a000001 	bhi	3000b51c <acoral_tolower+0x2c>
+3000b700:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b704:	e3530060 	cmp	r3, #96	; 0x60
+3000b708:	9a000004 	bls	3000b720 <acoral_tolower+0x2c>
+3000b70c:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b710:	e353007a 	cmp	r3, #122	; 0x7a
+3000b714:	8a000001 	bhi	3000b720 <acoral_tolower+0x2c>
         return c;
-3000b514:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b518:	ea00000a 	b	3000b548 <acoral_tolower+0x58>
+3000b718:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b71c:	ea00000a 	b	3000b74c <acoral_tolower+0x58>
       else if(IS_UPPER(c))
-3000b51c:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b520:	e3530040 	cmp	r3, #64	; 0x40
-3000b524:	9a000006 	bls	3000b544 <acoral_tolower+0x54>
-3000b528:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b52c:	e353005a 	cmp	r3, #90	; 0x5a
-3000b530:	8a000003 	bhi	3000b544 <acoral_tolower+0x54>
+3000b720:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b724:	e3530040 	cmp	r3, #64	; 0x40
+3000b728:	9a000006 	bls	3000b748 <acoral_tolower+0x54>
+3000b72c:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b730:	e353005a 	cmp	r3, #90	; 0x5a
+3000b734:	8a000003 	bhi	3000b748 <acoral_tolower+0x54>
         return (acoral_u8)(c+32);
-3000b534:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b538:	e2833020 	add	r3, r3, #32
-3000b53c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000b540:	ea000000 	b	3000b548 <acoral_tolower+0x58>
+3000b738:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b73c:	e2833020 	add	r3, r3, #32
+3000b740:	e20330ff 	and	r3, r3, #255	; 0xff
+3000b744:	ea000000 	b	3000b74c <acoral_tolower+0x58>
       else
         return FALSE; 
-3000b544:	e3a03000 	mov	r3, #0
+3000b748:	e3a03000 	mov	r3, #0
             
 }
-3000b548:	e1a00003 	mov	r0, r3
-3000b54c:	e28dd008 	add	sp, sp, #8
-3000b550:	e12fff1e 	bx	lr
+3000b74c:	e1a00003 	mov	r0, r3
+3000b750:	e28dd008 	add	sp, sp, #8
+3000b754:	e12fff1e 	bx	lr
 
-3000b554 <acoral_toupper>:
+3000b758 <acoral_toupper>:
 acoral_u8  acoral_toupper(acoral_u8 c){
-3000b554:	e24dd008 	sub	sp, sp, #8
-3000b558:	e1a03000 	mov	r3, r0
-3000b55c:	e5cd3007 	strb	r3, [sp, #7]
+3000b758:	e24dd008 	sub	sp, sp, #8
+3000b75c:	e1a03000 	mov	r3, r0
+3000b760:	e5cd3007 	strb	r3, [sp, #7]
      if(IS_LOWER(c))
-3000b560:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b564:	e3530060 	cmp	r3, #96	; 0x60
-3000b568:	9a000006 	bls	3000b588 <acoral_toupper+0x34>
-3000b56c:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b570:	e353007a 	cmp	r3, #122	; 0x7a
-3000b574:	8a000003 	bhi	3000b588 <acoral_toupper+0x34>
+3000b764:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b768:	e3530060 	cmp	r3, #96	; 0x60
+3000b76c:	9a000006 	bls	3000b78c <acoral_toupper+0x34>
+3000b770:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b774:	e353007a 	cmp	r3, #122	; 0x7a
+3000b778:	8a000003 	bhi	3000b78c <acoral_toupper+0x34>
         return (acoral_u8)(c-32);
-3000b578:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b57c:	e2433020 	sub	r3, r3, #32
-3000b580:	e20330ff 	and	r3, r3, #255	; 0xff
-3000b584:	ea000008 	b	3000b5ac <acoral_toupper+0x58>
+3000b77c:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b780:	e2433020 	sub	r3, r3, #32
+3000b784:	e20330ff 	and	r3, r3, #255	; 0xff
+3000b788:	ea000008 	b	3000b7b0 <acoral_toupper+0x58>
      else if(IS_UPPER(c))
-3000b588:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b58c:	e3530040 	cmp	r3, #64	; 0x40
-3000b590:	9a000004 	bls	3000b5a8 <acoral_toupper+0x54>
-3000b594:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b598:	e353005a 	cmp	r3, #90	; 0x5a
-3000b59c:	8a000001 	bhi	3000b5a8 <acoral_toupper+0x54>
+3000b78c:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b790:	e3530040 	cmp	r3, #64	; 0x40
+3000b794:	9a000004 	bls	3000b7ac <acoral_toupper+0x54>
+3000b798:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b79c:	e353005a 	cmp	r3, #90	; 0x5a
+3000b7a0:	8a000001 	bhi	3000b7ac <acoral_toupper+0x54>
         return c;
-3000b5a0:	e5dd3007 	ldrb	r3, [sp, #7]
-3000b5a4:	ea000000 	b	3000b5ac <acoral_toupper+0x58>
+3000b7a4:	e5dd3007 	ldrb	r3, [sp, #7]
+3000b7a8:	ea000000 	b	3000b7b0 <acoral_toupper+0x58>
      else
         return FALSE; 
-3000b5a8:	e3a03000 	mov	r3, #0
+3000b7ac:	e3a03000 	mov	r3, #0
 }
-3000b5ac:	e1a00003 	mov	r0, r3
-3000b5b0:	e28dd008 	add	sp, sp, #8
-3000b5b4:	e12fff1e 	bx	lr
+3000b7b0:	e1a00003 	mov	r0, r3
+3000b7b4:	e28dd008 	add	sp, sp, #8
+3000b7b8:	e12fff1e 	bx	lr
 
-3000b5b8 <acoral_str_upr>:
+3000b7bc <acoral_str_upr>:
 
 acoral_char *acoral_str_upr(acoral_char *str){
-3000b5b8:	e24dd010 	sub	sp, sp, #16
-3000b5bc:	e58d0004 	str	r0, [sp, #4]
+3000b7bc:	e24dd010 	sub	sp, sp, #16
+3000b7c0:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 i=0;
-3000b5c0:	e3a03000 	mov	r3, #0
-3000b5c4:	e58d3008 	str	r3, [sp, #8]
+3000b7c4:	e3a03000 	mov	r3, #0
+3000b7c8:	e58d3008 	str	r3, [sp, #8]
 	acoral_char *s=str;
-3000b5c8:	e59d3004 	ldr	r3, [sp, #4]
-3000b5cc:	e58d300c 	str	r3, [sp, #12]
+3000b7cc:	e59d3004 	ldr	r3, [sp, #4]
+3000b7d0:	e58d300c 	str	r3, [sp, #12]
 	while(s[i]!='\0'){
-3000b5d0:	ea000018 	b	3000b638 <acoral_str_upr+0x80>
+3000b7d4:	ea000018 	b	3000b83c <acoral_str_upr+0x80>
 		if(s[i]>='a'&&s[i]<='z')
-3000b5d4:	e59d200c 	ldr	r2, [sp, #12]
-3000b5d8:	e59d3008 	ldr	r3, [sp, #8]
-3000b5dc:	e0823003 	add	r3, r2, r3
-3000b5e0:	e5d33000 	ldrb	r3, [r3]
-3000b5e4:	e3530060 	cmp	r3, #96	; 0x60
-3000b5e8:	9a00000f 	bls	3000b62c <acoral_str_upr+0x74>
-3000b5ec:	e59d200c 	ldr	r2, [sp, #12]
-3000b5f0:	e59d3008 	ldr	r3, [sp, #8]
-3000b5f4:	e0823003 	add	r3, r2, r3
-3000b5f8:	e5d33000 	ldrb	r3, [r3]
-3000b5fc:	e353007a 	cmp	r3, #122	; 0x7a
-3000b600:	8a000009 	bhi	3000b62c <acoral_str_upr+0x74>
+3000b7d8:	e59d200c 	ldr	r2, [sp, #12]
+3000b7dc:	e59d3008 	ldr	r3, [sp, #8]
+3000b7e0:	e0823003 	add	r3, r2, r3
+3000b7e4:	e5d33000 	ldrb	r3, [r3]
+3000b7e8:	e3530060 	cmp	r3, #96	; 0x60
+3000b7ec:	9a00000f 	bls	3000b830 <acoral_str_upr+0x74>
+3000b7f0:	e59d200c 	ldr	r2, [sp, #12]
+3000b7f4:	e59d3008 	ldr	r3, [sp, #8]
+3000b7f8:	e0823003 	add	r3, r2, r3
+3000b7fc:	e5d33000 	ldrb	r3, [r3]
+3000b800:	e353007a 	cmp	r3, #122	; 0x7a
+3000b804:	8a000009 	bhi	3000b830 <acoral_str_upr+0x74>
 			s[i]-=32;
-3000b604:	e59d200c 	ldr	r2, [sp, #12]
-3000b608:	e59d3008 	ldr	r3, [sp, #8]
-3000b60c:	e0823003 	add	r3, r2, r3
-3000b610:	e59d100c 	ldr	r1, [sp, #12]
-3000b614:	e59d2008 	ldr	r2, [sp, #8]
-3000b618:	e0812002 	add	r2, r1, r2
-3000b61c:	e5d22000 	ldrb	r2, [r2]
-3000b620:	e2422020 	sub	r2, r2, #32
-3000b624:	e20220ff 	and	r2, r2, #255	; 0xff
-3000b628:	e5c32000 	strb	r2, [r3]
+3000b808:	e59d200c 	ldr	r2, [sp, #12]
+3000b80c:	e59d3008 	ldr	r3, [sp, #8]
+3000b810:	e0823003 	add	r3, r2, r3
+3000b814:	e59d100c 	ldr	r1, [sp, #12]
+3000b818:	e59d2008 	ldr	r2, [sp, #8]
+3000b81c:	e0812002 	add	r2, r1, r2
+3000b820:	e5d22000 	ldrb	r2, [r2]
+3000b824:	e2422020 	sub	r2, r2, #32
+3000b828:	e20220ff 	and	r2, r2, #255	; 0xff
+3000b82c:	e5c32000 	strb	r2, [r3]
 		i++;
-3000b62c:	e59d3008 	ldr	r3, [sp, #8]
-3000b630:	e2833001 	add	r3, r3, #1
-3000b634:	e58d3008 	str	r3, [sp, #8]
+3000b830:	e59d3008 	ldr	r3, [sp, #8]
+3000b834:	e2833001 	add	r3, r3, #1
+3000b838:	e58d3008 	str	r3, [sp, #8]
 }
 
 acoral_char *acoral_str_upr(acoral_char *str){
 	acoral_u32 i=0;
 	acoral_char *s=str;
 	while(s[i]!='\0'){
-3000b638:	e59d200c 	ldr	r2, [sp, #12]
-3000b63c:	e59d3008 	ldr	r3, [sp, #8]
-3000b640:	e0823003 	add	r3, r2, r3
-3000b644:	e5d33000 	ldrb	r3, [r3]
-3000b648:	e3530000 	cmp	r3, #0
-3000b64c:	1affffe0 	bne	3000b5d4 <acoral_str_upr+0x1c>
+3000b83c:	e59d200c 	ldr	r2, [sp, #12]
+3000b840:	e59d3008 	ldr	r3, [sp, #8]
+3000b844:	e0823003 	add	r3, r2, r3
+3000b848:	e5d33000 	ldrb	r3, [r3]
+3000b84c:	e3530000 	cmp	r3, #0
+3000b850:	1affffe0 	bne	3000b7d8 <acoral_str_upr+0x1c>
 		if(s[i]>='a'&&s[i]<='z')
 			s[i]-=32;
 		i++;
 	} 
 	return str;
-3000b650:	e59d3004 	ldr	r3, [sp, #4]
+3000b854:	e59d3004 	ldr	r3, [sp, #4]
 }
-3000b654:	e1a00003 	mov	r0, r3
-3000b658:	e28dd010 	add	sp, sp, #16
-3000b65c:	e12fff1e 	bx	lr
+3000b858:	e1a00003 	mov	r0, r3
+3000b85c:	e28dd010 	add	sp, sp, #16
+3000b860:	e12fff1e 	bx	lr
 
-3000b660 <acoral_str_lwr>:
+3000b864 <acoral_str_lwr>:
 
 acoral_char *acoral_str_lwr(acoral_char *s){
-3000b660:	e24dd010 	sub	sp, sp, #16
-3000b664:	e58d0004 	str	r0, [sp, #4]
+3000b864:	e24dd010 	sub	sp, sp, #16
+3000b868:	e58d0004 	str	r0, [sp, #4]
 	acoral_u32 i=0;
-3000b668:	e3a03000 	mov	r3, #0
-3000b66c:	e58d300c 	str	r3, [sp, #12]
+3000b86c:	e3a03000 	mov	r3, #0
+3000b870:	e58d300c 	str	r3, [sp, #12]
 	while(s[i]!='\0'){
-3000b670:	ea000018 	b	3000b6d8 <acoral_str_lwr+0x78>
+3000b874:	ea000018 	b	3000b8dc <acoral_str_lwr+0x78>
 		if(s[i]>='A'&&s[i]<='Z')
-3000b674:	e59d2004 	ldr	r2, [sp, #4]
-3000b678:	e59d300c 	ldr	r3, [sp, #12]
-3000b67c:	e0823003 	add	r3, r2, r3
-3000b680:	e5d33000 	ldrb	r3, [r3]
-3000b684:	e3530040 	cmp	r3, #64	; 0x40
-3000b688:	9a00000f 	bls	3000b6cc <acoral_str_lwr+0x6c>
-3000b68c:	e59d2004 	ldr	r2, [sp, #4]
-3000b690:	e59d300c 	ldr	r3, [sp, #12]
-3000b694:	e0823003 	add	r3, r2, r3
-3000b698:	e5d33000 	ldrb	r3, [r3]
-3000b69c:	e353005a 	cmp	r3, #90	; 0x5a
-3000b6a0:	8a000009 	bhi	3000b6cc <acoral_str_lwr+0x6c>
+3000b878:	e59d2004 	ldr	r2, [sp, #4]
+3000b87c:	e59d300c 	ldr	r3, [sp, #12]
+3000b880:	e0823003 	add	r3, r2, r3
+3000b884:	e5d33000 	ldrb	r3, [r3]
+3000b888:	e3530040 	cmp	r3, #64	; 0x40
+3000b88c:	9a00000f 	bls	3000b8d0 <acoral_str_lwr+0x6c>
+3000b890:	e59d2004 	ldr	r2, [sp, #4]
+3000b894:	e59d300c 	ldr	r3, [sp, #12]
+3000b898:	e0823003 	add	r3, r2, r3
+3000b89c:	e5d33000 	ldrb	r3, [r3]
+3000b8a0:	e353005a 	cmp	r3, #90	; 0x5a
+3000b8a4:	8a000009 	bhi	3000b8d0 <acoral_str_lwr+0x6c>
 			s[i]+=32;
-3000b6a4:	e59d2004 	ldr	r2, [sp, #4]
-3000b6a8:	e59d300c 	ldr	r3, [sp, #12]
-3000b6ac:	e0823003 	add	r3, r2, r3
-3000b6b0:	e59d1004 	ldr	r1, [sp, #4]
-3000b6b4:	e59d200c 	ldr	r2, [sp, #12]
-3000b6b8:	e0812002 	add	r2, r1, r2
-3000b6bc:	e5d22000 	ldrb	r2, [r2]
-3000b6c0:	e2822020 	add	r2, r2, #32
-3000b6c4:	e20220ff 	and	r2, r2, #255	; 0xff
-3000b6c8:	e5c32000 	strb	r2, [r3]
+3000b8a8:	e59d2004 	ldr	r2, [sp, #4]
+3000b8ac:	e59d300c 	ldr	r3, [sp, #12]
+3000b8b0:	e0823003 	add	r3, r2, r3
+3000b8b4:	e59d1004 	ldr	r1, [sp, #4]
+3000b8b8:	e59d200c 	ldr	r2, [sp, #12]
+3000b8bc:	e0812002 	add	r2, r1, r2
+3000b8c0:	e5d22000 	ldrb	r2, [r2]
+3000b8c4:	e2822020 	add	r2, r2, #32
+3000b8c8:	e20220ff 	and	r2, r2, #255	; 0xff
+3000b8cc:	e5c32000 	strb	r2, [r3]
 		i++;
-3000b6cc:	e59d300c 	ldr	r3, [sp, #12]
-3000b6d0:	e2833001 	add	r3, r3, #1
-3000b6d4:	e58d300c 	str	r3, [sp, #12]
+3000b8d0:	e59d300c 	ldr	r3, [sp, #12]
+3000b8d4:	e2833001 	add	r3, r3, #1
+3000b8d8:	e58d300c 	str	r3, [sp, #12]
 	return str;
 }
 
 acoral_char *acoral_str_lwr(acoral_char *s){
 	acoral_u32 i=0;
 	while(s[i]!='\0'){
-3000b6d8:	e59d2004 	ldr	r2, [sp, #4]
-3000b6dc:	e59d300c 	ldr	r3, [sp, #12]
-3000b6e0:	e0823003 	add	r3, r2, r3
-3000b6e4:	e5d33000 	ldrb	r3, [r3]
-3000b6e8:	e3530000 	cmp	r3, #0
-3000b6ec:	1affffe0 	bne	3000b674 <acoral_str_lwr+0x14>
+3000b8dc:	e59d2004 	ldr	r2, [sp, #4]
+3000b8e0:	e59d300c 	ldr	r3, [sp, #12]
+3000b8e4:	e0823003 	add	r3, r2, r3
+3000b8e8:	e5d33000 	ldrb	r3, [r3]
+3000b8ec:	e3530000 	cmp	r3, #0
+3000b8f0:	1affffe0 	bne	3000b878 <acoral_str_lwr+0x14>
 		if(s[i]>='A'&&s[i]<='Z')
 			s[i]+=32;
 		i++;
 	} 
 	return s;
-3000b6f0:	e59d3004 	ldr	r3, [sp, #4]
+3000b8f4:	e59d3004 	ldr	r3, [sp, #4]
 }
-3000b6f4:	e1a00003 	mov	r0, r3
-3000b6f8:	e28dd010 	add	sp, sp, #16
-3000b6fc:	e12fff1e 	bx	lr
+3000b8f8:	e1a00003 	mov	r0, r3
+3000b8fc:	e28dd010 	add	sp, sp, #16
+3000b900:	e12fff1e 	bx	lr
 
-3000b700 <acoral_str_len>:
+3000b904 <acoral_str_len>:
 
 acoral_u32 acoral_str_len(const acoral_char *str)  
 {  
-3000b700:	e24dd010 	sub	sp, sp, #16
-3000b704:	e58d0004 	str	r0, [sp, #4]
+3000b904:	e24dd010 	sub	sp, sp, #16
+3000b908:	e58d0004 	str	r0, [sp, #4]
   acoral_u32  i=0;  
-3000b708:	e3a03000 	mov	r3, #0
-3000b70c:	e58d3008 	str	r3, [sp, #8]
+3000b90c:	e3a03000 	mov	r3, #0
+3000b910:	e58d3008 	str	r3, [sp, #8]
   const acoral_char *p=str;
-3000b710:	e59d3004 	ldr	r3, [sp, #4]
-3000b714:	e58d300c 	str	r3, [sp, #12]
+3000b914:	e59d3004 	ldr	r3, [sp, #4]
+3000b918:	e58d300c 	str	r3, [sp, #12]
   while(*p++)  
-3000b718:	ea000002 	b	3000b728 <acoral_str_len+0x28>
+3000b91c:	ea000002 	b	3000b92c <acoral_str_len+0x28>
       i++;  
-3000b71c:	e59d3008 	ldr	r3, [sp, #8]
-3000b720:	e2833001 	add	r3, r3, #1
-3000b724:	e58d3008 	str	r3, [sp, #8]
+3000b920:	e59d3008 	ldr	r3, [sp, #8]
+3000b924:	e2833001 	add	r3, r3, #1
+3000b928:	e58d3008 	str	r3, [sp, #8]
 
 acoral_u32 acoral_str_len(const acoral_char *str)  
 {  
   acoral_u32  i=0;  
   const acoral_char *p=str;
   while(*p++)  
-3000b728:	e59d300c 	ldr	r3, [sp, #12]
-3000b72c:	e5d33000 	ldrb	r3, [r3]
-3000b730:	e3530000 	cmp	r3, #0
-3000b734:	03a03000 	moveq	r3, #0
-3000b738:	13a03001 	movne	r3, #1
-3000b73c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000b740:	e59d200c 	ldr	r2, [sp, #12]
-3000b744:	e2822001 	add	r2, r2, #1
-3000b748:	e58d200c 	str	r2, [sp, #12]
-3000b74c:	e3530000 	cmp	r3, #0
-3000b750:	1afffff1 	bne	3000b71c <acoral_str_len+0x1c>
+3000b92c:	e59d300c 	ldr	r3, [sp, #12]
+3000b930:	e5d33000 	ldrb	r3, [r3]
+3000b934:	e3530000 	cmp	r3, #0
+3000b938:	03a03000 	moveq	r3, #0
+3000b93c:	13a03001 	movne	r3, #1
+3000b940:	e20330ff 	and	r3, r3, #255	; 0xff
+3000b944:	e59d200c 	ldr	r2, [sp, #12]
+3000b948:	e2822001 	add	r2, r2, #1
+3000b94c:	e58d200c 	str	r2, [sp, #12]
+3000b950:	e3530000 	cmp	r3, #0
+3000b954:	1afffff1 	bne	3000b920 <acoral_str_len+0x1c>
       i++;  
   return  i;  
-3000b754:	e59d3008 	ldr	r3, [sp, #8]
+3000b958:	e59d3008 	ldr	r3, [sp, #8]
 }
-3000b758:	e1a00003 	mov	r0, r3
-3000b75c:	e28dd010 	add	sp, sp, #16
-3000b760:	e12fff1e 	bx	lr
+3000b95c:	e1a00003 	mov	r0, r3
+3000b960:	e28dd010 	add	sp, sp, #16
+3000b964:	e12fff1e 	bx	lr
 
-3000b764 <acoral_str_cpy>:
+3000b968 <acoral_str_cpy>:
 
 acoral_char *acoral_str_cpy(acoral_char *to, const acoral_char *from)
 {
-3000b764:	e24dd010 	sub	sp, sp, #16
-3000b768:	e58d0004 	str	r0, [sp, #4]
-3000b76c:	e58d1000 	str	r1, [sp]
+3000b968:	e24dd010 	sub	sp, sp, #16
+3000b96c:	e58d0004 	str	r0, [sp, #4]
+3000b970:	e58d1000 	str	r1, [sp]
     acoral_char *rev = to;
-3000b770:	e59d3004 	ldr	r3, [sp, #4]
-3000b774:	e58d300c 	str	r3, [sp, #12]
+3000b974:	e59d3004 	ldr	r3, [sp, #4]
+3000b978:	e58d300c 	str	r3, [sp, #12]
     while(*to++ = *from++);
-3000b778:	e59d3000 	ldr	r3, [sp]
-3000b77c:	e5d32000 	ldrb	r2, [r3]
-3000b780:	e59d3004 	ldr	r3, [sp, #4]
-3000b784:	e5c32000 	strb	r2, [r3]
-3000b788:	e59d3004 	ldr	r3, [sp, #4]
-3000b78c:	e5d33000 	ldrb	r3, [r3]
-3000b790:	e3530000 	cmp	r3, #0
-3000b794:	03a03000 	moveq	r3, #0
-3000b798:	13a03001 	movne	r3, #1
-3000b79c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000b7a0:	e59d2004 	ldr	r2, [sp, #4]
-3000b7a4:	e2822001 	add	r2, r2, #1
-3000b7a8:	e58d2004 	str	r2, [sp, #4]
-3000b7ac:	e59d2000 	ldr	r2, [sp]
-3000b7b0:	e2822001 	add	r2, r2, #1
-3000b7b4:	e58d2000 	str	r2, [sp]
-3000b7b8:	e3530000 	cmp	r3, #0
-3000b7bc:	1affffed 	bne	3000b778 <acoral_str_cpy+0x14>
+3000b97c:	e59d3000 	ldr	r3, [sp]
+3000b980:	e5d32000 	ldrb	r2, [r3]
+3000b984:	e59d3004 	ldr	r3, [sp, #4]
+3000b988:	e5c32000 	strb	r2, [r3]
+3000b98c:	e59d3004 	ldr	r3, [sp, #4]
+3000b990:	e5d33000 	ldrb	r3, [r3]
+3000b994:	e3530000 	cmp	r3, #0
+3000b998:	03a03000 	moveq	r3, #0
+3000b99c:	13a03001 	movne	r3, #1
+3000b9a0:	e20330ff 	and	r3, r3, #255	; 0xff
+3000b9a4:	e59d2004 	ldr	r2, [sp, #4]
+3000b9a8:	e2822001 	add	r2, r2, #1
+3000b9ac:	e58d2004 	str	r2, [sp, #4]
+3000b9b0:	e59d2000 	ldr	r2, [sp]
+3000b9b4:	e2822001 	add	r2, r2, #1
+3000b9b8:	e58d2000 	str	r2, [sp]
+3000b9bc:	e3530000 	cmp	r3, #0
+3000b9c0:	1affffed 	bne	3000b97c <acoral_str_cpy+0x14>
     return rev;
-3000b7c0:	e59d300c 	ldr	r3, [sp, #12]
+3000b9c4:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000b7c4:	e1a00003 	mov	r0, r3
-3000b7c8:	e28dd010 	add	sp, sp, #16
-3000b7cc:	e12fff1e 	bx	lr
+3000b9c8:	e1a00003 	mov	r0, r3
+3000b9cc:	e28dd010 	add	sp, sp, #16
+3000b9d0:	e12fff1e 	bx	lr
 
-3000b7d0 <acoral_str_cmp>:
+3000b9d4 <acoral_str_cmp>:
 
 acoral_u32 acoral_str_cmp(const acoral_char * des,const  acoral_char * src)
 {
-3000b7d0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b7d4:	e24dd01c 	sub	sp, sp, #28
-3000b7d8:	e58d0004 	str	r0, [sp, #4]
-3000b7dc:	e58d1000 	str	r1, [sp]
+3000b9d4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000b9d8:	e24dd01c 	sub	sp, sp, #28
+3000b9dc:	e58d0004 	str	r0, [sp, #4]
+3000b9e0:	e58d1000 	str	r1, [sp]
     acoral_u32 c;
     acoral_u32 len1;
     acoral_u32 len2;
     if(des == NULL || src == NULL)
-3000b7e0:	e59d3004 	ldr	r3, [sp, #4]
-3000b7e4:	e3530000 	cmp	r3, #0
-3000b7e8:	0a000002 	beq	3000b7f8 <acoral_str_cmp+0x28>
-3000b7ec:	e59d3000 	ldr	r3, [sp]
-3000b7f0:	e3530000 	cmp	r3, #0
-3000b7f4:	1a000001 	bne	3000b800 <acoral_str_cmp+0x30>
+3000b9e4:	e59d3004 	ldr	r3, [sp, #4]
+3000b9e8:	e3530000 	cmp	r3, #0
+3000b9ec:	0a000002 	beq	3000b9fc <acoral_str_cmp+0x28>
+3000b9f0:	e59d3000 	ldr	r3, [sp]
+3000b9f4:	e3530000 	cmp	r3, #0
+3000b9f8:	1a000001 	bne	3000ba04 <acoral_str_cmp+0x30>
       	return -1;	
-3000b7f8:	e3e03000 	mvn	r3, #0
-3000b7fc:	ea00002b 	b	3000b8b0 <acoral_str_cmp+0xe0>
+3000b9fc:	e3e03000 	mvn	r3, #0
+3000ba00:	ea00002b 	b	3000bab4 <acoral_str_cmp+0xe0>
     len1 = acoral_str_len(des);
-3000b800:	e59d0004 	ldr	r0, [sp, #4]
-3000b804:	ebffffbd 	bl	3000b700 <acoral_str_len>
-3000b808:	e1a03000 	mov	r3, r0
-3000b80c:	e58d3010 	str	r3, [sp, #16]
+3000ba04:	e59d0004 	ldr	r0, [sp, #4]
+3000ba08:	ebffffbd 	bl	3000b904 <acoral_str_len>
+3000ba0c:	e1a03000 	mov	r3, r0
+3000ba10:	e58d3010 	str	r3, [sp, #16]
     len2 = acoral_str_len(src);
-3000b810:	e59d0000 	ldr	r0, [sp]
-3000b814:	ebffffb9 	bl	3000b700 <acoral_str_len>
-3000b818:	e1a03000 	mov	r3, r0
-3000b81c:	e58d3014 	str	r3, [sp, #20]
+3000ba14:	e59d0000 	ldr	r0, [sp]
+3000ba18:	ebffffb9 	bl	3000b904 <acoral_str_len>
+3000ba1c:	e1a03000 	mov	r3, r0
+3000ba20:	e58d3014 	str	r3, [sp, #20]
     if(len1 != len2)
-3000b820:	e59d2010 	ldr	r2, [sp, #16]
-3000b824:	e59d3014 	ldr	r3, [sp, #20]
-3000b828:	e1520003 	cmp	r2, r3
-3000b82c:	0a000019 	beq	3000b898 <acoral_str_cmp+0xc8>
+3000ba24:	e59d2010 	ldr	r2, [sp, #16]
+3000ba28:	e59d3014 	ldr	r3, [sp, #20]
+3000ba2c:	e1520003 	cmp	r2, r3
+3000ba30:	0a000019 	beq	3000ba9c <acoral_str_cmp+0xc8>
     {
         return len1-len2;
-3000b830:	e59d2010 	ldr	r2, [sp, #16]
-3000b834:	e59d3014 	ldr	r3, [sp, #20]
-3000b838:	e0633002 	rsb	r3, r3, r2
-3000b83c:	ea00001b 	b	3000b8b0 <acoral_str_cmp+0xe0>
+3000ba34:	e59d2010 	ldr	r2, [sp, #16]
+3000ba38:	e59d3014 	ldr	r3, [sp, #20]
+3000ba3c:	e0633002 	rsb	r3, r3, r2
+3000ba40:	ea00001b 	b	3000bab4 <acoral_str_cmp+0xe0>
     }
     while(*des != '\0')
     {
         if((c=(*des++ - * src++)) != 0)
-3000b840:	e59d3004 	ldr	r3, [sp, #4]
-3000b844:	e5d33000 	ldrb	r3, [r3]
-3000b848:	e1a02003 	mov	r2, r3
-3000b84c:	e59d3000 	ldr	r3, [sp]
-3000b850:	e5d33000 	ldrb	r3, [r3]
-3000b854:	e0633002 	rsb	r3, r3, r2
-3000b858:	e58d300c 	str	r3, [sp, #12]
-3000b85c:	e59d300c 	ldr	r3, [sp, #12]
-3000b860:	e3530000 	cmp	r3, #0
-3000b864:	03a03000 	moveq	r3, #0
-3000b868:	13a03001 	movne	r3, #1
-3000b86c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000b870:	e59d2004 	ldr	r2, [sp, #4]
-3000b874:	e2822001 	add	r2, r2, #1
-3000b878:	e58d2004 	str	r2, [sp, #4]
-3000b87c:	e59d2000 	ldr	r2, [sp]
-3000b880:	e2822001 	add	r2, r2, #1
-3000b884:	e58d2000 	str	r2, [sp]
-3000b888:	e3530000 	cmp	r3, #0
-3000b88c:	0a000002 	beq	3000b89c <acoral_str_cmp+0xcc>
+3000ba44:	e59d3004 	ldr	r3, [sp, #4]
+3000ba48:	e5d33000 	ldrb	r3, [r3]
+3000ba4c:	e1a02003 	mov	r2, r3
+3000ba50:	e59d3000 	ldr	r3, [sp]
+3000ba54:	e5d33000 	ldrb	r3, [r3]
+3000ba58:	e0633002 	rsb	r3, r3, r2
+3000ba5c:	e58d300c 	str	r3, [sp, #12]
+3000ba60:	e59d300c 	ldr	r3, [sp, #12]
+3000ba64:	e3530000 	cmp	r3, #0
+3000ba68:	03a03000 	moveq	r3, #0
+3000ba6c:	13a03001 	movne	r3, #1
+3000ba70:	e20330ff 	and	r3, r3, #255	; 0xff
+3000ba74:	e59d2004 	ldr	r2, [sp, #4]
+3000ba78:	e2822001 	add	r2, r2, #1
+3000ba7c:	e58d2004 	str	r2, [sp, #4]
+3000ba80:	e59d2000 	ldr	r2, [sp]
+3000ba84:	e2822001 	add	r2, r2, #1
+3000ba88:	e58d2000 	str	r2, [sp]
+3000ba8c:	e3530000 	cmp	r3, #0
+3000ba90:	0a000002 	beq	3000baa0 <acoral_str_cmp+0xcc>
         {
             return c;
-3000b890:	e59d300c 	ldr	r3, [sp, #12]
-3000b894:	ea000005 	b	3000b8b0 <acoral_str_cmp+0xe0>
+3000ba94:	e59d300c 	ldr	r3, [sp, #12]
+3000ba98:	ea000005 	b	3000bab4 <acoral_str_cmp+0xe0>
     len2 = acoral_str_len(src);
     if(len1 != len2)
     {
         return len1-len2;
     }
     while(*des != '\0')
-3000b898:	e1a00000 	nop			; (mov r0, r0)
-3000b89c:	e59d3004 	ldr	r3, [sp, #4]
-3000b8a0:	e5d33000 	ldrb	r3, [r3]
-3000b8a4:	e3530000 	cmp	r3, #0
-3000b8a8:	1affffe4 	bne	3000b840 <acoral_str_cmp+0x70>
+3000ba9c:	e1a00000 	nop			; (mov r0, r0)
+3000baa0:	e59d3004 	ldr	r3, [sp, #4]
+3000baa4:	e5d33000 	ldrb	r3, [r3]
+3000baa8:	e3530000 	cmp	r3, #0
+3000baac:	1affffe4 	bne	3000ba44 <acoral_str_cmp+0x70>
         if((c=(*des++ - * src++)) != 0)
         {
             return c;
         }
     }
     return c;
-3000b8ac:	e59d300c 	ldr	r3, [sp, #12]
+3000bab0:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000b8b0:	e1a00003 	mov	r0, r3
-3000b8b4:	e28dd01c 	add	sp, sp, #28
-3000b8b8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b8bc:	e12fff1e 	bx	lr
+3000bab4:	e1a00003 	mov	r0, r3
+3000bab8:	e28dd01c 	add	sp, sp, #28
+3000babc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000bac0:	e12fff1e 	bx	lr
 
-3000b8c0 <acoral_str_nicmp>:
+3000bac4 <acoral_str_nicmp>:
  * @s1: One string
  * @s2: The other string
  * @len: the maximum number of characters to compare
  */
 acoral_32 acoral_str_nicmp(const acoral_char *s1, const acoral_char *s2, acoral_u32 len)
 {
-3000b8c0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000b8c4:	e24dd01c 	sub	sp, sp, #28
-3000b8c8:	e58d000c 	str	r0, [sp, #12]
-3000b8cc:	e58d1008 	str	r1, [sp, #8]
-3000b8d0:	e58d2004 	str	r2, [sp, #4]
+3000bac4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000bac8:	e24dd01c 	sub	sp, sp, #28
+3000bacc:	e58d000c 	str	r0, [sp, #12]
+3000bad0:	e58d1008 	str	r1, [sp, #8]
+3000bad4:	e58d2004 	str	r2, [sp, #4]
 	/* Yes, Virginia, it had better be unsigned */
 	acoral_u8 c1, c2;
 
 	c1 = 0;	c2 = 0;
-3000b8d4:	e3a03000 	mov	r3, #0
-3000b8d8:	e5cd3016 	strb	r3, [sp, #22]
-3000b8dc:	e3a03000 	mov	r3, #0
-3000b8e0:	e5cd3017 	strb	r3, [sp, #23]
+3000bad8:	e3a03000 	mov	r3, #0
+3000badc:	e5cd3016 	strb	r3, [sp, #22]
+3000bae0:	e3a03000 	mov	r3, #0
+3000bae4:	e5cd3017 	strb	r3, [sp, #23]
 	if (len) {
-3000b8e4:	e59d3004 	ldr	r3, [sp, #4]
-3000b8e8:	e3530000 	cmp	r3, #0
-3000b8ec:	0a000031 	beq	3000b9b8 <acoral_str_nicmp+0xf8>
+3000bae8:	e59d3004 	ldr	r3, [sp, #4]
+3000baec:	e3530000 	cmp	r3, #0
+3000baf0:	0a000031 	beq	3000bbbc <acoral_str_nicmp+0xf8>
 		do {
 			c1 = *s1; c2 = *s2;
-3000b8f0:	e59d300c 	ldr	r3, [sp, #12]
-3000b8f4:	e5d33000 	ldrb	r3, [r3]
-3000b8f8:	e5cd3016 	strb	r3, [sp, #22]
-3000b8fc:	e59d3008 	ldr	r3, [sp, #8]
-3000b900:	e5d33000 	ldrb	r3, [r3]
-3000b904:	e5cd3017 	strb	r3, [sp, #23]
+3000baf4:	e59d300c 	ldr	r3, [sp, #12]
+3000baf8:	e5d33000 	ldrb	r3, [r3]
+3000bafc:	e5cd3016 	strb	r3, [sp, #22]
+3000bb00:	e59d3008 	ldr	r3, [sp, #8]
+3000bb04:	e5d33000 	ldrb	r3, [r3]
+3000bb08:	e5cd3017 	strb	r3, [sp, #23]
 			s1++; s2++;
-3000b908:	e59d300c 	ldr	r3, [sp, #12]
-3000b90c:	e2833001 	add	r3, r3, #1
-3000b910:	e58d300c 	str	r3, [sp, #12]
-3000b914:	e59d3008 	ldr	r3, [sp, #8]
-3000b918:	e2833001 	add	r3, r3, #1
-3000b91c:	e58d3008 	str	r3, [sp, #8]
+3000bb0c:	e59d300c 	ldr	r3, [sp, #12]
+3000bb10:	e2833001 	add	r3, r3, #1
+3000bb14:	e58d300c 	str	r3, [sp, #12]
+3000bb18:	e59d3008 	ldr	r3, [sp, #8]
+3000bb1c:	e2833001 	add	r3, r3, #1
+3000bb20:	e58d3008 	str	r3, [sp, #8]
 			if (!c1)
-3000b920:	e5dd3016 	ldrb	r3, [sp, #22]
-3000b924:	e3530000 	cmp	r3, #0
-3000b928:	0a00001d 	beq	3000b9a4 <acoral_str_nicmp+0xe4>
+3000bb24:	e5dd3016 	ldrb	r3, [sp, #22]
+3000bb28:	e3530000 	cmp	r3, #0
+3000bb2c:	0a00001d 	beq	3000bba8 <acoral_str_nicmp+0xe4>
 				break;
 			if (!c2)
-3000b92c:	e5dd3017 	ldrb	r3, [sp, #23]
-3000b930:	e3530000 	cmp	r3, #0
-3000b934:	0a00001c 	beq	3000b9ac <acoral_str_nicmp+0xec>
+3000bb30:	e5dd3017 	ldrb	r3, [sp, #23]
+3000bb34:	e3530000 	cmp	r3, #0
+3000bb38:	0a00001c 	beq	3000bbb0 <acoral_str_nicmp+0xec>
 				break;
 			if (c1 == c2)
-3000b938:	e5dd2016 	ldrb	r2, [sp, #22]
-3000b93c:	e5dd3017 	ldrb	r3, [sp, #23]
-3000b940:	e1520003 	cmp	r2, r3
-3000b944:	0a00000e 	beq	3000b984 <acoral_str_nicmp+0xc4>
+3000bb3c:	e5dd2016 	ldrb	r2, [sp, #22]
+3000bb40:	e5dd3017 	ldrb	r3, [sp, #23]
+3000bb44:	e1520003 	cmp	r2, r3
+3000bb48:	0a00000e 	beq	3000bb88 <acoral_str_nicmp+0xc4>
 				continue;
 			c1 = acoral_tolower(c1);
-3000b948:	e5dd3016 	ldrb	r3, [sp, #22]
-3000b94c:	e1a00003 	mov	r0, r3
-3000b950:	ebfffee6 	bl	3000b4f0 <acoral_tolower>
-3000b954:	e1a03000 	mov	r3, r0
-3000b958:	e5cd3016 	strb	r3, [sp, #22]
+3000bb4c:	e5dd3016 	ldrb	r3, [sp, #22]
+3000bb50:	e1a00003 	mov	r0, r3
+3000bb54:	ebfffee6 	bl	3000b6f4 <acoral_tolower>
+3000bb58:	e1a03000 	mov	r3, r0
+3000bb5c:	e5cd3016 	strb	r3, [sp, #22]
 			c2 = acoral_tolower(c2);
-3000b95c:	e5dd3017 	ldrb	r3, [sp, #23]
-3000b960:	e1a00003 	mov	r0, r3
-3000b964:	ebfffee1 	bl	3000b4f0 <acoral_tolower>
-3000b968:	e1a03000 	mov	r3, r0
-3000b96c:	e5cd3017 	strb	r3, [sp, #23]
+3000bb60:	e5dd3017 	ldrb	r3, [sp, #23]
+3000bb64:	e1a00003 	mov	r0, r3
+3000bb68:	ebfffee1 	bl	3000b6f4 <acoral_tolower>
+3000bb6c:	e1a03000 	mov	r3, r0
+3000bb70:	e5cd3017 	strb	r3, [sp, #23]
 			if (c1 != c2)
-3000b970:	e5dd2016 	ldrb	r2, [sp, #22]
-3000b974:	e5dd3017 	ldrb	r3, [sp, #23]
-3000b978:	e1520003 	cmp	r2, r3
-3000b97c:	1a00000c 	bne	3000b9b4 <acoral_str_nicmp+0xf4>
-3000b980:	ea000000 	b	3000b988 <acoral_str_nicmp+0xc8>
+3000bb74:	e5dd2016 	ldrb	r2, [sp, #22]
+3000bb78:	e5dd3017 	ldrb	r3, [sp, #23]
+3000bb7c:	e1520003 	cmp	r2, r3
+3000bb80:	1a00000c 	bne	3000bbb8 <acoral_str_nicmp+0xf4>
+3000bb84:	ea000000 	b	3000bb8c <acoral_str_nicmp+0xc8>
 			if (!c1)
 				break;
 			if (!c2)
 				break;
 			if (c1 == c2)
 				continue;
-3000b984:	e1a00000 	nop			; (mov r0, r0)
+3000bb88:	e1a00000 	nop			; (mov r0, r0)
 			c1 = acoral_tolower(c1);
 			c2 = acoral_tolower(c2);
 			if (c1 != c2)
 				break;
 		} while (--len);
-3000b988:	e59d3004 	ldr	r3, [sp, #4]
-3000b98c:	e2433001 	sub	r3, r3, #1
-3000b990:	e58d3004 	str	r3, [sp, #4]
-3000b994:	e59d3004 	ldr	r3, [sp, #4]
-3000b998:	e3530000 	cmp	r3, #0
-3000b99c:	1affffd3 	bne	3000b8f0 <acoral_str_nicmp+0x30>
-3000b9a0:	ea000004 	b	3000b9b8 <acoral_str_nicmp+0xf8>
+3000bb8c:	e59d3004 	ldr	r3, [sp, #4]
+3000bb90:	e2433001 	sub	r3, r3, #1
+3000bb94:	e58d3004 	str	r3, [sp, #4]
+3000bb98:	e59d3004 	ldr	r3, [sp, #4]
+3000bb9c:	e3530000 	cmp	r3, #0
+3000bba0:	1affffd3 	bne	3000baf4 <acoral_str_nicmp+0x30>
+3000bba4:	ea000004 	b	3000bbbc <acoral_str_nicmp+0xf8>
 	if (len) {
 		do {
 			c1 = *s1; c2 = *s2;
 			s1++; s2++;
 			if (!c1)
 				break;
-3000b9a4:	e1a00000 	nop			; (mov r0, r0)
-3000b9a8:	ea000002 	b	3000b9b8 <acoral_str_nicmp+0xf8>
+3000bba8:	e1a00000 	nop			; (mov r0, r0)
+3000bbac:	ea000002 	b	3000bbbc <acoral_str_nicmp+0xf8>
 			if (!c2)
 				break;
-3000b9ac:	e1a00000 	nop			; (mov r0, r0)
-3000b9b0:	ea000000 	b	3000b9b8 <acoral_str_nicmp+0xf8>
+3000bbb0:	e1a00000 	nop			; (mov r0, r0)
+3000bbb4:	ea000000 	b	3000bbbc <acoral_str_nicmp+0xf8>
 			if (c1 == c2)
 				continue;
 			c1 = acoral_tolower(c1);
 			c2 = acoral_tolower(c2);
 			if (c1 != c2)
 				break;
-3000b9b4:	e1a00000 	nop			; (mov r0, r0)
+3000bbb8:	e1a00000 	nop			; (mov r0, r0)
 		} while (--len);
 	}
 	return (acoral_32)c1 - (acoral_32)c2;
-3000b9b8:	e5dd2016 	ldrb	r2, [sp, #22]
-3000b9bc:	e5dd3017 	ldrb	r3, [sp, #23]
-3000b9c0:	e0633002 	rsb	r3, r3, r2
+3000bbbc:	e5dd2016 	ldrb	r2, [sp, #22]
+3000bbc0:	e5dd3017 	ldrb	r3, [sp, #23]
+3000bbc4:	e0633002 	rsb	r3, r3, r2
 }
-3000b9c4:	e1a00003 	mov	r0, r3
-3000b9c8:	e28dd01c 	add	sp, sp, #28
-3000b9cc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000b9d0:	e12fff1e 	bx	lr
+3000bbc8:	e1a00003 	mov	r0, r3
+3000bbcc:	e28dd01c 	add	sp, sp, #28
+3000bbd0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000bbd4:	e12fff1e 	bx	lr
 
-3000b9d4 <acoral_str_ncpy>:
+3000bbd8 <acoral_str_ncpy>:
  *
  * The result is not %NUL-terminated if the source exceeds
  * @count bytes.
  */
 acoral_char * acoral_str_ncpy(acoral_char * dest,const acoral_char *src,acoral_u32 count)
 {
-3000b9d4:	e24dd018 	sub	sp, sp, #24
-3000b9d8:	e58d000c 	str	r0, [sp, #12]
-3000b9dc:	e58d1008 	str	r1, [sp, #8]
-3000b9e0:	e58d2004 	str	r2, [sp, #4]
+3000bbd8:	e24dd018 	sub	sp, sp, #24
+3000bbdc:	e58d000c 	str	r0, [sp, #12]
+3000bbe0:	e58d1008 	str	r1, [sp, #8]
+3000bbe4:	e58d2004 	str	r2, [sp, #4]
 	acoral_char *tmp = dest;
-3000b9e4:	e59d300c 	ldr	r3, [sp, #12]
-3000b9e8:	e58d3014 	str	r3, [sp, #20]
+3000bbe8:	e59d300c 	ldr	r3, [sp, #12]
+3000bbec:	e58d3014 	str	r3, [sp, #20]
 
 	while (count) {
-3000b9ec:	ea000012 	b	3000ba3c <acoral_str_ncpy+0x68>
+3000bbf0:	ea000012 	b	3000bc40 <acoral_str_ncpy+0x68>
 		if ((*tmp = *src) == '\0')
-3000b9f0:	e59d3008 	ldr	r3, [sp, #8]
-3000b9f4:	e5d32000 	ldrb	r2, [r3]
-3000b9f8:	e59d3014 	ldr	r3, [sp, #20]
-3000b9fc:	e5c32000 	strb	r2, [r3]
-3000ba00:	e59d3014 	ldr	r3, [sp, #20]
-3000ba04:	e5d33000 	ldrb	r3, [r3]
-3000ba08:	e3530000 	cmp	r3, #0
-3000ba0c:	1a000001 	bne	3000ba18 <acoral_str_ncpy+0x44>
+3000bbf4:	e59d3008 	ldr	r3, [sp, #8]
+3000bbf8:	e5d32000 	ldrb	r2, [r3]
+3000bbfc:	e59d3014 	ldr	r3, [sp, #20]
+3000bc00:	e5c32000 	strb	r2, [r3]
+3000bc04:	e59d3014 	ldr	r3, [sp, #20]
+3000bc08:	e5d33000 	ldrb	r3, [r3]
+3000bc0c:	e3530000 	cmp	r3, #0
+3000bc10:	1a000001 	bne	3000bc1c <acoral_str_ncpy+0x44>
 			return dest;
-3000ba10:	e59d300c 	ldr	r3, [sp, #12]
-3000ba14:	ea00000f 	b	3000ba58 <acoral_str_ncpy+0x84>
+3000bc14:	e59d300c 	ldr	r3, [sp, #12]
+3000bc18:	ea00000f 	b	3000bc5c <acoral_str_ncpy+0x84>
 		src++;
-3000ba18:	e59d3008 	ldr	r3, [sp, #8]
-3000ba1c:	e2833001 	add	r3, r3, #1
-3000ba20:	e58d3008 	str	r3, [sp, #8]
+3000bc1c:	e59d3008 	ldr	r3, [sp, #8]
+3000bc20:	e2833001 	add	r3, r3, #1
+3000bc24:	e58d3008 	str	r3, [sp, #8]
 		tmp++;
-3000ba24:	e59d3014 	ldr	r3, [sp, #20]
-3000ba28:	e2833001 	add	r3, r3, #1
-3000ba2c:	e58d3014 	str	r3, [sp, #20]
+3000bc28:	e59d3014 	ldr	r3, [sp, #20]
+3000bc2c:	e2833001 	add	r3, r3, #1
+3000bc30:	e58d3014 	str	r3, [sp, #20]
 		count--;
-3000ba30:	e59d3004 	ldr	r3, [sp, #4]
-3000ba34:	e2433001 	sub	r3, r3, #1
-3000ba38:	e58d3004 	str	r3, [sp, #4]
+3000bc34:	e59d3004 	ldr	r3, [sp, #4]
+3000bc38:	e2433001 	sub	r3, r3, #1
+3000bc3c:	e58d3004 	str	r3, [sp, #4]
  */
 acoral_char * acoral_str_ncpy(acoral_char * dest,const acoral_char *src,acoral_u32 count)
 {
 	acoral_char *tmp = dest;
 
 	while (count) {
-3000ba3c:	e59d3004 	ldr	r3, [sp, #4]
-3000ba40:	e3530000 	cmp	r3, #0
-3000ba44:	1affffe9 	bne	3000b9f0 <acoral_str_ncpy+0x1c>
+3000bc40:	e59d3004 	ldr	r3, [sp, #4]
+3000bc44:	e3530000 	cmp	r3, #0
+3000bc48:	1affffe9 	bne	3000bbf4 <acoral_str_ncpy+0x1c>
 			return dest;
 		src++;
 		tmp++;
 		count--;
 	}
 	*tmp = '\0';
-3000ba48:	e59d3014 	ldr	r3, [sp, #20]
-3000ba4c:	e3a02000 	mov	r2, #0
-3000ba50:	e5c32000 	strb	r2, [r3]
+3000bc4c:	e59d3014 	ldr	r3, [sp, #20]
+3000bc50:	e3a02000 	mov	r2, #0
+3000bc54:	e5c32000 	strb	r2, [r3]
 	return dest;
-3000ba54:	e59d300c 	ldr	r3, [sp, #12]
+3000bc58:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000ba58:	e1a00003 	mov	r0, r3
-3000ba5c:	e28dd018 	add	sp, sp, #24
-3000ba60:	e12fff1e 	bx	lr
+3000bc5c:	e1a00003 	mov	r0, r3
+3000bc60:	e28dd018 	add	sp, sp, #24
+3000bc64:	e12fff1e 	bx	lr
 
-3000ba64 <acoral_str_lcpy>:
+3000bc68 <acoral_str_lcpy>:
  * NUL-terminated string that fits in the buffer (unless,
  * of course, the buffer size is zero). It does not pad
  * out the result like acoral_str_ncpy() does.
  */
 acoral_u32 acoral_str_lcpy(acoral_char *dest, const acoral_char *src, acoral_u32 size)
 {
-3000ba64:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000ba68:	e24dd01c 	sub	sp, sp, #28
-3000ba6c:	e58d000c 	str	r0, [sp, #12]
-3000ba70:	e58d1008 	str	r1, [sp, #8]
-3000ba74:	e58d2004 	str	r2, [sp, #4]
+3000bc68:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000bc6c:	e24dd01c 	sub	sp, sp, #28
+3000bc70:	e58d000c 	str	r0, [sp, #12]
+3000bc74:	e58d1008 	str	r1, [sp, #8]
+3000bc78:	e58d2004 	str	r2, [sp, #4]
 	acoral_u32 ret = acoral_str_len(src);
-3000ba78:	e59d0008 	ldr	r0, [sp, #8]
-3000ba7c:	ebffff1f 	bl	3000b700 <acoral_str_len>
-3000ba80:	e1a03000 	mov	r3, r0
-3000ba84:	e58d3010 	str	r3, [sp, #16]
+3000bc7c:	e59d0008 	ldr	r0, [sp, #8]
+3000bc80:	ebffff1f 	bl	3000b904 <acoral_str_len>
+3000bc84:	e1a03000 	mov	r3, r0
+3000bc88:	e58d3010 	str	r3, [sp, #16]
 
 	if (size) {
-3000ba88:	e59d3004 	ldr	r3, [sp, #4]
-3000ba8c:	e3530000 	cmp	r3, #0
-3000ba90:	0a000011 	beq	3000badc <acoral_str_lcpy+0x78>
+3000bc8c:	e59d3004 	ldr	r3, [sp, #4]
+3000bc90:	e3530000 	cmp	r3, #0
+3000bc94:	0a000011 	beq	3000bce0 <acoral_str_lcpy+0x78>
 		acoral_u32 len = (ret >= size) ? size-1 : ret;
-3000ba94:	e59d2010 	ldr	r2, [sp, #16]
-3000ba98:	e59d3004 	ldr	r3, [sp, #4]
-3000ba9c:	e1520003 	cmp	r2, r3
-3000baa0:	3a000002 	bcc	3000bab0 <acoral_str_lcpy+0x4c>
-3000baa4:	e59d3004 	ldr	r3, [sp, #4]
-3000baa8:	e2433001 	sub	r3, r3, #1
-3000baac:	ea000000 	b	3000bab4 <acoral_str_lcpy+0x50>
-3000bab0:	e59d3010 	ldr	r3, [sp, #16]
-3000bab4:	e58d3014 	str	r3, [sp, #20]
+3000bc98:	e59d2010 	ldr	r2, [sp, #16]
+3000bc9c:	e59d3004 	ldr	r3, [sp, #4]
+3000bca0:	e1520003 	cmp	r2, r3
+3000bca4:	3a000002 	bcc	3000bcb4 <acoral_str_lcpy+0x4c>
+3000bca8:	e59d3004 	ldr	r3, [sp, #4]
+3000bcac:	e2433001 	sub	r3, r3, #1
+3000bcb0:	ea000000 	b	3000bcb8 <acoral_str_lcpy+0x50>
+3000bcb4:	e59d3010 	ldr	r3, [sp, #16]
+3000bcb8:	e58d3014 	str	r3, [sp, #20]
 		acoral_memcpy(dest, src, len);
-3000bab8:	e59d000c 	ldr	r0, [sp, #12]
-3000babc:	e59d1008 	ldr	r1, [sp, #8]
-3000bac0:	e59d2014 	ldr	r2, [sp, #20]
-3000bac4:	eb0001f6 	bl	3000c2a4 <acoral_memcpy>
+3000bcbc:	e59d000c 	ldr	r0, [sp, #12]
+3000bcc0:	e59d1008 	ldr	r1, [sp, #8]
+3000bcc4:	e59d2014 	ldr	r2, [sp, #20]
+3000bcc8:	eb0001f6 	bl	3000c4a8 <acoral_memcpy>
 		dest[len] = '\0';
-3000bac8:	e59d200c 	ldr	r2, [sp, #12]
-3000bacc:	e59d3014 	ldr	r3, [sp, #20]
-3000bad0:	e0823003 	add	r3, r2, r3
-3000bad4:	e3a02000 	mov	r2, #0
-3000bad8:	e5c32000 	strb	r2, [r3]
+3000bccc:	e59d200c 	ldr	r2, [sp, #12]
+3000bcd0:	e59d3014 	ldr	r3, [sp, #20]
+3000bcd4:	e0823003 	add	r3, r2, r3
+3000bcd8:	e3a02000 	mov	r2, #0
+3000bcdc:	e5c32000 	strb	r2, [r3]
 	}
 	return ret;
-3000badc:	e59d3010 	ldr	r3, [sp, #16]
+3000bce0:	e59d3010 	ldr	r3, [sp, #16]
 }
-3000bae0:	e1a00003 	mov	r0, r3
-3000bae4:	e28dd01c 	add	sp, sp, #28
-3000bae8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000baec:	e12fff1e 	bx	lr
+3000bce4:	e1a00003 	mov	r0, r3
+3000bce8:	e28dd01c 	add	sp, sp, #28
+3000bcec:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000bcf0:	e12fff1e 	bx	lr
 
-3000baf0 <acoral_str_cat>:
+3000bcf4 <acoral_str_cat>:
  * acoral_str_cat - Append one %NUL-terminated string to another
  * @dest: The string to be appended to
  * @src: The string to append to it
  */
 acoral_char * acoral_str_cat(acoral_char * dest, const acoral_char * src)
 {
-3000baf0:	e24dd010 	sub	sp, sp, #16
-3000baf4:	e58d0004 	str	r0, [sp, #4]
-3000baf8:	e58d1000 	str	r1, [sp]
+3000bcf4:	e24dd010 	sub	sp, sp, #16
+3000bcf8:	e58d0004 	str	r0, [sp, #4]
+3000bcfc:	e58d1000 	str	r1, [sp]
 	acoral_char *tmp = dest;
-3000bafc:	e59d3004 	ldr	r3, [sp, #4]
-3000bb00:	e58d300c 	str	r3, [sp, #12]
+3000bd00:	e59d3004 	ldr	r3, [sp, #4]
+3000bd04:	e58d300c 	str	r3, [sp, #12]
 
 	while (*dest)
-3000bb04:	ea000002 	b	3000bb14 <acoral_str_cat+0x24>
+3000bd08:	ea000002 	b	3000bd18 <acoral_str_cat+0x24>
 		dest++;
-3000bb08:	e59d3004 	ldr	r3, [sp, #4]
-3000bb0c:	e2833001 	add	r3, r3, #1
-3000bb10:	e58d3004 	str	r3, [sp, #4]
+3000bd0c:	e59d3004 	ldr	r3, [sp, #4]
+3000bd10:	e2833001 	add	r3, r3, #1
+3000bd14:	e58d3004 	str	r3, [sp, #4]
  */
 acoral_char * acoral_str_cat(acoral_char * dest, const acoral_char * src)
 {
 	acoral_char *tmp = dest;
 
 	while (*dest)
-3000bb14:	e59d3004 	ldr	r3, [sp, #4]
-3000bb18:	e5d33000 	ldrb	r3, [r3]
-3000bb1c:	e3530000 	cmp	r3, #0
-3000bb20:	1afffff8 	bne	3000bb08 <acoral_str_cat+0x18>
+3000bd18:	e59d3004 	ldr	r3, [sp, #4]
+3000bd1c:	e5d33000 	ldrb	r3, [r3]
+3000bd20:	e3530000 	cmp	r3, #0
+3000bd24:	1afffff8 	bne	3000bd0c <acoral_str_cat+0x18>
 		dest++;
 	while ((*dest++ = *src++) != '\0')
-3000bb24:	e59d3000 	ldr	r3, [sp]
-3000bb28:	e5d32000 	ldrb	r2, [r3]
-3000bb2c:	e59d3004 	ldr	r3, [sp, #4]
-3000bb30:	e5c32000 	strb	r2, [r3]
-3000bb34:	e59d3004 	ldr	r3, [sp, #4]
-3000bb38:	e5d33000 	ldrb	r3, [r3]
-3000bb3c:	e3530000 	cmp	r3, #0
-3000bb40:	03a03000 	moveq	r3, #0
-3000bb44:	13a03001 	movne	r3, #1
-3000bb48:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bb4c:	e59d2004 	ldr	r2, [sp, #4]
-3000bb50:	e2822001 	add	r2, r2, #1
-3000bb54:	e58d2004 	str	r2, [sp, #4]
-3000bb58:	e59d2000 	ldr	r2, [sp]
-3000bb5c:	e2822001 	add	r2, r2, #1
-3000bb60:	e58d2000 	str	r2, [sp]
-3000bb64:	e3530000 	cmp	r3, #0
-3000bb68:	1affffed 	bne	3000bb24 <acoral_str_cat+0x34>
+3000bd28:	e59d3000 	ldr	r3, [sp]
+3000bd2c:	e5d32000 	ldrb	r2, [r3]
+3000bd30:	e59d3004 	ldr	r3, [sp, #4]
+3000bd34:	e5c32000 	strb	r2, [r3]
+3000bd38:	e59d3004 	ldr	r3, [sp, #4]
+3000bd3c:	e5d33000 	ldrb	r3, [r3]
+3000bd40:	e3530000 	cmp	r3, #0
+3000bd44:	03a03000 	moveq	r3, #0
+3000bd48:	13a03001 	movne	r3, #1
+3000bd4c:	e20330ff 	and	r3, r3, #255	; 0xff
+3000bd50:	e59d2004 	ldr	r2, [sp, #4]
+3000bd54:	e2822001 	add	r2, r2, #1
+3000bd58:	e58d2004 	str	r2, [sp, #4]
+3000bd5c:	e59d2000 	ldr	r2, [sp]
+3000bd60:	e2822001 	add	r2, r2, #1
+3000bd64:	e58d2000 	str	r2, [sp]
+3000bd68:	e3530000 	cmp	r3, #0
+3000bd6c:	1affffed 	bne	3000bd28 <acoral_str_cat+0x34>
 		;
 
 	return tmp;
-3000bb6c:	e59d300c 	ldr	r3, [sp, #12]
+3000bd70:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000bb70:	e1a00003 	mov	r0, r3
-3000bb74:	e28dd010 	add	sp, sp, #16
-3000bb78:	e12fff1e 	bx	lr
+3000bd74:	e1a00003 	mov	r0, r3
+3000bd78:	e28dd010 	add	sp, sp, #16
+3000bd7c:	e12fff1e 	bx	lr
 
-3000bb7c <acoral_str_ncat>:
+3000bd80 <acoral_str_ncat>:
  *
  * Note that in contrast to acoral_str_ncpy, acoral_str_ncat ensures the result is
  * terminated.
  */
 acoral_char * acoral_str_ncat(acoral_char *dest, const acoral_char *src, acoral_u32 count)
 {
-3000bb7c:	e24dd018 	sub	sp, sp, #24
-3000bb80:	e58d000c 	str	r0, [sp, #12]
-3000bb84:	e58d1008 	str	r1, [sp, #8]
-3000bb88:	e58d2004 	str	r2, [sp, #4]
+3000bd80:	e24dd018 	sub	sp, sp, #24
+3000bd84:	e58d000c 	str	r0, [sp, #12]
+3000bd88:	e58d1008 	str	r1, [sp, #8]
+3000bd8c:	e58d2004 	str	r2, [sp, #4]
 	acoral_char *tmp = dest;
-3000bb8c:	e59d300c 	ldr	r3, [sp, #12]
-3000bb90:	e58d3014 	str	r3, [sp, #20]
+3000bd90:	e59d300c 	ldr	r3, [sp, #12]
+3000bd94:	e58d3014 	str	r3, [sp, #20]
 
 	if (count) {
-3000bb94:	e59d3004 	ldr	r3, [sp, #4]
-3000bb98:	e3530000 	cmp	r3, #0
-3000bb9c:	0a000024 	beq	3000bc34 <acoral_str_ncat+0xb8>
+3000bd98:	e59d3004 	ldr	r3, [sp, #4]
+3000bd9c:	e3530000 	cmp	r3, #0
+3000bda0:	0a000024 	beq	3000be38 <acoral_str_ncat+0xb8>
 		while (*dest)
-3000bba0:	ea000002 	b	3000bbb0 <acoral_str_ncat+0x34>
+3000bda4:	ea000002 	b	3000bdb4 <acoral_str_ncat+0x34>
 			dest++;
-3000bba4:	e59d300c 	ldr	r3, [sp, #12]
-3000bba8:	e2833001 	add	r3, r3, #1
-3000bbac:	e58d300c 	str	r3, [sp, #12]
+3000bda8:	e59d300c 	ldr	r3, [sp, #12]
+3000bdac:	e2833001 	add	r3, r3, #1
+3000bdb0:	e58d300c 	str	r3, [sp, #12]
 acoral_char * acoral_str_ncat(acoral_char *dest, const acoral_char *src, acoral_u32 count)
 {
 	acoral_char *tmp = dest;
 
 	if (count) {
 		while (*dest)
-3000bbb0:	e59d300c 	ldr	r3, [sp, #12]
-3000bbb4:	e5d33000 	ldrb	r3, [r3]
-3000bbb8:	e3530000 	cmp	r3, #0
-3000bbbc:	1afffff8 	bne	3000bba4 <acoral_str_ncat+0x28>
+3000bdb4:	e59d300c 	ldr	r3, [sp, #12]
+3000bdb8:	e5d33000 	ldrb	r3, [r3]
+3000bdbc:	e3530000 	cmp	r3, #0
+3000bdc0:	1afffff8 	bne	3000bda8 <acoral_str_ncat+0x28>
 			dest++;
 		while ((*dest++ = *src++) != 0) {
-3000bbc0:	ea000009 	b	3000bbec <acoral_str_ncat+0x70>
+3000bdc4:	ea000009 	b	3000bdf0 <acoral_str_ncat+0x70>
 			if (--count == 0) {
-3000bbc4:	e59d3004 	ldr	r3, [sp, #4]
-3000bbc8:	e2433001 	sub	r3, r3, #1
-3000bbcc:	e58d3004 	str	r3, [sp, #4]
-3000bbd0:	e59d3004 	ldr	r3, [sp, #4]
-3000bbd4:	e3530000 	cmp	r3, #0
-3000bbd8:	1a000003 	bne	3000bbec <acoral_str_ncat+0x70>
+3000bdc8:	e59d3004 	ldr	r3, [sp, #4]
+3000bdcc:	e2433001 	sub	r3, r3, #1
+3000bdd0:	e58d3004 	str	r3, [sp, #4]
+3000bdd4:	e59d3004 	ldr	r3, [sp, #4]
+3000bdd8:	e3530000 	cmp	r3, #0
+3000bddc:	1a000003 	bne	3000bdf0 <acoral_str_ncat+0x70>
 				*dest = '\0';
-3000bbdc:	e59d300c 	ldr	r3, [sp, #12]
-3000bbe0:	e3a02000 	mov	r2, #0
-3000bbe4:	e5c32000 	strb	r2, [r3]
+3000bde0:	e59d300c 	ldr	r3, [sp, #12]
+3000bde4:	e3a02000 	mov	r2, #0
+3000bde8:	e5c32000 	strb	r2, [r3]
 				break;
-3000bbe8:	ea000011 	b	3000bc34 <acoral_str_ncat+0xb8>
+3000bdec:	ea000011 	b	3000be38 <acoral_str_ncat+0xb8>
 	acoral_char *tmp = dest;
 
 	if (count) {
 		while (*dest)
 			dest++;
 		while ((*dest++ = *src++) != 0) {
-3000bbec:	e59d3008 	ldr	r3, [sp, #8]
-3000bbf0:	e5d32000 	ldrb	r2, [r3]
-3000bbf4:	e59d300c 	ldr	r3, [sp, #12]
-3000bbf8:	e5c32000 	strb	r2, [r3]
-3000bbfc:	e59d300c 	ldr	r3, [sp, #12]
-3000bc00:	e5d33000 	ldrb	r3, [r3]
-3000bc04:	e3530000 	cmp	r3, #0
-3000bc08:	03a03000 	moveq	r3, #0
-3000bc0c:	13a03001 	movne	r3, #1
-3000bc10:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bc14:	e59d200c 	ldr	r2, [sp, #12]
-3000bc18:	e2822001 	add	r2, r2, #1
-3000bc1c:	e58d200c 	str	r2, [sp, #12]
-3000bc20:	e59d2008 	ldr	r2, [sp, #8]
-3000bc24:	e2822001 	add	r2, r2, #1
-3000bc28:	e58d2008 	str	r2, [sp, #8]
-3000bc2c:	e3530000 	cmp	r3, #0
-3000bc30:	1affffe3 	bne	3000bbc4 <acoral_str_ncat+0x48>
+3000bdf0:	e59d3008 	ldr	r3, [sp, #8]
+3000bdf4:	e5d32000 	ldrb	r2, [r3]
+3000bdf8:	e59d300c 	ldr	r3, [sp, #12]
+3000bdfc:	e5c32000 	strb	r2, [r3]
+3000be00:	e59d300c 	ldr	r3, [sp, #12]
+3000be04:	e5d33000 	ldrb	r3, [r3]
+3000be08:	e3530000 	cmp	r3, #0
+3000be0c:	03a03000 	moveq	r3, #0
+3000be10:	13a03001 	movne	r3, #1
+3000be14:	e20330ff 	and	r3, r3, #255	; 0xff
+3000be18:	e59d200c 	ldr	r2, [sp, #12]
+3000be1c:	e2822001 	add	r2, r2, #1
+3000be20:	e58d200c 	str	r2, [sp, #12]
+3000be24:	e59d2008 	ldr	r2, [sp, #8]
+3000be28:	e2822001 	add	r2, r2, #1
+3000be2c:	e58d2008 	str	r2, [sp, #8]
+3000be30:	e3530000 	cmp	r3, #0
+3000be34:	1affffe3 	bne	3000bdc8 <acoral_str_ncat+0x48>
 				break;
 			}
 		}
 	}
 
 	return tmp;
-3000bc34:	e59d3014 	ldr	r3, [sp, #20]
+3000be38:	e59d3014 	ldr	r3, [sp, #20]
 }
-3000bc38:	e1a00003 	mov	r0, r3
-3000bc3c:	e28dd018 	add	sp, sp, #24
-3000bc40:	e12fff1e 	bx	lr
+3000be3c:	e1a00003 	mov	r0, r3
+3000be40:	e28dd018 	add	sp, sp, #24
+3000be44:	e12fff1e 	bx	lr
 
-3000bc44 <acoral_str_lcat>:
+3000be48 <acoral_str_lcat>:
  * @dest: The string to be appended to
  * @src: The string to append to it
  * @count: The size of the destination buffer.
  */
 acoral_u32 acoral_str_lcat(acoral_char *dest, const acoral_char *src, acoral_u32 count)
 {
-3000bc44:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000bc48:	e24dd024 	sub	sp, sp, #36	; 0x24
-3000bc4c:	e58d000c 	str	r0, [sp, #12]
-3000bc50:	e58d1008 	str	r1, [sp, #8]
-3000bc54:	e58d2004 	str	r2, [sp, #4]
+3000be48:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000be4c:	e24dd024 	sub	sp, sp, #36	; 0x24
+3000be50:	e58d000c 	str	r0, [sp, #12]
+3000be54:	e58d1008 	str	r1, [sp, #8]
+3000be58:	e58d2004 	str	r2, [sp, #4]
 	acoral_u32 dsize = acoral_str_len(dest);
-3000bc58:	e59d000c 	ldr	r0, [sp, #12]
-3000bc5c:	ebfffea7 	bl	3000b700 <acoral_str_len>
-3000bc60:	e1a03000 	mov	r3, r0
-3000bc64:	e58d3014 	str	r3, [sp, #20]
+3000be5c:	e59d000c 	ldr	r0, [sp, #12]
+3000be60:	ebfffea7 	bl	3000b904 <acoral_str_len>
+3000be64:	e1a03000 	mov	r3, r0
+3000be68:	e58d3014 	str	r3, [sp, #20]
 	acoral_u32 len = acoral_str_len(src);
-3000bc68:	e59d0008 	ldr	r0, [sp, #8]
-3000bc6c:	ebfffea3 	bl	3000b700 <acoral_str_len>
-3000bc70:	e1a03000 	mov	r3, r0
-3000bc74:	e58d3018 	str	r3, [sp, #24]
+3000be6c:	e59d0008 	ldr	r0, [sp, #8]
+3000be70:	ebfffea3 	bl	3000b904 <acoral_str_len>
+3000be74:	e1a03000 	mov	r3, r0
+3000be78:	e58d3018 	str	r3, [sp, #24]
 	acoral_u32 res = dsize + len;
-3000bc78:	e59d2014 	ldr	r2, [sp, #20]
-3000bc7c:	e59d3018 	ldr	r3, [sp, #24]
-3000bc80:	e0823003 	add	r3, r2, r3
-3000bc84:	e58d301c 	str	r3, [sp, #28]
+3000be7c:	e59d2014 	ldr	r2, [sp, #20]
+3000be80:	e59d3018 	ldr	r3, [sp, #24]
+3000be84:	e0823003 	add	r3, r2, r3
+3000be88:	e58d301c 	str	r3, [sp, #28]
 
 	/* This would be a bug */
 //	BUG_ON(dsize >= count);
 
 	dest += dsize;
-3000bc88:	e59d200c 	ldr	r2, [sp, #12]
-3000bc8c:	e59d3014 	ldr	r3, [sp, #20]
-3000bc90:	e0823003 	add	r3, r2, r3
-3000bc94:	e58d300c 	str	r3, [sp, #12]
+3000be8c:	e59d200c 	ldr	r2, [sp, #12]
+3000be90:	e59d3014 	ldr	r3, [sp, #20]
+3000be94:	e0823003 	add	r3, r2, r3
+3000be98:	e58d300c 	str	r3, [sp, #12]
 	count -= dsize;
-3000bc98:	e59d2004 	ldr	r2, [sp, #4]
-3000bc9c:	e59d3014 	ldr	r3, [sp, #20]
-3000bca0:	e0633002 	rsb	r3, r3, r2
-3000bca4:	e58d3004 	str	r3, [sp, #4]
+3000be9c:	e59d2004 	ldr	r2, [sp, #4]
+3000bea0:	e59d3014 	ldr	r3, [sp, #20]
+3000bea4:	e0633002 	rsb	r3, r3, r2
+3000bea8:	e58d3004 	str	r3, [sp, #4]
 	if (len >= count)
-3000bca8:	e59d2018 	ldr	r2, [sp, #24]
-3000bcac:	e59d3004 	ldr	r3, [sp, #4]
-3000bcb0:	e1520003 	cmp	r2, r3
-3000bcb4:	3a000002 	bcc	3000bcc4 <acoral_str_lcat+0x80>
+3000beac:	e59d2018 	ldr	r2, [sp, #24]
+3000beb0:	e59d3004 	ldr	r3, [sp, #4]
+3000beb4:	e1520003 	cmp	r2, r3
+3000beb8:	3a000002 	bcc	3000bec8 <acoral_str_lcat+0x80>
 		len = count-1;
-3000bcb8:	e59d3004 	ldr	r3, [sp, #4]
-3000bcbc:	e2433001 	sub	r3, r3, #1
-3000bcc0:	e58d3018 	str	r3, [sp, #24]
+3000bebc:	e59d3004 	ldr	r3, [sp, #4]
+3000bec0:	e2433001 	sub	r3, r3, #1
+3000bec4:	e58d3018 	str	r3, [sp, #24]
 	acoral_memcpy(dest, src, len);
-3000bcc4:	e59d000c 	ldr	r0, [sp, #12]
-3000bcc8:	e59d1008 	ldr	r1, [sp, #8]
-3000bccc:	e59d2018 	ldr	r2, [sp, #24]
-3000bcd0:	eb000173 	bl	3000c2a4 <acoral_memcpy>
+3000bec8:	e59d000c 	ldr	r0, [sp, #12]
+3000becc:	e59d1008 	ldr	r1, [sp, #8]
+3000bed0:	e59d2018 	ldr	r2, [sp, #24]
+3000bed4:	eb000173 	bl	3000c4a8 <acoral_memcpy>
 	dest[len] = 0;
-3000bcd4:	e59d200c 	ldr	r2, [sp, #12]
-3000bcd8:	e59d3018 	ldr	r3, [sp, #24]
-3000bcdc:	e0823003 	add	r3, r2, r3
-3000bce0:	e3a02000 	mov	r2, #0
-3000bce4:	e5c32000 	strb	r2, [r3]
+3000bed8:	e59d200c 	ldr	r2, [sp, #12]
+3000bedc:	e59d3018 	ldr	r3, [sp, #24]
+3000bee0:	e0823003 	add	r3, r2, r3
+3000bee4:	e3a02000 	mov	r2, #0
+3000bee8:	e5c32000 	strb	r2, [r3]
 	return res;
-3000bce8:	e59d301c 	ldr	r3, [sp, #28]
+3000beec:	e59d301c 	ldr	r3, [sp, #28]
 }
-3000bcec:	e1a00003 	mov	r0, r3
-3000bcf0:	e28dd024 	add	sp, sp, #36	; 0x24
-3000bcf4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000bcf8:	e12fff1e 	bx	lr
+3000bef0:	e1a00003 	mov	r0, r3
+3000bef4:	e28dd024 	add	sp, sp, #36	; 0x24
+3000bef8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000befc:	e12fff1e 	bx	lr
 
-3000bcfc <acoral_str_ncmp>:
+3000bf00 <acoral_str_ncmp>:
  * @cs: One string
  * @ct: Another string
  * @count: The maximum number of bytes to compare
  */
 acoral_32 acoral_str_ncmp(const acoral_char * cs,const acoral_char * ct,acoral_u32 count)
 {
-3000bcfc:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
-3000bd00:	e24dd014 	sub	sp, sp, #20
-3000bd04:	e58d000c 	str	r0, [sp, #12]
-3000bd08:	e58d1008 	str	r1, [sp, #8]
-3000bd0c:	e58d2004 	str	r2, [sp, #4]
+3000bf00:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+3000bf04:	e24dd014 	sub	sp, sp, #20
+3000bf08:	e58d000c 	str	r0, [sp, #12]
+3000bf0c:	e58d1008 	str	r1, [sp, #8]
+3000bf10:	e58d2004 	str	r2, [sp, #4]
 	register acoral_8 __res = 0;
-3000bd10:	e3a04000 	mov	r4, #0
+3000bf14:	e3a04000 	mov	r4, #0
 
 	while (count) {
-3000bd14:	ea00001f 	b	3000bd98 <acoral_str_ncmp+0x9c>
+3000bf18:	ea00001f 	b	3000bf9c <acoral_str_ncmp+0x9c>
 		if ((__res = *cs - *ct++) != 0 || !*cs++)
-3000bd18:	e59d300c 	ldr	r3, [sp, #12]
-3000bd1c:	e5d32000 	ldrb	r2, [r3]
-3000bd20:	e59d3008 	ldr	r3, [sp, #8]
-3000bd24:	e5d33000 	ldrb	r3, [r3]
-3000bd28:	e0633002 	rsb	r3, r3, r2
-3000bd2c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bd30:	e1a04003 	mov	r4, r3
-3000bd34:	e1a03c04 	lsl	r3, r4, #24
-3000bd38:	e1a03c43 	asr	r3, r3, #24
-3000bd3c:	e3530000 	cmp	r3, #0
-3000bd40:	03a03000 	moveq	r3, #0
-3000bd44:	13a03001 	movne	r3, #1
-3000bd48:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bd4c:	e59d2008 	ldr	r2, [sp, #8]
-3000bd50:	e2822001 	add	r2, r2, #1
-3000bd54:	e58d2008 	str	r2, [sp, #8]
-3000bd58:	e3530000 	cmp	r3, #0
-3000bd5c:	1a000010 	bne	3000bda4 <acoral_str_ncmp+0xa8>
-3000bd60:	e59d300c 	ldr	r3, [sp, #12]
-3000bd64:	e5d33000 	ldrb	r3, [r3]
-3000bd68:	e3530000 	cmp	r3, #0
-3000bd6c:	13a03000 	movne	r3, #0
-3000bd70:	03a03001 	moveq	r3, #1
-3000bd74:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bd78:	e59d200c 	ldr	r2, [sp, #12]
-3000bd7c:	e2822001 	add	r2, r2, #1
-3000bd80:	e58d200c 	str	r2, [sp, #12]
-3000bd84:	e3530000 	cmp	r3, #0
-3000bd88:	1a000005 	bne	3000bda4 <acoral_str_ncmp+0xa8>
+3000bf1c:	e59d300c 	ldr	r3, [sp, #12]
+3000bf20:	e5d32000 	ldrb	r2, [r3]
+3000bf24:	e59d3008 	ldr	r3, [sp, #8]
+3000bf28:	e5d33000 	ldrb	r3, [r3]
+3000bf2c:	e0633002 	rsb	r3, r3, r2
+3000bf30:	e20330ff 	and	r3, r3, #255	; 0xff
+3000bf34:	e1a04003 	mov	r4, r3
+3000bf38:	e1a03c04 	lsl	r3, r4, #24
+3000bf3c:	e1a03c43 	asr	r3, r3, #24
+3000bf40:	e3530000 	cmp	r3, #0
+3000bf44:	03a03000 	moveq	r3, #0
+3000bf48:	13a03001 	movne	r3, #1
+3000bf4c:	e20330ff 	and	r3, r3, #255	; 0xff
+3000bf50:	e59d2008 	ldr	r2, [sp, #8]
+3000bf54:	e2822001 	add	r2, r2, #1
+3000bf58:	e58d2008 	str	r2, [sp, #8]
+3000bf5c:	e3530000 	cmp	r3, #0
+3000bf60:	1a000010 	bne	3000bfa8 <acoral_str_ncmp+0xa8>
+3000bf64:	e59d300c 	ldr	r3, [sp, #12]
+3000bf68:	e5d33000 	ldrb	r3, [r3]
+3000bf6c:	e3530000 	cmp	r3, #0
+3000bf70:	13a03000 	movne	r3, #0
+3000bf74:	03a03001 	moveq	r3, #1
+3000bf78:	e20330ff 	and	r3, r3, #255	; 0xff
+3000bf7c:	e59d200c 	ldr	r2, [sp, #12]
+3000bf80:	e2822001 	add	r2, r2, #1
+3000bf84:	e58d200c 	str	r2, [sp, #12]
+3000bf88:	e3530000 	cmp	r3, #0
+3000bf8c:	1a000005 	bne	3000bfa8 <acoral_str_ncmp+0xa8>
 			break;
 		count--;
-3000bd8c:	e59d3004 	ldr	r3, [sp, #4]
-3000bd90:	e2433001 	sub	r3, r3, #1
-3000bd94:	e58d3004 	str	r3, [sp, #4]
+3000bf90:	e59d3004 	ldr	r3, [sp, #4]
+3000bf94:	e2433001 	sub	r3, r3, #1
+3000bf98:	e58d3004 	str	r3, [sp, #4]
  */
 acoral_32 acoral_str_ncmp(const acoral_char * cs,const acoral_char * ct,acoral_u32 count)
 {
 	register acoral_8 __res = 0;
 
 	while (count) {
-3000bd98:	e59d3004 	ldr	r3, [sp, #4]
-3000bd9c:	e3530000 	cmp	r3, #0
-3000bda0:	1affffdc 	bne	3000bd18 <acoral_str_ncmp+0x1c>
+3000bf9c:	e59d3004 	ldr	r3, [sp, #4]
+3000bfa0:	e3530000 	cmp	r3, #0
+3000bfa4:	1affffdc 	bne	3000bf1c <acoral_str_ncmp+0x1c>
 		if ((__res = *cs - *ct++) != 0 || !*cs++)
 			break;
 		count--;
 	}
 
 	return __res;
-3000bda4:	e1a03c04 	lsl	r3, r4, #24
-3000bda8:	e1a03c43 	asr	r3, r3, #24
+3000bfa8:	e1a03c04 	lsl	r3, r4, #24
+3000bfac:	e1a03c43 	asr	r3, r3, #24
 }
-3000bdac:	e1a00003 	mov	r0, r3
-3000bdb0:	e28dd014 	add	sp, sp, #20
-3000bdb4:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
-3000bdb8:	e12fff1e 	bx	lr
+3000bfb0:	e1a00003 	mov	r0, r3
+3000bfb4:	e28dd014 	add	sp, sp, #20
+3000bfb8:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
+3000bfbc:	e12fff1e 	bx	lr
 
-3000bdbc <acoral_str_chr>:
+3000bfc0 <acoral_str_chr>:
  * acoral_str_chr - Find the first occurrence of a character in a string
  * @s: The string to be searched
  * @c: The character to search for
  */
 acoral_32  acoral_str_chr(const acoral_char * s, acoral_32 c)
 {
-3000bdbc:	e24dd010 	sub	sp, sp, #16
-3000bdc0:	e58d0004 	str	r0, [sp, #4]
-3000bdc4:	e58d1000 	str	r1, [sp]
+3000bfc0:	e24dd010 	sub	sp, sp, #16
+3000bfc4:	e58d0004 	str	r0, [sp, #4]
+3000bfc8:	e58d1000 	str	r1, [sp]
 	acoral_u32 pos = 1;
-3000bdc8:	e3a03001 	mov	r3, #1
-3000bdcc:	e58d300c 	str	r3, [sp, #12]
+3000bfcc:	e3a03001 	mov	r3, #1
+3000bfd0:	e58d300c 	str	r3, [sp, #12]
 	for(; *s != (acoral_char) c; ++s,++pos)
-3000bdd0:	ea00000b 	b	3000be04 <acoral_str_chr+0x48>
+3000bfd4:	ea00000b 	b	3000c008 <acoral_str_chr+0x48>
 		if (*s == '\0')
-3000bdd4:	e59d3004 	ldr	r3, [sp, #4]
-3000bdd8:	e5d33000 	ldrb	r3, [r3]
-3000bddc:	e3530000 	cmp	r3, #0
-3000bde0:	1a000001 	bne	3000bdec <acoral_str_chr+0x30>
+3000bfd8:	e59d3004 	ldr	r3, [sp, #4]
+3000bfdc:	e5d33000 	ldrb	r3, [r3]
+3000bfe0:	e3530000 	cmp	r3, #0
+3000bfe4:	1a000001 	bne	3000bff0 <acoral_str_chr+0x30>
 			return 0;
-3000bde4:	e3a03000 	mov	r3, #0
-3000bde8:	ea00000c 	b	3000be20 <acoral_str_chr+0x64>
+3000bfe8:	e3a03000 	mov	r3, #0
+3000bfec:	ea00000c 	b	3000c024 <acoral_str_chr+0x64>
  * @c: The character to search for
  */
 acoral_32  acoral_str_chr(const acoral_char * s, acoral_32 c)
 {
 	acoral_u32 pos = 1;
 	for(; *s != (acoral_char) c; ++s,++pos)
-3000bdec:	e59d3004 	ldr	r3, [sp, #4]
-3000bdf0:	e2833001 	add	r3, r3, #1
-3000bdf4:	e58d3004 	str	r3, [sp, #4]
-3000bdf8:	e59d300c 	ldr	r3, [sp, #12]
-3000bdfc:	e2833001 	add	r3, r3, #1
-3000be00:	e58d300c 	str	r3, [sp, #12]
-3000be04:	e59d3004 	ldr	r3, [sp, #4]
-3000be08:	e5d32000 	ldrb	r2, [r3]
-3000be0c:	e59d3000 	ldr	r3, [sp]
-3000be10:	e20330ff 	and	r3, r3, #255	; 0xff
-3000be14:	e1520003 	cmp	r2, r3
-3000be18:	1affffed 	bne	3000bdd4 <acoral_str_chr+0x18>
+3000bff0:	e59d3004 	ldr	r3, [sp, #4]
+3000bff4:	e2833001 	add	r3, r3, #1
+3000bff8:	e58d3004 	str	r3, [sp, #4]
+3000bffc:	e59d300c 	ldr	r3, [sp, #12]
+3000c000:	e2833001 	add	r3, r3, #1
+3000c004:	e58d300c 	str	r3, [sp, #12]
+3000c008:	e59d3004 	ldr	r3, [sp, #4]
+3000c00c:	e5d32000 	ldrb	r2, [r3]
+3000c010:	e59d3000 	ldr	r3, [sp]
+3000c014:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c018:	e1520003 	cmp	r2, r3
+3000c01c:	1affffed 	bne	3000bfd8 <acoral_str_chr+0x18>
 		if (*s == '\0')
 			return 0;
 	return pos;
-3000be1c:	e59d300c 	ldr	r3, [sp, #12]
+3000c020:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000be20:	e1a00003 	mov	r0, r3
-3000be24:	e28dd010 	add	sp, sp, #16
-3000be28:	e12fff1e 	bx	lr
+3000c024:	e1a00003 	mov	r0, r3
+3000c028:	e28dd010 	add	sp, sp, #16
+3000c02c:	e12fff1e 	bx	lr
 
-3000be2c <acoral_str_rchr>:
+3000c030 <acoral_str_rchr>:
  * acoral_str_rchr - Find the last occurrence of a character in a string
  * @s: The string to be searched
  * @c: The character to search for
  */
 acoral_32  acoral_str_rchr(const acoral_char * s, acoral_32 c)
 {
-3000be2c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000be30:	e24dd014 	sub	sp, sp, #20
-3000be34:	e58d0004 	str	r0, [sp, #4]
-3000be38:	e58d1000 	str	r1, [sp]
+3000c030:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000c034:	e24dd014 	sub	sp, sp, #20
+3000c038:	e58d0004 	str	r0, [sp, #4]
+3000c03c:	e58d1000 	str	r1, [sp]
 	   acoral_u32 pos = acoral_str_len(s);
-3000be3c:	e59d0004 	ldr	r0, [sp, #4]
-3000be40:	ebfffe2e 	bl	3000b700 <acoral_str_len>
-3000be44:	e1a03000 	mov	r3, r0
-3000be48:	e58d3008 	str	r3, [sp, #8]
+3000c040:	e59d0004 	ldr	r0, [sp, #4]
+3000c044:	ebfffe2e 	bl	3000b904 <acoral_str_len>
+3000c048:	e1a03000 	mov	r3, r0
+3000c04c:	e58d3008 	str	r3, [sp, #8]
        const acoral_char *p = s + pos;
-3000be4c:	e59d2004 	ldr	r2, [sp, #4]
-3000be50:	e59d3008 	ldr	r3, [sp, #8]
-3000be54:	e0823003 	add	r3, r2, r3
-3000be58:	e58d300c 	str	r3, [sp, #12]
+3000c050:	e59d2004 	ldr	r2, [sp, #4]
+3000c054:	e59d3008 	ldr	r3, [sp, #8]
+3000c058:	e0823003 	add	r3, r2, r3
+3000c05c:	e58d300c 	str	r3, [sp, #12]
        do {
            if (*p == (acoral_char)c)
-3000be5c:	e59d300c 	ldr	r3, [sp, #12]
-3000be60:	e5d32000 	ldrb	r2, [r3]
-3000be64:	e59d3000 	ldr	r3, [sp]
-3000be68:	e20330ff 	and	r3, r3, #255	; 0xff
-3000be6c:	e1520003 	cmp	r2, r3
-3000be70:	1a000001 	bne	3000be7c <acoral_str_rchr+0x50>
+3000c060:	e59d300c 	ldr	r3, [sp, #12]
+3000c064:	e5d32000 	ldrb	r2, [r3]
+3000c068:	e59d3000 	ldr	r3, [sp]
+3000c06c:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c070:	e1520003 	cmp	r2, r3
+3000c074:	1a000001 	bne	3000c080 <acoral_str_rchr+0x50>
                return pos;
-3000be74:	e59d3008 	ldr	r3, [sp, #8]
-3000be78:	ea00000a 	b	3000bea8 <acoral_str_rchr+0x7c>
+3000c078:	e59d3008 	ldr	r3, [sp, #8]
+3000c07c:	ea00000a 	b	3000c0ac <acoral_str_rchr+0x7c>
            --pos;
-3000be7c:	e59d3008 	ldr	r3, [sp, #8]
-3000be80:	e2433001 	sub	r3, r3, #1
-3000be84:	e58d3008 	str	r3, [sp, #8]
+3000c080:	e59d3008 	ldr	r3, [sp, #8]
+3000c084:	e2433001 	sub	r3, r3, #1
+3000c088:	e58d3008 	str	r3, [sp, #8]
        } while (--p >= s);
-3000be88:	e59d300c 	ldr	r3, [sp, #12]
-3000be8c:	e2433001 	sub	r3, r3, #1
-3000be90:	e58d300c 	str	r3, [sp, #12]
-3000be94:	e59d200c 	ldr	r2, [sp, #12]
-3000be98:	e59d3004 	ldr	r3, [sp, #4]
-3000be9c:	e1520003 	cmp	r2, r3
-3000bea0:	2affffed 	bcs	3000be5c <acoral_str_rchr+0x30>
+3000c08c:	e59d300c 	ldr	r3, [sp, #12]
+3000c090:	e2433001 	sub	r3, r3, #1
+3000c094:	e58d300c 	str	r3, [sp, #12]
+3000c098:	e59d200c 	ldr	r2, [sp, #12]
+3000c09c:	e59d3004 	ldr	r3, [sp, #4]
+3000c0a0:	e1520003 	cmp	r2, r3
+3000c0a4:	2affffed 	bcs	3000c060 <acoral_str_rchr+0x30>
        return 0;
-3000bea4:	e3a03000 	mov	r3, #0
+3000c0a8:	e3a03000 	mov	r3, #0
 }
-3000bea8:	e1a00003 	mov	r0, r3
-3000beac:	e28dd014 	add	sp, sp, #20
-3000beb0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000beb4:	e12fff1e 	bx	lr
+3000c0ac:	e1a00003 	mov	r0, r3
+3000c0b0:	e28dd014 	add	sp, sp, #20
+3000c0b4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000c0b8:	e12fff1e 	bx	lr
 
-3000beb8 <acoral_str_nchr>:
+3000c0bc <acoral_str_nchr>:
  * @s: The string to be searched
  * @count: The number of characters to be searched
  * @c: The character to search for
  */
 acoral_32 acoral_str_nchr(const acoral_char *s, acoral_u32 count, acoral_32 c)
 {
-3000beb8:	e24dd018 	sub	sp, sp, #24
-3000bebc:	e58d000c 	str	r0, [sp, #12]
-3000bec0:	e58d1008 	str	r1, [sp, #8]
-3000bec4:	e58d2004 	str	r2, [sp, #4]
+3000c0bc:	e24dd018 	sub	sp, sp, #24
+3000c0c0:	e58d000c 	str	r0, [sp, #12]
+3000c0c4:	e58d1008 	str	r1, [sp, #8]
+3000c0c8:	e58d2004 	str	r2, [sp, #4]
 	acoral_u32 pos = 1;
-3000bec8:	e3a03001 	mov	r3, #1
-3000becc:	e58d3014 	str	r3, [sp, #20]
+3000c0cc:	e3a03001 	mov	r3, #1
+3000c0d0:	e58d3014 	str	r3, [sp, #20]
 	for (; count-- && *s != '\0'; ++s,++pos)
-3000bed0:	ea00000d 	b	3000bf0c <acoral_str_nchr+0x54>
+3000c0d4:	ea00000d 	b	3000c110 <acoral_str_nchr+0x54>
 		if (*s == (acoral_char) c)
-3000bed4:	e59d300c 	ldr	r3, [sp, #12]
-3000bed8:	e5d32000 	ldrb	r2, [r3]
-3000bedc:	e59d3004 	ldr	r3, [sp, #4]
-3000bee0:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bee4:	e1520003 	cmp	r2, r3
-3000bee8:	1a000001 	bne	3000bef4 <acoral_str_nchr+0x3c>
+3000c0d8:	e59d300c 	ldr	r3, [sp, #12]
+3000c0dc:	e5d32000 	ldrb	r2, [r3]
+3000c0e0:	e59d3004 	ldr	r3, [sp, #4]
+3000c0e4:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c0e8:	e1520003 	cmp	r2, r3
+3000c0ec:	1a000001 	bne	3000c0f8 <acoral_str_nchr+0x3c>
 			return pos;
-3000beec:	e59d3014 	ldr	r3, [sp, #20]
-3000bef0:	ea000014 	b	3000bf48 <acoral_str_nchr+0x90>
+3000c0f0:	e59d3014 	ldr	r3, [sp, #20]
+3000c0f4:	ea000014 	b	3000c14c <acoral_str_nchr+0x90>
  * @c: The character to search for
  */
 acoral_32 acoral_str_nchr(const acoral_char *s, acoral_u32 count, acoral_32 c)
 {
 	acoral_u32 pos = 1;
 	for (; count-- && *s != '\0'; ++s,++pos)
-3000bef4:	e59d300c 	ldr	r3, [sp, #12]
-3000bef8:	e2833001 	add	r3, r3, #1
-3000befc:	e58d300c 	str	r3, [sp, #12]
-3000bf00:	e59d3014 	ldr	r3, [sp, #20]
-3000bf04:	e2833001 	add	r3, r3, #1
-3000bf08:	e58d3014 	str	r3, [sp, #20]
-3000bf0c:	e59d3008 	ldr	r3, [sp, #8]
-3000bf10:	e3530000 	cmp	r3, #0
-3000bf14:	03a03000 	moveq	r3, #0
-3000bf18:	13a03001 	movne	r3, #1
-3000bf1c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bf20:	e59d2008 	ldr	r2, [sp, #8]
-3000bf24:	e2422001 	sub	r2, r2, #1
-3000bf28:	e58d2008 	str	r2, [sp, #8]
-3000bf2c:	e3530000 	cmp	r3, #0
-3000bf30:	0a000003 	beq	3000bf44 <acoral_str_nchr+0x8c>
-3000bf34:	e59d300c 	ldr	r3, [sp, #12]
-3000bf38:	e5d33000 	ldrb	r3, [r3]
-3000bf3c:	e3530000 	cmp	r3, #0
-3000bf40:	1affffe3 	bne	3000bed4 <acoral_str_nchr+0x1c>
+3000c0f8:	e59d300c 	ldr	r3, [sp, #12]
+3000c0fc:	e2833001 	add	r3, r3, #1
+3000c100:	e58d300c 	str	r3, [sp, #12]
+3000c104:	e59d3014 	ldr	r3, [sp, #20]
+3000c108:	e2833001 	add	r3, r3, #1
+3000c10c:	e58d3014 	str	r3, [sp, #20]
+3000c110:	e59d3008 	ldr	r3, [sp, #8]
+3000c114:	e3530000 	cmp	r3, #0
+3000c118:	03a03000 	moveq	r3, #0
+3000c11c:	13a03001 	movne	r3, #1
+3000c120:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c124:	e59d2008 	ldr	r2, [sp, #8]
+3000c128:	e2422001 	sub	r2, r2, #1
+3000c12c:	e58d2008 	str	r2, [sp, #8]
+3000c130:	e3530000 	cmp	r3, #0
+3000c134:	0a000003 	beq	3000c148 <acoral_str_nchr+0x8c>
+3000c138:	e59d300c 	ldr	r3, [sp, #12]
+3000c13c:	e5d33000 	ldrb	r3, [r3]
+3000c140:	e3530000 	cmp	r3, #0
+3000c144:	1affffe3 	bne	3000c0d8 <acoral_str_nchr+0x1c>
 		if (*s == (acoral_char) c)
 			return pos;
 	return 0;
-3000bf44:	e3a03000 	mov	r3, #0
+3000c148:	e3a03000 	mov	r3, #0
 }
-3000bf48:	e1a00003 	mov	r0, r3
-3000bf4c:	e28dd018 	add	sp, sp, #24
-3000bf50:	e12fff1e 	bx	lr
+3000c14c:	e1a00003 	mov	r0, r3
+3000c150:	e28dd018 	add	sp, sp, #24
+3000c154:	e12fff1e 	bx	lr
 
-3000bf54 <acoral_str_nlen>:
+3000c158 <acoral_str_nlen>:
  * acoral_str_nlen - Find the length of a length-limited string
  * @s: The string to be sized
  * @count: The maximum number of bytes to search
  */
 acoral_u32 acoral_str_nlen(const acoral_char * s, acoral_u32 count)
 {
-3000bf54:	e24dd010 	sub	sp, sp, #16
-3000bf58:	e58d0004 	str	r0, [sp, #4]
-3000bf5c:	e58d1000 	str	r1, [sp]
+3000c158:	e24dd010 	sub	sp, sp, #16
+3000c15c:	e58d0004 	str	r0, [sp, #4]
+3000c160:	e58d1000 	str	r1, [sp]
 	const acoral_char *sc;
 
 	for (sc = s; count-- && *sc != '\0'; ++sc)
-3000bf60:	e59d3004 	ldr	r3, [sp, #4]
-3000bf64:	e58d300c 	str	r3, [sp, #12]
-3000bf68:	ea000002 	b	3000bf78 <acoral_str_nlen+0x24>
-3000bf6c:	e59d300c 	ldr	r3, [sp, #12]
-3000bf70:	e2833001 	add	r3, r3, #1
-3000bf74:	e58d300c 	str	r3, [sp, #12]
-3000bf78:	e59d3000 	ldr	r3, [sp]
-3000bf7c:	e3530000 	cmp	r3, #0
-3000bf80:	03a03000 	moveq	r3, #0
-3000bf84:	13a03001 	movne	r3, #1
-3000bf88:	e20330ff 	and	r3, r3, #255	; 0xff
-3000bf8c:	e59d2000 	ldr	r2, [sp]
-3000bf90:	e2422001 	sub	r2, r2, #1
-3000bf94:	e58d2000 	str	r2, [sp]
-3000bf98:	e3530000 	cmp	r3, #0
-3000bf9c:	0a000003 	beq	3000bfb0 <acoral_str_nlen+0x5c>
-3000bfa0:	e59d300c 	ldr	r3, [sp, #12]
-3000bfa4:	e5d33000 	ldrb	r3, [r3]
-3000bfa8:	e3530000 	cmp	r3, #0
-3000bfac:	1affffee 	bne	3000bf6c <acoral_str_nlen+0x18>
+3000c164:	e59d3004 	ldr	r3, [sp, #4]
+3000c168:	e58d300c 	str	r3, [sp, #12]
+3000c16c:	ea000002 	b	3000c17c <acoral_str_nlen+0x24>
+3000c170:	e59d300c 	ldr	r3, [sp, #12]
+3000c174:	e2833001 	add	r3, r3, #1
+3000c178:	e58d300c 	str	r3, [sp, #12]
+3000c17c:	e59d3000 	ldr	r3, [sp]
+3000c180:	e3530000 	cmp	r3, #0
+3000c184:	03a03000 	moveq	r3, #0
+3000c188:	13a03001 	movne	r3, #1
+3000c18c:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c190:	e59d2000 	ldr	r2, [sp]
+3000c194:	e2422001 	sub	r2, r2, #1
+3000c198:	e58d2000 	str	r2, [sp]
+3000c19c:	e3530000 	cmp	r3, #0
+3000c1a0:	0a000003 	beq	3000c1b4 <acoral_str_nlen+0x5c>
+3000c1a4:	e59d300c 	ldr	r3, [sp, #12]
+3000c1a8:	e5d33000 	ldrb	r3, [r3]
+3000c1ac:	e3530000 	cmp	r3, #0
+3000c1b0:	1affffee 	bne	3000c170 <acoral_str_nlen+0x18>
 		/* nothing */;
 	return sc - s;
-3000bfb0:	e59d200c 	ldr	r2, [sp, #12]
-3000bfb4:	e59d3004 	ldr	r3, [sp, #4]
-3000bfb8:	e0633002 	rsb	r3, r3, r2
+3000c1b4:	e59d200c 	ldr	r2, [sp, #12]
+3000c1b8:	e59d3004 	ldr	r3, [sp, #4]
+3000c1bc:	e0633002 	rsb	r3, r3, r2
 }
-3000bfbc:	e1a00003 	mov	r0, r3
-3000bfc0:	e28dd010 	add	sp, sp, #16
-3000bfc4:	e12fff1e 	bx	lr
+3000c1c0:	e1a00003 	mov	r0, r3
+3000c1c4:	e28dd010 	add	sp, sp, #16
+3000c1c8:	e12fff1e 	bx	lr
 
-3000bfc8 <acoral_str_spn>:
+3000c1cc <acoral_str_spn>:
  * 	contain letters in @accept
  * @s: The string to be searched
  * @accept: The string to search for
  */
 acoral_u32 acoral_str_spn(const acoral_char *s, const acoral_char *accept)
 {
-3000bfc8:	e24dd018 	sub	sp, sp, #24
-3000bfcc:	e58d0004 	str	r0, [sp, #4]
-3000bfd0:	e58d1000 	str	r1, [sp]
+3000c1cc:	e24dd018 	sub	sp, sp, #24
+3000c1d0:	e58d0004 	str	r0, [sp, #4]
+3000c1d4:	e58d1000 	str	r1, [sp]
 	const acoral_char *p;
 	const acoral_char *a;
 	acoral_u32 count = 0;
-3000bfd4:	e3a03000 	mov	r3, #0
-3000bfd8:	e58d3014 	str	r3, [sp, #20]
+3000c1d8:	e3a03000 	mov	r3, #0
+3000c1dc:	e58d3014 	str	r3, [sp, #20]
 
 	for (p = s; *p != '\0'; ++p) {
-3000bfdc:	e59d3004 	ldr	r3, [sp, #4]
-3000bfe0:	e58d300c 	str	r3, [sp, #12]
-3000bfe4:	ea00001d 	b	3000c060 <acoral_str_spn+0x98>
+3000c1e0:	e59d3004 	ldr	r3, [sp, #4]
+3000c1e4:	e58d300c 	str	r3, [sp, #12]
+3000c1e8:	ea00001d 	b	3000c264 <acoral_str_spn+0x98>
 		for (a = accept; *a != '\0'; ++a) {
-3000bfe8:	e59d3000 	ldr	r3, [sp]
-3000bfec:	e58d3010 	str	r3, [sp, #16]
-3000bff0:	ea000008 	b	3000c018 <acoral_str_spn+0x50>
+3000c1ec:	e59d3000 	ldr	r3, [sp]
+3000c1f0:	e58d3010 	str	r3, [sp, #16]
+3000c1f4:	ea000008 	b	3000c21c <acoral_str_spn+0x50>
 			if (*p == *a)
-3000bff4:	e59d300c 	ldr	r3, [sp, #12]
-3000bff8:	e5d32000 	ldrb	r2, [r3]
-3000bffc:	e59d3010 	ldr	r3, [sp, #16]
-3000c000:	e5d33000 	ldrb	r3, [r3]
-3000c004:	e1520003 	cmp	r2, r3
-3000c008:	0a000007 	beq	3000c02c <acoral_str_spn+0x64>
+3000c1f8:	e59d300c 	ldr	r3, [sp, #12]
+3000c1fc:	e5d32000 	ldrb	r2, [r3]
+3000c200:	e59d3010 	ldr	r3, [sp, #16]
+3000c204:	e5d33000 	ldrb	r3, [r3]
+3000c208:	e1520003 	cmp	r2, r3
+3000c20c:	0a000007 	beq	3000c230 <acoral_str_spn+0x64>
 	const acoral_char *p;
 	const acoral_char *a;
 	acoral_u32 count = 0;
 
 	for (p = s; *p != '\0'; ++p) {
 		for (a = accept; *a != '\0'; ++a) {
-3000c00c:	e59d3010 	ldr	r3, [sp, #16]
-3000c010:	e2833001 	add	r3, r3, #1
-3000c014:	e58d3010 	str	r3, [sp, #16]
-3000c018:	e59d3010 	ldr	r3, [sp, #16]
-3000c01c:	e5d33000 	ldrb	r3, [r3]
-3000c020:	e3530000 	cmp	r3, #0
-3000c024:	1afffff2 	bne	3000bff4 <acoral_str_spn+0x2c>
-3000c028:	ea000000 	b	3000c030 <acoral_str_spn+0x68>
+3000c210:	e59d3010 	ldr	r3, [sp, #16]
+3000c214:	e2833001 	add	r3, r3, #1
+3000c218:	e58d3010 	str	r3, [sp, #16]
+3000c21c:	e59d3010 	ldr	r3, [sp, #16]
+3000c220:	e5d33000 	ldrb	r3, [r3]
+3000c224:	e3530000 	cmp	r3, #0
+3000c228:	1afffff2 	bne	3000c1f8 <acoral_str_spn+0x2c>
+3000c22c:	ea000000 	b	3000c234 <acoral_str_spn+0x68>
 			if (*p == *a)
 				break;
-3000c02c:	e1a00000 	nop			; (mov r0, r0)
+3000c230:	e1a00000 	nop			; (mov r0, r0)
 		}
 		if (*a == '\0')
-3000c030:	e59d3010 	ldr	r3, [sp, #16]
-3000c034:	e5d33000 	ldrb	r3, [r3]
-3000c038:	e3530000 	cmp	r3, #0
-3000c03c:	1a000001 	bne	3000c048 <acoral_str_spn+0x80>
+3000c234:	e59d3010 	ldr	r3, [sp, #16]
+3000c238:	e5d33000 	ldrb	r3, [r3]
+3000c23c:	e3530000 	cmp	r3, #0
+3000c240:	1a000001 	bne	3000c24c <acoral_str_spn+0x80>
 			return count;
-3000c040:	e59d3014 	ldr	r3, [sp, #20]
-3000c044:	ea00000a 	b	3000c074 <acoral_str_spn+0xac>
+3000c244:	e59d3014 	ldr	r3, [sp, #20]
+3000c248:	ea00000a 	b	3000c278 <acoral_str_spn+0xac>
 		++count;
-3000c048:	e59d3014 	ldr	r3, [sp, #20]
-3000c04c:	e2833001 	add	r3, r3, #1
-3000c050:	e58d3014 	str	r3, [sp, #20]
+3000c24c:	e59d3014 	ldr	r3, [sp, #20]
+3000c250:	e2833001 	add	r3, r3, #1
+3000c254:	e58d3014 	str	r3, [sp, #20]
 {
 	const acoral_char *p;
 	const acoral_char *a;
 	acoral_u32 count = 0;
 
 	for (p = s; *p != '\0'; ++p) {
-3000c054:	e59d300c 	ldr	r3, [sp, #12]
-3000c058:	e2833001 	add	r3, r3, #1
-3000c05c:	e58d300c 	str	r3, [sp, #12]
-3000c060:	e59d300c 	ldr	r3, [sp, #12]
-3000c064:	e5d33000 	ldrb	r3, [r3]
-3000c068:	e3530000 	cmp	r3, #0
-3000c06c:	1affffdd 	bne	3000bfe8 <acoral_str_spn+0x20>
+3000c258:	e59d300c 	ldr	r3, [sp, #12]
+3000c25c:	e2833001 	add	r3, r3, #1
+3000c260:	e58d300c 	str	r3, [sp, #12]
+3000c264:	e59d300c 	ldr	r3, [sp, #12]
+3000c268:	e5d33000 	ldrb	r3, [r3]
+3000c26c:	e3530000 	cmp	r3, #0
+3000c270:	1affffdd 	bne	3000c1ec <acoral_str_spn+0x20>
 		if (*a == '\0')
 			return count;
 		++count;
 	}
 
 	return count;
-3000c070:	e59d3014 	ldr	r3, [sp, #20]
+3000c274:	e59d3014 	ldr	r3, [sp, #20]
 }
-3000c074:	e1a00003 	mov	r0, r3
-3000c078:	e28dd018 	add	sp, sp, #24
-3000c07c:	e12fff1e 	bx	lr
+3000c278:	e1a00003 	mov	r0, r3
+3000c27c:	e28dd018 	add	sp, sp, #24
+3000c280:	e12fff1e 	bx	lr
 
-3000c080 <acoral_str_cspn>:
+3000c284 <acoral_str_cspn>:
  * 	not contain letters in @reject
  * @s: The string to be searched
  * @reject: The string to avoid
  */
 acoral_u32 acoral_str_cspn(const acoral_char *s, const acoral_char *reject)
 {
-3000c080:	e24dd018 	sub	sp, sp, #24
-3000c084:	e58d0004 	str	r0, [sp, #4]
-3000c088:	e58d1000 	str	r1, [sp]
+3000c284:	e24dd018 	sub	sp, sp, #24
+3000c288:	e58d0004 	str	r0, [sp, #4]
+3000c28c:	e58d1000 	str	r1, [sp]
 	const acoral_char *p;
 	const acoral_char *r;
 	acoral_u32 count = 0;
-3000c08c:	e3a03000 	mov	r3, #0
-3000c090:	e58d3014 	str	r3, [sp, #20]
+3000c290:	e3a03000 	mov	r3, #0
+3000c294:	e58d3014 	str	r3, [sp, #20]
 
 	for (p = s; *p != '\0'; ++p) {
-3000c094:	e59d3004 	ldr	r3, [sp, #4]
-3000c098:	e58d300c 	str	r3, [sp, #12]
-3000c09c:	ea000017 	b	3000c100 <acoral_str_cspn+0x80>
+3000c298:	e59d3004 	ldr	r3, [sp, #4]
+3000c29c:	e58d300c 	str	r3, [sp, #12]
+3000c2a0:	ea000017 	b	3000c304 <acoral_str_cspn+0x80>
 		for (r = reject; *r != '\0'; ++r) {
-3000c0a0:	e59d3000 	ldr	r3, [sp]
-3000c0a4:	e58d3010 	str	r3, [sp, #16]
-3000c0a8:	ea00000a 	b	3000c0d8 <acoral_str_cspn+0x58>
+3000c2a4:	e59d3000 	ldr	r3, [sp]
+3000c2a8:	e58d3010 	str	r3, [sp, #16]
+3000c2ac:	ea00000a 	b	3000c2dc <acoral_str_cspn+0x58>
 			if (*p == *r)
-3000c0ac:	e59d300c 	ldr	r3, [sp, #12]
-3000c0b0:	e5d32000 	ldrb	r2, [r3]
-3000c0b4:	e59d3010 	ldr	r3, [sp, #16]
-3000c0b8:	e5d33000 	ldrb	r3, [r3]
-3000c0bc:	e1520003 	cmp	r2, r3
-3000c0c0:	1a000001 	bne	3000c0cc <acoral_str_cspn+0x4c>
+3000c2b0:	e59d300c 	ldr	r3, [sp, #12]
+3000c2b4:	e5d32000 	ldrb	r2, [r3]
+3000c2b8:	e59d3010 	ldr	r3, [sp, #16]
+3000c2bc:	e5d33000 	ldrb	r3, [r3]
+3000c2c0:	e1520003 	cmp	r2, r3
+3000c2c4:	1a000001 	bne	3000c2d0 <acoral_str_cspn+0x4c>
 				return count;
-3000c0c4:	e59d3014 	ldr	r3, [sp, #20]
-3000c0c8:	ea000011 	b	3000c114 <acoral_str_cspn+0x94>
+3000c2c8:	e59d3014 	ldr	r3, [sp, #20]
+3000c2cc:	ea000011 	b	3000c318 <acoral_str_cspn+0x94>
 	const acoral_char *p;
 	const acoral_char *r;
 	acoral_u32 count = 0;
 
 	for (p = s; *p != '\0'; ++p) {
 		for (r = reject; *r != '\0'; ++r) {
-3000c0cc:	e59d3010 	ldr	r3, [sp, #16]
-3000c0d0:	e2833001 	add	r3, r3, #1
-3000c0d4:	e58d3010 	str	r3, [sp, #16]
-3000c0d8:	e59d3010 	ldr	r3, [sp, #16]
-3000c0dc:	e5d33000 	ldrb	r3, [r3]
-3000c0e0:	e3530000 	cmp	r3, #0
-3000c0e4:	1afffff0 	bne	3000c0ac <acoral_str_cspn+0x2c>
+3000c2d0:	e59d3010 	ldr	r3, [sp, #16]
+3000c2d4:	e2833001 	add	r3, r3, #1
+3000c2d8:	e58d3010 	str	r3, [sp, #16]
+3000c2dc:	e59d3010 	ldr	r3, [sp, #16]
+3000c2e0:	e5d33000 	ldrb	r3, [r3]
+3000c2e4:	e3530000 	cmp	r3, #0
+3000c2e8:	1afffff0 	bne	3000c2b0 <acoral_str_cspn+0x2c>
 			if (*p == *r)
 				return count;
 		}
 		++count;
-3000c0e8:	e59d3014 	ldr	r3, [sp, #20]
-3000c0ec:	e2833001 	add	r3, r3, #1
-3000c0f0:	e58d3014 	str	r3, [sp, #20]
+3000c2ec:	e59d3014 	ldr	r3, [sp, #20]
+3000c2f0:	e2833001 	add	r3, r3, #1
+3000c2f4:	e58d3014 	str	r3, [sp, #20]
 {
 	const acoral_char *p;
 	const acoral_char *r;
 	acoral_u32 count = 0;
 
 	for (p = s; *p != '\0'; ++p) {
-3000c0f4:	e59d300c 	ldr	r3, [sp, #12]
-3000c0f8:	e2833001 	add	r3, r3, #1
-3000c0fc:	e58d300c 	str	r3, [sp, #12]
-3000c100:	e59d300c 	ldr	r3, [sp, #12]
-3000c104:	e5d33000 	ldrb	r3, [r3]
-3000c108:	e3530000 	cmp	r3, #0
-3000c10c:	1affffe3 	bne	3000c0a0 <acoral_str_cspn+0x20>
+3000c2f8:	e59d300c 	ldr	r3, [sp, #12]
+3000c2fc:	e2833001 	add	r3, r3, #1
+3000c300:	e58d300c 	str	r3, [sp, #12]
+3000c304:	e59d300c 	ldr	r3, [sp, #12]
+3000c308:	e5d33000 	ldrb	r3, [r3]
+3000c30c:	e3530000 	cmp	r3, #0
+3000c310:	1affffe3 	bne	3000c2a4 <acoral_str_cspn+0x20>
 				return count;
 		}
 		++count;
 	}
 
 	return count;
-3000c110:	e59d3014 	ldr	r3, [sp, #20]
+3000c314:	e59d3014 	ldr	r3, [sp, #20]
 }	
-3000c114:	e1a00003 	mov	r0, r3
-3000c118:	e28dd018 	add	sp, sp, #24
-3000c11c:	e12fff1e 	bx	lr
+3000c318:	e1a00003 	mov	r0, r3
+3000c31c:	e28dd018 	add	sp, sp, #24
+3000c320:	e12fff1e 	bx	lr
 
-3000c120 <acoral_str_pbrk>:
+3000c324 <acoral_str_pbrk>:
  * acoral_str_pbrk - Find the first occurrence of a set of characters
  * @cs: The string to be searched
  * @ct: The characters to search for
  */
 acoral_char * acoral_str_pbrk(const acoral_char * cs,const acoral_char * ct)
 {
-3000c120:	e24dd010 	sub	sp, sp, #16
-3000c124:	e58d0004 	str	r0, [sp, #4]
-3000c128:	e58d1000 	str	r1, [sp]
+3000c324:	e24dd010 	sub	sp, sp, #16
+3000c328:	e58d0004 	str	r0, [sp, #4]
+3000c32c:	e58d1000 	str	r1, [sp]
 	const acoral_char *sc1,*sc2;
 
 	for( sc1 = cs; *sc1 != '\0'; ++sc1) {
-3000c12c:	e59d3004 	ldr	r3, [sp, #4]
-3000c130:	e58d3008 	str	r3, [sp, #8]
-3000c134:	ea000014 	b	3000c18c <acoral_str_pbrk+0x6c>
+3000c330:	e59d3004 	ldr	r3, [sp, #4]
+3000c334:	e58d3008 	str	r3, [sp, #8]
+3000c338:	ea000014 	b	3000c390 <acoral_str_pbrk+0x6c>
 		for( sc2 = ct; *sc2 != '\0'; ++sc2) {
-3000c138:	e59d3000 	ldr	r3, [sp]
-3000c13c:	e58d300c 	str	r3, [sp, #12]
-3000c140:	ea00000a 	b	3000c170 <acoral_str_pbrk+0x50>
+3000c33c:	e59d3000 	ldr	r3, [sp]
+3000c340:	e58d300c 	str	r3, [sp, #12]
+3000c344:	ea00000a 	b	3000c374 <acoral_str_pbrk+0x50>
 			if (*sc1 == *sc2)
-3000c144:	e59d3008 	ldr	r3, [sp, #8]
-3000c148:	e5d32000 	ldrb	r2, [r3]
-3000c14c:	e59d300c 	ldr	r3, [sp, #12]
-3000c150:	e5d33000 	ldrb	r3, [r3]
-3000c154:	e1520003 	cmp	r2, r3
-3000c158:	1a000001 	bne	3000c164 <acoral_str_pbrk+0x44>
+3000c348:	e59d3008 	ldr	r3, [sp, #8]
+3000c34c:	e5d32000 	ldrb	r2, [r3]
+3000c350:	e59d300c 	ldr	r3, [sp, #12]
+3000c354:	e5d33000 	ldrb	r3, [r3]
+3000c358:	e1520003 	cmp	r2, r3
+3000c35c:	1a000001 	bne	3000c368 <acoral_str_pbrk+0x44>
 				return (acoral_char *) sc1;
-3000c15c:	e59d3008 	ldr	r3, [sp, #8]
-3000c160:	ea00000e 	b	3000c1a0 <acoral_str_pbrk+0x80>
+3000c360:	e59d3008 	ldr	r3, [sp, #8]
+3000c364:	ea00000e 	b	3000c3a4 <acoral_str_pbrk+0x80>
 acoral_char * acoral_str_pbrk(const acoral_char * cs,const acoral_char * ct)
 {
 	const acoral_char *sc1,*sc2;
 
 	for( sc1 = cs; *sc1 != '\0'; ++sc1) {
 		for( sc2 = ct; *sc2 != '\0'; ++sc2) {
-3000c164:	e59d300c 	ldr	r3, [sp, #12]
-3000c168:	e2833001 	add	r3, r3, #1
-3000c16c:	e58d300c 	str	r3, [sp, #12]
-3000c170:	e59d300c 	ldr	r3, [sp, #12]
-3000c174:	e5d33000 	ldrb	r3, [r3]
-3000c178:	e3530000 	cmp	r3, #0
-3000c17c:	1afffff0 	bne	3000c144 <acoral_str_pbrk+0x24>
+3000c368:	e59d300c 	ldr	r3, [sp, #12]
+3000c36c:	e2833001 	add	r3, r3, #1
+3000c370:	e58d300c 	str	r3, [sp, #12]
+3000c374:	e59d300c 	ldr	r3, [sp, #12]
+3000c378:	e5d33000 	ldrb	r3, [r3]
+3000c37c:	e3530000 	cmp	r3, #0
+3000c380:	1afffff0 	bne	3000c348 <acoral_str_pbrk+0x24>
  */
 acoral_char * acoral_str_pbrk(const acoral_char * cs,const acoral_char * ct)
 {
 	const acoral_char *sc1,*sc2;
 
 	for( sc1 = cs; *sc1 != '\0'; ++sc1) {
-3000c180:	e59d3008 	ldr	r3, [sp, #8]
-3000c184:	e2833001 	add	r3, r3, #1
-3000c188:	e58d3008 	str	r3, [sp, #8]
-3000c18c:	e59d3008 	ldr	r3, [sp, #8]
-3000c190:	e5d33000 	ldrb	r3, [r3]
-3000c194:	e3530000 	cmp	r3, #0
-3000c198:	1affffe6 	bne	3000c138 <acoral_str_pbrk+0x18>
+3000c384:	e59d3008 	ldr	r3, [sp, #8]
+3000c388:	e2833001 	add	r3, r3, #1
+3000c38c:	e58d3008 	str	r3, [sp, #8]
+3000c390:	e59d3008 	ldr	r3, [sp, #8]
+3000c394:	e5d33000 	ldrb	r3, [r3]
+3000c398:	e3530000 	cmp	r3, #0
+3000c39c:	1affffe6 	bne	3000c33c <acoral_str_pbrk+0x18>
 		for( sc2 = ct; *sc2 != '\0'; ++sc2) {
 			if (*sc1 == *sc2)
 				return (acoral_char *) sc1;
 		}
 	}
 	return NULL;
-3000c19c:	e3a03000 	mov	r3, #0
+3000c3a0:	e3a03000 	mov	r3, #0
 }
-3000c1a0:	e1a00003 	mov	r0, r3
-3000c1a4:	e28dd010 	add	sp, sp, #16
-3000c1a8:	e12fff1e 	bx	lr
+3000c3a4:	e1a00003 	mov	r0, r3
+3000c3a8:	e28dd010 	add	sp, sp, #16
+3000c3ac:	e12fff1e 	bx	lr
 
-3000c1ac <acoral_str_sep>:
+3000c3b0 <acoral_str_sep>:
  * It returns empty tokens, too, behaving exactly like the libc function
  * of that name. In fact, it was stolen from glibc2 and de-fancy-fied.
  * Same semantics, slimmer shape. ;)
  */
 acoral_char * acoral_str_sep(acoral_char **s, const acoral_char *ct)
 {
-3000c1ac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000c1b0:	e24dd014 	sub	sp, sp, #20
-3000c1b4:	e58d0004 	str	r0, [sp, #4]
-3000c1b8:	e58d1000 	str	r1, [sp]
+3000c3b0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000c3b4:	e24dd014 	sub	sp, sp, #20
+3000c3b8:	e58d0004 	str	r0, [sp, #4]
+3000c3bc:	e58d1000 	str	r1, [sp]
 	acoral_char *sbegin = *s, *end;
-3000c1bc:	e59d3004 	ldr	r3, [sp, #4]
-3000c1c0:	e5933000 	ldr	r3, [r3]
-3000c1c4:	e58d3008 	str	r3, [sp, #8]
+3000c3c0:	e59d3004 	ldr	r3, [sp, #4]
+3000c3c4:	e5933000 	ldr	r3, [r3]
+3000c3c8:	e58d3008 	str	r3, [sp, #8]
 
 	if (sbegin == NULL)
-3000c1c8:	e59d3008 	ldr	r3, [sp, #8]
-3000c1cc:	e3530000 	cmp	r3, #0
-3000c1d0:	1a000001 	bne	3000c1dc <acoral_str_sep+0x30>
+3000c3cc:	e59d3008 	ldr	r3, [sp, #8]
+3000c3d0:	e3530000 	cmp	r3, #0
+3000c3d4:	1a000001 	bne	3000c3e0 <acoral_str_sep+0x30>
 		return NULL;
-3000c1d4:	e3a03000 	mov	r3, #0
-3000c1d8:	ea000011 	b	3000c224 <acoral_str_sep+0x78>
+3000c3d8:	e3a03000 	mov	r3, #0
+3000c3dc:	ea000011 	b	3000c428 <acoral_str_sep+0x78>
 
 	end = acoral_str_pbrk(sbegin, ct);
-3000c1dc:	e59d0008 	ldr	r0, [sp, #8]
-3000c1e0:	e59d1000 	ldr	r1, [sp]
-3000c1e4:	ebffffcd 	bl	3000c120 <acoral_str_pbrk>
-3000c1e8:	e1a03000 	mov	r3, r0
-3000c1ec:	e58d300c 	str	r3, [sp, #12]
+3000c3e0:	e59d0008 	ldr	r0, [sp, #8]
+3000c3e4:	e59d1000 	ldr	r1, [sp]
+3000c3e8:	ebffffcd 	bl	3000c324 <acoral_str_pbrk>
+3000c3ec:	e1a03000 	mov	r3, r0
+3000c3f0:	e58d300c 	str	r3, [sp, #12]
 	if (end)
-3000c1f0:	e59d300c 	ldr	r3, [sp, #12]
-3000c1f4:	e3530000 	cmp	r3, #0
-3000c1f8:	0a000005 	beq	3000c214 <acoral_str_sep+0x68>
+3000c3f4:	e59d300c 	ldr	r3, [sp, #12]
+3000c3f8:	e3530000 	cmp	r3, #0
+3000c3fc:	0a000005 	beq	3000c418 <acoral_str_sep+0x68>
 		*end++ = '\0';
-3000c1fc:	e59d300c 	ldr	r3, [sp, #12]
-3000c200:	e3a02000 	mov	r2, #0
-3000c204:	e5c32000 	strb	r2, [r3]
-3000c208:	e59d300c 	ldr	r3, [sp, #12]
-3000c20c:	e2833001 	add	r3, r3, #1
-3000c210:	e58d300c 	str	r3, [sp, #12]
+3000c400:	e59d300c 	ldr	r3, [sp, #12]
+3000c404:	e3a02000 	mov	r2, #0
+3000c408:	e5c32000 	strb	r2, [r3]
+3000c40c:	e59d300c 	ldr	r3, [sp, #12]
+3000c410:	e2833001 	add	r3, r3, #1
+3000c414:	e58d300c 	str	r3, [sp, #12]
 	*s = end;
-3000c214:	e59d3004 	ldr	r3, [sp, #4]
-3000c218:	e59d200c 	ldr	r2, [sp, #12]
-3000c21c:	e5832000 	str	r2, [r3]
+3000c418:	e59d3004 	ldr	r3, [sp, #4]
+3000c41c:	e59d200c 	ldr	r2, [sp, #12]
+3000c420:	e5832000 	str	r2, [r3]
 
 	return sbegin;
-3000c220:	e59d3008 	ldr	r3, [sp, #8]
+3000c424:	e59d3008 	ldr	r3, [sp, #8]
 }
-3000c224:	e1a00003 	mov	r0, r3
-3000c228:	e28dd014 	add	sp, sp, #20
-3000c22c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000c230:	e12fff1e 	bx	lr
+3000c428:	e1a00003 	mov	r0, r3
+3000c42c:	e28dd014 	add	sp, sp, #20
+3000c430:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000c434:	e12fff1e 	bx	lr
 
-3000c234 <acoral_memset>:
+3000c438 <acoral_memset>:
  * @count: The size of the area.
  *
  * Do not use memset() to access IO space, use memset_io() instead.
  */
 void * acoral_memset(void * s,acoral_32 c,acoral_u32 count)
 {
-3000c234:	e24dd018 	sub	sp, sp, #24
-3000c238:	e58d000c 	str	r0, [sp, #12]
-3000c23c:	e58d1008 	str	r1, [sp, #8]
-3000c240:	e58d2004 	str	r2, [sp, #4]
+3000c438:	e24dd018 	sub	sp, sp, #24
+3000c43c:	e58d000c 	str	r0, [sp, #12]
+3000c440:	e58d1008 	str	r1, [sp, #8]
+3000c444:	e58d2004 	str	r2, [sp, #4]
 	acoral_char *xs = (acoral_char *) s;
-3000c244:	e59d300c 	ldr	r3, [sp, #12]
-3000c248:	e58d3014 	str	r3, [sp, #20]
+3000c448:	e59d300c 	ldr	r3, [sp, #12]
+3000c44c:	e58d3014 	str	r3, [sp, #20]
 
 	while (count--)
-3000c24c:	ea000006 	b	3000c26c <acoral_memset+0x38>
+3000c450:	ea000006 	b	3000c470 <acoral_memset+0x38>
 		*xs++ = c;
-3000c250:	e59d3008 	ldr	r3, [sp, #8]
-3000c254:	e20320ff 	and	r2, r3, #255	; 0xff
-3000c258:	e59d3014 	ldr	r3, [sp, #20]
-3000c25c:	e5c32000 	strb	r2, [r3]
-3000c260:	e59d3014 	ldr	r3, [sp, #20]
-3000c264:	e2833001 	add	r3, r3, #1
-3000c268:	e58d3014 	str	r3, [sp, #20]
+3000c454:	e59d3008 	ldr	r3, [sp, #8]
+3000c458:	e20320ff 	and	r2, r3, #255	; 0xff
+3000c45c:	e59d3014 	ldr	r3, [sp, #20]
+3000c460:	e5c32000 	strb	r2, [r3]
+3000c464:	e59d3014 	ldr	r3, [sp, #20]
+3000c468:	e2833001 	add	r3, r3, #1
+3000c46c:	e58d3014 	str	r3, [sp, #20]
  */
 void * acoral_memset(void * s,acoral_32 c,acoral_u32 count)
 {
 	acoral_char *xs = (acoral_char *) s;
 
 	while (count--)
-3000c26c:	e59d3004 	ldr	r3, [sp, #4]
-3000c270:	e3530000 	cmp	r3, #0
-3000c274:	03a03000 	moveq	r3, #0
-3000c278:	13a03001 	movne	r3, #1
-3000c27c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000c280:	e59d2004 	ldr	r2, [sp, #4]
-3000c284:	e2422001 	sub	r2, r2, #1
-3000c288:	e58d2004 	str	r2, [sp, #4]
-3000c28c:	e3530000 	cmp	r3, #0
-3000c290:	1affffee 	bne	3000c250 <acoral_memset+0x1c>
+3000c470:	e59d3004 	ldr	r3, [sp, #4]
+3000c474:	e3530000 	cmp	r3, #0
+3000c478:	03a03000 	moveq	r3, #0
+3000c47c:	13a03001 	movne	r3, #1
+3000c480:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c484:	e59d2004 	ldr	r2, [sp, #4]
+3000c488:	e2422001 	sub	r2, r2, #1
+3000c48c:	e58d2004 	str	r2, [sp, #4]
+3000c490:	e3530000 	cmp	r3, #0
+3000c494:	1affffee 	bne	3000c454 <acoral_memset+0x1c>
 		*xs++ = c;
 
 	return s;
-3000c294:	e59d300c 	ldr	r3, [sp, #12]
+3000c498:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000c298:	e1a00003 	mov	r0, r3
-3000c29c:	e28dd018 	add	sp, sp, #24
-3000c2a0:	e12fff1e 	bx	lr
+3000c49c:	e1a00003 	mov	r0, r3
+3000c4a0:	e28dd018 	add	sp, sp, #24
+3000c4a4:	e12fff1e 	bx	lr
 
-3000c2a4 <acoral_memcpy>:
+3000c4a8 <acoral_memcpy>:
  *
  * You should not use this function to access IO space, use memcpy_toio()
  * or memcpy_fromio() instead.
  */
 void * acoral_memcpy(void * dest,const void *src,acoral_u32 count)
 {
-3000c2a4:	e24dd018 	sub	sp, sp, #24
-3000c2a8:	e58d000c 	str	r0, [sp, #12]
-3000c2ac:	e58d1008 	str	r1, [sp, #8]
-3000c2b0:	e58d2004 	str	r2, [sp, #4]
+3000c4a8:	e24dd018 	sub	sp, sp, #24
+3000c4ac:	e58d000c 	str	r0, [sp, #12]
+3000c4b0:	e58d1008 	str	r1, [sp, #8]
+3000c4b4:	e58d2004 	str	r2, [sp, #4]
 	acoral_char *tmp = (acoral_char *) dest, *s = (acoral_char *) src;
-3000c2b4:	e59d300c 	ldr	r3, [sp, #12]
-3000c2b8:	e58d3010 	str	r3, [sp, #16]
-3000c2bc:	e59d3008 	ldr	r3, [sp, #8]
-3000c2c0:	e58d3014 	str	r3, [sp, #20]
+3000c4b8:	e59d300c 	ldr	r3, [sp, #12]
+3000c4bc:	e58d3010 	str	r3, [sp, #16]
+3000c4c0:	e59d3008 	ldr	r3, [sp, #8]
+3000c4c4:	e58d3014 	str	r3, [sp, #20]
 
 	while (count--)
-3000c2c4:	ea000009 	b	3000c2f0 <acoral_memcpy+0x4c>
+3000c4c8:	ea000009 	b	3000c4f4 <acoral_memcpy+0x4c>
 		*tmp++ = *s++;
-3000c2c8:	e59d3014 	ldr	r3, [sp, #20]
-3000c2cc:	e5d32000 	ldrb	r2, [r3]
-3000c2d0:	e59d3010 	ldr	r3, [sp, #16]
-3000c2d4:	e5c32000 	strb	r2, [r3]
-3000c2d8:	e59d3010 	ldr	r3, [sp, #16]
-3000c2dc:	e2833001 	add	r3, r3, #1
-3000c2e0:	e58d3010 	str	r3, [sp, #16]
-3000c2e4:	e59d3014 	ldr	r3, [sp, #20]
-3000c2e8:	e2833001 	add	r3, r3, #1
-3000c2ec:	e58d3014 	str	r3, [sp, #20]
+3000c4cc:	e59d3014 	ldr	r3, [sp, #20]
+3000c4d0:	e5d32000 	ldrb	r2, [r3]
+3000c4d4:	e59d3010 	ldr	r3, [sp, #16]
+3000c4d8:	e5c32000 	strb	r2, [r3]
+3000c4dc:	e59d3010 	ldr	r3, [sp, #16]
+3000c4e0:	e2833001 	add	r3, r3, #1
+3000c4e4:	e58d3010 	str	r3, [sp, #16]
+3000c4e8:	e59d3014 	ldr	r3, [sp, #20]
+3000c4ec:	e2833001 	add	r3, r3, #1
+3000c4f0:	e58d3014 	str	r3, [sp, #20]
  */
 void * acoral_memcpy(void * dest,const void *src,acoral_u32 count)
 {
 	acoral_char *tmp = (acoral_char *) dest, *s = (acoral_char *) src;
 
 	while (count--)
-3000c2f0:	e59d3004 	ldr	r3, [sp, #4]
-3000c2f4:	e3530000 	cmp	r3, #0
-3000c2f8:	03a03000 	moveq	r3, #0
-3000c2fc:	13a03001 	movne	r3, #1
-3000c300:	e20330ff 	and	r3, r3, #255	; 0xff
-3000c304:	e59d2004 	ldr	r2, [sp, #4]
-3000c308:	e2422001 	sub	r2, r2, #1
-3000c30c:	e58d2004 	str	r2, [sp, #4]
-3000c310:	e3530000 	cmp	r3, #0
-3000c314:	1affffeb 	bne	3000c2c8 <acoral_memcpy+0x24>
+3000c4f4:	e59d3004 	ldr	r3, [sp, #4]
+3000c4f8:	e3530000 	cmp	r3, #0
+3000c4fc:	03a03000 	moveq	r3, #0
+3000c500:	13a03001 	movne	r3, #1
+3000c504:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c508:	e59d2004 	ldr	r2, [sp, #4]
+3000c50c:	e2422001 	sub	r2, r2, #1
+3000c510:	e58d2004 	str	r2, [sp, #4]
+3000c514:	e3530000 	cmp	r3, #0
+3000c518:	1affffeb 	bne	3000c4cc <acoral_memcpy+0x24>
 		*tmp++ = *s++;
 
 	return dest;
-3000c318:	e59d300c 	ldr	r3, [sp, #12]
+3000c51c:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000c31c:	e1a00003 	mov	r0, r3
-3000c320:	e28dd018 	add	sp, sp, #24
-3000c324:	e12fff1e 	bx	lr
+3000c520:	e1a00003 	mov	r0, r3
+3000c524:	e28dd018 	add	sp, sp, #24
+3000c528:	e12fff1e 	bx	lr
 
-3000c328 <acoral_memmove>:
+3000c52c <acoral_memmove>:
  * @count: The size of the area.
  *
  * Unlike memcpy(), memmove() copes with overlapping areas.
  */
 void * acoral_memmove(void * dest,const void *src,acoral_u32 count)
 {
-3000c328:	e24dd018 	sub	sp, sp, #24
-3000c32c:	e58d000c 	str	r0, [sp, #12]
-3000c330:	e58d1008 	str	r1, [sp, #8]
-3000c334:	e58d2004 	str	r2, [sp, #4]
+3000c52c:	e24dd018 	sub	sp, sp, #24
+3000c530:	e58d000c 	str	r0, [sp, #12]
+3000c534:	e58d1008 	str	r1, [sp, #8]
+3000c538:	e58d2004 	str	r2, [sp, #4]
 	acoral_char *tmp, *s;
 
 	if (dest <= src) {
-3000c338:	e59d200c 	ldr	r2, [sp, #12]
-3000c33c:	e59d3008 	ldr	r3, [sp, #8]
-3000c340:	e1520003 	cmp	r2, r3
-3000c344:	8a000019 	bhi	3000c3b0 <acoral_memmove+0x88>
+3000c53c:	e59d200c 	ldr	r2, [sp, #12]
+3000c540:	e59d3008 	ldr	r3, [sp, #8]
+3000c544:	e1520003 	cmp	r2, r3
+3000c548:	8a000019 	bhi	3000c5b4 <acoral_memmove+0x88>
 		tmp = (acoral_char *) dest;
-3000c348:	e59d300c 	ldr	r3, [sp, #12]
-3000c34c:	e58d3010 	str	r3, [sp, #16]
+3000c54c:	e59d300c 	ldr	r3, [sp, #12]
+3000c550:	e58d3010 	str	r3, [sp, #16]
 		s = (acoral_char *) src;
-3000c350:	e59d3008 	ldr	r3, [sp, #8]
-3000c354:	e58d3014 	str	r3, [sp, #20]
+3000c554:	e59d3008 	ldr	r3, [sp, #8]
+3000c558:	e58d3014 	str	r3, [sp, #20]
 		while (count--)
-3000c358:	ea000009 	b	3000c384 <acoral_memmove+0x5c>
+3000c55c:	ea000009 	b	3000c588 <acoral_memmove+0x5c>
 			*tmp++ = *s++;
-3000c35c:	e59d3014 	ldr	r3, [sp, #20]
-3000c360:	e5d32000 	ldrb	r2, [r3]
-3000c364:	e59d3010 	ldr	r3, [sp, #16]
-3000c368:	e5c32000 	strb	r2, [r3]
-3000c36c:	e59d3010 	ldr	r3, [sp, #16]
-3000c370:	e2833001 	add	r3, r3, #1
-3000c374:	e58d3010 	str	r3, [sp, #16]
-3000c378:	e59d3014 	ldr	r3, [sp, #20]
-3000c37c:	e2833001 	add	r3, r3, #1
-3000c380:	e58d3014 	str	r3, [sp, #20]
+3000c560:	e59d3014 	ldr	r3, [sp, #20]
+3000c564:	e5d32000 	ldrb	r2, [r3]
+3000c568:	e59d3010 	ldr	r3, [sp, #16]
+3000c56c:	e5c32000 	strb	r2, [r3]
+3000c570:	e59d3010 	ldr	r3, [sp, #16]
+3000c574:	e2833001 	add	r3, r3, #1
+3000c578:	e58d3010 	str	r3, [sp, #16]
+3000c57c:	e59d3014 	ldr	r3, [sp, #20]
+3000c580:	e2833001 	add	r3, r3, #1
+3000c584:	e58d3014 	str	r3, [sp, #20]
 	acoral_char *tmp, *s;
 
 	if (dest <= src) {
 		tmp = (acoral_char *) dest;
 		s = (acoral_char *) src;
 		while (count--)
-3000c384:	e59d3004 	ldr	r3, [sp, #4]
-3000c388:	e3530000 	cmp	r3, #0
-3000c38c:	03a03000 	moveq	r3, #0
-3000c390:	13a03001 	movne	r3, #1
-3000c394:	e20330ff 	and	r3, r3, #255	; 0xff
-3000c398:	e59d2004 	ldr	r2, [sp, #4]
-3000c39c:	e2422001 	sub	r2, r2, #1
-3000c3a0:	e58d2004 	str	r2, [sp, #4]
-3000c3a4:	e3530000 	cmp	r3, #0
-3000c3a8:	1affffeb 	bne	3000c35c <acoral_memmove+0x34>
-3000c3ac:	ea00001c 	b	3000c424 <acoral_memmove+0xfc>
+3000c588:	e59d3004 	ldr	r3, [sp, #4]
+3000c58c:	e3530000 	cmp	r3, #0
+3000c590:	03a03000 	moveq	r3, #0
+3000c594:	13a03001 	movne	r3, #1
+3000c598:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c59c:	e59d2004 	ldr	r2, [sp, #4]
+3000c5a0:	e2422001 	sub	r2, r2, #1
+3000c5a4:	e58d2004 	str	r2, [sp, #4]
+3000c5a8:	e3530000 	cmp	r3, #0
+3000c5ac:	1affffeb 	bne	3000c560 <acoral_memmove+0x34>
+3000c5b0:	ea00001c 	b	3000c628 <acoral_memmove+0xfc>
 			*tmp++ = *s++;
 		}
 	else {
 		tmp = (acoral_char *) dest + count;
-3000c3b0:	e59d200c 	ldr	r2, [sp, #12]
-3000c3b4:	e59d3004 	ldr	r3, [sp, #4]
-3000c3b8:	e0823003 	add	r3, r2, r3
-3000c3bc:	e58d3010 	str	r3, [sp, #16]
+3000c5b4:	e59d200c 	ldr	r2, [sp, #12]
+3000c5b8:	e59d3004 	ldr	r3, [sp, #4]
+3000c5bc:	e0823003 	add	r3, r2, r3
+3000c5c0:	e58d3010 	str	r3, [sp, #16]
 		s = (acoral_char *) src + count;
-3000c3c0:	e59d2008 	ldr	r2, [sp, #8]
-3000c3c4:	e59d3004 	ldr	r3, [sp, #4]
-3000c3c8:	e0823003 	add	r3, r2, r3
-3000c3cc:	e58d3014 	str	r3, [sp, #20]
+3000c5c4:	e59d2008 	ldr	r2, [sp, #8]
+3000c5c8:	e59d3004 	ldr	r3, [sp, #4]
+3000c5cc:	e0823003 	add	r3, r2, r3
+3000c5d0:	e58d3014 	str	r3, [sp, #20]
 		while (count--)
-3000c3d0:	ea000009 	b	3000c3fc <acoral_memmove+0xd4>
+3000c5d4:	ea000009 	b	3000c600 <acoral_memmove+0xd4>
 			*--tmp = *--s;
-3000c3d4:	e59d3010 	ldr	r3, [sp, #16]
-3000c3d8:	e2433001 	sub	r3, r3, #1
-3000c3dc:	e58d3010 	str	r3, [sp, #16]
-3000c3e0:	e59d3014 	ldr	r3, [sp, #20]
-3000c3e4:	e2433001 	sub	r3, r3, #1
-3000c3e8:	e58d3014 	str	r3, [sp, #20]
-3000c3ec:	e59d3014 	ldr	r3, [sp, #20]
-3000c3f0:	e5d32000 	ldrb	r2, [r3]
-3000c3f4:	e59d3010 	ldr	r3, [sp, #16]
-3000c3f8:	e5c32000 	strb	r2, [r3]
+3000c5d8:	e59d3010 	ldr	r3, [sp, #16]
+3000c5dc:	e2433001 	sub	r3, r3, #1
+3000c5e0:	e58d3010 	str	r3, [sp, #16]
+3000c5e4:	e59d3014 	ldr	r3, [sp, #20]
+3000c5e8:	e2433001 	sub	r3, r3, #1
+3000c5ec:	e58d3014 	str	r3, [sp, #20]
+3000c5f0:	e59d3014 	ldr	r3, [sp, #20]
+3000c5f4:	e5d32000 	ldrb	r2, [r3]
+3000c5f8:	e59d3010 	ldr	r3, [sp, #16]
+3000c5fc:	e5c32000 	strb	r2, [r3]
 			*tmp++ = *s++;
 		}
 	else {
 		tmp = (acoral_char *) dest + count;
 		s = (acoral_char *) src + count;
 		while (count--)
-3000c3fc:	e59d3004 	ldr	r3, [sp, #4]
-3000c400:	e3530000 	cmp	r3, #0
-3000c404:	03a03000 	moveq	r3, #0
-3000c408:	13a03001 	movne	r3, #1
-3000c40c:	e20330ff 	and	r3, r3, #255	; 0xff
-3000c410:	e59d2004 	ldr	r2, [sp, #4]
-3000c414:	e2422001 	sub	r2, r2, #1
-3000c418:	e58d2004 	str	r2, [sp, #4]
-3000c41c:	e3530000 	cmp	r3, #0
-3000c420:	1affffeb 	bne	3000c3d4 <acoral_memmove+0xac>
+3000c600:	e59d3004 	ldr	r3, [sp, #4]
+3000c604:	e3530000 	cmp	r3, #0
+3000c608:	03a03000 	moveq	r3, #0
+3000c60c:	13a03001 	movne	r3, #1
+3000c610:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c614:	e59d2004 	ldr	r2, [sp, #4]
+3000c618:	e2422001 	sub	r2, r2, #1
+3000c61c:	e58d2004 	str	r2, [sp, #4]
+3000c620:	e3530000 	cmp	r3, #0
+3000c624:	1affffeb 	bne	3000c5d8 <acoral_memmove+0xac>
 			*--tmp = *--s;
 		}
 
 	return dest;
-3000c424:	e59d300c 	ldr	r3, [sp, #12]
+3000c628:	e59d300c 	ldr	r3, [sp, #12]
 }
-3000c428:	e1a00003 	mov	r0, r3
-3000c42c:	e28dd018 	add	sp, sp, #24
-3000c430:	e12fff1e 	bx	lr
+3000c62c:	e1a00003 	mov	r0, r3
+3000c630:	e28dd018 	add	sp, sp, #24
+3000c634:	e12fff1e 	bx	lr
 
-3000c434 <acoral_memcmp>:
+3000c638 <acoral_memcmp>:
  * @cs: One area of memory
  * @ct: Another area of memory
  * @count: The size of the area.
  */
 acoral_32 acoral_memcmp(const void * cs,const void * ct,acoral_u32 count)
 {
-3000c434:	e24dd020 	sub	sp, sp, #32
-3000c438:	e58d000c 	str	r0, [sp, #12]
-3000c43c:	e58d1008 	str	r1, [sp, #8]
-3000c440:	e58d2004 	str	r2, [sp, #4]
+3000c638:	e24dd020 	sub	sp, sp, #32
+3000c63c:	e58d000c 	str	r0, [sp, #12]
+3000c640:	e58d1008 	str	r1, [sp, #8]
+3000c644:	e58d2004 	str	r2, [sp, #4]
 	const acoral_u8 *su1, *su2;
 	acoral_32 res = 0;
-3000c444:	e3a03000 	mov	r3, #0
-3000c448:	e58d301c 	str	r3, [sp, #28]
+3000c648:	e3a03000 	mov	r3, #0
+3000c64c:	e58d301c 	str	r3, [sp, #28]
 
 	for( su1 = cs, su2 = ct; 0 < count; ++su1, ++su2, count--)
-3000c44c:	e59d300c 	ldr	r3, [sp, #12]
-3000c450:	e58d3014 	str	r3, [sp, #20]
-3000c454:	e59d3008 	ldr	r3, [sp, #8]
-3000c458:	e58d3018 	str	r3, [sp, #24]
-3000c45c:	ea000012 	b	3000c4ac <acoral_memcmp+0x78>
+3000c650:	e59d300c 	ldr	r3, [sp, #12]
+3000c654:	e58d3014 	str	r3, [sp, #20]
+3000c658:	e59d3008 	ldr	r3, [sp, #8]
+3000c65c:	e58d3018 	str	r3, [sp, #24]
+3000c660:	ea000012 	b	3000c6b0 <acoral_memcmp+0x78>
 		if ((res = *su1 - *su2) != 0)
-3000c460:	e59d3014 	ldr	r3, [sp, #20]
-3000c464:	e5d33000 	ldrb	r3, [r3]
-3000c468:	e1a02003 	mov	r2, r3
-3000c46c:	e59d3018 	ldr	r3, [sp, #24]
-3000c470:	e5d33000 	ldrb	r3, [r3]
-3000c474:	e0633002 	rsb	r3, r3, r2
-3000c478:	e58d301c 	str	r3, [sp, #28]
-3000c47c:	e59d301c 	ldr	r3, [sp, #28]
-3000c480:	e3530000 	cmp	r3, #0
-3000c484:	1a00000c 	bne	3000c4bc <acoral_memcmp+0x88>
+3000c664:	e59d3014 	ldr	r3, [sp, #20]
+3000c668:	e5d33000 	ldrb	r3, [r3]
+3000c66c:	e1a02003 	mov	r2, r3
+3000c670:	e59d3018 	ldr	r3, [sp, #24]
+3000c674:	e5d33000 	ldrb	r3, [r3]
+3000c678:	e0633002 	rsb	r3, r3, r2
+3000c67c:	e58d301c 	str	r3, [sp, #28]
+3000c680:	e59d301c 	ldr	r3, [sp, #28]
+3000c684:	e3530000 	cmp	r3, #0
+3000c688:	1a00000c 	bne	3000c6c0 <acoral_memcmp+0x88>
 acoral_32 acoral_memcmp(const void * cs,const void * ct,acoral_u32 count)
 {
 	const acoral_u8 *su1, *su2;
 	acoral_32 res = 0;
 
 	for( su1 = cs, su2 = ct; 0 < count; ++su1, ++su2, count--)
-3000c488:	e59d3014 	ldr	r3, [sp, #20]
-3000c48c:	e2833001 	add	r3, r3, #1
-3000c490:	e58d3014 	str	r3, [sp, #20]
-3000c494:	e59d3018 	ldr	r3, [sp, #24]
-3000c498:	e2833001 	add	r3, r3, #1
-3000c49c:	e58d3018 	str	r3, [sp, #24]
-3000c4a0:	e59d3004 	ldr	r3, [sp, #4]
-3000c4a4:	e2433001 	sub	r3, r3, #1
-3000c4a8:	e58d3004 	str	r3, [sp, #4]
-3000c4ac:	e59d3004 	ldr	r3, [sp, #4]
-3000c4b0:	e3530000 	cmp	r3, #0
-3000c4b4:	1affffe9 	bne	3000c460 <acoral_memcmp+0x2c>
-3000c4b8:	ea000000 	b	3000c4c0 <acoral_memcmp+0x8c>
+3000c68c:	e59d3014 	ldr	r3, [sp, #20]
+3000c690:	e2833001 	add	r3, r3, #1
+3000c694:	e58d3014 	str	r3, [sp, #20]
+3000c698:	e59d3018 	ldr	r3, [sp, #24]
+3000c69c:	e2833001 	add	r3, r3, #1
+3000c6a0:	e58d3018 	str	r3, [sp, #24]
+3000c6a4:	e59d3004 	ldr	r3, [sp, #4]
+3000c6a8:	e2433001 	sub	r3, r3, #1
+3000c6ac:	e58d3004 	str	r3, [sp, #4]
+3000c6b0:	e59d3004 	ldr	r3, [sp, #4]
+3000c6b4:	e3530000 	cmp	r3, #0
+3000c6b8:	1affffe9 	bne	3000c664 <acoral_memcmp+0x2c>
+3000c6bc:	ea000000 	b	3000c6c4 <acoral_memcmp+0x8c>
 		if ((res = *su1 - *su2) != 0)
 			break;
-3000c4bc:	e1a00000 	nop			; (mov r0, r0)
+3000c6c0:	e1a00000 	nop			; (mov r0, r0)
 	return res;
-3000c4c0:	e59d301c 	ldr	r3, [sp, #28]
+3000c6c4:	e59d301c 	ldr	r3, [sp, #28]
 }
-3000c4c4:	e1a00003 	mov	r0, r3
-3000c4c8:	e28dd020 	add	sp, sp, #32
-3000c4cc:	e12fff1e 	bx	lr
+3000c6c8:	e1a00003 	mov	r0, r3
+3000c6cc:	e28dd020 	add	sp, sp, #32
+3000c6d0:	e12fff1e 	bx	lr
 
-3000c4d0 <acoral_memscan>:
+3000c6d4 <acoral_memscan>:
  *
  * returns the address of the first occurrence of @c, or 1 byte past
  * the area if @c is not found
  */
 void * acoral_memscan(void * addr, acoral_32 c, acoral_u32 size)
 {
-3000c4d0:	e24dd018 	sub	sp, sp, #24
-3000c4d4:	e58d000c 	str	r0, [sp, #12]
-3000c4d8:	e58d1008 	str	r1, [sp, #8]
-3000c4dc:	e58d2004 	str	r2, [sp, #4]
+3000c6d4:	e24dd018 	sub	sp, sp, #24
+3000c6d8:	e58d000c 	str	r0, [sp, #12]
+3000c6dc:	e58d1008 	str	r1, [sp, #8]
+3000c6e0:	e58d2004 	str	r2, [sp, #4]
 	acoral_u8 * p = (acoral_u8 *) addr;
-3000c4e0:	e59d300c 	ldr	r3, [sp, #12]
-3000c4e4:	e58d3014 	str	r3, [sp, #20]
+3000c6e4:	e59d300c 	ldr	r3, [sp, #12]
+3000c6e8:	e58d3014 	str	r3, [sp, #20]
 
 	while (size) {
-3000c4e8:	ea00000d 	b	3000c524 <acoral_memscan+0x54>
+3000c6ec:	ea00000d 	b	3000c728 <acoral_memscan+0x54>
 		if (*p == c)
-3000c4ec:	e59d3014 	ldr	r3, [sp, #20]
-3000c4f0:	e5d33000 	ldrb	r3, [r3]
-3000c4f4:	e1a02003 	mov	r2, r3
-3000c4f8:	e59d3008 	ldr	r3, [sp, #8]
-3000c4fc:	e1520003 	cmp	r2, r3
-3000c500:	1a000001 	bne	3000c50c <acoral_memscan+0x3c>
+3000c6f0:	e59d3014 	ldr	r3, [sp, #20]
+3000c6f4:	e5d33000 	ldrb	r3, [r3]
+3000c6f8:	e1a02003 	mov	r2, r3
+3000c6fc:	e59d3008 	ldr	r3, [sp, #8]
+3000c700:	e1520003 	cmp	r2, r3
+3000c704:	1a000001 	bne	3000c710 <acoral_memscan+0x3c>
 			return (void *) p;
-3000c504:	e59d3014 	ldr	r3, [sp, #20]
-3000c508:	ea000009 	b	3000c534 <acoral_memscan+0x64>
+3000c708:	e59d3014 	ldr	r3, [sp, #20]
+3000c70c:	ea000009 	b	3000c738 <acoral_memscan+0x64>
 		p++;
-3000c50c:	e59d3014 	ldr	r3, [sp, #20]
-3000c510:	e2833001 	add	r3, r3, #1
-3000c514:	e58d3014 	str	r3, [sp, #20]
+3000c710:	e59d3014 	ldr	r3, [sp, #20]
+3000c714:	e2833001 	add	r3, r3, #1
+3000c718:	e58d3014 	str	r3, [sp, #20]
 		size--;
-3000c518:	e59d3004 	ldr	r3, [sp, #4]
-3000c51c:	e2433001 	sub	r3, r3, #1
-3000c520:	e58d3004 	str	r3, [sp, #4]
+3000c71c:	e59d3004 	ldr	r3, [sp, #4]
+3000c720:	e2433001 	sub	r3, r3, #1
+3000c724:	e58d3004 	str	r3, [sp, #4]
  */
 void * acoral_memscan(void * addr, acoral_32 c, acoral_u32 size)
 {
 	acoral_u8 * p = (acoral_u8 *) addr;
 
 	while (size) {
-3000c524:	e59d3004 	ldr	r3, [sp, #4]
-3000c528:	e3530000 	cmp	r3, #0
-3000c52c:	1affffee 	bne	3000c4ec <acoral_memscan+0x1c>
+3000c728:	e59d3004 	ldr	r3, [sp, #4]
+3000c72c:	e3530000 	cmp	r3, #0
+3000c730:	1affffee 	bne	3000c6f0 <acoral_memscan+0x1c>
 		if (*p == c)
 			return (void *) p;
 		p++;
 		size--;
 	}
   	return (void *) p;
-3000c530:	e59d3014 	ldr	r3, [sp, #20]
+3000c734:	e59d3014 	ldr	r3, [sp, #20]
 }
-3000c534:	e1a00003 	mov	r0, r3
-3000c538:	e28dd018 	add	sp, sp, #24
-3000c53c:	e12fff1e 	bx	lr
+3000c738:	e1a00003 	mov	r0, r3
+3000c73c:	e28dd018 	add	sp, sp, #24
+3000c740:	e12fff1e 	bx	lr
 
-3000c540 <acoral_strstr>:
+3000c744 <acoral_strstr>:
  * acoral_strstr - Find the first substring in a %NUL terminated string
  * @s1: The string to be searched
  * @s2: The string to search for
  */
 acoral_char * acoral_strstr(const acoral_char * s1,const acoral_char * s2)
 {
-3000c540:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000c544:	e24dd014 	sub	sp, sp, #20
-3000c548:	e58d0004 	str	r0, [sp, #4]
-3000c54c:	e58d1000 	str	r1, [sp]
+3000c744:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000c748:	e24dd014 	sub	sp, sp, #20
+3000c74c:	e58d0004 	str	r0, [sp, #4]
+3000c750:	e58d1000 	str	r1, [sp]
 	acoral_32 l1, l2;
 
 	l2 = acoral_str_len(s2);
-3000c550:	e59d0000 	ldr	r0, [sp]
-3000c554:	ebfffc69 	bl	3000b700 <acoral_str_len>
-3000c558:	e1a03000 	mov	r3, r0
-3000c55c:	e58d300c 	str	r3, [sp, #12]
+3000c754:	e59d0000 	ldr	r0, [sp]
+3000c758:	ebfffc69 	bl	3000b904 <acoral_str_len>
+3000c75c:	e1a03000 	mov	r3, r0
+3000c760:	e58d300c 	str	r3, [sp, #12]
 	if (!l2)
-3000c560:	e59d300c 	ldr	r3, [sp, #12]
-3000c564:	e3530000 	cmp	r3, #0
-3000c568:	1a000001 	bne	3000c574 <acoral_strstr+0x34>
+3000c764:	e59d300c 	ldr	r3, [sp, #12]
+3000c768:	e3530000 	cmp	r3, #0
+3000c76c:	1a000001 	bne	3000c778 <acoral_strstr+0x34>
 		return (acoral_char *) s1;
-3000c56c:	e59d3004 	ldr	r3, [sp, #4]
-3000c570:	ea000019 	b	3000c5dc <acoral_strstr+0x9c>
+3000c770:	e59d3004 	ldr	r3, [sp, #4]
+3000c774:	ea000019 	b	3000c7e0 <acoral_strstr+0x9c>
 	l1 = acoral_str_len(s1);
-3000c574:	e59d0004 	ldr	r0, [sp, #4]
-3000c578:	ebfffc60 	bl	3000b700 <acoral_str_len>
-3000c57c:	e1a03000 	mov	r3, r0
-3000c580:	e58d3008 	str	r3, [sp, #8]
+3000c778:	e59d0004 	ldr	r0, [sp, #4]
+3000c77c:	ebfffc60 	bl	3000b904 <acoral_str_len>
+3000c780:	e1a03000 	mov	r3, r0
+3000c784:	e58d3008 	str	r3, [sp, #8]
 	while (l1 >= l2) {
-3000c584:	ea00000f 	b	3000c5c8 <acoral_strstr+0x88>
+3000c788:	ea00000f 	b	3000c7cc <acoral_strstr+0x88>
 		l1--;
-3000c588:	e59d3008 	ldr	r3, [sp, #8]
-3000c58c:	e2433001 	sub	r3, r3, #1
-3000c590:	e58d3008 	str	r3, [sp, #8]
+3000c78c:	e59d3008 	ldr	r3, [sp, #8]
+3000c790:	e2433001 	sub	r3, r3, #1
+3000c794:	e58d3008 	str	r3, [sp, #8]
 		if (!acoral_memcmp(s1,s2,l2))
-3000c594:	e59d300c 	ldr	r3, [sp, #12]
-3000c598:	e59d0004 	ldr	r0, [sp, #4]
-3000c59c:	e59d1000 	ldr	r1, [sp]
-3000c5a0:	e1a02003 	mov	r2, r3
-3000c5a4:	ebffffa2 	bl	3000c434 <acoral_memcmp>
-3000c5a8:	e1a03000 	mov	r3, r0
-3000c5ac:	e3530000 	cmp	r3, #0
-3000c5b0:	1a000001 	bne	3000c5bc <acoral_strstr+0x7c>
+3000c798:	e59d300c 	ldr	r3, [sp, #12]
+3000c79c:	e59d0004 	ldr	r0, [sp, #4]
+3000c7a0:	e59d1000 	ldr	r1, [sp]
+3000c7a4:	e1a02003 	mov	r2, r3
+3000c7a8:	ebffffa2 	bl	3000c638 <acoral_memcmp>
+3000c7ac:	e1a03000 	mov	r3, r0
+3000c7b0:	e3530000 	cmp	r3, #0
+3000c7b4:	1a000001 	bne	3000c7c0 <acoral_strstr+0x7c>
 			return (acoral_char *) s1;
-3000c5b4:	e59d3004 	ldr	r3, [sp, #4]
-3000c5b8:	ea000007 	b	3000c5dc <acoral_strstr+0x9c>
+3000c7b8:	e59d3004 	ldr	r3, [sp, #4]
+3000c7bc:	ea000007 	b	3000c7e0 <acoral_strstr+0x9c>
 		s1++;
-3000c5bc:	e59d3004 	ldr	r3, [sp, #4]
-3000c5c0:	e2833001 	add	r3, r3, #1
-3000c5c4:	e58d3004 	str	r3, [sp, #4]
+3000c7c0:	e59d3004 	ldr	r3, [sp, #4]
+3000c7c4:	e2833001 	add	r3, r3, #1
+3000c7c8:	e58d3004 	str	r3, [sp, #4]
 
 	l2 = acoral_str_len(s2);
 	if (!l2)
 		return (acoral_char *) s1;
 	l1 = acoral_str_len(s1);
 	while (l1 >= l2) {
-3000c5c8:	e59d2008 	ldr	r2, [sp, #8]
-3000c5cc:	e59d300c 	ldr	r3, [sp, #12]
-3000c5d0:	e1520003 	cmp	r2, r3
-3000c5d4:	aaffffeb 	bge	3000c588 <acoral_strstr+0x48>
+3000c7cc:	e59d2008 	ldr	r2, [sp, #8]
+3000c7d0:	e59d300c 	ldr	r3, [sp, #12]
+3000c7d4:	e1520003 	cmp	r2, r3
+3000c7d8:	aaffffeb 	bge	3000c78c <acoral_strstr+0x48>
 		l1--;
 		if (!acoral_memcmp(s1,s2,l2))
 			return (acoral_char *) s1;
 		s1++;
 	}
 	return NULL;
-3000c5d8:	e3a03000 	mov	r3, #0
+3000c7dc:	e3a03000 	mov	r3, #0
 }
-3000c5dc:	e1a00003 	mov	r0, r3
-3000c5e0:	e28dd014 	add	sp, sp, #20
-3000c5e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000c5e8:	e12fff1e 	bx	lr
+3000c7e0:	e1a00003 	mov	r0, r3
+3000c7e4:	e28dd014 	add	sp, sp, #20
+3000c7e8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000c7ec:	e12fff1e 	bx	lr
 
-3000c5ec <acoral_memchr>:
+3000c7f0 <acoral_memchr>:
  *
  * returns the address of the first occurrence of @c, or %NULL
  * if @c is not found
  */
 void *acoral_memchr(const void *s, acoral_32 c, acoral_u32 n)
 {
-3000c5ec:	e24dd018 	sub	sp, sp, #24
-3000c5f0:	e58d000c 	str	r0, [sp, #12]
-3000c5f4:	e58d1008 	str	r1, [sp, #8]
-3000c5f8:	e58d2004 	str	r2, [sp, #4]
+3000c7f0:	e24dd018 	sub	sp, sp, #24
+3000c7f4:	e58d000c 	str	r0, [sp, #12]
+3000c7f8:	e58d1008 	str	r1, [sp, #8]
+3000c7fc:	e58d2004 	str	r2, [sp, #4]
 	const acoral_u8 *p = s;
-3000c5fc:	e59d300c 	ldr	r3, [sp, #12]
-3000c600:	e58d3014 	str	r3, [sp, #20]
+3000c800:	e59d300c 	ldr	r3, [sp, #12]
+3000c804:	e58d3014 	str	r3, [sp, #20]
 	while (n-- != 0) {
-3000c604:	ea00000f 	b	3000c648 <acoral_memchr+0x5c>
+3000c808:	ea00000f 	b	3000c84c <acoral_memchr+0x5c>
         	if ((acoral_u8)c == *p++) {
-3000c608:	e59d3008 	ldr	r3, [sp, #8]
-3000c60c:	e20320ff 	and	r2, r3, #255	; 0xff
-3000c610:	e59d3014 	ldr	r3, [sp, #20]
-3000c614:	e5d33000 	ldrb	r3, [r3]
-3000c618:	e1520003 	cmp	r2, r3
-3000c61c:	13a03000 	movne	r3, #0
-3000c620:	03a03001 	moveq	r3, #1
-3000c624:	e20330ff 	and	r3, r3, #255	; 0xff
-3000c628:	e59d2014 	ldr	r2, [sp, #20]
-3000c62c:	e2822001 	add	r2, r2, #1
-3000c630:	e58d2014 	str	r2, [sp, #20]
-3000c634:	e3530000 	cmp	r3, #0
-3000c638:	0a000002 	beq	3000c648 <acoral_memchr+0x5c>
+3000c80c:	e59d3008 	ldr	r3, [sp, #8]
+3000c810:	e20320ff 	and	r2, r3, #255	; 0xff
+3000c814:	e59d3014 	ldr	r3, [sp, #20]
+3000c818:	e5d33000 	ldrb	r3, [r3]
+3000c81c:	e1520003 	cmp	r2, r3
+3000c820:	13a03000 	movne	r3, #0
+3000c824:	03a03001 	moveq	r3, #1
+3000c828:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c82c:	e59d2014 	ldr	r2, [sp, #20]
+3000c830:	e2822001 	add	r2, r2, #1
+3000c834:	e58d2014 	str	r2, [sp, #20]
+3000c838:	e3530000 	cmp	r3, #0
+3000c83c:	0a000002 	beq	3000c84c <acoral_memchr+0x5c>
 			return (void *)(p-1);
-3000c63c:	e59d3014 	ldr	r3, [sp, #20]
-3000c640:	e2433001 	sub	r3, r3, #1
-3000c644:	ea00000a 	b	3000c674 <acoral_memchr+0x88>
+3000c840:	e59d3014 	ldr	r3, [sp, #20]
+3000c844:	e2433001 	sub	r3, r3, #1
+3000c848:	ea00000a 	b	3000c878 <acoral_memchr+0x88>
  * if @c is not found
  */
 void *acoral_memchr(const void *s, acoral_32 c, acoral_u32 n)
 {
 	const acoral_u8 *p = s;
 	while (n-- != 0) {
-3000c648:	e59d3004 	ldr	r3, [sp, #4]
-3000c64c:	e3530000 	cmp	r3, #0
-3000c650:	03a03000 	moveq	r3, #0
-3000c654:	13a03001 	movne	r3, #1
-3000c658:	e20330ff 	and	r3, r3, #255	; 0xff
-3000c65c:	e59d2004 	ldr	r2, [sp, #4]
-3000c660:	e2422001 	sub	r2, r2, #1
-3000c664:	e58d2004 	str	r2, [sp, #4]
-3000c668:	e3530000 	cmp	r3, #0
-3000c66c:	1affffe5 	bne	3000c608 <acoral_memchr+0x1c>
+3000c84c:	e59d3004 	ldr	r3, [sp, #4]
+3000c850:	e3530000 	cmp	r3, #0
+3000c854:	03a03000 	moveq	r3, #0
+3000c858:	13a03001 	movne	r3, #1
+3000c85c:	e20330ff 	and	r3, r3, #255	; 0xff
+3000c860:	e59d2004 	ldr	r2, [sp, #4]
+3000c864:	e2422001 	sub	r2, r2, #1
+3000c868:	e58d2004 	str	r2, [sp, #4]
+3000c86c:	e3530000 	cmp	r3, #0
+3000c870:	1affffe5 	bne	3000c80c <acoral_memchr+0x1c>
         	if ((acoral_u8)c == *p++) {
 			return (void *)(p-1);
 		}
 	}
 	return NULL;
-3000c670:	e3a03000 	mov	r3, #0
+3000c874:	e3a03000 	mov	r3, #0
 }
-3000c674:	e1a00003 	mov	r0, r3
-3000c678:	e28dd018 	add	sp, sp, #24
-3000c67c:	e12fff1e 	bx	lr
+3000c878:	e1a00003 	mov	r0, r3
+3000c87c:	e28dd018 	add	sp, sp, #24
+3000c880:	e12fff1e 	bx	lr
 
-3000c680 <acoral_rand>:
+3000c884 <acoral_rand>:
 #include<acoral.h>
 static acoral_u32 rand_seed;
 acoral_u32 acoral_rand(void)
 {
 	rand_seed=(rand_seed*123+59)%65536;
-3000c680:	e59f3038 	ldr	r3, [pc, #56]	; 3000c6c0 <acoral_rand+0x40>
-3000c684:	e5932000 	ldr	r2, [r3]
-3000c688:	e1a03002 	mov	r3, r2
-3000c68c:	e1a03283 	lsl	r3, r3, #5
-3000c690:	e0623003 	rsb	r3, r2, r3
-3000c694:	e1a03103 	lsl	r3, r3, #2
-3000c698:	e0623003 	rsb	r3, r2, r3
-3000c69c:	e283303b 	add	r3, r3, #59	; 0x3b
-3000c6a0:	e1a03803 	lsl	r3, r3, #16
-3000c6a4:	e1a03823 	lsr	r3, r3, #16
-3000c6a8:	e59f2010 	ldr	r2, [pc, #16]	; 3000c6c0 <acoral_rand+0x40>
-3000c6ac:	e5823000 	str	r3, [r2]
+3000c884:	e59f3038 	ldr	r3, [pc, #56]	; 3000c8c4 <acoral_rand+0x40>
+3000c888:	e5932000 	ldr	r2, [r3]
+3000c88c:	e1a03002 	mov	r3, r2
+3000c890:	e1a03283 	lsl	r3, r3, #5
+3000c894:	e0623003 	rsb	r3, r2, r3
+3000c898:	e1a03103 	lsl	r3, r3, #2
+3000c89c:	e0623003 	rsb	r3, r2, r3
+3000c8a0:	e283303b 	add	r3, r3, #59	; 0x3b
+3000c8a4:	e1a03803 	lsl	r3, r3, #16
+3000c8a8:	e1a03823 	lsr	r3, r3, #16
+3000c8ac:	e59f2010 	ldr	r2, [pc, #16]	; 3000c8c4 <acoral_rand+0x40>
+3000c8b0:	e5823000 	str	r3, [r2]
 	return rand_seed;
-3000c6b0:	e59f3008 	ldr	r3, [pc, #8]	; 3000c6c0 <acoral_rand+0x40>
-3000c6b4:	e5933000 	ldr	r3, [r3]
+3000c8b4:	e59f3008 	ldr	r3, [pc, #8]	; 3000c8c4 <acoral_rand+0x40>
+3000c8b8:	e5933000 	ldr	r3, [r3]
 }
-3000c6b8:	e1a00003 	mov	r0, r3
-3000c6bc:	e12fff1e 	bx	lr
-3000c6c0:	3000f348 	.word	0x3000f348
+3000c8bc:	e1a00003 	mov	r0, r3
+3000c8c0:	e12fff1e 	bx	lr
+3000c8c4:	3000f554 	.word	0x3000f554
 
-3000c6c4 <acoral_rand_start>:
+3000c8c8 <acoral_rand_start>:
 
 void acoral_rand_start(void)
 {
-3000c6c4:	e92d4008 	push	{r3, lr}
+3000c8c8:	e92d4008 	push	{r3, lr}
 	rand_seed=acoral_ticks;
-3000c6c8:	ebffdf87 	bl	300044ec <acoral_get_ticks>
-3000c6cc:	e1a02000 	mov	r2, r0
-3000c6d0:	e59f3008 	ldr	r3, [pc, #8]	; 3000c6e0 <acoral_rand_start+0x1c>
-3000c6d4:	e5832000 	str	r2, [r3]
+3000c8cc:	ebffdf06 	bl	300044ec <acoral_get_ticks>
+3000c8d0:	e1a02000 	mov	r2, r0
+3000c8d4:	e59f3008 	ldr	r3, [pc, #8]	; 3000c8e4 <acoral_rand_start+0x1c>
+3000c8d8:	e5832000 	str	r2, [r3]
 }
-3000c6d8:	e8bd4008 	pop	{r3, lr}
-3000c6dc:	e12fff1e 	bx	lr
-3000c6e0:	3000f348 	.word	0x3000f348
+3000c8dc:	e8bd4008 	pop	{r3, lr}
+3000c8e0:	e12fff1e 	bx	lr
+3000c8e4:	3000f554 	.word	0x3000f554
 
-3000c6e4 <plugin_init>:
+3000c8e8 <plugin_init>:
 #endif
 
 #ifdef CFG_PLUGIN_GUI
 	acoral_gui_init();
 #endif
 }
-3000c6e4:	e12fff1e 	bx	lr
+3000c8e8:	e12fff1e 	bx	lr
 
-3000c6e8 <dummy>:
+3000c8ec <dummy>:
 #include"acoral.h"
 #include"../include/shell.h"
 void dummy(void *args){
-3000c6e8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000c6ec:	e24dd014 	sub	sp, sp, #20
-3000c6f0:	e58d0004 	str	r0, [sp, #4]
+3000c8ec:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000c8f0:	e24dd014 	sub	sp, sp, #20
+3000c8f4:	e58d0004 	str	r0, [sp, #4]
 	int i=0;
-3000c6f4:	e3a03000 	mov	r3, #0
-3000c6f8:	e58d300c 	str	r3, [sp, #12]
+3000c8f8:	e3a03000 	mov	r3, #0
+3000c8fc:	e58d300c 	str	r3, [sp, #12]
 	while(1){
 		i++;
-3000c6fc:	e59d300c 	ldr	r3, [sp, #12]
-3000c700:	e2833001 	add	r3, r3, #1
-3000c704:	e58d300c 	str	r3, [sp, #12]
+3000c900:	e59d300c 	ldr	r3, [sp, #12]
+3000c904:	e2833001 	add	r3, r3, #1
+3000c908:	e58d300c 	str	r3, [sp, #12]
 //		LedControl(i);
 		acoral_delay_self(1000);
-3000c708:	e3a00ffa 	mov	r0, #1000	; 0x3e8
-3000c70c:	ebffd890 	bl	30002954 <acoral_delay_self>
+3000c90c:	e3a00ffa 	mov	r0, #1000	; 0x3e8
+3000c910:	ebffd80f 	bl	30002954 <acoral_delay_self>
 	}
-3000c710:	eafffff9 	b	3000c6fc <dummy+0x14>
+3000c914:	eafffff9 	b	3000c900 <dummy+0x14>
 
-3000c714 <user_main>:
+3000c918 <user_main>:
 #endif
 #ifdef CFG_WEB_SERVER
 	user_httpd();
 #endif
 //	acoral_create_thread(dummy,256,NULL,NULL,20,0);
 }
-3000c714:	e12fff1e 	bx	lr
+3000c918:	e12fff1e 	bx	lr
 
-3000c718 <parse_args>:
+3000c91c <parse_args>:
 	PS_STRING,
 	PS_ESCAPE
 };
 
 void parse_args(acoral_char *argstr, acoral_32 *argc_p, acoral_char **argv, acoral_char** resid,enum parse_state *stacked)
 {
-3000c718:	e24dd018 	sub	sp, sp, #24
-3000c71c:	e58d000c 	str	r0, [sp, #12]
-3000c720:	e58d1008 	str	r1, [sp, #8]
-3000c724:	e58d2004 	str	r2, [sp, #4]
-3000c728:	e58d3000 	str	r3, [sp]
+3000c91c:	e24dd018 	sub	sp, sp, #24
+3000c920:	e58d000c 	str	r0, [sp, #12]
+3000c924:	e58d1008 	str	r1, [sp, #8]
+3000c928:	e58d2004 	str	r2, [sp, #4]
+3000c92c:	e58d3000 	str	r3, [sp]
 	acoral_32 argc = 0;
-3000c72c:	e3a03000 	mov	r3, #0
-3000c730:	e58d3010 	str	r3, [sp, #16]
+3000c930:	e3a03000 	mov	r3, #0
+3000c934:	e58d3010 	str	r3, [sp, #16]
 	acoral_char c;
 	enum parse_state newState;
 	enum parse_state stacked_state=*stacked;
-3000c734:	e59d3018 	ldr	r3, [sp, #24]
-3000c738:	e5d33000 	ldrb	r3, [r3]
-3000c73c:	e5cd3016 	strb	r3, [sp, #22]
+3000c938:	e59d3018 	ldr	r3, [sp, #24]
+3000c93c:	e5d33000 	ldrb	r3, [r3]
+3000c940:	e5cd3016 	strb	r3, [sp, #22]
 	enum parse_state lastState = PS_WHITESPACE;
-3000c740:	e3a03000 	mov	r3, #0
-3000c744:	e5cd3017 	strb	r3, [sp, #23]
+3000c944:	e3a03000 	mov	r3, #0
+3000c948:	e5cd3017 	strb	r3, [sp, #23]
 
 	while ((c = *argstr) != 0&&argc<MAX_ARGS_NUM) {
-3000c748:	ea000059 	b	3000c8b4 <parse_args+0x19c>
+3000c94c:	ea000059 	b	3000cab8 <parse_args+0x19c>
 
 		if (c == ';' && lastState != PS_STRING && lastState != PS_ESCAPE)
-3000c74c:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c750:	e353003b 	cmp	r3, #59	; 0x3b
-3000c754:	1a000005 	bne	3000c770 <parse_args+0x58>
-3000c758:	e5dd3017 	ldrb	r3, [sp, #23]
-3000c75c:	e3530002 	cmp	r3, #2
-3000c760:	0a000002 	beq	3000c770 <parse_args+0x58>
-3000c764:	e5dd3017 	ldrb	r3, [sp, #23]
-3000c768:	e3530003 	cmp	r3, #3
-3000c76c:	1a00005a 	bne	3000c8dc <parse_args+0x1c4>
+3000c950:	e5dd3014 	ldrb	r3, [sp, #20]
+3000c954:	e353003b 	cmp	r3, #59	; 0x3b
+3000c958:	1a000005 	bne	3000c974 <parse_args+0x58>
+3000c95c:	e5dd3017 	ldrb	r3, [sp, #23]
+3000c960:	e3530002 	cmp	r3, #2
+3000c964:	0a000002 	beq	3000c974 <parse_args+0x58>
+3000c968:	e5dd3017 	ldrb	r3, [sp, #23]
+3000c96c:	e3530003 	cmp	r3, #3
+3000c970:	1a00005a 	bne	3000cae0 <parse_args+0x1c4>
 			break;
 
 		if (lastState == PS_ESCAPE) {
-3000c770:	e5dd3017 	ldrb	r3, [sp, #23]
-3000c774:	e3530003 	cmp	r3, #3
-3000c778:	1a000002 	bne	3000c788 <parse_args+0x70>
+3000c974:	e5dd3017 	ldrb	r3, [sp, #23]
+3000c978:	e3530003 	cmp	r3, #3
+3000c97c:	1a000002 	bne	3000c98c <parse_args+0x70>
 			newState = stacked_state;
-3000c77c:	e5dd3016 	ldrb	r3, [sp, #22]
-3000c780:	e5cd3015 	strb	r3, [sp, #21]
-3000c784:	ea000045 	b	3000c8a0 <parse_args+0x188>
+3000c980:	e5dd3016 	ldrb	r3, [sp, #22]
+3000c984:	e5cd3015 	strb	r3, [sp, #21]
+3000c988:	ea000045 	b	3000caa4 <parse_args+0x188>
 		} else if (lastState == PS_STRING) {
-3000c788:	e5dd3017 	ldrb	r3, [sp, #23]
-3000c78c:	e3530002 	cmp	r3, #2
-3000c790:	1a00000b 	bne	3000c7c4 <parse_args+0xac>
+3000c98c:	e5dd3017 	ldrb	r3, [sp, #23]
+3000c990:	e3530002 	cmp	r3, #2
+3000c994:	1a00000b 	bne	3000c9c8 <parse_args+0xac>
 			if (c == '"') {
-3000c794:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c798:	e3530022 	cmp	r3, #34	; 0x22
-3000c79c:	1a000005 	bne	3000c7b8 <parse_args+0xa0>
+3000c998:	e5dd3014 	ldrb	r3, [sp, #20]
+3000c99c:	e3530022 	cmp	r3, #34	; 0x22
+3000c9a0:	1a000005 	bne	3000c9bc <parse_args+0xa0>
 				newState = PS_WHITESPACE;
-3000c7a0:	e3a03000 	mov	r3, #0
-3000c7a4:	e5cd3015 	strb	r3, [sp, #21]
+3000c9a4:	e3a03000 	mov	r3, #0
+3000c9a8:	e5cd3015 	strb	r3, [sp, #21]
 				*argstr = 0;
-3000c7a8:	e59d300c 	ldr	r3, [sp, #12]
-3000c7ac:	e3a02000 	mov	r2, #0
-3000c7b0:	e5c32000 	strb	r2, [r3]
+3000c9ac:	e59d300c 	ldr	r3, [sp, #12]
+3000c9b0:	e3a02000 	mov	r2, #0
+3000c9b4:	e5c32000 	strb	r2, [r3]
 			} else {
 				newState = PS_STRING;
-3000c7b4:	ea000039 	b	3000c8a0 <parse_args+0x188>
-3000c7b8:	e3a03002 	mov	r3, #2
-3000c7bc:	e5cd3015 	strb	r3, [sp, #21]
-3000c7c0:	ea000036 	b	3000c8a0 <parse_args+0x188>
+3000c9b8:	ea000039 	b	3000caa4 <parse_args+0x188>
+3000c9bc:	e3a03002 	mov	r3, #2
+3000c9c0:	e5cd3015 	strb	r3, [sp, #21]
+3000c9c4:	ea000036 	b	3000caa4 <parse_args+0x188>
 			}
 		} else if ((c == ' ') || (c == '\t')) {
-3000c7c4:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c7c8:	e3530020 	cmp	r3, #32
-3000c7cc:	0a000002 	beq	3000c7dc <parse_args+0xc4>
-3000c7d0:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c7d4:	e3530009 	cmp	r3, #9
-3000c7d8:	1a000005 	bne	3000c7f4 <parse_args+0xdc>
+3000c9c8:	e5dd3014 	ldrb	r3, [sp, #20]
+3000c9cc:	e3530020 	cmp	r3, #32
+3000c9d0:	0a000002 	beq	3000c9e0 <parse_args+0xc4>
+3000c9d4:	e5dd3014 	ldrb	r3, [sp, #20]
+3000c9d8:	e3530009 	cmp	r3, #9
+3000c9dc:	1a000005 	bne	3000c9f8 <parse_args+0xdc>
 			*argstr = 0;
-3000c7dc:	e59d300c 	ldr	r3, [sp, #12]
-3000c7e0:	e3a02000 	mov	r2, #0
-3000c7e4:	e5c32000 	strb	r2, [r3]
+3000c9e0:	e59d300c 	ldr	r3, [sp, #12]
+3000c9e4:	e3a02000 	mov	r2, #0
+3000c9e8:	e5c32000 	strb	r2, [r3]
 			newState = PS_WHITESPACE;
-3000c7e8:	e3a03000 	mov	r3, #0
-3000c7ec:	e5cd3015 	strb	r3, [sp, #21]
+3000c9ec:	e3a03000 	mov	r3, #0
+3000c9f0:	e5cd3015 	strb	r3, [sp, #21]
 				newState = PS_WHITESPACE;
 				*argstr = 0;
 			} else {
 				newState = PS_STRING;
 			}
 		} else if ((c == ' ') || (c == '\t')) {
-3000c7f0:	ea00002a 	b	3000c8a0 <parse_args+0x188>
+3000c9f4:	ea00002a 	b	3000caa4 <parse_args+0x188>
 			*argstr = 0;
 			newState = PS_WHITESPACE;
 		} else if (c == '"') {
-3000c7f4:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c7f8:	e3530022 	cmp	r3, #34	; 0x22
-3000c7fc:	1a000011 	bne	3000c848 <parse_args+0x130>
+3000c9f8:	e5dd3014 	ldrb	r3, [sp, #20]
+3000c9fc:	e3530022 	cmp	r3, #34	; 0x22
+3000ca00:	1a000011 	bne	3000ca4c <parse_args+0x130>
 			newState = PS_STRING;
-3000c800:	e3a03002 	mov	r3, #2
-3000c804:	e5cd3015 	strb	r3, [sp, #21]
+3000ca04:	e3a03002 	mov	r3, #2
+3000ca08:	e5cd3015 	strb	r3, [sp, #21]
 			*argstr++ = 0;
-3000c808:	e59d300c 	ldr	r3, [sp, #12]
-3000c80c:	e3a02000 	mov	r2, #0
-3000c810:	e5c32000 	strb	r2, [r3]
-3000c814:	e59d300c 	ldr	r3, [sp, #12]
-3000c818:	e2833001 	add	r3, r3, #1
-3000c81c:	e58d300c 	str	r3, [sp, #12]
+3000ca0c:	e59d300c 	ldr	r3, [sp, #12]
+3000ca10:	e3a02000 	mov	r2, #0
+3000ca14:	e5c32000 	strb	r2, [r3]
+3000ca18:	e59d300c 	ldr	r3, [sp, #12]
+3000ca1c:	e2833001 	add	r3, r3, #1
+3000ca20:	e58d300c 	str	r3, [sp, #12]
 			argv[argc++] = argstr;
-3000c820:	e59d3010 	ldr	r3, [sp, #16]
-3000c824:	e1a02103 	lsl	r2, r3, #2
-3000c828:	e59d3004 	ldr	r3, [sp, #4]
-3000c82c:	e0823003 	add	r3, r2, r3
-3000c830:	e59d200c 	ldr	r2, [sp, #12]
-3000c834:	e5832000 	str	r2, [r3]
-3000c838:	e59d3010 	ldr	r3, [sp, #16]
-3000c83c:	e2833001 	add	r3, r3, #1
-3000c840:	e58d3010 	str	r3, [sp, #16]
-3000c844:	ea000015 	b	3000c8a0 <parse_args+0x188>
+3000ca24:	e59d3010 	ldr	r3, [sp, #16]
+3000ca28:	e1a02103 	lsl	r2, r3, #2
+3000ca2c:	e59d3004 	ldr	r3, [sp, #4]
+3000ca30:	e0823003 	add	r3, r2, r3
+3000ca34:	e59d200c 	ldr	r2, [sp, #12]
+3000ca38:	e5832000 	str	r2, [r3]
+3000ca3c:	e59d3010 	ldr	r3, [sp, #16]
+3000ca40:	e2833001 	add	r3, r3, #1
+3000ca44:	e58d3010 	str	r3, [sp, #16]
+3000ca48:	ea000015 	b	3000caa4 <parse_args+0x188>
 		} else if (c == '\\') {
-3000c848:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c84c:	e353005c 	cmp	r3, #92	; 0x5c
-3000c850:	1a000004 	bne	3000c868 <parse_args+0x150>
+3000ca4c:	e5dd3014 	ldrb	r3, [sp, #20]
+3000ca50:	e353005c 	cmp	r3, #92	; 0x5c
+3000ca54:	1a000004 	bne	3000ca6c <parse_args+0x150>
 			stacked_state = lastState;
-3000c854:	e5dd3017 	ldrb	r3, [sp, #23]
-3000c858:	e5cd3016 	strb	r3, [sp, #22]
+3000ca58:	e5dd3017 	ldrb	r3, [sp, #23]
+3000ca5c:	e5cd3016 	strb	r3, [sp, #22]
 			newState = PS_ESCAPE;
-3000c85c:	e3a03003 	mov	r3, #3
-3000c860:	e5cd3015 	strb	r3, [sp, #21]
-3000c864:	ea00000d 	b	3000c8a0 <parse_args+0x188>
+3000ca60:	e3a03003 	mov	r3, #3
+3000ca64:	e5cd3015 	strb	r3, [sp, #21]
+3000ca68:	ea00000d 	b	3000caa4 <parse_args+0x188>
 		} else {
 			if (lastState == PS_WHITESPACE) {
-3000c868:	e5dd3017 	ldrb	r3, [sp, #23]
-3000c86c:	e3530000 	cmp	r3, #0
-3000c870:	1a000008 	bne	3000c898 <parse_args+0x180>
+3000ca6c:	e5dd3017 	ldrb	r3, [sp, #23]
+3000ca70:	e3530000 	cmp	r3, #0
+3000ca74:	1a000008 	bne	3000ca9c <parse_args+0x180>
 				argv[argc++] = argstr;
-3000c874:	e59d3010 	ldr	r3, [sp, #16]
-3000c878:	e1a02103 	lsl	r2, r3, #2
-3000c87c:	e59d3004 	ldr	r3, [sp, #4]
-3000c880:	e0823003 	add	r3, r2, r3
-3000c884:	e59d200c 	ldr	r2, [sp, #12]
-3000c888:	e5832000 	str	r2, [r3]
-3000c88c:	e59d3010 	ldr	r3, [sp, #16]
-3000c890:	e2833001 	add	r3, r3, #1
-3000c894:	e58d3010 	str	r3, [sp, #16]
+3000ca78:	e59d3010 	ldr	r3, [sp, #16]
+3000ca7c:	e1a02103 	lsl	r2, r3, #2
+3000ca80:	e59d3004 	ldr	r3, [sp, #4]
+3000ca84:	e0823003 	add	r3, r2, r3
+3000ca88:	e59d200c 	ldr	r2, [sp, #12]
+3000ca8c:	e5832000 	str	r2, [r3]
+3000ca90:	e59d3010 	ldr	r3, [sp, #16]
+3000ca94:	e2833001 	add	r3, r3, #1
+3000ca98:	e58d3010 	str	r3, [sp, #16]
 			}
 			newState = PS_TOKEN;
-3000c898:	e3a03001 	mov	r3, #1
-3000c89c:	e5cd3015 	strb	r3, [sp, #21]
+3000ca9c:	e3a03001 	mov	r3, #1
+3000caa0:	e5cd3015 	strb	r3, [sp, #21]
 		}
 
 		lastState = newState;
-3000c8a0:	e5dd3015 	ldrb	r3, [sp, #21]
-3000c8a4:	e5cd3017 	strb	r3, [sp, #23]
+3000caa4:	e5dd3015 	ldrb	r3, [sp, #21]
+3000caa8:	e5cd3017 	strb	r3, [sp, #23]
 		argstr++;
-3000c8a8:	e59d300c 	ldr	r3, [sp, #12]
-3000c8ac:	e2833001 	add	r3, r3, #1
-3000c8b0:	e58d300c 	str	r3, [sp, #12]
+3000caac:	e59d300c 	ldr	r3, [sp, #12]
+3000cab0:	e2833001 	add	r3, r3, #1
+3000cab4:	e58d300c 	str	r3, [sp, #12]
 	acoral_char c;
 	enum parse_state newState;
 	enum parse_state stacked_state=*stacked;
 	enum parse_state lastState = PS_WHITESPACE;
 
 	while ((c = *argstr) != 0&&argc<MAX_ARGS_NUM) {
-3000c8b4:	e59d300c 	ldr	r3, [sp, #12]
-3000c8b8:	e5d33000 	ldrb	r3, [r3]
-3000c8bc:	e5cd3014 	strb	r3, [sp, #20]
-3000c8c0:	e5dd3014 	ldrb	r3, [sp, #20]
-3000c8c4:	e3530000 	cmp	r3, #0
-3000c8c8:	0a000004 	beq	3000c8e0 <parse_args+0x1c8>
-3000c8cc:	e59d3010 	ldr	r3, [sp, #16]
-3000c8d0:	e3530007 	cmp	r3, #7
-3000c8d4:	daffff9c 	ble	3000c74c <parse_args+0x34>
-3000c8d8:	ea000000 	b	3000c8e0 <parse_args+0x1c8>
+3000cab8:	e59d300c 	ldr	r3, [sp, #12]
+3000cabc:	e5d33000 	ldrb	r3, [r3]
+3000cac0:	e5cd3014 	strb	r3, [sp, #20]
+3000cac4:	e5dd3014 	ldrb	r3, [sp, #20]
+3000cac8:	e3530000 	cmp	r3, #0
+3000cacc:	0a000004 	beq	3000cae4 <parse_args+0x1c8>
+3000cad0:	e59d3010 	ldr	r3, [sp, #16]
+3000cad4:	e3530007 	cmp	r3, #7
+3000cad8:	daffff9c 	ble	3000c950 <parse_args+0x34>
+3000cadc:	ea000000 	b	3000cae4 <parse_args+0x1c8>
 
 		if (c == ';' && lastState != PS_STRING && lastState != PS_ESCAPE)
 			break;
-3000c8dc:	e1a00000 	nop			; (mov r0, r0)
+3000cae0:	e1a00000 	nop			; (mov r0, r0)
 
 		lastState = newState;
 		argstr++;
 	}
 
 	argv[argc] = NULL;
-3000c8e0:	e59d3010 	ldr	r3, [sp, #16]
-3000c8e4:	e1a02103 	lsl	r2, r3, #2
-3000c8e8:	e59d3004 	ldr	r3, [sp, #4]
-3000c8ec:	e0823003 	add	r3, r2, r3
-3000c8f0:	e3a02000 	mov	r2, #0
-3000c8f4:	e5832000 	str	r2, [r3]
+3000cae4:	e59d3010 	ldr	r3, [sp, #16]
+3000cae8:	e1a02103 	lsl	r2, r3, #2
+3000caec:	e59d3004 	ldr	r3, [sp, #4]
+3000caf0:	e0823003 	add	r3, r2, r3
+3000caf4:	e3a02000 	mov	r2, #0
+3000caf8:	e5832000 	str	r2, [r3]
 	if (argc_p != NULL)
-3000c8f8:	e59d3008 	ldr	r3, [sp, #8]
-3000c8fc:	e3530000 	cmp	r3, #0
-3000c900:	0a000002 	beq	3000c910 <parse_args+0x1f8>
+3000cafc:	e59d3008 	ldr	r3, [sp, #8]
+3000cb00:	e3530000 	cmp	r3, #0
+3000cb04:	0a000002 	beq	3000cb14 <parse_args+0x1f8>
 		*argc_p = argc;
-3000c904:	e59d3008 	ldr	r3, [sp, #8]
-3000c908:	e59d2010 	ldr	r2, [sp, #16]
-3000c90c:	e5832000 	str	r2, [r3]
+3000cb08:	e59d3008 	ldr	r3, [sp, #8]
+3000cb0c:	e59d2010 	ldr	r2, [sp, #16]
+3000cb10:	e5832000 	str	r2, [r3]
 
 	if (*argstr == ';') {
-3000c910:	e59d300c 	ldr	r3, [sp, #12]
-3000c914:	e5d33000 	ldrb	r3, [r3]
-3000c918:	e353003b 	cmp	r3, #59	; 0x3b
-3000c91c:	1a000005 	bne	3000c938 <parse_args+0x220>
+3000cb14:	e59d300c 	ldr	r3, [sp, #12]
+3000cb18:	e5d33000 	ldrb	r3, [r3]
+3000cb1c:	e353003b 	cmp	r3, #59	; 0x3b
+3000cb20:	1a000005 	bne	3000cb3c <parse_args+0x220>
 		*argstr++ = '\0';
-3000c920:	e59d300c 	ldr	r3, [sp, #12]
-3000c924:	e3a02000 	mov	r2, #0
-3000c928:	e5c32000 	strb	r2, [r3]
-3000c92c:	e59d300c 	ldr	r3, [sp, #12]
-3000c930:	e2833001 	add	r3, r3, #1
-3000c934:	e58d300c 	str	r3, [sp, #12]
+3000cb24:	e59d300c 	ldr	r3, [sp, #12]
+3000cb28:	e3a02000 	mov	r2, #0
+3000cb2c:	e5c32000 	strb	r2, [r3]
+3000cb30:	e59d300c 	ldr	r3, [sp, #12]
+3000cb34:	e2833001 	add	r3, r3, #1
+3000cb38:	e58d300c 	str	r3, [sp, #12]
 	}
 	*resid = argstr;
-3000c938:	e59d3000 	ldr	r3, [sp]
-3000c93c:	e59d200c 	ldr	r2, [sp, #12]
-3000c940:	e5832000 	str	r2, [r3]
+3000cb3c:	e59d3000 	ldr	r3, [sp]
+3000cb40:	e59d200c 	ldr	r2, [sp, #12]
+3000cb44:	e5832000 	str	r2, [r3]
 	*stacked=stacked_state;
-3000c944:	e59d3018 	ldr	r3, [sp, #24]
-3000c948:	e5dd2016 	ldrb	r2, [sp, #22]
-3000c94c:	e5c32000 	strb	r2, [r3]
+3000cb48:	e59d3018 	ldr	r3, [sp, #24]
+3000cb4c:	e5dd2016 	ldrb	r2, [sp, #22]
+3000cb50:	e5c32000 	strb	r2, [r3]
 }
-3000c950:	e28dd018 	add	sp, sp, #24
-3000c954:	e12fff1e 	bx	lr
+3000cb54:	e28dd018 	add	sp, sp, #24
+3000cb58:	e12fff1e 	bx	lr
 
-3000c958 <add_command>:
+3000cb5c <add_command>:
 
 void add_command(acoral_shell_cmd_t *cmd)
 {
-3000c958:	e24dd008 	sub	sp, sp, #8
-3000c95c:	e58d0004 	str	r0, [sp, #4]
+3000cb5c:	e24dd008 	sub	sp, sp, #8
+3000cb60:	e58d0004 	str	r0, [sp, #4]
 	if (head_cmd == NULL) {
-3000c960:	e59f304c 	ldr	r3, [pc, #76]	; 3000c9b4 <add_command+0x5c>
-3000c964:	e5933000 	ldr	r3, [r3]
-3000c968:	e3530000 	cmp	r3, #0
-3000c96c:	1a000007 	bne	3000c990 <add_command+0x38>
+3000cb64:	e59f304c 	ldr	r3, [pc, #76]	; 3000cbb8 <add_command+0x5c>
+3000cb68:	e5933000 	ldr	r3, [r3]
+3000cb6c:	e3530000 	cmp	r3, #0
+3000cb70:	1a000007 	bne	3000cb94 <add_command+0x38>
 		head_cmd = tail_cmd = cmd;
-3000c970:	e59f3040 	ldr	r3, [pc, #64]	; 3000c9b8 <add_command+0x60>
-3000c974:	e59d2004 	ldr	r2, [sp, #4]
-3000c978:	e5832000 	str	r2, [r3]
-3000c97c:	e59f3034 	ldr	r3, [pc, #52]	; 3000c9b8 <add_command+0x60>
-3000c980:	e5932000 	ldr	r2, [r3]
-3000c984:	e59f3028 	ldr	r3, [pc, #40]	; 3000c9b4 <add_command+0x5c>
-3000c988:	e5832000 	str	r2, [r3]
-3000c98c:	ea000006 	b	3000c9ac <add_command+0x54>
+3000cb74:	e59f3040 	ldr	r3, [pc, #64]	; 3000cbbc <add_command+0x60>
+3000cb78:	e59d2004 	ldr	r2, [sp, #4]
+3000cb7c:	e5832000 	str	r2, [r3]
+3000cb80:	e59f3034 	ldr	r3, [pc, #52]	; 3000cbbc <add_command+0x60>
+3000cb84:	e5932000 	ldr	r2, [r3]
+3000cb88:	e59f3028 	ldr	r3, [pc, #40]	; 3000cbb8 <add_command+0x5c>
+3000cb8c:	e5832000 	str	r2, [r3]
+3000cb90:	ea000006 	b	3000cbb0 <add_command+0x54>
 	} else {
 		tail_cmd->next = cmd;
-3000c990:	e59f3020 	ldr	r3, [pc, #32]	; 3000c9b8 <add_command+0x60>
-3000c994:	e5933000 	ldr	r3, [r3]
-3000c998:	e59d2004 	ldr	r2, [sp, #4]
-3000c99c:	e583200c 	str	r2, [r3, #12]
+3000cb94:	e59f3020 	ldr	r3, [pc, #32]	; 3000cbbc <add_command+0x60>
+3000cb98:	e5933000 	ldr	r3, [r3]
+3000cb9c:	e59d2004 	ldr	r2, [sp, #4]
+3000cba0:	e583200c 	str	r2, [r3, #12]
 		tail_cmd = cmd;
-3000c9a0:	e59f3010 	ldr	r3, [pc, #16]	; 3000c9b8 <add_command+0x60>
-3000c9a4:	e59d2004 	ldr	r2, [sp, #4]
-3000c9a8:	e5832000 	str	r2, [r3]
+3000cba4:	e59f3010 	ldr	r3, [pc, #16]	; 3000cbbc <add_command+0x60>
+3000cba8:	e59d2004 	ldr	r2, [sp, #4]
+3000cbac:	e5832000 	str	r2, [r3]
 	}
 }
-3000c9ac:	e28dd008 	add	sp, sp, #8
-3000c9b0:	e12fff1e 	bx	lr
-3000c9b4:	3000facc 	.word	0x3000facc
-3000c9b8:	30010420 	.word	0x30010420
+3000cbb0:	e28dd008 	add	sp, sp, #8
+3000cbb4:	e12fff1e 	bx	lr
+3000cbb8:	3000fcd8 	.word	0x3000fcd8
+3000cbbc:	3001062c 	.word	0x3001062c
 
-3000c9bc <find_cmd>:
+3000cbc0 <find_cmd>:
 
 acoral_shell_cmd_t *find_cmd(acoral_char *cmdname)
 {
-3000c9bc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000c9c0:	e24dd014 	sub	sp, sp, #20
-3000c9c4:	e58d0004 	str	r0, [sp, #4]
+3000cbc0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cbc4:	e24dd014 	sub	sp, sp, #20
+3000cbc8:	e58d0004 	str	r0, [sp, #4]
 	acoral_shell_cmd_t *curr;
 	curr =head_cmd;
-3000c9c8:	e59f305c 	ldr	r3, [pc, #92]	; 3000ca2c <find_cmd+0x70>
-3000c9cc:	e5933000 	ldr	r3, [r3]
-3000c9d0:	e58d300c 	str	r3, [sp, #12]
+3000cbcc:	e59f305c 	ldr	r3, [pc, #92]	; 3000cc30 <find_cmd+0x70>
+3000cbd0:	e5933000 	ldr	r3, [r3]
+3000cbd4:	e58d300c 	str	r3, [sp, #12]
 	while(curr != NULL) {
-3000c9d4:	ea00000c 	b	3000ca0c <find_cmd+0x50>
+3000cbd8:	ea00000c 	b	3000cc10 <find_cmd+0x50>
 		if (acoral_str_cmp(curr->name, cmdname) == 0)
-3000c9d8:	e59d300c 	ldr	r3, [sp, #12]
-3000c9dc:	e5933000 	ldr	r3, [r3]
-3000c9e0:	e1a00003 	mov	r0, r3
-3000c9e4:	e59d1004 	ldr	r1, [sp, #4]
-3000c9e8:	ebfffb78 	bl	3000b7d0 <acoral_str_cmp>
-3000c9ec:	e1a03000 	mov	r3, r0
-3000c9f0:	e3530000 	cmp	r3, #0
-3000c9f4:	1a000001 	bne	3000ca00 <find_cmd+0x44>
+3000cbdc:	e59d300c 	ldr	r3, [sp, #12]
+3000cbe0:	e5933000 	ldr	r3, [r3]
+3000cbe4:	e1a00003 	mov	r0, r3
+3000cbe8:	e59d1004 	ldr	r1, [sp, #4]
+3000cbec:	ebfffb78 	bl	3000b9d4 <acoral_str_cmp>
+3000cbf0:	e1a03000 	mov	r3, r0
+3000cbf4:	e3530000 	cmp	r3, #0
+3000cbf8:	1a000001 	bne	3000cc04 <find_cmd+0x44>
 			return curr;
-3000c9f8:	e59d300c 	ldr	r3, [sp, #12]
-3000c9fc:	ea000006 	b	3000ca1c <find_cmd+0x60>
+3000cbfc:	e59d300c 	ldr	r3, [sp, #12]
+3000cc00:	ea000006 	b	3000cc20 <find_cmd+0x60>
 		curr = curr->next;
-3000ca00:	e59d300c 	ldr	r3, [sp, #12]
-3000ca04:	e593300c 	ldr	r3, [r3, #12]
-3000ca08:	e58d300c 	str	r3, [sp, #12]
+3000cc04:	e59d300c 	ldr	r3, [sp, #12]
+3000cc08:	e593300c 	ldr	r3, [r3, #12]
+3000cc0c:	e58d300c 	str	r3, [sp, #12]
 
 acoral_shell_cmd_t *find_cmd(acoral_char *cmdname)
 {
 	acoral_shell_cmd_t *curr;
 	curr =head_cmd;
 	while(curr != NULL) {
-3000ca0c:	e59d300c 	ldr	r3, [sp, #12]
-3000ca10:	e3530000 	cmp	r3, #0
-3000ca14:	1affffef 	bne	3000c9d8 <find_cmd+0x1c>
+3000cc10:	e59d300c 	ldr	r3, [sp, #12]
+3000cc14:	e3530000 	cmp	r3, #0
+3000cc18:	1affffef 	bne	3000cbdc <find_cmd+0x1c>
 		if (acoral_str_cmp(curr->name, cmdname) == 0)
 			return curr;
 		curr = curr->next;
 	}
 	return NULL;
-3000ca18:	e3a03000 	mov	r3, #0
+3000cc1c:	e3a03000 	mov	r3, #0
 }
-3000ca1c:	e1a00003 	mov	r0, r3
-3000ca20:	e28dd014 	add	sp, sp, #20
-3000ca24:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000ca28:	e12fff1e 	bx	lr
-3000ca2c:	3000facc 	.word	0x3000facc
+3000cc20:	e1a00003 	mov	r0, r3
+3000cc24:	e28dd014 	add	sp, sp, #20
+3000cc28:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cc2c:	e12fff1e 	bx	lr
+3000cc30:	3000fcd8 	.word	0x3000fcd8
 
-3000ca30 <execmd>:
+3000cc34 <execmd>:
 
 void execmd(acoral_32 argc,acoral_char **argv)
 {
-3000ca30:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000ca34:	e24dd014 	sub	sp, sp, #20
-3000ca38:	e58d0004 	str	r0, [sp, #4]
-3000ca3c:	e58d1000 	str	r1, [sp]
+3000cc34:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cc38:	e24dd014 	sub	sp, sp, #20
+3000cc3c:	e58d0004 	str	r0, [sp, #4]
+3000cc40:	e58d1000 	str	r1, [sp]
 	acoral_shell_cmd_t *cmd = find_cmd(argv[0]);
-3000ca40:	e59d3000 	ldr	r3, [sp]
-3000ca44:	e5933000 	ldr	r3, [r3]
-3000ca48:	e1a00003 	mov	r0, r3
-3000ca4c:	ebffffda 	bl	3000c9bc <find_cmd>
-3000ca50:	e1a03000 	mov	r3, r0
-3000ca54:	e58d300c 	str	r3, [sp, #12]
+3000cc44:	e59d3000 	ldr	r3, [sp]
+3000cc48:	e5933000 	ldr	r3, [r3]
+3000cc4c:	e1a00003 	mov	r0, r3
+3000cc50:	ebffffda 	bl	3000cbc0 <find_cmd>
+3000cc54:	e1a03000 	mov	r3, r0
+3000cc58:	e58d300c 	str	r3, [sp, #12]
 	if (cmd == NULL) {
-3000ca58:	e59d300c 	ldr	r3, [sp, #12]
-3000ca5c:	e3530000 	cmp	r3, #0
-3000ca60:	1a000007 	bne	3000ca84 <execmd+0x54>
+3000cc5c:	e59d300c 	ldr	r3, [sp, #12]
+3000cc60:	e3530000 	cmp	r3, #0
+3000cc64:	1a000007 	bne	3000cc88 <execmd+0x54>
 		acoral_print("Could not found '%s' command\r\n", argv[0]);
-3000ca64:	e59d3000 	ldr	r3, [sp]
-3000ca68:	e5933000 	ldr	r3, [r3]
-3000ca6c:	e59f0034 	ldr	r0, [pc, #52]	; 3000caa8 <execmd+0x78>
-3000ca70:	e1a01003 	mov	r1, r3
-3000ca74:	ebfff9e3 	bl	3000b208 <acoral_print>
+3000cc68:	e59d3000 	ldr	r3, [sp]
+3000cc6c:	e5933000 	ldr	r3, [r3]
+3000cc70:	e59f0034 	ldr	r0, [pc, #52]	; 3000ccac <execmd+0x78>
+3000cc74:	e1a01003 	mov	r1, r3
+3000cc78:	ebfff9e3 	bl	3000b40c <acoral_print>
 		acoral_print("you can type 'help'\r\n"); 
-3000ca78:	e59f002c 	ldr	r0, [pc, #44]	; 3000caac <execmd+0x7c>
-3000ca7c:	ebfff9e1 	bl	3000b208 <acoral_print>
+3000cc7c:	e59f002c 	ldr	r0, [pc, #44]	; 3000ccb0 <execmd+0x7c>
+3000cc80:	ebfff9e1 	bl	3000b40c <acoral_print>
 		return;
-3000ca80:	ea000005 	b	3000ca9c <execmd+0x6c>
+3000cc84:	ea000005 	b	3000cca0 <execmd+0x6c>
 	}
 	cmd->exe(argc, argv);
-3000ca84:	e59d300c 	ldr	r3, [sp, #12]
-3000ca88:	e5933004 	ldr	r3, [r3, #4]
-3000ca8c:	e59d0004 	ldr	r0, [sp, #4]
-3000ca90:	e59d1000 	ldr	r1, [sp]
-3000ca94:	e1a0e00f 	mov	lr, pc
-3000ca98:	e12fff13 	bx	r3
+3000cc88:	e59d300c 	ldr	r3, [sp, #12]
+3000cc8c:	e5933004 	ldr	r3, [r3, #4]
+3000cc90:	e59d0004 	ldr	r0, [sp, #4]
+3000cc94:	e59d1000 	ldr	r1, [sp]
+3000cc98:	e1a0e00f 	mov	lr, pc
+3000cc9c:	e12fff13 	bx	r3
 }
-3000ca9c:	e28dd014 	add	sp, sp, #20
-3000caa0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000caa4:	e12fff1e 	bx	lr
-3000caa8:	3000e7f0 	.word	0x3000e7f0
-3000caac:	3000e810 	.word	0x3000e810
+3000cca0:	e28dd014 	add	sp, sp, #20
+3000cca4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cca8:	e12fff1e 	bx	lr
+3000ccac:	3000e9f4 	.word	0x3000e9f4
+3000ccb0:	3000ea14 	.word	0x3000ea14
 
-3000cab0 <cmd_exe>:
+3000ccb4 <cmd_exe>:
 
 
 void cmd_exe(acoral_char *buf){
-3000cab0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cab4:	e24dd044 	sub	sp, sp, #68	; 0x44
-3000cab8:	e58d000c 	str	r0, [sp, #12]
+3000ccb4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000ccb8:	e24dd044 	sub	sp, sp, #68	; 0x44
+3000ccbc:	e58d000c 	str	r0, [sp, #12]
 	acoral_32 argc;
 	acoral_char *argv[MAX_ARGS_NUM];
 	acoral_char *resid;
 	enum parse_state stacked_state;
 	while (*buf) {
-3000cabc:	ea000015 	b	3000cb18 <cmd_exe+0x68>
+3000ccc0:	ea000015 	b	3000cd1c <cmd_exe+0x68>
 		acoral_memset(argv, 0, sizeof(argv));
-3000cac0:	e28d301c 	add	r3, sp, #28
-3000cac4:	e1a00003 	mov	r0, r3
-3000cac8:	e3a01000 	mov	r1, #0
-3000cacc:	e3a02020 	mov	r2, #32
-3000cad0:	ebfffdd7 	bl	3000c234 <acoral_memset>
+3000ccc4:	e28d301c 	add	r3, sp, #28
+3000ccc8:	e1a00003 	mov	r0, r3
+3000cccc:	e3a01000 	mov	r1, #0
+3000ccd0:	e3a02020 	mov	r2, #32
+3000ccd4:	ebfffdd7 	bl	3000c438 <acoral_memset>
 		parse_args(buf, &argc, argv, &resid,&stacked_state);
-3000cad4:	e28d103c 	add	r1, sp, #60	; 0x3c
-3000cad8:	e28d201c 	add	r2, sp, #28
-3000cadc:	e28d3018 	add	r3, sp, #24
-3000cae0:	e28d0017 	add	r0, sp, #23
-3000cae4:	e58d0000 	str	r0, [sp]
-3000cae8:	e59d000c 	ldr	r0, [sp, #12]
-3000caec:	ebffff09 	bl	3000c718 <parse_args>
+3000ccd8:	e28d103c 	add	r1, sp, #60	; 0x3c
+3000ccdc:	e28d201c 	add	r2, sp, #28
+3000cce0:	e28d3018 	add	r3, sp, #24
+3000cce4:	e28d0017 	add	r0, sp, #23
+3000cce8:	e58d0000 	str	r0, [sp]
+3000ccec:	e59d000c 	ldr	r0, [sp, #12]
+3000ccf0:	ebffff09 	bl	3000c91c <parse_args>
 		if (argc > 0)
-3000caf0:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
-3000caf4:	e3530000 	cmp	r3, #0
-3000caf8:	da000004 	ble	3000cb10 <cmd_exe+0x60>
+3000ccf4:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+3000ccf8:	e3530000 	cmp	r3, #0
+3000ccfc:	da000004 	ble	3000cd14 <cmd_exe+0x60>
 			execmd(argc, (const acoral_char **)argv);
-3000cafc:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
-3000cb00:	e28d301c 	add	r3, sp, #28
-3000cb04:	e1a00002 	mov	r0, r2
-3000cb08:	e1a01003 	mov	r1, r3
-3000cb0c:	ebffffc7 	bl	3000ca30 <execmd>
+3000cd00:	e59d203c 	ldr	r2, [sp, #60]	; 0x3c
+3000cd04:	e28d301c 	add	r3, sp, #28
+3000cd08:	e1a00002 	mov	r0, r2
+3000cd0c:	e1a01003 	mov	r1, r3
+3000cd10:	ebffffc7 	bl	3000cc34 <execmd>
 		buf = resid;
-3000cb10:	e59d3018 	ldr	r3, [sp, #24]
-3000cb14:	e58d300c 	str	r3, [sp, #12]
+3000cd14:	e59d3018 	ldr	r3, [sp, #24]
+3000cd18:	e58d300c 	str	r3, [sp, #12]
 void cmd_exe(acoral_char *buf){
 	acoral_32 argc;
 	acoral_char *argv[MAX_ARGS_NUM];
 	acoral_char *resid;
 	enum parse_state stacked_state;
 	while (*buf) {
-3000cb18:	e59d300c 	ldr	r3, [sp, #12]
-3000cb1c:	e5d33000 	ldrb	r3, [r3]
-3000cb20:	e3530000 	cmp	r3, #0
-3000cb24:	1affffe5 	bne	3000cac0 <cmd_exe+0x10>
+3000cd1c:	e59d300c 	ldr	r3, [sp, #12]
+3000cd20:	e5d33000 	ldrb	r3, [r3]
+3000cd24:	e3530000 	cmp	r3, #0
+3000cd28:	1affffe5 	bne	3000ccc4 <cmd_exe+0x10>
 		parse_args(buf, &argc, argv, &resid,&stacked_state);
 		if (argc > 0)
 			execmd(argc, (const acoral_char **)argv);
 		buf = resid;
 	}	
 }
-3000cb28:	e28dd044 	add	sp, sp, #68	; 0x44
-3000cb2c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cb30:	e12fff1e 	bx	lr
+3000cd2c:	e28dd044 	add	sp, sp, #68	; 0x44
+3000cd30:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cd34:	e12fff1e 	bx	lr
 
-3000cb34 <echo>:
+3000cd38 <echo>:
 
 void echo(acoral_char c){
-3000cb34:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cb38:	e24dd00c 	sub	sp, sp, #12
-3000cb3c:	e1a03000 	mov	r3, r0
-3000cb40:	e5cd3007 	strb	r3, [sp, #7]
+3000cd38:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cd3c:	e24dd00c 	sub	sp, sp, #12
+3000cd40:	e1a03000 	mov	r3, r0
+3000cd44:	e5cd3007 	strb	r3, [sp, #7]
 	acoral_putchar(c);
-3000cb44:	e5dd3007 	ldrb	r3, [sp, #7]
-3000cb48:	e1a00003 	mov	r0, r3
-3000cb4c:	ebfff9fb 	bl	3000b340 <acoral_putchar>
+3000cd48:	e5dd3007 	ldrb	r3, [sp, #7]
+3000cd4c:	e1a00003 	mov	r0, r3
+3000cd50:	ebfff9fb 	bl	3000b544 <acoral_putchar>
 }
-3000cb50:	e28dd00c 	add	sp, sp, #12
-3000cb54:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cb58:	e12fff1e 	bx	lr
+3000cd54:	e28dd00c 	add	sp, sp, #12
+3000cd58:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cd5c:	e12fff1e 	bx	lr
 
-3000cb5c <get_cmd>:
+3000cd60 <get_cmd>:
 
 void get_cmd(acoral_char *cmd_buf){
-3000cb5c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cb60:	e24dd024 	sub	sp, sp, #36	; 0x24
-3000cb64:	e58d000c 	str	r0, [sp, #12]
+3000cd60:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cd64:	e24dd024 	sub	sp, sp, #36	; 0x24
+3000cd68:	e58d000c 	str	r0, [sp, #12]
 	acoral_u32 cur_pos;
 	acoral_char c;
 	acoral_u8 IsEcho=0;
-3000cb68:	e3a03000 	mov	r3, #0
-3000cb6c:	e5cd3016 	strb	r3, [sp, #22]
+3000cd6c:	e3a03000 	mov	r3, #0
+3000cd70:	e5cd3016 	strb	r3, [sp, #22]
 	acoral_id console_id;
 	console_id=acoral_cur_thread->console_id;
-3000cb70:	e59f31a8 	ldr	r3, [pc, #424]	; 3000cd20 <get_cmd+0x1c4>
-3000cb74:	e5933000 	ldr	r3, [r3]
-3000cb78:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
-3000cb7c:	e58d301c 	str	r3, [sp, #28]
+3000cd74:	e59f31a8 	ldr	r3, [pc, #424]	; 3000cf24 <get_cmd+0x1c4>
+3000cd78:	e5933000 	ldr	r3, [r3]
+3000cd7c:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
+3000cd80:	e58d301c 	str	r3, [sp, #28]
 	acoral_dev_config(console_id,CONSOLE_ECHO,&IsEcho,0);
-3000cb80:	e28d3016 	add	r3, sp, #22
-3000cb84:	e59d001c 	ldr	r0, [sp, #28]
-3000cb88:	e3a01001 	mov	r1, #1
-3000cb8c:	e1a02003 	mov	r2, r3
-3000cb90:	e3a03000 	mov	r3, #0
-3000cb94:	eb000283 	bl	3000d5a8 <acoral_dev_config>
+3000cd84:	e28d3016 	add	r3, sp, #22
+3000cd88:	e59d001c 	ldr	r0, [sp, #28]
+3000cd8c:	e3a01001 	mov	r1, #1
+3000cd90:	e1a02003 	mov	r2, r3
+3000cd94:	e3a03000 	mov	r3, #0
+3000cd98:	eb000283 	bl	3000d7ac <acoral_dev_config>
 	cur_pos=0;
-3000cb98:	e3a03000 	mov	r3, #0
-3000cb9c:	e58d3018 	str	r3, [sp, #24]
-3000cba0:	ea000000 	b	3000cba8 <get_cmd+0x4c>
+3000cd9c:	e3a03000 	mov	r3, #0
+3000cda0:	e58d3018 	str	r3, [sp, #24]
+3000cda4:	ea000000 	b	3000cdac <get_cmd+0x4c>
 						echo(c);
 					cur_pos++;
 				}
 				break;
 		}
 	}
-3000cba4:	e1a00000 	nop			; (mov r0, r0)
+3000cda8:	e1a00000 	nop			; (mov r0, r0)
 	acoral_id console_id;
 	console_id=acoral_cur_thread->console_id;
 	acoral_dev_config(console_id,CONSOLE_ECHO,&IsEcho,0);
 	cur_pos=0;
 	while(1){
 		while(acoral_dev_read(console_id,&c,1,0,0)<1);
-3000cba8:	e28d3017 	add	r3, sp, #23
-3000cbac:	e3a02000 	mov	r2, #0
-3000cbb0:	e58d2000 	str	r2, [sp]
-3000cbb4:	e59d001c 	ldr	r0, [sp, #28]
-3000cbb8:	e1a01003 	mov	r1, r3
-3000cbbc:	e3a02001 	mov	r2, #1
-3000cbc0:	e3a03000 	mov	r3, #0
-3000cbc4:	eb000251 	bl	3000d510 <acoral_dev_read>
-3000cbc8:	e1a03000 	mov	r3, r0
-3000cbcc:	e3530000 	cmp	r3, #0
-3000cbd0:	dafffff4 	ble	3000cba8 <get_cmd+0x4c>
+3000cdac:	e28d3017 	add	r3, sp, #23
+3000cdb0:	e3a02000 	mov	r2, #0
+3000cdb4:	e58d2000 	str	r2, [sp]
+3000cdb8:	e59d001c 	ldr	r0, [sp, #28]
+3000cdbc:	e1a01003 	mov	r1, r3
+3000cdc0:	e3a02001 	mov	r2, #1
+3000cdc4:	e3a03000 	mov	r3, #0
+3000cdc8:	eb000251 	bl	3000d714 <acoral_dev_read>
+3000cdcc:	e1a03000 	mov	r3, r0
+3000cdd0:	e3530000 	cmp	r3, #0
+3000cdd4:	dafffff4 	ble	3000cdac <get_cmd+0x4c>
 		switch (c) {
-3000cbd4:	e5dd3017 	ldrb	r3, [sp, #23]
-3000cbd8:	e353000a 	cmp	r3, #10
-3000cbdc:	0a000028 	beq	3000cc84 <get_cmd+0x128>
-3000cbe0:	e353000a 	cmp	r3, #10
-3000cbe4:	ca000007 	bgt	3000cc08 <get_cmd+0xac>
-3000cbe8:	e3530000 	cmp	r3, #0
-3000cbec:	0a000024 	beq	3000cc84 <get_cmd+0x128>
-3000cbf0:	e3530000 	cmp	r3, #0
-3000cbf4:	ba000036 	blt	3000ccd4 <get_cmd+0x178>
-3000cbf8:	e2433006 	sub	r3, r3, #6
-3000cbfc:	e3530002 	cmp	r3, #2
-3000cc00:	8a000033 	bhi	3000ccd4 <get_cmd+0x178>
-3000cc04:	ea000009 	b	3000cc30 <get_cmd+0xd4>
-3000cc08:	e3530018 	cmp	r3, #24
-3000cc0c:	0a00002d 	beq	3000ccc8 <get_cmd+0x16c>
-3000cc10:	e3530018 	cmp	r3, #24
-3000cc14:	ca000002 	bgt	3000cc24 <get_cmd+0xc8>
-3000cc18:	e353000d 	cmp	r3, #13
-3000cc1c:	0a000018 	beq	3000cc84 <get_cmd+0x128>
-3000cc20:	ea00002b 	b	3000ccd4 <get_cmd+0x178>
-3000cc24:	e243307e 	sub	r3, r3, #126	; 0x7e
-3000cc28:	e3530001 	cmp	r3, #1
-3000cc2c:	8a000028 	bhi	3000ccd4 <get_cmd+0x178>
+3000cdd8:	e5dd3017 	ldrb	r3, [sp, #23]
+3000cddc:	e353000a 	cmp	r3, #10
+3000cde0:	0a000028 	beq	3000ce88 <get_cmd+0x128>
+3000cde4:	e353000a 	cmp	r3, #10
+3000cde8:	ca000007 	bgt	3000ce0c <get_cmd+0xac>
+3000cdec:	e3530000 	cmp	r3, #0
+3000cdf0:	0a000024 	beq	3000ce88 <get_cmd+0x128>
+3000cdf4:	e3530000 	cmp	r3, #0
+3000cdf8:	ba000036 	blt	3000ced8 <get_cmd+0x178>
+3000cdfc:	e2433006 	sub	r3, r3, #6
+3000ce00:	e3530002 	cmp	r3, #2
+3000ce04:	8a000033 	bhi	3000ced8 <get_cmd+0x178>
+3000ce08:	ea000009 	b	3000ce34 <get_cmd+0xd4>
+3000ce0c:	e3530018 	cmp	r3, #24
+3000ce10:	0a00002d 	beq	3000cecc <get_cmd+0x16c>
+3000ce14:	e3530018 	cmp	r3, #24
+3000ce18:	ca000002 	bgt	3000ce28 <get_cmd+0xc8>
+3000ce1c:	e353000d 	cmp	r3, #13
+3000ce20:	0a000018 	beq	3000ce88 <get_cmd+0x128>
+3000ce24:	ea00002b 	b	3000ced8 <get_cmd+0x178>
+3000ce28:	e243307e 	sub	r3, r3, #126	; 0x7e
+3000ce2c:	e3530001 	cmp	r3, #1
+3000ce30:	8a000028 	bhi	3000ced8 <get_cmd+0x178>
 			case 0x08:
 			case 0x06:
 			case 0x07:
 			case 0x7E:
 			case 0x7F:
 				if (cur_pos) {
-3000cc30:	e59d3018 	ldr	r3, [sp, #24]
-3000cc34:	e3530000 	cmp	r3, #0
-3000cc38:	0a00000b 	beq	3000cc6c <get_cmd+0x110>
+3000ce34:	e59d3018 	ldr	r3, [sp, #24]
+3000ce38:	e3530000 	cmp	r3, #0
+3000ce3c:	0a00000b 	beq	3000ce70 <get_cmd+0x110>
 					cur_pos--;
-3000cc3c:	e59d3018 	ldr	r3, [sp, #24]
-3000cc40:	e2433001 	sub	r3, r3, #1
-3000cc44:	e58d3018 	str	r3, [sp, #24]
+3000ce40:	e59d3018 	ldr	r3, [sp, #24]
+3000ce44:	e2433001 	sub	r3, r3, #1
+3000ce48:	e58d3018 	str	r3, [sp, #24]
 					if(IsEcho){
-3000cc48:	e5dd3016 	ldrb	r3, [sp, #22]
-3000cc4c:	e3530000 	cmp	r3, #0
-3000cc50:	0a000005 	beq	3000cc6c <get_cmd+0x110>
+3000ce4c:	e5dd3016 	ldrb	r3, [sp, #22]
+3000ce50:	e3530000 	cmp	r3, #0
+3000ce54:	0a000005 	beq	3000ce70 <get_cmd+0x110>
 						echo(0x08);
-3000cc54:	e3a00008 	mov	r0, #8
-3000cc58:	ebffffb5 	bl	3000cb34 <echo>
+3000ce58:	e3a00008 	mov	r0, #8
+3000ce5c:	ebffffb5 	bl	3000cd38 <echo>
 						echo(' ');
-3000cc5c:	e3a00020 	mov	r0, #32
-3000cc60:	ebffffb3 	bl	3000cb34 <echo>
+3000ce60:	e3a00020 	mov	r0, #32
+3000ce64:	ebffffb3 	bl	3000cd38 <echo>
 						echo(0x08);
-3000cc64:	e3a00008 	mov	r0, #8
-3000cc68:	ebffffb1 	bl	3000cb34 <echo>
+3000ce68:	e3a00008 	mov	r0, #8
+3000ce6c:	ebffffb1 	bl	3000cd38 <echo>
 					}
 				}
 				cmd_buf[cur_pos] = '\0';
-3000cc6c:	e59d200c 	ldr	r2, [sp, #12]
-3000cc70:	e59d3018 	ldr	r3, [sp, #24]
-3000cc74:	e0823003 	add	r3, r2, r3
-3000cc78:	e3a02000 	mov	r2, #0
-3000cc7c:	e5c32000 	strb	r2, [r3]
+3000ce70:	e59d200c 	ldr	r2, [sp, #12]
+3000ce74:	e59d3018 	ldr	r3, [sp, #24]
+3000ce78:	e0823003 	add	r3, r2, r3
+3000ce7c:	e3a02000 	mov	r2, #0
+3000ce80:	e5c32000 	strb	r2, [r3]
 				break;
-3000cc80:	ea000025 	b	3000cd1c <get_cmd+0x1c0>
+3000ce84:	ea000025 	b	3000cf20 <get_cmd+0x1c0>
 			case '\r':
 			case '\n':
 			case '\0':
 				echo('\r');
-3000cc84:	e3a0000d 	mov	r0, #13
-3000cc88:	ebffffa9 	bl	3000cb34 <echo>
+3000ce88:	e3a0000d 	mov	r0, #13
+3000ce8c:	ebffffa9 	bl	3000cd38 <echo>
 				echo('\n');
-3000cc8c:	e3a0000a 	mov	r0, #10
-3000cc90:	ebffffa7 	bl	3000cb34 <echo>
+3000ce90:	e3a0000a 	mov	r0, #10
+3000ce94:	ebffffa7 	bl	3000cd38 <echo>
 				cmd_buf[cur_pos]='\0';
-3000cc94:	e59d200c 	ldr	r2, [sp, #12]
-3000cc98:	e59d3018 	ldr	r3, [sp, #24]
-3000cc9c:	e0823003 	add	r3, r2, r3
-3000cca0:	e3a02000 	mov	r2, #0
-3000cca4:	e5c32000 	strb	r2, [r3]
+3000ce98:	e59d200c 	ldr	r2, [sp, #12]
+3000ce9c:	e59d3018 	ldr	r3, [sp, #24]
+3000cea0:	e0823003 	add	r3, r2, r3
+3000cea4:	e3a02000 	mov	r2, #0
+3000cea8:	e5c32000 	strb	r2, [r3]
 				acoral_dev_config(console_id,CONSOLE_BUF_CLEAR,NULL,0);
-3000cca8:	e59d001c 	ldr	r0, [sp, #28]
-3000ccac:	e3a01004 	mov	r1, #4
-3000ccb0:	e3a02000 	mov	r2, #0
-3000ccb4:	e3a03000 	mov	r3, #0
-3000ccb8:	eb00023a 	bl	3000d5a8 <acoral_dev_config>
+3000ceac:	e59d001c 	ldr	r0, [sp, #28]
+3000ceb0:	e3a01004 	mov	r1, #4
+3000ceb4:	e3a02000 	mov	r2, #0
+3000ceb8:	e3a03000 	mov	r3, #0
+3000cebc:	eb00023a 	bl	3000d7ac <acoral_dev_config>
 					cur_pos++;
 				}
 				break;
 		}
 	}
 }
-3000ccbc:	e28dd024 	add	sp, sp, #36	; 0x24
-3000ccc0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000ccc4:	e12fff1e 	bx	lr
+3000cec0:	e28dd024 	add	sp, sp, #36	; 0x24
+3000cec4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cec8:	e12fff1e 	bx	lr
 				echo('\n');
 				cmd_buf[cur_pos]='\0';
 				acoral_dev_config(console_id,CONSOLE_BUF_CLEAR,NULL,0);
 				return;
 			case 'x'-'a'+1:
 				cur_pos = 0;
-3000ccc8:	e3a03000 	mov	r3, #0
-3000cccc:	e58d3018 	str	r3, [sp, #24]
+3000cecc:	e3a03000 	mov	r3, #0
+3000ced0:	e58d3018 	str	r3, [sp, #24]
 				break;
-3000ccd0:	ea000011 	b	3000cd1c <get_cmd+0x1c0>
+3000ced4:	ea000011 	b	3000cf20 <get_cmd+0x1c0>
 
 			default:
 				if (cur_pos < BUF_SIZE) {
-3000ccd4:	e59d3018 	ldr	r3, [sp, #24]
-3000ccd8:	e353007f 	cmp	r3, #127	; 0x7f
-3000ccdc:	8affffb0 	bhi	3000cba4 <get_cmd+0x48>
+3000ced8:	e59d3018 	ldr	r3, [sp, #24]
+3000cedc:	e353007f 	cmp	r3, #127	; 0x7f
+3000cee0:	8affffb0 	bhi	3000cda8 <get_cmd+0x48>
 					cmd_buf[cur_pos] = c;
-3000cce0:	e59d200c 	ldr	r2, [sp, #12]
-3000cce4:	e59d3018 	ldr	r3, [sp, #24]
-3000cce8:	e0823003 	add	r3, r2, r3
-3000ccec:	e5dd2017 	ldrb	r2, [sp, #23]
-3000ccf0:	e5c32000 	strb	r2, [r3]
+3000cee4:	e59d200c 	ldr	r2, [sp, #12]
+3000cee8:	e59d3018 	ldr	r3, [sp, #24]
+3000ceec:	e0823003 	add	r3, r2, r3
+3000cef0:	e5dd2017 	ldrb	r2, [sp, #23]
+3000cef4:	e5c32000 	strb	r2, [r3]
 					if(IsEcho)
-3000ccf4:	e5dd3016 	ldrb	r3, [sp, #22]
-3000ccf8:	e3530000 	cmp	r3, #0
-3000ccfc:	0a000002 	beq	3000cd0c <get_cmd+0x1b0>
+3000cef8:	e5dd3016 	ldrb	r3, [sp, #22]
+3000cefc:	e3530000 	cmp	r3, #0
+3000cf00:	0a000002 	beq	3000cf10 <get_cmd+0x1b0>
 						echo(c);
-3000cd00:	e5dd3017 	ldrb	r3, [sp, #23]
-3000cd04:	e1a00003 	mov	r0, r3
-3000cd08:	ebffff89 	bl	3000cb34 <echo>
+3000cf04:	e5dd3017 	ldrb	r3, [sp, #23]
+3000cf08:	e1a00003 	mov	r0, r3
+3000cf0c:	ebffff89 	bl	3000cd38 <echo>
 					cur_pos++;
-3000cd0c:	e59d3018 	ldr	r3, [sp, #24]
-3000cd10:	e2833001 	add	r3, r3, #1
-3000cd14:	e58d3018 	str	r3, [sp, #24]
+3000cf10:	e59d3018 	ldr	r3, [sp, #24]
+3000cf14:	e2833001 	add	r3, r3, #1
+3000cf18:	e58d3018 	str	r3, [sp, #24]
 				}
 				break;
 		}
 	}
-3000cd18:	eaffffa2 	b	3000cba8 <get_cmd+0x4c>
-3000cd1c:	eaffffa1 	b	3000cba8 <get_cmd+0x4c>
-3000cd20:	300103f8 	.word	0x300103f8
+3000cf1c:	eaffffa2 	b	3000cdac <get_cmd+0x4c>
+3000cf20:	eaffffa1 	b	3000cdac <get_cmd+0x4c>
+3000cf24:	30010604 	.word	0x30010604
 
-3000cd24 <acoral_shell_init>:
+3000cf28 <acoral_shell_init>:
 }
 
 #define SHELL_STACK_SIZE 1024
 void acoral_shell_init(){
-3000cd24:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cd28:	e24dd01c 	sub	sp, sp, #28
+3000cf28:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cf2c:	e24dd01c 	sub	sp, sp, #28
 	acoral_comm_policy_data_t data;
 	head_cmd=NULL;
-3000cd2c:	e59f3070 	ldr	r3, [pc, #112]	; 3000cda4 <acoral_shell_init+0x80>
-3000cd30:	e3a02000 	mov	r2, #0
-3000cd34:	e5832000 	str	r2, [r3]
+3000cf30:	e59f3070 	ldr	r3, [pc, #112]	; 3000cfa8 <acoral_shell_init+0x80>
+3000cf34:	e3a02000 	mov	r2, #0
+3000cf38:	e5832000 	str	r2, [r3]
 	tail_cmd=NULL;
-3000cd38:	e59f3068 	ldr	r3, [pc, #104]	; 3000cda8 <acoral_shell_init+0x84>
-3000cd3c:	e3a02000 	mov	r2, #0
-3000cd40:	e5832000 	str	r2, [r3]
+3000cf3c:	e59f3068 	ldr	r3, [pc, #104]	; 3000cfac <acoral_shell_init+0x84>
+3000cf40:	e3a02000 	mov	r2, #0
+3000cf44:	e5832000 	str	r2, [r3]
 	cmd_init();
-3000cd44:	eb000094 	bl	3000cf9c <cmd_init>
+3000cf48:	eb000094 	bl	3000d1a0 <cmd_init>
 #ifdef CFG_UART_SHELL
 	data.cpu=acoral_current_cpu;
-3000cd48:	e3a03000 	mov	r3, #0
-3000cd4c:	e5cd3014 	strb	r3, [sp, #20]
+3000cf4c:	e3a03000 	mov	r3, #0
+3000cf50:	e5cd3014 	strb	r3, [sp, #20]
 	data.prio=ACORAL_TMP_PRIO;
-3000cd50:	e3a03045 	mov	r3, #69	; 0x45
-3000cd54:	e5cd3015 	strb	r3, [sp, #21]
+3000cf54:	e3a03045 	mov	r3, #69	; 0x45
+3000cf58:	e5cd3015 	strb	r3, [sp, #21]
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
-3000cd58:	e3a03004 	mov	r3, #4
-3000cd5c:	e5cd3016 	strb	r3, [sp, #22]
+3000cf5c:	e3a03004 	mov	r3, #4
+3000cf60:	e5cd3016 	strb	r3, [sp, #22]
 	acoral_create_thread_ext(acoral_shell_enter,SHELL_STACK_SIZE,(void *)acoral_cur_thread->console_id,"shell",NULL,ACORAL_SCHED_POLICY_COMM,&data);
-3000cd60:	e59f3044 	ldr	r3, [pc, #68]	; 3000cdac <acoral_shell_init+0x88>
-3000cd64:	e5933000 	ldr	r3, [r3]
-3000cd68:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
-3000cd6c:	e3a02000 	mov	r2, #0
-3000cd70:	e58d2000 	str	r2, [sp]
-3000cd74:	e3a02015 	mov	r2, #21
-3000cd78:	e58d2004 	str	r2, [sp, #4]
-3000cd7c:	e28d2014 	add	r2, sp, #20
-3000cd80:	e58d2008 	str	r2, [sp, #8]
-3000cd84:	e59f0024 	ldr	r0, [pc, #36]	; 3000cdb0 <acoral_shell_init+0x8c>
-3000cd88:	e3a01b01 	mov	r1, #1024	; 0x400
-3000cd8c:	e1a02003 	mov	r2, r3
-3000cd90:	e59f301c 	ldr	r3, [pc, #28]	; 3000cdb4 <acoral_shell_init+0x90>
-3000cd94:	ebffd3a6 	bl	30001c34 <create_thread_ext>
+3000cf64:	e59f3044 	ldr	r3, [pc, #68]	; 3000cfb0 <acoral_shell_init+0x88>
+3000cf68:	e5933000 	ldr	r3, [r3]
+3000cf6c:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
+3000cf70:	e3a02000 	mov	r2, #0
+3000cf74:	e58d2000 	str	r2, [sp]
+3000cf78:	e3a02015 	mov	r2, #21
+3000cf7c:	e58d2004 	str	r2, [sp, #4]
+3000cf80:	e28d2014 	add	r2, sp, #20
+3000cf84:	e58d2008 	str	r2, [sp, #8]
+3000cf88:	e59f0024 	ldr	r0, [pc, #36]	; 3000cfb4 <acoral_shell_init+0x8c>
+3000cf8c:	e3a01b01 	mov	r1, #1024	; 0x400
+3000cf90:	e1a02003 	mov	r2, r3
+3000cf94:	e59f301c 	ldr	r3, [pc, #28]	; 3000cfb8 <acoral_shell_init+0x90>
+3000cf98:	ebffd325 	bl	30001c34 <create_thread_ext>
 #endif
 }
-3000cd98:	e28dd01c 	add	sp, sp, #28
-3000cd9c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cda0:	e12fff1e 	bx	lr
-3000cda4:	3000facc 	.word	0x3000facc
-3000cda8:	30010420 	.word	0x30010420
-3000cdac:	300103f8 	.word	0x300103f8
-3000cdb0:	3000cddc 	.word	0x3000cddc
-3000cdb4:	3000e828 	.word	0x3000e828
+3000cf9c:	e28dd01c 	add	sp, sp, #28
+3000cfa0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cfa4:	e12fff1e 	bx	lr
+3000cfa8:	3000fcd8 	.word	0x3000fcd8
+3000cfac:	3001062c 	.word	0x3001062c
+3000cfb0:	30010604 	.word	0x30010604
+3000cfb4:	3000cfe0 	.word	0x3000cfe0
+3000cfb8:	3000ea2c 	.word	0x3000ea2c
 
-3000cdb8 <acoral_shell_exit>:
+3000cfbc <acoral_shell_exit>:
 
 void acoral_shell_exit(void *ptr){
-3000cdb8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cdbc:	e24dd00c 	sub	sp, sp, #12
-3000cdc0:	e58d0004 	str	r0, [sp, #4]
+3000cfbc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cfc0:	e24dd00c 	sub	sp, sp, #12
+3000cfc4:	e58d0004 	str	r0, [sp, #4]
 	acoral_free(ptr);
-3000cdc4:	e59d0004 	ldr	r0, [sp, #4]
-3000cdc8:	ebffe5aa 	bl	30006478 <buddy_free>
+3000cfc8:	e59d0004 	ldr	r0, [sp, #4]
+3000cfcc:	ebffe5aa 	bl	3000667c <buddy_free>
 	acoral_thread_exit();
-3000cdcc:	ebffd71f 	bl	30002a50 <acoral_thread_exit>
+3000cfd0:	ebffd69e 	bl	30002a50 <acoral_thread_exit>
 }
-3000cdd0:	e28dd00c 	add	sp, sp, #12
-3000cdd4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cdd8:	e12fff1e 	bx	lr
+3000cfd4:	e28dd00c 	add	sp, sp, #12
+3000cfd8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000cfdc:	e12fff1e 	bx	lr
 
-3000cddc <acoral_shell_enter>:
+3000cfe0 <acoral_shell_enter>:
 
 void acoral_shell_enter(void *args){
-3000cddc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cde0:	e24dd014 	sub	sp, sp, #20
-3000cde4:	e58d0004 	str	r0, [sp, #4]
+3000cfe0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000cfe4:	e24dd014 	sub	sp, sp, #20
+3000cfe8:	e58d0004 	str	r0, [sp, #4]
 	acoral_char *cmd_buf;
 	acoral_set_thread_console((acoral_id)args);
-3000cde8:	e59d3004 	ldr	r3, [sp, #4]
-3000cdec:	e1a00003 	mov	r0, r3
-3000cdf0:	ebffd845 	bl	30002f0c <acoral_set_thread_console>
+3000cfec:	e59d3004 	ldr	r3, [sp, #4]
+3000cff0:	e1a00003 	mov	r0, r3
+3000cff4:	ebffd7c4 	bl	30002f0c <acoral_set_thread_console>
 	if(acoral_cur_thread->console_id<0){
-3000cdf4:	e59f306c 	ldr	r3, [pc, #108]	; 3000ce68 <acoral_shell_enter+0x8c>
-3000cdf8:	e5933000 	ldr	r3, [r3]
-3000cdfc:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
-3000ce00:	e3530000 	cmp	r3, #0
-3000ce04:	aa000004 	bge	3000ce1c <acoral_shell_enter+0x40>
+3000cff8:	e59f306c 	ldr	r3, [pc, #108]	; 3000d06c <acoral_shell_enter+0x8c>
+3000cffc:	e5933000 	ldr	r3, [r3]
+3000d000:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
+3000d004:	e3530000 	cmp	r3, #0
+3000d008:	aa000004 	bge	3000d020 <acoral_shell_enter+0x40>
 		acoral_prints("The thread have no Console\n");
-3000ce08:	e59f005c 	ldr	r0, [pc, #92]	; 3000ce6c <acoral_shell_enter+0x90>
-3000ce0c:	ebfff920 	bl	3000b294 <acoral_prints>
+3000d00c:	e59f005c 	ldr	r0, [pc, #92]	; 3000d070 <acoral_shell_enter+0x90>
+3000d010:	ebfff920 	bl	3000b498 <acoral_prints>
 		acoral_prints("aCoral:>");
 		get_cmd(cmd_buf);
 		if(cmd_buf[0])
 			cmd_exe(cmd_buf);
 	}
 }
-3000ce10:	e28dd014 	add	sp, sp, #20
-3000ce14:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000ce18:	e12fff1e 	bx	lr
+3000d014:	e28dd014 	add	sp, sp, #20
+3000d018:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d01c:	e12fff1e 	bx	lr
 	acoral_set_thread_console((acoral_id)args);
 	if(acoral_cur_thread->console_id<0){
 		acoral_prints("The thread have no Console\n");
 		return;
 	}
 	cmd_buf=acoral_malloc(sizeof(BUF_SIZE));
-3000ce1c:	e3a00004 	mov	r0, #4
-3000ce20:	ebffe55c 	bl	30006398 <buddy_malloc>
-3000ce24:	e1a03000 	mov	r3, r0
-3000ce28:	e58d300c 	str	r3, [sp, #12]
-3000ce2c:	ea000000 	b	3000ce34 <acoral_shell_enter+0x58>
+3000d020:	e3a00004 	mov	r0, #4
+3000d024:	ebffe55c 	bl	3000659c <buddy_malloc>
+3000d028:	e1a03000 	mov	r3, r0
+3000d02c:	e58d300c 	str	r3, [sp, #12]
+3000d030:	ea000000 	b	3000d038 <acoral_shell_enter+0x58>
 		acoral_prints("\r\n");
 		acoral_prints("aCoral:>");
 		get_cmd(cmd_buf);
 		if(cmd_buf[0])
 			cmd_exe(cmd_buf);
 	}
-3000ce30:	e1a00000 	nop			; (mov r0, r0)
+3000d034:	e1a00000 	nop			; (mov r0, r0)
 		acoral_prints("The thread have no Console\n");
 		return;
 	}
 	cmd_buf=acoral_malloc(sizeof(BUF_SIZE));
 	while(1){
 		acoral_prints("\r\n");
-3000ce34:	e59f0034 	ldr	r0, [pc, #52]	; 3000ce70 <acoral_shell_enter+0x94>
-3000ce38:	ebfff915 	bl	3000b294 <acoral_prints>
+3000d038:	e59f0034 	ldr	r0, [pc, #52]	; 3000d074 <acoral_shell_enter+0x94>
+3000d03c:	ebfff915 	bl	3000b498 <acoral_prints>
 		acoral_prints("aCoral:>");
-3000ce3c:	e59f0030 	ldr	r0, [pc, #48]	; 3000ce74 <acoral_shell_enter+0x98>
-3000ce40:	ebfff913 	bl	3000b294 <acoral_prints>
+3000d040:	e59f0030 	ldr	r0, [pc, #48]	; 3000d078 <acoral_shell_enter+0x98>
+3000d044:	ebfff913 	bl	3000b498 <acoral_prints>
 		get_cmd(cmd_buf);
-3000ce44:	e59d000c 	ldr	r0, [sp, #12]
-3000ce48:	ebffff43 	bl	3000cb5c <get_cmd>
+3000d048:	e59d000c 	ldr	r0, [sp, #12]
+3000d04c:	ebffff43 	bl	3000cd60 <get_cmd>
 		if(cmd_buf[0])
-3000ce4c:	e59d300c 	ldr	r3, [sp, #12]
-3000ce50:	e5d33000 	ldrb	r3, [r3]
-3000ce54:	e3530000 	cmp	r3, #0
-3000ce58:	0afffff4 	beq	3000ce30 <acoral_shell_enter+0x54>
+3000d050:	e59d300c 	ldr	r3, [sp, #12]
+3000d054:	e5d33000 	ldrb	r3, [r3]
+3000d058:	e3530000 	cmp	r3, #0
+3000d05c:	0afffff4 	beq	3000d034 <acoral_shell_enter+0x54>
 			cmd_exe(cmd_buf);
-3000ce5c:	e59d000c 	ldr	r0, [sp, #12]
-3000ce60:	ebffff12 	bl	3000cab0 <cmd_exe>
+3000d060:	e59d000c 	ldr	r0, [sp, #12]
+3000d064:	ebffff12 	bl	3000ccb4 <cmd_exe>
 	}
-3000ce64:	eafffff2 	b	3000ce34 <acoral_shell_enter+0x58>
-3000ce68:	300103f8 	.word	0x300103f8
-3000ce6c:	3000e830 	.word	0x3000e830
-3000ce70:	3000e84c 	.word	0x3000e84c
-3000ce74:	3000e850 	.word	0x3000e850
+3000d068:	eafffff2 	b	3000d038 <acoral_shell_enter+0x58>
+3000d06c:	30010604 	.word	0x30010604
+3000d070:	3000ea34 	.word	0x3000ea34
+3000d074:	3000ea50 	.word	0x3000ea50
+3000d078:	3000ea54 	.word	0x3000ea54
 
-3000ce78 <malloc_scan>:
+3000d07c <malloc_scan>:
 #include<kernel.h>
 #include"../include/shell.h"
 #include"console.h"
 void malloc_scan(acoral_32 argc,acoral_char **argv){
-3000ce78:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000ce7c:	e24dd00c 	sub	sp, sp, #12
-3000ce80:	e58d0004 	str	r0, [sp, #4]
-3000ce84:	e58d1000 	str	r1, [sp]
+3000d07c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d080:	e24dd00c 	sub	sp, sp, #12
+3000d084:	e58d0004 	str	r0, [sp, #4]
+3000d088:	e58d1000 	str	r1, [sp]
 	acoral_mem_scan();
-3000ce88:	ebffe151 	bl	300053d4 <buddy_scan>
+3000d08c:	ebffe151 	bl	300055d8 <buddy_scan>
 }
-3000ce8c:	e28dd00c 	add	sp, sp, #12
-3000ce90:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000ce94:	e12fff1e 	bx	lr
+3000d090:	e28dd00c 	add	sp, sp, #12
+3000d094:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d098:	e12fff1e 	bx	lr
 
-3000ce98 <malloc_scan2>:
+3000d09c <malloc_scan2>:
 	malloc_scan,
 	"View the first Level Memory Managment Info",
 	NULL
 };
 
 void malloc_scan2(acoral_32 argc,acoral_char **argv){
-3000ce98:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000ce9c:	e24dd00c 	sub	sp, sp, #12
-3000cea0:	e58d0004 	str	r0, [sp, #4]
-3000cea4:	e58d1000 	str	r1, [sp]
+3000d09c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d0a0:	e24dd00c 	sub	sp, sp, #12
+3000d0a4:	e58d0004 	str	r0, [sp, #4]
+3000d0a8:	e58d1000 	str	r1, [sp]
 	acoral_mem_scan2();
-3000cea8:	ebffe83a 	bl	30006f98 <v_mem_scan>
+3000d0ac:	ebffe83a 	bl	3000719c <v_mem_scan>
 }
-3000ceac:	e28dd00c 	add	sp, sp, #12
-3000ceb0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000ceb4:	e12fff1e 	bx	lr
+3000d0b0:	e28dd00c 	add	sp, sp, #12
+3000d0b4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d0b8:	e12fff1e 	bx	lr
 
-3000ceb8 <help>:
+3000d0bc <help>:
 	"View the seconde Level Memory Managment Info",
 	NULL
 };
 
 extern acoral_shell_cmd_t *head_cmd;
 void help(acoral_32 argc,acoral_char **argv){
-3000ceb8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cebc:	e24dd014 	sub	sp, sp, #20
-3000cec0:	e58d0004 	str	r0, [sp, #4]
-3000cec4:	e58d1000 	str	r1, [sp]
+3000d0bc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d0c0:	e24dd014 	sub	sp, sp, #20
+3000d0c4:	e58d0004 	str	r0, [sp, #4]
+3000d0c8:	e58d1000 	str	r1, [sp]
 	acoral_shell_cmd_t *curr;
 	curr =head_cmd;
-3000cec8:	e59f304c 	ldr	r3, [pc, #76]	; 3000cf1c <help+0x64>
-3000cecc:	e5933000 	ldr	r3, [r3]
-3000ced0:	e58d300c 	str	r3, [sp, #12]
+3000d0cc:	e59f304c 	ldr	r3, [pc, #76]	; 3000d120 <help+0x64>
+3000d0d0:	e5933000 	ldr	r3, [r3]
+3000d0d4:	e58d300c 	str	r3, [sp, #12]
 	while(curr != NULL) {
-3000ced4:	ea00000a 	b	3000cf04 <help+0x4c>
+3000d0d8:	ea00000a 	b	3000d108 <help+0x4c>
 		acoral_print("%s  %s\n",curr->name,curr->comment);
-3000ced8:	e59d300c 	ldr	r3, [sp, #12]
-3000cedc:	e5932000 	ldr	r2, [r3]
-3000cee0:	e59d300c 	ldr	r3, [sp, #12]
-3000cee4:	e5933008 	ldr	r3, [r3, #8]
-3000cee8:	e59f0030 	ldr	r0, [pc, #48]	; 3000cf20 <help+0x68>
-3000ceec:	e1a01002 	mov	r1, r2
-3000cef0:	e1a02003 	mov	r2, r3
-3000cef4:	ebfff8c3 	bl	3000b208 <acoral_print>
+3000d0dc:	e59d300c 	ldr	r3, [sp, #12]
+3000d0e0:	e5932000 	ldr	r2, [r3]
+3000d0e4:	e59d300c 	ldr	r3, [sp, #12]
+3000d0e8:	e5933008 	ldr	r3, [r3, #8]
+3000d0ec:	e59f0030 	ldr	r0, [pc, #48]	; 3000d124 <help+0x68>
+3000d0f0:	e1a01002 	mov	r1, r2
+3000d0f4:	e1a02003 	mov	r2, r3
+3000d0f8:	ebfff8c3 	bl	3000b40c <acoral_print>
 		curr = curr->next;
-3000cef8:	e59d300c 	ldr	r3, [sp, #12]
-3000cefc:	e593300c 	ldr	r3, [r3, #12]
-3000cf00:	e58d300c 	str	r3, [sp, #12]
+3000d0fc:	e59d300c 	ldr	r3, [sp, #12]
+3000d100:	e593300c 	ldr	r3, [r3, #12]
+3000d104:	e58d300c 	str	r3, [sp, #12]
 
 extern acoral_shell_cmd_t *head_cmd;
 void help(acoral_32 argc,acoral_char **argv){
 	acoral_shell_cmd_t *curr;
 	curr =head_cmd;
 	while(curr != NULL) {
-3000cf04:	e59d300c 	ldr	r3, [sp, #12]
-3000cf08:	e3530000 	cmp	r3, #0
-3000cf0c:	1afffff1 	bne	3000ced8 <help+0x20>
+3000d108:	e59d300c 	ldr	r3, [sp, #12]
+3000d10c:	e3530000 	cmp	r3, #0
+3000d110:	1afffff1 	bne	3000d0dc <help+0x20>
 		acoral_print("%s  %s\n",curr->name,curr->comment);
 		curr = curr->next;
 	}
 }
-3000cf10:	e28dd014 	add	sp, sp, #20
-3000cf14:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cf18:	e12fff1e 	bx	lr
-3000cf1c:	3000facc 	.word	0x3000facc
-3000cf20:	3000e8cc 	.word	0x3000e8cc
+3000d114:	e28dd014 	add	sp, sp, #20
+3000d118:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d11c:	e12fff1e 	bx	lr
+3000d120:	3000fcd8 	.word	0x3000fcd8
+3000d124:	3000ead0 	.word	0x3000ead0
 
-3000cf24 <exit>:
+3000d128 <exit>:
 	help,
 	"View all Shell Command info",
 	NULL
 };
 
 void exit(acoral_32 argc,acoral_char **argv){
-3000cf24:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cf28:	e24dd00c 	sub	sp, sp, #12
-3000cf2c:	e58d0004 	str	r0, [sp, #4]
-3000cf30:	e58d1000 	str	r1, [sp]
+3000d128:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d12c:	e24dd00c 	sub	sp, sp, #12
+3000d130:	e58d0004 	str	r0, [sp, #4]
+3000d134:	e58d1000 	str	r1, [sp]
 	acoral_dev_config(acoral_cur_thread->console_id,CONSOLE_EXIT,NULL,0);
-3000cf34:	e59f3034 	ldr	r3, [pc, #52]	; 3000cf70 <exit+0x4c>
-3000cf38:	e5933000 	ldr	r3, [r3]
-3000cf3c:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
-3000cf40:	e1a00003 	mov	r0, r3
-3000cf44:	e3a01003 	mov	r1, #3
-3000cf48:	e3a02000 	mov	r2, #0
-3000cf4c:	e3a03000 	mov	r3, #0
-3000cf50:	eb000194 	bl	3000d5a8 <acoral_dev_config>
+3000d138:	e59f3034 	ldr	r3, [pc, #52]	; 3000d174 <exit+0x4c>
+3000d13c:	e5933000 	ldr	r3, [r3]
+3000d140:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
+3000d144:	e1a00003 	mov	r0, r3
+3000d148:	e3a01003 	mov	r1, #3
+3000d14c:	e3a02000 	mov	r2, #0
+3000d150:	e3a03000 	mov	r3, #0
+3000d154:	eb000194 	bl	3000d7ac <acoral_dev_config>
 	acoral_shell_exit((void *)argv[0]);
-3000cf54:	e59d3000 	ldr	r3, [sp]
-3000cf58:	e5933000 	ldr	r3, [r3]
-3000cf5c:	e1a00003 	mov	r0, r3
-3000cf60:	ebffff94 	bl	3000cdb8 <acoral_shell_exit>
+3000d158:	e59d3000 	ldr	r3, [sp]
+3000d15c:	e5933000 	ldr	r3, [r3]
+3000d160:	e1a00003 	mov	r0, r3
+3000d164:	ebffff94 	bl	3000cfbc <acoral_shell_exit>
 }
-3000cf64:	e28dd00c 	add	sp, sp, #12
-3000cf68:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cf6c:	e12fff1e 	bx	lr
-3000cf70:	300103f8 	.word	0x300103f8
+3000d168:	e28dd00c 	add	sp, sp, #12
+3000d16c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d170:	e12fff1e 	bx	lr
+3000d174:	30010604 	.word	0x30010604
 
-3000cf74 <spg>:
+3000d178 <spg>:
 	"exit",
 	exit,
 	"Exit Shell",
 	NULL
 };
 void spg(acoral_32 argc,acoral_char **argv){
-3000cf74:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cf78:	e24dd00c 	sub	sp, sp, #12
-3000cf7c:	e58d0004 	str	r0, [sp, #4]
-3000cf80:	e58d1000 	str	r1, [sp]
-	acoral_prints("SPGGOGOGO!");
-3000cf84:	e59f000c 	ldr	r0, [pc, #12]	; 3000cf98 <spg+0x24>
-3000cf88:	ebfff8c1 	bl	3000b294 <acoral_prints>
+3000d178:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d17c:	e24dd00c 	sub	sp, sp, #12
+3000d180:	e58d0004 	str	r0, [sp, #4]
+3000d184:	e58d1000 	str	r1, [sp]
+	acoral_prints("SPGGOGOGO！！！");
+3000d188:	e59f000c 	ldr	r0, [pc, #12]	; 3000d19c <spg+0x24>
+3000d18c:	ebfff8c1 	bl	3000b498 <acoral_prints>
 }
-3000cf8c:	e28dd00c 	add	sp, sp, #12
-3000cf90:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000cf94:	e12fff1e 	bx	lr
-3000cf98:	3000e90c 	.word	0x3000e90c
+3000d190:	e28dd00c 	add	sp, sp, #12
+3000d194:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d198:	e12fff1e 	bx	lr
+3000d19c:	3000eb10 	.word	0x3000eb10
 
-3000cf9c <cmd_init>:
+3000d1a0 <cmd_init>:
 };
 #endif
 
 extern acoral_shell_cmd_t dt_cmd;
 extern fs_cmd_init();
 void cmd_init(){
-3000cf9c:	e92d4008 	push	{r3, lr}
+3000d1a0:	e92d4008 	push	{r3, lr}
 	add_command(&mem_cmd);
-3000cfa0:	e59f0028 	ldr	r0, [pc, #40]	; 3000cfd0 <cmd_init+0x34>
-3000cfa4:	ebfffe6b 	bl	3000c958 <add_command>
+3000d1a4:	e59f0028 	ldr	r0, [pc, #40]	; 3000d1d4 <cmd_init+0x34>
+3000d1a8:	ebfffe6b 	bl	3000cb5c <add_command>
 	//add_command(&mem2_cmd);
 	add_command(&dt_cmd);
-3000cfa8:	e59f0024 	ldr	r0, [pc, #36]	; 3000cfd4 <cmd_init+0x38>
-3000cfac:	ebfffe69 	bl	3000c958 <add_command>
+3000d1ac:	e59f0024 	ldr	r0, [pc, #36]	; 3000d1d8 <cmd_init+0x38>
+3000d1b0:	ebfffe69 	bl	3000cb5c <add_command>
 	add_command(&spg_cmd);
-3000cfb0:	e59f0020 	ldr	r0, [pc, #32]	; 3000cfd8 <cmd_init+0x3c>
-3000cfb4:	ebfffe67 	bl	3000c958 <add_command>
+3000d1b4:	e59f0020 	ldr	r0, [pc, #32]	; 3000d1dc <cmd_init+0x3c>
+3000d1b8:	ebfffe67 	bl	3000cb5c <add_command>
 #ifdef CFG_PM
 	add_command(&suspend_cmd);
 #endif
 	add_command(&exit_cmd);
-3000cfb8:	e59f001c 	ldr	r0, [pc, #28]	; 3000cfdc <cmd_init+0x40>
-3000cfbc:	ebfffe65 	bl	3000c958 <add_command>
+3000d1bc:	e59f001c 	ldr	r0, [pc, #28]	; 3000d1e0 <cmd_init+0x40>
+3000d1c0:	ebfffe65 	bl	3000cb5c <add_command>
 	add_command(&help_cmd);
-3000cfc0:	e59f0018 	ldr	r0, [pc, #24]	; 3000cfe0 <cmd_init+0x44>
-3000cfc4:	ebfffe63 	bl	3000c958 <add_command>
+3000d1c4:	e59f0018 	ldr	r0, [pc, #24]	; 3000d1e4 <cmd_init+0x44>
+3000d1c8:	ebfffe63 	bl	3000cb5c <add_command>
 #ifdef CFG_SHELL_FS_CMD
 	fs_cmd_init();
 #endif
 
 }
-3000cfc8:	e8bd4008 	pop	{r3, lr}
-3000cfcc:	e12fff1e 	bx	lr
-3000cfd0:	3000ea7c 	.word	0x3000ea7c
-3000cfd4:	3000eacc 	.word	0x3000eacc
-3000cfd8:	3000eabc 	.word	0x3000eabc
-3000cfdc:	3000eaac 	.word	0x3000eaac
-3000cfe0:	3000ea9c 	.word	0x3000ea9c
+3000d1cc:	e8bd4008 	pop	{r3, lr}
+3000d1d0:	e12fff1e 	bx	lr
+3000d1d4:	3000ec88 	.word	0x3000ec88
+3000d1d8:	3000ecd8 	.word	0x3000ecd8
+3000d1dc:	3000ecc8 	.word	0x3000ecc8
+3000d1e0:	3000ecb8 	.word	0x3000ecb8
+3000d1e4:	3000eca8 	.word	0x3000eca8
 
-3000cfe4 <display_thread>:
+3000d1e8 <display_thread>:
 #include<thread.h>
 #include<policy.h>
 #include<hal.h>
 #include"../include/shell.h"
 void display_thread(acoral_32 argc,acoral_char **argv){
-3000cfe4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000cfe8:	e24dd01c 	sub	sp, sp, #28
-3000cfec:	e58d0004 	str	r0, [sp, #4]
-3000cff0:	e58d1000 	str	r1, [sp]
+3000d1e8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d1ec:	e24dd01c 	sub	sp, sp, #28
+3000d1f0:	e58d0004 	str	r0, [sp, #4]
+3000d1f4:	e58d1000 	str	r1, [sp]
 	acoral_sr cpu_sr;	
 	acoral_list_t *head,*tmp;
 	acoral_thread_t * thread;
 	head=&acoral_threads_queue.head;
-3000cff4:	e59f31b4 	ldr	r3, [pc, #436]	; 3000d1b0 <display_thread+0x1cc>
-3000cff8:	e58d300c 	str	r3, [sp, #12]
+3000d1f8:	e59f31b4 	ldr	r3, [pc, #436]	; 3000d3b4 <display_thread+0x1cc>
+3000d1fc:	e58d300c 	str	r3, [sp, #12]
 	acoral_prints("\t\tSystem Thread Information\r\n");
-3000cffc:	e59f01b0 	ldr	r0, [pc, #432]	; 3000d1b4 <display_thread+0x1d0>
-3000d000:	ebfff8a3 	bl	3000b294 <acoral_prints>
+3000d200:	e59f01b0 	ldr	r0, [pc, #432]	; 3000d3b8 <display_thread+0x1d0>
+3000d204:	ebfff8a3 	bl	3000b498 <acoral_prints>
 	acoral_prints("------------------------------------------------------\r\n");
-3000d004:	e59f01ac 	ldr	r0, [pc, #428]	; 3000d1b8 <display_thread+0x1d4>
-3000d008:	ebfff8a1 	bl	3000b294 <acoral_prints>
+3000d208:	e59f01ac 	ldr	r0, [pc, #428]	; 3000d3bc <display_thread+0x1d4>
+3000d20c:	ebfff8a1 	bl	3000b498 <acoral_prints>
 	acoral_prints("Name\t\tType\t\tConsole\t\tState\r\n");
-3000d00c:	e59f01a8 	ldr	r0, [pc, #424]	; 3000d1bc <display_thread+0x1d8>
-3000d010:	ebfff89f 	bl	3000b294 <acoral_prints>
+3000d210:	e59f01a8 	ldr	r0, [pc, #424]	; 3000d3c0 <display_thread+0x1d8>
+3000d214:	ebfff89f 	bl	3000b498 <acoral_prints>
 	HAL_ENTER_CRITICAL();
-3000d014:	ebffd1b6 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
-3000d018:	e1a03000 	mov	r3, r0
-3000d01c:	e58d3008 	str	r3, [sp, #8]
+3000d218:	ebffd135 	bl	300016f4 <HAL_INTR_DISABLE_SAVE>
+3000d21c:	e1a03000 	mov	r3, r0
+3000d220:	e58d3008 	str	r3, [sp, #8]
 	acoral_spin_lock(&acoral_threads_queue.head.lock);
 	for(tmp=head->next;tmp!=head;tmp=tmp->next){
-3000d020:	e59d300c 	ldr	r3, [sp, #12]
-3000d024:	e5933000 	ldr	r3, [r3]
-3000d028:	e58d3010 	str	r3, [sp, #16]
-3000d02c:	ea000054 	b	3000d184 <display_thread+0x1a0>
+3000d224:	e59d300c 	ldr	r3, [sp, #12]
+3000d228:	e5933000 	ldr	r3, [r3]
+3000d22c:	e58d3010 	str	r3, [sp, #16]
+3000d230:	ea000054 	b	3000d388 <display_thread+0x1a0>
 		thread=list_entry(tmp,acoral_thread_t,global_list);
-3000d030:	e59d3010 	ldr	r3, [sp, #16]
-3000d034:	e2433028 	sub	r3, r3, #40	; 0x28
-3000d038:	e58d3014 	str	r3, [sp, #20]
+3000d234:	e59d3010 	ldr	r3, [sp, #16]
+3000d238:	e2433028 	sub	r3, r3, #40	; 0x28
+3000d23c:	e58d3014 	str	r3, [sp, #20]
 		acoral_print("%s\t\t",thread->name);
-3000d03c:	e59d3014 	ldr	r3, [sp, #20]
-3000d040:	e5933048 	ldr	r3, [r3, #72]	; 0x48
-3000d044:	e59f0174 	ldr	r0, [pc, #372]	; 3000d1c0 <display_thread+0x1dc>
-3000d048:	e1a01003 	mov	r1, r3
-3000d04c:	ebfff86d 	bl	3000b208 <acoral_print>
+3000d240:	e59d3014 	ldr	r3, [sp, #20]
+3000d244:	e5933048 	ldr	r3, [r3, #72]	; 0x48
+3000d248:	e59f0174 	ldr	r0, [pc, #372]	; 3000d3c4 <display_thread+0x1dc>
+3000d24c:	e1a01003 	mov	r1, r3
+3000d250:	ebfff86d 	bl	3000b40c <acoral_print>
 		switch(thread->policy){
-3000d050:	e59d3014 	ldr	r3, [sp, #20]
-3000d054:	e5d3300c 	ldrb	r3, [r3, #12]
-3000d058:	e2433015 	sub	r3, r3, #21
-3000d05c:	e3530004 	cmp	r3, #4
-3000d060:	979ff103 	ldrls	pc, [pc, r3, lsl #2]
-3000d064:	ea000012 	b	3000d0b4 <display_thread+0xd0>
-3000d068:	3000d07c 	.word	0x3000d07c
-3000d06c:	3000d094 	.word	0x3000d094
-3000d070:	3000d0a0 	.word	0x3000d0a0
-3000d074:	3000d088 	.word	0x3000d088
-3000d078:	3000d0ac 	.word	0x3000d0ac
+3000d254:	e59d3014 	ldr	r3, [sp, #20]
+3000d258:	e5d3300c 	ldrb	r3, [r3, #12]
+3000d25c:	e2433015 	sub	r3, r3, #21
+3000d260:	e3530004 	cmp	r3, #4
+3000d264:	979ff103 	ldrls	pc, [pc, r3, lsl #2]
+3000d268:	ea000012 	b	3000d2b8 <display_thread+0xd0>
+3000d26c:	3000d280 	.word	0x3000d280
+3000d270:	3000d298 	.word	0x3000d298
+3000d274:	3000d2a4 	.word	0x3000d2a4
+3000d278:	3000d28c 	.word	0x3000d28c
+3000d27c:	3000d2b0 	.word	0x3000d2b0
 			case ACORAL_SCHED_POLICY_COMM:
 				acoral_prints("Common\t\t");
-3000d07c:	e59f0140 	ldr	r0, [pc, #320]	; 3000d1c4 <display_thread+0x1e0>
-3000d080:	ebfff883 	bl	3000b294 <acoral_prints>
+3000d280:	e59f0140 	ldr	r0, [pc, #320]	; 3000d3c8 <display_thread+0x1e0>
+3000d284:	ebfff883 	bl	3000b498 <acoral_prints>
 				break;
-3000d084:	ea00000a 	b	3000d0b4 <display_thread+0xd0>
+3000d288:	ea00000a 	b	3000d2b8 <display_thread+0xd0>
 			case ACORAL_SCHED_POLICY_SLICE:
 				acoral_prints("Slice\t\t");
-3000d088:	e59f0138 	ldr	r0, [pc, #312]	; 3000d1c8 <display_thread+0x1e4>
-3000d08c:	ebfff880 	bl	3000b294 <acoral_prints>
+3000d28c:	e59f0138 	ldr	r0, [pc, #312]	; 3000d3cc <display_thread+0x1e4>
+3000d290:	ebfff880 	bl	3000b498 <acoral_prints>
 				break;
-3000d090:	ea000007 	b	3000d0b4 <display_thread+0xd0>
+3000d294:	ea000007 	b	3000d2b8 <display_thread+0xd0>
 			case ACORAL_SCHED_POLICY_PERIOD:
 				acoral_prints("Period\t\t");
-3000d094:	e59f0130 	ldr	r0, [pc, #304]	; 3000d1cc <display_thread+0x1e8>
-3000d098:	ebfff87d 	bl	3000b294 <acoral_prints>
+3000d298:	e59f0130 	ldr	r0, [pc, #304]	; 3000d3d0 <display_thread+0x1e8>
+3000d29c:	ebfff87d 	bl	3000b498 <acoral_prints>
 				break;
-3000d09c:	ea000004 	b	3000d0b4 <display_thread+0xd0>
+3000d2a0:	ea000004 	b	3000d2b8 <display_thread+0xd0>
 			case ACORAL_SCHED_POLICY_RM:
 				acoral_prints("RM\t\t");
-3000d0a0:	e59f0128 	ldr	r0, [pc, #296]	; 3000d1d0 <display_thread+0x1ec>
-3000d0a4:	ebfff87a 	bl	3000b294 <acoral_prints>
+3000d2a4:	e59f0128 	ldr	r0, [pc, #296]	; 3000d3d4 <display_thread+0x1ec>
+3000d2a8:	ebfff87a 	bl	3000b498 <acoral_prints>
 				break;
-3000d0a8:	ea000001 	b	3000d0b4 <display_thread+0xd0>
+3000d2ac:	ea000001 	b	3000d2b8 <display_thread+0xd0>
 			case ACORAL_SCHED_POLICY_POSIX:
 				acoral_prints("Posix\t\t");
-3000d0ac:	e59f0120 	ldr	r0, [pc, #288]	; 3000d1d4 <display_thread+0x1f0>
-3000d0b0:	ebfff877 	bl	3000b294 <acoral_prints>
+3000d2b0:	e59f0120 	ldr	r0, [pc, #288]	; 3000d3d8 <display_thread+0x1f0>
+3000d2b4:	ebfff877 	bl	3000b498 <acoral_prints>
 			default:
 				break;
 		}
 		acoral_print("%d\t\t",thread->console_id);
-3000d0b4:	e59d3014 	ldr	r3, [sp, #20]
-3000d0b8:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
-3000d0bc:	e59f0114 	ldr	r0, [pc, #276]	; 3000d1d8 <display_thread+0x1f4>
-3000d0c0:	e1a01003 	mov	r1, r3
-3000d0c4:	ebfff84f 	bl	3000b208 <acoral_print>
+3000d2b8:	e59d3014 	ldr	r3, [sp, #20]
+3000d2bc:	e593304c 	ldr	r3, [r3, #76]	; 0x4c
+3000d2c0:	e59f0114 	ldr	r0, [pc, #276]	; 3000d3dc <display_thread+0x1f4>
+3000d2c4:	e1a01003 	mov	r1, r3
+3000d2c8:	ebfff84f 	bl	3000b40c <acoral_print>
 		if(thread->state&ACORAL_THREAD_STATE_RUNNING)
-3000d0c8:	e59d3014 	ldr	r3, [sp, #20]
-3000d0cc:	e5d33004 	ldrb	r3, [r3, #4]
-3000d0d0:	e2033004 	and	r3, r3, #4
-3000d0d4:	e3530000 	cmp	r3, #0
-3000d0d8:	0a000002 	beq	3000d0e8 <display_thread+0x104>
+3000d2cc:	e59d3014 	ldr	r3, [sp, #20]
+3000d2d0:	e5d33004 	ldrb	r3, [r3, #4]
+3000d2d4:	e2033004 	and	r3, r3, #4
+3000d2d8:	e3530000 	cmp	r3, #0
+3000d2dc:	0a000002 	beq	3000d2ec <display_thread+0x104>
 				acoral_prints("Running\t\t");
-3000d0dc:	e59f00f8 	ldr	r0, [pc, #248]	; 3000d1dc <display_thread+0x1f8>
-3000d0e0:	ebfff86b 	bl	3000b294 <acoral_prints>
-3000d0e4:	ea000021 	b	3000d170 <display_thread+0x18c>
+3000d2e0:	e59f00f8 	ldr	r0, [pc, #248]	; 3000d3e0 <display_thread+0x1f8>
+3000d2e4:	ebfff86b 	bl	3000b498 <acoral_prints>
+3000d2e8:	ea000021 	b	3000d374 <display_thread+0x18c>
 		else if(thread->state&ACORAL_THREAD_STATE_READY)
-3000d0e8:	e59d3014 	ldr	r3, [sp, #20]
-3000d0ec:	e5d33004 	ldrb	r3, [r3, #4]
-3000d0f0:	e2033001 	and	r3, r3, #1
-3000d0f4:	e20330ff 	and	r3, r3, #255	; 0xff
-3000d0f8:	e3530000 	cmp	r3, #0
-3000d0fc:	0a000002 	beq	3000d10c <display_thread+0x128>
+3000d2ec:	e59d3014 	ldr	r3, [sp, #20]
+3000d2f0:	e5d33004 	ldrb	r3, [r3, #4]
+3000d2f4:	e2033001 	and	r3, r3, #1
+3000d2f8:	e20330ff 	and	r3, r3, #255	; 0xff
+3000d2fc:	e3530000 	cmp	r3, #0
+3000d300:	0a000002 	beq	3000d310 <display_thread+0x128>
 				acoral_prints("Ready\t\t");
-3000d100:	e59f00d8 	ldr	r0, [pc, #216]	; 3000d1e0 <display_thread+0x1fc>
-3000d104:	ebfff862 	bl	3000b294 <acoral_prints>
-3000d108:	ea000018 	b	3000d170 <display_thread+0x18c>
+3000d304:	e59f00d8 	ldr	r0, [pc, #216]	; 3000d3e4 <display_thread+0x1fc>
+3000d308:	ebfff862 	bl	3000b498 <acoral_prints>
+3000d30c:	ea000018 	b	3000d374 <display_thread+0x18c>
 		else if(thread->state&ACORAL_THREAD_STATE_DELAY)
-3000d10c:	e59d3014 	ldr	r3, [sp, #20]
-3000d110:	e5d33004 	ldrb	r3, [r3, #4]
-3000d114:	e2033020 	and	r3, r3, #32
-3000d118:	e3530000 	cmp	r3, #0
-3000d11c:	0a000002 	beq	3000d12c <display_thread+0x148>
+3000d310:	e59d3014 	ldr	r3, [sp, #20]
+3000d314:	e5d33004 	ldrb	r3, [r3, #4]
+3000d318:	e2033020 	and	r3, r3, #32
+3000d31c:	e3530000 	cmp	r3, #0
+3000d320:	0a000002 	beq	3000d330 <display_thread+0x148>
 				acoral_prints("Delay\t\t");
-3000d120:	e59f00bc 	ldr	r0, [pc, #188]	; 3000d1e4 <display_thread+0x200>
-3000d124:	ebfff85a 	bl	3000b294 <acoral_prints>
-3000d128:	ea000010 	b	3000d170 <display_thread+0x18c>
+3000d324:	e59f00bc 	ldr	r0, [pc, #188]	; 3000d3e8 <display_thread+0x200>
+3000d328:	ebfff85a 	bl	3000b498 <acoral_prints>
+3000d32c:	ea000010 	b	3000d374 <display_thread+0x18c>
 		else if(thread->state&ACORAL_THREAD_STATE_SUSPEND)
-3000d12c:	e59d3014 	ldr	r3, [sp, #20]
-3000d130:	e5d33004 	ldrb	r3, [r3, #4]
-3000d134:	e2033002 	and	r3, r3, #2
-3000d138:	e3530000 	cmp	r3, #0
-3000d13c:	0a000002 	beq	3000d14c <display_thread+0x168>
+3000d330:	e59d3014 	ldr	r3, [sp, #20]
+3000d334:	e5d33004 	ldrb	r3, [r3, #4]
+3000d338:	e2033002 	and	r3, r3, #2
+3000d33c:	e3530000 	cmp	r3, #0
+3000d340:	0a000002 	beq	3000d350 <display_thread+0x168>
 				acoral_prints("Sleep\t\t");
-3000d140:	e59f00a0 	ldr	r0, [pc, #160]	; 3000d1e8 <display_thread+0x204>
-3000d144:	ebfff852 	bl	3000b294 <acoral_prints>
-3000d148:	ea000008 	b	3000d170 <display_thread+0x18c>
+3000d344:	e59f00a0 	ldr	r0, [pc, #160]	; 3000d3ec <display_thread+0x204>
+3000d348:	ebfff852 	bl	3000b498 <acoral_prints>
+3000d34c:	ea000008 	b	3000d374 <display_thread+0x18c>
 		else if(thread->state==ACORAL_THREAD_STATE_EXIT)
-3000d14c:	e59d3014 	ldr	r3, [sp, #20]
-3000d150:	e5d33004 	ldrb	r3, [r3, #4]
-3000d154:	e3530008 	cmp	r3, #8
-3000d158:	1a000002 	bne	3000d168 <display_thread+0x184>
+3000d350:	e59d3014 	ldr	r3, [sp, #20]
+3000d354:	e5d33004 	ldrb	r3, [r3, #4]
+3000d358:	e3530008 	cmp	r3, #8
+3000d35c:	1a000002 	bne	3000d36c <display_thread+0x184>
 				acoral_prints("Freeze\t\t");
-3000d15c:	e59f0088 	ldr	r0, [pc, #136]	; 3000d1ec <display_thread+0x208>
-3000d160:	ebfff84b 	bl	3000b294 <acoral_prints>
-3000d164:	ea000001 	b	3000d170 <display_thread+0x18c>
+3000d360:	e59f0088 	ldr	r0, [pc, #136]	; 3000d3f0 <display_thread+0x208>
+3000d364:	ebfff84b 	bl	3000b498 <acoral_prints>
+3000d368:	ea000001 	b	3000d374 <display_thread+0x18c>
 		else
 				acoral_prints("Error\t\t");
-3000d168:	e59f0080 	ldr	r0, [pc, #128]	; 3000d1f0 <display_thread+0x20c>
-3000d16c:	ebfff848 	bl	3000b294 <acoral_prints>
+3000d36c:	e59f0080 	ldr	r0, [pc, #128]	; 3000d3f4 <display_thread+0x20c>
+3000d370:	ebfff848 	bl	3000b498 <acoral_prints>
 		acoral_prints("\r\n");
-3000d170:	e59f007c 	ldr	r0, [pc, #124]	; 3000d1f4 <display_thread+0x210>
-3000d174:	ebfff846 	bl	3000b294 <acoral_prints>
+3000d374:	e59f007c 	ldr	r0, [pc, #124]	; 3000d3f8 <display_thread+0x210>
+3000d378:	ebfff846 	bl	3000b498 <acoral_prints>
 	acoral_prints("\t\tSystem Thread Information\r\n");
 	acoral_prints("------------------------------------------------------\r\n");
 	acoral_prints("Name\t\tType\t\tConsole\t\tState\r\n");
 	HAL_ENTER_CRITICAL();
 	acoral_spin_lock(&acoral_threads_queue.head.lock);
 	for(tmp=head->next;tmp!=head;tmp=tmp->next){
-3000d178:	e59d3010 	ldr	r3, [sp, #16]
-3000d17c:	e5933000 	ldr	r3, [r3]
-3000d180:	e58d3010 	str	r3, [sp, #16]
-3000d184:	e59d2010 	ldr	r2, [sp, #16]
-3000d188:	e59d300c 	ldr	r3, [sp, #12]
-3000d18c:	e1520003 	cmp	r2, r3
-3000d190:	1affffa6 	bne	3000d030 <display_thread+0x4c>
+3000d37c:	e59d3010 	ldr	r3, [sp, #16]
+3000d380:	e5933000 	ldr	r3, [r3]
+3000d384:	e58d3010 	str	r3, [sp, #16]
+3000d388:	e59d2010 	ldr	r2, [sp, #16]
+3000d38c:	e59d300c 	ldr	r3, [sp, #12]
+3000d390:	e1520003 	cmp	r2, r3
+3000d394:	1affffa6 	bne	3000d234 <display_thread+0x4c>
 				acoral_prints("Freeze\t\t");
 		else
 				acoral_prints("Error\t\t");
 		acoral_prints("\r\n");
 	}
 	acoral_prints("------------------------------------------------------\r\n");
-3000d194:	e59f001c 	ldr	r0, [pc, #28]	; 3000d1b8 <display_thread+0x1d4>
-3000d198:	ebfff83d 	bl	3000b294 <acoral_prints>
+3000d398:	e59f001c 	ldr	r0, [pc, #28]	; 3000d3bc <display_thread+0x1d4>
+3000d39c:	ebfff83d 	bl	3000b498 <acoral_prints>
 	acoral_spin_unlock(&acoral_threads_queue.head.lock);
 	HAL_EXIT_CRITICAL();
-3000d19c:	e59d0008 	ldr	r0, [sp, #8]
-3000d1a0:	ebffd151 	bl	300016ec <HAL_INTR_RESTORE>
+3000d3a0:	e59d0008 	ldr	r0, [sp, #8]
+3000d3a4:	ebffd0d0 	bl	300016ec <HAL_INTR_RESTORE>
 }
-3000d1a4:	e28dd01c 	add	sp, sp, #28
-3000d1a8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d1ac:	e12fff1e 	bx	lr
-3000d1b0:	3000fa24 	.word	0x3000fa24
-3000d1b4:	3000e928 	.word	0x3000e928
-3000d1b8:	3000e948 	.word	0x3000e948
-3000d1bc:	3000e984 	.word	0x3000e984
-3000d1c0:	3000e9a4 	.word	0x3000e9a4
-3000d1c4:	3000e9ac 	.word	0x3000e9ac
-3000d1c8:	3000e9b8 	.word	0x3000e9b8
-3000d1cc:	3000e9c0 	.word	0x3000e9c0
-3000d1d0:	3000e9cc 	.word	0x3000e9cc
-3000d1d4:	3000e9d4 	.word	0x3000e9d4
-3000d1d8:	3000e9dc 	.word	0x3000e9dc
-3000d1dc:	3000e9e4 	.word	0x3000e9e4
-3000d1e0:	3000e9f0 	.word	0x3000e9f0
-3000d1e4:	3000e9f8 	.word	0x3000e9f8
-3000d1e8:	3000ea00 	.word	0x3000ea00
-3000d1ec:	3000ea08 	.word	0x3000ea08
-3000d1f0:	3000ea14 	.word	0x3000ea14
-3000d1f4:	3000ea1c 	.word	0x3000ea1c
+3000d3a8:	e28dd01c 	add	sp, sp, #28
+3000d3ac:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d3b0:	e12fff1e 	bx	lr
+3000d3b4:	3000fc30 	.word	0x3000fc30
+3000d3b8:	3000eb34 	.word	0x3000eb34
+3000d3bc:	3000eb54 	.word	0x3000eb54
+3000d3c0:	3000eb90 	.word	0x3000eb90
+3000d3c4:	3000ebb0 	.word	0x3000ebb0
+3000d3c8:	3000ebb8 	.word	0x3000ebb8
+3000d3cc:	3000ebc4 	.word	0x3000ebc4
+3000d3d0:	3000ebcc 	.word	0x3000ebcc
+3000d3d4:	3000ebd8 	.word	0x3000ebd8
+3000d3d8:	3000ebe0 	.word	0x3000ebe0
+3000d3dc:	3000ebe8 	.word	0x3000ebe8
+3000d3e0:	3000ebf0 	.word	0x3000ebf0
+3000d3e4:	3000ebfc 	.word	0x3000ebfc
+3000d3e8:	3000ec04 	.word	0x3000ec04
+3000d3ec:	3000ec0c 	.word	0x3000ec0c
+3000d3f0:	3000ec14 	.word	0x3000ec14
+3000d3f4:	3000ec20 	.word	0x3000ec20
+3000d3f8:	3000ec28 	.word	0x3000ec28
 
-3000d1f8 <acoral_get_drv_ctrl_by_name>:
+3000d3fc <acoral_get_drv_ctrl_by_name>:
 #define DRV_MAIN_ID_SHIFT 5
 #define DRV_MAIN_ID(id) (id>>DRV_MAIN_ID_SHIFT)
 #define DRV_CHK_ID(id) (DRV_MAIN_ID(id)>=0&&DRV_MAIN_ID(id)<ACORAL_DEV_NUM)
 acoral_pool_ctrl_t acoral_drv_pool_ctrl;
 acoral_drv_ctrl_t *drv_table[ACORAL_DEV_NUM];
 acoral_drv_ctrl_t *acoral_get_drv_ctrl_by_name(acoral_char *name){
-3000d1f8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d1fc:	e24dd014 	sub	sp, sp, #20
-3000d200:	e58d0004 	str	r0, [sp, #4]
+3000d3fc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d400:	e24dd014 	sub	sp, sp, #20
+3000d404:	e58d0004 	str	r0, [sp, #4]
   	acoral_u32 i;
 	acoral_drv_ctrl_t *ctrl;
 	for(i=0;i<ACORAL_DEV_NUM;i++){
-3000d204:	e3a03000 	mov	r3, #0
-3000d208:	e58d3008 	str	r3, [sp, #8]
-3000d20c:	ea000013 	b	3000d260 <acoral_get_drv_ctrl_by_name+0x68>
+3000d408:	e3a03000 	mov	r3, #0
+3000d40c:	e58d3008 	str	r3, [sp, #8]
+3000d410:	ea000013 	b	3000d464 <acoral_get_drv_ctrl_by_name+0x68>
 	  	ctrl=drv_table[i];	    
-3000d210:	e59d2008 	ldr	r2, [sp, #8]
-3000d214:	e59f3064 	ldr	r3, [pc, #100]	; 3000d280 <acoral_get_drv_ctrl_by_name+0x88>
-3000d218:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-3000d21c:	e58d300c 	str	r3, [sp, #12]
+3000d414:	e59d2008 	ldr	r2, [sp, #8]
+3000d418:	e59f3064 	ldr	r3, [pc, #100]	; 3000d484 <acoral_get_drv_ctrl_by_name+0x88>
+3000d41c:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+3000d420:	e58d300c 	str	r3, [sp, #12]
 		if(ctrl!=NULL&&!acoral_str_cmp(ctrl->name,name))
-3000d220:	e59d300c 	ldr	r3, [sp, #12]
-3000d224:	e3530000 	cmp	r3, #0
-3000d228:	0a000009 	beq	3000d254 <acoral_get_drv_ctrl_by_name+0x5c>
-3000d22c:	e59d300c 	ldr	r3, [sp, #12]
-3000d230:	e593300c 	ldr	r3, [r3, #12]
-3000d234:	e1a00003 	mov	r0, r3
-3000d238:	e59d1004 	ldr	r1, [sp, #4]
-3000d23c:	ebfff963 	bl	3000b7d0 <acoral_str_cmp>
-3000d240:	e1a03000 	mov	r3, r0
-3000d244:	e3530000 	cmp	r3, #0
-3000d248:	1a000001 	bne	3000d254 <acoral_get_drv_ctrl_by_name+0x5c>
+3000d424:	e59d300c 	ldr	r3, [sp, #12]
+3000d428:	e3530000 	cmp	r3, #0
+3000d42c:	0a000009 	beq	3000d458 <acoral_get_drv_ctrl_by_name+0x5c>
+3000d430:	e59d300c 	ldr	r3, [sp, #12]
+3000d434:	e593300c 	ldr	r3, [r3, #12]
+3000d438:	e1a00003 	mov	r0, r3
+3000d43c:	e59d1004 	ldr	r1, [sp, #4]
+3000d440:	ebfff963 	bl	3000b9d4 <acoral_str_cmp>
+3000d444:	e1a03000 	mov	r3, r0
+3000d448:	e3530000 	cmp	r3, #0
+3000d44c:	1a000001 	bne	3000d458 <acoral_get_drv_ctrl_by_name+0x5c>
 		   return ctrl;
-3000d24c:	e59d300c 	ldr	r3, [sp, #12]
-3000d250:	ea000006 	b	3000d270 <acoral_get_drv_ctrl_by_name+0x78>
+3000d450:	e59d300c 	ldr	r3, [sp, #12]
+3000d454:	ea000006 	b	3000d474 <acoral_get_drv_ctrl_by_name+0x78>
 acoral_pool_ctrl_t acoral_drv_pool_ctrl;
 acoral_drv_ctrl_t *drv_table[ACORAL_DEV_NUM];
 acoral_drv_ctrl_t *acoral_get_drv_ctrl_by_name(acoral_char *name){
   	acoral_u32 i;
 	acoral_drv_ctrl_t *ctrl;
 	for(i=0;i<ACORAL_DEV_NUM;i++){
-3000d254:	e59d3008 	ldr	r3, [sp, #8]
-3000d258:	e2833001 	add	r3, r3, #1
-3000d25c:	e58d3008 	str	r3, [sp, #8]
-3000d260:	e59d3008 	ldr	r3, [sp, #8]
-3000d264:	e3530013 	cmp	r3, #19
-3000d268:	9affffe8 	bls	3000d210 <acoral_get_drv_ctrl_by_name+0x18>
+3000d458:	e59d3008 	ldr	r3, [sp, #8]
+3000d45c:	e2833001 	add	r3, r3, #1
+3000d460:	e58d3008 	str	r3, [sp, #8]
+3000d464:	e59d3008 	ldr	r3, [sp, #8]
+3000d468:	e3530013 	cmp	r3, #19
+3000d46c:	9affffe8 	bls	3000d414 <acoral_get_drv_ctrl_by_name+0x18>
 	  	ctrl=drv_table[i];	    
 		if(ctrl!=NULL&&!acoral_str_cmp(ctrl->name,name))
 		   return ctrl;
 	}
 	return NULL;
-3000d26c:	e3a03000 	mov	r3, #0
+3000d470:	e3a03000 	mov	r3, #0
 }
-3000d270:	e1a00003 	mov	r0, r3
-3000d274:	e28dd014 	add	sp, sp, #20
-3000d278:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d27c:	e12fff1e 	bx	lr
-3000d280:	3000f358 	.word	0x3000f358
+3000d474:	e1a00003 	mov	r0, r3
+3000d478:	e28dd014 	add	sp, sp, #20
+3000d47c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d480:	e12fff1e 	bx	lr
+3000d484:	3000f564 	.word	0x3000f564
 
-3000d284 <acoral_drv_register>:
+3000d488 <acoral_drv_register>:
 
 acoral_err acoral_drv_register(acoral_dev_ops_t *ops,acoral_char *name){
-3000d284:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d288:	e24dd01c 	sub	sp, sp, #28
-3000d28c:	e58d0004 	str	r0, [sp, #4]
-3000d290:	e58d1000 	str	r1, [sp]
+3000d488:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d48c:	e24dd01c 	sub	sp, sp, #28
+3000d490:	e58d0004 	str	r0, [sp, #4]
+3000d494:	e58d1000 	str	r1, [sp]
 	acoral_u32 i;
 	acoral_drv_ctrl_t *tmp,*ctrl;
 	ctrl=acoral_alloc_drv();
-3000d294:	eb000107 	bl	3000d6b8 <acoral_alloc_drv>
-3000d298:	e1a03000 	mov	r3, r0
-3000d29c:	e58d3014 	str	r3, [sp, #20]
+3000d498:	eb000107 	bl	3000d8bc <acoral_alloc_drv>
+3000d49c:	e1a03000 	mov	r3, r0
+3000d4a0:	e58d3014 	str	r3, [sp, #20]
 	if(ctrl==NULL)
-3000d2a0:	e59d3014 	ldr	r3, [sp, #20]
-3000d2a4:	e3530000 	cmp	r3, #0
-3000d2a8:	1a000001 	bne	3000d2b4 <acoral_drv_register+0x30>
+3000d4a4:	e59d3014 	ldr	r3, [sp, #20]
+3000d4a8:	e3530000 	cmp	r3, #0
+3000d4ac:	1a000001 	bne	3000d4b8 <acoral_drv_register+0x30>
 		return ACORAL_ERR_NO_DRV_RES;
-3000d2ac:	e3a03005 	mov	r3, #5
-3000d2b0:	ea000024 	b	3000d348 <acoral_drv_register+0xc4>
+3000d4b0:	e3a03005 	mov	r3, #5
+3000d4b4:	ea000024 	b	3000d54c <acoral_drv_register+0xc4>
 	ctrl->name=name;
-3000d2b4:	e59d3014 	ldr	r3, [sp, #20]
-3000d2b8:	e59d2000 	ldr	r2, [sp]
-3000d2bc:	e583200c 	str	r2, [r3, #12]
+3000d4b8:	e59d3014 	ldr	r3, [sp, #20]
+3000d4bc:	e59d2000 	ldr	r2, [sp]
+3000d4c0:	e583200c 	str	r2, [r3, #12]
 	ctrl->ops=ops;
-3000d2c0:	e59d3014 	ldr	r3, [sp, #20]
-3000d2c4:	e59d2004 	ldr	r2, [sp, #4]
-3000d2c8:	e5832004 	str	r2, [r3, #4]
+3000d4c4:	e59d3014 	ldr	r3, [sp, #20]
+3000d4c8:	e59d2004 	ldr	r2, [sp, #4]
+3000d4cc:	e5832004 	str	r2, [r3, #4]
 	for(i=0;i<ACORAL_DEV_NUM;i++){
-3000d2cc:	e3a03000 	mov	r3, #0
-3000d2d0:	e58d300c 	str	r3, [sp, #12]
-3000d2d4:	ea000012 	b	3000d324 <acoral_drv_register+0xa0>
+3000d4d0:	e3a03000 	mov	r3, #0
+3000d4d4:	e58d300c 	str	r3, [sp, #12]
+3000d4d8:	ea000012 	b	3000d528 <acoral_drv_register+0xa0>
 	  	tmp=drv_table[i];	    
-3000d2d8:	e59d200c 	ldr	r2, [sp, #12]
-3000d2dc:	e59f3074 	ldr	r3, [pc, #116]	; 3000d358 <acoral_drv_register+0xd4>
-3000d2e0:	e7933102 	ldr	r3, [r3, r2, lsl #2]
-3000d2e4:	e58d3010 	str	r3, [sp, #16]
+3000d4dc:	e59d200c 	ldr	r2, [sp, #12]
+3000d4e0:	e59f3074 	ldr	r3, [pc, #116]	; 3000d55c <acoral_drv_register+0xd4>
+3000d4e4:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+3000d4e8:	e58d3010 	str	r3, [sp, #16]
 		if(tmp==NULL){
-3000d2e8:	e59d3010 	ldr	r3, [sp, #16]
-3000d2ec:	e3530000 	cmp	r3, #0
-3000d2f0:	1a000008 	bne	3000d318 <acoral_drv_register+0x94>
+3000d4ec:	e59d3010 	ldr	r3, [sp, #16]
+3000d4f0:	e3530000 	cmp	r3, #0
+3000d4f4:	1a000008 	bne	3000d51c <acoral_drv_register+0x94>
 			drv_table[i]=ctrl;
-3000d2f4:	e59d200c 	ldr	r2, [sp, #12]
-3000d2f8:	e59f3058 	ldr	r3, [pc, #88]	; 3000d358 <acoral_drv_register+0xd4>
-3000d2fc:	e59d1014 	ldr	r1, [sp, #20]
-3000d300:	e7831102 	str	r1, [r3, r2, lsl #2]
+3000d4f8:	e59d200c 	ldr	r2, [sp, #12]
+3000d4fc:	e59f3058 	ldr	r3, [pc, #88]	; 3000d55c <acoral_drv_register+0xd4>
+3000d500:	e59d1014 	ldr	r1, [sp, #20]
+3000d504:	e7831102 	str	r1, [r3, r2, lsl #2]
 			ctrl->drv_id=i<<DRV_MAIN_ID_SHIFT;
-3000d304:	e59d300c 	ldr	r3, [sp, #12]
-3000d308:	e1a02283 	lsl	r2, r3, #5
-3000d30c:	e59d3014 	ldr	r3, [sp, #20]
-3000d310:	e5832008 	str	r2, [r3, #8]
+3000d508:	e59d300c 	ldr	r3, [sp, #12]
+3000d50c:	e1a02283 	lsl	r2, r3, #5
+3000d510:	e59d3014 	ldr	r3, [sp, #20]
+3000d514:	e5832008 	str	r2, [r3, #8]
 			break;
-3000d314:	ea000005 	b	3000d330 <acoral_drv_register+0xac>
+3000d518:	ea000005 	b	3000d534 <acoral_drv_register+0xac>
 	ctrl=acoral_alloc_drv();
 	if(ctrl==NULL)
 		return ACORAL_ERR_NO_DRV_RES;
 	ctrl->name=name;
 	ctrl->ops=ops;
 	for(i=0;i<ACORAL_DEV_NUM;i++){
-3000d318:	e59d300c 	ldr	r3, [sp, #12]
-3000d31c:	e2833001 	add	r3, r3, #1
-3000d320:	e58d300c 	str	r3, [sp, #12]
-3000d324:	e59d300c 	ldr	r3, [sp, #12]
-3000d328:	e3530013 	cmp	r3, #19
-3000d32c:	9affffe9 	bls	3000d2d8 <acoral_drv_register+0x54>
+3000d51c:	e59d300c 	ldr	r3, [sp, #12]
+3000d520:	e2833001 	add	r3, r3, #1
+3000d524:	e58d300c 	str	r3, [sp, #12]
+3000d528:	e59d300c 	ldr	r3, [sp, #12]
+3000d52c:	e3530013 	cmp	r3, #19
+3000d530:	9affffe9 	bls	3000d4dc <acoral_drv_register+0x54>
 			drv_table[i]=ctrl;
 			ctrl->drv_id=i<<DRV_MAIN_ID_SHIFT;
 			break;
 		}
 	}
 	if(i==ACORAL_DEV_NUM)
-3000d330:	e59d300c 	ldr	r3, [sp, #12]
-3000d334:	e3530014 	cmp	r3, #20
-3000d338:	1a000001 	bne	3000d344 <acoral_drv_register+0xc0>
+3000d534:	e59d300c 	ldr	r3, [sp, #12]
+3000d538:	e3530014 	cmp	r3, #20
+3000d53c:	1a000001 	bne	3000d548 <acoral_drv_register+0xc0>
 		return ACORAL_ERR_DRV_FULL;
-3000d33c:	e3a03005 	mov	r3, #5
-3000d340:	ea000000 	b	3000d348 <acoral_drv_register+0xc4>
+3000d540:	e3a03005 	mov	r3, #5
+3000d544:	ea000000 	b	3000d54c <acoral_drv_register+0xc4>
 	return 0;
-3000d344:	e3a03000 	mov	r3, #0
+3000d548:	e3a03000 	mov	r3, #0
 }
-3000d348:	e1a00003 	mov	r0, r3
-3000d34c:	e28dd01c 	add	sp, sp, #28
-3000d350:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d354:	e12fff1e 	bx	lr
-3000d358:	3000f358 	.word	0x3000f358
+3000d54c:	e1a00003 	mov	r0, r3
+3000d550:	e28dd01c 	add	sp, sp, #28
+3000d554:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d558:	e12fff1e 	bx	lr
+3000d55c:	3000f564 	.word	0x3000f564
 
-3000d35c <acoral_drv_unregister>:
+3000d560 <acoral_drv_unregister>:
 
 void acoral_drv_unregister(acoral_id res_id){
-3000d35c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d360:	e24dd014 	sub	sp, sp, #20
-3000d364:	e58d0004 	str	r0, [sp, #4]
+3000d560:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d564:	e24dd014 	sub	sp, sp, #20
+3000d568:	e58d0004 	str	r0, [sp, #4]
 	acoral_drv_ctrl_t *ctrl=(acoral_drv_ctrl_t *)acoral_get_res_by_id(res_id);
-3000d368:	e59d0004 	ldr	r0, [sp, #4]
-3000d36c:	ebffd939 	bl	30003858 <acoral_get_res_by_id>
-3000d370:	e1a03000 	mov	r3, r0
-3000d374:	e58d300c 	str	r3, [sp, #12]
+3000d56c:	e59d0004 	ldr	r0, [sp, #4]
+3000d570:	ebffd8b8 	bl	30003858 <acoral_get_res_by_id>
+3000d574:	e1a03000 	mov	r3, r0
+3000d578:	e58d300c 	str	r3, [sp, #12]
 	if(ctrl->ops!=NULL&&ctrl->ops->close!=NULL)
-3000d378:	e59d300c 	ldr	r3, [sp, #12]
-3000d37c:	e5933004 	ldr	r3, [r3, #4]
-3000d380:	e3530000 	cmp	r3, #0
-3000d384:	0a000009 	beq	3000d3b0 <acoral_drv_unregister+0x54>
-3000d388:	e59d300c 	ldr	r3, [sp, #12]
-3000d38c:	e5933004 	ldr	r3, [r3, #4]
-3000d390:	e5933010 	ldr	r3, [r3, #16]
-3000d394:	e3530000 	cmp	r3, #0
-3000d398:	0a000004 	beq	3000d3b0 <acoral_drv_unregister+0x54>
+3000d57c:	e59d300c 	ldr	r3, [sp, #12]
+3000d580:	e5933004 	ldr	r3, [r3, #4]
+3000d584:	e3530000 	cmp	r3, #0
+3000d588:	0a000009 	beq	3000d5b4 <acoral_drv_unregister+0x54>
+3000d58c:	e59d300c 	ldr	r3, [sp, #12]
+3000d590:	e5933004 	ldr	r3, [r3, #4]
+3000d594:	e5933010 	ldr	r3, [r3, #16]
+3000d598:	e3530000 	cmp	r3, #0
+3000d59c:	0a000004 	beq	3000d5b4 <acoral_drv_unregister+0x54>
 		ctrl->ops->close();
-3000d39c:	e59d300c 	ldr	r3, [sp, #12]
-3000d3a0:	e5933004 	ldr	r3, [r3, #4]
-3000d3a4:	e5933010 	ldr	r3, [r3, #16]
-3000d3a8:	e1a0e00f 	mov	lr, pc
-3000d3ac:	e12fff13 	bx	r3
+3000d5a0:	e59d300c 	ldr	r3, [sp, #12]
+3000d5a4:	e5933004 	ldr	r3, [r3, #4]
+3000d5a8:	e5933010 	ldr	r3, [r3, #16]
+3000d5ac:	e1a0e00f 	mov	lr, pc
+3000d5b0:	e12fff13 	bx	r3
 	drv_table[DRV_MAIN_ID(ctrl->drv_id)]=NULL;
-3000d3b0:	e59d300c 	ldr	r3, [sp, #12]
-3000d3b4:	e5933008 	ldr	r3, [r3, #8]
-3000d3b8:	e1a022a3 	lsr	r2, r3, #5
-3000d3bc:	e59f301c 	ldr	r3, [pc, #28]	; 3000d3e0 <acoral_drv_unregister+0x84>
-3000d3c0:	e3a01000 	mov	r1, #0
-3000d3c4:	e7831102 	str	r1, [r3, r2, lsl #2]
+3000d5b4:	e59d300c 	ldr	r3, [sp, #12]
+3000d5b8:	e5933008 	ldr	r3, [r3, #8]
+3000d5bc:	e1a022a3 	lsr	r2, r3, #5
+3000d5c0:	e59f301c 	ldr	r3, [pc, #28]	; 3000d5e4 <acoral_drv_unregister+0x84>
+3000d5c4:	e3a01000 	mov	r1, #0
+3000d5c8:	e7831102 	str	r1, [r3, r2, lsl #2]
 	acoral_release_res((acoral_res_t *)ctrl);
-3000d3c8:	e59d300c 	ldr	r3, [sp, #12]
-3000d3cc:	e1a00003 	mov	r0, r3
-3000d3d0:	ebffd88c 	bl	30003608 <acoral_release_res>
+3000d5cc:	e59d300c 	ldr	r3, [sp, #12]
+3000d5d0:	e1a00003 	mov	r0, r3
+3000d5d4:	ebffd80b 	bl	30003608 <acoral_release_res>
 }
-3000d3d4:	e28dd014 	add	sp, sp, #20
-3000d3d8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d3dc:	e12fff1e 	bx	lr
-3000d3e0:	3000f358 	.word	0x3000f358
+3000d5d8:	e28dd014 	add	sp, sp, #20
+3000d5dc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d5e0:	e12fff1e 	bx	lr
+3000d5e4:	3000f564 	.word	0x3000f564
 
-3000d3e4 <acoral_dev_open>:
+3000d5e8 <acoral_dev_open>:
 
 acoral_id acoral_dev_open(acoral_char *name){
-3000d3e4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d3e8:	e24dd014 	sub	sp, sp, #20
-3000d3ec:	e58d0004 	str	r0, [sp, #4]
+3000d5e8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d5ec:	e24dd014 	sub	sp, sp, #20
+3000d5f0:	e58d0004 	str	r0, [sp, #4]
 	acoral_drv_ctrl_t *ctrl=acoral_get_drv_ctrl_by_name(name);
-3000d3f0:	e59d0004 	ldr	r0, [sp, #4]
-3000d3f4:	ebffff7f 	bl	3000d1f8 <acoral_get_drv_ctrl_by_name>
-3000d3f8:	e1a03000 	mov	r3, r0
-3000d3fc:	e58d300c 	str	r3, [sp, #12]
+3000d5f4:	e59d0004 	ldr	r0, [sp, #4]
+3000d5f8:	ebffff7f 	bl	3000d3fc <acoral_get_drv_ctrl_by_name>
+3000d5fc:	e1a03000 	mov	r3, r0
+3000d600:	e58d300c 	str	r3, [sp, #12]
 	if(ctrl==NULL)
-3000d400:	e59d300c 	ldr	r3, [sp, #12]
-3000d404:	e3530000 	cmp	r3, #0
-3000d408:	1a000001 	bne	3000d414 <acoral_dev_open+0x30>
+3000d604:	e59d300c 	ldr	r3, [sp, #12]
+3000d608:	e3530000 	cmp	r3, #0
+3000d60c:	1a000001 	bne	3000d618 <acoral_dev_open+0x30>
 		return ACORAL_DEV_ERR_ID;
-3000d40c:	e3e03000 	mvn	r3, #0
-3000d410:	ea000014 	b	3000d468 <acoral_dev_open+0x84>
+3000d610:	e3e03000 	mvn	r3, #0
+3000d614:	ea000014 	b	3000d66c <acoral_dev_open+0x84>
 	if(ctrl->ops!=NULL&&ctrl->ops->open!=NULL){
-3000d414:	e59d300c 	ldr	r3, [sp, #12]
-3000d418:	e5933004 	ldr	r3, [r3, #4]
-3000d41c:	e3530000 	cmp	r3, #0
-3000d420:	0a00000e 	beq	3000d460 <acoral_dev_open+0x7c>
-3000d424:	e59d300c 	ldr	r3, [sp, #12]
-3000d428:	e5933004 	ldr	r3, [r3, #4]
-3000d42c:	e5933000 	ldr	r3, [r3]
-3000d430:	e3530000 	cmp	r3, #0
-3000d434:	0a000009 	beq	3000d460 <acoral_dev_open+0x7c>
+3000d618:	e59d300c 	ldr	r3, [sp, #12]
+3000d61c:	e5933004 	ldr	r3, [r3, #4]
+3000d620:	e3530000 	cmp	r3, #0
+3000d624:	0a00000e 	beq	3000d664 <acoral_dev_open+0x7c>
+3000d628:	e59d300c 	ldr	r3, [sp, #12]
+3000d62c:	e5933004 	ldr	r3, [r3, #4]
+3000d630:	e5933000 	ldr	r3, [r3]
+3000d634:	e3530000 	cmp	r3, #0
+3000d638:	0a000009 	beq	3000d664 <acoral_dev_open+0x7c>
 		if(ctrl->ops->open()!=0)
-3000d438:	e59d300c 	ldr	r3, [sp, #12]
-3000d43c:	e5933004 	ldr	r3, [r3, #4]
-3000d440:	e5933000 	ldr	r3, [r3]
-3000d444:	e1a0e00f 	mov	lr, pc
-3000d448:	e12fff13 	bx	r3
-3000d44c:	e1a03000 	mov	r3, r0
-3000d450:	e3530000 	cmp	r3, #0
-3000d454:	0a000001 	beq	3000d460 <acoral_dev_open+0x7c>
+3000d63c:	e59d300c 	ldr	r3, [sp, #12]
+3000d640:	e5933004 	ldr	r3, [r3, #4]
+3000d644:	e5933000 	ldr	r3, [r3]
+3000d648:	e1a0e00f 	mov	lr, pc
+3000d64c:	e12fff13 	bx	r3
+3000d650:	e1a03000 	mov	r3, r0
+3000d654:	e3530000 	cmp	r3, #0
+3000d658:	0a000001 	beq	3000d664 <acoral_dev_open+0x7c>
 			return ACORAL_DEV_ERR_ID;
-3000d458:	e3e03000 	mvn	r3, #0
-3000d45c:	ea000001 	b	3000d468 <acoral_dev_open+0x84>
+3000d65c:	e3e03000 	mvn	r3, #0
+3000d660:	ea000001 	b	3000d66c <acoral_dev_open+0x84>
 	}
 	return ctrl->res.id;
-3000d460:	e59d300c 	ldr	r3, [sp, #12]
-3000d464:	e5933000 	ldr	r3, [r3]
+3000d664:	e59d300c 	ldr	r3, [sp, #12]
+3000d668:	e5933000 	ldr	r3, [r3]
 }
-3000d468:	e1a00003 	mov	r0, r3
-3000d46c:	e28dd014 	add	sp, sp, #20
-3000d470:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d474:	e12fff1e 	bx	lr
+3000d66c:	e1a00003 	mov	r0, r3
+3000d670:	e28dd014 	add	sp, sp, #20
+3000d674:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d678:	e12fff1e 	bx	lr
 
-3000d478 <acoral_dev_write>:
+3000d67c <acoral_dev_write>:
 
 acoral_32 acoral_dev_write(acoral_id id,void *data,acoral_size size,acoral_size offset,acoral_time time_out){
-3000d478:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d47c:	e24dd01c 	sub	sp, sp, #28
-3000d480:	e58d000c 	str	r0, [sp, #12]
-3000d484:	e58d1008 	str	r1, [sp, #8]
-3000d488:	e58d2004 	str	r2, [sp, #4]
-3000d48c:	e58d3000 	str	r3, [sp]
+3000d67c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d680:	e24dd01c 	sub	sp, sp, #28
+3000d684:	e58d000c 	str	r0, [sp, #12]
+3000d688:	e58d1008 	str	r1, [sp, #8]
+3000d68c:	e58d2004 	str	r2, [sp, #4]
+3000d690:	e58d3000 	str	r3, [sp]
 	acoral_drv_ctrl_t *ctrl=(acoral_drv_ctrl_t *)acoral_get_res_by_id(id);
-3000d490:	e59d000c 	ldr	r0, [sp, #12]
-3000d494:	ebffd8ef 	bl	30003858 <acoral_get_res_by_id>
-3000d498:	e1a03000 	mov	r3, r0
-3000d49c:	e58d3014 	str	r3, [sp, #20]
+3000d694:	e59d000c 	ldr	r0, [sp, #12]
+3000d698:	ebffd86e 	bl	30003858 <acoral_get_res_by_id>
+3000d69c:	e1a03000 	mov	r3, r0
+3000d6a0:	e58d3014 	str	r3, [sp, #20]
 	if(ctrl!=NULL&&ctrl->ops!=NULL&&ctrl->ops->write!=NULL)
-3000d4a0:	e59d3014 	ldr	r3, [sp, #20]
-3000d4a4:	e3530000 	cmp	r3, #0
-3000d4a8:	0a000013 	beq	3000d4fc <acoral_dev_write+0x84>
-3000d4ac:	e59d3014 	ldr	r3, [sp, #20]
-3000d4b0:	e5933004 	ldr	r3, [r3, #4]
-3000d4b4:	e3530000 	cmp	r3, #0
-3000d4b8:	0a00000f 	beq	3000d4fc <acoral_dev_write+0x84>
-3000d4bc:	e59d3014 	ldr	r3, [sp, #20]
-3000d4c0:	e5933004 	ldr	r3, [r3, #4]
-3000d4c4:	e5933008 	ldr	r3, [r3, #8]
-3000d4c8:	e3530000 	cmp	r3, #0
-3000d4cc:	0a00000a 	beq	3000d4fc <acoral_dev_write+0x84>
+3000d6a4:	e59d3014 	ldr	r3, [sp, #20]
+3000d6a8:	e3530000 	cmp	r3, #0
+3000d6ac:	0a000013 	beq	3000d700 <acoral_dev_write+0x84>
+3000d6b0:	e59d3014 	ldr	r3, [sp, #20]
+3000d6b4:	e5933004 	ldr	r3, [r3, #4]
+3000d6b8:	e3530000 	cmp	r3, #0
+3000d6bc:	0a00000f 	beq	3000d700 <acoral_dev_write+0x84>
+3000d6c0:	e59d3014 	ldr	r3, [sp, #20]
+3000d6c4:	e5933004 	ldr	r3, [r3, #4]
+3000d6c8:	e5933008 	ldr	r3, [r3, #8]
+3000d6cc:	e3530000 	cmp	r3, #0
+3000d6d0:	0a00000a 	beq	3000d700 <acoral_dev_write+0x84>
 		return ctrl->ops->write(data,size,offset,time_out);
-3000d4d0:	e59d3014 	ldr	r3, [sp, #20]
-3000d4d4:	e5933004 	ldr	r3, [r3, #4]
-3000d4d8:	e593c008 	ldr	ip, [r3, #8]
-3000d4dc:	e59d0008 	ldr	r0, [sp, #8]
-3000d4e0:	e59d1004 	ldr	r1, [sp, #4]
-3000d4e4:	e59d2000 	ldr	r2, [sp]
-3000d4e8:	e59d3020 	ldr	r3, [sp, #32]
-3000d4ec:	e1a0e00f 	mov	lr, pc
-3000d4f0:	e12fff1c 	bx	ip
-3000d4f4:	e1a03000 	mov	r3, r0
-3000d4f8:	ea000000 	b	3000d500 <acoral_dev_write+0x88>
+3000d6d4:	e59d3014 	ldr	r3, [sp, #20]
+3000d6d8:	e5933004 	ldr	r3, [r3, #4]
+3000d6dc:	e593c008 	ldr	ip, [r3, #8]
+3000d6e0:	e59d0008 	ldr	r0, [sp, #8]
+3000d6e4:	e59d1004 	ldr	r1, [sp, #4]
+3000d6e8:	e59d2000 	ldr	r2, [sp]
+3000d6ec:	e59d3020 	ldr	r3, [sp, #32]
+3000d6f0:	e1a0e00f 	mov	lr, pc
+3000d6f4:	e12fff1c 	bx	ip
+3000d6f8:	e1a03000 	mov	r3, r0
+3000d6fc:	ea000000 	b	3000d704 <acoral_dev_write+0x88>
 	return 0;
-3000d4fc:	e3a03000 	mov	r3, #0
+3000d700:	e3a03000 	mov	r3, #0
 }
-3000d500:	e1a00003 	mov	r0, r3
-3000d504:	e28dd01c 	add	sp, sp, #28
-3000d508:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d50c:	e12fff1e 	bx	lr
+3000d704:	e1a00003 	mov	r0, r3
+3000d708:	e28dd01c 	add	sp, sp, #28
+3000d70c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d710:	e12fff1e 	bx	lr
 
-3000d510 <acoral_dev_read>:
+3000d714 <acoral_dev_read>:
 
 acoral_32 acoral_dev_read(acoral_id id,void *data,acoral_size size,acoral_size offset,acoral_time time_out){
-3000d510:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d514:	e24dd01c 	sub	sp, sp, #28
-3000d518:	e58d000c 	str	r0, [sp, #12]
-3000d51c:	e58d1008 	str	r1, [sp, #8]
-3000d520:	e58d2004 	str	r2, [sp, #4]
-3000d524:	e58d3000 	str	r3, [sp]
+3000d714:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d718:	e24dd01c 	sub	sp, sp, #28
+3000d71c:	e58d000c 	str	r0, [sp, #12]
+3000d720:	e58d1008 	str	r1, [sp, #8]
+3000d724:	e58d2004 	str	r2, [sp, #4]
+3000d728:	e58d3000 	str	r3, [sp]
 	acoral_drv_ctrl_t *ctrl=(acoral_drv_ctrl_t *)acoral_get_res_by_id(id);
-3000d528:	e59d000c 	ldr	r0, [sp, #12]
-3000d52c:	ebffd8c9 	bl	30003858 <acoral_get_res_by_id>
-3000d530:	e1a03000 	mov	r3, r0
-3000d534:	e58d3014 	str	r3, [sp, #20]
+3000d72c:	e59d000c 	ldr	r0, [sp, #12]
+3000d730:	ebffd848 	bl	30003858 <acoral_get_res_by_id>
+3000d734:	e1a03000 	mov	r3, r0
+3000d738:	e58d3014 	str	r3, [sp, #20]
 	if(ctrl!=NULL&&ctrl->ops!=NULL&&ctrl->ops->read!=NULL)
-3000d538:	e59d3014 	ldr	r3, [sp, #20]
-3000d53c:	e3530000 	cmp	r3, #0
-3000d540:	0a000013 	beq	3000d594 <acoral_dev_read+0x84>
-3000d544:	e59d3014 	ldr	r3, [sp, #20]
-3000d548:	e5933004 	ldr	r3, [r3, #4]
-3000d54c:	e3530000 	cmp	r3, #0
-3000d550:	0a00000f 	beq	3000d594 <acoral_dev_read+0x84>
-3000d554:	e59d3014 	ldr	r3, [sp, #20]
-3000d558:	e5933004 	ldr	r3, [r3, #4]
-3000d55c:	e5933004 	ldr	r3, [r3, #4]
-3000d560:	e3530000 	cmp	r3, #0
-3000d564:	0a00000a 	beq	3000d594 <acoral_dev_read+0x84>
+3000d73c:	e59d3014 	ldr	r3, [sp, #20]
+3000d740:	e3530000 	cmp	r3, #0
+3000d744:	0a000013 	beq	3000d798 <acoral_dev_read+0x84>
+3000d748:	e59d3014 	ldr	r3, [sp, #20]
+3000d74c:	e5933004 	ldr	r3, [r3, #4]
+3000d750:	e3530000 	cmp	r3, #0
+3000d754:	0a00000f 	beq	3000d798 <acoral_dev_read+0x84>
+3000d758:	e59d3014 	ldr	r3, [sp, #20]
+3000d75c:	e5933004 	ldr	r3, [r3, #4]
+3000d760:	e5933004 	ldr	r3, [r3, #4]
+3000d764:	e3530000 	cmp	r3, #0
+3000d768:	0a00000a 	beq	3000d798 <acoral_dev_read+0x84>
 		return ctrl->ops->read(data,size,offset,time_out);
-3000d568:	e59d3014 	ldr	r3, [sp, #20]
-3000d56c:	e5933004 	ldr	r3, [r3, #4]
-3000d570:	e593c004 	ldr	ip, [r3, #4]
-3000d574:	e59d0008 	ldr	r0, [sp, #8]
-3000d578:	e59d1004 	ldr	r1, [sp, #4]
-3000d57c:	e59d2000 	ldr	r2, [sp]
-3000d580:	e59d3020 	ldr	r3, [sp, #32]
-3000d584:	e1a0e00f 	mov	lr, pc
-3000d588:	e12fff1c 	bx	ip
-3000d58c:	e1a03000 	mov	r3, r0
-3000d590:	ea000000 	b	3000d598 <acoral_dev_read+0x88>
+3000d76c:	e59d3014 	ldr	r3, [sp, #20]
+3000d770:	e5933004 	ldr	r3, [r3, #4]
+3000d774:	e593c004 	ldr	ip, [r3, #4]
+3000d778:	e59d0008 	ldr	r0, [sp, #8]
+3000d77c:	e59d1004 	ldr	r1, [sp, #4]
+3000d780:	e59d2000 	ldr	r2, [sp]
+3000d784:	e59d3020 	ldr	r3, [sp, #32]
+3000d788:	e1a0e00f 	mov	lr, pc
+3000d78c:	e12fff1c 	bx	ip
+3000d790:	e1a03000 	mov	r3, r0
+3000d794:	ea000000 	b	3000d79c <acoral_dev_read+0x88>
 	return 0;
-3000d594:	e3a03000 	mov	r3, #0
+3000d798:	e3a03000 	mov	r3, #0
 }
-3000d598:	e1a00003 	mov	r0, r3
-3000d59c:	e28dd01c 	add	sp, sp, #28
-3000d5a0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d5a4:	e12fff1e 	bx	lr
+3000d79c:	e1a00003 	mov	r0, r3
+3000d7a0:	e28dd01c 	add	sp, sp, #28
+3000d7a4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d7a8:	e12fff1e 	bx	lr
 
-3000d5a8 <acoral_dev_config>:
+3000d7ac <acoral_dev_config>:
 
 acoral_32 acoral_dev_config(acoral_id id,acoral_u32 cmd,void *data,acoral_time tm_out){
-3000d5a8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d5ac:	e24dd01c 	sub	sp, sp, #28
-3000d5b0:	e58d000c 	str	r0, [sp, #12]
-3000d5b4:	e58d1008 	str	r1, [sp, #8]
-3000d5b8:	e58d2004 	str	r2, [sp, #4]
-3000d5bc:	e58d3000 	str	r3, [sp]
+3000d7ac:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d7b0:	e24dd01c 	sub	sp, sp, #28
+3000d7b4:	e58d000c 	str	r0, [sp, #12]
+3000d7b8:	e58d1008 	str	r1, [sp, #8]
+3000d7bc:	e58d2004 	str	r2, [sp, #4]
+3000d7c0:	e58d3000 	str	r3, [sp]
 	acoral_drv_ctrl_t *ctrl=(acoral_drv_ctrl_t *)acoral_get_res_by_id(id);
-3000d5c0:	e59d000c 	ldr	r0, [sp, #12]
-3000d5c4:	ebffd8a3 	bl	30003858 <acoral_get_res_by_id>
-3000d5c8:	e1a03000 	mov	r3, r0
-3000d5cc:	e58d3014 	str	r3, [sp, #20]
+3000d7c4:	e59d000c 	ldr	r0, [sp, #12]
+3000d7c8:	ebffd822 	bl	30003858 <acoral_get_res_by_id>
+3000d7cc:	e1a03000 	mov	r3, r0
+3000d7d0:	e58d3014 	str	r3, [sp, #20]
 	if(ctrl!=NULL&&ctrl->ops!=NULL&&ctrl->ops->config!=NULL)
-3000d5d0:	e59d3014 	ldr	r3, [sp, #20]
-3000d5d4:	e3530000 	cmp	r3, #0
-3000d5d8:	0a000012 	beq	3000d628 <acoral_dev_config+0x80>
-3000d5dc:	e59d3014 	ldr	r3, [sp, #20]
-3000d5e0:	e5933004 	ldr	r3, [r3, #4]
-3000d5e4:	e3530000 	cmp	r3, #0
-3000d5e8:	0a00000e 	beq	3000d628 <acoral_dev_config+0x80>
-3000d5ec:	e59d3014 	ldr	r3, [sp, #20]
-3000d5f0:	e5933004 	ldr	r3, [r3, #4]
-3000d5f4:	e593300c 	ldr	r3, [r3, #12]
-3000d5f8:	e3530000 	cmp	r3, #0
-3000d5fc:	0a000009 	beq	3000d628 <acoral_dev_config+0x80>
+3000d7d4:	e59d3014 	ldr	r3, [sp, #20]
+3000d7d8:	e3530000 	cmp	r3, #0
+3000d7dc:	0a000012 	beq	3000d82c <acoral_dev_config+0x80>
+3000d7e0:	e59d3014 	ldr	r3, [sp, #20]
+3000d7e4:	e5933004 	ldr	r3, [r3, #4]
+3000d7e8:	e3530000 	cmp	r3, #0
+3000d7ec:	0a00000e 	beq	3000d82c <acoral_dev_config+0x80>
+3000d7f0:	e59d3014 	ldr	r3, [sp, #20]
+3000d7f4:	e5933004 	ldr	r3, [r3, #4]
+3000d7f8:	e593300c 	ldr	r3, [r3, #12]
+3000d7fc:	e3530000 	cmp	r3, #0
+3000d800:	0a000009 	beq	3000d82c <acoral_dev_config+0x80>
 		return ctrl->ops->config(cmd,data,tm_out);
-3000d600:	e59d3014 	ldr	r3, [sp, #20]
-3000d604:	e5933004 	ldr	r3, [r3, #4]
-3000d608:	e593300c 	ldr	r3, [r3, #12]
-3000d60c:	e59d0008 	ldr	r0, [sp, #8]
-3000d610:	e59d1004 	ldr	r1, [sp, #4]
-3000d614:	e59d2000 	ldr	r2, [sp]
-3000d618:	e1a0e00f 	mov	lr, pc
-3000d61c:	e12fff13 	bx	r3
-3000d620:	e1a03000 	mov	r3, r0
-3000d624:	ea000000 	b	3000d62c <acoral_dev_config+0x84>
+3000d804:	e59d3014 	ldr	r3, [sp, #20]
+3000d808:	e5933004 	ldr	r3, [r3, #4]
+3000d80c:	e593300c 	ldr	r3, [r3, #12]
+3000d810:	e59d0008 	ldr	r0, [sp, #8]
+3000d814:	e59d1004 	ldr	r1, [sp, #4]
+3000d818:	e59d2000 	ldr	r2, [sp]
+3000d81c:	e1a0e00f 	mov	lr, pc
+3000d820:	e12fff13 	bx	r3
+3000d824:	e1a03000 	mov	r3, r0
+3000d828:	ea000000 	b	3000d830 <acoral_dev_config+0x84>
 	return 0;	
-3000d628:	e3a03000 	mov	r3, #0
+3000d82c:	e3a03000 	mov	r3, #0
 }
-3000d62c:	e1a00003 	mov	r0, r3
-3000d630:	e28dd01c 	add	sp, sp, #28
-3000d634:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d638:	e12fff1e 	bx	lr
+3000d830:	e1a00003 	mov	r0, r3
+3000d834:	e28dd01c 	add	sp, sp, #28
+3000d838:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d83c:	e12fff1e 	bx	lr
 
-3000d63c <acoral_dev_close>:
+3000d840 <acoral_dev_close>:
 acoral_32 acoral_dev_close(acoral_id id){
-3000d63c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d640:	e24dd014 	sub	sp, sp, #20
-3000d644:	e58d0004 	str	r0, [sp, #4]
+3000d840:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d844:	e24dd014 	sub	sp, sp, #20
+3000d848:	e58d0004 	str	r0, [sp, #4]
 	acoral_drv_ctrl_t *ctrl=(acoral_drv_ctrl_t *)acoral_get_res_by_id(id);
-3000d648:	e59d0004 	ldr	r0, [sp, #4]
-3000d64c:	ebffd881 	bl	30003858 <acoral_get_res_by_id>
-3000d650:	e1a03000 	mov	r3, r0
-3000d654:	e58d300c 	str	r3, [sp, #12]
+3000d84c:	e59d0004 	ldr	r0, [sp, #4]
+3000d850:	ebffd800 	bl	30003858 <acoral_get_res_by_id>
+3000d854:	e1a03000 	mov	r3, r0
+3000d858:	e58d300c 	str	r3, [sp, #12]
 	if(ctrl!=NULL&&ctrl->ops!=NULL&&ctrl->ops->close!=NULL)
-3000d658:	e59d300c 	ldr	r3, [sp, #12]
-3000d65c:	e3530000 	cmp	r3, #0
-3000d660:	0a00000f 	beq	3000d6a4 <acoral_dev_close+0x68>
-3000d664:	e59d300c 	ldr	r3, [sp, #12]
-3000d668:	e5933004 	ldr	r3, [r3, #4]
-3000d66c:	e3530000 	cmp	r3, #0
-3000d670:	0a00000b 	beq	3000d6a4 <acoral_dev_close+0x68>
-3000d674:	e59d300c 	ldr	r3, [sp, #12]
-3000d678:	e5933004 	ldr	r3, [r3, #4]
-3000d67c:	e5933010 	ldr	r3, [r3, #16]
-3000d680:	e3530000 	cmp	r3, #0
-3000d684:	0a000006 	beq	3000d6a4 <acoral_dev_close+0x68>
+3000d85c:	e59d300c 	ldr	r3, [sp, #12]
+3000d860:	e3530000 	cmp	r3, #0
+3000d864:	0a00000f 	beq	3000d8a8 <acoral_dev_close+0x68>
+3000d868:	e59d300c 	ldr	r3, [sp, #12]
+3000d86c:	e5933004 	ldr	r3, [r3, #4]
+3000d870:	e3530000 	cmp	r3, #0
+3000d874:	0a00000b 	beq	3000d8a8 <acoral_dev_close+0x68>
+3000d878:	e59d300c 	ldr	r3, [sp, #12]
+3000d87c:	e5933004 	ldr	r3, [r3, #4]
+3000d880:	e5933010 	ldr	r3, [r3, #16]
+3000d884:	e3530000 	cmp	r3, #0
+3000d888:	0a000006 	beq	3000d8a8 <acoral_dev_close+0x68>
 		return ctrl->ops->close();
-3000d688:	e59d300c 	ldr	r3, [sp, #12]
-3000d68c:	e5933004 	ldr	r3, [r3, #4]
-3000d690:	e5933010 	ldr	r3, [r3, #16]
-3000d694:	e1a0e00f 	mov	lr, pc
-3000d698:	e12fff13 	bx	r3
-3000d69c:	e1a03000 	mov	r3, r0
-3000d6a0:	ea000000 	b	3000d6a8 <acoral_dev_close+0x6c>
+3000d88c:	e59d300c 	ldr	r3, [sp, #12]
+3000d890:	e5933004 	ldr	r3, [r3, #4]
+3000d894:	e5933010 	ldr	r3, [r3, #16]
+3000d898:	e1a0e00f 	mov	lr, pc
+3000d89c:	e12fff13 	bx	r3
+3000d8a0:	e1a03000 	mov	r3, r0
+3000d8a4:	ea000000 	b	3000d8ac <acoral_dev_close+0x6c>
 	return 0;
-3000d6a4:	e3a03000 	mov	r3, #0
+3000d8a8:	e3a03000 	mov	r3, #0
 }
-3000d6a8:	e1a00003 	mov	r0, r3
-3000d6ac:	e28dd014 	add	sp, sp, #20
-3000d6b0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d6b4:	e12fff1e 	bx	lr
+3000d8ac:	e1a00003 	mov	r0, r3
+3000d8b0:	e28dd014 	add	sp, sp, #20
+3000d8b4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d8b8:	e12fff1e 	bx	lr
 
-3000d6b8 <acoral_alloc_drv>:
+3000d8bc <acoral_alloc_drv>:
 
 acoral_drv_ctrl_t *acoral_alloc_drv(){
-3000d6b8:	e92d4008 	push	{r3, lr}
+3000d8bc:	e92d4008 	push	{r3, lr}
   	return (acoral_drv_ctrl_t *)acoral_get_res(&acoral_drv_pool_ctrl);
-3000d6bc:	e59f0010 	ldr	r0, [pc, #16]	; 3000d6d4 <acoral_alloc_drv+0x1c>
-3000d6c0:	ebffd785 	bl	300034dc <acoral_get_res>
-3000d6c4:	e1a03000 	mov	r3, r0
+3000d8c0:	e59f0010 	ldr	r0, [pc, #16]	; 3000d8d8 <acoral_alloc_drv+0x1c>
+3000d8c4:	ebffd704 	bl	300034dc <acoral_get_res>
+3000d8c8:	e1a03000 	mov	r3, r0
 }
-3000d6c8:	e1a00003 	mov	r0, r3
-3000d6cc:	e8bd4008 	pop	{r3, lr}
-3000d6d0:	e12fff1e 	bx	lr
-3000d6d4:	3000f9ec 	.word	0x3000f9ec
+3000d8cc:	e1a00003 	mov	r0, r3
+3000d8d0:	e8bd4008 	pop	{r3, lr}
+3000d8d4:	e12fff1e 	bx	lr
+3000d8d8:	3000fbf8 	.word	0x3000fbf8
 
-3000d6d8 <acoral_drv_pool_init>:
+3000d8dc <acoral_drv_pool_init>:
 
 
 void acoral_drv_pool_init(){
-3000d6d8:	e92d4008 	push	{r3, lr}
+3000d8dc:	e92d4008 	push	{r3, lr}
 	acoral_drv_pool_ctrl.type=ACORAL_RES_DRIVER;
-3000d6dc:	e59f3038 	ldr	r3, [pc, #56]	; 3000d71c <acoral_drv_pool_init+0x44>
-3000d6e0:	e3a02004 	mov	r2, #4
-3000d6e4:	e5832000 	str	r2, [r3]
+3000d8e0:	e59f3038 	ldr	r3, [pc, #56]	; 3000d920 <acoral_drv_pool_init+0x44>
+3000d8e4:	e3a02004 	mov	r2, #4
+3000d8e8:	e5832000 	str	r2, [r3]
 	acoral_drv_pool_ctrl.size=sizeof(acoral_drv_ctrl_t);
-3000d6e8:	e59f302c 	ldr	r3, [pc, #44]	; 3000d71c <acoral_drv_pool_init+0x44>
-3000d6ec:	e3a02010 	mov	r2, #16
-3000d6f0:	e5832004 	str	r2, [r3, #4]
+3000d8ec:	e59f302c 	ldr	r3, [pc, #44]	; 3000d920 <acoral_drv_pool_init+0x44>
+3000d8f0:	e3a02010 	mov	r2, #16
+3000d8f4:	e5832004 	str	r2, [r3, #4]
 	acoral_drv_pool_ctrl.num_per_pool=10;
-3000d6f4:	e59f3020 	ldr	r3, [pc, #32]	; 3000d71c <acoral_drv_pool_init+0x44>
-3000d6f8:	e3a0200a 	mov	r2, #10
-3000d6fc:	e5832008 	str	r2, [r3, #8]
+3000d8f8:	e59f3020 	ldr	r3, [pc, #32]	; 3000d920 <acoral_drv_pool_init+0x44>
+3000d8fc:	e3a0200a 	mov	r2, #10
+3000d900:	e5832008 	str	r2, [r3, #8]
 	acoral_drv_pool_ctrl.max_pools=3;
-3000d700:	e59f3014 	ldr	r3, [pc, #20]	; 3000d71c <acoral_drv_pool_init+0x44>
-3000d704:	e3a02003 	mov	r2, #3
-3000d708:	e5832010 	str	r2, [r3, #16]
+3000d904:	e59f3014 	ldr	r3, [pc, #20]	; 3000d920 <acoral_drv_pool_init+0x44>
+3000d908:	e3a02003 	mov	r2, #3
+3000d90c:	e5832010 	str	r2, [r3, #16]
 	acoral_pool_ctrl_init(&acoral_drv_pool_ctrl);
-3000d70c:	e59f0008 	ldr	r0, [pc, #8]	; 3000d71c <acoral_drv_pool_init+0x44>
-3000d710:	ebffd8d0 	bl	30003a58 <acoral_pool_ctrl_init>
+3000d910:	e59f0008 	ldr	r0, [pc, #8]	; 3000d920 <acoral_drv_pool_init+0x44>
+3000d914:	ebffd84f 	bl	30003a58 <acoral_pool_ctrl_init>
 }
-3000d714:	e8bd4008 	pop	{r3, lr}
-3000d718:	e12fff1e 	bx	lr
-3000d71c:	3000f9ec 	.word	0x3000f9ec
+3000d918:	e8bd4008 	pop	{r3, lr}
+3000d91c:	e12fff1e 	bx	lr
+3000d920:	3000fbf8 	.word	0x3000fbf8
 
-3000d720 <acoral_drv_sys_init>:
+3000d924 <acoral_drv_sys_init>:
 
 void acoral_drv_sys_init(){
-3000d720:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d724:	e24dd00c 	sub	sp, sp, #12
+3000d924:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000d928:	e24dd00c 	sub	sp, sp, #12
 	acoral_u32 i;
 	for(i=0;i<ACORAL_DEV_NUM;i++)
-3000d728:	e3a03000 	mov	r3, #0
-3000d72c:	e58d3004 	str	r3, [sp, #4]
-3000d730:	ea000006 	b	3000d750 <acoral_drv_sys_init+0x30>
+3000d92c:	e3a03000 	mov	r3, #0
+3000d930:	e58d3004 	str	r3, [sp, #4]
+3000d934:	ea000006 	b	3000d954 <acoral_drv_sys_init+0x30>
 	  	drv_table[i]=NULL;	    
-3000d734:	e59d2004 	ldr	r2, [sp, #4]
-3000d738:	e59f3030 	ldr	r3, [pc, #48]	; 3000d770 <acoral_drv_sys_init+0x50>
-3000d73c:	e3a01000 	mov	r1, #0
-3000d740:	e7831102 	str	r1, [r3, r2, lsl #2]
+3000d938:	e59d2004 	ldr	r2, [sp, #4]
+3000d93c:	e59f3030 	ldr	r3, [pc, #48]	; 3000d974 <acoral_drv_sys_init+0x50>
+3000d940:	e3a01000 	mov	r1, #0
+3000d944:	e7831102 	str	r1, [r3, r2, lsl #2]
 	acoral_pool_ctrl_init(&acoral_drv_pool_ctrl);
 }
 
 void acoral_drv_sys_init(){
 	acoral_u32 i;
 	for(i=0;i<ACORAL_DEV_NUM;i++)
-3000d744:	e59d3004 	ldr	r3, [sp, #4]
-3000d748:	e2833001 	add	r3, r3, #1
-3000d74c:	e58d3004 	str	r3, [sp, #4]
-3000d750:	e59d3004 	ldr	r3, [sp, #4]
-3000d754:	e3530013 	cmp	r3, #19
-3000d758:	9afffff5 	bls	3000d734 <acoral_drv_sys_init+0x14>
+3000d948:	e59d3004 	ldr	r3, [sp, #4]
+3000d94c:	e2833001 	add	r3, r3, #1
+3000d950:	e58d3004 	str	r3, [sp, #4]
+3000d954:	e59d3004 	ldr	r3, [sp, #4]
+3000d958:	e3530013 	cmp	r3, #19
+3000d95c:	9afffff5 	bls	3000d938 <acoral_drv_sys_init+0x14>
 	  	drv_table[i]=NULL;	    
 	acoral_drv_pool_init();
-3000d75c:	ebffffdd 	bl	3000d6d8 <acoral_drv_pool_init>
+3000d960:	ebffffdd 	bl	3000d8dc <acoral_drv_pool_init>
 	brd_driver_init();
-3000d760:	eb000003 	bl	3000d774 <brd_driver_init>
+3000d964:	eb000003 	bl	3000d978 <brd_driver_init>
 }
-3000d764:	e28dd00c 	add	sp, sp, #12
-3000d768:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d76c:	e12fff1e 	bx	lr
-3000d770:	3000f358 	.word	0x3000f358
+3000d968:	e28dd00c 	add	sp, sp, #12
+3000d96c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000d970:	e12fff1e 	bx	lr
+3000d974:	3000f564 	.word	0x3000f564
 
-3000d774 <brd_driver_init>:
+3000d978 <brd_driver_init>:
 #include<autocfg.h>
 void brd_driver_init(){
-3000d774:	e92d4008 	push	{r3, lr}
+3000d978:	e92d4008 	push	{r3, lr}
 #ifdef CFG_DRV_CON_UART
 	con_uart_init();
-3000d778:	eb000089 	bl	3000d9a4 <con_uart_init>
+3000d97c:	eb000089 	bl	3000dba8 <con_uart_init>
 #endif
 
 #ifdef CFG_DRV_NET_DM9000
 	dm9000_init();
 #endif
 }
-3000d77c:	e8bd4008 	pop	{r3, lr}
-3000d780:	e12fff1e 	bx	lr
+3000d980:	e8bd4008 	pop	{r3, lr}
+3000d984:	e12fff1e 	bx	lr
 
-3000d784 <uart_write>:
+3000d988 <uart_write>:
 #define put_char(ch) uart_write(ch)
 #define get_char(ch) uart_read(ch)
 acoral_dev_ops_t console_ops;
 void uart_init();
 
 void uart_write(acoral_u8 ch){
-3000d784:	e24dd008 	sub	sp, sp, #8
-3000d788:	e1a03000 	mov	r3, r0
-3000d78c:	e5cd3007 	strb	r3, [sp, #7]
+3000d988:	e24dd008 	sub	sp, sp, #8
+3000d98c:	e1a03000 	mov	r3, r0
+3000d990:	e5cd3007 	strb	r3, [sp, #7]
 	while(!(rUTRSTAT0 & 0x4));
-3000d790:	e3a03205 	mov	r3, #1342177280	; 0x50000000
-3000d794:	e2833010 	add	r3, r3, #16
-3000d798:	e5933000 	ldr	r3, [r3]
-3000d79c:	e2033004 	and	r3, r3, #4
-3000d7a0:	e3530000 	cmp	r3, #0
-3000d7a4:	0afffff9 	beq	3000d790 <uart_write+0xc>
+3000d994:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+3000d998:	e2833010 	add	r3, r3, #16
+3000d99c:	e5933000 	ldr	r3, [r3]
+3000d9a0:	e2033004 	and	r3, r3, #4
+3000d9a4:	e3530000 	cmp	r3, #0
+3000d9a8:	0afffff9 	beq	3000d994 <uart_write+0xc>
 	WrUTXH0(ch);
-3000d7a8:	e3a03205 	mov	r3, #1342177280	; 0x50000000
-3000d7ac:	e2833020 	add	r3, r3, #32
-3000d7b0:	e5dd2007 	ldrb	r2, [sp, #7]
-3000d7b4:	e5c32000 	strb	r2, [r3]
+3000d9ac:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+3000d9b0:	e2833020 	add	r3, r3, #32
+3000d9b4:	e5dd2007 	ldrb	r2, [sp, #7]
+3000d9b8:	e5c32000 	strb	r2, [r3]
 }
-3000d7b8:	e28dd008 	add	sp, sp, #8
-3000d7bc:	e12fff1e 	bx	lr
+3000d9bc:	e28dd008 	add	sp, sp, #8
+3000d9c0:	e12fff1e 	bx	lr
 
-3000d7c0 <uart_read>:
+3000d9c4 <uart_read>:
 
 void uart_read(acoral_char *ch){
-3000d7c0:	e24dd008 	sub	sp, sp, #8
-3000d7c4:	e58d0004 	str	r0, [sp, #4]
+3000d9c4:	e24dd008 	sub	sp, sp, #8
+3000d9c8:	e58d0004 	str	r0, [sp, #4]
 	while(!(rUTRSTAT0 & 0x1));
-3000d7c8:	e3a03205 	mov	r3, #1342177280	; 0x50000000
-3000d7cc:	e2833010 	add	r3, r3, #16
-3000d7d0:	e5933000 	ldr	r3, [r3]
-3000d7d4:	e2033001 	and	r3, r3, #1
-3000d7d8:	e3530000 	cmp	r3, #0
-3000d7dc:	0afffff9 	beq	3000d7c8 <uart_read+0x8>
+3000d9cc:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+3000d9d0:	e2833010 	add	r3, r3, #16
+3000d9d4:	e5933000 	ldr	r3, [r3]
+3000d9d8:	e2033001 	and	r3, r3, #1
+3000d9dc:	e3530000 	cmp	r3, #0
+3000d9e0:	0afffff9 	beq	3000d9cc <uart_read+0x8>
 	*ch=RdURXH0();
-3000d7e0:	e3a03205 	mov	r3, #1342177280	; 0x50000000
-3000d7e4:	e2833024 	add	r3, r3, #36	; 0x24
-3000d7e8:	e5d33000 	ldrb	r3, [r3]
-3000d7ec:	e20320ff 	and	r2, r3, #255	; 0xff
-3000d7f0:	e59d3004 	ldr	r3, [sp, #4]
-3000d7f4:	e5c32000 	strb	r2, [r3]
+3000d9e4:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+3000d9e8:	e2833024 	add	r3, r3, #36	; 0x24
+3000d9ec:	e5d33000 	ldrb	r3, [r3]
+3000d9f0:	e20320ff 	and	r2, r3, #255	; 0xff
+3000d9f4:	e59d3004 	ldr	r3, [sp, #4]
+3000d9f8:	e5c32000 	strb	r2, [r3]
 }
-3000d7f8:	e28dd008 	add	sp, sp, #8
-3000d7fc:	e12fff1e 	bx	lr
+3000d9fc:	e28dd008 	add	sp, sp, #8
+3000da00:	e12fff1e 	bx	lr
 
-3000d800 <console_write>:
+3000da04 <console_write>:
 
 acoral_32 console_write(void *data,acoral_u32 size,acoral_time tm_out){
-3000d800:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d804:	e24dd01c 	sub	sp, sp, #28
-3000d808:	e58d000c 	str	r0, [sp, #12]
-3000d80c:	e58d1008 	str	r1, [sp, #8]
-3000d810:	e58d2004 	str	r2, [sp, #4]
+3000da04:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000da08:	e24dd01c 	sub	sp, sp, #28
+3000da0c:	e58d000c 	str	r0, [sp, #12]
+3000da10:	e58d1008 	str	r1, [sp, #8]
+3000da14:	e58d2004 	str	r2, [sp, #4]
 	acoral_u32 i;
   	char p;
 	for(i=0;i<size;i++){
-3000d814:	e3a03000 	mov	r3, #0
-3000d818:	e58d3010 	str	r3, [sp, #16]
-3000d81c:	ea00000f 	b	3000d860 <console_write+0x60>
+3000da18:	e3a03000 	mov	r3, #0
+3000da1c:	e58d3010 	str	r3, [sp, #16]
+3000da20:	ea00000f 	b	3000da64 <console_write+0x60>
 		p=*((acoral_char *)data+i);
-3000d820:	e59d200c 	ldr	r2, [sp, #12]
-3000d824:	e59d3010 	ldr	r3, [sp, #16]
-3000d828:	e0823003 	add	r3, r2, r3
-3000d82c:	e5d33000 	ldrb	r3, [r3]
-3000d830:	e5cd3017 	strb	r3, [sp, #23]
+3000da24:	e59d200c 	ldr	r2, [sp, #12]
+3000da28:	e59d3010 	ldr	r3, [sp, #16]
+3000da2c:	e0823003 	add	r3, r2, r3
+3000da30:	e5d33000 	ldrb	r3, [r3]
+3000da34:	e5cd3017 	strb	r3, [sp, #23]
 		if(p=='\n')
-3000d834:	e5dd3017 	ldrb	r3, [sp, #23]
-3000d838:	e353000a 	cmp	r3, #10
-3000d83c:	1a000001 	bne	3000d848 <console_write+0x48>
+3000da38:	e5dd3017 	ldrb	r3, [sp, #23]
+3000da3c:	e353000a 	cmp	r3, #10
+3000da40:	1a000001 	bne	3000da4c <console_write+0x48>
 			put_char('\r');
-3000d840:	e3a0000d 	mov	r0, #13
-3000d844:	ebffffce 	bl	3000d784 <uart_write>
+3000da44:	e3a0000d 	mov	r0, #13
+3000da48:	ebffffce 	bl	3000d988 <uart_write>
 		put_char(p);
-3000d848:	e5dd3017 	ldrb	r3, [sp, #23]
-3000d84c:	e1a00003 	mov	r0, r3
-3000d850:	ebffffcb 	bl	3000d784 <uart_write>
+3000da4c:	e5dd3017 	ldrb	r3, [sp, #23]
+3000da50:	e1a00003 	mov	r0, r3
+3000da54:	ebffffcb 	bl	3000d988 <uart_write>
 }
 
 acoral_32 console_write(void *data,acoral_u32 size,acoral_time tm_out){
 	acoral_u32 i;
   	char p;
 	for(i=0;i<size;i++){
-3000d854:	e59d3010 	ldr	r3, [sp, #16]
-3000d858:	e2833001 	add	r3, r3, #1
-3000d85c:	e58d3010 	str	r3, [sp, #16]
-3000d860:	e59d2010 	ldr	r2, [sp, #16]
-3000d864:	e59d3008 	ldr	r3, [sp, #8]
-3000d868:	e1520003 	cmp	r2, r3
-3000d86c:	3affffeb 	bcc	3000d820 <console_write+0x20>
+3000da58:	e59d3010 	ldr	r3, [sp, #16]
+3000da5c:	e2833001 	add	r3, r3, #1
+3000da60:	e58d3010 	str	r3, [sp, #16]
+3000da64:	e59d2010 	ldr	r2, [sp, #16]
+3000da68:	e59d3008 	ldr	r3, [sp, #8]
+3000da6c:	e1520003 	cmp	r2, r3
+3000da70:	3affffeb 	bcc	3000da24 <console_write+0x20>
 		p=*((acoral_char *)data+i);
 		if(p=='\n')
 			put_char('\r');
 		put_char(p);
 	}
 }
-3000d870:	e28dd01c 	add	sp, sp, #28
-3000d874:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d878:	e12fff1e 	bx	lr
+3000da74:	e28dd01c 	add	sp, sp, #28
+3000da78:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000da7c:	e12fff1e 	bx	lr
 
-3000d87c <console_read>:
+3000da80 <console_read>:
 
 acoral_32 console_read(void *data,acoral_size size,acoral_size offset,acoral_time tm_out){
-3000d87c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-3000d880:	e24dd01c 	sub	sp, sp, #28
-3000d884:	e58d000c 	str	r0, [sp, #12]
-3000d888:	e58d1008 	str	r1, [sp, #8]
-3000d88c:	e58d2004 	str	r2, [sp, #4]
-3000d890:	e58d3000 	str	r3, [sp]
+3000da80:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+3000da84:	e24dd01c 	sub	sp, sp, #28
+3000da88:	e58d000c 	str	r0, [sp, #12]
+3000da8c:	e58d1008 	str	r1, [sp, #8]
+3000da90:	e58d2004 	str	r2, [sp, #4]
+3000da94:	e58d3000 	str	r3, [sp]
 	acoral_u32 i;
   	acoral_char *p;
 	for(i=0;i<size;i++){
-3000d894:	e3a03000 	mov	r3, #0
-3000d898:	e58d3010 	str	r3, [sp, #16]
-3000d89c:	ea000008 	b	3000d8c4 <console_read+0x48>
+3000da98:	e3a03000 	mov	r3, #0
+3000da9c:	e58d3010 	str	r3, [sp, #16]
+3000daa0:	ea000008 	b	3000dac8 <console_read+0x48>
 		p=(acoral_char *)data+i;
-3000d8a0:	e59d200c 	ldr	r2, [sp, #12]
-3000d8a4:	e59d3010 	ldr	r3, [sp, #16]
-3000d8a8:	e0823003 	add	r3, r2, r3
-3000d8ac:	e58d3014 	str	r3, [sp, #20]
+3000daa4:	e59d200c 	ldr	r2, [sp, #12]
+3000daa8:	e59d3010 	ldr	r3, [sp, #16]
+3000daac:	e0823003 	add	r3, r2, r3
+3000dab0:	e58d3014 	str	r3, [sp, #20]
 		get_char(p);
-3000d8b0:	e59d0014 	ldr	r0, [sp, #20]
-3000d8b4:	ebffffc1 	bl	3000d7c0 <uart_read>
+3000dab4:	e59d0014 	ldr	r0, [sp, #20]
+3000dab8:	ebffffc1 	bl	3000d9c4 <uart_read>
 }
 
 acoral_32 console_read(void *data,acoral_size size,acoral_size offset,acoral_time tm_out){
 	acoral_u32 i;
   	acoral_char *p;
 	for(i=0;i<size;i++){
-3000d8b8:	e59d3010 	ldr	r3, [sp, #16]
-3000d8bc:	e2833001 	add	r3, r3, #1
-3000d8c0:	e58d3010 	str	r3, [sp, #16]
-3000d8c4:	e59d2010 	ldr	r2, [sp, #16]
-3000d8c8:	e59d3008 	ldr	r3, [sp, #8]
-3000d8cc:	e1520003 	cmp	r2, r3
-3000d8d0:	3afffff2 	bcc	3000d8a0 <console_read+0x24>
+3000dabc:	e59d3010 	ldr	r3, [sp, #16]
+3000dac0:	e2833001 	add	r3, r3, #1
+3000dac4:	e58d3010 	str	r3, [sp, #16]
+3000dac8:	e59d2010 	ldr	r2, [sp, #16]
+3000dacc:	e59d3008 	ldr	r3, [sp, #8]
+3000dad0:	e1520003 	cmp	r2, r3
+3000dad4:	3afffff2 	bcc	3000daa4 <console_read+0x24>
 		p=(acoral_char *)data+i;
 		get_char(p);
 	}
 	return size;
-3000d8d4:	e59d3008 	ldr	r3, [sp, #8]
+3000dad8:	e59d3008 	ldr	r3, [sp, #8]
 }
-3000d8d8:	e1a00003 	mov	r0, r3
-3000d8dc:	e28dd01c 	add	sp, sp, #28
-3000d8e0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-3000d8e4:	e12fff1e 	bx	lr
+3000dadc:	e1a00003 	mov	r0, r3
+3000dae0:	e28dd01c 	add	sp, sp, #28
+3000dae4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+3000dae8:	e12fff1e 	bx	lr
 
-3000d8e8 <console_config>:
+3000daec <console_config>:
 
 acoral_32 console_config(acoral_u32 cmd,void *data,acoral_time time_out){
-3000d8e8:	e24dd010 	sub	sp, sp, #16
-3000d8ec:	e58d000c 	str	r0, [sp, #12]
-3000d8f0:	e58d1008 	str	r1, [sp, #8]
-3000d8f4:	e58d2004 	str	r2, [sp, #4]
+3000daec:	e24dd010 	sub	sp, sp, #16
+3000daf0:	e58d000c 	str	r0, [sp, #12]
+3000daf4:	e58d1008 	str	r1, [sp, #8]
+3000daf8:	e58d2004 	str	r2, [sp, #4]
 	switch(cmd){
-3000d8f8:	e59d300c 	ldr	r3, [sp, #12]
-3000d8fc:	e3530001 	cmp	r3, #1
-3000d900:	1a000002 	bne	3000d910 <console_config+0x28>
+3000dafc:	e59d300c 	ldr	r3, [sp, #12]
+3000db00:	e3530001 	cmp	r3, #1
+3000db04:	1a000002 	bne	3000db14 <console_config+0x28>
 		case CONSOLE_ECHO:
 			*(acoral_u8 *)data=1;
-3000d904:	e59d3008 	ldr	r3, [sp, #8]
-3000d908:	e3a02001 	mov	r2, #1
-3000d90c:	e5c32000 	strb	r2, [r3]
+3000db08:	e59d3008 	ldr	r3, [sp, #8]
+3000db0c:	e3a02001 	mov	r2, #1
+3000db10:	e5c32000 	strb	r2, [r3]
 		default:
 			break;
 	}		
 }
-3000d910:	e28dd010 	add	sp, sp, #16
-3000d914:	e12fff1e 	bx	lr
+3000db14:	e28dd010 	add	sp, sp, #16
+3000db18:	e12fff1e 	bx	lr
 
-3000d918 <console_open>:
+3000db1c <console_open>:
 
 acoral_32 console_open(){
-3000d918:	e92d4008 	push	{r3, lr}
+3000db1c:	e92d4008 	push	{r3, lr}
 	uart_init();
-3000d91c:	eb000003 	bl	3000d930 <uart_init>
+3000db20:	eb000003 	bl	3000db34 <uart_init>
 	return 0;
-3000d920:	e3a03000 	mov	r3, #0
+3000db24:	e3a03000 	mov	r3, #0
 }
-3000d924:	e1a00003 	mov	r0, r3
-3000d928:	e8bd4008 	pop	{r3, lr}
-3000d92c:	e12fff1e 	bx	lr
+3000db28:	e1a00003 	mov	r0, r3
+3000db2c:	e8bd4008 	pop	{r3, lr}
+3000db30:	e12fff1e 	bx	lr
 
-3000d930 <uart_init>:
+3000db34 <uart_init>:
 
 void uart_init(){
 	rUCON0=0x245;	
-3000d930:	e3a02245 	mov	r2, #1342177284	; 0x50000004
-3000d934:	e3a03f91 	mov	r3, #580	; 0x244
-3000d938:	e2833001 	add	r3, r3, #1
-3000d93c:	e5823000 	str	r3, [r2]
+3000db34:	e3a02245 	mov	r2, #1342177284	; 0x50000004
+3000db38:	e3a03f91 	mov	r3, #580	; 0x244
+3000db3c:	e2833001 	add	r3, r3, #1
+3000db40:	e5823000 	str	r3, [r2]
 	rULCON0=0x3;	
-3000d940:	e3a03205 	mov	r3, #1342177280	; 0x50000000
-3000d944:	e3a02003 	mov	r2, #3
-3000d948:	e5832000 	str	r2, [r3]
+3000db44:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+3000db48:	e3a02003 	mov	r2, #3
+3000db4c:	e5832000 	str	r2, [r3]
 	rUFCON0=0x0;	
-3000d94c:	e3a03285 	mov	r3, #1342177288	; 0x50000008
-3000d950:	e3a02000 	mov	r2, #0
-3000d954:	e5832000 	str	r2, [r3]
+3000db50:	e3a03285 	mov	r3, #1342177288	; 0x50000008
+3000db54:	e3a02000 	mov	r2, #0
+3000db58:	e5832000 	str	r2, [r3]
 	rUMCON0=0x0;	
-3000d958:	e3a032c5 	mov	r3, #1342177292	; 0x5000000c
-3000d95c:	e3a02000 	mov	r2, #0
-3000d960:	e5832000 	str	r2, [r3]
+3000db5c:	e3a032c5 	mov	r3, #1342177292	; 0x5000000c
+3000db60:	e3a02000 	mov	r2, #0
+3000db64:	e5832000 	str	r2, [r3]
 	rUBRDIV0=(PCLK /(CFG_BAUD_RATE * 16))-1;
-3000d964:	e3a03205 	mov	r3, #1342177280	; 0x50000000
-3000d968:	e2833028 	add	r3, r3, #40	; 0x28
-3000d96c:	e3a0201a 	mov	r2, #26
-3000d970:	e5832000 	str	r2, [r3]
+3000db68:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+3000db6c:	e2833028 	add	r3, r3, #40	; 0x28
+3000db70:	e3a0201a 	mov	r2, #26
+3000db74:	e5832000 	str	r2, [r3]
     rGPHCON = 0x0016faaa;
-3000d974:	e3a02456 	mov	r2, #1442840576	; 0x56000000
-3000d978:	e2822070 	add	r2, r2, #112	; 0x70
-3000d97c:	e3a0395b 	mov	r3, #1490944	; 0x16c000
-3000d980:	e2833dea 	add	r3, r3, #14976	; 0x3a80
-3000d984:	e283302a 	add	r3, r3, #42	; 0x2a
-3000d988:	e5823000 	str	r3, [r2]
+3000db78:	e3a02456 	mov	r2, #1442840576	; 0x56000000
+3000db7c:	e2822070 	add	r2, r2, #112	; 0x70
+3000db80:	e3a0395b 	mov	r3, #1490944	; 0x16c000
+3000db84:	e2833dea 	add	r3, r3, #14976	; 0x3a80
+3000db88:	e283302a 	add	r3, r3, #42	; 0x2a
+3000db8c:	e5823000 	str	r3, [r2]
 	rGPHUP  = 0x7ff;    /* The pull up function is disabled GPH[10:0]*/
-3000d98c:	e3a03456 	mov	r3, #1442840576	; 0x56000000
-3000d990:	e2833078 	add	r3, r3, #120	; 0x78
-3000d994:	e3a02e7f 	mov	r2, #2032	; 0x7f0
-3000d998:	e282200f 	add	r2, r2, #15
-3000d99c:	e5832000 	str	r2, [r3]
+3000db90:	e3a03456 	mov	r3, #1442840576	; 0x56000000
+3000db94:	e2833078 	add	r3, r3, #120	; 0x78
+3000db98:	e3a02e7f 	mov	r2, #2032	; 0x7f0
+3000db9c:	e282200f 	add	r2, r2, #15
+3000dba0:	e5832000 	str	r2, [r3]
 }
-3000d9a0:	e12fff1e 	bx	lr
+3000dba4:	e12fff1e 	bx	lr
 
-3000d9a4 <con_uart_init>:
+3000dba8 <con_uart_init>:
 
 void con_uart_init(){
-3000d9a4:	e92d4008 	push	{r3, lr}
+3000dba8:	e92d4008 	push	{r3, lr}
 	console_ops.open=console_open;
-3000d9a8:	e59f203c 	ldr	r2, [pc, #60]	; 3000d9ec <con_uart_init+0x48>
-3000d9ac:	e59f303c 	ldr	r3, [pc, #60]	; 3000d9f0 <con_uart_init+0x4c>
-3000d9b0:	e5832000 	str	r2, [r3]
+3000dbac:	e59f203c 	ldr	r2, [pc, #60]	; 3000dbf0 <con_uart_init+0x48>
+3000dbb0:	e59f303c 	ldr	r3, [pc, #60]	; 3000dbf4 <con_uart_init+0x4c>
+3000dbb4:	e5832000 	str	r2, [r3]
 	console_ops.write=console_write;
-3000d9b4:	e59f2038 	ldr	r2, [pc, #56]	; 3000d9f4 <con_uart_init+0x50>
-3000d9b8:	e59f3030 	ldr	r3, [pc, #48]	; 3000d9f0 <con_uart_init+0x4c>
-3000d9bc:	e5832008 	str	r2, [r3, #8]
+3000dbb8:	e59f2038 	ldr	r2, [pc, #56]	; 3000dbf8 <con_uart_init+0x50>
+3000dbbc:	e59f3030 	ldr	r3, [pc, #48]	; 3000dbf4 <con_uart_init+0x4c>
+3000dbc0:	e5832008 	str	r2, [r3, #8]
 	console_ops.read=console_read;
-3000d9c0:	e59f3028 	ldr	r3, [pc, #40]	; 3000d9f0 <con_uart_init+0x4c>
-3000d9c4:	e59f202c 	ldr	r2, [pc, #44]	; 3000d9f8 <con_uart_init+0x54>
-3000d9c8:	e5832004 	str	r2, [r3, #4]
+3000dbc4:	e59f3028 	ldr	r3, [pc, #40]	; 3000dbf4 <con_uart_init+0x4c>
+3000dbc8:	e59f202c 	ldr	r2, [pc, #44]	; 3000dbfc <con_uart_init+0x54>
+3000dbcc:	e5832004 	str	r2, [r3, #4]
 	console_ops.config=console_config;
-3000d9cc:	e59f301c 	ldr	r3, [pc, #28]	; 3000d9f0 <con_uart_init+0x4c>
-3000d9d0:	e59f2024 	ldr	r2, [pc, #36]	; 3000d9fc <con_uart_init+0x58>
-3000d9d4:	e583200c 	str	r2, [r3, #12]
+3000dbd0:	e59f301c 	ldr	r3, [pc, #28]	; 3000dbf4 <con_uart_init+0x4c>
+3000dbd4:	e59f2024 	ldr	r2, [pc, #36]	; 3000dc00 <con_uart_init+0x58>
+3000dbd8:	e583200c 	str	r2, [r3, #12]
   	acoral_drv_register(&console_ops,"console");
-3000d9d8:	e59f0010 	ldr	r0, [pc, #16]	; 3000d9f0 <con_uart_init+0x4c>
-3000d9dc:	e59f101c 	ldr	r1, [pc, #28]	; 3000da00 <con_uart_init+0x5c>
-3000d9e0:	ebfffe27 	bl	3000d284 <acoral_drv_register>
+3000dbdc:	e59f0010 	ldr	r0, [pc, #16]	; 3000dbf4 <con_uart_init+0x4c>
+3000dbe0:	e59f101c 	ldr	r1, [pc, #28]	; 3000dc04 <con_uart_init+0x5c>
+3000dbe4:	ebfffe27 	bl	3000d488 <acoral_drv_register>
 }
-3000d9e4:	e8bd4008 	pop	{r3, lr}
-3000d9e8:	e12fff1e 	bx	lr
-3000d9ec:	3000d918 	.word	0x3000d918
-3000d9f0:	3000faa0 	.word	0x3000faa0
-3000d9f4:	3000d800 	.word	0x3000d800
-3000d9f8:	3000d87c 	.word	0x3000d87c
-3000d9fc:	3000d8e8 	.word	0x3000d8e8
-3000da00:	3000ea3c 	.word	0x3000ea3c
+3000dbe8:	e8bd4008 	pop	{r3, lr}
+3000dbec:	e12fff1e 	bx	lr
+3000dbf0:	3000db1c 	.word	0x3000db1c
+3000dbf4:	3000fcac 	.word	0x3000fcac
+3000dbf8:	3000da04 	.word	0x3000da04
+3000dbfc:	3000da80 	.word	0x3000da80
+3000dc00:	3000daec 	.word	0x3000daec
+3000dc04:	3000ec48 	.word	0x3000ec48
 
-3000da04 <__aeabi_uidiv>:
-3000da04:	e2512001 	subs	r2, r1, #1
-3000da08:	012fff1e 	bxeq	lr
-3000da0c:	3a000036 	bcc	3000daec <__aeabi_uidiv+0xe8>
-3000da10:	e1500001 	cmp	r0, r1
-3000da14:	9a000022 	bls	3000daa4 <__aeabi_uidiv+0xa0>
-3000da18:	e1110002 	tst	r1, r2
-3000da1c:	0a000023 	beq	3000dab0 <__aeabi_uidiv+0xac>
-3000da20:	e311020e 	tst	r1, #-536870912	; 0xe0000000
-3000da24:	01a01181 	lsleq	r1, r1, #3
-3000da28:	03a03008 	moveq	r3, #8
-3000da2c:	13a03001 	movne	r3, #1
-3000da30:	e3510201 	cmp	r1, #268435456	; 0x10000000
-3000da34:	31510000 	cmpcc	r1, r0
-3000da38:	31a01201 	lslcc	r1, r1, #4
-3000da3c:	31a03203 	lslcc	r3, r3, #4
-3000da40:	3afffffa 	bcc	3000da30 <__aeabi_uidiv+0x2c>
-3000da44:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
-3000da48:	31510000 	cmpcc	r1, r0
-3000da4c:	31a01081 	lslcc	r1, r1, #1
-3000da50:	31a03083 	lslcc	r3, r3, #1
-3000da54:	3afffffa 	bcc	3000da44 <__aeabi_uidiv+0x40>
-3000da58:	e3a02000 	mov	r2, #0
-3000da5c:	e1500001 	cmp	r0, r1
-3000da60:	20400001 	subcs	r0, r0, r1
-3000da64:	21822003 	orrcs	r2, r2, r3
-3000da68:	e15000a1 	cmp	r0, r1, lsr #1
-3000da6c:	204000a1 	subcs	r0, r0, r1, lsr #1
-3000da70:	218220a3 	orrcs	r2, r2, r3, lsr #1
-3000da74:	e1500121 	cmp	r0, r1, lsr #2
-3000da78:	20400121 	subcs	r0, r0, r1, lsr #2
-3000da7c:	21822123 	orrcs	r2, r2, r3, lsr #2
-3000da80:	e15001a1 	cmp	r0, r1, lsr #3
-3000da84:	204001a1 	subcs	r0, r0, r1, lsr #3
-3000da88:	218221a3 	orrcs	r2, r2, r3, lsr #3
-3000da8c:	e3500000 	cmp	r0, #0
-3000da90:	11b03223 	lsrsne	r3, r3, #4
-3000da94:	11a01221 	lsrne	r1, r1, #4
-3000da98:	1affffef 	bne	3000da5c <__aeabi_uidiv+0x58>
-3000da9c:	e1a00002 	mov	r0, r2
-3000daa0:	e12fff1e 	bx	lr
-3000daa4:	03a00001 	moveq	r0, #1
-3000daa8:	13a00000 	movne	r0, #0
-3000daac:	e12fff1e 	bx	lr
-3000dab0:	e3510801 	cmp	r1, #65536	; 0x10000
-3000dab4:	21a01821 	lsrcs	r1, r1, #16
-3000dab8:	23a02010 	movcs	r2, #16
-3000dabc:	33a02000 	movcc	r2, #0
-3000dac0:	e3510c01 	cmp	r1, #256	; 0x100
-3000dac4:	21a01421 	lsrcs	r1, r1, #8
-3000dac8:	22822008 	addcs	r2, r2, #8
-3000dacc:	e3510010 	cmp	r1, #16
-3000dad0:	21a01221 	lsrcs	r1, r1, #4
-3000dad4:	22822004 	addcs	r2, r2, #4
-3000dad8:	e3510004 	cmp	r1, #4
-3000dadc:	82822003 	addhi	r2, r2, #3
-3000dae0:	908220a1 	addls	r2, r2, r1, lsr #1
-3000dae4:	e1a00230 	lsr	r0, r0, r2
-3000dae8:	e12fff1e 	bx	lr
-3000daec:	e3500000 	cmp	r0, #0
-3000daf0:	13e00000 	mvnne	r0, #0
-3000daf4:	ea000007 	b	3000db18 <__aeabi_idiv0>
+3000dc08 <__aeabi_uidiv>:
+3000dc08:	e2512001 	subs	r2, r1, #1
+3000dc0c:	012fff1e 	bxeq	lr
+3000dc10:	3a000036 	bcc	3000dcf0 <__aeabi_uidiv+0xe8>
+3000dc14:	e1500001 	cmp	r0, r1
+3000dc18:	9a000022 	bls	3000dca8 <__aeabi_uidiv+0xa0>
+3000dc1c:	e1110002 	tst	r1, r2
+3000dc20:	0a000023 	beq	3000dcb4 <__aeabi_uidiv+0xac>
+3000dc24:	e311020e 	tst	r1, #-536870912	; 0xe0000000
+3000dc28:	01a01181 	lsleq	r1, r1, #3
+3000dc2c:	03a03008 	moveq	r3, #8
+3000dc30:	13a03001 	movne	r3, #1
+3000dc34:	e3510201 	cmp	r1, #268435456	; 0x10000000
+3000dc38:	31510000 	cmpcc	r1, r0
+3000dc3c:	31a01201 	lslcc	r1, r1, #4
+3000dc40:	31a03203 	lslcc	r3, r3, #4
+3000dc44:	3afffffa 	bcc	3000dc34 <__aeabi_uidiv+0x2c>
+3000dc48:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
+3000dc4c:	31510000 	cmpcc	r1, r0
+3000dc50:	31a01081 	lslcc	r1, r1, #1
+3000dc54:	31a03083 	lslcc	r3, r3, #1
+3000dc58:	3afffffa 	bcc	3000dc48 <__aeabi_uidiv+0x40>
+3000dc5c:	e3a02000 	mov	r2, #0
+3000dc60:	e1500001 	cmp	r0, r1
+3000dc64:	20400001 	subcs	r0, r0, r1
+3000dc68:	21822003 	orrcs	r2, r2, r3
+3000dc6c:	e15000a1 	cmp	r0, r1, lsr #1
+3000dc70:	204000a1 	subcs	r0, r0, r1, lsr #1
+3000dc74:	218220a3 	orrcs	r2, r2, r3, lsr #1
+3000dc78:	e1500121 	cmp	r0, r1, lsr #2
+3000dc7c:	20400121 	subcs	r0, r0, r1, lsr #2
+3000dc80:	21822123 	orrcs	r2, r2, r3, lsr #2
+3000dc84:	e15001a1 	cmp	r0, r1, lsr #3
+3000dc88:	204001a1 	subcs	r0, r0, r1, lsr #3
+3000dc8c:	218221a3 	orrcs	r2, r2, r3, lsr #3
+3000dc90:	e3500000 	cmp	r0, #0
+3000dc94:	11b03223 	lsrsne	r3, r3, #4
+3000dc98:	11a01221 	lsrne	r1, r1, #4
+3000dc9c:	1affffef 	bne	3000dc60 <__aeabi_uidiv+0x58>
+3000dca0:	e1a00002 	mov	r0, r2
+3000dca4:	e12fff1e 	bx	lr
+3000dca8:	03a00001 	moveq	r0, #1
+3000dcac:	13a00000 	movne	r0, #0
+3000dcb0:	e12fff1e 	bx	lr
+3000dcb4:	e3510801 	cmp	r1, #65536	; 0x10000
+3000dcb8:	21a01821 	lsrcs	r1, r1, #16
+3000dcbc:	23a02010 	movcs	r2, #16
+3000dcc0:	33a02000 	movcc	r2, #0
+3000dcc4:	e3510c01 	cmp	r1, #256	; 0x100
+3000dcc8:	21a01421 	lsrcs	r1, r1, #8
+3000dccc:	22822008 	addcs	r2, r2, #8
+3000dcd0:	e3510010 	cmp	r1, #16
+3000dcd4:	21a01221 	lsrcs	r1, r1, #4
+3000dcd8:	22822004 	addcs	r2, r2, #4
+3000dcdc:	e3510004 	cmp	r1, #4
+3000dce0:	82822003 	addhi	r2, r2, #3
+3000dce4:	908220a1 	addls	r2, r2, r1, lsr #1
+3000dce8:	e1a00230 	lsr	r0, r0, r2
+3000dcec:	e12fff1e 	bx	lr
+3000dcf0:	e3500000 	cmp	r0, #0
+3000dcf4:	13e00000 	mvnne	r0, #0
+3000dcf8:	ea000007 	b	3000dd1c <__aeabi_idiv0>
 
-3000daf8 <__aeabi_uidivmod>:
-3000daf8:	e3510000 	cmp	r1, #0
-3000dafc:	0afffffa 	beq	3000daec <__aeabi_uidiv+0xe8>
-3000db00:	e92d4003 	push	{r0, r1, lr}
-3000db04:	ebffffbe 	bl	3000da04 <__aeabi_uidiv>
-3000db08:	e8bd4006 	pop	{r1, r2, lr}
-3000db0c:	e0030092 	mul	r3, r2, r0
-3000db10:	e0411003 	sub	r1, r1, r3
-3000db14:	e12fff1e 	bx	lr
+3000dcfc <__aeabi_uidivmod>:
+3000dcfc:	e3510000 	cmp	r1, #0
+3000dd00:	0afffffa 	beq	3000dcf0 <__aeabi_uidiv+0xe8>
+3000dd04:	e92d4003 	push	{r0, r1, lr}
+3000dd08:	ebffffbe 	bl	3000dc08 <__aeabi_uidiv>
+3000dd0c:	e8bd4006 	pop	{r1, r2, lr}
+3000dd10:	e0030092 	mul	r3, r2, r0
+3000dd14:	e0411003 	sub	r1, r1, r3
+3000dd18:	e12fff1e 	bx	lr
 
-3000db18 <__aeabi_idiv0>:
-3000db18:	e12fff1e 	bx	lr
+3000dd1c <__aeabi_idiv0>:
+3000dd1c:	e12fff1e 	bx	lr
 
-3000db1c <__aeabi_frsub>:
-3000db1c:	e2200102 	eor	r0, r0, #-2147483648	; 0x80000000
-3000db20:	ea000000 	b	3000db28 <__addsf3>
+3000dd20 <__aeabi_frsub>:
+3000dd20:	e2200102 	eor	r0, r0, #-2147483648	; 0x80000000
+3000dd24:	ea000000 	b	3000dd2c <__addsf3>
 
-3000db24 <__aeabi_fsub>:
-3000db24:	e2211102 	eor	r1, r1, #-2147483648	; 0x80000000
+3000dd28 <__aeabi_fsub>:
+3000dd28:	e2211102 	eor	r1, r1, #-2147483648	; 0x80000000
 
-3000db28 <__addsf3>:
-3000db28:	e1b02080 	lsls	r2, r0, #1
-3000db2c:	11b03081 	lslsne	r3, r1, #1
-3000db30:	11320003 	teqne	r2, r3
-3000db34:	11f0cc42 	mvnsne	ip, r2, asr #24
-3000db38:	11f0cc43 	mvnsne	ip, r3, asr #24
-3000db3c:	0a000047 	beq	3000dc60 <__addsf3+0x138>
-3000db40:	e1a02c22 	lsr	r2, r2, #24
-3000db44:	e0723c23 	rsbs	r3, r2, r3, lsr #24
-3000db48:	c0822003 	addgt	r2, r2, r3
-3000db4c:	c0201001 	eorgt	r1, r0, r1
-3000db50:	c0210000 	eorgt	r0, r1, r0
-3000db54:	c0201001 	eorgt	r1, r0, r1
-3000db58:	b2633000 	rsblt	r3, r3, #0
-3000db5c:	e3530019 	cmp	r3, #25
-3000db60:	812fff1e 	bxhi	lr
-3000db64:	e3100102 	tst	r0, #-2147483648	; 0x80000000
-3000db68:	e3800502 	orr	r0, r0, #8388608	; 0x800000
-3000db6c:	e3c004ff 	bic	r0, r0, #-16777216	; 0xff000000
-3000db70:	12600000 	rsbne	r0, r0, #0
-3000db74:	e3110102 	tst	r1, #-2147483648	; 0x80000000
-3000db78:	e3811502 	orr	r1, r1, #8388608	; 0x800000
-3000db7c:	e3c114ff 	bic	r1, r1, #-16777216	; 0xff000000
-3000db80:	12611000 	rsbne	r1, r1, #0
-3000db84:	e1320003 	teq	r2, r3
-3000db88:	0a00002e 	beq	3000dc48 <__addsf3+0x120>
-3000db8c:	e2422001 	sub	r2, r2, #1
-3000db90:	e0900351 	adds	r0, r0, r1, asr r3
-3000db94:	e2633020 	rsb	r3, r3, #32
-3000db98:	e1a01311 	lsl	r1, r1, r3
-3000db9c:	e2003102 	and	r3, r0, #-2147483648	; 0x80000000
-3000dba0:	5a000001 	bpl	3000dbac <__addsf3+0x84>
-3000dba4:	e2711000 	rsbs	r1, r1, #0
-3000dba8:	e2e00000 	rsc	r0, r0, #0
-3000dbac:	e3500502 	cmp	r0, #8388608	; 0x800000
-3000dbb0:	3a00000b 	bcc	3000dbe4 <__addsf3+0xbc>
-3000dbb4:	e3500401 	cmp	r0, #16777216	; 0x1000000
-3000dbb8:	3a000004 	bcc	3000dbd0 <__addsf3+0xa8>
-3000dbbc:	e1b000a0 	lsrs	r0, r0, #1
-3000dbc0:	e1a01061 	rrx	r1, r1
-3000dbc4:	e2822001 	add	r2, r2, #1
-3000dbc8:	e35200fe 	cmp	r2, #254	; 0xfe
-3000dbcc:	2a000038 	bcs	3000dcb4 <__addsf3+0x18c>
-3000dbd0:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
-3000dbd4:	e0a00b82 	adc	r0, r0, r2, lsl #23
-3000dbd8:	03c00001 	biceq	r0, r0, #1
-3000dbdc:	e1800003 	orr	r0, r0, r3
-3000dbe0:	e12fff1e 	bx	lr
-3000dbe4:	e1b01081 	lsls	r1, r1, #1
-3000dbe8:	e0a00000 	adc	r0, r0, r0
-3000dbec:	e3100502 	tst	r0, #8388608	; 0x800000
-3000dbf0:	e2422001 	sub	r2, r2, #1
-3000dbf4:	1afffff5 	bne	3000dbd0 <__addsf3+0xa8>
-3000dbf8:	e1b0c620 	lsrs	ip, r0, #12
-3000dbfc:	01a00600 	lsleq	r0, r0, #12
-3000dc00:	0242200c 	subeq	r2, r2, #12
-3000dc04:	e31008ff 	tst	r0, #16711680	; 0xff0000
-3000dc08:	01a00400 	lsleq	r0, r0, #8
-3000dc0c:	02422008 	subeq	r2, r2, #8
-3000dc10:	e310060f 	tst	r0, #15728640	; 0xf00000
-3000dc14:	01a00200 	lsleq	r0, r0, #4
-3000dc18:	02422004 	subeq	r2, r2, #4
-3000dc1c:	e3100503 	tst	r0, #12582912	; 0xc00000
-3000dc20:	01a00100 	lsleq	r0, r0, #2
-3000dc24:	02422002 	subeq	r2, r2, #2
-3000dc28:	e3500502 	cmp	r0, #8388608	; 0x800000
-3000dc2c:	31a00080 	lslcc	r0, r0, #1
-3000dc30:	e2d22000 	sbcs	r2, r2, #0
-3000dc34:	a0800b82 	addge	r0, r0, r2, lsl #23
-3000dc38:	b2622000 	rsblt	r2, r2, #0
-3000dc3c:	a1800003 	orrge	r0, r0, r3
-3000dc40:	b1830230 	orrlt	r0, r3, r0, lsr r2
-3000dc44:	e12fff1e 	bx	lr
-3000dc48:	e3320000 	teq	r2, #0
-3000dc4c:	e2211502 	eor	r1, r1, #8388608	; 0x800000
-3000dc50:	02200502 	eoreq	r0, r0, #8388608	; 0x800000
-3000dc54:	02822001 	addeq	r2, r2, #1
-3000dc58:	12433001 	subne	r3, r3, #1
-3000dc5c:	eaffffca 	b	3000db8c <__addsf3+0x64>
-3000dc60:	e1a03081 	lsl	r3, r1, #1
-3000dc64:	e1f0cc42 	mvns	ip, r2, asr #24
-3000dc68:	11f0cc43 	mvnsne	ip, r3, asr #24
-3000dc6c:	0a000013 	beq	3000dcc0 <__addsf3+0x198>
-3000dc70:	e1320003 	teq	r2, r3
-3000dc74:	0a000002 	beq	3000dc84 <__addsf3+0x15c>
-3000dc78:	e3320000 	teq	r2, #0
-3000dc7c:	01a00001 	moveq	r0, r1
-3000dc80:	e12fff1e 	bx	lr
-3000dc84:	e1300001 	teq	r0, r1
-3000dc88:	13a00000 	movne	r0, #0
-3000dc8c:	112fff1e 	bxne	lr
-3000dc90:	e31204ff 	tst	r2, #-16777216	; 0xff000000
-3000dc94:	1a000002 	bne	3000dca4 <__addsf3+0x17c>
-3000dc98:	e1b00080 	lsls	r0, r0, #1
-3000dc9c:	23800102 	orrcs	r0, r0, #-2147483648	; 0x80000000
-3000dca0:	e12fff1e 	bx	lr
-3000dca4:	e2922402 	adds	r2, r2, #33554432	; 0x2000000
-3000dca8:	32800502 	addcc	r0, r0, #8388608	; 0x800000
-3000dcac:	312fff1e 	bxcc	lr
-3000dcb0:	e2003102 	and	r3, r0, #-2147483648	; 0x80000000
-3000dcb4:	e383047f 	orr	r0, r3, #2130706432	; 0x7f000000
-3000dcb8:	e3800502 	orr	r0, r0, #8388608	; 0x800000
-3000dcbc:	e12fff1e 	bx	lr
-3000dcc0:	e1f02c42 	mvns	r2, r2, asr #24
-3000dcc4:	11a00001 	movne	r0, r1
-3000dcc8:	01f03c43 	mvnseq	r3, r3, asr #24
-3000dccc:	11a01000 	movne	r1, r0
-3000dcd0:	e1b02480 	lsls	r2, r0, #9
-3000dcd4:	01b03481 	lslseq	r3, r1, #9
-3000dcd8:	01300001 	teqeq	r0, r1
-3000dcdc:	13800501 	orrne	r0, r0, #4194304	; 0x400000
-3000dce0:	e12fff1e 	bx	lr
+3000dd2c <__addsf3>:
+3000dd2c:	e1b02080 	lsls	r2, r0, #1
+3000dd30:	11b03081 	lslsne	r3, r1, #1
+3000dd34:	11320003 	teqne	r2, r3
+3000dd38:	11f0cc42 	mvnsne	ip, r2, asr #24
+3000dd3c:	11f0cc43 	mvnsne	ip, r3, asr #24
+3000dd40:	0a000047 	beq	3000de64 <__addsf3+0x138>
+3000dd44:	e1a02c22 	lsr	r2, r2, #24
+3000dd48:	e0723c23 	rsbs	r3, r2, r3, lsr #24
+3000dd4c:	c0822003 	addgt	r2, r2, r3
+3000dd50:	c0201001 	eorgt	r1, r0, r1
+3000dd54:	c0210000 	eorgt	r0, r1, r0
+3000dd58:	c0201001 	eorgt	r1, r0, r1
+3000dd5c:	b2633000 	rsblt	r3, r3, #0
+3000dd60:	e3530019 	cmp	r3, #25
+3000dd64:	812fff1e 	bxhi	lr
+3000dd68:	e3100102 	tst	r0, #-2147483648	; 0x80000000
+3000dd6c:	e3800502 	orr	r0, r0, #8388608	; 0x800000
+3000dd70:	e3c004ff 	bic	r0, r0, #-16777216	; 0xff000000
+3000dd74:	12600000 	rsbne	r0, r0, #0
+3000dd78:	e3110102 	tst	r1, #-2147483648	; 0x80000000
+3000dd7c:	e3811502 	orr	r1, r1, #8388608	; 0x800000
+3000dd80:	e3c114ff 	bic	r1, r1, #-16777216	; 0xff000000
+3000dd84:	12611000 	rsbne	r1, r1, #0
+3000dd88:	e1320003 	teq	r2, r3
+3000dd8c:	0a00002e 	beq	3000de4c <__addsf3+0x120>
+3000dd90:	e2422001 	sub	r2, r2, #1
+3000dd94:	e0900351 	adds	r0, r0, r1, asr r3
+3000dd98:	e2633020 	rsb	r3, r3, #32
+3000dd9c:	e1a01311 	lsl	r1, r1, r3
+3000dda0:	e2003102 	and	r3, r0, #-2147483648	; 0x80000000
+3000dda4:	5a000001 	bpl	3000ddb0 <__addsf3+0x84>
+3000dda8:	e2711000 	rsbs	r1, r1, #0
+3000ddac:	e2e00000 	rsc	r0, r0, #0
+3000ddb0:	e3500502 	cmp	r0, #8388608	; 0x800000
+3000ddb4:	3a00000b 	bcc	3000dde8 <__addsf3+0xbc>
+3000ddb8:	e3500401 	cmp	r0, #16777216	; 0x1000000
+3000ddbc:	3a000004 	bcc	3000ddd4 <__addsf3+0xa8>
+3000ddc0:	e1b000a0 	lsrs	r0, r0, #1
+3000ddc4:	e1a01061 	rrx	r1, r1
+3000ddc8:	e2822001 	add	r2, r2, #1
+3000ddcc:	e35200fe 	cmp	r2, #254	; 0xfe
+3000ddd0:	2a000038 	bcs	3000deb8 <__addsf3+0x18c>
+3000ddd4:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
+3000ddd8:	e0a00b82 	adc	r0, r0, r2, lsl #23
+3000dddc:	03c00001 	biceq	r0, r0, #1
+3000dde0:	e1800003 	orr	r0, r0, r3
+3000dde4:	e12fff1e 	bx	lr
+3000dde8:	e1b01081 	lsls	r1, r1, #1
+3000ddec:	e0a00000 	adc	r0, r0, r0
+3000ddf0:	e3100502 	tst	r0, #8388608	; 0x800000
+3000ddf4:	e2422001 	sub	r2, r2, #1
+3000ddf8:	1afffff5 	bne	3000ddd4 <__addsf3+0xa8>
+3000ddfc:	e1b0c620 	lsrs	ip, r0, #12
+3000de00:	01a00600 	lsleq	r0, r0, #12
+3000de04:	0242200c 	subeq	r2, r2, #12
+3000de08:	e31008ff 	tst	r0, #16711680	; 0xff0000
+3000de0c:	01a00400 	lsleq	r0, r0, #8
+3000de10:	02422008 	subeq	r2, r2, #8
+3000de14:	e310060f 	tst	r0, #15728640	; 0xf00000
+3000de18:	01a00200 	lsleq	r0, r0, #4
+3000de1c:	02422004 	subeq	r2, r2, #4
+3000de20:	e3100503 	tst	r0, #12582912	; 0xc00000
+3000de24:	01a00100 	lsleq	r0, r0, #2
+3000de28:	02422002 	subeq	r2, r2, #2
+3000de2c:	e3500502 	cmp	r0, #8388608	; 0x800000
+3000de30:	31a00080 	lslcc	r0, r0, #1
+3000de34:	e2d22000 	sbcs	r2, r2, #0
+3000de38:	a0800b82 	addge	r0, r0, r2, lsl #23
+3000de3c:	b2622000 	rsblt	r2, r2, #0
+3000de40:	a1800003 	orrge	r0, r0, r3
+3000de44:	b1830230 	orrlt	r0, r3, r0, lsr r2
+3000de48:	e12fff1e 	bx	lr
+3000de4c:	e3320000 	teq	r2, #0
+3000de50:	e2211502 	eor	r1, r1, #8388608	; 0x800000
+3000de54:	02200502 	eoreq	r0, r0, #8388608	; 0x800000
+3000de58:	02822001 	addeq	r2, r2, #1
+3000de5c:	12433001 	subne	r3, r3, #1
+3000de60:	eaffffca 	b	3000dd90 <__addsf3+0x64>
+3000de64:	e1a03081 	lsl	r3, r1, #1
+3000de68:	e1f0cc42 	mvns	ip, r2, asr #24
+3000de6c:	11f0cc43 	mvnsne	ip, r3, asr #24
+3000de70:	0a000013 	beq	3000dec4 <__addsf3+0x198>
+3000de74:	e1320003 	teq	r2, r3
+3000de78:	0a000002 	beq	3000de88 <__addsf3+0x15c>
+3000de7c:	e3320000 	teq	r2, #0
+3000de80:	01a00001 	moveq	r0, r1
+3000de84:	e12fff1e 	bx	lr
+3000de88:	e1300001 	teq	r0, r1
+3000de8c:	13a00000 	movne	r0, #0
+3000de90:	112fff1e 	bxne	lr
+3000de94:	e31204ff 	tst	r2, #-16777216	; 0xff000000
+3000de98:	1a000002 	bne	3000dea8 <__addsf3+0x17c>
+3000de9c:	e1b00080 	lsls	r0, r0, #1
+3000dea0:	23800102 	orrcs	r0, r0, #-2147483648	; 0x80000000
+3000dea4:	e12fff1e 	bx	lr
+3000dea8:	e2922402 	adds	r2, r2, #33554432	; 0x2000000
+3000deac:	32800502 	addcc	r0, r0, #8388608	; 0x800000
+3000deb0:	312fff1e 	bxcc	lr
+3000deb4:	e2003102 	and	r3, r0, #-2147483648	; 0x80000000
+3000deb8:	e383047f 	orr	r0, r3, #2130706432	; 0x7f000000
+3000debc:	e3800502 	orr	r0, r0, #8388608	; 0x800000
+3000dec0:	e12fff1e 	bx	lr
+3000dec4:	e1f02c42 	mvns	r2, r2, asr #24
+3000dec8:	11a00001 	movne	r0, r1
+3000decc:	01f03c43 	mvnseq	r3, r3, asr #24
+3000ded0:	11a01000 	movne	r1, r0
+3000ded4:	e1b02480 	lsls	r2, r0, #9
+3000ded8:	01b03481 	lslseq	r3, r1, #9
+3000dedc:	01300001 	teqeq	r0, r1
+3000dee0:	13800501 	orrne	r0, r0, #4194304	; 0x400000
+3000dee4:	e12fff1e 	bx	lr
 
-3000dce4 <__aeabi_ui2f>:
-3000dce4:	e3a03000 	mov	r3, #0
-3000dce8:	ea000001 	b	3000dcf4 <__aeabi_i2f+0x8>
+3000dee8 <__aeabi_ui2f>:
+3000dee8:	e3a03000 	mov	r3, #0
+3000deec:	ea000001 	b	3000def8 <__aeabi_i2f+0x8>
 
-3000dcec <__aeabi_i2f>:
-3000dcec:	e2103102 	ands	r3, r0, #-2147483648	; 0x80000000
-3000dcf0:	42600000 	rsbmi	r0, r0, #0
-3000dcf4:	e1b0c000 	movs	ip, r0
-3000dcf8:	012fff1e 	bxeq	lr
-3000dcfc:	e383344b 	orr	r3, r3, #1258291200	; 0x4b000000
-3000dd00:	e1a01000 	mov	r1, r0
-3000dd04:	e3a00000 	mov	r0, #0
-3000dd08:	ea00000f 	b	3000dd4c <__aeabi_l2f+0x30>
+3000def0 <__aeabi_i2f>:
+3000def0:	e2103102 	ands	r3, r0, #-2147483648	; 0x80000000
+3000def4:	42600000 	rsbmi	r0, r0, #0
+3000def8:	e1b0c000 	movs	ip, r0
+3000defc:	012fff1e 	bxeq	lr
+3000df00:	e383344b 	orr	r3, r3, #1258291200	; 0x4b000000
+3000df04:	e1a01000 	mov	r1, r0
+3000df08:	e3a00000 	mov	r0, #0
+3000df0c:	ea00000f 	b	3000df50 <__aeabi_l2f+0x30>
 
-3000dd0c <__aeabi_ul2f>:
-3000dd0c:	e1902001 	orrs	r2, r0, r1
-3000dd10:	012fff1e 	bxeq	lr
-3000dd14:	e3a03000 	mov	r3, #0
-3000dd18:	ea000005 	b	3000dd34 <__aeabi_l2f+0x18>
+3000df10 <__aeabi_ul2f>:
+3000df10:	e1902001 	orrs	r2, r0, r1
+3000df14:	012fff1e 	bxeq	lr
+3000df18:	e3a03000 	mov	r3, #0
+3000df1c:	ea000005 	b	3000df38 <__aeabi_l2f+0x18>
 
-3000dd1c <__aeabi_l2f>:
-3000dd1c:	e1902001 	orrs	r2, r0, r1
-3000dd20:	012fff1e 	bxeq	lr
-3000dd24:	e2113102 	ands	r3, r1, #-2147483648	; 0x80000000
-3000dd28:	5a000001 	bpl	3000dd34 <__aeabi_l2f+0x18>
-3000dd2c:	e2700000 	rsbs	r0, r0, #0
-3000dd30:	e2e11000 	rsc	r1, r1, #0
-3000dd34:	e1b0c001 	movs	ip, r1
-3000dd38:	01a0c000 	moveq	ip, r0
-3000dd3c:	01a01000 	moveq	r1, r0
-3000dd40:	03a00000 	moveq	r0, #0
-3000dd44:	e383345b 	orr	r3, r3, #1526726656	; 0x5b000000
-3000dd48:	02433201 	subeq	r3, r3, #268435456	; 0x10000000
-3000dd4c:	e2433502 	sub	r3, r3, #8388608	; 0x800000
-3000dd50:	e3a02017 	mov	r2, #23
-3000dd54:	e35c0801 	cmp	ip, #65536	; 0x10000
-3000dd58:	21a0c82c 	lsrcs	ip, ip, #16
-3000dd5c:	22422010 	subcs	r2, r2, #16
-3000dd60:	e35c0c01 	cmp	ip, #256	; 0x100
-3000dd64:	21a0c42c 	lsrcs	ip, ip, #8
-3000dd68:	22422008 	subcs	r2, r2, #8
-3000dd6c:	e35c0010 	cmp	ip, #16
-3000dd70:	21a0c22c 	lsrcs	ip, ip, #4
-3000dd74:	22422004 	subcs	r2, r2, #4
-3000dd78:	e35c0004 	cmp	ip, #4
-3000dd7c:	22422002 	subcs	r2, r2, #2
-3000dd80:	304220ac 	subcc	r2, r2, ip, lsr #1
-3000dd84:	e05221ac 	subs	r2, r2, ip, lsr #3
-3000dd88:	e0433b82 	sub	r3, r3, r2, lsl #23
-3000dd8c:	ba000006 	blt	3000ddac <__aeabi_l2f+0x90>
-3000dd90:	e0833211 	add	r3, r3, r1, lsl r2
-3000dd94:	e1a0c210 	lsl	ip, r0, r2
-3000dd98:	e2622020 	rsb	r2, r2, #32
-3000dd9c:	e35c0102 	cmp	ip, #-2147483648	; 0x80000000
-3000dda0:	e0a30230 	adc	r0, r3, r0, lsr r2
-3000dda4:	03c00001 	biceq	r0, r0, #1
-3000dda8:	e12fff1e 	bx	lr
-3000ddac:	e2822020 	add	r2, r2, #32
-3000ddb0:	e1a0c211 	lsl	ip, r1, r2
-3000ddb4:	e2622020 	rsb	r2, r2, #32
-3000ddb8:	e190008c 	orrs	r0, r0, ip, lsl #1
-3000ddbc:	e0a30231 	adc	r0, r3, r1, lsr r2
-3000ddc0:	01c00fac 	biceq	r0, r0, ip, lsr #31
-3000ddc4:	e12fff1e 	bx	lr
+3000df20 <__aeabi_l2f>:
+3000df20:	e1902001 	orrs	r2, r0, r1
+3000df24:	012fff1e 	bxeq	lr
+3000df28:	e2113102 	ands	r3, r1, #-2147483648	; 0x80000000
+3000df2c:	5a000001 	bpl	3000df38 <__aeabi_l2f+0x18>
+3000df30:	e2700000 	rsbs	r0, r0, #0
+3000df34:	e2e11000 	rsc	r1, r1, #0
+3000df38:	e1b0c001 	movs	ip, r1
+3000df3c:	01a0c000 	moveq	ip, r0
+3000df40:	01a01000 	moveq	r1, r0
+3000df44:	03a00000 	moveq	r0, #0
+3000df48:	e383345b 	orr	r3, r3, #1526726656	; 0x5b000000
+3000df4c:	02433201 	subeq	r3, r3, #268435456	; 0x10000000
+3000df50:	e2433502 	sub	r3, r3, #8388608	; 0x800000
+3000df54:	e3a02017 	mov	r2, #23
+3000df58:	e35c0801 	cmp	ip, #65536	; 0x10000
+3000df5c:	21a0c82c 	lsrcs	ip, ip, #16
+3000df60:	22422010 	subcs	r2, r2, #16
+3000df64:	e35c0c01 	cmp	ip, #256	; 0x100
+3000df68:	21a0c42c 	lsrcs	ip, ip, #8
+3000df6c:	22422008 	subcs	r2, r2, #8
+3000df70:	e35c0010 	cmp	ip, #16
+3000df74:	21a0c22c 	lsrcs	ip, ip, #4
+3000df78:	22422004 	subcs	r2, r2, #4
+3000df7c:	e35c0004 	cmp	ip, #4
+3000df80:	22422002 	subcs	r2, r2, #2
+3000df84:	304220ac 	subcc	r2, r2, ip, lsr #1
+3000df88:	e05221ac 	subs	r2, r2, ip, lsr #3
+3000df8c:	e0433b82 	sub	r3, r3, r2, lsl #23
+3000df90:	ba000006 	blt	3000dfb0 <__aeabi_l2f+0x90>
+3000df94:	e0833211 	add	r3, r3, r1, lsl r2
+3000df98:	e1a0c210 	lsl	ip, r0, r2
+3000df9c:	e2622020 	rsb	r2, r2, #32
+3000dfa0:	e35c0102 	cmp	ip, #-2147483648	; 0x80000000
+3000dfa4:	e0a30230 	adc	r0, r3, r0, lsr r2
+3000dfa8:	03c00001 	biceq	r0, r0, #1
+3000dfac:	e12fff1e 	bx	lr
+3000dfb0:	e2822020 	add	r2, r2, #32
+3000dfb4:	e1a0c211 	lsl	ip, r1, r2
+3000dfb8:	e2622020 	rsb	r2, r2, #32
+3000dfbc:	e190008c 	orrs	r0, r0, ip, lsl #1
+3000dfc0:	e0a30231 	adc	r0, r3, r1, lsr r2
+3000dfc4:	01c00fac 	biceq	r0, r0, ip, lsr #31
+3000dfc8:	e12fff1e 	bx	lr
 
-3000ddc8 <__aeabi_fmul>:
-3000ddc8:	e3a0c0ff 	mov	ip, #255	; 0xff
-3000ddcc:	e01c2ba0 	ands	r2, ip, r0, lsr #23
-3000ddd0:	101c3ba1 	andsne	r3, ip, r1, lsr #23
-3000ddd4:	1132000c 	teqne	r2, ip
-3000ddd8:	1133000c 	teqne	r3, ip
-3000dddc:	0a00003e 	beq	3000dedc <__aeabi_fmul+0x114>
-3000dde0:	e0822003 	add	r2, r2, r3
-3000dde4:	e020c001 	eor	ip, r0, r1
-3000dde8:	e1b00480 	lsls	r0, r0, #9
-3000ddec:	11b01481 	lslsne	r1, r1, #9
-3000ddf0:	0a000010 	beq	3000de38 <__aeabi_fmul+0x70>
-3000ddf4:	e3a03302 	mov	r3, #134217728	; 0x8000000
-3000ddf8:	e18302a0 	orr	r0, r3, r0, lsr #5
-3000ddfc:	e18312a1 	orr	r1, r3, r1, lsr #5
-3000de00:	e0813190 	umull	r3, r1, r0, r1
-3000de04:	e20c0102 	and	r0, ip, #-2147483648	; 0x80000000
-3000de08:	e3510502 	cmp	r1, #8388608	; 0x800000
-3000de0c:	31a01081 	lslcc	r1, r1, #1
-3000de10:	31811fa3 	orrcc	r1, r1, r3, lsr #31
-3000de14:	31a03083 	lslcc	r3, r3, #1
-3000de18:	e1800001 	orr	r0, r0, r1
-3000de1c:	e2c2207f 	sbc	r2, r2, #127	; 0x7f
-3000de20:	e35200fd 	cmp	r2, #253	; 0xfd
-3000de24:	8a00000f 	bhi	3000de68 <__aeabi_fmul+0xa0>
-3000de28:	e3530102 	cmp	r3, #-2147483648	; 0x80000000
-3000de2c:	e0a00b82 	adc	r0, r0, r2, lsl #23
-3000de30:	03c00001 	biceq	r0, r0, #1
-3000de34:	e12fff1e 	bx	lr
-3000de38:	e3300000 	teq	r0, #0
-3000de3c:	e20cc102 	and	ip, ip, #-2147483648	; 0x80000000
-3000de40:	01a01481 	lsleq	r1, r1, #9
-3000de44:	e18c04a0 	orr	r0, ip, r0, lsr #9
-3000de48:	e18004a1 	orr	r0, r0, r1, lsr #9
-3000de4c:	e252207f 	subs	r2, r2, #127	; 0x7f
-3000de50:	c27230ff 	rsbsgt	r3, r2, #255	; 0xff
-3000de54:	c1800b82 	orrgt	r0, r0, r2, lsl #23
-3000de58:	c12fff1e 	bxgt	lr
-3000de5c:	e3800502 	orr	r0, r0, #8388608	; 0x800000
-3000de60:	e3a03000 	mov	r3, #0
-3000de64:	e2522001 	subs	r2, r2, #1
-3000de68:	ca000035 	bgt	3000df44 <__aeabi_fmul+0x17c>
-3000de6c:	e3720019 	cmn	r2, #25
-3000de70:	d2000102 	andle	r0, r0, #-2147483648	; 0x80000000
-3000de74:	d12fff1e 	bxle	lr
-3000de78:	e2622000 	rsb	r2, r2, #0
-3000de7c:	e1b01080 	lsls	r1, r0, #1
-3000de80:	e1a01231 	lsr	r1, r1, r2
-3000de84:	e2622020 	rsb	r2, r2, #32
-3000de88:	e1a0c210 	lsl	ip, r0, r2
-3000de8c:	e1b00061 	rrxs	r0, r1
-3000de90:	e2a00000 	adc	r0, r0, #0
-3000de94:	e193308c 	orrs	r3, r3, ip, lsl #1
-3000de98:	01c00fac 	biceq	r0, r0, ip, lsr #31
-3000de9c:	e12fff1e 	bx	lr
-3000dea0:	e3320000 	teq	r2, #0
-3000dea4:	e200c102 	and	ip, r0, #-2147483648	; 0x80000000
-3000dea8:	01a00080 	lsleq	r0, r0, #1
-3000deac:	03100502 	tsteq	r0, #8388608	; 0x800000
-3000deb0:	02422001 	subeq	r2, r2, #1
-3000deb4:	0afffffb 	beq	3000dea8 <__aeabi_fmul+0xe0>
-3000deb8:	e180000c 	orr	r0, r0, ip
-3000debc:	e3330000 	teq	r3, #0
-3000dec0:	e201c102 	and	ip, r1, #-2147483648	; 0x80000000
-3000dec4:	01a01081 	lsleq	r1, r1, #1
-3000dec8:	03110502 	tsteq	r1, #8388608	; 0x800000
-3000decc:	02433001 	subeq	r3, r3, #1
-3000ded0:	0afffffb 	beq	3000dec4 <__aeabi_fmul+0xfc>
-3000ded4:	e181100c 	orr	r1, r1, ip
-3000ded8:	eaffffc0 	b	3000dde0 <__aeabi_fmul+0x18>
-3000dedc:	e00c3ba1 	and	r3, ip, r1, lsr #23
-3000dee0:	e132000c 	teq	r2, ip
-3000dee4:	1133000c 	teqne	r3, ip
-3000dee8:	0a000005 	beq	3000df04 <__aeabi_fmul+0x13c>
-3000deec:	e3d0c102 	bics	ip, r0, #-2147483648	; 0x80000000
-3000def0:	13d1c102 	bicsne	ip, r1, #-2147483648	; 0x80000000
-3000def4:	1affffe9 	bne	3000dea0 <__aeabi_fmul+0xd8>
-3000def8:	e0200001 	eor	r0, r0, r1
-3000defc:	e2000102 	and	r0, r0, #-2147483648	; 0x80000000
-3000df00:	e12fff1e 	bx	lr
-3000df04:	e3300000 	teq	r0, #0
-3000df08:	13300102 	teqne	r0, #-2147483648	; 0x80000000
-3000df0c:	01a00001 	moveq	r0, r1
-3000df10:	13310000 	teqne	r1, #0
-3000df14:	13310102 	teqne	r1, #-2147483648	; 0x80000000
-3000df18:	0a00000d 	beq	3000df54 <__aeabi_fmul+0x18c>
-3000df1c:	e132000c 	teq	r2, ip
-3000df20:	1a000001 	bne	3000df2c <__aeabi_fmul+0x164>
-3000df24:	e1b02480 	lsls	r2, r0, #9
-3000df28:	1a000009 	bne	3000df54 <__aeabi_fmul+0x18c>
-3000df2c:	e133000c 	teq	r3, ip
-3000df30:	1a000002 	bne	3000df40 <__aeabi_fmul+0x178>
-3000df34:	e1b03481 	lsls	r3, r1, #9
-3000df38:	11a00001 	movne	r0, r1
-3000df3c:	1a000004 	bne	3000df54 <__aeabi_fmul+0x18c>
-3000df40:	e0200001 	eor	r0, r0, r1
-3000df44:	e2000102 	and	r0, r0, #-2147483648	; 0x80000000
-3000df48:	e380047f 	orr	r0, r0, #2130706432	; 0x7f000000
-3000df4c:	e3800502 	orr	r0, r0, #8388608	; 0x800000
-3000df50:	e12fff1e 	bx	lr
-3000df54:	e380047f 	orr	r0, r0, #2130706432	; 0x7f000000
-3000df58:	e3800503 	orr	r0, r0, #12582912	; 0xc00000
-3000df5c:	e12fff1e 	bx	lr
+3000dfcc <__aeabi_fmul>:
+3000dfcc:	e3a0c0ff 	mov	ip, #255	; 0xff
+3000dfd0:	e01c2ba0 	ands	r2, ip, r0, lsr #23
+3000dfd4:	101c3ba1 	andsne	r3, ip, r1, lsr #23
+3000dfd8:	1132000c 	teqne	r2, ip
+3000dfdc:	1133000c 	teqne	r3, ip
+3000dfe0:	0a00003e 	beq	3000e0e0 <__aeabi_fmul+0x114>
+3000dfe4:	e0822003 	add	r2, r2, r3
+3000dfe8:	e020c001 	eor	ip, r0, r1
+3000dfec:	e1b00480 	lsls	r0, r0, #9
+3000dff0:	11b01481 	lslsne	r1, r1, #9
+3000dff4:	0a000010 	beq	3000e03c <__aeabi_fmul+0x70>
+3000dff8:	e3a03302 	mov	r3, #134217728	; 0x8000000
+3000dffc:	e18302a0 	orr	r0, r3, r0, lsr #5
+3000e000:	e18312a1 	orr	r1, r3, r1, lsr #5
+3000e004:	e0813190 	umull	r3, r1, r0, r1
+3000e008:	e20c0102 	and	r0, ip, #-2147483648	; 0x80000000
+3000e00c:	e3510502 	cmp	r1, #8388608	; 0x800000
+3000e010:	31a01081 	lslcc	r1, r1, #1
+3000e014:	31811fa3 	orrcc	r1, r1, r3, lsr #31
+3000e018:	31a03083 	lslcc	r3, r3, #1
+3000e01c:	e1800001 	orr	r0, r0, r1
+3000e020:	e2c2207f 	sbc	r2, r2, #127	; 0x7f
+3000e024:	e35200fd 	cmp	r2, #253	; 0xfd
+3000e028:	8a00000f 	bhi	3000e06c <__aeabi_fmul+0xa0>
+3000e02c:	e3530102 	cmp	r3, #-2147483648	; 0x80000000
+3000e030:	e0a00b82 	adc	r0, r0, r2, lsl #23
+3000e034:	03c00001 	biceq	r0, r0, #1
+3000e038:	e12fff1e 	bx	lr
+3000e03c:	e3300000 	teq	r0, #0
+3000e040:	e20cc102 	and	ip, ip, #-2147483648	; 0x80000000
+3000e044:	01a01481 	lsleq	r1, r1, #9
+3000e048:	e18c04a0 	orr	r0, ip, r0, lsr #9
+3000e04c:	e18004a1 	orr	r0, r0, r1, lsr #9
+3000e050:	e252207f 	subs	r2, r2, #127	; 0x7f
+3000e054:	c27230ff 	rsbsgt	r3, r2, #255	; 0xff
+3000e058:	c1800b82 	orrgt	r0, r0, r2, lsl #23
+3000e05c:	c12fff1e 	bxgt	lr
+3000e060:	e3800502 	orr	r0, r0, #8388608	; 0x800000
+3000e064:	e3a03000 	mov	r3, #0
+3000e068:	e2522001 	subs	r2, r2, #1
+3000e06c:	ca000035 	bgt	3000e148 <__aeabi_fmul+0x17c>
+3000e070:	e3720019 	cmn	r2, #25
+3000e074:	d2000102 	andle	r0, r0, #-2147483648	; 0x80000000
+3000e078:	d12fff1e 	bxle	lr
+3000e07c:	e2622000 	rsb	r2, r2, #0
+3000e080:	e1b01080 	lsls	r1, r0, #1
+3000e084:	e1a01231 	lsr	r1, r1, r2
+3000e088:	e2622020 	rsb	r2, r2, #32
+3000e08c:	e1a0c210 	lsl	ip, r0, r2
+3000e090:	e1b00061 	rrxs	r0, r1
+3000e094:	e2a00000 	adc	r0, r0, #0
+3000e098:	e193308c 	orrs	r3, r3, ip, lsl #1
+3000e09c:	01c00fac 	biceq	r0, r0, ip, lsr #31
+3000e0a0:	e12fff1e 	bx	lr
+3000e0a4:	e3320000 	teq	r2, #0
+3000e0a8:	e200c102 	and	ip, r0, #-2147483648	; 0x80000000
+3000e0ac:	01a00080 	lsleq	r0, r0, #1
+3000e0b0:	03100502 	tsteq	r0, #8388608	; 0x800000
+3000e0b4:	02422001 	subeq	r2, r2, #1
+3000e0b8:	0afffffb 	beq	3000e0ac <__aeabi_fmul+0xe0>
+3000e0bc:	e180000c 	orr	r0, r0, ip
+3000e0c0:	e3330000 	teq	r3, #0
+3000e0c4:	e201c102 	and	ip, r1, #-2147483648	; 0x80000000
+3000e0c8:	01a01081 	lsleq	r1, r1, #1
+3000e0cc:	03110502 	tsteq	r1, #8388608	; 0x800000
+3000e0d0:	02433001 	subeq	r3, r3, #1
+3000e0d4:	0afffffb 	beq	3000e0c8 <__aeabi_fmul+0xfc>
+3000e0d8:	e181100c 	orr	r1, r1, ip
+3000e0dc:	eaffffc0 	b	3000dfe4 <__aeabi_fmul+0x18>
+3000e0e0:	e00c3ba1 	and	r3, ip, r1, lsr #23
+3000e0e4:	e132000c 	teq	r2, ip
+3000e0e8:	1133000c 	teqne	r3, ip
+3000e0ec:	0a000005 	beq	3000e108 <__aeabi_fmul+0x13c>
+3000e0f0:	e3d0c102 	bics	ip, r0, #-2147483648	; 0x80000000
+3000e0f4:	13d1c102 	bicsne	ip, r1, #-2147483648	; 0x80000000
+3000e0f8:	1affffe9 	bne	3000e0a4 <__aeabi_fmul+0xd8>
+3000e0fc:	e0200001 	eor	r0, r0, r1
+3000e100:	e2000102 	and	r0, r0, #-2147483648	; 0x80000000
+3000e104:	e12fff1e 	bx	lr
+3000e108:	e3300000 	teq	r0, #0
+3000e10c:	13300102 	teqne	r0, #-2147483648	; 0x80000000
+3000e110:	01a00001 	moveq	r0, r1
+3000e114:	13310000 	teqne	r1, #0
+3000e118:	13310102 	teqne	r1, #-2147483648	; 0x80000000
+3000e11c:	0a00000d 	beq	3000e158 <__aeabi_fmul+0x18c>
+3000e120:	e132000c 	teq	r2, ip
+3000e124:	1a000001 	bne	3000e130 <__aeabi_fmul+0x164>
+3000e128:	e1b02480 	lsls	r2, r0, #9
+3000e12c:	1a000009 	bne	3000e158 <__aeabi_fmul+0x18c>
+3000e130:	e133000c 	teq	r3, ip
+3000e134:	1a000002 	bne	3000e144 <__aeabi_fmul+0x178>
+3000e138:	e1b03481 	lsls	r3, r1, #9
+3000e13c:	11a00001 	movne	r0, r1
+3000e140:	1a000004 	bne	3000e158 <__aeabi_fmul+0x18c>
+3000e144:	e0200001 	eor	r0, r0, r1
+3000e148:	e2000102 	and	r0, r0, #-2147483648	; 0x80000000
+3000e14c:	e380047f 	orr	r0, r0, #2130706432	; 0x7f000000
+3000e150:	e3800502 	orr	r0, r0, #8388608	; 0x800000
+3000e154:	e12fff1e 	bx	lr
+3000e158:	e380047f 	orr	r0, r0, #2130706432	; 0x7f000000
+3000e15c:	e3800503 	orr	r0, r0, #12582912	; 0xc00000
+3000e160:	e12fff1e 	bx	lr
 
-3000df60 <__aeabi_fdiv>:
-3000df60:	e3a0c0ff 	mov	ip, #255	; 0xff
-3000df64:	e01c2ba0 	ands	r2, ip, r0, lsr #23
-3000df68:	101c3ba1 	andsne	r3, ip, r1, lsr #23
-3000df6c:	1132000c 	teqne	r2, ip
-3000df70:	1133000c 	teqne	r3, ip
-3000df74:	0a00003a 	beq	3000e064 <__aeabi_fdiv+0x104>
-3000df78:	e0422003 	sub	r2, r2, r3
-3000df7c:	e020c001 	eor	ip, r0, r1
-3000df80:	e1b01481 	lsls	r1, r1, #9
-3000df84:	e1a00480 	lsl	r0, r0, #9
-3000df88:	0a00001c 	beq	3000e000 <__aeabi_fdiv+0xa0>
-3000df8c:	e3a03201 	mov	r3, #268435456	; 0x10000000
-3000df90:	e1831221 	orr	r1, r3, r1, lsr #4
-3000df94:	e1833220 	orr	r3, r3, r0, lsr #4
-3000df98:	e20c0102 	and	r0, ip, #-2147483648	; 0x80000000
-3000df9c:	e1530001 	cmp	r3, r1
-3000dfa0:	31a03083 	lslcc	r3, r3, #1
-3000dfa4:	e2a2207d 	adc	r2, r2, #125	; 0x7d
-3000dfa8:	e3a0c502 	mov	ip, #8388608	; 0x800000
-3000dfac:	e1530001 	cmp	r3, r1
-3000dfb0:	20433001 	subcs	r3, r3, r1
-3000dfb4:	2180000c 	orrcs	r0, r0, ip
-3000dfb8:	e15300a1 	cmp	r3, r1, lsr #1
-3000dfbc:	204330a1 	subcs	r3, r3, r1, lsr #1
-3000dfc0:	218000ac 	orrcs	r0, r0, ip, lsr #1
-3000dfc4:	e1530121 	cmp	r3, r1, lsr #2
-3000dfc8:	20433121 	subcs	r3, r3, r1, lsr #2
-3000dfcc:	2180012c 	orrcs	r0, r0, ip, lsr #2
-3000dfd0:	e15301a1 	cmp	r3, r1, lsr #3
-3000dfd4:	204331a1 	subcs	r3, r3, r1, lsr #3
-3000dfd8:	218001ac 	orrcs	r0, r0, ip, lsr #3
-3000dfdc:	e1b03203 	lsls	r3, r3, #4
-3000dfe0:	11b0c22c 	lsrsne	ip, ip, #4
-3000dfe4:	1afffff0 	bne	3000dfac <__aeabi_fdiv+0x4c>
-3000dfe8:	e35200fd 	cmp	r2, #253	; 0xfd
-3000dfec:	8affff9d 	bhi	3000de68 <__aeabi_fmul+0xa0>
-3000dff0:	e1530001 	cmp	r3, r1
-3000dff4:	e0a00b82 	adc	r0, r0, r2, lsl #23
-3000dff8:	03c00001 	biceq	r0, r0, #1
-3000dffc:	e12fff1e 	bx	lr
-3000e000:	e20cc102 	and	ip, ip, #-2147483648	; 0x80000000
-3000e004:	e18c04a0 	orr	r0, ip, r0, lsr #9
-3000e008:	e292207f 	adds	r2, r2, #127	; 0x7f
-3000e00c:	c27230ff 	rsbsgt	r3, r2, #255	; 0xff
-3000e010:	c1800b82 	orrgt	r0, r0, r2, lsl #23
-3000e014:	c12fff1e 	bxgt	lr
-3000e018:	e3800502 	orr	r0, r0, #8388608	; 0x800000
-3000e01c:	e3a03000 	mov	r3, #0
-3000e020:	e2522001 	subs	r2, r2, #1
-3000e024:	eaffff8f 	b	3000de68 <__aeabi_fmul+0xa0>
-3000e028:	e3320000 	teq	r2, #0
-3000e02c:	e200c102 	and	ip, r0, #-2147483648	; 0x80000000
-3000e030:	01a00080 	lsleq	r0, r0, #1
-3000e034:	03100502 	tsteq	r0, #8388608	; 0x800000
-3000e038:	02422001 	subeq	r2, r2, #1
-3000e03c:	0afffffb 	beq	3000e030 <__aeabi_fdiv+0xd0>
-3000e040:	e180000c 	orr	r0, r0, ip
-3000e044:	e3330000 	teq	r3, #0
-3000e048:	e201c102 	and	ip, r1, #-2147483648	; 0x80000000
-3000e04c:	01a01081 	lsleq	r1, r1, #1
-3000e050:	03110502 	tsteq	r1, #8388608	; 0x800000
-3000e054:	02433001 	subeq	r3, r3, #1
-3000e058:	0afffffb 	beq	3000e04c <__aeabi_fdiv+0xec>
-3000e05c:	e181100c 	orr	r1, r1, ip
-3000e060:	eaffffc4 	b	3000df78 <__aeabi_fdiv+0x18>
-3000e064:	e00c3ba1 	and	r3, ip, r1, lsr #23
-3000e068:	e132000c 	teq	r2, ip
-3000e06c:	1a000005 	bne	3000e088 <__aeabi_fdiv+0x128>
-3000e070:	e1b02480 	lsls	r2, r0, #9
-3000e074:	1affffb6 	bne	3000df54 <__aeabi_fmul+0x18c>
-3000e078:	e133000c 	teq	r3, ip
-3000e07c:	1affffaf 	bne	3000df40 <__aeabi_fmul+0x178>
-3000e080:	e1a00001 	mov	r0, r1
-3000e084:	eaffffb2 	b	3000df54 <__aeabi_fmul+0x18c>
-3000e088:	e133000c 	teq	r3, ip
-3000e08c:	1a000003 	bne	3000e0a0 <__aeabi_fdiv+0x140>
-3000e090:	e1b03481 	lsls	r3, r1, #9
-3000e094:	0affff97 	beq	3000def8 <__aeabi_fmul+0x130>
-3000e098:	e1a00001 	mov	r0, r1
-3000e09c:	eaffffac 	b	3000df54 <__aeabi_fmul+0x18c>
-3000e0a0:	e3d0c102 	bics	ip, r0, #-2147483648	; 0x80000000
-3000e0a4:	13d1c102 	bicsne	ip, r1, #-2147483648	; 0x80000000
-3000e0a8:	1affffde 	bne	3000e028 <__aeabi_fdiv+0xc8>
-3000e0ac:	e3d02102 	bics	r2, r0, #-2147483648	; 0x80000000
-3000e0b0:	1affffa2 	bne	3000df40 <__aeabi_fmul+0x178>
-3000e0b4:	e3d13102 	bics	r3, r1, #-2147483648	; 0x80000000
-3000e0b8:	1affff8e 	bne	3000def8 <__aeabi_fmul+0x130>
-3000e0bc:	eaffffa4 	b	3000df54 <__aeabi_fmul+0x18c>
+3000e164 <__aeabi_fdiv>:
+3000e164:	e3a0c0ff 	mov	ip, #255	; 0xff
+3000e168:	e01c2ba0 	ands	r2, ip, r0, lsr #23
+3000e16c:	101c3ba1 	andsne	r3, ip, r1, lsr #23
+3000e170:	1132000c 	teqne	r2, ip
+3000e174:	1133000c 	teqne	r3, ip
+3000e178:	0a00003a 	beq	3000e268 <__aeabi_fdiv+0x104>
+3000e17c:	e0422003 	sub	r2, r2, r3
+3000e180:	e020c001 	eor	ip, r0, r1
+3000e184:	e1b01481 	lsls	r1, r1, #9
+3000e188:	e1a00480 	lsl	r0, r0, #9
+3000e18c:	0a00001c 	beq	3000e204 <__aeabi_fdiv+0xa0>
+3000e190:	e3a03201 	mov	r3, #268435456	; 0x10000000
+3000e194:	e1831221 	orr	r1, r3, r1, lsr #4
+3000e198:	e1833220 	orr	r3, r3, r0, lsr #4
+3000e19c:	e20c0102 	and	r0, ip, #-2147483648	; 0x80000000
+3000e1a0:	e1530001 	cmp	r3, r1
+3000e1a4:	31a03083 	lslcc	r3, r3, #1
+3000e1a8:	e2a2207d 	adc	r2, r2, #125	; 0x7d
+3000e1ac:	e3a0c502 	mov	ip, #8388608	; 0x800000
+3000e1b0:	e1530001 	cmp	r3, r1
+3000e1b4:	20433001 	subcs	r3, r3, r1
+3000e1b8:	2180000c 	orrcs	r0, r0, ip
+3000e1bc:	e15300a1 	cmp	r3, r1, lsr #1
+3000e1c0:	204330a1 	subcs	r3, r3, r1, lsr #1
+3000e1c4:	218000ac 	orrcs	r0, r0, ip, lsr #1
+3000e1c8:	e1530121 	cmp	r3, r1, lsr #2
+3000e1cc:	20433121 	subcs	r3, r3, r1, lsr #2
+3000e1d0:	2180012c 	orrcs	r0, r0, ip, lsr #2
+3000e1d4:	e15301a1 	cmp	r3, r1, lsr #3
+3000e1d8:	204331a1 	subcs	r3, r3, r1, lsr #3
+3000e1dc:	218001ac 	orrcs	r0, r0, ip, lsr #3
+3000e1e0:	e1b03203 	lsls	r3, r3, #4
+3000e1e4:	11b0c22c 	lsrsne	ip, ip, #4
+3000e1e8:	1afffff0 	bne	3000e1b0 <__aeabi_fdiv+0x4c>
+3000e1ec:	e35200fd 	cmp	r2, #253	; 0xfd
+3000e1f0:	8affff9d 	bhi	3000e06c <__aeabi_fmul+0xa0>
+3000e1f4:	e1530001 	cmp	r3, r1
+3000e1f8:	e0a00b82 	adc	r0, r0, r2, lsl #23
+3000e1fc:	03c00001 	biceq	r0, r0, #1
+3000e200:	e12fff1e 	bx	lr
+3000e204:	e20cc102 	and	ip, ip, #-2147483648	; 0x80000000
+3000e208:	e18c04a0 	orr	r0, ip, r0, lsr #9
+3000e20c:	e292207f 	adds	r2, r2, #127	; 0x7f
+3000e210:	c27230ff 	rsbsgt	r3, r2, #255	; 0xff
+3000e214:	c1800b82 	orrgt	r0, r0, r2, lsl #23
+3000e218:	c12fff1e 	bxgt	lr
+3000e21c:	e3800502 	orr	r0, r0, #8388608	; 0x800000
+3000e220:	e3a03000 	mov	r3, #0
+3000e224:	e2522001 	subs	r2, r2, #1
+3000e228:	eaffff8f 	b	3000e06c <__aeabi_fmul+0xa0>
+3000e22c:	e3320000 	teq	r2, #0
+3000e230:	e200c102 	and	ip, r0, #-2147483648	; 0x80000000
+3000e234:	01a00080 	lsleq	r0, r0, #1
+3000e238:	03100502 	tsteq	r0, #8388608	; 0x800000
+3000e23c:	02422001 	subeq	r2, r2, #1
+3000e240:	0afffffb 	beq	3000e234 <__aeabi_fdiv+0xd0>
+3000e244:	e180000c 	orr	r0, r0, ip
+3000e248:	e3330000 	teq	r3, #0
+3000e24c:	e201c102 	and	ip, r1, #-2147483648	; 0x80000000
+3000e250:	01a01081 	lsleq	r1, r1, #1
+3000e254:	03110502 	tsteq	r1, #8388608	; 0x800000
+3000e258:	02433001 	subeq	r3, r3, #1
+3000e25c:	0afffffb 	beq	3000e250 <__aeabi_fdiv+0xec>
+3000e260:	e181100c 	orr	r1, r1, ip
+3000e264:	eaffffc4 	b	3000e17c <__aeabi_fdiv+0x18>
+3000e268:	e00c3ba1 	and	r3, ip, r1, lsr #23
+3000e26c:	e132000c 	teq	r2, ip
+3000e270:	1a000005 	bne	3000e28c <__aeabi_fdiv+0x128>
+3000e274:	e1b02480 	lsls	r2, r0, #9
+3000e278:	1affffb6 	bne	3000e158 <__aeabi_fmul+0x18c>
+3000e27c:	e133000c 	teq	r3, ip
+3000e280:	1affffaf 	bne	3000e144 <__aeabi_fmul+0x178>
+3000e284:	e1a00001 	mov	r0, r1
+3000e288:	eaffffb2 	b	3000e158 <__aeabi_fmul+0x18c>
+3000e28c:	e133000c 	teq	r3, ip
+3000e290:	1a000003 	bne	3000e2a4 <__aeabi_fdiv+0x140>
+3000e294:	e1b03481 	lsls	r3, r1, #9
+3000e298:	0affff97 	beq	3000e0fc <__aeabi_fmul+0x130>
+3000e29c:	e1a00001 	mov	r0, r1
+3000e2a0:	eaffffac 	b	3000e158 <__aeabi_fmul+0x18c>
+3000e2a4:	e3d0c102 	bics	ip, r0, #-2147483648	; 0x80000000
+3000e2a8:	13d1c102 	bicsne	ip, r1, #-2147483648	; 0x80000000
+3000e2ac:	1affffde 	bne	3000e22c <__aeabi_fdiv+0xc8>
+3000e2b0:	e3d02102 	bics	r2, r0, #-2147483648	; 0x80000000
+3000e2b4:	1affffa2 	bne	3000e144 <__aeabi_fmul+0x178>
+3000e2b8:	e3d13102 	bics	r3, r1, #-2147483648	; 0x80000000
+3000e2bc:	1affff8e 	bne	3000e0fc <__aeabi_fmul+0x130>
+3000e2c0:	eaffffa4 	b	3000e158 <__aeabi_fmul+0x18c>
 
-3000e0c0 <__gesf2>:
-3000e0c0:	e3e0c000 	mvn	ip, #0
-3000e0c4:	ea000002 	b	3000e0d4 <__cmpsf2+0x4>
+3000e2c4 <__gesf2>:
+3000e2c4:	e3e0c000 	mvn	ip, #0
+3000e2c8:	ea000002 	b	3000e2d8 <__cmpsf2+0x4>
 
-3000e0c8 <__lesf2>:
-3000e0c8:	e3a0c001 	mov	ip, #1
-3000e0cc:	ea000000 	b	3000e0d4 <__cmpsf2+0x4>
+3000e2cc <__lesf2>:
+3000e2cc:	e3a0c001 	mov	ip, #1
+3000e2d0:	ea000000 	b	3000e2d8 <__cmpsf2+0x4>
 
-3000e0d0 <__cmpsf2>:
-3000e0d0:	e3a0c001 	mov	ip, #1
-3000e0d4:	e52dc004 	push	{ip}		; (str ip, [sp, #-4]!)
-3000e0d8:	e1a02080 	lsl	r2, r0, #1
-3000e0dc:	e1a03081 	lsl	r3, r1, #1
-3000e0e0:	e1f0cc42 	mvns	ip, r2, asr #24
-3000e0e4:	11f0cc43 	mvnsne	ip, r3, asr #24
-3000e0e8:	0a000007 	beq	3000e10c <__cmpsf2+0x3c>
-3000e0ec:	e28dd004 	add	sp, sp, #4
-3000e0f0:	e192c0a3 	orrs	ip, r2, r3, lsr #1
-3000e0f4:	11300001 	teqne	r0, r1
-3000e0f8:	50520003 	subspl	r0, r2, r3
-3000e0fc:	81a00fc1 	asrhi	r0, r1, #31
-3000e100:	31e00fc1 	mvncc	r0, r1, asr #31
-3000e104:	13800001 	orrne	r0, r0, #1
-3000e108:	e12fff1e 	bx	lr
-3000e10c:	e1f0cc42 	mvns	ip, r2, asr #24
-3000e110:	1a000001 	bne	3000e11c <__cmpsf2+0x4c>
-3000e114:	e1b0c480 	lsls	ip, r0, #9
-3000e118:	1a000003 	bne	3000e12c <__cmpsf2+0x5c>
-3000e11c:	e1f0cc43 	mvns	ip, r3, asr #24
-3000e120:	1afffff1 	bne	3000e0ec <__cmpsf2+0x1c>
-3000e124:	e1b0c481 	lsls	ip, r1, #9
-3000e128:	0affffef 	beq	3000e0ec <__cmpsf2+0x1c>
-3000e12c:	e49d0004 	pop	{r0}		; (ldr r0, [sp], #4)
-3000e130:	e12fff1e 	bx	lr
+3000e2d4 <__cmpsf2>:
+3000e2d4:	e3a0c001 	mov	ip, #1
+3000e2d8:	e52dc004 	push	{ip}		; (str ip, [sp, #-4]!)
+3000e2dc:	e1a02080 	lsl	r2, r0, #1
+3000e2e0:	e1a03081 	lsl	r3, r1, #1
+3000e2e4:	e1f0cc42 	mvns	ip, r2, asr #24
+3000e2e8:	11f0cc43 	mvnsne	ip, r3, asr #24
+3000e2ec:	0a000007 	beq	3000e310 <__cmpsf2+0x3c>
+3000e2f0:	e28dd004 	add	sp, sp, #4
+3000e2f4:	e192c0a3 	orrs	ip, r2, r3, lsr #1
+3000e2f8:	11300001 	teqne	r0, r1
+3000e2fc:	50520003 	subspl	r0, r2, r3
+3000e300:	81a00fc1 	asrhi	r0, r1, #31
+3000e304:	31e00fc1 	mvncc	r0, r1, asr #31
+3000e308:	13800001 	orrne	r0, r0, #1
+3000e30c:	e12fff1e 	bx	lr
+3000e310:	e1f0cc42 	mvns	ip, r2, asr #24
+3000e314:	1a000001 	bne	3000e320 <__cmpsf2+0x4c>
+3000e318:	e1b0c480 	lsls	ip, r0, #9
+3000e31c:	1a000003 	bne	3000e330 <__cmpsf2+0x5c>
+3000e320:	e1f0cc43 	mvns	ip, r3, asr #24
+3000e324:	1afffff1 	bne	3000e2f0 <__cmpsf2+0x1c>
+3000e328:	e1b0c481 	lsls	ip, r1, #9
+3000e32c:	0affffef 	beq	3000e2f0 <__cmpsf2+0x1c>
+3000e330:	e49d0004 	pop	{r0}		; (ldr r0, [sp], #4)
+3000e334:	e12fff1e 	bx	lr
 
-3000e134 <__aeabi_cfrcmple>:
-3000e134:	e1a0c000 	mov	ip, r0
-3000e138:	e1a00001 	mov	r0, r1
-3000e13c:	e1a0100c 	mov	r1, ip
-3000e140:	eaffffff 	b	3000e144 <__aeabi_cfcmpeq>
+3000e338 <__aeabi_cfrcmple>:
+3000e338:	e1a0c000 	mov	ip, r0
+3000e33c:	e1a00001 	mov	r0, r1
+3000e340:	e1a0100c 	mov	r1, ip
+3000e344:	eaffffff 	b	3000e348 <__aeabi_cfcmpeq>
 
-3000e144 <__aeabi_cfcmpeq>:
-3000e144:	e92d400f 	push	{r0, r1, r2, r3, lr}
-3000e148:	ebffffe0 	bl	3000e0d0 <__cmpsf2>
-3000e14c:	e3500000 	cmp	r0, #0
-3000e150:	43700000 	cmnmi	r0, #0
-3000e154:	e8bd400f 	pop	{r0, r1, r2, r3, lr}
-3000e158:	e12fff1e 	bx	lr
+3000e348 <__aeabi_cfcmpeq>:
+3000e348:	e92d400f 	push	{r0, r1, r2, r3, lr}
+3000e34c:	ebffffe0 	bl	3000e2d4 <__cmpsf2>
+3000e350:	e3500000 	cmp	r0, #0
+3000e354:	43700000 	cmnmi	r0, #0
+3000e358:	e8bd400f 	pop	{r0, r1, r2, r3, lr}
+3000e35c:	e12fff1e 	bx	lr
 
-3000e15c <__aeabi_fcmpeq>:
-3000e15c:	e52de008 	str	lr, [sp, #-8]!
-3000e160:	ebfffff7 	bl	3000e144 <__aeabi_cfcmpeq>
-3000e164:	03a00001 	moveq	r0, #1
-3000e168:	13a00000 	movne	r0, #0
-3000e16c:	e49de008 	ldr	lr, [sp], #8
-3000e170:	e12fff1e 	bx	lr
+3000e360 <__aeabi_fcmpeq>:
+3000e360:	e52de008 	str	lr, [sp, #-8]!
+3000e364:	ebfffff7 	bl	3000e348 <__aeabi_cfcmpeq>
+3000e368:	03a00001 	moveq	r0, #1
+3000e36c:	13a00000 	movne	r0, #0
+3000e370:	e49de008 	ldr	lr, [sp], #8
+3000e374:	e12fff1e 	bx	lr
 
-3000e174 <__aeabi_fcmplt>:
-3000e174:	e52de008 	str	lr, [sp, #-8]!
-3000e178:	ebfffff1 	bl	3000e144 <__aeabi_cfcmpeq>
-3000e17c:	33a00001 	movcc	r0, #1
-3000e180:	23a00000 	movcs	r0, #0
-3000e184:	e49de008 	ldr	lr, [sp], #8
-3000e188:	e12fff1e 	bx	lr
+3000e378 <__aeabi_fcmplt>:
+3000e378:	e52de008 	str	lr, [sp, #-8]!
+3000e37c:	ebfffff1 	bl	3000e348 <__aeabi_cfcmpeq>
+3000e380:	33a00001 	movcc	r0, #1
+3000e384:	23a00000 	movcs	r0, #0
+3000e388:	e49de008 	ldr	lr, [sp], #8
+3000e38c:	e12fff1e 	bx	lr
 
-3000e18c <__aeabi_fcmple>:
-3000e18c:	e52de008 	str	lr, [sp, #-8]!
-3000e190:	ebffffeb 	bl	3000e144 <__aeabi_cfcmpeq>
-3000e194:	93a00001 	movls	r0, #1
-3000e198:	83a00000 	movhi	r0, #0
-3000e19c:	e49de008 	ldr	lr, [sp], #8
-3000e1a0:	e12fff1e 	bx	lr
+3000e390 <__aeabi_fcmple>:
+3000e390:	e52de008 	str	lr, [sp, #-8]!
+3000e394:	ebffffeb 	bl	3000e348 <__aeabi_cfcmpeq>
+3000e398:	93a00001 	movls	r0, #1
+3000e39c:	83a00000 	movhi	r0, #0
+3000e3a0:	e49de008 	ldr	lr, [sp], #8
+3000e3a4:	e12fff1e 	bx	lr
 
-3000e1a4 <__aeabi_fcmpge>:
-3000e1a4:	e52de008 	str	lr, [sp, #-8]!
-3000e1a8:	ebffffe1 	bl	3000e134 <__aeabi_cfrcmple>
-3000e1ac:	93a00001 	movls	r0, #1
-3000e1b0:	83a00000 	movhi	r0, #0
-3000e1b4:	e49de008 	ldr	lr, [sp], #8
-3000e1b8:	e12fff1e 	bx	lr
+3000e3a8 <__aeabi_fcmpge>:
+3000e3a8:	e52de008 	str	lr, [sp, #-8]!
+3000e3ac:	ebffffe1 	bl	3000e338 <__aeabi_cfrcmple>
+3000e3b0:	93a00001 	movls	r0, #1
+3000e3b4:	83a00000 	movhi	r0, #0
+3000e3b8:	e49de008 	ldr	lr, [sp], #8
+3000e3bc:	e12fff1e 	bx	lr
 
-3000e1bc <__aeabi_fcmpgt>:
-3000e1bc:	e52de008 	str	lr, [sp, #-8]!
-3000e1c0:	ebffffdb 	bl	3000e134 <__aeabi_cfrcmple>
-3000e1c4:	33a00001 	movcc	r0, #1
-3000e1c8:	23a00000 	movcs	r0, #0
-3000e1cc:	e49de008 	ldr	lr, [sp], #8
-3000e1d0:	e12fff1e 	bx	lr
-3000e1d4:	72724544 	.word	0x72724544
-3000e1d8:	0000000a 	.word	0x0000000a
-3000e1dc:	6d656164 	.word	0x6d656164
-3000e1e0:	00006e6f 	.word	0x00006e6f
-3000e1e4:	736e6f63 	.word	0x736e6f63
-3000e1e8:	00656c6f 	.word	0x00656c6f
-3000e1ec:	656c6469 	.word	0x656c6469
-3000e1f0:	00000000 	.word	0x00000000
-3000e1f4:	69206e69 	.word	0x69206e69
-3000e1f8:	0074696e 	.word	0x0074696e
-3000e1fc:	74696e69 	.word	0x74696e69
-3000e200:	00000000 	.word	0x00000000
-3000e204:	6f6c6c41 	.word	0x6f6c6c41
-3000e208:	68742063 	.word	0x68742063
-3000e20c:	64616572 	.word	0x64616572
-3000e210:	2073253a 	.word	0x2073253a
-3000e214:	6c696166 	.word	0x6c696166
-3000e218:	0000000a 	.word	0x0000000a
-3000e21c:	74206f4e 	.word	0x74206f4e
-3000e220:	61657268 	.word	0x61657268
-3000e224:	6f702064 	.word	0x6f702064
-3000e228:	7963696c 	.word	0x7963696c
-3000e22c:	70757320 	.word	0x70757320
-3000e230:	74726f70 	.word	0x74726f70
-3000e234:	0a64253a 	.word	0x0a64253a
-3000e238:	00000000 	.word	0x00000000
-3000e23c:	65657341 	.word	0x65657341
-3000e240:	493a7472 	.word	0x493a7472
-3000e244:	6573206e 	.word	0x6573206e
-3000e248:	7463656c 	.word	0x7463656c
-3000e24c:	72687420 	.word	0x72687420
-3000e250:	00646165 	.word	0x00646165
-3000e254:	6f6c6c41 	.word	0x6f6c6c41
-3000e258:	68742063 	.word	0x68742063
-3000e25c:	64616572 	.word	0x64616572
-3000e260:	2073253a 	.word	0x2073253a
-3000e264:	6c696166 	.word	0x6c696166
-3000e268:	0000000a 	.word	0x0000000a
-3000e26c:	74206f4e 	.word	0x74206f4e
-3000e270:	61657268 	.word	0x61657268
-3000e274:	74732064 	.word	0x74732064
-3000e278:	3a6b6361 	.word	0x3a6b6361
-3000e27c:	000a7325 	.word	0x000a7325
-3000e280:	6d6d6f63 	.word	0x6d6d6f63
-3000e284:	00000000 	.word	0x00000000
-3000e288:	20736552 	.word	0x20736552
-3000e28c:	656c6552 	.word	0x656c6552
-3000e290:	0a657361 	.word	0x0a657361
-3000e294:	00000000 	.word	0x00000000
-3000e298:	20736552 	.word	0x20736552
-3000e29c:	656c6572 	.word	0x656c6572
-3000e2a0:	20657361 	.word	0x20657361
-3000e2a4:	0a727245 	.word	0x0a727245
-3000e2a8:	00000000 	.word	0x00000000
-3000e2ac:	20727245 	.word	0x20727245
-3000e2b0:	0a736552 	.word	0x0a736552
-3000e2b4:	00000000 	.word	0x00000000
-3000e2b8:	000a7325 	.word	0x000a7325
-3000e2bc:	20727245 	.word	0x20727245
-3000e2c0:	27736572 	.word	0x27736572
-3000e2c4:	64692073 	.word	0x64692073
-3000e2c8:	0a78253a 	.word	0x0a78253a
-3000e2cc:	00000000 	.word	0x00000000
-3000e2d0:	65637845 	.word	0x65637845
-3000e2d4:	6f697470 	.word	0x6f697470
-3000e2d8:	636f206e 	.word	0x636f206e
-3000e2dc:	0a727563 	.word	0x0a727563
-3000e2e0:	00000000 	.word	0x00000000
-3000e2e4:	2a2a2a2a 	.word	0x2a2a2a2a
-3000e2e8:	2a2a2a2a 	.word	0x2a2a2a2a
-3000e2ec:	2a2a2a2a 	.word	0x2a2a2a2a
-3000e2f0:	2a2a2a2a 	.word	0x2a2a2a2a
-3000e2f4:	000a2a2a 	.word	0x000a2a2a
-3000e2f8:	3a555043 	.word	0x3a555043
-3000e2fc:	000a6425 	.word	0x000a6425
-3000e300:	65726854 	.word	0x65726854
-3000e304:	6e206461 	.word	0x6e206461
-3000e308:	3a656d61 	.word	0x3a656d61
-3000e30c:	000a7325 	.word	0x000a7325
-3000e310:	65726854 	.word	0x65726854
-3000e314:	70206461 	.word	0x70206461
-3000e318:	3a6f6972 	.word	0x3a6f6972
-3000e31c:	000a6425 	.word	0x000a6425
-3000e320:	65726854 	.word	0x65726854
-3000e324:	73206461 	.word	0x73206461
-3000e328:	6b636174 	.word	0x6b636174
-3000e32c:	7a69735f 	.word	0x7a69735f
-3000e330:	64253a65 	.word	0x64253a65
-3000e334:	0000000a 	.word	0x0000000a
-3000e338:	65726854 	.word	0x65726854
-3000e33c:	73206461 	.word	0x73206461
-3000e340:	6b636174 	.word	0x6b636174
-3000e344:	7475625f 	.word	0x7475625f
-3000e348:	3a6d6f74 	.word	0x3a6d6f74
-3000e34c:	78257830 	.word	0x78257830
-3000e350:	0000000a 	.word	0x0000000a
-3000e354:	65726854 	.word	0x65726854
-3000e358:	73206461 	.word	0x73206461
-3000e35c:	6b636174 	.word	0x6b636174
-3000e360:	2578303a 	.word	0x2578303a
-3000e364:	00000a78 	.word	0x00000a78
-3000e368:	303a6350 	.word	0x303a6350
-3000e36c:	0a782578 	.word	0x0a782578
-3000e370:	00000000 	.word	0x00000000
-3000e374:	63617453 	.word	0x63617453
-3000e378:	78303a6b 	.word	0x78303a6b
-3000e37c:	000a7825 	.word	0x000a7825
-3000e380:	74206e69 	.word	0x74206e69
-3000e384:	20656d69 	.word	0x20656d69
-3000e388:	6c616564 	.word	0x6c616564
-3000e38c:	00000000 	.word	0x00000000
-3000e390:	74206e69 	.word	0x74206e69
-3000e394:	20656d69 	.word	0x20656d69
-3000e398:	6c616564 	.word	0x6c616564
-3000e39c:	726f6620 	.word	0x726f6620
-3000e3a0:	00000000 	.word	0x00000000
-3000e3a4:	74206e69 	.word	0x74206e69
-3000e3a8:	6f656d69 	.word	0x6f656d69
-3000e3ac:	64207475 	.word	0x64207475
-3000e3b0:	006c6165 	.word	0x006c6165
-3000e3b4:	6574756d 	.word	0x6574756d
-3000e3b8:	554e2078 	.word	0x554e2078
-3000e3bc:	000a4c4c 	.word	0x000a4c4c
-3000e3c0:	6574756d 	.word	0x6574756d
-3000e3c4:	72702078 	.word	0x72702078
-3000e3c8:	65206f69 	.word	0x65206f69
-3000e3cc:	000a7272 	.word	0x000a7272
-3000e3d0:	6576654c 	.word	0x6576654c
-3000e3d4:	0d64256c 	.word	0x0d64256c
-3000e3d8:	0000000a 	.word	0x0000000a
-3000e3dc:	6d746962 	.word	0x6d746962
-3000e3e0:	003a7061 	.word	0x003a7061
-3000e3e4:	00207825 	.word	0x00207825
-3000e3e8:	00000a0d 	.word	0x00000a0d
-3000e3ec:	65657246 	.word	0x65657246
-3000e3f0:	6f6c4220 	.word	0x6f6c4220
-3000e3f4:	68206b63 	.word	0x68206b63
-3000e3f8:	3a646165 	.word	0x3a646165
-3000e3fc:	0a0d6425 	.word	0x0a0d6425
-3000e400:	00000000 	.word	0x00000000
-3000e404:	65657246 	.word	0x65657246
-3000e408:	6d654d20 	.word	0x6d654d20
-3000e40c:	6f6c4220 	.word	0x6f6c4220
-3000e410:	4e206b63 	.word	0x4e206b63
-3000e414:	65626d75 	.word	0x65626d75
-3000e418:	64253a72 	.word	0x64253a72
-3000e41c:	00000a0d 	.word	0x00000a0d
-3000e420:	61766e49 	.word	0x61766e49
-3000e424:	2064696c 	.word	0x2064696c
-3000e428:	65657246 	.word	0x65657246
-3000e42c:	64644120 	.word	0x64644120
-3000e430:	73736572 	.word	0x73736572
-3000e434:	2578303a 	.word	0x2578303a
-3000e438:	00000a78 	.word	0x00000a78
-3000e43c:	72646441 	.word	0x72646441
-3000e440:	3a737365 	.word	0x3a737365
-3000e444:	78257830 	.word	0x78257830
-3000e448:	76616820 	.word	0x76616820
-3000e44c:	65622065 	.word	0x65622065
-3000e450:	66206e65 	.word	0x66206e65
-3000e454:	64656572 	.word	0x64656572
-3000e458:	0000000a 	.word	0x0000000a
-3000e45c:	20727245 	.word	0x20727245
-3000e460:	72646461 	.word	0x72646461
-3000e464:	20737365 	.word	0x20737365
-3000e468:	30207369 	.word	0x30207369
-3000e46c:	2c782578 	.word	0x2c782578
-3000e470:	657a6973 	.word	0x657a6973
-3000e474:	6f687320 	.word	0x6f687320
-3000e478:	20646c75 	.word	0x20646c75
-3000e47c:	20746f6e 	.word	0x20746f6e
-3000e480:	30206562 	.word	0x30206562
-3000e484:	00000000 	.word	0x00000000
-3000e488:	61766e49 	.word	0x61766e49
-3000e48c:	6564696c 	.word	0x6564696c
-3000e490:	65724620 	.word	0x65724620
-3000e494:	64612065 	.word	0x64612065
-3000e498:	73657264 	.word	0x73657264
-3000e49c:	78303a73 	.word	0x78303a73
-3000e4a0:	000a7825 	.word	0x000a7825
-3000e4a4:	72646441 	.word	0x72646441
-3000e4a8:	3a737365 	.word	0x3a737365
-3000e4ac:	78257830 	.word	0x78257830
-3000e4b0:	76616820 	.word	0x76616820
-3000e4b4:	65622065 	.word	0x65622065
-3000e4b8:	66206e65 	.word	0x66206e65
-3000e4bc:	64656572 	.word	0x64656572
-3000e4c0:	0000000a 	.word	0x0000000a
-3000e4c4:	20727265 	.word	0x20727265
-3000e4c8:	72646461 	.word	0x72646461
-3000e4cc:	20737365 	.word	0x20737365
-3000e4d0:	30207369 	.word	0x30207369
-3000e4d4:	2c782578 	.word	0x2c782578
-3000e4d8:	657a6973 	.word	0x657a6973
-3000e4dc:	6f687320 	.word	0x6f687320
-3000e4e0:	20646c75 	.word	0x20646c75
-3000e4e4:	20746f6e 	.word	0x20746f6e
-3000e4e8:	30206562 	.word	0x30206562
-3000e4ec:	00000000 	.word	0x00000000
-3000e4f0:	206d654d 	.word	0x206d654d
-3000e4f4:	74696e49 	.word	0x74696e49
-3000e4f8:	72724520 	.word	0x72724520
-3000e4fc:	6f732c20 	.word	0x6f732c20
-3000e500:	206f6e20 	.word	0x206f6e20
-3000e504:	206d656d 	.word	0x206d656d
-3000e508:	63617073 	.word	0x63617073
-3000e50c:	6f742065 	.word	0x6f742065
-3000e510:	6c616d20 	.word	0x6c616d20
-3000e514:	0d636f6c 	.word	0x0d636f6c
-3000e518:	0000000a 	.word	0x0000000a
-3000e51c:	20727245 	.word	0x20727245
-3000e520:	72646461 	.word	0x72646461
-3000e524:	20737365 	.word	0x20737365
-3000e528:	30207369 	.word	0x30207369
-3000e52c:	2c782578 	.word	0x2c782578
-3000e530:	657a6973 	.word	0x657a6973
-3000e534:	6f687320 	.word	0x6f687320
-3000e538:	20646c75 	.word	0x20646c75
-3000e53c:	20746f6e 	.word	0x20746f6e
-3000e540:	30206562 	.word	0x30206562
-3000e544:	00000a0d 	.word	0x00000a0d
-3000e548:	20656854 	.word	0x20656854
-3000e54c:	72646461 	.word	0x72646461
-3000e550:	20737365 	.word	0x20737365
-3000e554:	30207369 	.word	0x30207369
-3000e558:	2c782578 	.word	0x2c782578
-3000e55c:	20656874 	.word	0x20656874
-3000e560:	636f6c62 	.word	0x636f6c62
-3000e564:	7369206b 	.word	0x7369206b
-3000e568:	65737520 	.word	0x65737520
-3000e56c:	6e612064 	.word	0x6e612064
-3000e570:	74692064 	.word	0x74692064
-3000e574:	73207327 	.word	0x73207327
-3000e578:	20657a69 	.word	0x20657a69
-3000e57c:	25207369 	.word	0x25207369
-3000e580:	000a0d64 	.word	0x000a0d64
-3000e584:	20656854 	.word	0x20656854
-3000e588:	72646461 	.word	0x72646461
-3000e58c:	20737365 	.word	0x20737365
-3000e590:	30207369 	.word	0x30207369
-3000e594:	2c782578 	.word	0x2c782578
-3000e598:	20656874 	.word	0x20656874
-3000e59c:	636f6c62 	.word	0x636f6c62
-3000e5a0:	7369206b 	.word	0x7369206b
-3000e5a4:	756e7520 	.word	0x756e7520
-3000e5a8:	20646573 	.word	0x20646573
-3000e5ac:	20646e61 	.word	0x20646e61
-3000e5b0:	73277469 	.word	0x73277469
-3000e5b4:	7a697320 	.word	0x7a697320
-3000e5b8:	73692065 	.word	0x73692065
-3000e5bc:	0d642520 	.word	0x0d642520
-3000e5c0:	0000000a 	.word	0x0000000a
-3000e5c4:	20727245 	.word	0x20727245
-3000e5c8:	206d6553 	.word	0x206d6553
-3000e5cc:	74736f70 	.word	0x74736f70
-3000e5d0:	0000000a 	.word	0x0000000a
-3000e5d4:	2064690a 	.word	0x2064690a
-3000e5d8:	6425203d 	.word	0x6425203d
-3000e5dc:	00000000 	.word	0x00000000
-3000e5e0:	6177200a 	.word	0x6177200a
-3000e5e4:	74207469 	.word	0x74207469
-3000e5e8:	61657268 	.word	0x61657268
-3000e5ec:	6d207364 	.word	0x6d207364
-3000e5f0:	3d206d75 	.word	0x3d206d75
-3000e5f4:	00642520 	.word	0x00642520
-3000e5f8:	6c206f4e 	.word	0x6c206f4e
-3000e5fc:	6c657665 	.word	0x6c657665
-3000e600:	656d2032 	.word	0x656d2032
-3000e604:	7073206d 	.word	0x7073206d
-3000e608:	20656361 	.word	0x20656361
-3000e60c:	20726f66 	.word	0x20726f66
-3000e610:	76697270 	.word	0x76697270
-3000e614:	5f657461 	.word	0x5f657461
-3000e618:	61746164 	.word	0x61746164
-3000e61c:	0a73253a 	.word	0x0a73253a
-3000e620:	00000000 	.word	0x00000000
-3000e624:	74204d52 	.word	0x74204d52
-3000e628:	61657268 	.word	0x61657268
-3000e62c:	73252064 	.word	0x73252064
-3000e630:	72724520 	.word	0x72724520
-3000e634:	6972502c 	.word	0x6972502c
-3000e638:	7369206f 	.word	0x7369206f
-3000e63c:	746f6e20 	.word	0x746f6e20
-3000e640:	6f6e6520 	.word	0x6f6e6520
-3000e644:	0a686775 	.word	0x0a686775
-3000e648:	00000000 	.word	0x00000000
-3000e64c:	63736944 	.word	0x63736944
-3000e650:	20647261 	.word	0x20647261
-3000e654:	65726874 	.word	0x65726874
-3000e658:	25206461 	.word	0x25206461
-3000e65c:	00000a73 	.word	0x00000a73
-3000e660:	00006d72 	.word	0x00006d72
-3000e664:	6c206f4e 	.word	0x6c206f4e
-3000e668:	6c657665 	.word	0x6c657665
-3000e66c:	656d2032 	.word	0x656d2032
-3000e670:	7073206d 	.word	0x7073206d
-3000e674:	20656361 	.word	0x20656361
-3000e678:	20726f66 	.word	0x20726f66
-3000e67c:	76697270 	.word	0x76697270
-3000e680:	5f657461 	.word	0x5f657461
-3000e684:	61746164 	.word	0x61746164
-3000e688:	0a73253a 	.word	0x0a73253a
-3000e68c:	00000000 	.word	0x00000000
-3000e690:	74206f4e 	.word	0x74206f4e
-3000e694:	61657268 	.word	0x61657268
-3000e698:	74732064 	.word	0x74732064
-3000e69c:	3a6b6361 	.word	0x3a6b6361
-3000e6a0:	000a7325 	.word	0x000a7325
-3000e6a4:	70206e69 	.word	0x70206e69
-3000e6a8:	6f697265 	.word	0x6f697265
-3000e6ac:	68742064 	.word	0x68742064
-3000e6b0:	64616572 	.word	0x64616572
-3000e6b4:	61656420 	.word	0x61656420
-3000e6b8:	0000006c 	.word	0x0000006c
-3000e6bc:	70206e69 	.word	0x70206e69
-3000e6c0:	6f697265 	.word	0x6f697265
-3000e6c4:	68742064 	.word	0x68742064
-3000e6c8:	64616572 	.word	0x64616572
-3000e6cc:	61656420 	.word	0x61656420
-3000e6d0:	0000206c 	.word	0x0000206c
-3000e6d4:	69726570 	.word	0x69726570
-3000e6d8:	0000646f 	.word	0x0000646f
-3000e6dc:	6c206f4e 	.word	0x6c206f4e
-3000e6e0:	6c657665 	.word	0x6c657665
-3000e6e4:	656d2032 	.word	0x656d2032
-3000e6e8:	7073206d 	.word	0x7073206d
-3000e6ec:	20656361 	.word	0x20656361
-3000e6f0:	20726f66 	.word	0x20726f66
-3000e6f4:	76697270 	.word	0x76697270
-3000e6f8:	5f657461 	.word	0x5f657461
-3000e6fc:	61746164 	.word	0x61746164
-3000e700:	0a73253a 	.word	0x0a73253a
-3000e704:	00000000 	.word	0x00000000
-3000e708:	74206f4e 	.word	0x74206f4e
-3000e70c:	61657268 	.word	0x61657268
-3000e710:	74732064 	.word	0x74732064
-3000e714:	3a6b6361 	.word	0x3a6b6361
-3000e718:	000a7325 	.word	0x000a7325
-3000e71c:	63696c73 	.word	0x63696c73
-3000e720:	00000065 	.word	0x00000065
-3000e724:	6f6c6c41 	.word	0x6f6c6c41
-3000e728:	6f502063 	.word	0x6f502063
-3000e72c:	20786973 	.word	0x20786973
-3000e730:	65726874 	.word	0x65726874
-3000e734:	66206461 	.word	0x66206461
-3000e738:	0a6c6961 	.word	0x0a6c6961
-3000e73c:	00000000 	.word	0x00000000
-3000e740:	6d206f4e 	.word	0x6d206f4e
-3000e744:	73206d65 	.word	0x73206d65
-3000e748:	65636170 	.word	0x65636170
-3000e74c:	726f6620 	.word	0x726f6620
-3000e750:	736f7020 	.word	0x736f7020
-3000e754:	70207869 	.word	0x70207869
-3000e758:	61766972 	.word	0x61766972
-3000e75c:	645f6574 	.word	0x645f6574
-3000e760:	3a617461 	.word	0x3a617461
-3000e764:	000a7325 	.word	0x000a7325
-3000e768:	74206f4e 	.word	0x74206f4e
-3000e76c:	61657268 	.word	0x61657268
-3000e770:	74732064 	.word	0x74732064
-3000e774:	3a6b6361 	.word	0x3a6b6361
-3000e778:	000a7325 	.word	0x000a7325
-3000e77c:	69736f70 	.word	0x69736f70
-3000e780:	00000078 	.word	0x00000078
-3000e784:	74666f73 	.word	0x74666f73
-3000e788:	616c6564 	.word	0x616c6564
-3000e78c:	00000079 	.word	0x00000079
+3000e3c0 <__aeabi_fcmpgt>:
+3000e3c0:	e52de008 	str	lr, [sp, #-8]!
+3000e3c4:	ebffffdb 	bl	3000e338 <__aeabi_cfrcmple>
+3000e3c8:	33a00001 	movcc	r0, #1
+3000e3cc:	23a00000 	movcs	r0, #0
+3000e3d0:	e49de008 	ldr	lr, [sp], #8
+3000e3d4:	e12fff1e 	bx	lr
+3000e3d8:	72724544 	.word	0x72724544
+3000e3dc:	0000000a 	.word	0x0000000a
+3000e3e0:	6d656164 	.word	0x6d656164
+3000e3e4:	00006e6f 	.word	0x00006e6f
+3000e3e8:	736e6f63 	.word	0x736e6f63
+3000e3ec:	00656c6f 	.word	0x00656c6f
+3000e3f0:	656c6469 	.word	0x656c6469
+3000e3f4:	00000000 	.word	0x00000000
+3000e3f8:	69206e69 	.word	0x69206e69
+3000e3fc:	0074696e 	.word	0x0074696e
+3000e400:	74696e69 	.word	0x74696e69
+3000e404:	00000000 	.word	0x00000000
+3000e408:	6f6c6c41 	.word	0x6f6c6c41
+3000e40c:	68742063 	.word	0x68742063
+3000e410:	64616572 	.word	0x64616572
+3000e414:	2073253a 	.word	0x2073253a
+3000e418:	6c696166 	.word	0x6c696166
+3000e41c:	0000000a 	.word	0x0000000a
+3000e420:	74206f4e 	.word	0x74206f4e
+3000e424:	61657268 	.word	0x61657268
+3000e428:	6f702064 	.word	0x6f702064
+3000e42c:	7963696c 	.word	0x7963696c
+3000e430:	70757320 	.word	0x70757320
+3000e434:	74726f70 	.word	0x74726f70
+3000e438:	0a64253a 	.word	0x0a64253a
+3000e43c:	00000000 	.word	0x00000000
+3000e440:	65657341 	.word	0x65657341
+3000e444:	493a7472 	.word	0x493a7472
+3000e448:	6573206e 	.word	0x6573206e
+3000e44c:	7463656c 	.word	0x7463656c
+3000e450:	72687420 	.word	0x72687420
+3000e454:	00646165 	.word	0x00646165
+3000e458:	6f6c6c41 	.word	0x6f6c6c41
+3000e45c:	68742063 	.word	0x68742063
+3000e460:	64616572 	.word	0x64616572
+3000e464:	2073253a 	.word	0x2073253a
+3000e468:	6c696166 	.word	0x6c696166
+3000e46c:	0000000a 	.word	0x0000000a
+3000e470:	74206f4e 	.word	0x74206f4e
+3000e474:	61657268 	.word	0x61657268
+3000e478:	74732064 	.word	0x74732064
+3000e47c:	3a6b6361 	.word	0x3a6b6361
+3000e480:	000a7325 	.word	0x000a7325
+3000e484:	6d6d6f63 	.word	0x6d6d6f63
+3000e488:	00000000 	.word	0x00000000
+3000e48c:	20736552 	.word	0x20736552
+3000e490:	656c6552 	.word	0x656c6552
+3000e494:	0a657361 	.word	0x0a657361
+3000e498:	00000000 	.word	0x00000000
+3000e49c:	20736552 	.word	0x20736552
+3000e4a0:	656c6572 	.word	0x656c6572
+3000e4a4:	20657361 	.word	0x20657361
+3000e4a8:	0a727245 	.word	0x0a727245
+3000e4ac:	00000000 	.word	0x00000000
+3000e4b0:	20727245 	.word	0x20727245
+3000e4b4:	0a736552 	.word	0x0a736552
+3000e4b8:	00000000 	.word	0x00000000
+3000e4bc:	000a7325 	.word	0x000a7325
+3000e4c0:	20727245 	.word	0x20727245
+3000e4c4:	27736572 	.word	0x27736572
+3000e4c8:	64692073 	.word	0x64692073
+3000e4cc:	0a78253a 	.word	0x0a78253a
+3000e4d0:	00000000 	.word	0x00000000
+3000e4d4:	65637845 	.word	0x65637845
+3000e4d8:	6f697470 	.word	0x6f697470
+3000e4dc:	636f206e 	.word	0x636f206e
+3000e4e0:	0a727563 	.word	0x0a727563
+3000e4e4:	00000000 	.word	0x00000000
+3000e4e8:	2a2a2a2a 	.word	0x2a2a2a2a
+3000e4ec:	2a2a2a2a 	.word	0x2a2a2a2a
+3000e4f0:	2a2a2a2a 	.word	0x2a2a2a2a
+3000e4f4:	2a2a2a2a 	.word	0x2a2a2a2a
+3000e4f8:	000a2a2a 	.word	0x000a2a2a
+3000e4fc:	3a555043 	.word	0x3a555043
+3000e500:	000a6425 	.word	0x000a6425
+3000e504:	65726854 	.word	0x65726854
+3000e508:	6e206461 	.word	0x6e206461
+3000e50c:	3a656d61 	.word	0x3a656d61
+3000e510:	000a7325 	.word	0x000a7325
+3000e514:	65726854 	.word	0x65726854
+3000e518:	70206461 	.word	0x70206461
+3000e51c:	3a6f6972 	.word	0x3a6f6972
+3000e520:	000a6425 	.word	0x000a6425
+3000e524:	65726854 	.word	0x65726854
+3000e528:	73206461 	.word	0x73206461
+3000e52c:	6b636174 	.word	0x6b636174
+3000e530:	7a69735f 	.word	0x7a69735f
+3000e534:	64253a65 	.word	0x64253a65
+3000e538:	0000000a 	.word	0x0000000a
+3000e53c:	65726854 	.word	0x65726854
+3000e540:	73206461 	.word	0x73206461
+3000e544:	6b636174 	.word	0x6b636174
+3000e548:	7475625f 	.word	0x7475625f
+3000e54c:	3a6d6f74 	.word	0x3a6d6f74
+3000e550:	78257830 	.word	0x78257830
+3000e554:	0000000a 	.word	0x0000000a
+3000e558:	65726854 	.word	0x65726854
+3000e55c:	73206461 	.word	0x73206461
+3000e560:	6b636174 	.word	0x6b636174
+3000e564:	2578303a 	.word	0x2578303a
+3000e568:	00000a78 	.word	0x00000a78
+3000e56c:	303a6350 	.word	0x303a6350
+3000e570:	0a782578 	.word	0x0a782578
+3000e574:	00000000 	.word	0x00000000
+3000e578:	63617453 	.word	0x63617453
+3000e57c:	78303a6b 	.word	0x78303a6b
+3000e580:	000a7825 	.word	0x000a7825
+3000e584:	74206e69 	.word	0x74206e69
+3000e588:	20656d69 	.word	0x20656d69
+3000e58c:	6c616564 	.word	0x6c616564
+3000e590:	00000000 	.word	0x00000000
+3000e594:	74206e69 	.word	0x74206e69
+3000e598:	20656d69 	.word	0x20656d69
+3000e59c:	6c616564 	.word	0x6c616564
+3000e5a0:	726f6620 	.word	0x726f6620
+3000e5a4:	00000000 	.word	0x00000000
+3000e5a8:	74206e69 	.word	0x74206e69
+3000e5ac:	6f656d69 	.word	0x6f656d69
+3000e5b0:	64207475 	.word	0x64207475
+3000e5b4:	006c6165 	.word	0x006c6165
+3000e5b8:	6574756d 	.word	0x6574756d
+3000e5bc:	554e2078 	.word	0x554e2078
+3000e5c0:	000a4c4c 	.word	0x000a4c4c
+3000e5c4:	6574756d 	.word	0x6574756d
+3000e5c8:	72702078 	.word	0x72702078
+3000e5cc:	65206f69 	.word	0x65206f69
+3000e5d0:	000a7272 	.word	0x000a7272
+3000e5d4:	6576654c 	.word	0x6576654c
+3000e5d8:	0d64256c 	.word	0x0d64256c
+3000e5dc:	0000000a 	.word	0x0000000a
+3000e5e0:	6d746962 	.word	0x6d746962
+3000e5e4:	003a7061 	.word	0x003a7061
+3000e5e8:	00207825 	.word	0x00207825
+3000e5ec:	00000a0d 	.word	0x00000a0d
+3000e5f0:	65657246 	.word	0x65657246
+3000e5f4:	6f6c4220 	.word	0x6f6c4220
+3000e5f8:	68206b63 	.word	0x68206b63
+3000e5fc:	3a646165 	.word	0x3a646165
+3000e600:	0a0d6425 	.word	0x0a0d6425
+3000e604:	00000000 	.word	0x00000000
+3000e608:	65657246 	.word	0x65657246
+3000e60c:	6d654d20 	.word	0x6d654d20
+3000e610:	6f6c4220 	.word	0x6f6c4220
+3000e614:	4e206b63 	.word	0x4e206b63
+3000e618:	65626d75 	.word	0x65626d75
+3000e61c:	64253a72 	.word	0x64253a72
+3000e620:	00000a0d 	.word	0x00000a0d
+3000e624:	61766e49 	.word	0x61766e49
+3000e628:	2064696c 	.word	0x2064696c
+3000e62c:	65657246 	.word	0x65657246
+3000e630:	64644120 	.word	0x64644120
+3000e634:	73736572 	.word	0x73736572
+3000e638:	2578303a 	.word	0x2578303a
+3000e63c:	00000a78 	.word	0x00000a78
+3000e640:	72646441 	.word	0x72646441
+3000e644:	3a737365 	.word	0x3a737365
+3000e648:	78257830 	.word	0x78257830
+3000e64c:	76616820 	.word	0x76616820
+3000e650:	65622065 	.word	0x65622065
+3000e654:	66206e65 	.word	0x66206e65
+3000e658:	64656572 	.word	0x64656572
+3000e65c:	0000000a 	.word	0x0000000a
+3000e660:	20727245 	.word	0x20727245
+3000e664:	72646461 	.word	0x72646461
+3000e668:	20737365 	.word	0x20737365
+3000e66c:	30207369 	.word	0x30207369
+3000e670:	2c782578 	.word	0x2c782578
+3000e674:	657a6973 	.word	0x657a6973
+3000e678:	6f687320 	.word	0x6f687320
+3000e67c:	20646c75 	.word	0x20646c75
+3000e680:	20746f6e 	.word	0x20746f6e
+3000e684:	30206562 	.word	0x30206562
+3000e688:	00000000 	.word	0x00000000
+3000e68c:	61766e49 	.word	0x61766e49
+3000e690:	6564696c 	.word	0x6564696c
+3000e694:	65724620 	.word	0x65724620
+3000e698:	64612065 	.word	0x64612065
+3000e69c:	73657264 	.word	0x73657264
+3000e6a0:	78303a73 	.word	0x78303a73
+3000e6a4:	000a7825 	.word	0x000a7825
+3000e6a8:	72646441 	.word	0x72646441
+3000e6ac:	3a737365 	.word	0x3a737365
+3000e6b0:	78257830 	.word	0x78257830
+3000e6b4:	76616820 	.word	0x76616820
+3000e6b8:	65622065 	.word	0x65622065
+3000e6bc:	66206e65 	.word	0x66206e65
+3000e6c0:	64656572 	.word	0x64656572
+3000e6c4:	0000000a 	.word	0x0000000a
+3000e6c8:	20727265 	.word	0x20727265
+3000e6cc:	72646461 	.word	0x72646461
+3000e6d0:	20737365 	.word	0x20737365
+3000e6d4:	30207369 	.word	0x30207369
+3000e6d8:	2c782578 	.word	0x2c782578
+3000e6dc:	657a6973 	.word	0x657a6973
+3000e6e0:	6f687320 	.word	0x6f687320
+3000e6e4:	20646c75 	.word	0x20646c75
+3000e6e8:	20746f6e 	.word	0x20746f6e
+3000e6ec:	30206562 	.word	0x30206562
+3000e6f0:	00000000 	.word	0x00000000
+3000e6f4:	206d654d 	.word	0x206d654d
+3000e6f8:	74696e49 	.word	0x74696e49
+3000e6fc:	72724520 	.word	0x72724520
+3000e700:	6f732c20 	.word	0x6f732c20
+3000e704:	206f6e20 	.word	0x206f6e20
+3000e708:	206d656d 	.word	0x206d656d
+3000e70c:	63617073 	.word	0x63617073
+3000e710:	6f742065 	.word	0x6f742065
+3000e714:	6c616d20 	.word	0x6c616d20
+3000e718:	0d636f6c 	.word	0x0d636f6c
+3000e71c:	0000000a 	.word	0x0000000a
+3000e720:	20727245 	.word	0x20727245
+3000e724:	72646461 	.word	0x72646461
+3000e728:	20737365 	.word	0x20737365
+3000e72c:	30207369 	.word	0x30207369
+3000e730:	2c782578 	.word	0x2c782578
+3000e734:	657a6973 	.word	0x657a6973
+3000e738:	6f687320 	.word	0x6f687320
+3000e73c:	20646c75 	.word	0x20646c75
+3000e740:	20746f6e 	.word	0x20746f6e
+3000e744:	30206562 	.word	0x30206562
+3000e748:	00000a0d 	.word	0x00000a0d
+3000e74c:	20656854 	.word	0x20656854
+3000e750:	72646461 	.word	0x72646461
+3000e754:	20737365 	.word	0x20737365
+3000e758:	30207369 	.word	0x30207369
+3000e75c:	2c782578 	.word	0x2c782578
+3000e760:	20656874 	.word	0x20656874
+3000e764:	636f6c62 	.word	0x636f6c62
+3000e768:	7369206b 	.word	0x7369206b
+3000e76c:	65737520 	.word	0x65737520
+3000e770:	6e612064 	.word	0x6e612064
+3000e774:	74692064 	.word	0x74692064
+3000e778:	73207327 	.word	0x73207327
+3000e77c:	20657a69 	.word	0x20657a69
+3000e780:	25207369 	.word	0x25207369
+3000e784:	000a0d64 	.word	0x000a0d64
+3000e788:	20656854 	.word	0x20656854
+3000e78c:	72646461 	.word	0x72646461
+3000e790:	20737365 	.word	0x20737365
+3000e794:	30207369 	.word	0x30207369
+3000e798:	2c782578 	.word	0x2c782578
+3000e79c:	20656874 	.word	0x20656874
+3000e7a0:	636f6c62 	.word	0x636f6c62
+3000e7a4:	7369206b 	.word	0x7369206b
+3000e7a8:	756e7520 	.word	0x756e7520
+3000e7ac:	20646573 	.word	0x20646573
+3000e7b0:	20646e61 	.word	0x20646e61
+3000e7b4:	73277469 	.word	0x73277469
+3000e7b8:	7a697320 	.word	0x7a697320
+3000e7bc:	73692065 	.word	0x73692065
+3000e7c0:	0d642520 	.word	0x0d642520
+3000e7c4:	0000000a 	.word	0x0000000a
+3000e7c8:	20727245 	.word	0x20727245
+3000e7cc:	206d6553 	.word	0x206d6553
+3000e7d0:	74736f70 	.word	0x74736f70
+3000e7d4:	0000000a 	.word	0x0000000a
+3000e7d8:	2064690a 	.word	0x2064690a
+3000e7dc:	6425203d 	.word	0x6425203d
+3000e7e0:	00000000 	.word	0x00000000
+3000e7e4:	6177200a 	.word	0x6177200a
+3000e7e8:	74207469 	.word	0x74207469
+3000e7ec:	61657268 	.word	0x61657268
+3000e7f0:	6d207364 	.word	0x6d207364
+3000e7f4:	3d206d75 	.word	0x3d206d75
+3000e7f8:	00642520 	.word	0x00642520
+3000e7fc:	6c206f4e 	.word	0x6c206f4e
+3000e800:	6c657665 	.word	0x6c657665
+3000e804:	656d2032 	.word	0x656d2032
+3000e808:	7073206d 	.word	0x7073206d
+3000e80c:	20656361 	.word	0x20656361
+3000e810:	20726f66 	.word	0x20726f66
+3000e814:	76697270 	.word	0x76697270
+3000e818:	5f657461 	.word	0x5f657461
+3000e81c:	61746164 	.word	0x61746164
+3000e820:	0a73253a 	.word	0x0a73253a
+3000e824:	00000000 	.word	0x00000000
+3000e828:	74204d52 	.word	0x74204d52
+3000e82c:	61657268 	.word	0x61657268
+3000e830:	73252064 	.word	0x73252064
+3000e834:	72724520 	.word	0x72724520
+3000e838:	6972502c 	.word	0x6972502c
+3000e83c:	7369206f 	.word	0x7369206f
+3000e840:	746f6e20 	.word	0x746f6e20
+3000e844:	6f6e6520 	.word	0x6f6e6520
+3000e848:	0a686775 	.word	0x0a686775
+3000e84c:	00000000 	.word	0x00000000
+3000e850:	63736944 	.word	0x63736944
+3000e854:	20647261 	.word	0x20647261
+3000e858:	65726874 	.word	0x65726874
+3000e85c:	25206461 	.word	0x25206461
+3000e860:	00000a73 	.word	0x00000a73
+3000e864:	00006d72 	.word	0x00006d72
+3000e868:	6c206f4e 	.word	0x6c206f4e
+3000e86c:	6c657665 	.word	0x6c657665
+3000e870:	656d2032 	.word	0x656d2032
+3000e874:	7073206d 	.word	0x7073206d
+3000e878:	20656361 	.word	0x20656361
+3000e87c:	20726f66 	.word	0x20726f66
+3000e880:	76697270 	.word	0x76697270
+3000e884:	5f657461 	.word	0x5f657461
+3000e888:	61746164 	.word	0x61746164
+3000e88c:	0a73253a 	.word	0x0a73253a
+3000e890:	00000000 	.word	0x00000000
+3000e894:	74206f4e 	.word	0x74206f4e
+3000e898:	61657268 	.word	0x61657268
+3000e89c:	74732064 	.word	0x74732064
+3000e8a0:	3a6b6361 	.word	0x3a6b6361
+3000e8a4:	000a7325 	.word	0x000a7325
+3000e8a8:	70206e69 	.word	0x70206e69
+3000e8ac:	6f697265 	.word	0x6f697265
+3000e8b0:	68742064 	.word	0x68742064
+3000e8b4:	64616572 	.word	0x64616572
+3000e8b8:	61656420 	.word	0x61656420
+3000e8bc:	0000006c 	.word	0x0000006c
+3000e8c0:	70206e69 	.word	0x70206e69
+3000e8c4:	6f697265 	.word	0x6f697265
+3000e8c8:	68742064 	.word	0x68742064
+3000e8cc:	64616572 	.word	0x64616572
+3000e8d0:	61656420 	.word	0x61656420
+3000e8d4:	0000206c 	.word	0x0000206c
+3000e8d8:	69726570 	.word	0x69726570
+3000e8dc:	0000646f 	.word	0x0000646f
+3000e8e0:	6c206f4e 	.word	0x6c206f4e
+3000e8e4:	6c657665 	.word	0x6c657665
+3000e8e8:	656d2032 	.word	0x656d2032
+3000e8ec:	7073206d 	.word	0x7073206d
+3000e8f0:	20656361 	.word	0x20656361
+3000e8f4:	20726f66 	.word	0x20726f66
+3000e8f8:	76697270 	.word	0x76697270
+3000e8fc:	5f657461 	.word	0x5f657461
+3000e900:	61746164 	.word	0x61746164
+3000e904:	0a73253a 	.word	0x0a73253a
+3000e908:	00000000 	.word	0x00000000
+3000e90c:	74206f4e 	.word	0x74206f4e
+3000e910:	61657268 	.word	0x61657268
+3000e914:	74732064 	.word	0x74732064
+3000e918:	3a6b6361 	.word	0x3a6b6361
+3000e91c:	000a7325 	.word	0x000a7325
+3000e920:	63696c73 	.word	0x63696c73
+3000e924:	00000065 	.word	0x00000065
+3000e928:	6f6c6c41 	.word	0x6f6c6c41
+3000e92c:	6f502063 	.word	0x6f502063
+3000e930:	20786973 	.word	0x20786973
+3000e934:	65726874 	.word	0x65726874
+3000e938:	66206461 	.word	0x66206461
+3000e93c:	0a6c6961 	.word	0x0a6c6961
+3000e940:	00000000 	.word	0x00000000
+3000e944:	6d206f4e 	.word	0x6d206f4e
+3000e948:	73206d65 	.word	0x73206d65
+3000e94c:	65636170 	.word	0x65636170
+3000e950:	726f6620 	.word	0x726f6620
+3000e954:	736f7020 	.word	0x736f7020
+3000e958:	70207869 	.word	0x70207869
+3000e95c:	61766972 	.word	0x61766972
+3000e960:	645f6574 	.word	0x645f6574
+3000e964:	3a617461 	.word	0x3a617461
+3000e968:	000a7325 	.word	0x000a7325
+3000e96c:	74206f4e 	.word	0x74206f4e
+3000e970:	61657268 	.word	0x61657268
+3000e974:	74732064 	.word	0x74732064
+3000e978:	3a6b6361 	.word	0x3a6b6361
+3000e97c:	000a7325 	.word	0x000a7325
+3000e980:	69736f70 	.word	0x69736f70
+3000e984:	00000078 	.word	0x00000078
+3000e988:	74666f73 	.word	0x74666f73
+3000e98c:	616c6564 	.word	0x616c6564
+3000e990:	00000079 	.word	0x00000079
 
-3000e790 <small_digits>:
-3000e790:	33323130 37363534 62613938 66656463     0123456789abcdef
-3000e7a0:	6a696867 6e6d6c6b 7271706f 76757473     ghijklmnopqrstuv
-3000e7b0:	7a797877 00000000                       wxyz....
+3000e994 <small_digits>:
+3000e994:	33323130 37363534 62613938 66656463     0123456789abcdef
+3000e9a4:	6a696867 6e6d6c6b 7271706f 76757473     ghijklmnopqrstuv
+3000e9b4:	7a797877 00000000                       wxyz....
 
-3000e7b8 <large_digits>:
-3000e7b8:	33323130 37363534 42413938 46454443     0123456789ABCDEF
-3000e7c8:	4a494847 4e4d4c4b 5251504f 56555453     GHIJKLMNOPQRSTUV
-3000e7d8:	5a595857 00000000 4c554e3c 00003e4c     WXYZ....<NULL>..
-3000e7e8:	736e6f63 00656c6f 6c756f43 6f6e2064     console.Could no
-3000e7f8:	6f662074 20646e75 27732527 6d6f6320     t found '%s' com
-3000e808:	646e616d 00000a0d 20756f79 206e6163     mand....you can 
-3000e818:	65707974 65682720 0d27706c 0000000a     type 'help'.....
-3000e828:	6c656873 0000006c 20656854 65726874     shell...The thre
-3000e838:	68206461 20657661 43206f6e 6f736e6f     ad have no Conso
-3000e848:	000a656c 00000a0d 726f4361 3e3a6c61     le......aCoral:>
-3000e858:	00000000 736d656d 006e6163 77656956     ....memscan.View
-3000e868:	65687420 72696620 4c207473 6c657665      the first Level
-3000e878:	6d654d20 2079726f 616e614d 6e656d67      Memory Managmen
-3000e888:	6e492074 00006f66 736d656d 326e6163     t Info..memscan2
-3000e898:	00000000 77656956 65687420 63657320     ....View the sec
-3000e8a8:	65646e6f 76654c20 4d206c65 726f6d65     onde Level Memor
-3000e8b8:	614d2079 6d67616e 20746e65 6f666e49     y Managment Info
-3000e8c8:	00000000 20207325 000a7325 706c6568     ....%s  %s..help
-3000e8d8:	00000000 77656956 6c6c6120 65685320     ....View all She
-3000e8e8:	43206c6c 616d6d6f 6920646e 006f666e     ll Command info.
-3000e8f8:	74697865 00000000 74697845 65685320     exit....Exit She
-3000e908:	00006c6c 47475053 474f474f 0000214f     ll..SPGGOGOGO!..
-3000e918:	00677073 74736145 65207265 00006767     spg.Easter egg..
-3000e928:	79530909 6d657473 72685420 20646165     ..System Thread 
-3000e938:	6f666e49 74616d72 0d6e6f69 0000000a     Information.....
-3000e948:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-3000e958:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-3000e968:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-3000e978:	2d2d2d2d 0a0d2d2d 00000000 656d614e     ------......Name
-3000e988:	79540909 09096570 736e6f43 09656c6f     ..Type..Console.
-3000e998:	61745309 0a0d6574 00000000 09097325     .State......%s..
-3000e9a8:	00000000 6d6d6f43 09096e6f 00000000     ....Common......
-3000e9b8:	63696c53 00090965 69726550 0909646f     Slice...Period..
-3000e9c8:	00000000 09094d52 00000000 69736f50     ....RM......Posi
-3000e9d8:	00090978 09096425 00000000 6e6e7552     x...%d......Runn
-3000e9e8:	09676e69 00000009 64616552 00090979     ing.....Ready...
-3000e9f8:	616c6544 00090979 65656c53 00090970     Delay...Sleep...
-3000ea08:	65657246 0909657a 00000000 6f727245     Freeze......Erro
-3000ea18:	00090972 00000a0d 00007464 77656956     r.......dt..View
-3000ea28:	6c6c6120 72687420 20646165 6f666e69      all thread info
-3000ea38:	00000000 736e6f63 00656c6f              ....console.
+3000e9bc <large_digits>:
+3000e9bc:	33323130 37363534 42413938 46454443     0123456789ABCDEF
+3000e9cc:	4a494847 4e4d4c4b 5251504f 56555453     GHIJKLMNOPQRSTUV
+3000e9dc:	5a595857 00000000 4c554e3c 00003e4c     WXYZ....<NULL>..
+3000e9ec:	736e6f63 00656c6f 6c756f43 6f6e2064     console.Could no
+3000e9fc:	6f662074 20646e75 27732527 6d6f6320     t found '%s' com
+3000ea0c:	646e616d 00000a0d 20756f79 206e6163     mand....you can 
+3000ea1c:	65707974 65682720 0d27706c 0000000a     type 'help'.....
+3000ea2c:	6c656873 0000006c 20656854 65726874     shell...The thre
+3000ea3c:	68206461 20657661 43206f6e 6f736e6f     ad have no Conso
+3000ea4c:	000a656c 00000a0d 726f4361 3e3a6c61     le......aCoral:>
+3000ea5c:	00000000 736d656d 006e6163 77656956     ....memscan.View
+3000ea6c:	65687420 72696620 4c207473 6c657665      the first Level
+3000ea7c:	6d654d20 2079726f 616e614d 6e656d67      Memory Managmen
+3000ea8c:	6e492074 00006f66 736d656d 326e6163     t Info..memscan2
+3000ea9c:	00000000 77656956 65687420 63657320     ....View the sec
+3000eaac:	65646e6f 76654c20 4d206c65 726f6d65     onde Level Memor
+3000eabc:	614d2079 6d67616e 20746e65 6f666e49     y Managment Info
+3000eacc:	00000000 20207325 000a7325 706c6568     ....%s  %s..help
+3000eadc:	00000000 77656956 6c6c6120 65685320     ....View all She
+3000eaec:	43206c6c 616d6d6f 6920646e 006f666e     ll Command info.
+3000eafc:	74697865 00000000 74697845 65685320     exit....Exit She
+3000eb0c:	00006c6c 47475053 474f474f 81bcef4f     ll..SPGGOGOGO...
+3000eb1c:	ef81bcef 000081bc 00677073 74736145     ........spg.East
+3000eb2c:	65207265 00006767 79530909 6d657473     er egg....System
+3000eb3c:	72685420 20646165 6f666e49 74616d72      Thread Informat
+3000eb4c:	0d6e6f69 0000000a 2d2d2d2d 2d2d2d2d     ion.....--------
+3000eb5c:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
+3000eb6c:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
+3000eb7c:	2d2d2d2d 2d2d2d2d 2d2d2d2d 0a0d2d2d     --------------..
+3000eb8c:	00000000 656d614e 79540909 09096570     ....Name..Type..
+3000eb9c:	736e6f43 09656c6f 61745309 0a0d6574     Console..State..
+3000ebac:	00000000 09097325 00000000 6d6d6f43     ....%s......Comm
+3000ebbc:	09096e6f 00000000 63696c53 00090965     on......Slice...
+3000ebcc:	69726550 0909646f 00000000 09094d52     Period......RM..
+3000ebdc:	00000000 69736f50 00090978 09096425     ....Posix...%d..
+3000ebec:	00000000 6e6e7552 09676e69 00000009     ....Running.....
+3000ebfc:	64616552 00090979 616c6544 00090979     Ready...Delay...
+3000ec0c:	65656c53 00090970 65657246 0909657a     Sleep...Freeze..
+3000ec1c:	00000000 6f727245 00090972 00000a0d     ....Error.......
+3000ec2c:	00007464 77656956 6c6c6120 72687420     dt..View all thr
+3000ec3c:	20646165 6f666e69 00000000 736e6f63     ead info....cons
+3000ec4c:	00656c6f                                ole.
