@@ -22,27 +22,51 @@
  */
 #define CFG_MEM_BUDDY 1
 #undef  CFG_MEM_SLATE
-#undef  CFG_MEM2
-#undef  CFG_THRD_SLICE
-#undef  CFG_THRD_PERIOD
+#define CFG_MEM2 1
+#define CFG_MEM2_SIZE (1024000)
+#define CFG_THRD_SLICE 1
+#define CFG_THRD_PERIOD 1
+#define CFG_THRD_RM 1
+#define CFG_HARD_RT_PRIO_NUM (0)
+#define CFG_THRD_POSIX 1
+#define CFG_POSIX_STAIR_NUM (30)
 #define CFG_MAX_THREAD (40)
-#define CFG_MIN_STACK_SIZE (512)
+#define CFG_MIN_STACK_SIZE (1024)
 #undef  CFG_PM
-#undef  CFG_EVT_MBOX
-#undef  CFG_EVT_SEM
-#undef  CFG_MSG
-#undef  CFG_SOFT_DELAY
+#define CFG_EVT_MBOX 1
+#define CFG_EVT_SEM 1
+#define CFG_MSG 1
+#define CFG_SOFT_DELAY 1
 #define CFG_TICKS_PER_SEC (100)
 #undef  CFG_HOOK
 
 /*
  * Driver configuration
  */
-#undef  CFG_DRIVER
+#define CFG_DRIVER 1
+#define CFG_DRV_CONSOLE 1
+#define CFG_DRV_CON_UART 1
+#undef  CFG_DRV_CON_TELNET
+#undef  CFG_DRV_LCD
+#undef  CFG_DRV_TS
+#undef  CFG_DRV_NET_DM9000
+#undef  CFG_DRV_SDI
 
 /*
  * Bsp configuration
  */
+
+/*
+ * Plugin configuration
+ */
+#undef  CFG_PLUGIN_GUI
+#undef  CFG_PLUGIN_NET
+#undef  CFG_PLUGIN_FS
+
+/*
+ * lib configuration
+ */
+#define CFG_LIB_EXT 1
 
 /*
  * Test configuration
@@ -50,9 +74,15 @@
 #undef  CFG_TEST
 
 /*
+ * User configuration
+ */
+#define CFG_SHELL 1
+#define CFG_UART_SHELL 1
+
+/*
  * System hacking
  */
-#define CFG_BAUD_RATE (38400)
+#define CFG_BAUD_RATE (115200)
 #undef  CFG_OUT_SEMI
 #undef  CFG_DEBUG
 #undef  CFG_STAT

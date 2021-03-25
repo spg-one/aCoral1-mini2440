@@ -51,6 +51,17 @@ acoral_shell_cmd_t exit_cmd={
 	"Exit Shell",
 	NULL
 };
+void spg(acoral_32 argc,acoral_char **argv){
+	acoral_prints("SPGGOGOGO!");
+}
+
+acoral_shell_cmd_t spg_cmd={
+	"spg",
+	spg,
+	"Easter egg",
+	NULL
+};
+
 #ifdef CFG_PM
 void acoral_suspend();
 acoral_shell_cmd_t suspend_cmd={
@@ -65,8 +76,9 @@ extern acoral_shell_cmd_t dt_cmd;
 extern fs_cmd_init();
 void cmd_init(){
 	add_command(&mem_cmd);
-	add_command(&mem2_cmd);
+	//add_command(&mem2_cmd);
 	add_command(&dt_cmd);
+	add_command(&spg_cmd);
 #ifdef CFG_PM
 	add_command(&suspend_cmd);
 #endif
