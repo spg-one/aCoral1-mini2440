@@ -8,6 +8,7 @@
 
 #define MUTEX_L_MASK  0x00FF
 #define MUTEX_U_MASK  0xFF00
+#define MUTEX_CEILING_MASK 0xFF0000
 
 #define MUTEX_SUCCED              0
 #define MUTEX_THREAD_SUSPEND      1

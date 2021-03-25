@@ -88,7 +88,7 @@ acoral_u32 acoral_mutex_del(acoral_evt_t *evt, acoral_u32 opt)
 /*=============================
  *  the appliation for mutex
  *      信号号申请操作
- *  优先级继承的优先级反转解决
+ *  	  非阻塞式
  *=============================*/
 acoral_u32 acoral_mutex_trypend(acoral_evt_t *evt)
 {
@@ -165,20 +165,99 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 	}
 	
 	/* 互斥量已被占有*/
-	/* 这里要看进程是否一个核上的*/
-	/* 是一个核上的任务才有可能发生优先级反转*/
 	highPrio = (acoral_u8)(evt->count >> 8);
-	ownerPrio = (acoral_u8)(evt->count & MUTEX_L_MASK);
 	thread = (acoral_thread_t*)evt->data;
 
-	if (thread->prio != highPrio&&ownerPrio>cur->prio)
+	if (thread->prio>cur->prio)
 	{
-		/*有可能优先级反转，提升拥有者优先级*/
-		if(highPrio==0)
+		/*有可能优先级反转，继承最高优先级*/
+		if(cur->prio<highPrio)
+		{
 			highPrio=cur->prio;
+			evt->count &= ~MUTEX_U_MASK;
+			evt->count |= highPrio << 8;
+		}
 		acoral_thread_change_prio(thread,highPrio);
 	}
 	/*不需要或不能提高优先级*/
+	acoral_unrdy_thread(cur);
+	acoral_evt_queue_add(evt,cur);
+	if (timeout > 0)
+	{
+		/*加载到超时队列*/
+		cur->delay = TIME_TO_TICKS(timeout);
+		timeout_queue_add(cur);
+	}
+	acoral_spin_unlock(&evt->spin_lock);
+	HAL_EXIT_CRITICAL();
+	acoral_sched();
+	HAL_ENTER_CRITICAL();
+	acoral_spin_lock(&evt->spin_lock);
+	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
+		acoral_printk("Time Out Return\n");
+		acoral_evt_queue_del(cur);
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+		return MUTEX_ERR_TIMEOUT;
+	}
+
+	//---------------
+	// modify by pegasus 0804: timeout_queue_del [+]
+	timeout_queue_del(cur);
+
+	if(evt->data!=cur){
+		acoral_printk("Err Ready Return\n");
+		acoral_evt_queue_del(cur);
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+		return MUTEX_ERR_RDY;
+	}
+	
+	return MUTEX_SUCCED;
+}
+
+/*=============================
+ *  the appliation for mutex
+ *      信号号申请操作
+ *  优先级天花板的优先级反转解决
+ *=============================*/
+acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
+{
+	acoral_sr        cpu_sr;
+	acoral_u8        highPrio;
+	acoral_u8        ownerPrio;
+	acoral_thread_t *thread;
+	acoral_thread_t *cur;
+
+	if(acoral_intr_nesting>0)
+		return MUTEX_ERR_INTR;
+	
+	cur=acoral_cur_thread;
+	
+	HAL_ENTER_CRITICAL();
+	acoral_spin_lock(&evt->spin_lock);
+	if (NULL== evt)
+	{
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+		return MUTEX_ERR_NULL;
+	}
+	
+	if ((acoral_u8)(evt->count & MUTEX_L_MASK) == MUTEX_AVAI)
+	{
+		/* 申请成功*/
+		evt->count &= MUTEX_U_MASK;
+		evt->count |= cur->prio;
+		evt->data = (void*)cur;
+
+		/*提升至天花板优先级*/
+		cur->prio = (evt->count & MUTEX_CEILING_MASK)>> 16;
+		acoral_spin_unlock(&evt->spin_lock);
+		HAL_EXIT_CRITICAL();
+		return MUTEX_SUCCED;
+	}
+	
+	/* 互斥量已被占有*/
 	acoral_unrdy_thread(cur);
 	acoral_evt_queue_add(evt,cur);
 	if (timeout > 0)
