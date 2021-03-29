@@ -107,7 +107,7 @@ acoral_thread_t orig_thread;
  *       c语言初始化入口函数
  *================================*/
 void acoral_start(){
-	acoral_prints("hello spg");
+	
 #ifdef CFG_CMP
       	static int core_cpu=1;
 	if(!core_cpu){
@@ -192,5 +192,6 @@ void acoral_module_init(){
 	/*消息管理系统初始化*/
 #ifdef CFG_DRIVER
 	acoral_drv_sys_init();
+	acoral_prints("hello spg");
 #endif
 }
