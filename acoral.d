@@ -2576,192 +2576,192 @@ void acoral_start(){
 	HAL_CORE_CPU_INIT();
 #endif
 	orig_thread.console_id=ACORAL_DEV_ERR_ID;
-30001a90:	e59f3030 	ldr	r3, [pc, #48]	; 30001ac8 <acoral_start+0x3c>
+30001a90:	e59f3038 	ldr	r3, [pc, #56]	; 30001ad0 <acoral_start+0x44>
 30001a94:	e3e02000 	mvn	r2, #0
 30001a98:	e583204c 	str	r2, [r3, #76]	; 0x4c
 	acoral_set_orig_thread(&orig_thread);
-30001a9c:	e59f0024 	ldr	r0, [pc, #36]	; 30001ac8 <acoral_start+0x3c>
+30001a9c:	e59f002c 	ldr	r0, [pc, #44]	; 30001ad0 <acoral_start+0x44>
 30001aa0:	eb00015d 	bl	3000201c <acoral_set_orig_thread>
 	/*板子初始化*/
 	HAL_BOARD_INIT();
 
 	/*内核模块初始化*/
 	acoral_module_init();
-30001aa4:	eb000058 	bl	30001c0c <acoral_module_init>
+30001aa4:	eb00005b 	bl	30001c18 <acoral_module_init>
 
 	/*串口终端应该初始化好了，将根线程的终端id设置为串口终端*/
 #ifdef CFG_DRIVER
-	orig_thread.console_id=acoral_dev_open("console");;
-30001aa8:	e59f001c 	ldr	r0, [pc, #28]	; 30001acc <acoral_start+0x40>
+	orig_thread.console_id=acoral_dev_open("console");
+30001aa8:	e59f0024 	ldr	r0, [pc, #36]	; 30001ad4 <acoral_start+0x48>
 30001aac:	eb002ed0 	bl	3000d5f4 <acoral_dev_open>
 30001ab0:	e1a02000 	mov	r2, r0
-30001ab4:	e59f300c 	ldr	r3, [pc, #12]	; 30001ac8 <acoral_start+0x3c>
+30001ab4:	e59f3014 	ldr	r3, [pc, #20]	; 30001ad0 <acoral_start+0x44>
 30001ab8:	e583204c 	str	r2, [r3, #76]	; 0x4c
+	acoral_prints("hello spg");
+30001abc:	e59f0014 	ldr	r0, [pc, #20]	; 30001ad8 <acoral_start+0x4c>
+30001ac0:	eb002677 	bl	3000b4a4 <acoral_prints>
 	/*cmp初始化*/
     	acoral_cmp_init();
 #endif
 
 	/*主cpu开始函数*/
 	acoral_core_cpu_start();
-30001abc:	eb000003 	bl	30001ad0 <acoral_core_cpu_start>
+30001ac4:	eb000004 	bl	30001adc <acoral_core_cpu_start>
 }
-30001ac0:	e8bd4008 	pop	{r3, lr}
-30001ac4:	e12fff1e 	bx	lr
-30001ac8:	3000fc54 	.word	0x3000fc54
-30001acc:	3000e3f4 	.word	0x3000e3f4
+30001ac8:	e8bd4008 	pop	{r3, lr}
+30001acc:	e12fff1e 	bx	lr
+30001ad0:	3000fc54 	.word	0x3000fc54
+30001ad4:	3000e3f4 	.word	0x3000e3f4
+30001ad8:	3000e3fc 	.word	0x3000e3fc
 
-30001ad0 <acoral_core_cpu_start>:
+30001adc <acoral_core_cpu_start>:
 /*================================
  *  the primary cpu core start function 
  *      主cpu core的开始函数
  *================================*/
 #define IDLE_STACK_SIZE 128
 void acoral_core_cpu_start(){
-30001ad0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-30001ad4:	e24dd01c 	sub	sp, sp, #28
+30001adc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+30001ae0:	e24dd01c 	sub	sp, sp, #28
 	acoral_comm_policy_data_t data;
 	/*创建空闲线程*/
 	acoral_start_sched=false;
-30001ad8:	e59f30cc 	ldr	r3, [pc, #204]	; 30001bac <acoral_core_cpu_start+0xdc>
-30001adc:	e3a02000 	mov	r2, #0
-30001ae0:	e5832000 	str	r2, [r3]
+30001ae4:	e59f30cc 	ldr	r3, [pc, #204]	; 30001bb8 <acoral_core_cpu_start+0xdc>
+30001ae8:	e3a02000 	mov	r2, #0
+30001aec:	e5832000 	str	r2, [r3]
 	data.cpu=acoral_current_cpu;
-30001ae4:	e3a03000 	mov	r3, #0
-30001ae8:	e5cd3014 	strb	r3, [sp, #20]
+30001af0:	e3a03000 	mov	r3, #0
+30001af4:	e5cd3014 	strb	r3, [sp, #20]
 	data.prio=ACORAL_IDLE_PRIO;
-30001aec:	e3a03046 	mov	r3, #70	; 0x46
-30001af0:	e5cd3015 	strb	r3, [sp, #21]
+30001af8:	e3a03046 	mov	r3, #70	; 0x46
+30001afc:	e5cd3015 	strb	r3, [sp, #21]
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
-30001af4:	e3a03004 	mov	r3, #4
-30001af8:	e5cd3016 	strb	r3, [sp, #22]
+30001b00:	e3a03004 	mov	r3, #4
+30001b04:	e5cd3016 	strb	r3, [sp, #22]
 	idle_id=acoral_create_thread_ext(idle,IDLE_STACK_SIZE,NULL,"idle",NULL,ACORAL_SCHED_POLICY_COMM,&data);
-30001afc:	e3a03000 	mov	r3, #0
-30001b00:	e58d3000 	str	r3, [sp]
-30001b04:	e3a03015 	mov	r3, #21
-30001b08:	e58d3004 	str	r3, [sp, #4]
-30001b0c:	e28d3014 	add	r3, sp, #20
-30001b10:	e58d3008 	str	r3, [sp, #8]
-30001b14:	e59f0094 	ldr	r0, [pc, #148]	; 30001bb0 <acoral_core_cpu_start+0xe0>
-30001b18:	e3a01080 	mov	r1, #128	; 0x80
-30001b1c:	e3a02000 	mov	r2, #0
-30001b20:	e59f308c 	ldr	r3, [pc, #140]	; 30001bb4 <acoral_core_cpu_start+0xe4>
-30001b24:	eb000045 	bl	30001c40 <create_thread_ext>
-30001b28:	e1a02000 	mov	r2, r0
-30001b2c:	e59f3084 	ldr	r3, [pc, #132]	; 30001bb8 <acoral_core_cpu_start+0xe8>
-30001b30:	e5832000 	str	r2, [r3]
+30001b08:	e3a03000 	mov	r3, #0
+30001b0c:	e58d3000 	str	r3, [sp]
+30001b10:	e3a03015 	mov	r3, #21
+30001b14:	e58d3004 	str	r3, [sp, #4]
+30001b18:	e28d3014 	add	r3, sp, #20
+30001b1c:	e58d3008 	str	r3, [sp, #8]
+30001b20:	e59f0094 	ldr	r0, [pc, #148]	; 30001bbc <acoral_core_cpu_start+0xe0>
+30001b24:	e3a01080 	mov	r1, #128	; 0x80
+30001b28:	e3a02000 	mov	r2, #0
+30001b2c:	e59f308c 	ldr	r3, [pc, #140]	; 30001bc0 <acoral_core_cpu_start+0xe4>
+30001b30:	eb000042 	bl	30001c40 <create_thread_ext>
+30001b34:	e1a02000 	mov	r2, r0
+30001b38:	e59f3084 	ldr	r3, [pc, #132]	; 30001bc4 <acoral_core_cpu_start+0xe8>
+30001b3c:	e5832000 	str	r2, [r3]
 	if(idle_id==-1)
-30001b34:	e59f307c 	ldr	r3, [pc, #124]	; 30001bb8 <acoral_core_cpu_start+0xe8>
-30001b38:	e5933000 	ldr	r3, [r3]
-30001b3c:	e3730001 	cmn	r3, #1
-30001b40:	1a000000 	bne	30001b48 <acoral_core_cpu_start+0x78>
+30001b40:	e59f307c 	ldr	r3, [pc, #124]	; 30001bc4 <acoral_core_cpu_start+0xe8>
+30001b44:	e5933000 	ldr	r3, [r3]
+30001b48:	e3730001 	cmn	r3, #1
+30001b4c:	1a000000 	bne	30001b54 <acoral_core_cpu_start+0x78>
 		while(1);
-30001b44:	eafffffe 	b	30001b44 <acoral_core_cpu_start+0x74>
+30001b50:	eafffffe 	b	30001b50 <acoral_core_cpu_start+0x74>
 	/*创建初始化线程,这个调用层次比较多，需要多谢堆栈*/
 	data.prio=ACORAL_INIT_PRIO;
-30001b48:	e3a03000 	mov	r3, #0
-30001b4c:	e5cd3015 	strb	r3, [sp, #21]
+30001b54:	e3a03000 	mov	r3, #0
+30001b58:	e5cd3015 	strb	r3, [sp, #21]
 	/*动态堆栈*/
 	init_id=acoral_create_thread_ext(init,ACORAL_TEST_STACK_SIZE,"in init","init",NULL,ACORAL_SCHED_POLICY_COMM,&data);
-30001b50:	e3a03000 	mov	r3, #0
-30001b54:	e58d3000 	str	r3, [sp]
-30001b58:	e3a03015 	mov	r3, #21
-30001b5c:	e58d3004 	str	r3, [sp, #4]
-30001b60:	e28d3014 	add	r3, sp, #20
-30001b64:	e58d3008 	str	r3, [sp, #8]
-30001b68:	e59f004c 	ldr	r0, [pc, #76]	; 30001bbc <acoral_core_cpu_start+0xec>
-30001b6c:	e3a01c02 	mov	r1, #512	; 0x200
-30001b70:	e59f2048 	ldr	r2, [pc, #72]	; 30001bc0 <acoral_core_cpu_start+0xf0>
-30001b74:	e59f3048 	ldr	r3, [pc, #72]	; 30001bc4 <acoral_core_cpu_start+0xf4>
-30001b78:	eb000030 	bl	30001c40 <create_thread_ext>
-30001b7c:	e1a02000 	mov	r2, r0
-30001b80:	e59f3040 	ldr	r3, [pc, #64]	; 30001bc8 <acoral_core_cpu_start+0xf8>
-30001b84:	e5832000 	str	r2, [r3]
+30001b5c:	e3a03000 	mov	r3, #0
+30001b60:	e58d3000 	str	r3, [sp]
+30001b64:	e3a03015 	mov	r3, #21
+30001b68:	e58d3004 	str	r3, [sp, #4]
+30001b6c:	e28d3014 	add	r3, sp, #20
+30001b70:	e58d3008 	str	r3, [sp, #8]
+30001b74:	e59f004c 	ldr	r0, [pc, #76]	; 30001bc8 <acoral_core_cpu_start+0xec>
+30001b78:	e3a01c02 	mov	r1, #512	; 0x200
+30001b7c:	e59f2048 	ldr	r2, [pc, #72]	; 30001bcc <acoral_core_cpu_start+0xf0>
+30001b80:	e59f3048 	ldr	r3, [pc, #72]	; 30001bd0 <acoral_core_cpu_start+0xf4>
+30001b84:	eb00002d 	bl	30001c40 <create_thread_ext>
+30001b88:	e1a02000 	mov	r2, r0
+30001b8c:	e59f3040 	ldr	r3, [pc, #64]	; 30001bd4 <acoral_core_cpu_start+0xf8>
+30001b90:	e5832000 	str	r2, [r3]
 	if(init_id==-1)
-30001b88:	e59f3038 	ldr	r3, [pc, #56]	; 30001bc8 <acoral_core_cpu_start+0xf8>
-30001b8c:	e5933000 	ldr	r3, [r3]
-30001b90:	e3730001 	cmn	r3, #1
-30001b94:	1a000000 	bne	30001b9c <acoral_core_cpu_start+0xcc>
+30001b94:	e59f3038 	ldr	r3, [pc, #56]	; 30001bd4 <acoral_core_cpu_start+0xf8>
+30001b98:	e5933000 	ldr	r3, [r3]
+30001b9c:	e3730001 	cmn	r3, #1
+30001ba0:	1a000000 	bne	30001ba8 <acoral_core_cpu_start+0xcc>
 		while(1);
-30001b98:	eafffffe 	b	30001b98 <acoral_core_cpu_start+0xc8>
+30001ba4:	eafffffe 	b	30001ba4 <acoral_core_cpu_start+0xc8>
 	acoral_start_os();
-30001b9c:	eb00000a 	bl	30001bcc <acoral_start_os>
+30001ba8:	eb00000a 	bl	30001bd8 <acoral_start_os>
 }
-30001ba0:	e28dd01c 	add	sp, sp, #28
-30001ba4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
-30001ba8:	e12fff1e 	bx	lr
-30001bac:	3000ecfc 	.word	0x3000ecfc
-30001bb0:	300018bc 	.word	0x300018bc
-30001bb4:	3000e3fc 	.word	0x3000e3fc
-30001bb8:	30010554 	.word	0x30010554
-30001bbc:	30001998 	.word	0x30001998
-30001bc0:	3000e404 	.word	0x3000e404
-30001bc4:	3000e40c 	.word	0x3000e40c
-30001bc8:	30010584 	.word	0x30010584
+30001bac:	e28dd01c 	add	sp, sp, #28
+30001bb0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+30001bb4:	e12fff1e 	bx	lr
+30001bb8:	3000ecfc 	.word	0x3000ecfc
+30001bbc:	300018bc 	.word	0x300018bc
+30001bc0:	3000e408 	.word	0x3000e408
+30001bc4:	30010554 	.word	0x30010554
+30001bc8:	30001998 	.word	0x30001998
+30001bcc:	3000e410 	.word	0x3000e410
+30001bd0:	3000e418 	.word	0x3000e418
+30001bd4:	30010584 	.word	0x30010584
 
-30001bcc <acoral_start_os>:
+30001bd8 <acoral_start_os>:
 
 void acoral_start_os(){
-30001bcc:	e92d4008 	push	{r3, lr}
+30001bd8:	e92d4008 	push	{r3, lr}
 	acoral_sched_init();
-30001bd0:	eb0000f5 	bl	30001fac <acoral_sched_init>
+30001bdc:	eb0000f2 	bl	30001fac <acoral_sched_init>
 	acoral_select_thread();
-30001bd4:	eb000280 	bl	300025dc <acoral_select_thread>
+30001be0:	eb00027d 	bl	300025dc <acoral_select_thread>
 	acoral_set_running_thread(acoral_ready_thread);
-30001bd8:	e59f3024 	ldr	r3, [pc, #36]	; 30001c04 <acoral_start_os+0x38>
-30001bdc:	e5933000 	ldr	r3, [r3]
-30001be0:	e1a00003 	mov	r0, r3
-30001be4:	eb000114 	bl	3000203c <acoral_set_running_thread>
+30001be4:	e59f3024 	ldr	r3, [pc, #36]	; 30001c10 <acoral_start_os+0x38>
+30001be8:	e5933000 	ldr	r3, [r3]
+30001bec:	e1a00003 	mov	r0, r3
+30001bf0:	eb000111 	bl	3000203c <acoral_set_running_thread>
 	HAL_START_OS(&acoral_cur_thread->stack);
-30001be8:	e59f3018 	ldr	r3, [pc, #24]	; 30001c08 <acoral_start_os+0x3c>
-30001bec:	e5933000 	ldr	r3, [r3]
-30001bf0:	e2833034 	add	r3, r3, #52	; 0x34
-30001bf4:	e1a00003 	mov	r0, r3
-30001bf8:	ebfffe63 	bl	3000158c <HAL_SWITCH_TO>
+30001bf4:	e59f3018 	ldr	r3, [pc, #24]	; 30001c14 <acoral_start_os+0x3c>
+30001bf8:	e5933000 	ldr	r3, [r3]
+30001bfc:	e2833034 	add	r3, r3, #52	; 0x34
+30001c00:	e1a00003 	mov	r0, r3
+30001c04:	ebfffe60 	bl	3000158c <HAL_SWITCH_TO>
 }
-30001bfc:	e8bd4008 	pop	{r3, lr}
-30001c00:	e12fff1e 	bx	lr
-30001c04:	30010610 	.word	0x30010610
-30001c08:	30010618 	.word	0x30010618
+30001c08:	e8bd4008 	pop	{r3, lr}
+30001c0c:	e12fff1e 	bx	lr
+30001c10:	30010610 	.word	0x30010610
+30001c14:	30010618 	.word	0x30010618
 
-30001c0c <acoral_module_init>:
+30001c18 <acoral_module_init>:
 
 /*================================
  *  the subsystem init of the kernel
  *     内核各模块初始化
  *================================*/
 void acoral_module_init(){
-30001c0c:	e92d4008 	push	{r3, lr}
+30001c18:	e92d4008 	push	{r3, lr}
 	/*中断系统初始化*/
 	acoral_intr_sys_init();
-30001c10:	eb000826 	bl	30003cb0 <acoral_intr_sys_init>
+30001c1c:	eb000823 	bl	30003cb0 <acoral_intr_sys_init>
 	/*内存管理系统初始化*/
 	acoral_mem_sys_init();
-30001c14:	eb000b94 	bl	30004a6c <acoral_mem_sys_init>
+30001c20:	eb000b91 	bl	30004a6c <acoral_mem_sys_init>
 	/*资源管理系统初始化*/
 	acoral_res_sys_init();
-30001c18:	eb000800 	bl	30003c20 <acoral_res_sys_init>
+30001c24:	eb0007fd 	bl	30003c20 <acoral_res_sys_init>
 	/*驱动管理系统初始化*/
 	/*线程管理系统初始化*/
 	acoral_thread_sys_init();
-30001c1c:	eb0004d2 	bl	30002f6c <acoral_thread_sys_init>
+30001c28:	eb0004cf 	bl	30002f6c <acoral_thread_sys_init>
 	/*时钟管理系统初始化*/
 	acoral_time_sys_init();
-30001c20:	eb000a25 	bl	300044bc <acoral_time_sys_init>
+30001c2c:	eb000a22 	bl	300044bc <acoral_time_sys_init>
 	/*事件管理系统初始化,这个必须要，因为内存管理系统用到了*/
 	acoral_evt_sys_init();
-30001c24:	eb000bcd 	bl	30004b60 <acoral_evt_sys_init>
+30001c30:	eb000bca 	bl	30004b60 <acoral_evt_sys_init>
 	/*消息管理系统初始化*/
 #ifdef CFG_DRIVER
 	acoral_drv_sys_init();
-30001c28:	eb002f40 	bl	3000d930 <acoral_drv_sys_init>
-	acoral_prints("hello spg");
-30001c2c:	e59f0008 	ldr	r0, [pc, #8]	; 30001c3c <acoral_module_init+0x30>
-30001c30:	eb00261b 	bl	3000b4a4 <acoral_prints>
+30001c34:	eb002f3d 	bl	3000d930 <acoral_drv_sys_init>
 #endif
 }
-30001c34:	e8bd4008 	pop	{r3, lr}
-30001c38:	e12fff1e 	bx	lr
-30001c3c:	3000e414 	.word	0x3000e414
+30001c38:	e8bd4008 	pop	{r3, lr}
+30001c3c:	e12fff1e 	bx	lr
 
 30001c40 <create_thread_ext>:
 #include<queue.h>
@@ -22770,15 +22770,15 @@ void con_uart_init(){
 3000e3f0:	00006e6f 	.word	0x00006e6f
 3000e3f4:	736e6f63 	.word	0x736e6f63
 3000e3f8:	00656c6f 	.word	0x00656c6f
-3000e3fc:	656c6469 	.word	0x656c6469
-3000e400:	00000000 	.word	0x00000000
-3000e404:	69206e69 	.word	0x69206e69
-3000e408:	0074696e 	.word	0x0074696e
-3000e40c:	74696e69 	.word	0x74696e69
-3000e410:	00000000 	.word	0x00000000
-3000e414:	6c6c6568 	.word	0x6c6c6568
-3000e418:	7073206f 	.word	0x7073206f
-3000e41c:	00000067 	.word	0x00000067
+3000e3fc:	6c6c6568 	.word	0x6c6c6568
+3000e400:	7073206f 	.word	0x7073206f
+3000e404:	00000067 	.word	0x00000067
+3000e408:	656c6469 	.word	0x656c6469
+3000e40c:	00000000 	.word	0x00000000
+3000e410:	69206e69 	.word	0x69206e69
+3000e414:	0074696e 	.word	0x0074696e
+3000e418:	74696e69 	.word	0x74696e69
+3000e41c:	00000000 	.word	0x00000000
 3000e420:	6f6c6c41 	.word	0x6f6c6c41
 3000e424:	68742063 	.word	0x68742063
 3000e428:	64616572 	.word	0x64616572

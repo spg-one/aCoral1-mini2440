@@ -187,7 +187,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000d688 g     F .text	00000098 acoral_dev_write
 30000974 g     F .text	00000010 hal_mem_init
 300002c0 g     F .text	0000010c hal_stack_init
-30001ad0 g     F .text	000000fc acoral_core_cpu_start
+30001adc g     F .text	000000fc acoral_core_cpu_start
 3000166c g       .text	00000000 HAL_INTR_ENTRY
 3000ec9c g     O .data	00000010 mem_cmd
 30004ac8 g     F .text	00000024 spin_unlock_intr_restore
@@ -320,7 +320,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000df2c g     F .text	000000ac __floatdisf
 3000e9d4 g     O .text	00000025 large_digits
 30009774 g     F .text	000000c0 acoral_posix_create
-30001a8c g     F .text	00000044 acoral_start
+30001a8c g     F .text	00000050 acoral_start
 3000c928 g     F .text	00000240 parse_args
 3000fcdc g     O .bss	00000004 daemon_id
 3000fce0 g     O .bss	0000000c period_delay_queue
@@ -340,7 +340,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 33fffd00 g       *ABS*	00000000 ABT_stack
 3000ecbc g     O .data	00000010 help_cmd
 3000d408 g     F .text	0000008c acoral_get_drv_ctrl_by_name
-30001bcc g     F .text	00000040 acoral_start_os
+30001bd8 g     F .text	00000040 acoral_start_os
 300071a8 g     F .text	000000e4 v_mem_scan
 30009b6c g     F .text	00000024 delay_task
 300031ac g     F .text	00000164 acoral_create_pool
@@ -585,7 +585,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000dd38 g     F .text	000001bc __addsf3
 30004318 g     F .text	0000004c acoral_set_intr_unmask
 30010640 g     O .bss	00000004 tail_cmd
-30001c0c g     F .text	00000034 acoral_module_init
+30001c18 g     F .text	00000028 acoral_module_init
 300078a0 g     F .text	000001ac acoral_sem_pend
 30004234 g     F .text	0000004c acoral_set_intr_enter
 30006df4 g     F .text	00000054 v_malloc
