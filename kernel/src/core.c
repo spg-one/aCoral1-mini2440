@@ -65,6 +65,7 @@ void daem(void *args){
 #endif
 acoral_thread_t *thread;
 void init(void *args){
+	acoral_prints("in init spg");
 	acoral_comm_policy_data_t data;
 	acoral_ticks_init();
 	/*ticks中断初始化函数*/
