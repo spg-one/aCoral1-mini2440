@@ -107,6 +107,7 @@ acoral_thread_t orig_thread;
  *       c语言初始化入口函数
  *================================*/
 void acoral_start(){
+	acoral_prints("hello spg");
 #ifdef CFG_CMP
       	static int core_cpu=1;
 	if(!core_cpu){

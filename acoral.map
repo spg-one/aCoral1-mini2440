@@ -34,25 +34,25 @@
 30000214 t memsetup
 30000238 t mem_clear
 30000250 t mem_cfg_val
-300002c0 T hal_stack_init	/usr/aCoral-mini2440/hal/s3c2440/src/hal_thread_c.c:21
-300003cc T hal_all_entry	/usr/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:4
-30000498 t hal_intr_unmask	/usr/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:23
-3000058c t hal_intr_mask	/usr/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:38
-30000674 t hal_intr_ack	/usr/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:54
-30000768 T hal_intr_init	/usr/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:72
-30000864 T hal_ticks_init	/usr/aCoral-mini2440/hal/s3c2440/src/hal_timer.c:10
-30000938 T hal_ticks_delay	/usr/aCoral-mini2440/hal/s3c2440/src/hal_timer.c:22
-30000974 T hal_mem_init	/usr/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:7
-30000984 T flush_cache	/usr/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:11
-30000a08 t hal_mmu_init	/usr/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:22
-30000c04 T hal_mmu_setmtt	/usr/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:67
-30000cb0 t nand_wait	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:6
-30000d00 t nand_reset	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:14
-30000d84 T nand_init	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:25
-30000db4 t is_bad_block	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:42
-30000f6c t nand_read_page	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:74
-30001140 t nand_read_id	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:111
-300011c0 T nand_read	/usr/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:123
+300002c0 T hal_stack_init	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_thread_c.c:21
+300003cc T hal_all_entry	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:4
+30000498 t hal_intr_unmask	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:23
+3000058c t hal_intr_mask	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:38
+30000674 t hal_intr_ack	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:54
+30000768 T hal_intr_init	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_int_c.c:72
+30000864 T hal_ticks_init	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_timer.c:10
+30000938 T hal_ticks_delay	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_timer.c:22
+30000974 T hal_mem_init	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:7
+30000984 T flush_cache	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:11
+30000a08 t hal_mmu_init	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:22
+30000c04 T hal_mmu_setmtt	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_mem_c.c:67
+30000cb0 t nand_wait	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:6
+30000d00 t nand_reset	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:14
+30000d84 T nand_init	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:25
+30000db4 t is_bad_block	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:42
+30000f6c t nand_read_page	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:74
+30001140 t nand_read_id	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:111
+300011c0 T nand_read	/home/acoral/aCoral-mini2440/hal/s3c2440/src/hal_nand.c:123
 3000147c T MMU_EnableICache
 3000148c T MMU_DisableICache
 3000149c T MMU_EnableDCache
@@ -89,404 +89,404 @@
 300016d8 T HAL_INTR_DISABLE
 300016ec T HAL_INTR_RESTORE
 300016f4 T HAL_INTR_DISABLE_SAVE
-3000171c T hal_intr_nesting_init_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:11
-30001760 T hal_get_intr_nesting_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:21
-30001774 T hal_intr_nesting_dec_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:30
-300017b8 T hal_intr_nesting_inc_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:42
-300017d4 T hal_sched_bridge_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:46
-30001800 T hal_intr_exit_bridge_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:53
-3000182c T hal_atomic_add_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:60
-30001874 T hal_atomic_sub_comm	/usr/aCoral-mini2440/hal/src/hal_comm.c:68
-300018bc T idle	/usr/aCoral-mini2440/kernel/src/core.c:10
-300018c8 T daem	/usr/aCoral-mini2440/kernel/src/core.c:22
-30001998 T init	/usr/aCoral-mini2440/kernel/src/core.c:67
-30001a8c T acoral_start	/usr/aCoral-mini2440/kernel/src/core.c:109
-30001ad0 T acoral_core_cpu_start	/usr/aCoral-mini2440/kernel/src/core.c:147
-30001bcc T acoral_start_os	/usr/aCoral-mini2440/kernel/src/core.c:166
-30001c0c T acoral_module_init	/usr/aCoral-mini2440/kernel/src/core.c:177
-30001c34 T create_thread_ext	/usr/aCoral-mini2440/kernel/src/policy.c:8
-30001d08 T acoral_get_policy_ctrl	/usr/aCoral-mini2440/kernel/src/policy.c:28
-30001d88 T acoral_policy_thread_init	/usr/aCoral-mini2440/kernel/src/policy.c:41
-30001e48 T acoral_register_sched_policy	/usr/aCoral-mini2440/kernel/src/policy.c:55
-30001e74 T acoral_policy_delay_deal	/usr/aCoral-mini2440/kernel/src/policy.c:59
-30001ef0 T acoral_policy_thread_release	/usr/aCoral-mini2440/kernel/src/policy.c:71
-30001f44 T acoral_sched_policy_init	/usr/aCoral-mini2440/kernel/src/policy.c:79
-30001f80 T app_enter_policy_init	/usr/aCoral-mini2440/kernel/src/policy.c:96
-30001f90 T app_exit_policy_init	/usr/aCoral-mini2440/kernel/src/policy.c:102
-30001fa0 T acoral_sched_init	/usr/aCoral-mini2440/kernel/src/sched.c:11
-30001ff0 T acoral_sched_unlock	/usr/aCoral-mini2440/kernel/src/sched.c:19
-30002010 T acoral_set_orig_thread	/usr/aCoral-mini2440/kernel/src/sched.c:24
-30002030 T acoral_set_running_thread	/usr/aCoral-mini2440/kernel/src/sched.c:28
-30002084 T acoral_thread_runqueue_init	/usr/aCoral-mini2440/kernel/src/sched.c:38
-300020fc T acoral_get_idlest_cpu	/usr/aCoral-mini2440/kernel/src/sched.c:55
-30002194 T acoral_get_idle_maskcpu	/usr/aCoral-mini2440/kernel/src/sched.c:68
-30002258 T acoral_rdyqueue_add	/usr/aCoral-mini2440/kernel/src/sched.c:85
-3000232c T acoral_rdyqueue_del	/usr/aCoral-mini2440/kernel/src/sched.c:101
-300023f8 T acoral_sched	/usr/aCoral-mini2440/kernel/src/sched.c:118
-30002478 T acoral_real_sched	/usr/aCoral-mini2440/kernel/src/sched.c:141
-30002524 T acoral_real_intr_sched	/usr/aCoral-mini2440/kernel/src/sched.c:174
-300025d0 T acoral_select_thread	/usr/aCoral-mini2440/kernel/src/sched.c:206
-30002698 T acoral_release_thread1	/usr/aCoral-mini2440/kernel/src/thread.c:27
-3000270c T acoral_release_thread	/usr/aCoral-mini2440/kernel/src/thread.c:49
-30002760 T acoral_suspend_thread	/usr/aCoral-mini2440/kernel/src/thread.c:70
-300027b4 T acoral_suspend_self	/usr/aCoral-mini2440/kernel/src/thread.c:95
-300027d4 T acoral_suspend_thread_by_id	/usr/aCoral-mini2440/kernel/src/thread.c:105
-30002808 T acoral_resume_thread_by_id	/usr/aCoral-mini2440/kernel/src/thread.c:116
-3000283c T acoral_resume_thread	/usr/aCoral-mini2440/kernel/src/thread.c:126
-30002890 t acoral_delay_thread	/usr/aCoral-mini2440/kernel/src/thread.c:154
-3000291c t acoral_delay_thread_by_id	/usr/aCoral-mini2440/kernel/src/thread.c:179
-30002954 T acoral_delay_self	/usr/aCoral-mini2440/kernel/src/thread.c:189
-30002984 T acoral_kill_thread	/usr/aCoral-mini2440/kernel/src/thread.c:198
-30002a20 T acoral_kill_thread_by_id	/usr/aCoral-mini2440/kernel/src/thread.c:243
-30002a50 T acoral_thread_exit	/usr/aCoral-mini2440/kernel/src/thread.c:253
-30002a70 T acoral_thread_change_prio	/usr/aCoral-mini2440/kernel/src/thread.c:261
-30002aec T acoral_change_prio_self	/usr/aCoral-mini2440/kernel/src/thread.c:285
-30002b1c T acoral_thread_change_prio_by_id	/usr/aCoral-mini2440/kernel/src/thread.c:293
-30002b58 T acoral_rdy_thread	/usr/aCoral-mini2440/kernel/src/thread.c:304
-30002b94 T acoral_unrdy_thread	/usr/aCoral-mini2440/kernel/src/thread.c:327
-30002bd0 T acoral_thread_move2_tail	/usr/aCoral-mini2440/kernel/src/thread.c:343
-30002c10 T acoral_thread_move2_tail_by_id	/usr/aCoral-mini2440/kernel/src/thread.c:361
-30002c40 T acoral_alloc_thread	/usr/aCoral-mini2440/kernel/src/thread.c:371
-30002c60 T acoral_thread_init	/usr/aCoral-mini2440/kernel/src/thread.c:384
-30002e8c T acoral_thread_pool_init	/usr/aCoral-mini2440/kernel/src/thread.c:431
-30002f0c T acoral_set_thread_console	/usr/aCoral-mini2440/kernel/src/thread.c:444
-30002f30 T acoral_sched_mechanism_init	/usr/aCoral-mini2440/kernel/src/thread.c:448
-30002f60 T acoral_thread_sys_init	/usr/aCoral-mini2440/kernel/src/thread.c:459
-30002f74 T create_comm_thread	/usr/aCoral-mini2440/kernel/src/comm_thrd.c:22
-30003044 T comm_policy_thread_init	/usr/aCoral-mini2440/kernel/src/comm_thrd.c:46
-30003144 T comm_policy_init	/usr/aCoral-mini2440/kernel/src/comm_thrd.c:71
-300031a0 T acoral_create_pool	/usr/aCoral-mini2440/kernel/src/resource.c:15
-30003304 T acoral_release_pool	/usr/aCoral-mini2440/kernel/src/resource.c:43
-300033e4 T acoral_collect_pool	/usr/aCoral-mini2440/kernel/src/resource.c:65
-300034dc T acoral_get_res	/usr/aCoral-mini2440/kernel/src/resource.c:89
-30003608 T acoral_release_res	/usr/aCoral-mini2440/kernel/src/resource.c:128
-30003790 T acoral_get_pool_by_id	/usr/aCoral-mini2440/kernel/src/resource.c:170
-300037f4 T acoral_get_free_pool	/usr/aCoral-mini2440/kernel/src/resource.c:183
-30003858 T acoral_get_res_by_id	/usr/aCoral-mini2440/kernel/src/resource.c:197
-300038d0 T acoral_pool_res_init	/usr/aCoral-mini2440/kernel/src/resource.c:213
-300039b4 T acoral_pools_init	/usr/aCoral-mini2440/kernel/src/resource.c:235
-30003a58 T acoral_pool_ctrl_init	/usr/aCoral-mini2440/kernel/src/resource.c:255
-30003b60 T acoral_obj_pool_init	/usr/aCoral-mini2440/kernel/src/resource.c:280
-30003ba0 T acoral_obj_pool_release	/usr/aCoral-mini2440/kernel/src/resource.c:287
-30003bc0 T acoral_get_obj	/usr/aCoral-mini2440/kernel/src/resource.c:291
-30003bec T acoral_free_obj	/usr/aCoral-mini2440/kernel/src/resource.c:295
-30003c14 T acoral_res_sys_init	/usr/aCoral-mini2440/kernel/src/resource.c:303
-30003c24 T acoral_assert_res	/usr/aCoral-mini2440/kernel/src/resource.c:307
-30003ca4 T acoral_intr_sys_init	/usr/aCoral-mini2440/kernel/src/int.c:13
-30003d54 T acoral_intr_attach	/usr/aCoral-mini2440/kernel/src/int.c:42
-30003dd0 T acoral_intr_detach	/usr/aCoral-mini2440/kernel/src/int.c:57
-30003e24 T acoral_intr_unmask	/usr/aCoral-mini2440/kernel/src/int.c:69
-30003f0c T acoral_intr_mask	/usr/aCoral-mini2440/kernel/src/int.c:88
-30003ff4 T acoral_intr_entry	/usr/aCoral-mini2440/kernel/src/int.c:107
-3000419c T acoral_default_isr	/usr/aCoral-mini2440/kernel/src/int.c:146
-300041ac T acoral_intr_exit	/usr/aCoral-mini2440/kernel/src/int.c:154
-30004228 T acoral_set_intr_enter	/usr/aCoral-mini2440/kernel/src/int.c:177
-30004274 T acoral_set_intr_exit	/usr/aCoral-mini2440/kernel/src/int.c:188
-300042c0 T acoral_set_intr_mask	/usr/aCoral-mini2440/kernel/src/int.c:199
-3000430c T acoral_set_intr_unmask	/usr/aCoral-mini2440/kernel/src/int.c:210
-30004358 T acoral_intr_set_type	/usr/aCoral-mini2440/kernel/src/int.c:220
-300043a0 T acoral_fault_entry	/usr/aCoral-mini2440/kernel/src/int.c:231
-300044b0 T acoral_time_sys_init	/usr/aCoral-mini2440/kernel/src/timer.c:24
-300044ec T acoral_get_ticks	/usr/aCoral-mini2440/kernel/src/timer.c:37
-30004500 T acoral_set_ticks	/usr/aCoral-mini2440/kernel/src/timer.c:41
-30004520 T acoral_ticks_init	/usr/aCoral-mini2440/kernel/src/timer.c:45
-30004558 T acoral_ticks_entry	/usr/aCoral-mini2440/kernel/src/timer.c:53
-300045a8 T acoral_delayqueue_add	/usr/aCoral-mini2440/kernel/src/timer.c:74
-300046d4 T time_delay_deal	/usr/aCoral-mini2440/kernel/src/timer.c:144
-300047e8 T timeout_queue_add	/usr/aCoral-mini2440/kernel/src/timer.c:179
-300048f0 T timeout_queue_del	/usr/aCoral-mini2440/kernel/src/timer.c:240
-30004954 T timeout_delay_deal	/usr/aCoral-mini2440/kernel/src/timer.c:263
-30004a60 T acoral_mem_sys_init	/usr/aCoral-mini2440/kernel/src/mem.c:9
-30004a90 T spin_lock_intr_save	/usr/aCoral-mini2440/kernel/src/spinlock.c:4
-30004abc T spin_unlock_intr_restore	/usr/aCoral-mini2440/kernel/src/spinlock.c:11
-30004ae0 T spin_lock_intr	/usr/aCoral-mini2440/kernel/src/spinlock.c:16
-30004afc T spin_unlock_intr	/usr/aCoral-mini2440/kernel/src/spinlock.c:21
-30004b18 T spin_lock_stamp	/usr/aCoral-mini2440/kernel/src/spinlock.c:26
-30004b38 T spin_unlock_stamp	/usr/aCoral-mini2440/kernel/src/spinlock.c:31
-30004b54 T acoral_evt_sys_init	/usr/aCoral-mini2440/kernel/src/event.c:4
-30004b64 T acoral_evt_pool_init	/usr/aCoral-mini2440/kernel/src/event.c:8
-30004bbc T acoral_alloc_evt	/usr/aCoral-mini2440/kernel/src/event.c:20
-30004bdc T acoral_evt_init	/usr/aCoral-mini2440/kernel/src/event.c:24
-30004c0c T acoral_evt_queue_empty	/usr/aCoral-mini2440/kernel/src/event.c:29
-30004c44 T acoral_evt_high_thread	/usr/aCoral-mini2440/kernel/src/event.c:33
-30004c94 T acoral_evt_queue_add	/usr/aCoral-mini2440/kernel/src/event.c:43
-30004d58 T acoral_evt_queue_del	/usr/aCoral-mini2440/kernel/src/event.c:62
-30004d8c T acoral_mutex_init	/usr/aCoral-mini2440/kernel/src/mutex.c:15
-30004dfc T acoral_mutex_create	/usr/aCoral-mini2440/kernel/src/mutex.c:32
-30004e84 T acoral_mutex_del	/usr/aCoral-mini2440/kernel/src/mutex.c:54
-30004f10 T acoral_mutex_trypend	/usr/aCoral-mini2440/kernel/src/mutex.c:93
-30004fe8 T acoral_mutex_pend	/usr/aCoral-mini2440/kernel/src/mutex.c:134
-30005248 T acoral_mutex_pend2	/usr/aCoral-mini2440/kernel/src/mutex.c:224
-30005430 T acoral_mutex_post	/usr/aCoral-mini2440/kernel/src/mutex.c:301
-300055d8 T buddy_scan	/usr/aCoral-mini2440/kernel/src/buddy.c:33
-30005750 T buddy_init	/usr/aCoral-mini2440/kernel/src/buddy.c:53
-30005ef0 t recus_malloc	/usr/aCoral-mini2440/kernel/src/buddy.c:179
-30006198 t r_malloc	/usr/aCoral-mini2440/kernel/src/buddy.c:215
-300064f8 T buddy_malloc_size	/usr/aCoral-mini2440/kernel/src/buddy.c:279
-3000659c T buddy_malloc	/usr/aCoral-mini2440/kernel/src/buddy.c:294
-3000667c T buddy_free	/usr/aCoral-mini2440/kernel/src/buddy.c:313
-30006b34 t r_malloc	/usr/aCoral-mini2440/kernel/src/malloc.c:34
-30006de8 T v_malloc	/usr/aCoral-mini2440/kernel/src/malloc.c:122
-30006e3c T v_free	/usr/aCoral-mini2440/kernel/src/malloc.c:129
-300070e0 T v_mem_init	/usr/aCoral-mini2440/kernel/src/malloc.c:210
-3000719c T v_mem_scan	/usr/aCoral-mini2440/kernel/src/malloc.c:232
-30007280 T acoral_mbox_create	/usr/aCoral-mini2440/kernel/src/mbox.c:23
-300072e8 T acoral_mbox_del	/usr/aCoral-mini2440/kernel/src/mbox.c:42
-30007358 T acoral_mbox_send	/usr/aCoral-mini2440/kernel/src/mbox.c:61
-30007430 T acoral_mbox_recv	/usr/aCoral-mini2440/kernel/src/mbox.c:107
-300075a8 T acoral_mbox_tryrecv	/usr/aCoral-mini2440/kernel/src/mbox.c:164
-30007644 T acoral_sem_init	/usr/aCoral-mini2440/kernel/src/sem.c:20
-300076b4 T acoral_sem_create	/usr/aCoral-mini2440/kernel/src/sem.c:37
-3000772c T acoral_sem_del	/usr/aCoral-mini2440/kernel/src/sem.c:57
-300077dc T acoral_sem_trypend	/usr/aCoral-mini2440/kernel/src/sem.c:97
-30007894 T acoral_sem_pend	/usr/aCoral-mini2440/kernel/src/sem.c:139
-30007a40 T acoral_sem_post	/usr/aCoral-mini2440/kernel/src/sem.c:210
-30007b48 T acoral_sem_getnum	/usr/aCoral-mini2440/kernel/src/sem.c:261
-30007ba0 T acoral_msg_sys_init	/usr/aCoral-mini2440/kernel/src/message.c:19
-30007c4c T acoral_msgctr_list_queueadd	/usr/aCoral-mini2440/kernel/src/message.c:44
-30007c7c T acoral_alloc_msgctr	/usr/aCoral-mini2440/kernel/src/message.c:53
-30007c9c T acoral_alloc_msg	/usr/aCoral-mini2440/kernel/src/message.c:58
-30007cbc T acoral_msgctr_queue_add	/usr/aCoral-mini2440/kernel/src/message.c:67
-30007d58 T acoral_msg_queue_add	/usr/aCoral-mini2440/kernel/src/message.c:85
-30007d90 T acoral_msgctr_init	/usr/aCoral-mini2440/kernel/src/message.c:97
-30007e4c T acoral_msg_init	/usr/aCoral-mini2440/kernel/src/message.c:114
-30007ed4 T acoral_msg_assign	/usr/aCoral-mini2440/kernel/src/message.c:130
-30007f3c T acoral_msgctr_create	/usr/aCoral-mini2440/kernel/src/message.c:148
-30008024 T acoral_msg_create	/usr/aCoral-mini2440/kernel/src/message.c:175
-300080c0 T acoral_msg_send	/usr/aCoral-mini2440/kernel/src/message.c:198
-300081d4 T acoral_msg_recv	/usr/aCoral-mini2440/kernel/src/message.c:258
-3000842c T acoral_msgctr_del	/usr/aCoral-mini2440/kernel/src/message.c:353
-30008578 T acoral_msg_del	/usr/aCoral-mini2440/kernel/src/message.c:401
-300085b0 T wake_up_thread	/usr/aCoral-mini2440/kernel/src/message.c:414
-30008600 T acoral_print_all_msg	/usr/aCoral-mini2440/kernel/src/message.c:430
-30008690 T acoral_print_waitThreadsNum	/usr/aCoral-mini2440/kernel/src/message.c:453
-300086c0 T rm_policy_thread_init	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:20
-30008808 T rm_policy_thread_release	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:45
-30008830 T rm_discard_thread	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:50
-30008874 T rm_queue_ascend_add	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:56
-30008928 T rm_check	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:72
-30008a80 T rm_thread_dispatch	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:85
-30008bcc T rm_init	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:119
-30008c60 T rm_policy_init	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:129
-30008cc4 T rm_end	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:139
-30008d78 T period_policy_thread_init	/usr/aCoral-mini2440/kernel/src/period_thrd.c:11
-30008f5c T period_policy_thread_release	/usr/aCoral-mini2440/kernel/src/period_thrd.c:55
-30008f84 T acoral_periodqueue_add	/usr/aCoral-mini2440/kernel/src/period_thrd.c:59
-30009090 T period_thread_delay	/usr/aCoral-mini2440/kernel/src/period_thrd.c:83
-300090f0 T period_delay_deal	/usr/aCoral-mini2440/kernel/src/period_thrd.c:88
-30009270 T period_thread_exit	/usr/aCoral-mini2440/kernel/src/period_thrd.c:119
-30009280 T period_policy_init	/usr/aCoral-mini2440/kernel/src/period_thrd.c:124
-30009300 T slice_policy_thread_init	/usr/aCoral-mini2440/kernel/src/slice_thrd.c:13
-300094d0 T slice_policy_thread_release	/usr/aCoral-mini2440/kernel/src/slice_thrd.c:53
-300094f8 T slice_delay_deal	/usr/aCoral-mini2440/kernel/src/slice_thrd.c:57
-30009574 T slice_policy_init	/usr/aCoral-mini2440/kernel/src/slice_thrd.c:80
-300095d8 T posix_delay_deal	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:13
-30009768 T acoral_posix_create	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:48
-30009828 T posix_policy_thread_init	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:66
-30009a28 T posix_policy_thread_release	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:105
-30009a50 T posix_policy_data_init	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:109
-30009aa8 T posix_policy_init	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:119
-30009b0c T delay	/usr/aCoral-mini2440/kernel/src/softdelay.c:9
-30009b60 T delay_task	/usr/aCoral-mini2440/kernel/src/softdelay.c:15
-30009b84 T acoral_soft_delay	/usr/aCoral-mini2440/kernel/src/softdelay.c:22
-30009be0 T soft_delay_init	/usr/aCoral-mini2440/kernel/src/softdelay.c:29
-30009cc4 T dummy_print	/usr/aCoral-mini2440/lib/src/dummy.c:2
-30009cd0 T acoral_ffs	/usr/aCoral-mini2440/lib/src/bitops.c:3
-30009db0 T acoral_find_first_bit	/usr/aCoral-mini2440/lib/src/bitops.c:15
-30009e3c T acoral_set_bit	/usr/aCoral-mini2440/lib/src/bitops.c:27
-30009e9c T acoral_clear_bit	/usr/aCoral-mini2440/lib/src/bitops.c:36
-30009f00 T acoral_get_bit	/usr/aCoral-mini2440/lib/src/bitops.c:45
-30009f5c T acoral_prio_queue_add	/usr/aCoral-mini2440/lib/src/queue.c:4
-30009fe4 T acoral_prio_queue_del	/usr/aCoral-mini2440/lib/src/queue.c:14
-3000a07c T acoral_get_highprio	/usr/aCoral-mini2440/lib/src/queue.c:25
-3000a0b0 T acoral_prio_queue_init	/usr/aCoral-mini2440/lib/src/queue.c:29
-3000a178 T acoral_list_add	/usr/aCoral-mini2440/lib/src/list.c:2
-3000a1c4 T acoral_list_add2_tail	/usr/aCoral-mini2440/lib/src/list.c:10
-3000a210 T acoral_list_del	/usr/aCoral-mini2440/lib/src/list.c:18
-3000a260 t do_div	/usr/aCoral-mini2440/lib/src/print.c:12
-3000a2d4 T skip_atoi	/usr/aCoral-mini2440/lib/src/print.c:21
-3000a35c T number	/usr/aCoral-mini2440/lib/src/print.c:32
-3000a874 T vsnprintf	/usr/aCoral-mini2440/lib/src/print.c:123
-3000b3ac T acoral_sprint	/usr/aCoral-mini2440/lib/src/print.c:350
-3000b40c T acoral_print	/usr/aCoral-mini2440/lib/src/print.c:360
-3000b498 T acoral_prints	/usr/aCoral-mini2440/lib/src/print.c:371
-3000b4f8 T acoral_getchar	/usr/aCoral-mini2440/lib/src/print.c:378
-3000b544 T acoral_putchar	/usr/aCoral-mini2440/lib/src/print.c:384
-3000b598 T acoral_debug	/usr/aCoral-mini2440/lib/src/print.c:391
-3000b65c T acoral_debugs	/usr/aCoral-mini2440/lib/src/print.c:407
-3000b6f4 T acoral_tolower	/usr/aCoral-mini2440/lib/src/str.c:3
-3000b758 T acoral_toupper	/usr/aCoral-mini2440/lib/src/str.c:12
-3000b7bc T acoral_str_upr	/usr/aCoral-mini2440/lib/src/str.c:21
-3000b864 T acoral_str_lwr	/usr/aCoral-mini2440/lib/src/str.c:32
-3000b904 T acoral_str_len	/usr/aCoral-mini2440/lib/src/str.c:42
-3000b968 T acoral_str_cpy	/usr/aCoral-mini2440/lib/src/str.c:51
-3000b9d4 T acoral_str_cmp	/usr/aCoral-mini2440/lib/src/str.c:58
-3000bac4 T acoral_str_nicmp	/usr/aCoral-mini2440/lib/src/str.c:87
-3000bbd8 T acoral_str_ncpy	/usr/aCoral-mini2440/lib/src/str.c:124
-3000bc68 T acoral_str_lcpy	/usr/aCoral-mini2440/lib/src/str.c:152
-3000bcf4 T acoral_str_cat	/usr/aCoral-mini2440/lib/src/str.c:170
-3000bd80 T acoral_str_ncat	/usr/aCoral-mini2440/lib/src/str.c:193
-3000be48 T acoral_str_lcat	/usr/aCoral-mini2440/lib/src/str.c:219
-3000bf00 T acoral_str_ncmp	/usr/aCoral-mini2440/lib/src/str.c:248
-3000bfc0 T acoral_str_chr	/usr/aCoral-mini2440/lib/src/str.c:270
-3000c030 T acoral_str_rchr	/usr/aCoral-mini2440/lib/src/str.c:286
-3000c0bc T acoral_str_nchr	/usr/aCoral-mini2440/lib/src/str.c:306
-3000c158 T acoral_str_nlen	/usr/aCoral-mini2440/lib/src/str.c:323
-3000c1cc T acoral_str_spn	/usr/aCoral-mini2440/lib/src/str.c:342
-3000c284 T acoral_str_cspn	/usr/aCoral-mini2440/lib/src/str.c:370
-3000c324 T acoral_str_pbrk	/usr/aCoral-mini2440/lib/src/str.c:394
-3000c3b0 T acoral_str_sep	/usr/aCoral-mini2440/lib/src/str.c:422
-3000c438 T acoral_memset	/usr/aCoral-mini2440/lib/src/str.c:447
-3000c4a8 T acoral_memcpy	/usr/aCoral-mini2440/lib/src/str.c:468
-3000c52c T acoral_memmove	/usr/aCoral-mini2440/lib/src/str.c:488
-3000c638 T acoral_memcmp	/usr/aCoral-mini2440/lib/src/str.c:515
-3000c6d4 T acoral_memscan	/usr/aCoral-mini2440/lib/src/str.c:538
-3000c744 T acoral_strstr	/usr/aCoral-mini2440/lib/src/str.c:558
-3000c7f0 T acoral_memchr	/usr/aCoral-mini2440/lib/src/str.c:587
-3000c884 T acoral_rand	/usr/aCoral-mini2440/lib/src/random.c:3
-3000c8c8 T acoral_rand_start	/usr/aCoral-mini2440/lib/src/random.c:9
-3000c8e8 T plugin_init	/usr/aCoral-mini2440/plugin/src/plugin.c:3
-3000c8ec T dummy	/usr/aCoral-mini2440/user/src/user.c:3
-3000c918 T user_main	/usr/aCoral-mini2440/user/src/user.c:11
-3000c91c T parse_args	/usr/aCoral-mini2440/user/src/shell.c:14
-3000cb5c T add_command	/usr/aCoral-mini2440/user/src/shell.c:68
-3000cbc0 T find_cmd	/usr/aCoral-mini2440/user/src/shell.c:78
-3000cc34 T execmd	/usr/aCoral-mini2440/user/src/shell.c:90
-3000ccb4 T cmd_exe	/usr/aCoral-mini2440/user/src/shell.c:102
-3000cd38 T echo	/usr/aCoral-mini2440/user/src/shell.c:116
-3000cd60 T get_cmd	/usr/aCoral-mini2440/user/src/shell.c:120
-3000cf28 T acoral_shell_init	/usr/aCoral-mini2440/user/src/shell.c:171
-3000cfbc T acoral_shell_exit	/usr/aCoral-mini2440/user/src/shell.c:184
-3000cfe0 T acoral_shell_enter	/usr/aCoral-mini2440/user/src/shell.c:189
-3000d07c T malloc_scan	/usr/aCoral-mini2440/user/src/cmd.c:4
-3000d09c T malloc_scan2	/usr/aCoral-mini2440/user/src/cmd.c:15
-3000d0bc T help	/usr/aCoral-mini2440/user/src/cmd.c:27
-3000d128 T exit	/usr/aCoral-mini2440/user/src/cmd.c:43
-3000d178 T spg	/usr/aCoral-mini2440/user/src/cmd.c:54
-3000d1a0 T cmd_init	/usr/aCoral-mini2440/user/src/cmd.c:77
-3000d1e8 T display_thread	/usr/aCoral-mini2440/user/src/thread_display.c:5
-3000d3fc T acoral_get_drv_ctrl_by_name	/usr/aCoral-mini2440/driver/src/driver.c:10
-3000d488 T acoral_drv_register	/usr/aCoral-mini2440/driver/src/driver.c:21
-3000d560 T acoral_drv_unregister	/usr/aCoral-mini2440/driver/src/driver.c:42
-3000d5e8 T acoral_dev_open	/usr/aCoral-mini2440/driver/src/driver.c:50
-3000d67c T acoral_dev_write	/usr/aCoral-mini2440/driver/src/driver.c:61
-3000d714 T acoral_dev_read	/usr/aCoral-mini2440/driver/src/driver.c:68
-3000d7ac T acoral_dev_config	/usr/aCoral-mini2440/driver/src/driver.c:75
-3000d840 T acoral_dev_close	/usr/aCoral-mini2440/driver/src/driver.c:81
-3000d8bc T acoral_alloc_drv	/usr/aCoral-mini2440/driver/src/driver.c:88
-3000d8dc T acoral_drv_pool_init	/usr/aCoral-mini2440/driver/src/driver.c:93
-3000d924 T acoral_drv_sys_init	/usr/aCoral-mini2440/driver/src/driver.c:101
-3000d978 T brd_driver_init	/usr/aCoral-mini2440/driver/s3c2440/src/brd_driver.c:2
-3000d988 T uart_write	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:9
-3000d9c4 T uart_read	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:14
-3000da04 T console_write	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:19
-3000da80 T console_read	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:30
-3000daec T console_config	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:40
-3000db1c T console_open	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:49
-3000db34 T uart_init	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:54
-3000dba8 T con_uart_init	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:64
-3000dc08 t .udivsi3_nodiv0
-3000dc08 T __aeabi_uidiv
-3000dc08 T __udivsi3
-3000dcfc T __aeabi_uidivmod
-3000dd1c W __aeabi_idiv0
-3000dd1c W __aeabi_ldiv0
-3000dd20 T __aeabi_frsub
-3000dd28 T __aeabi_fsub
-3000dd28 T __subsf3
-3000dd2c T __addsf3
-3000dd2c T __aeabi_fadd
-3000dee8 T __aeabi_ui2f
-3000dee8 T __floatunsisf
-3000def0 T __aeabi_i2f
-3000def0 T __floatsisf
-3000df10 T __aeabi_ul2f
-3000df10 T __floatundisf
-3000df20 T __aeabi_l2f
-3000df20 T __floatdisf
-3000dfcc T __aeabi_fmul
-3000dfcc T __mulsf3
-3000e164 T __aeabi_fdiv
-3000e164 T __divsf3
-3000e2c4 T __gesf2
-3000e2c4 T __gtsf2
-3000e2cc T __lesf2
-3000e2cc T __ltsf2
-3000e2d4 T __cmpsf2
-3000e2d4 T __eqsf2
-3000e2d4 T __nesf2
-3000e338 T __aeabi_cfrcmple
-3000e348 T __aeabi_cfcmpeq
-3000e348 T __aeabi_cfcmple
-3000e360 T __aeabi_fcmpeq
-3000e378 T __aeabi_fcmplt
-3000e390 T __aeabi_fcmple
-3000e3a8 T __aeabi_fcmpge
-3000e3c0 T __aeabi_fcmpgt
-3000e994 T small_digits	/usr/aCoral-mini2440/lib/src/print.c:30
-3000e9bc T large_digits	/usr/aCoral-mini2440/lib/src/print.c:31
-3000ec4c D acoral_doMsgTtl_checked	/usr/aCoral-mini2440/kernel/src/message.c:10
-3000ec50 D prio	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:11
-3000ec54 D rm_queue	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:13
-3000ec58 D right	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:14
-3000ec80 d console_id	/usr/aCoral-mini2440/lib/src/print.c:389
-3000ec84 D mem_cmd	/usr/aCoral-mini2440/user/src/cmd.c:8
-3000ec94 D mem2_cmd	/usr/aCoral-mini2440/user/src/cmd.c:19
-3000eca4 D help_cmd	/usr/aCoral-mini2440/user/src/cmd.c:36
-3000ecb4 D exit_cmd	/usr/aCoral-mini2440/user/src/cmd.c:48
-3000ecc4 D spg_cmd	/usr/aCoral-mini2440/user/src/cmd.c:58
-3000ecd4 D dt_cmd	/usr/aCoral-mini2440/user/src/thread_display.c:56
-3000ece4 B acoral_start_sched	/usr/aCoral-mini2440/kernel/src/core.c:3
-3000ece4 B bss_start
-3000ece8 b acoral_ready_queues	/usr/aCoral-mini2440/kernel/src/sched.c:10
-3000f04c b ticks	/usr/aCoral-mini2440/kernel/src/timer.c:23
-3000f050 b print_buf.2163
-3000f450 b print_buf.2126
-3000f550 b rand_seed	/usr/aCoral-mini2440/lib/src/random.c:2
-3000f554 B g_msgctr_header	/usr/aCoral-mini2440/kernel/src/message.c:14
-3000f560 B drv_table	/usr/aCoral-mini2440/driver/src/driver.c:9
-3000f5b0 B comm_policy	/usr/aCoral-mini2440/kernel/src/comm_thrd.c:10
-3000f5cc B acoral_free_res_pool	/usr/aCoral-mini2440/kernel/src/resource.c:9
-3000f5d0 B posix_policy	/usr/aCoral-mini2440/kernel/src/posix_thrd.c:118
-3000f5ec B sched_lock	/usr/aCoral-mini2440/kernel/src/sched.c:8
-3000f5f0 B intr_table	/usr/aCoral-mini2440/kernel/src/int.c:7
-3000fb68 B slice_policy	/usr/aCoral-mini2440/kernel/src/slice_thrd.c:12
-3000fb84 B thread_api	/usr/aCoral-mini2440/kernel/src/thread.c:18
-3000fb88 B mem_ctrl	/usr/aCoral-mini2440/kernel/src/malloc.c:32
-3000fbbc B acoral_thread_pool_ctrl	/usr/aCoral-mini2440/kernel/src/thread.c:19
-3000fbf4 B acoral_drv_pool_ctrl	/usr/aCoral-mini2440/driver/src/driver.c:8
-3000fc2c B acoral_threads_queue	/usr/aCoral-mini2440/kernel/src/thread.c:17
-3000fc38 B thread	/usr/aCoral-mini2440/kernel/src/core.c:66
-3000fc3c B orig_thread	/usr/aCoral-mini2440/kernel/src/core.c:104
-3000fc94 B tmp_rm_queue	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:12
-3000fca0 B acoral_mem_blocks	/usr/aCoral-mini2440/kernel/src/buddy.c:31
-3000fca4 B sample_100ms	/usr/aCoral-mini2440/kernel/src/softdelay.c:7
-3000fca8 B console_ops	/usr/aCoral-mini2440/driver/s3c2440/src/con_uart.c:6
-3000fcbc B left	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:18
-3000fcc4 B daemon_id	/usr/aCoral-mini2440/kernel/src/core.c:4
-3000fcc8 B period_delay_queue	/usr/aCoral-mini2440/kernel/src/period_thrd.c:10
-3000fcd4 B head_cmd	/usr/aCoral-mini2440/user/src/shell.c:6
-3000fcd8 B acoral_res_release_queue	/usr/aCoral-mini2440/kernel/src/core.c:2
-3000fce4 B acoral_pools	/usr/aCoral-mini2440/kernel/src/resource.c:8
-30010504 B acoral_msg_pool_ctrl	/usr/aCoral-mini2440/kernel/src/message.c:13
-3001053c B idle_id	/usr/aCoral-mini2440/kernel/src/core.c:4
-30010540 B policy_list	/usr/aCoral-mini2440/kernel/src/policy.c:7
-3001054c B acoral_mem_ctrl	/usr/aCoral-mini2440/kernel/src/buddy.c:30
-30010550 B rm_policy	/usr/aCoral-mini2440/kernel/src/rm_thrd.c:128
-3001056c B init_id	/usr/aCoral-mini2440/kernel/src/core.c:4
-30010570 B time_delay_queue	/usr/aCoral-mini2440/kernel/src/timer.c:17
-3001057c B acoral_evt_pool_ctrl	/usr/aCoral-mini2440/kernel/src/event.c:3
-300105b4 B acoral_msgctr_pool_ctrl	/usr/aCoral-mini2440/kernel/src/message.c:12
-300105ec B timeout_queue	/usr/aCoral-mini2440/kernel/src/timer.c:22
-300105f8 B ready_thread	/usr/aCoral-mini2440/kernel/src/sched.c:9
-300105fc B intr_nesting	/usr/aCoral-mini2440/hal/src/hal_comm.c:6
-30010600 B running_thread	/usr/aCoral-mini2440/kernel/src/sched.c:9
-30010604 B need_sched	/usr/aCoral-mini2440/kernel/src/sched.c:7
-30010608 B period_policy	/usr/aCoral-mini2440/kernel/src/period_thrd.c:123
-30010624 B sample	/usr/aCoral-mini2440/kernel/src/softdelay.c:8
-30010628 B tail_cmd	/usr/aCoral-mini2440/user/src/shell.c:6
-3001062c A bss_end
-3001062c A heap_start
+3000171c T hal_intr_nesting_init_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:11
+30001760 T hal_get_intr_nesting_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:21
+30001774 T hal_intr_nesting_dec_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:30
+300017b8 T hal_intr_nesting_inc_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:42
+300017d4 T hal_sched_bridge_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:46
+30001800 T hal_intr_exit_bridge_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:53
+3000182c T hal_atomic_add_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:60
+30001874 T hal_atomic_sub_comm	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:68
+300018bc T idle	/home/acoral/aCoral-mini2440/kernel/src/core.c:10
+300018c8 T daem	/home/acoral/aCoral-mini2440/kernel/src/core.c:22
+30001998 T init	/home/acoral/aCoral-mini2440/kernel/src/core.c:67
+30001a8c T acoral_start	/home/acoral/aCoral-mini2440/kernel/src/core.c:109
+30001adc T acoral_core_cpu_start	/home/acoral/aCoral-mini2440/kernel/src/core.c:148
+30001bd8 T acoral_start_os	/home/acoral/aCoral-mini2440/kernel/src/core.c:167
+30001c18 T acoral_module_init	/home/acoral/aCoral-mini2440/kernel/src/core.c:178
+30001c40 T create_thread_ext	/home/acoral/aCoral-mini2440/kernel/src/policy.c:8
+30001d14 T acoral_get_policy_ctrl	/home/acoral/aCoral-mini2440/kernel/src/policy.c:28
+30001d94 T acoral_policy_thread_init	/home/acoral/aCoral-mini2440/kernel/src/policy.c:41
+30001e54 T acoral_register_sched_policy	/home/acoral/aCoral-mini2440/kernel/src/policy.c:55
+30001e80 T acoral_policy_delay_deal	/home/acoral/aCoral-mini2440/kernel/src/policy.c:59
+30001efc T acoral_policy_thread_release	/home/acoral/aCoral-mini2440/kernel/src/policy.c:71
+30001f50 T acoral_sched_policy_init	/home/acoral/aCoral-mini2440/kernel/src/policy.c:79
+30001f8c T app_enter_policy_init	/home/acoral/aCoral-mini2440/kernel/src/policy.c:96
+30001f9c T app_exit_policy_init	/home/acoral/aCoral-mini2440/kernel/src/policy.c:102
+30001fac T acoral_sched_init	/home/acoral/aCoral-mini2440/kernel/src/sched.c:11
+30001ffc T acoral_sched_unlock	/home/acoral/aCoral-mini2440/kernel/src/sched.c:19
+3000201c T acoral_set_orig_thread	/home/acoral/aCoral-mini2440/kernel/src/sched.c:24
+3000203c T acoral_set_running_thread	/home/acoral/aCoral-mini2440/kernel/src/sched.c:28
+30002090 T acoral_thread_runqueue_init	/home/acoral/aCoral-mini2440/kernel/src/sched.c:38
+30002108 T acoral_get_idlest_cpu	/home/acoral/aCoral-mini2440/kernel/src/sched.c:55
+300021a0 T acoral_get_idle_maskcpu	/home/acoral/aCoral-mini2440/kernel/src/sched.c:68
+30002264 T acoral_rdyqueue_add	/home/acoral/aCoral-mini2440/kernel/src/sched.c:85
+30002338 T acoral_rdyqueue_del	/home/acoral/aCoral-mini2440/kernel/src/sched.c:101
+30002404 T acoral_sched	/home/acoral/aCoral-mini2440/kernel/src/sched.c:118
+30002484 T acoral_real_sched	/home/acoral/aCoral-mini2440/kernel/src/sched.c:141
+30002530 T acoral_real_intr_sched	/home/acoral/aCoral-mini2440/kernel/src/sched.c:174
+300025dc T acoral_select_thread	/home/acoral/aCoral-mini2440/kernel/src/sched.c:206
+300026a4 T acoral_release_thread1	/home/acoral/aCoral-mini2440/kernel/src/thread.c:27
+30002718 T acoral_release_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:49
+3000276c T acoral_suspend_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:70
+300027c0 T acoral_suspend_self	/home/acoral/aCoral-mini2440/kernel/src/thread.c:95
+300027e0 T acoral_suspend_thread_by_id	/home/acoral/aCoral-mini2440/kernel/src/thread.c:105
+30002814 T acoral_resume_thread_by_id	/home/acoral/aCoral-mini2440/kernel/src/thread.c:116
+30002848 T acoral_resume_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:126
+3000289c t acoral_delay_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:154
+30002928 t acoral_delay_thread_by_id	/home/acoral/aCoral-mini2440/kernel/src/thread.c:179
+30002960 T acoral_delay_self	/home/acoral/aCoral-mini2440/kernel/src/thread.c:189
+30002990 T acoral_kill_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:198
+30002a2c T acoral_kill_thread_by_id	/home/acoral/aCoral-mini2440/kernel/src/thread.c:243
+30002a5c T acoral_thread_exit	/home/acoral/aCoral-mini2440/kernel/src/thread.c:253
+30002a7c T acoral_thread_change_prio	/home/acoral/aCoral-mini2440/kernel/src/thread.c:261
+30002af8 T acoral_change_prio_self	/home/acoral/aCoral-mini2440/kernel/src/thread.c:285
+30002b28 T acoral_thread_change_prio_by_id	/home/acoral/aCoral-mini2440/kernel/src/thread.c:293
+30002b64 T acoral_rdy_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:304
+30002ba0 T acoral_unrdy_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:327
+30002bdc T acoral_thread_move2_tail	/home/acoral/aCoral-mini2440/kernel/src/thread.c:343
+30002c1c T acoral_thread_move2_tail_by_id	/home/acoral/aCoral-mini2440/kernel/src/thread.c:361
+30002c4c T acoral_alloc_thread	/home/acoral/aCoral-mini2440/kernel/src/thread.c:371
+30002c6c T acoral_thread_init	/home/acoral/aCoral-mini2440/kernel/src/thread.c:384
+30002e98 T acoral_thread_pool_init	/home/acoral/aCoral-mini2440/kernel/src/thread.c:431
+30002f18 T acoral_set_thread_console	/home/acoral/aCoral-mini2440/kernel/src/thread.c:444
+30002f3c T acoral_sched_mechanism_init	/home/acoral/aCoral-mini2440/kernel/src/thread.c:448
+30002f6c T acoral_thread_sys_init	/home/acoral/aCoral-mini2440/kernel/src/thread.c:459
+30002f80 T create_comm_thread	/home/acoral/aCoral-mini2440/kernel/src/comm_thrd.c:22
+30003050 T comm_policy_thread_init	/home/acoral/aCoral-mini2440/kernel/src/comm_thrd.c:46
+30003150 T comm_policy_init	/home/acoral/aCoral-mini2440/kernel/src/comm_thrd.c:71
+300031ac T acoral_create_pool	/home/acoral/aCoral-mini2440/kernel/src/resource.c:15
+30003310 T acoral_release_pool	/home/acoral/aCoral-mini2440/kernel/src/resource.c:43
+300033f0 T acoral_collect_pool	/home/acoral/aCoral-mini2440/kernel/src/resource.c:65
+300034e8 T acoral_get_res	/home/acoral/aCoral-mini2440/kernel/src/resource.c:89
+30003614 T acoral_release_res	/home/acoral/aCoral-mini2440/kernel/src/resource.c:128
+3000379c T acoral_get_pool_by_id	/home/acoral/aCoral-mini2440/kernel/src/resource.c:170
+30003800 T acoral_get_free_pool	/home/acoral/aCoral-mini2440/kernel/src/resource.c:183
+30003864 T acoral_get_res_by_id	/home/acoral/aCoral-mini2440/kernel/src/resource.c:197
+300038dc T acoral_pool_res_init	/home/acoral/aCoral-mini2440/kernel/src/resource.c:213
+300039c0 T acoral_pools_init	/home/acoral/aCoral-mini2440/kernel/src/resource.c:235
+30003a64 T acoral_pool_ctrl_init	/home/acoral/aCoral-mini2440/kernel/src/resource.c:255
+30003b6c T acoral_obj_pool_init	/home/acoral/aCoral-mini2440/kernel/src/resource.c:280
+30003bac T acoral_obj_pool_release	/home/acoral/aCoral-mini2440/kernel/src/resource.c:287
+30003bcc T acoral_get_obj	/home/acoral/aCoral-mini2440/kernel/src/resource.c:291
+30003bf8 T acoral_free_obj	/home/acoral/aCoral-mini2440/kernel/src/resource.c:295
+30003c20 T acoral_res_sys_init	/home/acoral/aCoral-mini2440/kernel/src/resource.c:303
+30003c30 T acoral_assert_res	/home/acoral/aCoral-mini2440/kernel/src/resource.c:307
+30003cb0 T acoral_intr_sys_init	/home/acoral/aCoral-mini2440/kernel/src/int.c:13
+30003d60 T acoral_intr_attach	/home/acoral/aCoral-mini2440/kernel/src/int.c:42
+30003ddc T acoral_intr_detach	/home/acoral/aCoral-mini2440/kernel/src/int.c:57
+30003e30 T acoral_intr_unmask	/home/acoral/aCoral-mini2440/kernel/src/int.c:69
+30003f18 T acoral_intr_mask	/home/acoral/aCoral-mini2440/kernel/src/int.c:88
+30004000 T acoral_intr_entry	/home/acoral/aCoral-mini2440/kernel/src/int.c:107
+300041a8 T acoral_default_isr	/home/acoral/aCoral-mini2440/kernel/src/int.c:146
+300041b8 T acoral_intr_exit	/home/acoral/aCoral-mini2440/kernel/src/int.c:154
+30004234 T acoral_set_intr_enter	/home/acoral/aCoral-mini2440/kernel/src/int.c:177
+30004280 T acoral_set_intr_exit	/home/acoral/aCoral-mini2440/kernel/src/int.c:188
+300042cc T acoral_set_intr_mask	/home/acoral/aCoral-mini2440/kernel/src/int.c:199
+30004318 T acoral_set_intr_unmask	/home/acoral/aCoral-mini2440/kernel/src/int.c:210
+30004364 T acoral_intr_set_type	/home/acoral/aCoral-mini2440/kernel/src/int.c:220
+300043ac T acoral_fault_entry	/home/acoral/aCoral-mini2440/kernel/src/int.c:231
+300044bc T acoral_time_sys_init	/home/acoral/aCoral-mini2440/kernel/src/timer.c:24
+300044f8 T acoral_get_ticks	/home/acoral/aCoral-mini2440/kernel/src/timer.c:37
+3000450c T acoral_set_ticks	/home/acoral/aCoral-mini2440/kernel/src/timer.c:41
+3000452c T acoral_ticks_init	/home/acoral/aCoral-mini2440/kernel/src/timer.c:45
+30004564 T acoral_ticks_entry	/home/acoral/aCoral-mini2440/kernel/src/timer.c:53
+300045b4 T acoral_delayqueue_add	/home/acoral/aCoral-mini2440/kernel/src/timer.c:74
+300046e0 T time_delay_deal	/home/acoral/aCoral-mini2440/kernel/src/timer.c:144
+300047f4 T timeout_queue_add	/home/acoral/aCoral-mini2440/kernel/src/timer.c:179
+300048fc T timeout_queue_del	/home/acoral/aCoral-mini2440/kernel/src/timer.c:240
+30004960 T timeout_delay_deal	/home/acoral/aCoral-mini2440/kernel/src/timer.c:263
+30004a6c T acoral_mem_sys_init	/home/acoral/aCoral-mini2440/kernel/src/mem.c:9
+30004a9c T spin_lock_intr_save	/home/acoral/aCoral-mini2440/kernel/src/spinlock.c:4
+30004ac8 T spin_unlock_intr_restore	/home/acoral/aCoral-mini2440/kernel/src/spinlock.c:11
+30004aec T spin_lock_intr	/home/acoral/aCoral-mini2440/kernel/src/spinlock.c:16
+30004b08 T spin_unlock_intr	/home/acoral/aCoral-mini2440/kernel/src/spinlock.c:21
+30004b24 T spin_lock_stamp	/home/acoral/aCoral-mini2440/kernel/src/spinlock.c:26
+30004b44 T spin_unlock_stamp	/home/acoral/aCoral-mini2440/kernel/src/spinlock.c:31
+30004b60 T acoral_evt_sys_init	/home/acoral/aCoral-mini2440/kernel/src/event.c:4
+30004b70 T acoral_evt_pool_init	/home/acoral/aCoral-mini2440/kernel/src/event.c:8
+30004bc8 T acoral_alloc_evt	/home/acoral/aCoral-mini2440/kernel/src/event.c:20
+30004be8 T acoral_evt_init	/home/acoral/aCoral-mini2440/kernel/src/event.c:24
+30004c18 T acoral_evt_queue_empty	/home/acoral/aCoral-mini2440/kernel/src/event.c:29
+30004c50 T acoral_evt_high_thread	/home/acoral/aCoral-mini2440/kernel/src/event.c:33
+30004ca0 T acoral_evt_queue_add	/home/acoral/aCoral-mini2440/kernel/src/event.c:43
+30004d64 T acoral_evt_queue_del	/home/acoral/aCoral-mini2440/kernel/src/event.c:62
+30004d98 T acoral_mutex_init	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:15
+30004e08 T acoral_mutex_create	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:32
+30004e90 T acoral_mutex_del	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:54
+30004f1c T acoral_mutex_trypend	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:93
+30004ff4 T acoral_mutex_pend	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:134
+30005254 T acoral_mutex_pend2	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:224
+3000543c T acoral_mutex_post	/home/acoral/aCoral-mini2440/kernel/src/mutex.c:301
+300055e4 T buddy_scan	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:33
+3000575c T buddy_init	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:53
+30005efc t recus_malloc	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:179
+300061a4 t r_malloc	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:215
+30006504 T buddy_malloc_size	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:279
+300065a8 T buddy_malloc	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:294
+30006688 T buddy_free	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:313
+30006b40 t r_malloc	/home/acoral/aCoral-mini2440/kernel/src/malloc.c:34
+30006df4 T v_malloc	/home/acoral/aCoral-mini2440/kernel/src/malloc.c:122
+30006e48 T v_free	/home/acoral/aCoral-mini2440/kernel/src/malloc.c:129
+300070ec T v_mem_init	/home/acoral/aCoral-mini2440/kernel/src/malloc.c:210
+300071a8 T v_mem_scan	/home/acoral/aCoral-mini2440/kernel/src/malloc.c:232
+3000728c T acoral_mbox_create	/home/acoral/aCoral-mini2440/kernel/src/mbox.c:23
+300072f4 T acoral_mbox_del	/home/acoral/aCoral-mini2440/kernel/src/mbox.c:42
+30007364 T acoral_mbox_send	/home/acoral/aCoral-mini2440/kernel/src/mbox.c:61
+3000743c T acoral_mbox_recv	/home/acoral/aCoral-mini2440/kernel/src/mbox.c:107
+300075b4 T acoral_mbox_tryrecv	/home/acoral/aCoral-mini2440/kernel/src/mbox.c:164
+30007650 T acoral_sem_init	/home/acoral/aCoral-mini2440/kernel/src/sem.c:20
+300076c0 T acoral_sem_create	/home/acoral/aCoral-mini2440/kernel/src/sem.c:37
+30007738 T acoral_sem_del	/home/acoral/aCoral-mini2440/kernel/src/sem.c:57
+300077e8 T acoral_sem_trypend	/home/acoral/aCoral-mini2440/kernel/src/sem.c:97
+300078a0 T acoral_sem_pend	/home/acoral/aCoral-mini2440/kernel/src/sem.c:139
+30007a4c T acoral_sem_post	/home/acoral/aCoral-mini2440/kernel/src/sem.c:210
+30007b54 T acoral_sem_getnum	/home/acoral/aCoral-mini2440/kernel/src/sem.c:261
+30007bac T acoral_msg_sys_init	/home/acoral/aCoral-mini2440/kernel/src/message.c:19
+30007c58 T acoral_msgctr_list_queueadd	/home/acoral/aCoral-mini2440/kernel/src/message.c:44
+30007c88 T acoral_alloc_msgctr	/home/acoral/aCoral-mini2440/kernel/src/message.c:53
+30007ca8 T acoral_alloc_msg	/home/acoral/aCoral-mini2440/kernel/src/message.c:58
+30007cc8 T acoral_msgctr_queue_add	/home/acoral/aCoral-mini2440/kernel/src/message.c:67
+30007d64 T acoral_msg_queue_add	/home/acoral/aCoral-mini2440/kernel/src/message.c:85
+30007d9c T acoral_msgctr_init	/home/acoral/aCoral-mini2440/kernel/src/message.c:97
+30007e58 T acoral_msg_init	/home/acoral/aCoral-mini2440/kernel/src/message.c:114
+30007ee0 T acoral_msg_assign	/home/acoral/aCoral-mini2440/kernel/src/message.c:130
+30007f48 T acoral_msgctr_create	/home/acoral/aCoral-mini2440/kernel/src/message.c:148
+30008030 T acoral_msg_create	/home/acoral/aCoral-mini2440/kernel/src/message.c:175
+300080cc T acoral_msg_send	/home/acoral/aCoral-mini2440/kernel/src/message.c:198
+300081e0 T acoral_msg_recv	/home/acoral/aCoral-mini2440/kernel/src/message.c:258
+30008438 T acoral_msgctr_del	/home/acoral/aCoral-mini2440/kernel/src/message.c:353
+30008584 T acoral_msg_del	/home/acoral/aCoral-mini2440/kernel/src/message.c:401
+300085bc T wake_up_thread	/home/acoral/aCoral-mini2440/kernel/src/message.c:414
+3000860c T acoral_print_all_msg	/home/acoral/aCoral-mini2440/kernel/src/message.c:430
+3000869c T acoral_print_waitThreadsNum	/home/acoral/aCoral-mini2440/kernel/src/message.c:453
+300086cc T rm_policy_thread_init	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:20
+30008814 T rm_policy_thread_release	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:45
+3000883c T rm_discard_thread	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:50
+30008880 T rm_queue_ascend_add	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:56
+30008934 T rm_check	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:72
+30008a8c T rm_thread_dispatch	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:85
+30008bd8 T rm_init	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:119
+30008c6c T rm_policy_init	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:129
+30008cd0 T rm_end	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:139
+30008d84 T period_policy_thread_init	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:11
+30008f68 T period_policy_thread_release	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:55
+30008f90 T acoral_periodqueue_add	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:59
+3000909c T period_thread_delay	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:83
+300090fc T period_delay_deal	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:88
+3000927c T period_thread_exit	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:119
+3000928c T period_policy_init	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:124
+3000930c T slice_policy_thread_init	/home/acoral/aCoral-mini2440/kernel/src/slice_thrd.c:13
+300094dc T slice_policy_thread_release	/home/acoral/aCoral-mini2440/kernel/src/slice_thrd.c:53
+30009504 T slice_delay_deal	/home/acoral/aCoral-mini2440/kernel/src/slice_thrd.c:57
+30009580 T slice_policy_init	/home/acoral/aCoral-mini2440/kernel/src/slice_thrd.c:80
+300095e4 T posix_delay_deal	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:13
+30009774 T acoral_posix_create	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:48
+30009834 T posix_policy_thread_init	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:66
+30009a34 T posix_policy_thread_release	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:105
+30009a5c T posix_policy_data_init	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:109
+30009ab4 T posix_policy_init	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:119
+30009b18 T delay	/home/acoral/aCoral-mini2440/kernel/src/softdelay.c:9
+30009b6c T delay_task	/home/acoral/aCoral-mini2440/kernel/src/softdelay.c:15
+30009b90 T acoral_soft_delay	/home/acoral/aCoral-mini2440/kernel/src/softdelay.c:22
+30009bec T soft_delay_init	/home/acoral/aCoral-mini2440/kernel/src/softdelay.c:29
+30009cd0 T dummy_print	/home/acoral/aCoral-mini2440/lib/src/dummy.c:2
+30009cdc T acoral_ffs	/home/acoral/aCoral-mini2440/lib/src/bitops.c:3
+30009dbc T acoral_find_first_bit	/home/acoral/aCoral-mini2440/lib/src/bitops.c:15
+30009e48 T acoral_set_bit	/home/acoral/aCoral-mini2440/lib/src/bitops.c:27
+30009ea8 T acoral_clear_bit	/home/acoral/aCoral-mini2440/lib/src/bitops.c:36
+30009f0c T acoral_get_bit	/home/acoral/aCoral-mini2440/lib/src/bitops.c:45
+30009f68 T acoral_prio_queue_add	/home/acoral/aCoral-mini2440/lib/src/queue.c:4
+30009ff0 T acoral_prio_queue_del	/home/acoral/aCoral-mini2440/lib/src/queue.c:14
+3000a088 T acoral_get_highprio	/home/acoral/aCoral-mini2440/lib/src/queue.c:25
+3000a0bc T acoral_prio_queue_init	/home/acoral/aCoral-mini2440/lib/src/queue.c:29
+3000a184 T acoral_list_add	/home/acoral/aCoral-mini2440/lib/src/list.c:2
+3000a1d0 T acoral_list_add2_tail	/home/acoral/aCoral-mini2440/lib/src/list.c:10
+3000a21c T acoral_list_del	/home/acoral/aCoral-mini2440/lib/src/list.c:18
+3000a26c t do_div	/home/acoral/aCoral-mini2440/lib/src/print.c:12
+3000a2e0 T skip_atoi	/home/acoral/aCoral-mini2440/lib/src/print.c:21
+3000a368 T number	/home/acoral/aCoral-mini2440/lib/src/print.c:32
+3000a880 T vsnprintf	/home/acoral/aCoral-mini2440/lib/src/print.c:123
+3000b3b8 T acoral_sprint	/home/acoral/aCoral-mini2440/lib/src/print.c:350
+3000b418 T acoral_print	/home/acoral/aCoral-mini2440/lib/src/print.c:360
+3000b4a4 T acoral_prints	/home/acoral/aCoral-mini2440/lib/src/print.c:371
+3000b504 T acoral_getchar	/home/acoral/aCoral-mini2440/lib/src/print.c:378
+3000b550 T acoral_putchar	/home/acoral/aCoral-mini2440/lib/src/print.c:384
+3000b5a4 T acoral_debug	/home/acoral/aCoral-mini2440/lib/src/print.c:391
+3000b668 T acoral_debugs	/home/acoral/aCoral-mini2440/lib/src/print.c:407
+3000b700 T acoral_tolower	/home/acoral/aCoral-mini2440/lib/src/str.c:3
+3000b764 T acoral_toupper	/home/acoral/aCoral-mini2440/lib/src/str.c:12
+3000b7c8 T acoral_str_upr	/home/acoral/aCoral-mini2440/lib/src/str.c:21
+3000b870 T acoral_str_lwr	/home/acoral/aCoral-mini2440/lib/src/str.c:32
+3000b910 T acoral_str_len	/home/acoral/aCoral-mini2440/lib/src/str.c:42
+3000b974 T acoral_str_cpy	/home/acoral/aCoral-mini2440/lib/src/str.c:51
+3000b9e0 T acoral_str_cmp	/home/acoral/aCoral-mini2440/lib/src/str.c:58
+3000bad0 T acoral_str_nicmp	/home/acoral/aCoral-mini2440/lib/src/str.c:87
+3000bbe4 T acoral_str_ncpy	/home/acoral/aCoral-mini2440/lib/src/str.c:124
+3000bc74 T acoral_str_lcpy	/home/acoral/aCoral-mini2440/lib/src/str.c:152
+3000bd00 T acoral_str_cat	/home/acoral/aCoral-mini2440/lib/src/str.c:170
+3000bd8c T acoral_str_ncat	/home/acoral/aCoral-mini2440/lib/src/str.c:193
+3000be54 T acoral_str_lcat	/home/acoral/aCoral-mini2440/lib/src/str.c:219
+3000bf0c T acoral_str_ncmp	/home/acoral/aCoral-mini2440/lib/src/str.c:248
+3000bfcc T acoral_str_chr	/home/acoral/aCoral-mini2440/lib/src/str.c:270
+3000c03c T acoral_str_rchr	/home/acoral/aCoral-mini2440/lib/src/str.c:286
+3000c0c8 T acoral_str_nchr	/home/acoral/aCoral-mini2440/lib/src/str.c:306
+3000c164 T acoral_str_nlen	/home/acoral/aCoral-mini2440/lib/src/str.c:323
+3000c1d8 T acoral_str_spn	/home/acoral/aCoral-mini2440/lib/src/str.c:342
+3000c290 T acoral_str_cspn	/home/acoral/aCoral-mini2440/lib/src/str.c:370
+3000c330 T acoral_str_pbrk	/home/acoral/aCoral-mini2440/lib/src/str.c:394
+3000c3bc T acoral_str_sep	/home/acoral/aCoral-mini2440/lib/src/str.c:422
+3000c444 T acoral_memset	/home/acoral/aCoral-mini2440/lib/src/str.c:447
+3000c4b4 T acoral_memcpy	/home/acoral/aCoral-mini2440/lib/src/str.c:468
+3000c538 T acoral_memmove	/home/acoral/aCoral-mini2440/lib/src/str.c:488
+3000c644 T acoral_memcmp	/home/acoral/aCoral-mini2440/lib/src/str.c:515
+3000c6e0 T acoral_memscan	/home/acoral/aCoral-mini2440/lib/src/str.c:538
+3000c750 T acoral_strstr	/home/acoral/aCoral-mini2440/lib/src/str.c:558
+3000c7fc T acoral_memchr	/home/acoral/aCoral-mini2440/lib/src/str.c:587
+3000c890 T acoral_rand	/home/acoral/aCoral-mini2440/lib/src/random.c:3
+3000c8d4 T acoral_rand_start	/home/acoral/aCoral-mini2440/lib/src/random.c:9
+3000c8f4 T plugin_init	/home/acoral/aCoral-mini2440/plugin/src/plugin.c:3
+3000c8f8 T dummy	/home/acoral/aCoral-mini2440/user/src/user.c:3
+3000c924 T user_main	/home/acoral/aCoral-mini2440/user/src/user.c:11
+3000c928 T parse_args	/home/acoral/aCoral-mini2440/user/src/shell.c:14
+3000cb68 T add_command	/home/acoral/aCoral-mini2440/user/src/shell.c:68
+3000cbcc T find_cmd	/home/acoral/aCoral-mini2440/user/src/shell.c:78
+3000cc40 T execmd	/home/acoral/aCoral-mini2440/user/src/shell.c:90
+3000ccc0 T cmd_exe	/home/acoral/aCoral-mini2440/user/src/shell.c:102
+3000cd44 T echo	/home/acoral/aCoral-mini2440/user/src/shell.c:116
+3000cd6c T get_cmd	/home/acoral/aCoral-mini2440/user/src/shell.c:120
+3000cf34 T acoral_shell_init	/home/acoral/aCoral-mini2440/user/src/shell.c:171
+3000cfc8 T acoral_shell_exit	/home/acoral/aCoral-mini2440/user/src/shell.c:184
+3000cfec T acoral_shell_enter	/home/acoral/aCoral-mini2440/user/src/shell.c:189
+3000d088 T malloc_scan	/home/acoral/aCoral-mini2440/user/src/cmd.c:4
+3000d0a8 T malloc_scan2	/home/acoral/aCoral-mini2440/user/src/cmd.c:15
+3000d0c8 T help	/home/acoral/aCoral-mini2440/user/src/cmd.c:27
+3000d134 T exit	/home/acoral/aCoral-mini2440/user/src/cmd.c:43
+3000d184 T spg	/home/acoral/aCoral-mini2440/user/src/cmd.c:54
+3000d1ac T cmd_init	/home/acoral/aCoral-mini2440/user/src/cmd.c:77
+3000d1f4 T display_thread	/home/acoral/aCoral-mini2440/user/src/thread_display.c:5
+3000d408 T acoral_get_drv_ctrl_by_name	/home/acoral/aCoral-mini2440/driver/src/driver.c:10
+3000d494 T acoral_drv_register	/home/acoral/aCoral-mini2440/driver/src/driver.c:21
+3000d56c T acoral_drv_unregister	/home/acoral/aCoral-mini2440/driver/src/driver.c:42
+3000d5f4 T acoral_dev_open	/home/acoral/aCoral-mini2440/driver/src/driver.c:50
+3000d688 T acoral_dev_write	/home/acoral/aCoral-mini2440/driver/src/driver.c:61
+3000d720 T acoral_dev_read	/home/acoral/aCoral-mini2440/driver/src/driver.c:68
+3000d7b8 T acoral_dev_config	/home/acoral/aCoral-mini2440/driver/src/driver.c:75
+3000d84c T acoral_dev_close	/home/acoral/aCoral-mini2440/driver/src/driver.c:81
+3000d8c8 T acoral_alloc_drv	/home/acoral/aCoral-mini2440/driver/src/driver.c:88
+3000d8e8 T acoral_drv_pool_init	/home/acoral/aCoral-mini2440/driver/src/driver.c:93
+3000d930 T acoral_drv_sys_init	/home/acoral/aCoral-mini2440/driver/src/driver.c:101
+3000d984 T brd_driver_init	/home/acoral/aCoral-mini2440/driver/s3c2440/src/brd_driver.c:2
+3000d994 T uart_write	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:9
+3000d9d0 T uart_read	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:14
+3000da10 T console_write	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:19
+3000da8c T console_read	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:30
+3000daf8 T console_config	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:40
+3000db28 T console_open	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:49
+3000db40 T uart_init	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:54
+3000dbb4 T con_uart_init	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:64
+3000dc14 t .udivsi3_nodiv0
+3000dc14 T __aeabi_uidiv
+3000dc14 T __udivsi3
+3000dd08 T __aeabi_uidivmod
+3000dd28 W __aeabi_idiv0
+3000dd28 W __aeabi_ldiv0
+3000dd2c T __aeabi_frsub
+3000dd34 T __aeabi_fsub
+3000dd34 T __subsf3
+3000dd38 T __addsf3
+3000dd38 T __aeabi_fadd
+3000def4 T __aeabi_ui2f
+3000def4 T __floatunsisf
+3000defc T __aeabi_i2f
+3000defc T __floatsisf
+3000df1c T __aeabi_ul2f
+3000df1c T __floatundisf
+3000df2c T __aeabi_l2f
+3000df2c T __floatdisf
+3000dfd8 T __aeabi_fmul
+3000dfd8 T __mulsf3
+3000e170 T __aeabi_fdiv
+3000e170 T __divsf3
+3000e2d0 T __gesf2
+3000e2d0 T __gtsf2
+3000e2d8 T __lesf2
+3000e2d8 T __ltsf2
+3000e2e0 T __cmpsf2
+3000e2e0 T __eqsf2
+3000e2e0 T __nesf2
+3000e344 T __aeabi_cfrcmple
+3000e354 T __aeabi_cfcmpeq
+3000e354 T __aeabi_cfcmple
+3000e36c T __aeabi_fcmpeq
+3000e384 T __aeabi_fcmplt
+3000e39c T __aeabi_fcmple
+3000e3b4 T __aeabi_fcmpge
+3000e3cc T __aeabi_fcmpgt
+3000e9ac T small_digits	/home/acoral/aCoral-mini2440/lib/src/print.c:30
+3000e9d4 T large_digits	/home/acoral/aCoral-mini2440/lib/src/print.c:31
+3000ec64 D acoral_doMsgTtl_checked	/home/acoral/aCoral-mini2440/kernel/src/message.c:10
+3000ec68 D prio	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:11
+3000ec6c D rm_queue	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:13
+3000ec70 D right	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:14
+3000ec98 d console_id	/home/acoral/aCoral-mini2440/lib/src/print.c:389
+3000ec9c D mem_cmd	/home/acoral/aCoral-mini2440/user/src/cmd.c:8
+3000ecac D mem2_cmd	/home/acoral/aCoral-mini2440/user/src/cmd.c:19
+3000ecbc D help_cmd	/home/acoral/aCoral-mini2440/user/src/cmd.c:36
+3000eccc D exit_cmd	/home/acoral/aCoral-mini2440/user/src/cmd.c:48
+3000ecdc D spg_cmd	/home/acoral/aCoral-mini2440/user/src/cmd.c:58
+3000ecec D dt_cmd	/home/acoral/aCoral-mini2440/user/src/thread_display.c:56
+3000ecfc B acoral_start_sched	/home/acoral/aCoral-mini2440/kernel/src/core.c:3
+3000ecfc B bss_start
+3000ed00 b acoral_ready_queues	/home/acoral/aCoral-mini2440/kernel/src/sched.c:10
+3000f064 b ticks	/home/acoral/aCoral-mini2440/kernel/src/timer.c:23
+3000f068 b print_buf.2163
+3000f468 b print_buf.2126
+3000f568 b rand_seed	/home/acoral/aCoral-mini2440/lib/src/random.c:2
+3000f56c B g_msgctr_header	/home/acoral/aCoral-mini2440/kernel/src/message.c:14
+3000f578 B drv_table	/home/acoral/aCoral-mini2440/driver/src/driver.c:9
+3000f5c8 B comm_policy	/home/acoral/aCoral-mini2440/kernel/src/comm_thrd.c:10
+3000f5e4 B acoral_free_res_pool	/home/acoral/aCoral-mini2440/kernel/src/resource.c:9
+3000f5e8 B posix_policy	/home/acoral/aCoral-mini2440/kernel/src/posix_thrd.c:118
+3000f604 B sched_lock	/home/acoral/aCoral-mini2440/kernel/src/sched.c:8
+3000f608 B intr_table	/home/acoral/aCoral-mini2440/kernel/src/int.c:7
+3000fb80 B slice_policy	/home/acoral/aCoral-mini2440/kernel/src/slice_thrd.c:12
+3000fb9c B thread_api	/home/acoral/aCoral-mini2440/kernel/src/thread.c:18
+3000fba0 B mem_ctrl	/home/acoral/aCoral-mini2440/kernel/src/malloc.c:32
+3000fbd4 B acoral_thread_pool_ctrl	/home/acoral/aCoral-mini2440/kernel/src/thread.c:19
+3000fc0c B acoral_drv_pool_ctrl	/home/acoral/aCoral-mini2440/driver/src/driver.c:8
+3000fc44 B acoral_threads_queue	/home/acoral/aCoral-mini2440/kernel/src/thread.c:17
+3000fc50 B thread	/home/acoral/aCoral-mini2440/kernel/src/core.c:66
+3000fc54 B orig_thread	/home/acoral/aCoral-mini2440/kernel/src/core.c:104
+3000fcac B tmp_rm_queue	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:12
+3000fcb8 B acoral_mem_blocks	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:31
+3000fcbc B sample_100ms	/home/acoral/aCoral-mini2440/kernel/src/softdelay.c:7
+3000fcc0 B console_ops	/home/acoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:6
+3000fcd4 B left	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:18
+3000fcdc B daemon_id	/home/acoral/aCoral-mini2440/kernel/src/core.c:4
+3000fce0 B period_delay_queue	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:10
+3000fcec B head_cmd	/home/acoral/aCoral-mini2440/user/src/shell.c:6
+3000fcf0 B acoral_res_release_queue	/home/acoral/aCoral-mini2440/kernel/src/core.c:2
+3000fcfc B acoral_pools	/home/acoral/aCoral-mini2440/kernel/src/resource.c:8
+3001051c B acoral_msg_pool_ctrl	/home/acoral/aCoral-mini2440/kernel/src/message.c:13
+30010554 B idle_id	/home/acoral/aCoral-mini2440/kernel/src/core.c:4
+30010558 B policy_list	/home/acoral/aCoral-mini2440/kernel/src/policy.c:7
+30010564 B acoral_mem_ctrl	/home/acoral/aCoral-mini2440/kernel/src/buddy.c:30
+30010568 B rm_policy	/home/acoral/aCoral-mini2440/kernel/src/rm_thrd.c:128
+30010584 B init_id	/home/acoral/aCoral-mini2440/kernel/src/core.c:4
+30010588 B time_delay_queue	/home/acoral/aCoral-mini2440/kernel/src/timer.c:17
+30010594 B acoral_evt_pool_ctrl	/home/acoral/aCoral-mini2440/kernel/src/event.c:3
+300105cc B acoral_msgctr_pool_ctrl	/home/acoral/aCoral-mini2440/kernel/src/message.c:12
+30010604 B timeout_queue	/home/acoral/aCoral-mini2440/kernel/src/timer.c:22
+30010610 B ready_thread	/home/acoral/aCoral-mini2440/kernel/src/sched.c:9
+30010614 B intr_nesting	/home/acoral/aCoral-mini2440/hal/src/hal_comm.c:6
+30010618 B running_thread	/home/acoral/aCoral-mini2440/kernel/src/sched.c:9
+3001061c B need_sched	/home/acoral/aCoral-mini2440/kernel/src/sched.c:7
+30010620 B period_policy	/home/acoral/aCoral-mini2440/kernel/src/period_thrd.c:123
+3001063c B sample	/home/acoral/aCoral-mini2440/kernel/src/softdelay.c:8
+30010640 B tail_cmd	/home/acoral/aCoral-mini2440/user/src/shell.c:6
+30010644 A bss_end
+30010644 A heap_start
 33eff000 A heap_end
 33f00000 A MMU_base
 33fff900 A SYS_stack
