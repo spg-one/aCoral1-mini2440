@@ -3,8 +3,8 @@ acoral.elf:     file format elf32-littlearm
 
 SYMBOL TABLE:
 30000000 l    d  .text	00000000 .text
-3000ec50 l    d  .data	00000000 .data
-3000ece8 l    d  .bss	00000000 .bss
+3000ec4c l    d  .data	00000000 .data
+3000ece4 l    d  .bss	00000000 .bss
 00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
 00000000 l    d  .comment	00000000 .comment
 00000000 l    d  .debug_aranges	00000000 .debug_aranges
@@ -61,7 +61,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 00000000 l    df *ABS*	00000000 core.c
 00000000 l    df *ABS*	00000000 policy.c
 00000000 l    df *ABS*	00000000 sched.c
-3000ecec l       .bss	00000000 acoral_ready_queues
+3000ece8 l       .bss	00000000 acoral_ready_queues
 00000000 l    df *ABS*	00000000 thread.c
 30002890 l     F .text	0000008c acoral_delay_thread
 3000291c l     F .text	00000038 acoral_delay_thread_by_id
@@ -69,7 +69,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 00000000 l    df *ABS*	00000000 resource.c
 00000000 l    df *ABS*	00000000 int.c
 00000000 l    df *ABS*	00000000 timer.c
-3000f050 l       .bss	00000000 ticks
+3000f04c l       .bss	00000000 ticks
 00000000 l    df *ABS*	00000000 mem.c
 00000000 l    df *ABS*	00000000 spinlock.c
 00000000 l    df *ABS*	00000000 event.c
@@ -93,12 +93,12 @@ c0000000 l       *ABS*	00000000 BUS_M
 00000000 l    df *ABS*	00000000 list.c
 00000000 l    df *ABS*	00000000 print.c
 3000a260 l     F .text	00000074 do_div
-3000f454 l       .bss	00000000 print_buf.2126
-3000ec84 l     O .data	00000004 console_id
-3000f054 l       .bss	00000000 print_buf.2163
+3000f450 l       .bss	00000000 print_buf.2126
+3000ec80 l     O .data	00000004 console_id
+3000f050 l       .bss	00000000 print_buf.2163
 00000000 l    df *ABS*	00000000 str.c
 00000000 l    df *ABS*	00000000 random.c
-3000f554 l       .bss	00000000 rand_seed
+3000f550 l       .bss	00000000 rand_seed
 00000000 l    df *ABS*	00000000 plugin.c
 00000000 l    df *ABS*	00000000 user.c
 00000000 l    df *ABS*	00000000 shell.c
@@ -114,15 +114,15 @@ c0000000 l       *ABS*	00000000 BUS_M
 30004b54 g     F .text	00000010 acoral_evt_sys_init
 30008600 g     F .text	00000090 acoral_print_all_msg
 30005248 g     F .text	000001e8 acoral_mutex_pend2
-3000f558 g     O .bss	0000000c g_msgctr_header
-3000f564 g     O .bss	00000050 drv_table
+3000f554 g     O .bss	0000000c g_msgctr_header
+3000f560 g     O .bss	00000050 drv_table
 3000d978 g     F .text	00000010 brd_driver_init
-3000f5b4 g     O .bss	0000001c comm_policy
-3000f5d0 g     O .bss	00000004 acoral_free_res_pool
+3000f5b0 g     O .bss	0000001c comm_policy
+3000f5cc g     O .bss	00000004 acoral_free_res_pool
 3000b758 g     F .text	00000064 acoral_toupper
 30002760 g     F .text	00000054 acoral_suspend_thread
 3000b65c g     F .text	00000098 acoral_debugs
-3000f5d4 g     O .bss	0000001c posix_policy
+3000f5d0 g     O .bss	0000001c posix_policy
 3000c4a8 g     F .text	00000084 acoral_memcpy
 30008808 g     F .text	00000028 rm_policy_thread_release
 300014dc g       .text	00000000 MMU_EnableMMU
@@ -130,7 +130,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000c8e8 g     F .text	00000004 plugin_init
 300014ec g       .text	00000000 MMU_DisableMMU
 30002e8c g     F .text	00000080 acoral_thread_pool_init
-3000f5f0 g     O .bss	00000001 sched_lock
+3000f5ec g     O .bss	00000001 sched_lock
 30002f0c g     F .text	00000024 acoral_set_thread_console
 300033e4 g     F .text	000000f8 acoral_collect_pool
 30009f5c g     F .text	00000088 acoral_prio_queue_add
@@ -139,12 +139,12 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000148c g       .text	00000000 MMU_DisableICache
 300044b0 g     F .text	0000003c acoral_time_sys_init
 30001514 g       .text	00000000 MMU_InvalidateICache
-3000f5f4 g     O .bss	00000578 intr_table
+3000f5f0 g     O .bss	00000578 intr_table
 3000157c g       .text	00000000 MMU_InvalidateDTLB
 3000e164 g     F .text	00000160 __divsf3
 30001800 g     F .text	0000002c hal_intr_exit_bridge_comm
 300016a8 g       .text	00000000 EXP_HANDLER
-3000fb6c g     O .bss	0000001c slice_policy
+3000fb68 g     O .bss	0000001c slice_policy
 30002b1c g     F .text	0000003c acoral_thread_change_prio_by_id
 300016ec g       .text	00000000 HAL_INTR_RESTORE
 3000d67c g     F .text	00000098 acoral_dev_write
@@ -152,12 +152,12 @@ c0000000 l       *ABS*	00000000 BUS_M
 300002c0 g     F .text	0000010c hal_stack_init
 30001ad0 g     F .text	000000fc acoral_core_cpu_start
 3000166c g       .text	00000000 HAL_INTR_ENTRY
-3000ec88 g     O .data	00000010 mem_cmd
+3000ec84 g     O .data	00000010 mem_cmd
 30004abc g     F .text	00000024 spin_unlock_intr_restore
 3000270c g     F .text	00000054 acoral_release_thread
-3000ec54 g     O .data	00000004 prio
+3000ec50 g     O .data	00000004 prio
 30009270 g     F .text	00000010 period_thread_exit
-3000fb88 g     O .bss	00000004 thread_api
+3000fb84 g     O .bss	00000004 thread_api
 3000182c g     F .text	00000048 hal_atomic_add_comm
 30004274 g     F .text	0000004c acoral_set_intr_exit
 30004bbc g     F .text	00000020 acoral_alloc_evt
@@ -184,7 +184,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 30002698 g     F .text	00000074 acoral_release_thread1
 3000c638 g     F .text	0000009c acoral_memcmp
 3000bf00 g     F .text	000000c0 acoral_str_ncmp
-3000fb8c g     O .bss	00000034 mem_ctrl
+3000fb88 g     O .bss	00000034 mem_ctrl
 30002c40 g     F .text	00000020 acoral_alloc_thread
 3000a0b0 g     F .text	000000c8 acoral_prio_queue_init
 300039b4 g     F .text	000000a4 acoral_pools_init
@@ -195,12 +195,12 @@ c0000000 l       *ABS*	00000000 BUS_M
 30000984 g     F .text	00000084 flush_cache
 300048f0 g     F .text	00000064 timeout_queue_del
 300011c0 g     F .text	000002bc nand_read
-3000fbc0 g     O .bss	00000038 acoral_thread_pool_ctrl
+3000fbbc g     O .bss	00000038 acoral_thread_pool_ctrl
 300042c0 g     F .text	0000004c acoral_set_intr_mask
-3000fbf8 g     O .bss	00000038 acoral_drv_pool_ctrl
+3000fbf4 g     O .bss	00000038 acoral_drv_pool_ctrl
 30002010 g     F .text	00000020 acoral_set_orig_thread
 3000cd60 g     F .text	000001c8 get_cmd
-3000ecc8 g     O .data	00000010 spg_cmd
+3000ecc4 g     O .data	00000010 spg_cmd
 300070e0 g     F .text	000000bc v_mem_init
 3000cfe0 g     F .text	0000009c acoral_shell_enter
 3000d488 g     F .text	000000d8 acoral_drv_register
@@ -229,21 +229,21 @@ c0000000 l       *ABS*	00000000 BUS_M
 300017d4 g     F .text	0000002c hal_sched_bridge_comm
 30007ed4 g     F .text	00000068 acoral_msg_assign
 30009f00 g     F .text	0000005c acoral_get_bit
-3000ec5c g     O .data	00000028 right
-3000fc30 g     O .bss	0000000c acoral_threads_queue
-3000fc3c g     O .bss	00000004 thread
+3000ec58 g     O .data	00000028 right
+3000fc2c g     O .bss	0000000c acoral_threads_queue
+3000fc38 g     O .bss	00000004 thread
 3000a1c4 g     F .text	0000004c acoral_list_add2_tail
 3000b6f4 g     F .text	00000064 acoral_tolower
-3000fc40 g     O .bss	00000058 orig_thread
+3000fc3c g     O .bss	00000058 orig_thread
 3000a178 g     F .text	0000004c acoral_list_add
 3000b9d4 g     F .text	000000f0 acoral_str_cmp
 300038d0 g     F .text	000000e4 acoral_pool_res_init
 00000200 g       *ABS*	00000000 SVC_stack_size
-3000fc98 g     O .bss	0000000c tmp_rm_queue
+3000fc94 g     O .bss	0000000c tmp_rm_queue
 30003ca4 g     F .text	000000b0 acoral_intr_sys_init
 30000c04 g     F .text	000000ac hal_mmu_setmtt
 30009a50 g     F .text	00000058 posix_policy_data_init
-3000fca4 g     O .bss	00000004 acoral_mem_blocks
+3000fca0 g     O .bss	00000004 acoral_mem_blocks
 3000e2d4 g     F .text	00000064 __nesf2
 30004a90 g     F .text	0000002c spin_lock_intr_save
 30004dfc g     F .text	00000088 acoral_mutex_create
@@ -253,16 +253,16 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000a07c g     F .text	00000034 acoral_get_highprio
 3000155c g       .text	00000000 MMU_WaitForInterrupt
 3000bd80 g     F .text	000000c8 acoral_str_ncat
-3000fca8 g     O .bss	00000004 sample_100ms
-30010630 g       *ABS*	00000000 heap_start
+3000fca4 g     O .bss	00000004 sample_100ms
+3001062c g       *ABS*	00000000 heap_start
 300043a0 g     F .text	00000110 acoral_fault_entry
 3000cd38 g     F .text	00000028 echo
 30002bd0 g     F .text	00000040 acoral_thread_move2_tail
 3000d09c g     F .text	00000020 malloc_scan2
 3000c8c8 g     F .text	00000020 acoral_rand_start
 30004f10 g     F .text	000000d8 acoral_mutex_trypend
-3000fcac g     O .bss	00000014 console_ops
-3000fcc0 g     O .bss	00000008 left
+3000fca8 g     O .bss	00000014 console_ops
+3000fcbc g     O .bss	00000008 left
 3000c884 g     F .text	00000044 acoral_rand
 30002f74 g     F .text	000000d0 create_comm_thread
 30003bec g     F .text	00000028 acoral_free_obj
@@ -271,7 +271,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 30002b94 g     F .text	0000003c acoral_unrdy_thread
 30002030 g     F .text	00000054 acoral_set_running_thread
 3000a35c g     F .text	00000518 number
-3000ecb8 g     O .data	00000010 exit_cmd
+3000ecb4 g     O .data	00000010 exit_cmd
 30004954 g     F .text	0000010c timeout_delay_deal
 30008c60 g     F .text	00000064 rm_policy_init
 3000e3a8 g     F .text	00000018 __aeabi_fcmpge
@@ -285,14 +285,14 @@ c0000000 l       *ABS*	00000000 BUS_M
 30009768 g     F .text	000000c0 acoral_posix_create
 30001a8c g     F .text	00000044 acoral_start
 3000c91c g     F .text	00000240 parse_args
-3000fcc8 g     O .bss	00000004 daemon_id
-3000fccc g     O .bss	0000000c period_delay_queue
+3000fcc4 g     O .bss	00000004 daemon_id
+3000fcc8 g     O .bss	0000000c period_delay_queue
 3000e2c4 g     F .text	00000074 __gtsf2
 30004c44 g     F .text	00000050 acoral_evt_high_thread
 30005430 g     F .text	000001a8 acoral_mutex_post
 300014ac g       .text	00000000 MMU_DisableDCache
-3000fcd8 g     O .bss	00000004 head_cmd
-3000fcdc g     O .bss	0000000c acoral_res_release_queue
+3000fcd4 g     O .bss	00000004 head_cmd
+3000fcd8 g     O .bss	0000000c acoral_res_release_queue
 3000e390 g     F .text	00000018 __aeabi_fcmple
 3000cb5c g     F .text	00000064 add_command
 30003ba0 g     F .text	00000020 acoral_obj_pool_release
@@ -301,7 +301,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000c438 g     F .text	00000070 acoral_memset
 30007c4c g     F .text	00000030 acoral_msgctr_list_queueadd
 33fffd00 g       *ABS*	00000000 ABT_stack
-3000eca8 g     O .data	00000010 help_cmd
+3000eca4 g     O .data	00000010 help_cmd
 3000d3fc g     F .text	0000008c acoral_get_drv_ctrl_by_name
 30001bcc g     F .text	00000040 acoral_start_os
 3000719c g     F .text	000000e4 v_mem_scan
@@ -310,7 +310,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000c7f0 g     F .text	00000094 acoral_memchr
 30001534 g       .text	00000000 MMU_InvalidateDCacheMVA
 3000c284 g     F .text	000000a0 acoral_str_cspn
-3000fce8 g     O .bss	00000820 acoral_pools
+3000fce4 g     O .bss	00000820 acoral_pools
 30003608 g     F .text	00000188 acoral_release_res
 3000cbc0 g     F .text	00000074 find_cmd
 30007644 g     F .text	00000070 acoral_sem_init
@@ -332,8 +332,8 @@ c0000000 l       *ABS*	00000000 BUS_M
 30004fe8 g     F .text	00000260 acoral_mutex_pend
 30001504 g       .text	00000000 MMU_SetDomain
 3000b7bc g     F .text	000000a8 acoral_str_upr
-30010508 g     O .bss	00000038 acoral_msg_pool_ctrl
-30010630 g       *ABS*	00000000 bss_end
+30010504 g     O .bss	00000038 acoral_msg_pool_ctrl
+3001062c g       *ABS*	00000000 bss_end
 3000def0 g     F .text	00000020 __floatsisf
 30009828 g     F .text	00000200 posix_policy_thread_init
 30002a70 g     F .text	0000007c acoral_thread_change_prio
@@ -354,13 +354,13 @@ c0000000 l       *ABS*	00000000 BUS_M
 30008928 g     F .text	00000158 rm_check
 300025d0 g     F .text	000000c8 acoral_select_thread
 00000200 g       *ABS*	00000000 SYS_stack_size
-3000ece8 g       .bss	00000000 bss_start
+3000ece4 g       .bss	00000000 bss_start
 3000e164 g     F .text	00000160 __aeabi_fdiv
 300055d8 g     F .text	00000178 buddy_scan
 30007b48 g     F .text	00000058 acoral_sem_getnum
 3000d924 g     F .text	00000054 acoral_drv_sys_init
 30009e9c g     F .text	00000064 acoral_clear_bit
-30010540 g     O .bss	00000004 idle_id
+3001053c g     O .bss	00000004 idle_id
 3000d8bc g     F .text	00000020 acoral_alloc_drv
 3000df10 g     F .text	000000bc __floatundisf
 30009cd0 g     F .text	000000e0 acoral_ffs
@@ -380,11 +380,11 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000bbd8 g     F .text	00000090 acoral_str_ncpy
 3000c52c g     F .text	0000010c acoral_memmove
 300047e8 g     F .text	00000108 timeout_queue_add
-30010544 g     O .bss	0000000c policy_list
-30010550 g     O .bss	00000004 acoral_mem_ctrl
+30010540 g     O .bss	0000000c policy_list
+3001054c g     O .bss	00000004 acoral_mem_ctrl
 3000d5e8 g     F .text	00000094 acoral_dev_open
 30008d78 g     F .text	000001e4 period_policy_thread_init
-30010554 g     O .bss	0000001c rm_policy
+30010550 g     O .bss	0000001c rm_policy
 30007d58 g     F .text	00000038 acoral_msg_queue_add
 3000e2d4 g     F .text	00000064 __cmpsf2
 3000c3b0 g     F .text	00000088 acoral_str_sep
@@ -397,9 +397,9 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000df20 g     F .text	000000ac __aeabi_l2f
 00000100 g       *ABS*	00000000 Undef_stack_size
 33f00000 g       *ABS*	00000000 MMU_base
-30010570 g     O .bss	00000004 init_id
+3001056c g     O .bss	00000004 init_id
 30001c34 g     F .text	000000d4 create_thread_ext
-30010574 g     O .bss	0000000c time_delay_queue
+30010570 g     O .bss	0000000c time_delay_queue
 3000e2cc g     F .text	0000006c __ltsf2
 30002f60 g     F .text	00000014 acoral_thread_sys_init
 3000dc08 g     F .text	00000000 __aeabi_uidiv
@@ -409,9 +409,9 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000283c g     F .text	00000054 acoral_resume_thread
 30000000 g       .text	00000000 text_start
 3000cf28 g     F .text	00000094 acoral_shell_init
-30010580 g     O .bss	00000038 acoral_evt_pool_ctrl
+3001057c g     O .bss	00000038 acoral_evt_pool_ctrl
 3000df10 g     F .text	000000bc __aeabi_ul2f
-300105b8 g     O .bss	00000038 acoral_msgctr_pool_ctrl
+300105b4 g     O .bss	00000038 acoral_msgctr_pool_ctrl
 33fff900 g       *ABS*	00000000 SYS_stack
 30002984 g     F .text	0000009c acoral_kill_thread
 300041ac g     F .text	0000007c acoral_intr_exit
@@ -424,13 +424,13 @@ c0000000 l       *ABS*	00000000 BUS_M
 300095d8 g     F .text	00000190 posix_delay_deal
 30009db0 g     F .text	0000008c acoral_find_first_bit
 3000da04 g     F .text	0000007c console_write
-3000ecd8 g     O .data	00000010 dt_cmd
+3000ecd4 g     O .data	00000010 dt_cmd
 30002954 g     F .text	00000030 acoral_delay_self
 30004c94 g     F .text	000000c4 acoral_evt_queue_add
 33eff000 g       *ABS*	00000000 heap_end
 300090f0 g     F .text	00000180 period_delay_deal
 30009b0c g     F .text	00000054 delay
-300105f0 g     O .bss	0000000c timeout_queue
+300105ec g     O .bss	0000000c timeout_queue
 300003cc g     F .text	000000cc hal_all_entry
 300027b4 g     F .text	00000020 acoral_suspend_self
 3000419c g     F .text	00000010 acoral_default_isr
@@ -455,8 +455,8 @@ c0000000 l       *ABS*	00000000 BUS_M
 30001760 g     F .text	00000014 hal_get_intr_nesting_comm
 300086c0 g     F .text	00000148 rm_policy_thread_init
 30001f90 g     F .text	00000010 app_exit_policy_init
-300105fc g     O .bss	00000004 ready_thread
-3000ec98 g     O .data	00000010 mem2_cmd
+300105f8 g     O .bss	00000004 ready_thread
+3000ec94 g     O .data	00000010 mem2_cmd
 3000b864 g     F .text	000000a0 acoral_str_lwr
 30003a58 g     F .text	00000108 acoral_pool_ctrl_init
 30001564 g       .text	00000000 MMU_InvalidateTLB
@@ -476,13 +476,13 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000153c g       .text	00000000 MMU_CleanDCacheMVA
 3000149c g       .text	00000000 MMU_EnableDCache
 30003c24 g     F .text	00000080 acoral_assert_res
-3000ece8 g     O .bss	00000004 acoral_start_sched
+3000ece4 g     O .bss	00000004 acoral_start_sched
 3000a210 g     F .text	00000050 acoral_list_del
 30008bcc g     F .text	00000094 rm_init
 300044ec g     F .text	00000014 acoral_get_ticks
 3000667c g     F .text	000004b8 buddy_free
 300014fc g       .text	00000000 MMU_SetTTBase
-30010600 g     O .bss	00000004 intr_nesting
+300105fc g     O .bss	00000004 intr_nesting
 30004520 g     F .text	00000038 acoral_ticks_init
 3000d9c4 g     F .text	00000040 uart_read
 30004b64 g     F .text	00000058 acoral_evt_pool_init
@@ -492,7 +492,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 30008874 g     F .text	000000b4 rm_queue_ascend_add
 3000bac4 g     F .text	00000114 acoral_str_nicmp
 3000d128 g     F .text	00000050 exit
-3000ec50 g     O .data	00000004 acoral_doMsgTtl_checked
+3000ec4c g     O .data	00000004 acoral_doMsgTtl_checked
 30009090 g     F .text	00000060 period_thread_delay
 33ffff00 g       *ABS*	00000000 IRQ_stack
 3000dee8 g     F .text	00000028 __floatunsisf
@@ -504,7 +504,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 30004358 g     F .text	00000048 acoral_intr_set_type
 3000dd1c  w    F .text	00000004 __aeabi_idiv0
 30001ef0 g     F .text	00000054 acoral_policy_thread_release
-30010604 g     O .bss	00000004 running_thread
+30010600 g     O .bss	00000004 running_thread
 30007cbc g     F .text	0000009c acoral_msgctr_queue_add
 30001f80 g     F .text	00000010 app_enter_policy_init
 30003d54 g     F .text	0000007c acoral_intr_attach
@@ -519,16 +519,16 @@ c0000000 l       *ABS*	00000000 BUS_M
 30003bc0 g     F .text	0000002c acoral_get_obj
 300081d4 g     F .text	00000258 acoral_msg_recv
 30008f84 g     F .text	0000010c acoral_periodqueue_add
-30010608 g     O .bss	00000001 need_sched
-3000ec58 g     O .data	00000004 rm_queue
+30010604 g     O .bss	00000001 need_sched
+3000ec54 g     O .data	00000004 rm_queue
 30000864 g     F .text	000000d4 hal_ticks_init
 3000bfc0 g     F .text	00000070 acoral_str_chr
 30009be0 g     F .text	000000e4 soft_delay_init
 3000d714 g     F .text	00000098 acoral_dev_read
 30001544 g       .text	00000000 MMU_CleanInvalidateDCacheMVA
-3001060c g     O .bss	0000001c period_policy
+30010608 g     O .bss	0000001c period_policy
 30003f0c g     F .text	000000e8 acoral_intr_mask
-30010628 g     O .bss	00000004 sample
+30010624 g     O .bss	00000004 sample
 30008024 g     F .text	0000009c acoral_msg_create
 30000768 g     F .text	000000fc hal_intr_init
 30003144 g     F .text	0000005c comm_policy_init
@@ -547,7 +547,7 @@ c0000000 l       *ABS*	00000000 BUS_M
 3000158c g       .text	00000000 HAL_SWITCH_TO
 3000dd2c g     F .text	000001bc __addsf3
 3000430c g     F .text	0000004c acoral_set_intr_unmask
-3001062c g     O .bss	00000004 tail_cmd
+30010628 g     O .bss	00000004 tail_cmd
 30001c0c g     F .text	00000028 acoral_module_init
 30007894 g     F .text	000001ac acoral_sem_pend
 30004228 g     F .text	0000004c acoral_set_intr_enter

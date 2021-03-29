@@ -41,10 +41,10 @@ Disassembly of section .text:
 30000050:	30000000 	.word	0x30000000
 
 30000054 <_bss_start>:
-30000054:	3000ece8 	.word	0x3000ece8
+30000054:	3000ece4 	.word	0x3000ece4
 
 30000058 <_bss_end>:
-30000058:	30010630 	.word	0x30010630
+30000058:	3001062c 	.word	0x3001062c
 
 3000005c <ResetHandler>:
 3000005c:	e3a01453 	mov	r1, #1392508928	; 0x53000000
@@ -2185,7 +2185,7 @@ void hal_intr_nesting_init_comm(){
 }
 30001754:	e28dd008 	add	sp, sp, #8
 30001758:	e12fff1e 	bx	lr
-3000175c:	30010600 	.word	0x30010600
+3000175c:	300105fc 	.word	0x300105fc
 
 30001760 <hal_get_intr_nesting_comm>:
 /*===========================                                                                                                                 
@@ -2199,7 +2199,7 @@ acoral_u32 hal_get_intr_nesting_comm(){
 }
 30001768:	e1a00003 	mov	r0, r3
 3000176c:	e12fff1e 	bx	lr
-30001770:	30010600 	.word	0x30010600
+30001770:	300105fc 	.word	0x300105fc
 
 30001774 <hal_intr_nesting_dec_comm>:
 
@@ -2229,7 +2229,7 @@ void hal_intr_nesting_dec_comm(){
 }
 300017ac:	e28dd008 	add	sp, sp, #8
 300017b0:	e12fff1e 	bx	lr
-300017b4:	30010600 	.word	0x30010600
+300017b4:	300105fc 	.word	0x300105fc
 
 300017b8 <hal_intr_nesting_inc_comm>:
 /*===========================                                                                                                                 
@@ -2245,7 +2245,7 @@ void hal_intr_nesting_inc_comm(){
 300017c8:	e5832000 	str	r2, [r3]
 }
 300017cc:	e12fff1e 	bx	lr
-300017d0:	30010600 	.word	0x30010600
+300017d0:	300105fc 	.word	0x300105fc
 
 300017d4 <hal_sched_bridge_comm>:
 
@@ -2458,7 +2458,7 @@ void daem(void *args){
 3000198c:	eb000388 	bl	300027b4 <acoral_suspend_self>
 	}
 30001990:	eaffffd1 	b	300018dc <daem+0x14>
-30001994:	3000fcdc 	.word	0x3000fcdc
+30001994:	3000fcd8 	.word	0x3000fcd8
 
 30001998 <init>:
 #define DAEM_STACK_SIZE 512
@@ -2555,12 +2555,12 @@ void init(void *args){
 30001a68:	e28dd024 	add	sp, sp, #36	; 0x24
 30001a6c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001a70:	e12fff1e 	bx	lr
-30001a74:	3000ece8 	.word	0x3000ece8
-30001a78:	3000fcdc 	.word	0x3000fcdc
+30001a74:	3000ece4 	.word	0x3000ece4
+30001a78:	3000fcd8 	.word	0x3000fcd8
 30001a7c:	300018c8 	.word	0x300018c8
 30001a80:	3000e3e0 	.word	0x3000e3e0
-30001a84:	3000fcc8 	.word	0x3000fcc8
-30001a88:	3000fc3c 	.word	0x3000fc3c
+30001a84:	3000fcc4 	.word	0x3000fcc4
+30001a88:	3000fc38 	.word	0x3000fc38
 
 30001a8c <acoral_start>:
 acoral_thread_t orig_thread;
@@ -2607,7 +2607,7 @@ void acoral_start(){
 }
 30001ac0:	e8bd4008 	pop	{r3, lr}
 30001ac4:	e12fff1e 	bx	lr
-30001ac8:	3000fc40 	.word	0x3000fc40
+30001ac8:	3000fc3c 	.word	0x3000fc3c
 30001acc:	3000e3e8 	.word	0x3000e3e8
 
 30001ad0 <acoral_core_cpu_start>:
@@ -2689,14 +2689,14 @@ void acoral_core_cpu_start(){
 30001ba0:	e28dd01c 	add	sp, sp, #28
 30001ba4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001ba8:	e12fff1e 	bx	lr
-30001bac:	3000ece8 	.word	0x3000ece8
+30001bac:	3000ece4 	.word	0x3000ece4
 30001bb0:	300018bc 	.word	0x300018bc
 30001bb4:	3000e3f0 	.word	0x3000e3f0
-30001bb8:	30010540 	.word	0x30010540
+30001bb8:	3001053c 	.word	0x3001053c
 30001bbc:	30001998 	.word	0x30001998
 30001bc0:	3000e3f8 	.word	0x3000e3f8
 30001bc4:	3000e400 	.word	0x3000e400
-30001bc8:	30010570 	.word	0x30010570
+30001bc8:	3001056c 	.word	0x3001056c
 
 30001bcc <acoral_start_os>:
 
@@ -2720,8 +2720,8 @@ void acoral_start_os(){
 }
 30001bfc:	e8bd4008 	pop	{r3, lr}
 30001c00:	e12fff1e 	bx	lr
-30001c04:	300105fc 	.word	0x300105fc
-30001c08:	30010604 	.word	0x30010604
+30001c04:	300105f8 	.word	0x300105f8
+30001c08:	30010600 	.word	0x30010600
 
 30001c0c <acoral_module_init>:
 
@@ -2892,7 +2892,7 @@ acoral_sched_policy_t *acoral_get_policy_ctrl(acoral_u8 type){
 30001d78:	e1a00003 	mov	r0, r3
 30001d7c:	e28dd018 	add	sp, sp, #24
 30001d80:	e12fff1e 	bx	lr
-30001d84:	30010544 	.word	0x30010544
+30001d84:	30010540 	.word	0x30010540
 
 30001d88 <acoral_policy_thread_init>:
 
@@ -2973,7 +2973,7 @@ void acoral_register_sched_policy(acoral_sched_policy_t *policy){
 30001e64:	e28dd00c 	add	sp, sp, #12
 30001e68:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001e6c:	e12fff1e 	bx	lr
-30001e70:	30010544 	.word	0x30010544
+30001e70:	30010540 	.word	0x30010540
 
 30001e74 <acoral_policy_delay_deal>:
 
@@ -3027,7 +3027,7 @@ void acoral_policy_delay_deal(){
 30001ee0:	e28dd014 	add	sp, sp, #20
 30001ee4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30001ee8:	e12fff1e 	bx	lr
-30001eec:	30010544 	.word	0x30010544
+30001eec:	30010540 	.word	0x30010540
 
 30001ef0 <acoral_policy_thread_release>:
 
@@ -3092,7 +3092,7 @@ void acoral_sched_policy_init(){
 }
 30001f74:	e8bd4008 	pop	{r3, lr}
 30001f78:	e12fff1e 	bx	lr
-30001f7c:	30010544 	.word	0x30010544
+30001f7c:	30010540 	.word	0x30010540
 
 30001f80 <app_enter_policy_init>:
 
@@ -3157,8 +3157,8 @@ void acoral_sched_init(){
 }
 30001fe0:	e28dd008 	add	sp, sp, #8
 30001fe4:	e12fff1e 	bx	lr
-30001fe8:	3000f5f0 	.word	0x3000f5f0
-30001fec:	30010608 	.word	0x30010608
+30001fe8:	3000f5ec 	.word	0x3000f5ec
+30001fec:	30010604 	.word	0x30010604
 
 30001ff0 <acoral_sched_unlock>:
 
@@ -3173,7 +3173,7 @@ void acoral_sched_unlock(){
 }
 30002004:	e8bd4008 	pop	{r3, lr}
 30002008:	e12fff1e 	bx	lr
-3000200c:	3000f5f0 	.word	0x3000f5f0
+3000200c:	3000f5ec 	.word	0x3000f5ec
 
 30002010 <acoral_set_orig_thread>:
 
@@ -3187,7 +3187,7 @@ void acoral_set_orig_thread(acoral_thread_t *thread){
 }
 30002024:	e28dd008 	add	sp, sp, #8
 30002028:	e12fff1e 	bx	lr
-3000202c:	30010604 	.word	0x30010604
+3000202c:	30010600 	.word	0x30010600
 
 30002030 <acoral_set_running_thread>:
 
@@ -3216,7 +3216,7 @@ void acoral_set_running_thread(acoral_thread_t *thread){
 }
 30002078:	e28dd008 	add	sp, sp, #8
 3000207c:	e12fff1e 	bx	lr
-30002080:	30010604 	.word	0x30010604
+30002080:	30010600 	.word	0x30010600
 
 30002084 <acoral_thread_runqueue_init>:
 
@@ -3274,7 +3274,7 @@ void acoral_thread_runqueue_init(){
 300020ec:	e28dd014 	add	sp, sp, #20
 300020f0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300020f4:	e12fff1e 	bx	lr
-300020f8:	3000ecec 	.word	0x3000ecec
+300020f8:	3000ece8 	.word	0x3000ece8
 
 300020fc <acoral_get_idlest_cpu>:
 
@@ -3340,7 +3340,7 @@ acoral_u32 acoral_get_idlest_cpu(){
 30002184:	e1a00003 	mov	r0, r3
 30002188:	e28dd010 	add	sp, sp, #16
 3000218c:	e12fff1e 	bx	lr
-30002190:	3000ecec 	.word	0x3000ecec
+30002190:	3000ece8 	.word	0x3000ece8
 
 30002194 <acoral_get_idle_maskcpu>:
 
@@ -3413,7 +3413,7 @@ acoral_u32 acoral_get_idle_maskcpu(acoral_u32 cpu_mask){
 30002248:	e1a00003 	mov	r0, r3
 3000224c:	e28dd018 	add	sp, sp, #24
 30002250:	e12fff1e 	bx	lr
-30002254:	3000ecec 	.word	0x3000ecec
+30002254:	3000ece8 	.word	0x3000ece8
 
 30002258 <acoral_rdyqueue_add>:
 
@@ -3483,8 +3483,8 @@ void acoral_rdyqueue_add(acoral_thread_t *thread){
 30002318:	e28dd014 	add	sp, sp, #20
 3000231c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002320:	e12fff1e 	bx	lr
-30002324:	3000ecec 	.word	0x3000ecec
-30002328:	30010608 	.word	0x30010608
+30002324:	3000ece8 	.word	0x3000ece8
+30002328:	30010604 	.word	0x30010604
 
 3000232c <acoral_rdyqueue_del>:
 
@@ -3553,8 +3553,8 @@ void acoral_rdyqueue_del(acoral_thread_t *thread){
 300023e4:	e28dd014 	add	sp, sp, #20
 300023e8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300023ec:	e12fff1e 	bx	lr
-300023f0:	3000ecec 	.word	0x3000ecec
-300023f4:	30010608 	.word	0x30010608
+300023f0:	3000ece8 	.word	0x3000ece8
+300023f4:	30010604 	.word	0x30010604
 
 300023f8 <acoral_sched>:
 
@@ -3626,9 +3626,9 @@ void acoral_sched(){
 }
 30002464:	e8bd4008 	pop	{r3, lr}
 30002468:	e12fff1e 	bx	lr
-3000246c:	30010608 	.word	0x30010608
-30002470:	3000f5f0 	.word	0x3000f5f0
-30002474:	3000ece8 	.word	0x3000ece8
+3000246c:	30010604 	.word	0x30010604
+30002470:	3000f5ec 	.word	0x3000f5ec
+30002474:	3000ece4 	.word	0x3000ece4
 
 30002478 <acoral_real_sched>:
 /*================================
@@ -3698,9 +3698,9 @@ void acoral_real_sched(){
 3000250c:	e28dd00c 	add	sp, sp, #12
 30002510:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002514:	e12fff1e 	bx	lr
-30002518:	30010608 	.word	0x30010608
-3000251c:	30010604 	.word	0x30010604
-30002520:	300105fc 	.word	0x300105fc
+30002518:	30010604 	.word	0x30010604
+3000251c:	30010600 	.word	0x30010600
+30002520:	300105f8 	.word	0x300105f8
 
 30002524 <acoral_real_intr_sched>:
 /*================================
@@ -3770,9 +3770,9 @@ void acoral_real_intr_sched(){
 300025b8:	e28dd00c 	add	sp, sp, #12
 300025bc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300025c0:	e12fff1e 	bx	lr
-300025c4:	30010608 	.word	0x30010608
-300025c8:	30010604 	.word	0x30010604
-300025cc:	300105fc 	.word	0x300105fc
+300025c4:	30010604 	.word	0x30010604
+300025c8:	30010600 	.word	0x30010600
+300025cc:	300105f8 	.word	0x300105f8
 
 300025d0 <acoral_select_thread>:
 
@@ -3844,9 +3844,9 @@ void acoral_select_thread(){
 30002680:	e28dd024 	add	sp, sp, #36	; 0x24
 30002684:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002688:	e12fff1e 	bx	lr
-3000268c:	3000ecec 	.word	0x3000ecec
+3000268c:	3000ece8 	.word	0x3000ece8
 30002690:	3000e440 	.word	0x3000e440
-30002694:	300105fc 	.word	0x300105fc
+30002694:	300105f8 	.word	0x300105f8
 
 30002698 <acoral_release_thread1>:
  * func: release thread in acoral
@@ -3897,8 +3897,8 @@ void acoral_release_thread1(acoral_thread_t *thread){
 300026f8:	e28dd01c 	add	sp, sp, #28
 300026fc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002700:	e12fff1e 	bx	lr
-30002704:	3000fcdc 	.word	0x3000fcdc
-30002708:	3000fcc8 	.word	0x3000fcc8
+30002704:	3000fcd8 	.word	0x3000fcd8
+30002708:	3000fcc4 	.word	0x3000fcc4
 
 3000270c <acoral_release_thread>:
 /*================================
@@ -4012,7 +4012,7 @@ void acoral_suspend_self(){
 }
 300027c8:	e8bd4008 	pop	{r3, lr}
 300027cc:	e12fff1e 	bx	lr
-300027d0:	30010604 	.word	0x30010604
+300027d0:	30010600 	.word	0x30010600
 
 300027d4 <acoral_suspend_thread_by_id>:
  * func: suspend thread in acoral
@@ -4181,7 +4181,7 @@ static void acoral_delay_thread(acoral_thread_t* thread,acoral_time time){
 3000290c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002910:	e12fff1e 	bx	lr
 30002914:	10624dd3 	.word	0x10624dd3
-30002918:	30010574 	.word	0x30010574
+30002918:	30010570 	.word	0x30010570
 
 3000291c <acoral_delay_thread_by_id>:
  *         	
@@ -4228,7 +4228,7 @@ void acoral_delay_self(acoral_time time){
 30002974:	e28dd00c 	add	sp, sp, #12
 30002978:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000297c:	e12fff1e 	bx	lr
-30002980:	30010604 	.word	0x30010604
+30002980:	30010600 	.word	0x30010600
 
 30002984 <acoral_kill_thread>:
 /*================================
@@ -4349,7 +4349,7 @@ void acoral_thread_exit(){
 }
 30002a64:	e8bd4008 	pop	{r3, lr}
 30002a68:	e12fff1e 	bx	lr
-30002a6c:	30010604 	.word	0x30010604
+30002a6c:	30010600 	.word	0x30010600
 
 30002a70 <acoral_thread_change_prio>:
 
@@ -4424,7 +4424,7 @@ void acoral_change_prio_self(acoral_u32 prio){
 30002b0c:	e28dd00c 	add	sp, sp, #12
 30002b10:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002b14:	e12fff1e 	bx	lr
-30002b18:	30010604 	.word	0x30010604
+30002b18:	30010600 	.word	0x30010600
 
 30002b1c <acoral_thread_change_prio_by_id>:
 
@@ -4604,7 +4604,7 @@ acoral_thread_t *acoral_alloc_thread(){
 30002c50:	e1a00003 	mov	r0, r3
 30002c54:	e8bd4008 	pop	{r3, lr}
 30002c58:	e12fff1e 	bx	lr
-30002c5c:	3000fbc0 	.word	0x3000fbc0
+30002c5c:	3000fbbc 	.word	0x3000fbbc
 
 30002c60 <acoral_thread_init>:
  * in:   (*exit)   (acoral_thread_exit)
@@ -4791,8 +4791,8 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 30002e78:	e28dd01c 	add	sp, sp, #28
 30002e7c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30002e80:	e12fff1e 	bx	lr
-30002e84:	30010604 	.word	0x30010604
-30002e88:	3000fc30 	.word	0x3000fc30
+30002e84:	30010600 	.word	0x30010600
+30002e88:	3000fc2c 	.word	0x3000fc2c
 
 30002e8c <acoral_thread_pool_init>:
 
@@ -4841,9 +4841,9 @@ void acoral_thread_pool_init(){
 }
 30002ef8:	e8bd4008 	pop	{r3, lr}
 30002efc:	e12fff1e 	bx	lr
-30002f00:	3000fb88 	.word	0x3000fb88
+30002f00:	3000fb84 	.word	0x3000fb84
 30002f04:	3000270c 	.word	0x3000270c
-30002f08:	3000fbc0 	.word	0x3000fbc0
+30002f08:	3000fbbc 	.word	0x3000fbbc
 
 30002f0c <acoral_set_thread_console>:
 
@@ -4858,7 +4858,7 @@ void acoral_set_thread_console(acoral_id id){
 }
 30002f24:	e28dd008 	add	sp, sp, #8
 30002f28:	e12fff1e 	bx	lr
-30002f2c:	30010604 	.word	0x30010604
+30002f2c:	30010600 	.word	0x30010600
 
 30002f30 <acoral_sched_mechanism_init>:
 
@@ -4879,7 +4879,7 @@ void acoral_sched_mechanism_init(){
 }
 30002f54:	e8bd4008 	pop	{r3, lr}
 30002f58:	e12fff1e 	bx	lr
-30002f5c:	3000fc30 	.word	0x3000fc30
+30002f5c:	3000fc2c 	.word	0x3000fc2c
 
 30002f60 <acoral_thread_sys_init>:
 
@@ -5100,7 +5100,7 @@ void comm_policy_init(){
 }
 3000318c:	e8bd4008 	pop	{r3, lr}
 30003190:	e12fff1e 	bx	lr
-30003194:	3000f5b4 	.word	0x3000f5b4
+30003194:	3000f5b0 	.word	0x3000f5b0
 30003198:	30003044 	.word	0x30003044
 3000319c:	3000e484 	.word	0x3000e484
 
@@ -5315,7 +5315,7 @@ void acoral_release_pool(acoral_pool_ctrl_t *pool_ctrl){
 300033d4:	e28dd01c 	add	sp, sp, #28
 300033d8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300033dc:	e12fff1e 	bx	lr
-300033e0:	3000f5d0 	.word	0x3000f5d0
+300033e0:	3000f5cc 	.word	0x3000f5cc
 
 300033e4 <acoral_collect_pool>:
 /*================================
@@ -5417,7 +5417,7 @@ void acoral_collect_pool(acoral_pool_ctrl_t *pool_ctrl){
 300034cc:	e28dd01c 	add	sp, sp, #28
 300034d0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300034d4:	e12fff1e 	bx	lr
-300034d8:	3000f5d0 	.word	0x3000f5d0
+300034d8:	3000f5cc 	.word	0x3000f5cc
 
 300034dc <acoral_get_res>:
 /*================================
@@ -5724,7 +5724,7 @@ acoral_pool_t *acoral_get_pool_by_id(acoral_id res_id){
 300037e4:	e1a00003 	mov	r0, r3
 300037e8:	e28dd010 	add	sp, sp, #16
 300037ec:	e12fff1e 	bx	lr
-300037f0:	3000fce8 	.word	0x3000fce8
+300037f0:	3000fce4 	.word	0x3000fce4
 
 300037f4 <acoral_get_free_pool>:
 
@@ -5769,7 +5769,7 @@ acoral_pool_t *acoral_get_free_pool(){
 30003848:	e28dd00c 	add	sp, sp, #12
 3000384c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003850:	e12fff1e 	bx	lr
-30003854:	3000f5d0 	.word	0x3000f5d0
+30003854:	3000f5cc 	.word	0x3000f5cc
 
 30003858 <acoral_get_res_by_id>:
 
@@ -5972,8 +5972,8 @@ void  acoral_pools_init(void)
 }
 30003a48:	e28dd008 	add	sp, sp, #8
 30003a4c:	e12fff1e 	bx	lr
-30003a50:	3000fce8 	.word	0x3000fce8
-30003a54:	3000f5d0 	.word	0x3000f5d0
+30003a50:	3000fce4 	.word	0x3000fce4
+30003a54:	3000f5cc 	.word	0x3000f5cc
 
 30003a58 <acoral_pool_ctrl_init>:
 /*================================
@@ -6278,7 +6278,7 @@ void acoral_intr_sys_init(){
 30003d40:	e28dd00c 	add	sp, sp, #12
 30003d44:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003d48:	e12fff1e 	bx	lr
-30003d4c:	3000f5f4 	.word	0x3000f5f4
+30003d4c:	3000f5f0 	.word	0x3000f5f0
 30003d50:	3000419c 	.word	0x3000419c
 
 30003d54 <acoral_intr_attach>:
@@ -6326,7 +6326,7 @@ acoral_32 acoral_intr_attach(acoral_vector vector,void (*isr)(acoral_vector)){
 30003dc0:	e1a00003 	mov	r0, r3
 30003dc4:	e28dd010 	add	sp, sp, #16
 30003dc8:	e12fff1e 	bx	lr
-30003dcc:	3000f5f4 	.word	0x3000f5f4
+30003dcc:	3000f5f0 	.word	0x3000f5f0
 
 30003dd0 <acoral_intr_detach>:
 
@@ -6359,7 +6359,7 @@ acoral_32 acoral_intr_detach(acoral_vector vector){
 30003e10:	e1a00003 	mov	r0, r3
 30003e14:	e28dd010 	add	sp, sp, #16
 30003e18:	e12fff1e 	bx	lr
-30003e1c:	3000f5f4 	.word	0x3000f5f4
+30003e1c:	3000f5f0 	.word	0x3000f5f0
 30003e20:	3000419c 	.word	0x3000419c
 
 30003e24 <acoral_intr_unmask>:
@@ -6448,7 +6448,7 @@ void acoral_intr_unmask(acoral_vector vector){
 30003efc:	e28dd014 	add	sp, sp, #20
 30003f00:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003f04:	e12fff1e 	bx	lr
-30003f08:	3000f5f4 	.word	0x3000f5f4
+30003f08:	3000f5f0 	.word	0x3000f5f0
 
 30003f0c <acoral_intr_mask>:
 
@@ -6536,7 +6536,7 @@ void acoral_intr_mask(acoral_vector vector){
 30003fe4:	e28dd014 	add	sp, sp, #20
 30003fe8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30003fec:	e12fff1e 	bx	lr
-30003ff0:	3000f5f4 	.word	0x3000f5f4
+30003ff0:	3000f5f0 	.word	0x3000f5f0
 
 30003ff4 <acoral_intr_entry>:
 
@@ -6682,7 +6682,7 @@ void acoral_intr_entry(acoral_vector vector){
 3000418c:	e28dd014 	add	sp, sp, #20
 30004190:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30004194:	e12fff1e 	bx	lr
-30004198:	3000f5f4 	.word	0x3000f5f4
+30004198:	3000f5f0 	.word	0x3000f5f0
 
 3000419c <acoral_default_isr>:
 
@@ -6766,9 +6766,9 @@ void acoral_intr_exit(){
 }
 30004214:	e8bd4008 	pop	{r3, lr}
 30004218:	e12fff1e 	bx	lr
-3000421c:	30010608 	.word	0x30010608
-30004220:	3000f5f0 	.word	0x3000f5f0
-30004224:	3000ece8 	.word	0x3000ece8
+3000421c:	30010604 	.word	0x30010604
+30004220:	3000f5ec 	.word	0x3000f5ec
+30004224:	3000ece4 	.word	0x3000ece4
 
 30004228 <acoral_set_intr_enter>:
 
@@ -6799,7 +6799,7 @@ void acoral_set_intr_enter(acoral_vector vector,void (*enter)(acoral_vector)){
 }
 30004268:	e28dd010 	add	sp, sp, #16
 3000426c:	e12fff1e 	bx	lr
-30004270:	3000f5f4 	.word	0x3000f5f4
+30004270:	3000f5f0 	.word	0x3000f5f0
 
 30004274 <acoral_set_intr_exit>:
 
@@ -6830,7 +6830,7 @@ void acoral_set_intr_exit(acoral_vector vector,void (*exit)(acoral_vector)){
 }
 300042b4:	e28dd010 	add	sp, sp, #16
 300042b8:	e12fff1e 	bx	lr
-300042bc:	3000f5f4 	.word	0x3000f5f4
+300042bc:	3000f5f0 	.word	0x3000f5f0
 
 300042c0 <acoral_set_intr_mask>:
 
@@ -6861,7 +6861,7 @@ void acoral_set_intr_mask(acoral_vector vector,void (*mask)(acoral_vector)){
 }
 30004300:	e28dd010 	add	sp, sp, #16
 30004304:	e12fff1e 	bx	lr
-30004308:	3000f5f4 	.word	0x3000f5f4
+30004308:	3000f5f0 	.word	0x3000f5f0
 
 3000430c <acoral_set_intr_unmask>:
 
@@ -6892,7 +6892,7 @@ void acoral_set_intr_unmask(acoral_vector vector,void (*unmask)(acoral_vector)){
 }
 3000434c:	e28dd010 	add	sp, sp, #16
 30004350:	e12fff1e 	bx	lr
-30004354:	3000f5f4 	.word	0x3000f5f4
+30004354:	3000f5f0 	.word	0x3000f5f0
 
 30004358 <acoral_intr_set_type>:
 
@@ -6922,7 +6922,7 @@ void acoral_intr_set_type(acoral_vector vector,acoral_u8 type){
 }
 30004394:	e28dd010 	add	sp, sp, #16
 30004398:	e12fff1e 	bx	lr
-3000439c:	3000f5f4 	.word	0x3000f5f4
+3000439c:	3000f5f0 	.word	0x3000f5f0
 
 300043a0 <acoral_fault_entry>:
 /*===========================                                                                                                                 
@@ -7002,11 +7002,11 @@ void acoral_fault_entry(acoral_u32 lr,acoral_u32 *stack){
 30004478:	eb001be3 	bl	3000b40c <acoral_print>
 	while(1);
 3000447c:	eafffffe 	b	3000447c <acoral_fault_entry+0xdc>
-30004480:	3000ece8 	.word	0x3000ece8
+30004480:	3000ece4 	.word	0x3000ece4
 30004484:	3000e4d4 	.word	0x3000e4d4
 30004488:	3000e4e8 	.word	0x3000e4e8
 3000448c:	3000e4fc 	.word	0x3000e4fc
-30004490:	30010604 	.word	0x30010604
+30004490:	30010600 	.word	0x30010600
 30004494:	3000e504 	.word	0x3000e504
 30004498:	3000e514 	.word	0x3000e514
 3000449c:	3000e524 	.word	0x3000e524
@@ -7043,8 +7043,8 @@ void acoral_time_sys_init(){
 	acoral_spin_init(&timeout_queue.head.lock);
 }
 300044e0:	e12fff1e 	bx	lr
-300044e4:	30010574 	.word	0x30010574
-300044e8:	300105f0 	.word	0x300105f0
+300044e4:	30010570 	.word	0x30010570
+300044e8:	300105ec 	.word	0x300105ec
 
 300044ec <acoral_get_ticks>:
 
@@ -7056,7 +7056,7 @@ acoral_time acoral_get_ticks(){
 }
 300044f4:	e1a00003 	mov	r0, r3
 300044f8:	e12fff1e 	bx	lr
-300044fc:	3000f050 	.word	0x3000f050
+300044fc:	3000f04c 	.word	0x3000f04c
 
 30004500 <acoral_set_ticks>:
 
@@ -7070,7 +7070,7 @@ void acoral_set_ticks(acoral_time time){
 }
 30004514:	e28dd008 	add	sp, sp, #8
 30004518:	e12fff1e 	bx	lr
-3000451c:	3000f050 	.word	0x3000f050
+3000451c:	3000f04c 	.word	0x3000f04c
 
 30004520 <acoral_ticks_init>:
 
@@ -7093,7 +7093,7 @@ void acoral_ticks_init(){
 }
 30004548:	e8bd4008 	pop	{r3, lr}
 3000454c:	e12fff1e 	bx	lr
-30004550:	3000f050 	.word	0x3000f050
+30004550:	3000f04c 	.word	0x3000f04c
 30004554:	30004558 	.word	0x30004558
 
 30004558 <acoral_ticks_entry>:
@@ -7132,8 +7132,8 @@ void acoral_ticks_entry(acoral_vector vector){
 30004594:	e28dd00c 	add	sp, sp, #12
 30004598:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000459c:	e12fff1e 	bx	lr
-300045a0:	3000f050 	.word	0x3000f050
-300045a4:	3000ece8 	.word	0x3000ece8
+300045a0:	3000f04c 	.word	0x3000f04c
+300045a4:	3000ece4 	.word	0x3000ece4
 
 300045a8 <acoral_delayqueue_add>:
 
@@ -7383,7 +7383,7 @@ void time_delay_deal(){
 300047d0:	e28dd014 	add	sp, sp, #20
 300047d4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300047d8:	e12fff1e 	bx	lr
-300047dc:	30010574 	.word	0x30010574
+300047dc:	30010570 	.word	0x30010570
 300047e0:	3000e584 	.word	0x3000e584
 300047e4:	3000e594 	.word	0x3000e594
 
@@ -7498,7 +7498,7 @@ void timeout_queue_add(acoral_thread_t *new)
 300048e0:	e28dd02c 	add	sp, sp, #44	; 0x2c
 300048e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300048e8:	e12fff1e 	bx	lr
-300048ec:	300105f0 	.word	0x300105f0
+300048ec:	300105ec 	.word	0x300105ec
 
 300048f0 <timeout_queue_del>:
 /*================================
@@ -7686,7 +7686,7 @@ void timeout_delay_deal()
 30004a4c:	e28dd014 	add	sp, sp, #20
 30004a50:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30004a54:	e12fff1e 	bx	lr
-30004a58:	300105f0 	.word	0x300105f0
+30004a58:	300105ec 	.word	0x300105ec
 30004a5c:	3000e5a8 	.word	0x3000e5a8
 
 30004a60 <acoral_mem_sys_init>:
@@ -7714,7 +7714,7 @@ void acoral_mem_sys_init(){
 }
 30004a80:	e8bd4008 	pop	{r3, lr}
 30004a84:	e12fff1e 	bx	lr
-30004a88:	30010630 	.word	0x30010630
+30004a88:	3001062c 	.word	0x3001062c
 30004a8c:	33eff000 	.word	0x33eff000
 
 30004a90 <spin_lock_intr_save>:
@@ -7796,7 +7796,7 @@ void spin_lock_stamp(acoral_spinlock_t *v){
 }
 30004b2c:	e28dd008 	add	sp, sp, #8
 30004b30:	e12fff1e 	bx	lr
-30004b34:	3000f5f0 	.word	0x3000f5f0
+30004b34:	3000f5ec 	.word	0x3000f5ec
 
 30004b38 <spin_unlock_stamp>:
 
@@ -7858,7 +7858,7 @@ void acoral_evt_pool_init(){
 }
 30004bb0:	e8bd4008 	pop	{r3, lr}
 30004bb4:	e12fff1e 	bx	lr
-30004bb8:	30010580 	.word	0x30010580
+30004bb8:	3001057c 	.word	0x3001057c
 
 30004bbc <acoral_alloc_evt>:
 
@@ -7872,7 +7872,7 @@ acoral_evt_t *acoral_alloc_evt(){
 30004bcc:	e1a00003 	mov	r0, r3
 30004bd0:	e8bd4008 	pop	{r3, lr}
 30004bd4:	e12fff1e 	bx	lr
-30004bd8:	30010580 	.word	0x30010580
+30004bd8:	3001057c 	.word	0x3001057c
 
 30004bdc <acoral_evt_init>:
 
@@ -8317,7 +8317,7 @@ acoral_u32 acoral_mutex_trypend(acoral_evt_t *evt)
 30004fd8:	e28dd014 	add	sp, sp, #20
 30004fdc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30004fe0:	e12fff1e 	bx	lr
-30004fe4:	30010604 	.word	0x30010604
+30004fe4:	30010600 	.word	0x30010600
 
 30004fe8 <acoral_mutex_pend>:
  *  the appliation for mutex
@@ -8557,7 +8557,7 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 30005234:	e28dd01c 	add	sp, sp, #28
 30005238:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000523c:	e12fff1e 	bx	lr
-30005240:	30010604 	.word	0x30010604
+30005240:	30010600 	.word	0x30010600
 30005244:	10624dd3 	.word	0x10624dd3
 
 30005248 <acoral_mutex_pend2>:
@@ -8756,7 +8756,7 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 3000541c:	e28dd01c 	add	sp, sp, #28
 30005420:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30005424:	e12fff1e 	bx	lr
-30005428:	30010604 	.word	0x30010604
+30005428:	30010600 	.word	0x30010600
 3000542c:	10624dd3 	.word	0x10624dd3
 
 30005430 <acoral_mutex_post>:
@@ -8925,7 +8925,7 @@ acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 300055c4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300055c8:	e12fff1e 	bx	lr
 300055cc:	3000e5b8 	.word	0x3000e5b8
-300055d0:	30010604 	.word	0x30010604
+300055d0:	30010600 	.word	0x30010600
 300055d4:	3000e5c4 	.word	0x3000e5c4
 
 300055d8 <buddy_scan>:
@@ -9067,7 +9067,7 @@ void buddy_scan(){
 30005728:	e28dd01c 	add	sp, sp, #28
 3000572c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30005730:	e12fff1e 	bx	lr
-30005734:	30010550 	.word	0x30010550
+30005734:	3001054c 	.word	0x3001054c
 30005738:	3000e5d4 	.word	0x3000e5d4
 3000573c:	3000e5e0 	.word	0x3000e5e0
 30005740:	3000e5e8 	.word	0x3000e5e8
@@ -9766,8 +9766,8 @@ acoral_err buddy_init(acoral_u32 start_adr,acoral_u32 end_adr){
 30005edc:	e28dd03c 	add	sp, sp, #60	; 0x3c
 30005ee0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30005ee4:	e12fff1e 	bx	lr
-30005ee8:	30010550 	.word	0x30010550
-30005eec:	3000fca4 	.word	0x3000fca4
+30005ee8:	3001054c 	.word	0x3001054c
+30005eec:	3000fca0 	.word	0x3000fca0
 
 30005ef0 <recus_malloc>:
 
@@ -9974,8 +9974,8 @@ static acoral_32 recus_malloc(level){
 30006184:	e28dd01c 	add	sp, sp, #28
 30006188:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000618c:	e12fff1e 	bx	lr
-30006190:	30010550 	.word	0x30010550
-30006194:	3000fca4 	.word	0x3000fca4
+30006190:	3001054c 	.word	0x3001054c
+30006194:	3000fca0 	.word	0x3000fca0
 
 30006198 <r_malloc>:
 
@@ -10262,8 +10262,8 @@ static void *r_malloc(acoral_u8 level){
 300064e4:	e28dd01c 	add	sp, sp, #28
 300064e8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300064ec:	e12fff1e 	bx	lr
-300064f0:	30010550 	.word	0x30010550
-300064f4:	3000fca4 	.word	0x3000fca4
+300064f0:	3001054c 	.word	0x3001054c
+300064f4:	3000fca0 	.word	0x3000fca0
 
 300064f8 <buddy_malloc_size>:
 
@@ -10330,7 +10330,7 @@ acoral_u32 buddy_malloc_size(acoral_u32 size){
 3000658c:	e1a00003 	mov	r0, r3
 30006590:	e28dd018 	add	sp, sp, #24
 30006594:	e12fff1e 	bx	lr
-30006598:	30010550 	.word	0x30010550
+30006598:	3001054c 	.word	0x3001054c
 
 3000659c <buddy_malloc>:
 
@@ -10416,7 +10416,7 @@ void *buddy_malloc(acoral_u32 size){
 3000666c:	e28dd01c 	add	sp, sp, #28
 30006670:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30006674:	e12fff1e 	bx	lr
-30006678:	30010550 	.word	0x30010550
+30006678:	3001054c 	.word	0x3001054c
 
 3000667c <buddy_free>:
 
@@ -10842,9 +10842,9 @@ void buddy_free(void *ptr){
 30006b18:	e28dd02c 	add	sp, sp, #44	; 0x2c
 30006b1c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30006b20:	e12fff1e 	bx	lr
-30006b24:	30010550 	.word	0x30010550
+30006b24:	3001054c 	.word	0x3001054c
 30006b28:	3000e624 	.word	0x3000e624
-30006b2c:	3000fca4 	.word	0x3000fca4
+30006b2c:	3000fca0 	.word	0x3000fca0
 30006b30:	3000e640 	.word	0x3000e640
 
 30006b34 <r_malloc>:
@@ -11139,7 +11139,7 @@ static void *r_malloc(acoral_32 size){
 30006dd4:	e28dd01c 	add	sp, sp, #28
 30006dd8:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30006ddc:	e12fff1e 	bx	lr
-30006de0:	3000fb8c 	.word	0x3000fb8c
+30006de0:	3000fb88 	.word	0x3000fb88
 30006de4:	3000e660 	.word	0x3000e660
 
 30006de8 <v_malloc>:
@@ -11170,7 +11170,7 @@ void * v_malloc(acoral_32 size){
 30006e2c:	e28dd00c 	add	sp, sp, #12
 30006e30:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30006e34:	e12fff1e 	bx	lr
-30006e38:	3000fb8c 	.word	0x3000fb8c
+30006e38:	3000fb88 	.word	0x3000fb88
 
 30006e3c <v_free>:
 
@@ -11440,7 +11440,7 @@ void v_free(void * p){
 300070c0:	e28dd024 	add	sp, sp, #36	; 0x24
 300070c4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 300070c8:	e12fff1e 	bx	lr
-300070cc:	3000fb8c 	.word	0x3000fb8c
+300070cc:	3000fb88 	.word	0x3000fb88
 300070d0:	3000e68c 	.word	0x3000e68c
 300070d4:	3000e6a8 	.word	0x3000e6a8
 300070d8:	3000e660 	.word	0x3000e660
@@ -11515,7 +11515,7 @@ void v_mem_init(){
 3000718c:	e28dd00c 	add	sp, sp, #12
 30007190:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30007194:	e12fff1e 	bx	lr
-30007198:	3000fb8c 	.word	0x3000fb8c
+30007198:	3000fb88 	.word	0x3000fb88
 
 3000719c <v_mem_scan>:
 
@@ -11600,7 +11600,7 @@ void v_mem_scan(void){
 30007260:	e28dd014 	add	sp, sp, #20
 30007264:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30007268:	e12fff1e 	bx	lr
-3000726c:	3000fb8c 	.word	0x3000fb8c
+3000726c:	3000fb88 	.word	0x3000fb88
 30007270:	3000e6f4 	.word	0x3000e6f4
 30007274:	3000e720 	.word	0x3000e720
 30007278:	3000e74c 	.word	0x3000e74c
@@ -11949,7 +11949,7 @@ void* acoral_mbox_recv(acoral_evt_t * event, acoral_time timeout)
 30007594:	e28dd01c 	add	sp, sp, #28
 30007598:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000759c:	e12fff1e 	bx	lr
-300075a0:	30010604 	.word	0x30010604
+300075a0:	30010600 	.word	0x30010600
 300075a4:	10624dd3 	.word	0x10624dd3
 
 300075a8 <acoral_mbox_tryrecv>:
@@ -12465,7 +12465,7 @@ acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 30007a2c:	e28dd014 	add	sp, sp, #20
 30007a30:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30007a34:	e12fff1e 	bx	lr
-30007a38:	30010604 	.word	0x30010604
+30007a38:	30010600 	.word	0x30010600
 30007a3c:	10624dd3 	.word	0x10624dd3
 
 30007a40 <acoral_sem_post>:
@@ -12692,9 +12692,9 @@ void acoral_msg_sys_init()
 }
 30007c38:	e8bd4008 	pop	{r3, lr}
 30007c3c:	e12fff1e 	bx	lr
-30007c40:	3000f558 	.word	0x3000f558
-30007c44:	300105b8 	.word	0x300105b8
-30007c48:	30010508 	.word	0x30010508
+30007c40:	3000f554 	.word	0x3000f554
+30007c44:	300105b4 	.word	0x300105b4
+30007c48:	30010504 	.word	0x30010504
 
 30007c4c <acoral_msgctr_list_queueadd>:
  *  静态创建的acoral_msgctr_t调用
@@ -12716,7 +12716,7 @@ void acoral_msgctr_list_queueadd(acoral_msgctr_t* msgctr)
 30007c6c:	e28dd00c 	add	sp, sp, #12
 30007c70:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30007c74:	e12fff1e 	bx	lr
-30007c78:	3000f558 	.word	0x3000f558
+30007c78:	3000f554 	.word	0x3000f554
 
 30007c7c <acoral_alloc_msgctr>:
 /*==============================
@@ -12734,7 +12734,7 @@ acoral_msgctr_t* acoral_alloc_msgctr()
 30007c8c:	e1a00003 	mov	r0, r3
 30007c90:	e8bd4008 	pop	{r3, lr}
 30007c94:	e12fff1e 	bx	lr
-30007c98:	300105b8 	.word	0x300105b8
+30007c98:	300105b4 	.word	0x300105b4
 
 30007c9c <acoral_alloc_msg>:
 
@@ -12749,7 +12749,7 @@ acoral_msg_t* acoral_alloc_msg()
 30007cac:	e1a00003 	mov	r0, r3
 30007cb0:	e8bd4008 	pop	{r3, lr}
 30007cb4:	e12fff1e 	bx	lr
-30007cb8:	30010508 	.word	0x30010508
+30007cb8:	30010504 	.word	0x30010504
 
 30007cbc <acoral_msgctr_queue_add>:
  *
@@ -13093,7 +13093,7 @@ acoral_msgctr_t*  acoral_msgctr_create (acoral_u32 *err)
 30008014:	e28dd014 	add	sp, sp, #20
 30008018:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000801c:	e12fff1e 	bx	lr
-30008020:	3000f558 	.word	0x3000f558
+30008020:	3000f554 	.word	0x3000f554
 
 30008024 <acoral_msg_create>:
 
@@ -13534,7 +13534,7 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 30008418:	e28dd02c 	add	sp, sp, #44	; 0x2c
 3000841c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30008420:	e12fff1e 	bx	lr
-30008424:	30010604 	.word	0x30010604
+30008424:	30010600 	.word	0x30010600
 30008428:	10624dd3 	.word	0x10624dd3
 
 3000842c <acoral_msgctr_del>:
@@ -13813,7 +13813,7 @@ void acoral_print_all_msg(acoral_msgctr_t* msgctr)
 3000867c:	e28dd01c 	add	sp, sp, #28
 30008680:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30008684:	e12fff1e 	bx	lr
-30008688:	3000ec50 	.word	0x3000ec50
+30008688:	3000ec4c 	.word	0x3000ec4c
 3000868c:	3000e7d8 	.word	0x3000e7d8
 
 30008690 <acoral_print_waitThreadsNum>:
@@ -14063,7 +14063,7 @@ void rm_queue_ascend_add(acoral_thread_t *new){
 30008918:	e28dd024 	add	sp, sp, #36	; 0x24
 3000891c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30008920:	e12fff1e 	bx	lr
-30008924:	3000ec58 	.word	0x3000ec58
+30008924:	3000ec54 	.word	0x3000ec54
 
 30008928 <rm_check>:
 
@@ -14163,8 +14163,8 @@ acoral_u8 rm_check(acoral_thread_t *thread,acoral_u32 cpu){
 30008a6c:	e28dd010 	add	sp, sp, #16
 30008a70:	e8bd4010 	pop	{r4, lr}
 30008a74:	e12fff1e 	bx	lr
-30008a78:	3000fcc0 	.word	0x3000fcc0
-30008a7c:	3000ec5c 	.word	0x3000ec5c
+30008a78:	3000fcbc 	.word	0x3000fcbc
+30008a7c:	3000ec58 	.word	0x3000ec58
 
 30008a80 <rm_thread_dispatch>:
 
@@ -14297,8 +14297,8 @@ void rm_thread_dispatch(){
 30008bb0:	e28dd01c 	add	sp, sp, #28
 30008bb4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30008bb8:	e12fff1e 	bx	lr
-30008bbc:	3000ec58 	.word	0x3000ec58
-30008bc0:	3000ec54 	.word	0x3000ec54
+30008bbc:	3000ec54 	.word	0x3000ec54
+30008bc0:	3000ec50 	.word	0x3000ec50
 30008bc4:	3000e828 	.word	0x3000e828
 30008bc8:	3000e850 	.word	0x3000e850
 
@@ -14354,8 +14354,8 @@ void rm_init(){
 }
 30008c4c:	e28dd008 	add	sp, sp, #8
 30008c50:	e12fff1e 	bx	lr
-30008c54:	3000ec58 	.word	0x3000ec58
-30008c58:	3000fcc0 	.word	0x3000fcc0
+30008c54:	3000ec54 	.word	0x3000ec54
+30008c58:	3000fcbc 	.word	0x3000fcbc
 30008c5c:	00000000 	.word	0x00000000
 
 30008c60 <rm_policy_init>:
@@ -14391,7 +14391,7 @@ void rm_policy_init(){
 }
 30008cac:	e8bd4008 	pop	{r3, lr}
 30008cb0:	e12fff1e 	bx	lr
-30008cb4:	30010554 	.word	0x30010554
+30008cb4:	30010550 	.word	0x30010550
 30008cb8:	300086c0 	.word	0x300086c0
 30008cbc:	30008808 	.word	0x30008808
 30008cc0:	3000e864 	.word	0x3000e864
@@ -14469,7 +14469,7 @@ void rm_end(){
 30008d68:	e28dd024 	add	sp, sp, #36	; 0x24
 30008d6c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30008d70:	e12fff1e 	bx	lr
-30008d74:	3000ec58 	.word	0x3000ec58
+30008d74:	3000ec54 	.word	0x3000ec54
 
 30008d78 <period_policy_thread_init>:
 #include<policy.h>
@@ -14758,7 +14758,7 @@ void acoral_periodqueue_add(acoral_thread_t *new){
 30009080:	e28dd024 	add	sp, sp, #36	; 0x24
 30009084:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30009088:	e12fff1e 	bx	lr
-3000908c:	3000fccc 	.word	0x3000fccc
+3000908c:	3000fcc8 	.word	0x3000fcc8
 
 30009090 <period_thread_delay>:
 
@@ -14937,7 +14937,7 @@ void period_delay_deal(){
 30009254:	e28dd01c 	add	sp, sp, #28
 30009258:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000925c:	e12fff1e 	bx	lr
-30009260:	3000fccc 	.word	0x3000fccc
+30009260:	3000fcc8 	.word	0x3000fcc8
 30009264:	3000e8a8 	.word	0x3000e8a8
 30009268:	3000e8c0 	.word	0x3000e8c0
 3000926c:	30009270 	.word	0x30009270
@@ -14991,8 +14991,8 @@ void period_policy_init(){
 }
 300092e0:	e8bd4008 	pop	{r3, lr}
 300092e4:	e12fff1e 	bx	lr
-300092e8:	3000fccc 	.word	0x3000fccc
-300092ec:	3001060c 	.word	0x3001060c
+300092e8:	3000fcc8 	.word	0x3000fcc8
+300092ec:	30010608 	.word	0x30010608
 300092f0:	30008d78 	.word	0x30008d78
 300092f4:	30008f5c 	.word	0x30008f5c
 300092f8:	300090f0 	.word	0x300090f0
@@ -15228,7 +15228,7 @@ void slice_delay_deal(){
 30009564:	e28dd00c 	add	sp, sp, #12
 30009568:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000956c:	e12fff1e 	bx	lr
-30009570:	30010604 	.word	0x30010604
+30009570:	30010600 	.word	0x30010600
 
 30009574 <slice_policy_init>:
 
@@ -15260,7 +15260,7 @@ void slice_policy_init(){
 }
 300095bc:	e8bd4008 	pop	{r3, lr}
 300095c0:	e12fff1e 	bx	lr
-300095c4:	3000fb6c 	.word	0x3000fb6c
+300095c4:	3000fb68 	.word	0x3000fb68
 300095c8:	300094d0 	.word	0x300094d0
 300095cc:	30009300 	.word	0x30009300
 300095d0:	300094f8 	.word	0x300094f8
@@ -15402,7 +15402,7 @@ void posix_delay_deal(){
 30009754:	e28dd00c 	add	sp, sp, #12
 30009758:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000975c:	e12fff1e 	bx	lr
-30009760:	30010604 	.word	0x30010604
+30009760:	30010600 	.word	0x30010600
 30009764:	10624dd3 	.word	0x10624dd3
 
 30009768 <acoral_posix_create>:
@@ -15722,7 +15722,7 @@ void posix_policy_init(){
 }
 30009af0:	e8bd4008 	pop	{r3, lr}
 30009af4:	e12fff1e 	bx	lr
-30009af8:	3000f5d4 	.word	0x3000f5d4
+30009af8:	3000f5d0 	.word	0x3000f5d0
 30009afc:	30009828 	.word	0x30009828
 30009b00:	30009a28 	.word	0x30009a28
 30009b04:	300095d8 	.word	0x300095d8
@@ -15759,7 +15759,7 @@ void delay(){
 }
 30009b54:	e28dd008 	add	sp, sp, #8
 30009b58:	e12fff1e 	bx	lr
-30009b5c:	30010628 	.word	0x30010628
+30009b5c:	30010624 	.word	0x30010624
 
 30009b60 <delay_task>:
 
@@ -15776,7 +15776,7 @@ void delay_task(void *args){
 30009b78:	ebffffe3 	bl	30009b0c <delay>
 	}
 30009b7c:	eafffffd 	b	30009b78 <delay_task+0x18>
-30009b80:	30010628 	.word	0x30010628
+30009b80:	30010624 	.word	0x30010624
 
 30009b84 <acoral_soft_delay>:
 }
@@ -15816,7 +15816,7 @@ void acoral_soft_delay(acoral_u32 n100ms){
 30009bd0:	e28dd014 	add	sp, sp, #20
 30009bd4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 30009bd8:	e12fff1e 	bx	lr
-30009bdc:	3000fca8 	.word	0x3000fca8
+30009bdc:	3000fca4 	.word	0x3000fca4
 
 30009be0 <soft_delay_init>:
 
@@ -15905,9 +15905,9 @@ void soft_delay_init(){
 30009cac:	e12fff1e 	bx	lr
 30009cb0:	30009b60 	.word	0x30009b60
 30009cb4:	3000e988 	.word	0x3000e988
-30009cb8:	30010628 	.word	0x30010628
+30009cb8:	30010624 	.word	0x30010624
 30009cbc:	cccccccd 	.word	0xcccccccd
-30009cc0:	3000fca8 	.word	0x3000fca8
+30009cc0:	3000fca4 	.word	0x3000fca4
 
 30009cc4 <dummy_print>:
 #include<type.h>
@@ -18149,8 +18149,8 @@ acoral_32 acoral_print(const acoral_char *fmt, ...)
 3000b484:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000b488:	e28dd010 	add	sp, sp, #16
 3000b48c:	e12fff1e 	bx	lr
-3000b490:	3000f454 	.word	0x3000f454
-3000b494:	30010604 	.word	0x30010604
+3000b490:	3000f450 	.word	0x3000f450
+3000b494:	30010600 	.word	0x30010600
 
 3000b498 <acoral_prints>:
 
@@ -18183,7 +18183,7 @@ acoral_32 acoral_prints(const acoral_char *str)
 3000b4e8:	e28dd01c 	add	sp, sp, #28
 3000b4ec:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000b4f0:	e12fff1e 	bx	lr
-3000b4f4:	30010604 	.word	0x30010604
+3000b4f4:	30010600 	.word	0x30010600
 
 3000b4f8 <acoral_getchar>:
 
@@ -18210,7 +18210,7 @@ acoral_char acoral_getchar(){
 3000b534:	e28dd014 	add	sp, sp, #20
 3000b538:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000b53c:	e12fff1e 	bx	lr
-3000b540:	30010604 	.word	0x30010604
+3000b540:	30010600 	.word	0x30010600
 
 3000b544 <acoral_putchar>:
 
@@ -18238,7 +18238,7 @@ acoral_char acoral_putchar(acoral_char c){
 3000b588:	e28dd014 	add	sp, sp, #20
 3000b58c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000b590:	e12fff1e 	bx	lr
-3000b594:	30010604 	.word	0x30010604
+3000b594:	30010600 	.word	0x30010600
 
 3000b598 <acoral_debug>:
 
@@ -18305,8 +18305,8 @@ acoral_32 acoral_debug(const acoral_char *fmt, ...)
 3000b644:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000b648:	e28dd010 	add	sp, sp, #16
 3000b64c:	e12fff1e 	bx	lr
-3000b650:	3000f054 	.word	0x3000f054
-3000b654:	3000ec84 	.word	0x3000ec84
+3000b650:	3000f050 	.word	0x3000f050
+3000b654:	3000ec80 	.word	0x3000ec80
 3000b658:	3000e9ec 	.word	0x3000e9ec
 
 3000b65c <acoral_debugs>:
@@ -18358,7 +18358,7 @@ acoral_32 acoral_debugs(const acoral_char *str)
 3000b6e0:	e28dd01c 	add	sp, sp, #28
 3000b6e4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000b6e8:	e12fff1e 	bx	lr
-3000b6ec:	3000ec84 	.word	0x3000ec84
+3000b6ec:	3000ec80 	.word	0x3000ec80
 3000b6f0:	3000e9ec 	.word	0x3000e9ec
 
 3000b6f4 <acoral_tolower>:
@@ -20245,7 +20245,7 @@ acoral_u32 acoral_rand(void)
 }
 3000c8bc:	e1a00003 	mov	r0, r3
 3000c8c0:	e12fff1e 	bx	lr
-3000c8c4:	3000f554 	.word	0x3000f554
+3000c8c4:	3000f550 	.word	0x3000f550
 
 3000c8c8 <acoral_rand_start>:
 
@@ -20260,7 +20260,7 @@ void acoral_rand_start(void)
 }
 3000c8dc:	e8bd4008 	pop	{r3, lr}
 3000c8e0:	e12fff1e 	bx	lr
-3000c8e4:	3000f554 	.word	0x3000f554
+3000c8e4:	3000f550 	.word	0x3000f550
 
 3000c8e8 <plugin_init>:
 #endif
@@ -20559,8 +20559,8 @@ void add_command(acoral_shell_cmd_t *cmd)
 }
 3000cbb0:	e28dd008 	add	sp, sp, #8
 3000cbb4:	e12fff1e 	bx	lr
-3000cbb8:	3000fcd8 	.word	0x3000fcd8
-3000cbbc:	3001062c 	.word	0x3001062c
+3000cbb8:	3000fcd4 	.word	0x3000fcd4
+3000cbbc:	30010628 	.word	0x30010628
 
 3000cbc0 <find_cmd>:
 
@@ -20612,7 +20612,7 @@ acoral_shell_cmd_t *find_cmd(acoral_char *cmdname)
 3000cc24:	e28dd014 	add	sp, sp, #20
 3000cc28:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000cc2c:	e12fff1e 	bx	lr
-3000cc30:	3000fcd8 	.word	0x3000fcd8
+3000cc30:	3000fcd4 	.word	0x3000fcd4
 
 3000cc34 <execmd>:
 
@@ -20917,7 +20917,7 @@ void get_cmd(acoral_char *cmd_buf){
 	}
 3000cf1c:	eaffffa2 	b	3000cdac <get_cmd+0x4c>
 3000cf20:	eaffffa1 	b	3000cdac <get_cmd+0x4c>
-3000cf24:	30010604 	.word	0x30010604
+3000cf24:	30010600 	.word	0x30010600
 
 3000cf28 <acoral_shell_init>:
 }
@@ -20967,9 +20967,9 @@ void acoral_shell_init(){
 3000cf9c:	e28dd01c 	add	sp, sp, #28
 3000cfa0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000cfa4:	e12fff1e 	bx	lr
-3000cfa8:	3000fcd8 	.word	0x3000fcd8
-3000cfac:	3001062c 	.word	0x3001062c
-3000cfb0:	30010604 	.word	0x30010604
+3000cfa8:	3000fcd4 	.word	0x3000fcd4
+3000cfac:	30010628 	.word	0x30010628
+3000cfb0:	30010600 	.word	0x30010600
 3000cfb4:	3000cfe0 	.word	0x3000cfe0
 3000cfb8:	3000ea2c 	.word	0x3000ea2c
 
@@ -21060,7 +21060,7 @@ void acoral_shell_enter(void *args){
 3000d064:	ebffff12 	bl	3000ccb4 <cmd_exe>
 	}
 3000d068:	eafffff2 	b	3000d038 <acoral_shell_enter+0x58>
-3000d06c:	30010604 	.word	0x30010604
+3000d06c:	30010600 	.word	0x30010600
 3000d070:	3000ea34 	.word	0x3000ea34
 3000d074:	3000ea50 	.word	0x3000ea50
 3000d078:	3000ea54 	.word	0x3000ea54
@@ -21146,7 +21146,7 @@ void help(acoral_32 argc,acoral_char **argv){
 3000d114:	e28dd014 	add	sp, sp, #20
 3000d118:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d11c:	e12fff1e 	bx	lr
-3000d120:	3000fcd8 	.word	0x3000fcd8
+3000d120:	3000fcd4 	.word	0x3000fcd4
 3000d124:	3000ead0 	.word	0x3000ead0
 
 3000d128 <exit>:
@@ -21178,7 +21178,7 @@ void exit(acoral_32 argc,acoral_char **argv){
 3000d168:	e28dd00c 	add	sp, sp, #12
 3000d16c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d170:	e12fff1e 	bx	lr
-3000d174:	30010604 	.word	0x30010604
+3000d174:	30010600 	.word	0x30010600
 
 3000d178 <spg>:
 	"exit",
@@ -21191,7 +21191,7 @@ void spg(acoral_32 argc,acoral_char **argv){
 3000d17c:	e24dd00c 	sub	sp, sp, #12
 3000d180:	e58d0004 	str	r0, [sp, #4]
 3000d184:	e58d1000 	str	r1, [sp]
-	acoral_prints("SPGGOGOGO！！！");
+	acoral_prints("SPGGOGOGO!!!");
 3000d188:	e59f000c 	ldr	r0, [pc, #12]	; 3000d19c <spg+0x24>
 3000d18c:	ebfff8c1 	bl	3000b498 <acoral_prints>
 }
@@ -21234,11 +21234,11 @@ void cmd_init(){
 }
 3000d1cc:	e8bd4008 	pop	{r3, lr}
 3000d1d0:	e12fff1e 	bx	lr
-3000d1d4:	3000ec88 	.word	0x3000ec88
-3000d1d8:	3000ecd8 	.word	0x3000ecd8
-3000d1dc:	3000ecc8 	.word	0x3000ecc8
-3000d1e0:	3000ecb8 	.word	0x3000ecb8
-3000d1e4:	3000eca8 	.word	0x3000eca8
+3000d1d4:	3000ec84 	.word	0x3000ec84
+3000d1d8:	3000ecd4 	.word	0x3000ecd4
+3000d1dc:	3000ecc4 	.word	0x3000ecc4
+3000d1e0:	3000ecb4 	.word	0x3000ecb4
+3000d1e4:	3000eca4 	.word	0x3000eca4
 
 3000d1e8 <display_thread>:
 #include<thread.h>
@@ -21420,24 +21420,24 @@ void display_thread(acoral_32 argc,acoral_char **argv){
 3000d3a8:	e28dd01c 	add	sp, sp, #28
 3000d3ac:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d3b0:	e12fff1e 	bx	lr
-3000d3b4:	3000fc30 	.word	0x3000fc30
-3000d3b8:	3000eb34 	.word	0x3000eb34
-3000d3bc:	3000eb54 	.word	0x3000eb54
-3000d3c0:	3000eb90 	.word	0x3000eb90
-3000d3c4:	3000ebb0 	.word	0x3000ebb0
-3000d3c8:	3000ebb8 	.word	0x3000ebb8
-3000d3cc:	3000ebc4 	.word	0x3000ebc4
-3000d3d0:	3000ebcc 	.word	0x3000ebcc
-3000d3d4:	3000ebd8 	.word	0x3000ebd8
-3000d3d8:	3000ebe0 	.word	0x3000ebe0
-3000d3dc:	3000ebe8 	.word	0x3000ebe8
-3000d3e0:	3000ebf0 	.word	0x3000ebf0
-3000d3e4:	3000ebfc 	.word	0x3000ebfc
-3000d3e8:	3000ec04 	.word	0x3000ec04
-3000d3ec:	3000ec0c 	.word	0x3000ec0c
-3000d3f0:	3000ec14 	.word	0x3000ec14
-3000d3f4:	3000ec20 	.word	0x3000ec20
-3000d3f8:	3000ec28 	.word	0x3000ec28
+3000d3b4:	3000fc2c 	.word	0x3000fc2c
+3000d3b8:	3000eb30 	.word	0x3000eb30
+3000d3bc:	3000eb50 	.word	0x3000eb50
+3000d3c0:	3000eb8c 	.word	0x3000eb8c
+3000d3c4:	3000ebac 	.word	0x3000ebac
+3000d3c8:	3000ebb4 	.word	0x3000ebb4
+3000d3cc:	3000ebc0 	.word	0x3000ebc0
+3000d3d0:	3000ebc8 	.word	0x3000ebc8
+3000d3d4:	3000ebd4 	.word	0x3000ebd4
+3000d3d8:	3000ebdc 	.word	0x3000ebdc
+3000d3dc:	3000ebe4 	.word	0x3000ebe4
+3000d3e0:	3000ebec 	.word	0x3000ebec
+3000d3e4:	3000ebf8 	.word	0x3000ebf8
+3000d3e8:	3000ec00 	.word	0x3000ec00
+3000d3ec:	3000ec08 	.word	0x3000ec08
+3000d3f0:	3000ec10 	.word	0x3000ec10
+3000d3f4:	3000ec1c 	.word	0x3000ec1c
+3000d3f8:	3000ec24 	.word	0x3000ec24
 
 3000d3fc <acoral_get_drv_ctrl_by_name>:
 #define DRV_MAIN_ID_SHIFT 5
@@ -21498,7 +21498,7 @@ acoral_drv_ctrl_t *acoral_get_drv_ctrl_by_name(acoral_char *name){
 3000d478:	e28dd014 	add	sp, sp, #20
 3000d47c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d480:	e12fff1e 	bx	lr
-3000d484:	3000f564 	.word	0x3000f564
+3000d484:	3000f560 	.word	0x3000f560
 
 3000d488 <acoral_drv_register>:
 
@@ -21584,7 +21584,7 @@ acoral_err acoral_drv_register(acoral_dev_ops_t *ops,acoral_char *name){
 3000d550:	e28dd01c 	add	sp, sp, #28
 3000d554:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d558:	e12fff1e 	bx	lr
-3000d55c:	3000f564 	.word	0x3000f564
+3000d55c:	3000f560 	.word	0x3000f560
 
 3000d560 <acoral_drv_unregister>:
 
@@ -21628,7 +21628,7 @@ void acoral_drv_unregister(acoral_id res_id){
 3000d5d8:	e28dd014 	add	sp, sp, #20
 3000d5dc:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d5e0:	e12fff1e 	bx	lr
-3000d5e4:	3000f564 	.word	0x3000f564
+3000d5e4:	3000f560 	.word	0x3000f560
 
 3000d5e8 <acoral_dev_open>:
 
@@ -21871,7 +21871,7 @@ acoral_drv_ctrl_t *acoral_alloc_drv(){
 3000d8cc:	e1a00003 	mov	r0, r3
 3000d8d0:	e8bd4008 	pop	{r3, lr}
 3000d8d4:	e12fff1e 	bx	lr
-3000d8d8:	3000fbf8 	.word	0x3000fbf8
+3000d8d8:	3000fbf4 	.word	0x3000fbf4
 
 3000d8dc <acoral_drv_pool_init>:
 
@@ -21900,7 +21900,7 @@ void acoral_drv_pool_init(){
 }
 3000d918:	e8bd4008 	pop	{r3, lr}
 3000d91c:	e12fff1e 	bx	lr
-3000d920:	3000fbf8 	.word	0x3000fbf8
+3000d920:	3000fbf4 	.word	0x3000fbf4
 
 3000d924 <acoral_drv_sys_init>:
 
@@ -21938,7 +21938,7 @@ void acoral_drv_sys_init(){
 3000d968:	e28dd00c 	add	sp, sp, #12
 3000d96c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 3000d970:	e12fff1e 	bx	lr
-3000d974:	3000f564 	.word	0x3000f564
+3000d974:	3000f560 	.word	0x3000f560
 
 3000d978 <brd_driver_init>:
 #include<autocfg.h>
@@ -22211,11 +22211,11 @@ void con_uart_init(){
 3000dbe8:	e8bd4008 	pop	{r3, lr}
 3000dbec:	e12fff1e 	bx	lr
 3000dbf0:	3000db1c 	.word	0x3000db1c
-3000dbf4:	3000fcac 	.word	0x3000fcac
+3000dbf4:	3000fca8 	.word	0x3000fca8
 3000dbf8:	3000da04 	.word	0x3000da04
 3000dbfc:	3000da80 	.word	0x3000da80
 3000dc00:	3000daec 	.word	0x3000daec
-3000dc04:	3000ec48 	.word	0x3000ec48
+3000dc04:	3000ec44 	.word	0x3000ec44
 
 3000dc08 <__aeabi_uidiv>:
 3000dc08:	e2512001 	subs	r2, r1, #1
@@ -23155,24 +23155,23 @@ void con_uart_init(){
 3000eadc:	00000000 77656956 6c6c6120 65685320     ....View all She
 3000eaec:	43206c6c 616d6d6f 6920646e 006f666e     ll Command info.
 3000eafc:	74697865 00000000 74697845 65685320     exit....Exit She
-3000eb0c:	00006c6c 47475053 474f474f 81bcef4f     ll..SPGGOGOGO...
-3000eb1c:	ef81bcef 000081bc 00677073 74736145     ........spg.East
-3000eb2c:	65207265 00006767 79530909 6d657473     er egg....System
-3000eb3c:	72685420 20646165 6f666e49 74616d72      Thread Informat
-3000eb4c:	0d6e6f69 0000000a 2d2d2d2d 2d2d2d2d     ion.....--------
+3000eb0c:	00006c6c 47475053 474f474f 2121214f     ll..SPGGOGOGO!!!
+3000eb1c:	00000000 00677073 74736145 65207265     ....spg.Easter e
+3000eb2c:	00006767 79530909 6d657473 72685420     gg....System Thr
+3000eb3c:	20646165 6f666e49 74616d72 0d6e6f69     ead Information.
+3000eb4c:	0000000a 2d2d2d2d 2d2d2d2d 2d2d2d2d     ....------------
 3000eb5c:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
 3000eb6c:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-3000eb7c:	2d2d2d2d 2d2d2d2d 2d2d2d2d 0a0d2d2d     --------------..
-3000eb8c:	00000000 656d614e 79540909 09096570     ....Name..Type..
-3000eb9c:	736e6f43 09656c6f 61745309 0a0d6574     Console..State..
-3000ebac:	00000000 09097325 00000000 6d6d6f43     ....%s......Comm
-3000ebbc:	09096e6f 00000000 63696c53 00090965     on......Slice...
-3000ebcc:	69726550 0909646f 00000000 09094d52     Period......RM..
-3000ebdc:	00000000 69736f50 00090978 09096425     ....Posix...%d..
-3000ebec:	00000000 6e6e7552 09676e69 00000009     ....Running.....
-3000ebfc:	64616552 00090979 616c6544 00090979     Ready...Delay...
-3000ec0c:	65656c53 00090970 65657246 0909657a     Sleep...Freeze..
-3000ec1c:	00000000 6f727245 00090972 00000a0d     ....Error.......
-3000ec2c:	00007464 77656956 6c6c6120 72687420     dt..View all thr
-3000ec3c:	20646165 6f666e69 00000000 736e6f63     ead info....cons
-3000ec4c:	00656c6f                                ole.
+3000eb7c:	2d2d2d2d 2d2d2d2d 0a0d2d2d 00000000     ----------......
+3000eb8c:	656d614e 79540909 09096570 736e6f43     Name..Type..Cons
+3000eb9c:	09656c6f 61745309 0a0d6574 00000000     ole..State......
+3000ebac:	09097325 00000000 6d6d6f43 09096e6f     %s......Common..
+3000ebbc:	00000000 63696c53 00090965 69726550     ....Slice...Peri
+3000ebcc:	0909646f 00000000 09094d52 00000000     od......RM......
+3000ebdc:	69736f50 00090978 09096425 00000000     Posix...%d......
+3000ebec:	6e6e7552 09676e69 00000009 64616552     Running.....Read
+3000ebfc:	00090979 616c6544 00090979 65656c53     y...Delay...Slee
+3000ec0c:	00090970 65657246 0909657a 00000000     p...Freeze......
+3000ec1c:	6f727245 00090972 00000a0d 00007464     Error.......dt..
+3000ec2c:	77656956 6c6c6120 72687420 20646165     View all thread 
+3000ec3c:	6f666e69 00000000 736e6f63 00656c6f     info....console.
