@@ -128,7 +128,8 @@ void acoral_start(){
 
 	/*串口终端应该初始化好了，将根线程的终端id设置为串口终端*/
 #ifdef CFG_DRIVER
-	orig_thread.console_id=acoral_dev_open("console");;
+	orig_thread.console_id=acoral_dev_open("console");
+	acoral_prints("hello spg");
 #endif
 
 #ifdef CFG_CMP
@@ -192,6 +193,5 @@ void acoral_module_init(){
 	/*消息管理系统初始化*/
 #ifdef CFG_DRIVER
 	acoral_drv_sys_init();
-	acoral_prints("hello spg");
 #endif
 }
