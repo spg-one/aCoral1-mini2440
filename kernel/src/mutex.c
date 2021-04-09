@@ -40,7 +40,7 @@ acoral_evt_t *acoral_mutex_create(acoral_u8 prio, acoral_u32 *err)
 		*err = MUTEX_ERR_NULL;
 		return NULL;
 	}
-	evt->count  = (prio << 8) | MUTEX_AVAI;
+	evt->count  = (prio << 16) | MUTEX_AVAI | MUTEX_U_MASK;
 	evt->type = ACORAL_EVENT_MUTEX;
 	evt->data = NULL;
 	acoral_evt_init(evt);
@@ -168,9 +168,9 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 	highPrio = (acoral_u8)(evt->count >> 8);
 	thread = (acoral_thread_t*)evt->data;
 
+	/*有可能优先级反转，继承最高优先级*/
 	if (thread->prio>cur->prio)
 	{
-		/*有可能优先级反转，继承最高优先级*/
 		if(cur->prio<highPrio)
 		{
 			highPrio=cur->prio;
