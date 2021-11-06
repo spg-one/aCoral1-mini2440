@@ -15,6 +15,7 @@ void acoral_list_add2_tail(acoral_list_t *new, acoral_list_t *head)
 	head->prev=new;
 }
 
+//从list中删除entry节点
 void acoral_list_del(acoral_list_t *entry)
 {
 	entry->prev->next= entry->next;

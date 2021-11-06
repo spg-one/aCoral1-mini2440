@@ -268,9 +268,14 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 	}
 	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
+
+	/*触发调度*/
 	acoral_sched();
+
 	HAL_ENTER_CRITICAL();
 	acoral_spin_lock(&evt->spin_lock);
+
+	/*超时时间内未获得互斥量*/
 	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
 		acoral_printk("Time Out Return\n");
 		acoral_evt_queue_del(cur);
@@ -279,8 +284,7 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 		return MUTEX_ERR_TIMEOUT;
 	}
 
-	//---------------
-	// modify by pegasus 0804: timeout_queue_del [+]
+	/*超时时间内获得了互斥量*/
 	timeout_queue_del(cur);
 
 	if(evt->data!=cur){

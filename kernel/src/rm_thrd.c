@@ -11,6 +11,8 @@
 acoral_u32 prio=ACORAL_HARD_RT_PRIO_MIN; 
 acoral_queue_t tmp_rm_queue;
 acoral_queue_t *rm_queue=&tmp_rm_queue;
+
+/*绿书P242*/
 acoral_fl right[10]={1,0.8284,0.7797,0.7568,0.7435,0.7350,0.7282,0.7240,0.7209,0.7280};
 struct{
 	acoral_u32 num;
@@ -69,6 +71,7 @@ void rm_queue_ascend_add(acoral_thread_t *new){
      acoral_list_add(&new->ready,tmp->prev);
 }
 
+/*多核可调度性判断*/
 acoral_u8 rm_check(acoral_thread_t *thread,acoral_u32 cpu){
 	rm_policy_data_t *data;
 	acoral_fl tmp;
@@ -141,15 +144,15 @@ void rm_end(){
       acoral_thread_t * thread;
       rm_policy_data_t *private_data;
       acoral_list_t *tmp,*head;
-      rm_thread_dispatch();
+      rm_thread_dispatch();	//可调度性分析
       HAL_ENTER_CRITICAL();
       head=&rm_queue->head;
       for (tmp=head->next;tmp!=head;){
-	  thread =list_entry(tmp, acoral_thread_t,ready);
-	  tmp=tmp->next;
-	  acoral_list_del(&thread->ready); /*从队列上取下线程*/
-	  private_data=thread->private_data;
-	  acoral_policy_thread_init(ACORAL_SCHED_POLICY_PERIOD,thread,private_data->period_data.route,private_data->period_data.args,NULL);
+	  	thread =list_entry(tmp, acoral_thread_t,ready);
+	  	tmp=tmp->next;
+	 	acoral_list_del(&thread->ready); /*从队列上取下线程*/
+	  	private_data=thread->private_data;
+	  	acoral_policy_thread_init(ACORAL_SCHED_POLICY_PERIOD,thread,private_data->period_data.route,private_data->period_data.args,NULL);
      }
      HAL_EXIT_CRITICAL();
 }

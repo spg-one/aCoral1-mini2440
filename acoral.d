@@ -16086,7 +16086,7 @@ void acoral_set_bit(acoral_32 nr,acoral_u32 *bitmap)
 }
 30009eac:	e28dd018 	add	sp, sp, #24
 30009eb0:	e12fff1e 	bx	lr
-
+00
 30009eb4 <acoral_clear_bit>:
 
 void acoral_clear_bit(acoral_32 nr,acoral_u32 *bitmap)
