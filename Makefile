@@ -36,7 +36,7 @@ do-it-all: 	acoral
 # Include the make variables (CC, etc...)
 #
 
-CROSS_COMPILE   =/home/acoral/Desktop/arm-2010q1/bin/arm-none-eabi-
+CROSS_COMPILE   =/home/spg/Documents/aCoral/arm-2010q1/bin/arm-none-eabi-
 
 AS              = $(CROSS_COMPILE)as
 LD              = $(CROSS_COMPILE)ld
