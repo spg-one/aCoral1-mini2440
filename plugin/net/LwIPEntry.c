@@ -16,7 +16,7 @@ void  my_lwip_init(void)
 
 	tcpip_init(NULL, NULL);
 	IP4_ADDR(&gw, 192,168,1,1);
-	IP4_ADDR(&ipaddr, 192,168,1,2);
+	IP4_ADDR(&ipaddr, 192,168,1,177);
 	IP4_ADDR(&netmask, 255,255,255,0);
 	netif_add(&net_if, &ipaddr, &netmask, &gw, NULL, ethernetif_init, tcpip_input);  
 	netif_set_default(&net_if);

@@ -49,7 +49,7 @@
 #undef  CFG_DRV_CON_TELNET
 #undef  CFG_DRV_LCD
 #undef  CFG_DRV_TS
-#undef  CFG_DRV_NET_DM9000
+#define CFG_DRV_NET_DM9000 1
 #undef  CFG_DRV_SDI
 
 /*
@@ -60,7 +60,7 @@
  * Plugin configuration
  */
 #undef  CFG_PLUGIN_GUI
-#undef  CFG_PLUGIN_NET
+#define CFG_PLUGIN_NET 1
 #undef  CFG_PLUGIN_FS
 
 /*
@@ -78,6 +78,8 @@
  */
 #define CFG_SHELL 1
 #define CFG_UART_SHELL 1
+#undef  CFG_TELNET_SHELL
+#undef  CFG_WEB_SERVER
 
 /*
  * System hacking

@@ -338,12 +338,12 @@ tcpip_input(struct pbuf *p, struct netif *inp)
   struct tcpip_msg *msg;
 	//===============
 	// test by pegasus
-	//	struct pbuf *q;
-	//	int i, plen = p->tot_len;
-	//	char* dat;
+	  struct pbuf *q;
+	  int i, plen = p->tot_len;
+	  char* dat;
 	//===============
 
-   		/*/
+   	
 		// 调试打印接收信息
 		lwip_printf("\r\n********tcpip_input*************\r\n");
 		lwip_printf("接收数据长度:%d <--->\r\n",plen);
@@ -360,24 +360,24 @@ tcpip_input(struct pbuf *p, struct netif *inp)
 
 		}
 		lwip_printf("\r\n+++++++++++++++++++++\r\n");
-		/**/
 	
-  if (mbox != SYS_MBOX_NULL) {
-    msg = memp_malloc(MEMP_TCPIP_MSG_INPKT);
-    if (msg == NULL) {
-      return ERR_MEM;
-    }
+	
+  // if (mbox != SYS_MBOX_NULL) {
+  //   msg = memp_malloc(MEMP_TCPIP_MSG_INPKT);
+  //   if (msg == NULL) {
+  //     return ERR_MEM;
+  //   }
 
-    msg->type = TCPIP_MSG_INPKT;
-    msg->msg.inp.p = p;
-    msg->msg.inp.netif = inp;
-    if (sys_mbox_trypost(mbox, msg) != ERR_OK) {
-      memp_free(MEMP_TCPIP_MSG_INPKT, msg);
-      return ERR_MEM;
-    }
-    return ERR_OK;
-  }
-  return ERR_VAL;
+  //   msg->type = TCPIP_MSG_INPKT;
+  //   msg->msg.inp.p = p;
+  //   msg->msg.inp.netif = inp;
+  //   if (sys_mbox_trypost(mbox, msg) != ERR_OK) {
+  //     memp_free(MEMP_TCPIP_MSG_INPKT, msg);
+  //     return ERR_MEM;
+  //   }
+  //   return ERR_OK;
+  // }
+  // return ERR_VAL;
 }
 
 /**

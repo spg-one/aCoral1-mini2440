@@ -90,7 +90,7 @@ low_level_init(struct netif *netif)
 	// pegasus0809
 	// hw_init(netif->hwaddr);
 		
-	dm9000_id = acoral_dev_open("dm9000");
+	dm9000_id = acoral_dev_open("netdev");
 	if (dm9000_id == ACORAL_DEV_ERR_ID)
 	{
 		acoral_printerr("ERROR: the dm9000 id %d", dm9000_id);
@@ -159,7 +159,7 @@ void ethernetif_input(void *arg)
 		/* no packet could be read, silently ignore this */
 		if (p == NULL) 
 			continue;
-
+		//acoral_prints("received\n");
 		/* points to packet payload, which starts with an Ethernet header */
 		ethhdr = p->payload;
 

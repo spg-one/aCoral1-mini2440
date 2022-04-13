@@ -1,0 +1,26 @@
+{
+    // Visual Studio Code launch.json for XMC 2Go development board 
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "gnu-debugger",
+        "request": "launch",
+        "name": "acoral debugger",
+        "program": "${workspaceFolder}/acoral.elf",
+        "toolchain": "${config:arm-none-eabi.bin}",
+        "client": "arm-none-eabi-gdb",
+        "server": "JLinkGDBServer",
+        "serverArgs": [
+          "-device", "S3C2440A",
+          "-if", "JTAG",
+          "-speed", "4000"
+        ],
+        "serverHost": "localhost",
+        "serverPort": 2331,
+        "autoRun": false,
+        "debugOutput": false,
+        "preLaunchTask": "build firmware"
+      }
+    ]
+  }
+  

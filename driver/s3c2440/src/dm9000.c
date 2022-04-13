@@ -45,7 +45,7 @@ void udelay(u32_t t)
  */
 void Eint7_ISR(acoral_vector vector)
 {
-	
+	acoral_prints("in DM9000 interuption\n");
 	rEINTMSK |=(1<<vector);
 	
 	//ethernetif_input(&dm9000);
