@@ -833,6 +833,7 @@ etharp_output(struct netif *netif, struct pbuf *q, struct ip_addr *ipaddr)
       }
     }
     /* queue on destination Ethernet address belonging to ipaddr */
+    acoral_prints("here\n");
     return etharp_query(netif, ipaddr, q);
   }
 
@@ -1008,6 +1009,7 @@ etharp_query(struct netif *netif, struct ip_addr *ipaddr, struct pbuf *q)
 #endif
     }
   }
+  acoral_print("send gratuitous arp done\n");
   return result;
 }
 

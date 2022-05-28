@@ -87,9 +87,9 @@ void IOSetInit(void)
  */
 void dm9000_reg_write(u16_t reg, u16_t data)
 {  
-//	udelay(20);
+	udelay(1000);
 	DM_ADD = reg;
-//	udelay(20);
+	udelay(1000);
 	DM_CMD = data;
 	
 }
@@ -190,12 +190,14 @@ void   hw_sendPacket(struct pbuf *p)
 		len = q->len;
 		for(i=0; i < (len); i+=2)
 		{
-			//udelay(20);
+			udelay(1000);
 			udelay(1);
 			tmp = 0x0;
 			tmp |= *dat;
+			//Printf("%4x ",*dat);
 			dat++;
 			tmp |= *dat<< 8;
+			//Printf("%4x ",*dat);
 			dat ++;
 			DM_CMD = tmp;
 		}
@@ -212,7 +214,7 @@ void   hw_sendPacket(struct pbuf *p)
 	}
 	dm9000_reg_write(DM9000_NSR, 0x2c);	
 
-	/*
+	
 		Printf("*********  send  DATA*********\r\n");
         Printf("len:   %d", p->tot_len);
 		for (q = p; q!=NULL; q = q->next)
@@ -229,7 +231,7 @@ void   hw_sendPacket(struct pbuf *p)
 
 		}
 		Printf("\r\n+++++++++++++++++++++\r\n");
-	*/		
+		Printf("done@\n");	
 
     dm9000_reg_write(DM9000_IMR, 0x81);	
 

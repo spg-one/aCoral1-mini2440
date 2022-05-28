@@ -2,6 +2,7 @@
     "files.associations": {
         "int.h": "c",
         "resource.h": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "type_traits": "c"
     }
 }

@@ -344,7 +344,7 @@ tcpip_input(struct pbuf *p, struct netif *inp)
 	//===============
 
    	
-		// 调试打印接收信息
+		//调试打印接收信息
 		lwip_printf("\r\n********tcpip_input*************\r\n");
 		lwip_printf("接收数据长度:%d <--->\r\n",plen);
 		for (q = p; q!=NULL; q = q->next)

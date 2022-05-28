@@ -394,7 +394,7 @@ void netif_set_up(struct netif *netif)
      *  ARP cache. From RFC 3220 "IP Mobility Support for IPv4" section 4.6.
      */ 
     if (netif->flags & NETIF_FLAG_ETHARP) {
-      etharp_query(netif, &(netif->ip_addr), NULL);
+      //etharp_query(netif, &(netif->ip_addr), NULL);
     }
 #endif /* LWIP_ARP */
     
