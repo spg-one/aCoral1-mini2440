@@ -348,468 +348,467 @@
 3000c904 T plugin_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/src/plugin.c:3
 3000c914 T my_lwip_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:14
 3000c9bc T acoral_net_lwip_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:28
-3000ca0c T send_data	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:37
-3000cb3c T output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:62
-3000cd30 T sys_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:27
-3000cdec T sys_sem_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:50
-3000ce1c T sys_sem_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:58
-3000ce40 T sys_sem_signal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:66
-3000ce60 T sys_arch_sem_wait	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:74
-3000cea4 T sys_mbox_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:86
-3000ced0 T sys_mbox_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:96
-3000cef4 T sys_mbox_post	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:105
-3000cf58 T sys_mbox_trypost	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:118
-3000cfcc T sys_arch_mbox_fetch	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:132
-3000d034 T getTONAvai	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:146
-3000d084 T sys_thread_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:163
-3000d178 T sys_arch_timeouts	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:195
-3000d20c T __re_memset	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:222
-3000d274 T __re_memcpy	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:231
-3000d2e8 T netconn_new_with_proto_and_callback	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:68
-3000d3a8 T netconn_delete	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:103
-3000d418 T netconn_type	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:129
-3000d434 T netconn_getaddr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:147
-3000d4a4 T netconn_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:176
-3000d50c T netconn_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:199
-3000d574 T netconn_disconnect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:221
-3000d5c0 T netconn_listen_with_backlog	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:242
-3000d614 T netconn_accept	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:267
-3000d67c T netconn_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:306
-3000d940 T netconn_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:418
-3000d9b4 T netconn_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:436
-3000da0c T netconn_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:462
-3000da7c T netconn_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:489
-3000dac8 t recv_raw	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:71
-3000dc7c t recv_udp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:133
-3000ddc0 t recv_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:188
-3000dedc t poll_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:231
-3000df44 t sent_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:255
-3000e010 t err_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:286
-3000e168 t setup_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:326
-3000e1dc t accept_function	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:345
-3000e2dc t pcb_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:391
-3000e4ac T do_newconn	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:453
-3000e4f4 T netconn_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:476
-3000e628 T netconn_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:548
-3000e764 t do_close_internal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:592
-3000e8ec T do_delconn	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:640
-3000ea4c T do_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:687
-3000eba8 t do_connected	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:726
-3000ec44 T do_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:756
-3000edc0 T do_disconnect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:799
-3000ee18 T do_listen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:816
-3000efec T do_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:866
-3000f19c T do_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:904
-3000f22c t do_writemore	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:938
-3000f4e4 T do_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:1030
-3000f5a8 T do_getaddr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:1072
-3000f764 T do_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:1120
-3000f7ec T netbuf_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:56
-3000f850 T netbuf_delete	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:77
-3000f8bc T netbuf_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:97
-3000f954 T netbuf_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:121
-3000f9a8 T netbuf_ref	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:140
-3000fa7c T netbuf_chain	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:164
-3000fad0 T netbuf_data	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:183
-3000fb38 T netbuf_next	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:208
-3000fba4 T netbuf_first	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:229
-3000fbc4 T lwip_socket_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:173
-3000fc00 t get_socket	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:186
-3000fc78 t alloc_socket	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:214
-3000fe50 T lwip_accept	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:246
-300100ec T lwip_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:317
-300101dc T lwip_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:353
-300102a4 T lwip_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:379
-300103c4 T lwip_listen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:429
-300104b0 T lwip_recvfrom	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:461
-300108fc T lwip_read	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:597
-30010948 T lwip_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:603
-30010998 T lwip_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:609
-30010ab0 T lwip_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:638
-30010c70 T lwip_socket	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:729
-30010d84 T lwip_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:781
-30010dc0 t lwip_selscan	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:802
-30011048 T lwip_select	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:846
-300114dc t event_callback	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:995
-300117c8 T lwip_shutdown	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1088
-300117f4 t lwip_getaddrname	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1096
-300118e4 T lwip_getpeername	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1129
-30011920 T lwip_getsockname	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1135
-3001195c T lwip_getsockopt	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1141
-30011c2c t lwip_getsockopt_internal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1326
-30011f00 T lwip_setsockopt	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1505
-30012188 t lwip_setsockopt_internal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1700
-30012448 T lwip_ioctl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1879
-300125f4 t tcpip_tcp_timer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:77
-30012660 T tcp_timer_needed	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:100
-300126c8 t arp_timer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:135
-300126fc t tcpip_thread	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:233
-300128cc T tcpip_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:336
-300129ec T tcpip_callback_with_block	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:395
-30012ae0 T tcpip_timeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:422
-30012b94 T tcpip_apimsg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:452
-30012c18 T tcpip_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:549
-30012c94 T icmp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/icmp.c:69
-300133d0 T icmp_dest_unreach	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/icmp.c:225
-30013624 T inet_addr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:61
-30013668 T inet_aton	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:83
-30013a60 T inet_ntoa	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:183
-30013be4 T htons	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:234
-30013c30 T ntohs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:246
-30013c60 T htonl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:258
-30013ca8 T ntohl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:273
-30013cd0 t lwip_standard_chksum	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:80
-30013e00 T inet_chksum_pseudo	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:264
-300140a8 T inet_chksum_pseudo_partial	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:320
-3001438c T inet_chksum	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:381
-30014410 T inet_chksum_pbuf	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:400
-30014538 T ip_route	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:69
-3001464c T ip_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:176
-30014c20 T ip_output_if	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:485
-300151b0 T ip_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:571
-3001523c T ip_addr_isbroadcast	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_addr.c:58
-30015360 T ip_frag	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_frag.c:619
-30015720 T lwip_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/init.c:216
-3001573c T memp_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:250
-30015918 T memp_malloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:294
-30015aac T memp_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:346
-30015b70 T netif_add	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:79
-30015c68 T netif_set_addr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:158
-30015cb0 T netif_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:171
-30015d8c T netif_find	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:216
-30015e48 T netif_set_ipaddr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:249
-30015ff8 T netif_set_gw	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:310
-30016054 T netif_set_netmask	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:331
-300160b0 T netif_set_default	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:352
-300160d0 T netif_set_up	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:378
-3001610c T netif_set_down	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:412
-30016148 T netif_is_up	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:429
-30016168 T pbuf_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:113
-30016518 T pbuf_realloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:269
-30016690 T pbuf_header	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:348
-30016824 T pbuf_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:455
-3001693c T pbuf_clen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:535
-30016984 T pbuf_ref	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:554
-300169d8 T pbuf_cat	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:576
-30016a68 T pbuf_chain	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:617
-30016a98 T pbuf_dechain	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:634
-30016b3c T pbuf_copy	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:683
-30016c94 T pbuf_copy_partial	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:747
-30016dec T raw_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:78
-30016f44 T raw_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:137
-30016fb0 T raw_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:157
-3001701c T raw_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:178
-3001704c T raw_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:201
-300171c4 T raw_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:273
-30017210 T raw_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:287
-300172c0 T raw_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:318
-30017348 T sys_mbox_fetch	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:66
-300174ac T sys_sem_wait	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:126
-300175fc T sys_timeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:188
-300177cc T sys_untimeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:248
-300178f4 t sswt_handler	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:287
-30017934 T sys_sem_wait_timeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:304
-300179bc T sys_msleep	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:334
-300179f8 T tcp_tmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:83
-30017a40 T tcp_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:110
-30017cbc T tcp_abort	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:195
-30017e50 T tcp_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:256
-30018264 t tcp_accept_null	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:323
-30018290 T tcp_listen_with_backlog	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:348
-3001848c T tcp_recved	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:393
-30018610 t tcp_new_port	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:441
-30018750 T tcp_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:486
-30018a28 T tcp_slowtmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:549
-300190fc T tcp_fasttmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:782
-30019228 T tcp_segs_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:814
-30019290 T tcp_seg_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:833
-300192f8 T tcp_setprio	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:856
-3001931c T tcp_seg_copy	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:870
-30019380 t tcp_recv_null	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:890
-300193f0 t tcp_kill_prio	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:908
-300194dc t tcp_kill_timewait	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:941
-30019584 T tcp_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:969
-3001974c T tcp_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1044
-30019768 T tcp_arg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1057
-30019788 T tcp_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1071
-300197a8 T tcp_sent	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1085
-300197c8 T tcp_err	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1100
-300197e8 T tcp_accept	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1115
-30019808 T tcp_poll	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1130
-3001983c T tcp_pcb_purge	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1146
-30019914 T tcp_pcb_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1190
-30019a54 T tcp_next_iss	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1223
-30019a88 T tcp_eff_send_mss	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1238
-30019b00 T tcp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:93
-3001aa58 t tcp_listen_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:441
-3001add4 t tcp_timewait_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:521
-3001ae90 t tcp_process	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:544
-3001ba60 t tcp_receive	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:760
-3001d940 t tcp_parseopt	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:1360
-3001db18 T tcp_send_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:70
-3001db7c T tcp_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:95
-3001dc44 T tcp_enqueue	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:131
-3001e578 T tcp_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:412
-3001ef2c t tcp_output_segment	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:605
-3001f254 T tcp_rst	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:702
-3001f5d4 T tcp_rexmit_rto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:747
-3001f6d0 T tcp_rexmit	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:783
-3001f7b4 T tcp_keepalive	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:818
-3001fb54 T tcp_zero_window_probe	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:889
-3001ff64 T udp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:85
-300205dc T udp_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:333
-3002062c T udp_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:357
-300206c8 T udp_sendto_if	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:400
-30020a20 T udp_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:567
-30020ba8 T udp_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:667
-30020cf4 T udp_disconnect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:725
-30020d60 T udp_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:744
-30020d90 T udp_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:763
-30020e40 T udp_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:793
-30020e94 t plug_holes	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:194
-30021024 T mem_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:232
-30021110 T mem_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:269
-30021264 T mem_realloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:325
-300215b8 T mem_malloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:442
-30021968 T mem_calloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:563
-300219e0 t free_etharp_q	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:144
-30021a38 T etharp_tmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:166
-30021c2c t find_entry	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:231
-30022284 t etharp_send_ip	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:429
-30022380 t update_arp_entry	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:468
-30022638 T etharp_find_addr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:545
-3002271c T etharp_ip_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:581
-300227c0 T etharp_arp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:618
-30022c00 T etharp_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:789
-30022eac T etharp_query	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:880
-3002334c t etharp_raw	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:1035
-30023640 T etharp_request	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:1120
-300236c4 T ethernet_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:1137
-300237b8 t low_level_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:65
-300238ac t low_level_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:118
-30023920 T ethernetif_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:145
-30023a28 T ethernetif_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:208
-30023ad4 T dummy	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/user.c:3
-30023b00 T user_main	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/user.c:11
-30023b04 T parse_args	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:14
-30023d44 T add_command	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:68
-30023da8 T find_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:78
-30023e1c T execmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:90
-30023e9c T cmd_exe	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:102
-30023f20 T echo	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:116
-30023f48 T get_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:120
-30024110 T acoral_shell_init	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:171
-300241a4 T acoral_shell_exit	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:184
-300241c8 T acoral_shell_enter	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:189
-30024264 T malloc_scan	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:4
-30024284 T malloc_scan2	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:15
-300242a4 T help	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:27
-30024310 T exit	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:43
-30024360 T spg	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:54
-30024388 T cmd_init	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:77
-300243d0 T display_thread	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/thread_display.c:5
-300245e4 T acoral_get_drv_ctrl_by_name	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:10
-30024670 T acoral_drv_register	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:21
-30024748 T acoral_drv_unregister	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:42
-300247d0 T acoral_dev_open	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:50
-30024864 T acoral_dev_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:61
-300248fc T acoral_dev_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:68
-30024994 T acoral_dev_config	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:75
-30024a28 T acoral_dev_close	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:81
-30024aa4 T acoral_alloc_drv	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:88
-30024ac4 T acoral_drv_pool_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:93
-30024b0c T acoral_drv_sys_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:101
-30024b60 T brd_driver_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/brd_driver.c:2
-30024b74 T uart_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:9
-30024bb0 T uart_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:14
-30024bf0 T console_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:19
-30024c6c T console_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:30
-30024cd8 T console_config	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:40
-30024d08 T console_open	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:49
-30024d20 T uart_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:54
-30024d94 T con_uart_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:64
-30024df4 T udelay	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:32
-30024e44 T Eint7_ISR	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:46
-30024ee0 T IOSetInit	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:72
-30024fa8 T dm9000_reg_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:88
-30024ffc T dm9000_reg_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:100
-3002503c T dm9000_reg_read16	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:111
-30025078 T hw_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:122
-300251f4 T hw_sendPacket	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:163
-300254c0 T hw_getPacket	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:245
-300257f8 T hw_dm9k_config	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:376
-30025848 T hw_dm9k_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:386
-300258c8 T hw_dm9k_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:397
-30025900 T dm9000_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:403
-30025968 t .udivsi3_nodiv0
-30025968 T __aeabi_uidiv
-30025968 T __udivsi3
-30025a5c T __aeabi_uidivmod
-30025a7c T __aeabi_idiv
-30025a7c T __divsi3
-30025a84 t .divsi3_nodiv0
-30025ba4 T __aeabi_idivmod
-30025bc4 W __aeabi_idiv0
-30025bc4 W __aeabi_ldiv0
-30025bc8 T __aeabi_frsub
-30025bd0 T __aeabi_fsub
-30025bd0 T __subsf3
-30025bd4 T __addsf3
-30025bd4 T __aeabi_fadd
-30025d90 T __aeabi_ui2f
-30025d90 T __floatunsisf
-30025d98 T __aeabi_i2f
-30025d98 T __floatsisf
-30025db8 T __aeabi_ul2f
-30025db8 T __floatundisf
-30025dc8 T __aeabi_l2f
-30025dc8 T __floatdisf
-30025e74 T __aeabi_fmul
-30025e74 T __mulsf3
-3002600c T __aeabi_fdiv
-3002600c T __divsf3
-3002616c T __gesf2
-3002616c T __gtsf2
-30026174 T __lesf2
-30026174 T __ltsf2
-3002617c T __cmpsf2
-3002617c T __eqsf2
-3002617c T __nesf2
-300261e0 T __aeabi_cfrcmple
-300261f0 T __aeabi_cfcmpeq
-300261f0 T __aeabi_cfcmple
-30026208 T __aeabi_fcmpeq
-30026220 T __aeabi_fcmplt
-30026238 T __aeabi_fcmple
-30026250 T __aeabi_fcmpge
-30026268 T __aeabi_fcmpgt
-30026854 T small_digits	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/print.c:30
-3002687c T large_digits	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/print.c:31
-30026968 t err_to_errno_table	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:127
-30026a2c T ip_addr_any	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_addr.c:48
-30026a30 T ip_addr_broadcast	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_addr.c:49
-30026a34 t memp_sizes	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:116
-30026a50 t memp_num	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:122
-30026a6c T tcp_backoff	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:56
-30026a7c T tcp_persist_backoff	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:59
-30026aac T ethbroadcast	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:107
-30026ab4 T ethzero	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:108
-30026e14 D acoral_doMsgTtl_checked	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:10
-30026e18 D prio	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:11
-30026e1c D rm_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:13
-30026e20 D right	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:16
-30026e48 d console_id	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/print.c:389
-30026e4c d iss.3566
-30026e50 d port.3022
-30026e54 d dm9000_id	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:41
-30026e58 D mem_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:8
-30026e68 D mem2_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:19
-30026e78 D help_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:36
-30026e88 D exit_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:48
-30026e98 D spg_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:58
-30026ea8 D dt_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/thread_display.c:56
-30026eb8 B acoral_start_sched	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:3
-30026eb8 B bss_start
-30026ebc b acoral_ready_queues	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:10
-30027220 b ticks	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/timer.c:23
-30027224 b print_buf.2163
-30027624 b print_buf.2126
-30027724 b rand_seed	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/random.c:2
-30027728 b sockets	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:116
-30027778 b select_cb_list	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:118
-3002777c b socksem	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:121
-30027780 b selectsem	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:123
-30027784 b tcpip_init_done	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:58
-30027788 b tcpip_init_done_arg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:59
-3002778c B mbox	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:60
-30027790 b tcpip_tcp_timer_active	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:69
-30027794 b str.2223
-300277a4 b ip_id.2987
-300277a8 b buf	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_frag.c:602
-30027d84 b memp_tab	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:110
-30027db8 b memp_memory	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:136
-300294d0 b netifnum.2761
-300294d4 b raw_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:58
-300294d8 b tcp_timer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:75
-300294dc b inseg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:63
-300294f0 b tcphdr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:64
-300294f4 b iphdr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:65
-300294f8 b seqno	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:66
-300294fc b ackno	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:66
-30029500 b flags	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:67
-30029502 b tcplen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:68
-30029504 b recv_flags	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:70
-30029508 b recv_data	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:71
-3002950c b ram_heap	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:172
-3002a520 b ram	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:174
-3002a524 b ram_end	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:176
-3002a528 b lfree	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:178
-3002a52c b mem_sem	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:180
-3002a530 b arp_table	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:109
-3002a5f8 b etharp_cached_entry	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:111
-3002a5fc b dm9k_recv_sem	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:25
-3002a620 b flag	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:26
-3002a624 B nulltimeouts	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:20
-3002a630 B g_msgctr_header	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:14
-3002a63c B drv_table	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:9
-3002a68c B netif_list	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:61
-3002a690 B comm_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/comm_thrd.c:10
-3002a6ac B acoral_free_res_pool	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/resource.c:9
-3002a6b0 B posix_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/posix_thrd.c:118
-3002a6cc B sched_lock	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:8
-3002a6d0 B intr_table	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/int.c:7
-3002ac48 B slice_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/slice_thrd.c:12
-3002ac64 B thread_api	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/thread.c:18
-3002ac68 B tcp_active_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:69
-3002ac6c B udp_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:70
-3002ac70 B mem_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/malloc.c:32
-3002aca4 B tcp_ticks	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:55
-3002aca8 B tcp_listen_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:66
-3002acac B acoral_thread_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/thread.c:19
-3002ace4 B acoral_drv_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:8
-3002ad1c B acoral_threads_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/thread.c:17
-3002ad28 B thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:66
-3002ad2c B orig_thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:105
-3002ad84 B tmp_rm_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:12
-3002ad90 B acoral_mem_blocks	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/buddy.c:31
-3002ad94 B sample_100ms	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/softdelay.c:7
-3002ad98 B pvNullPointer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:22
-3002ad9c B console_ops	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:6
-3002adb0 B left	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:20
-3002adb8 B tcp_tmp_pcb	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:73
-3002adbc B net_if	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:6
-3002adec B daemon_id	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:4
-3002adf0 B period_delay_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/period_thrd.c:10
-3002adfc B tcp_input_pcb	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:73
-3002ae00 B head_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:6
-3002ae04 B acoral_res_release_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:2
-3002ae10 B acoral_pools	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/resource.c:8
-3002b630 B acoral_msg_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:13
-3002b668 B tcp_bound_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:64
-3002b66c B hw_dm9k_ops	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:24
-3002b680 B idle_id	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:4
-3002b684 B policy_list	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/policy.c:7
-3002b690 B acoral_mem_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/buddy.c:30
-3002b694 B rm_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:131
-3002b6b0 B init_id	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:4
-3002b6b4 B time_delay_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/timer.c:17
-3002b6c0 B acoral_evt_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/event.c:3
-3002b6f8 B acoral_msgctr_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:12
-3002b730 B timeoutslist	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:21
-3002b734 B timeout_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/timer.c:22
-3002b740 B ready_thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:9
-3002b744 B tcp_tw_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:71
-3002b748 B timeoutnodes	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:18
-3002b794 B lwip_stats	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/stats.c:49
-3002b8c8 B intr_nesting	/home/spg/Documents/aCoral/aCoral-mini2440/hal/src/hal_comm.c:6
-3002b8cc B netif_default	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:62
-3002b8d0 B running_thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:9
-3002b8d4 B need_sched	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:7
-3002b8d8 B period_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/period_thrd.c:123
-3002b8f4 B sample	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/softdelay.c:8
-3002b8f8 B tail_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:6
-3002b8fc A bss_end
-3002b8fc A heap_start
+3000ca0c T send_data	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:36
+3000cb3c T sys_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:27
+3000cbf8 T sys_sem_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:50
+3000cc28 T sys_sem_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:58
+3000cc4c T sys_sem_signal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:66
+3000cc6c T sys_arch_sem_wait	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:74
+3000ccb0 T sys_mbox_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:86
+3000ccdc T sys_mbox_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:96
+3000cd00 T sys_mbox_post	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:105
+3000cd64 T sys_mbox_trypost	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:118
+3000cdd8 T sys_arch_mbox_fetch	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:132
+3000ce40 T getTONAvai	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:146
+3000ce90 T sys_thread_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:163
+3000cf84 T sys_arch_timeouts	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:195
+3000d018 T __re_memset	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:222
+3000d080 T __re_memcpy	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:231
+3000d0f4 T netconn_new_with_proto_and_callback	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:68
+3000d1b4 T netconn_delete	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:103
+3000d224 T netconn_type	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:129
+3000d240 T netconn_getaddr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:147
+3000d2b0 T netconn_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:176
+3000d318 T netconn_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:199
+3000d380 T netconn_disconnect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:221
+3000d3cc T netconn_listen_with_backlog	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:242
+3000d420 T netconn_accept	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:267
+3000d488 T netconn_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:306
+3000d74c T netconn_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:418
+3000d7c0 T netconn_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:436
+3000d818 T netconn_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:462
+3000d888 T netconn_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_lib.c:489
+3000d8d4 t recv_raw	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:71
+3000da88 t recv_udp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:133
+3000dbcc t recv_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:188
+3000dce8 t poll_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:231
+3000dd50 t sent_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:255
+3000de1c t err_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:286
+3000df74 t setup_tcp	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:326
+3000dfe8 t accept_function	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:345
+3000e0e8 t pcb_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:391
+3000e2b8 T do_newconn	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:453
+3000e300 T netconn_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:476
+3000e434 T netconn_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:548
+3000e570 t do_close_internal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:592
+3000e6f8 T do_delconn	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:640
+3000e858 T do_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:687
+3000e9b4 t do_connected	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:726
+3000ea50 T do_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:756
+3000ebcc T do_disconnect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:799
+3000ec24 T do_listen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:816
+3000edf8 T do_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:866
+3000efa8 T do_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:904
+3000f038 t do_writemore	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:938
+3000f2f0 T do_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:1030
+3000f3b4 T do_getaddr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:1072
+3000f570 T do_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/api_msg.c:1120
+3000f5f8 T netbuf_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:56
+3000f65c T netbuf_delete	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:77
+3000f6c8 T netbuf_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:97
+3000f760 T netbuf_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:121
+3000f7b4 T netbuf_ref	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:140
+3000f888 T netbuf_chain	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:164
+3000f8dc T netbuf_data	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:183
+3000f944 T netbuf_next	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:208
+3000f9b0 T netbuf_first	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/netbuf.c:229
+3000f9d0 T lwip_socket_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:173
+3000fa0c t get_socket	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:186
+3000fa84 t alloc_socket	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:214
+3000fc5c T lwip_accept	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:246
+3000fef8 T lwip_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:317
+3000ffe8 T lwip_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:353
+300100b0 T lwip_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:379
+300101d0 T lwip_listen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:429
+300102bc T lwip_recvfrom	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:461
+30010708 T lwip_read	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:597
+30010754 T lwip_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:603
+300107a4 T lwip_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:609
+300108bc T lwip_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:638
+30010a7c T lwip_socket	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:729
+30010b90 T lwip_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:781
+30010bcc t lwip_selscan	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:802
+30010e54 T lwip_select	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:846
+300112e8 t event_callback	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:995
+300115d4 T lwip_shutdown	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1088
+30011600 t lwip_getaddrname	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1096
+300116f0 T lwip_getpeername	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1129
+3001172c T lwip_getsockname	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1135
+30011768 T lwip_getsockopt	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1141
+30011a38 t lwip_getsockopt_internal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1326
+30011d0c T lwip_setsockopt	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1505
+30011f94 t lwip_setsockopt_internal	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1700
+30012254 T lwip_ioctl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:1879
+30012400 t tcpip_tcp_timer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:77
+3001246c T tcp_timer_needed	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:100
+300124d4 t arp_timer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:135
+30012508 t tcpip_thread	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:233
+300126d8 T tcpip_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:336
+300127f8 T tcpip_callback_with_block	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:395
+300128ec T tcpip_timeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:422
+300129a0 T tcpip_apimsg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:452
+30012a24 T tcpip_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:549
+30012aa0 T icmp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/icmp.c:69
+300131dc T icmp_dest_unreach	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/icmp.c:225
+30013430 T inet_addr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:61
+30013474 T inet_aton	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:83
+3001386c T inet_ntoa	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:183
+300139f0 T htons	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:234
+30013a3c T ntohs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:246
+30013a6c T htonl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:258
+30013ab4 T ntohl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet.c:273
+30013adc t lwip_standard_chksum	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:80
+30013c0c T inet_chksum_pseudo	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:264
+30013eb4 T inet_chksum_pseudo_partial	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:320
+30014198 T inet_chksum	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:381
+3001421c T inet_chksum_pbuf	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/inet_chksum.c:400
+30014344 T ip_route	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:69
+30014458 T ip_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:176
+30014a2c T ip_output_if	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:485
+30014fbc T ip_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip.c:571
+30015048 T ip_addr_isbroadcast	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_addr.c:58
+3001516c T ip_frag	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_frag.c:619
+3001552c T lwip_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/init.c:216
+30015548 T memp_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:250
+30015724 T memp_malloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:294
+300158b8 T memp_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:346
+3001597c T netif_add	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:79
+30015a74 T netif_set_addr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:158
+30015abc T netif_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:171
+30015b98 T netif_find	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:216
+30015c54 T netif_set_ipaddr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:249
+30015e04 T netif_set_gw	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:310
+30015e60 T netif_set_netmask	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:331
+30015ebc T netif_set_default	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:352
+30015edc T netif_set_up	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:378
+30015f18 T netif_set_down	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:412
+30015f54 T netif_is_up	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:429
+30015f74 T pbuf_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:113
+30016324 T pbuf_realloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:269
+3001649c T pbuf_header	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:348
+30016630 T pbuf_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:455
+30016748 T pbuf_clen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:535
+30016790 T pbuf_ref	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:554
+300167e4 T pbuf_cat	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:576
+30016874 T pbuf_chain	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:617
+300168a4 T pbuf_dechain	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:634
+30016948 T pbuf_copy	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:683
+30016aa0 T pbuf_copy_partial	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/pbuf.c:747
+30016bf8 T raw_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:78
+30016d50 T raw_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:137
+30016dbc T raw_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:157
+30016e28 T raw_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:178
+30016e58 T raw_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:201
+30016fd0 T raw_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:273
+3001701c T raw_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:287
+300170cc T raw_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:318
+30017154 T sys_mbox_fetch	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:66
+300172b8 T sys_sem_wait	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:126
+30017408 T sys_timeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:188
+300175d8 T sys_untimeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:248
+30017700 t sswt_handler	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:287
+30017740 T sys_sem_wait_timeout	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:304
+300177c8 T sys_msleep	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/sys.c:334
+30017804 T tcp_tmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:83
+3001784c T tcp_close	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:110
+30017ac8 T tcp_abort	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:195
+30017c5c T tcp_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:256
+30018070 t tcp_accept_null	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:323
+3001809c T tcp_listen_with_backlog	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:348
+30018298 T tcp_recved	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:393
+3001841c t tcp_new_port	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:441
+3001855c T tcp_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:486
+30018834 T tcp_slowtmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:549
+30018f08 T tcp_fasttmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:782
+30019034 T tcp_segs_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:814
+3001909c T tcp_seg_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:833
+30019104 T tcp_setprio	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:856
+30019128 T tcp_seg_copy	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:870
+3001918c t tcp_recv_null	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:890
+300191fc t tcp_kill_prio	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:908
+300192e8 t tcp_kill_timewait	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:941
+30019390 T tcp_alloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:969
+30019558 T tcp_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1044
+30019574 T tcp_arg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1057
+30019594 T tcp_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1071
+300195b4 T tcp_sent	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1085
+300195d4 T tcp_err	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1100
+300195f4 T tcp_accept	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1115
+30019614 T tcp_poll	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1130
+30019648 T tcp_pcb_purge	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1146
+30019720 T tcp_pcb_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1190
+30019860 T tcp_next_iss	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1223
+30019894 T tcp_eff_send_mss	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:1238
+3001990c T tcp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:93
+3001a864 t tcp_listen_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:441
+3001abe0 t tcp_timewait_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:521
+3001ac9c t tcp_process	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:544
+3001b86c t tcp_receive	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:760
+3001d74c t tcp_parseopt	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:1360
+3001d924 T tcp_send_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:70
+3001d988 T tcp_write	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:95
+3001da50 T tcp_enqueue	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:131
+3001e384 T tcp_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:412
+3001ed38 t tcp_output_segment	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:605
+3001f060 T tcp_rst	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:702
+3001f3e0 T tcp_rexmit_rto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:747
+3001f4dc T tcp_rexmit	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:783
+3001f5c0 T tcp_keepalive	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:818
+3001f960 T tcp_zero_window_probe	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_out.c:889
+3001fd70 T udp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:85
+300203e8 T udp_send	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:333
+30020438 T udp_sendto	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:357
+300204d4 T udp_sendto_if	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:400
+3002082c T udp_bind	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:567
+300209b4 T udp_connect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:667
+30020b00 T udp_disconnect	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:725
+30020b6c T udp_recv	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:744
+30020b9c T udp_remove	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:763
+30020c4c T udp_new	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:793
+30020ca0 t plug_holes	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:194
+30020e30 T mem_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:232
+30020f1c T mem_free	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:269
+30021070 T mem_realloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:325
+300213c4 T mem_malloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:442
+30021774 T mem_calloc	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:563
+300217ec t free_etharp_q	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:144
+30021844 T etharp_tmr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:166
+30021a38 t find_entry	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:231
+30022090 t etharp_send_ip	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:429
+3002218c t update_arp_entry	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:468
+30022444 T etharp_find_addr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:545
+30022528 T etharp_ip_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:581
+300225cc T etharp_arp_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:618
+30022a0c T etharp_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:789
+30022cb8 T etharp_query	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:880
+30023158 t etharp_raw	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:1035
+3002344c T etharp_request	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:1120
+300234d0 T ethernet_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:1137
+300235c4 t low_level_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:65
+300236b8 t low_level_output	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:118
+3002372c T ethernetif_input	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:145
+30023834 T ethernetif_init	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:208
+300238e0 T dummy	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/user.c:3
+3002390c T user_main	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/user.c:11
+30023910 T parse_args	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:14
+30023b50 T add_command	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:68
+30023bb4 T find_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:78
+30023c28 T execmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:90
+30023ca8 T cmd_exe	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:102
+30023d2c T echo	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:116
+30023d54 T get_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:120
+30023f1c T acoral_shell_init	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:171
+30023fb0 T acoral_shell_exit	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:184
+30023fd4 T acoral_shell_enter	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:189
+30024070 T malloc_scan	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:4
+30024090 T malloc_scan2	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:15
+300240b0 T help	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:27
+3002411c T exit	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:43
+3002416c T spg	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:54
+30024194 T cmd_init	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:77
+300241dc T display_thread	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/thread_display.c:5
+300243f0 T acoral_get_drv_ctrl_by_name	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:10
+3002447c T acoral_drv_register	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:21
+30024554 T acoral_drv_unregister	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:42
+300245dc T acoral_dev_open	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:50
+30024670 T acoral_dev_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:61
+30024708 T acoral_dev_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:68
+300247a0 T acoral_dev_config	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:75
+30024834 T acoral_dev_close	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:81
+300248b0 T acoral_alloc_drv	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:88
+300248d0 T acoral_drv_pool_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:93
+30024918 T acoral_drv_sys_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:101
+3002496c T brd_driver_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/brd_driver.c:2
+30024980 T uart_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:9
+300249bc T uart_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:14
+300249fc T console_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:19
+30024a78 T console_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:30
+30024ae4 T console_config	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:40
+30024b14 T console_open	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:49
+30024b2c T uart_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:54
+30024ba0 T con_uart_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:64
+30024c00 T udelay	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:32
+30024c50 T Eint7_ISR	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:46
+30024cec T IOSetInit	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:72
+30024db4 T dm9000_reg_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:88
+30024e08 T dm9000_reg_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:100
+30024e48 T dm9000_reg_read16	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:111
+30024e84 T hw_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:122
+30025000 T hw_sendPacket	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:163
+300252cc T hw_getPacket	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:245
+30025604 T hw_dm9k_config	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:376
+30025654 T hw_dm9k_read	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:386
+300256d4 T hw_dm9k_write	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:397
+3002570c T dm9000_init	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:403
+30025774 t .udivsi3_nodiv0
+30025774 T __aeabi_uidiv
+30025774 T __udivsi3
+30025868 T __aeabi_uidivmod
+30025888 T __aeabi_idiv
+30025888 T __divsi3
+30025890 t .divsi3_nodiv0
+300259b0 T __aeabi_idivmod
+300259d0 W __aeabi_idiv0
+300259d0 W __aeabi_ldiv0
+300259d4 T __aeabi_frsub
+300259dc T __aeabi_fsub
+300259dc T __subsf3
+300259e0 T __addsf3
+300259e0 T __aeabi_fadd
+30025b9c T __aeabi_ui2f
+30025b9c T __floatunsisf
+30025ba4 T __aeabi_i2f
+30025ba4 T __floatsisf
+30025bc4 T __aeabi_ul2f
+30025bc4 T __floatundisf
+30025bd4 T __aeabi_l2f
+30025bd4 T __floatdisf
+30025c80 T __aeabi_fmul
+30025c80 T __mulsf3
+30025e18 T __aeabi_fdiv
+30025e18 T __divsf3
+30025f78 T __gesf2
+30025f78 T __gtsf2
+30025f80 T __lesf2
+30025f80 T __ltsf2
+30025f88 T __cmpsf2
+30025f88 T __eqsf2
+30025f88 T __nesf2
+30025fec T __aeabi_cfrcmple
+30025ffc T __aeabi_cfcmpeq
+30025ffc T __aeabi_cfcmple
+30026014 T __aeabi_fcmpeq
+3002602c T __aeabi_fcmplt
+30026044 T __aeabi_fcmple
+3002605c T __aeabi_fcmpge
+30026074 T __aeabi_fcmpgt
+30026660 T small_digits	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/print.c:30
+30026688 T large_digits	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/print.c:31
+30026724 t err_to_errno_table	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:127
+300267e8 T ip_addr_any	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_addr.c:48
+300267ec T ip_addr_broadcast	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_addr.c:49
+300267f0 t memp_sizes	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:116
+3002680c t memp_num	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:122
+30026828 T tcp_backoff	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:56
+30026838 T tcp_persist_backoff	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:59
+30026868 T ethbroadcast	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:107
+30026870 T ethzero	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:108
+30026bd0 D acoral_doMsgTtl_checked	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:10
+30026bd4 D prio	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:11
+30026bd8 D rm_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:13
+30026bdc D right	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:16
+30026c04 d console_id	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/print.c:389
+30026c08 d iss.3566
+30026c0c d port.3022
+30026c10 d dm9000_id	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/ethernetif.c:41
+30026c14 D mem_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:8
+30026c24 D mem2_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:19
+30026c34 D help_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:36
+30026c44 D exit_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:48
+30026c54 D spg_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/cmd.c:58
+30026c64 D dt_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/thread_display.c:56
+30026c74 B acoral_start_sched	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:3
+30026c74 B bss_start
+30026c78 b acoral_ready_queues	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:10
+30026fdc b ticks	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/timer.c:23
+30026fe0 b print_buf.2163
+300273e0 b print_buf.2126
+300274e0 b rand_seed	/home/spg/Documents/aCoral/aCoral-mini2440/lib/src/random.c:2
+300274e4 b sockets	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:116
+30027534 b select_cb_list	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:118
+30027538 b socksem	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:121
+3002753c b selectsem	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/sockets.c:123
+30027540 b tcpip_init_done	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:58
+30027544 b tcpip_init_done_arg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:59
+30027548 B mbox	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:60
+3002754c b tcpip_tcp_timer_active	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/api/tcpip.c:69
+30027550 b str.2223
+30027560 b ip_id.2987
+30027564 b buf	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/ipv4/ip_frag.c:602
+30027b40 b memp_tab	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:110
+30027b74 b memp_memory	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/memp.c:136
+3002928c b netifnum.2761
+30029290 b raw_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/raw.c:58
+30029294 b tcp_timer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:75
+30029298 b inseg	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:63
+300292ac b tcphdr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:64
+300292b0 b iphdr	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:65
+300292b4 b seqno	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:66
+300292b8 b ackno	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:66
+300292bc b flags	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:67
+300292be b tcplen	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:68
+300292c0 b recv_flags	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:70
+300292c4 b recv_data	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:71
+300292c8 b ram_heap	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:172
+3002a2dc b ram	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:174
+3002a2e0 b ram_end	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:176
+3002a2e4 b lfree	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:178
+3002a2e8 b mem_sem	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/lwmem.c:180
+3002a2ec b arp_table	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:109
+3002a3b4 b etharp_cached_entry	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/netif/etharp.c:111
+3002a3b8 b dm9k_recv_sem	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:25
+3002a3dc b flag	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:26
+3002a3e0 B nulltimeouts	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:20
+3002a3ec B g_msgctr_header	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:14
+3002a3f8 B drv_table	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:9
+3002a448 B netif_list	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:61
+3002a44c B comm_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/comm_thrd.c:10
+3002a468 B acoral_free_res_pool	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/resource.c:9
+3002a46c B posix_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/posix_thrd.c:118
+3002a488 B sched_lock	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:8
+3002a48c B intr_table	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/int.c:7
+3002aa04 B slice_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/slice_thrd.c:12
+3002aa20 B thread_api	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/thread.c:18
+3002aa24 B tcp_active_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:69
+3002aa28 B udp_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/udp.c:70
+3002aa2c B mem_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/malloc.c:32
+3002aa60 B tcp_ticks	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:55
+3002aa64 B tcp_listen_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:66
+3002aa68 B acoral_thread_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/thread.c:19
+3002aaa0 B acoral_drv_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/driver/src/driver.c:8
+3002aad8 B acoral_threads_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/thread.c:17
+3002aae4 B thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:66
+3002aae8 B orig_thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:105
+3002ab40 B tmp_rm_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:12
+3002ab4c B acoral_mem_blocks	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/buddy.c:31
+3002ab50 B sample_100ms	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/softdelay.c:7
+3002ab54 B pvNullPointer	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:22
+3002ab58 B console_ops	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/con_uart.c:6
+3002ab6c B left	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:20
+3002ab74 B tcp_tmp_pcb	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:73
+3002ab78 B net_if	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/LwIPEntry.c:6
+3002aba8 B daemon_id	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:4
+3002abac B period_delay_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/period_thrd.c:10
+3002abb8 B tcp_input_pcb	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp_in.c:73
+3002abbc B head_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:6
+3002abc0 B acoral_res_release_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:2
+3002abcc B acoral_pools	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/resource.c:8
+3002b3ec B acoral_msg_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:13
+3002b424 B tcp_bound_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:64
+3002b428 B hw_dm9k_ops	/home/spg/Documents/aCoral/aCoral-mini2440/driver/s3c2440/src/dm9000.c:24
+3002b43c B idle_id	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:4
+3002b440 B policy_list	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/policy.c:7
+3002b44c B acoral_mem_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/buddy.c:30
+3002b450 B rm_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/rm_thrd.c:131
+3002b46c B init_id	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/core.c:4
+3002b470 B time_delay_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/timer.c:17
+3002b47c B acoral_evt_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/event.c:3
+3002b4b4 B acoral_msgctr_pool_ctrl	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/message.c:12
+3002b4ec B timeoutslist	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:21
+3002b4f0 B timeout_queue	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/timer.c:22
+3002b4fc B ready_thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:9
+3002b500 B tcp_tw_pcbs	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/tcp.c:71
+3002b504 B timeoutnodes	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/arch/sys_arch.c:18
+3002b550 B lwip_stats	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/stats.c:49
+3002b684 B intr_nesting	/home/spg/Documents/aCoral/aCoral-mini2440/hal/src/hal_comm.c:6
+3002b688 B netif_default	/home/spg/Documents/aCoral/aCoral-mini2440/plugin/net/core/netif.c:62
+3002b68c B running_thread	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:9
+3002b690 B need_sched	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/sched.c:7
+3002b694 B period_policy	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/period_thrd.c:123
+3002b6b0 B sample	/home/spg/Documents/aCoral/aCoral-mini2440/kernel/src/softdelay.c:8
+3002b6b4 B tail_cmd	/home/spg/Documents/aCoral/aCoral-mini2440/user/src/shell.c:6
+3002b6b8 A bss_end
+3002b6b8 A heap_start
 33eff000 A heap_end
 33f00000 A MMU_base
 33fff900 A SYS_stack
