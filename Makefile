@@ -26,7 +26,7 @@ ifeq (.config,$(wildcard .config))
 include .config
 -include ./hal/cfg.mk
 include ./plugin/cfg.mk
-include ./bsp/cfg.mk
+
 else
 do-it-all:	menuconfig
 endif
