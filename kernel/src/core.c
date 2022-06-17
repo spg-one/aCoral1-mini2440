@@ -30,23 +30,17 @@ void daem(void *args){
 			HAL_ENTER_CRITICAL();
 			thread=list_entry(tmp,acoral_thread_t,waiting);
 			/*如果线程资源已经不在使用，即release状态则释放*/
-			acoral_spin_lock(&head->lock);/**/
-			acoral_spin_lock(&tmp->lock);/**/
+	
 			acoral_list_del(tmp);/**/
-			acoral_spin_unlock(&tmp->lock);/**/
-			acoral_spin_unlock(&head->lock);/**/
+
 			HAL_EXIT_CRITICAL();
 			tmp=tmp1;	
 			if(thread->state==ACORAL_THREAD_STATE_RELEASE){
 				acoral_release_thread((acoral_res_t *)thread);
 			}else{
 				HAL_ENTER_CRITICAL();
-				acoral_spin_lock(&head->lock);/**/
 				tmp1=head->prev;
-				acoral_spin_lock(&tmp1->lock);/**/
 				acoral_list_add2_tail(&thread->waiting,head);/**/
-				acoral_spin_unlock(&tmp1->lock);/**/
-				acoral_spin_unlock(&head->lock);/**/
 				HAL_EXIT_CRITICAL();
 			}
 		}
@@ -81,7 +75,6 @@ void init(void *args){
 #endif
 	/*创建后台服务进程*/
   	acoral_init_list(&acoral_res_release_queue.head);
-  	acoral_spin_init(&acoral_res_release_queue.head.lock);
 	data.cpu=acoral_current_cpu;
 	data.prio=ACORAL_DAEMON_PRIO;
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
