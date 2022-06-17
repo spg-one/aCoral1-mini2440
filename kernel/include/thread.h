@@ -47,9 +47,7 @@
 #define acoral_init_stack() HAL_INIT_STACK()
 typedef struct{
   	acoral_res_t res;
-#ifdef CFG_CMP
-  	acoral_spinlock_t move_lock;
-#endif
+
 	acoral_u8 state;
 	acoral_u8 prio;
 	acoral_8 cpu;

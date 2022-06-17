@@ -23,10 +23,8 @@
 #include "mbox.h"
 #include "policy.h"
 #include "comm_thrd.h"
-#include "slice_thrd.h"
 #include "period_thrd.h"
-#include "posix_thrd.h"
-#include "rm_thrd.h"
+
 
 #include "atomic.h"
 #include "spinlock.h"

@@ -3,21 +3,14 @@
 #include <autocfg.h>
 #include <type.h>
 typedef struct {volatile acoral_32 lock;}acoral_spinlock_t;
-#ifdef CFG_CMP
-#define acoral_spin_init(v) HAL_SPIN_INIT(v)
-#define acoral_spin_init_lock(v) HAL_SPIN_INIT_LOCK(v)
-#define acoral_spin_is_locked(v) HAL_SPIN_IS_LOCKED(v)
-#define acoral_spin_try_lock(v) HAL_SPIN_TRY_LOCK(v)
-#define acoral_spin_lock(v) HAL_SPIN_LOCK(v)
-#define acoral_spin_unlock(v) HAL_SPIN_UNLOCK(v)
-#else
+
 #define acoral_spin_init(v)
 #define acoral_spin_init_lock(v)
 #define acoral_spin_is_locked(v) 
 #define acoral_spin_try_lock(v) 
 #define acoral_spin_lock(v)
 #define acoral_spin_unlock(v)
-#endif
+
 
 #define acoral_spin_lock_intr_save(v) (sr=spin_lock_intr_save(v))
 #define acoral_spin_unlock_intr_restore(v) spin_unlock_intr_restore(sr,v)

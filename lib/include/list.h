@@ -7,9 +7,6 @@
 #define acoral_list_init(list) acoral_init_list(list)
 struct acoral_list {
 	struct acoral_list *next, *prev;
-#ifdef CFG_CMP
-	acoral_spinlock_t lock;/*spin_lock相关操作在uncmp模式下是空，所以这个也可以是空*/
-#endif
 };
 typedef struct acoral_list acoral_list_t;
 #define acoral_init_list(ptr) do { \
