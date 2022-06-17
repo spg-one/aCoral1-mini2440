@@ -10,7 +10,7 @@ extern volatile acoral_u32 idle_count[HAL_MAX_CPU];
 void idle(void *args){
 	while(1){
 #ifdef CFG_STAT
-		idle_count[acoral_current_cpu]++;
+		idle_count[acoral_current_cpu]++;	//TODO这是什么
 #endif
 	}
 }
@@ -108,17 +108,6 @@ acoral_thread_t orig_thread;
  *       c语言初始化入口函数
  *================================*/
 void acoral_start(){
-	
-#ifdef CFG_CMP
-      	static int core_cpu=1;
-	if(!core_cpu){
-		acoral_set_orig_thread(&orig_thread);
-		/*其他次cpu core的开始函数,不会返回的*/
-		acoral_follow_cpu_start();
-	}
-	core_cpu=0;
-	HAL_CORE_CPU_INIT();
-#endif
 	orig_thread.console_id=ACORAL_DEV_ERR_ID;
 	acoral_set_orig_thread(&orig_thread);
 	/*板子初始化*/

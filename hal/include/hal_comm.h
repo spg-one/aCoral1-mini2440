@@ -29,18 +29,6 @@ typedef acoral_u32 acoral_sr;
 #define HAL_ATOMIC_SUB(i,v) hal_atomic_sub_comm(i,v)
 #define HAL_TRANSLATE_VECTOR(_vector_,_index_) \
 	(_index_)=((_vector_)-HAL_INTR_MIN)
-	
-#ifndef CFG_CMP
-
-#define HAL_IPI_SEND(cpu,vector)
-#define HAL_CPU_IS_ACTIVE(cpu) 1
-#define HAL_PREPARE_CPUS()
-#define HAL_START_CPU(cpu)
-#define HAL_CMP_ACK() 
-#define HAL_WAIT_ACK()
-#define HAL_CORE_CPU_INIT()
-#define HAL_FOLLOW_CPU_INIT()
-#endif
 
 #ifndef CFG_PM
 #define HAL_SUSP_PREPARE()
