@@ -1,2 +1,2 @@
 # aCoral-mini2440
-SPG的毕业设计
+aCoral单核版本

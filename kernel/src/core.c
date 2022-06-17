@@ -1,3 +1,14 @@
+/**
+ * @file core.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-06-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include <acoral.h>
 acoral_queue_t acoral_res_release_queue;
 volatile acoral_u32 acoral_start_sched = false;
