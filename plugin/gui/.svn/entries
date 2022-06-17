@@ -1,126 +1,0 @@
-10
-
-dir
-456
-svn://192.168.1.88/acoral/acoral_new/plugin/gui
-svn://192.168.1.88/acoral
-
-
-
-2011-01-09T11:09:20.838378Z
-451
-sjj0412
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-769487b0-007a-4922-8eb5-cdd474f4688a
-
-control
-dir
-
-gal
-dir
-
-gdi
-dir
-
-include
-dir
-
-cfg.in
-file
-
-
-
-
-2011-01-10T07:30:18.000000Z
-4df3052857d2cf419edb14e90bd208c8
-2011-01-02T15:27:52.857965Z
-424
-sjj0412
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-192
-
-ial
-dir
-
-lib
-dir
-
-src
-dir
-
-lguicore
-dir
-
-ime
-dir
-
-Makefile
-file
-
-
-
-
-2011-01-10T07:30:18.000000Z
-f9c5651fc01cfc8c70f85b5595f5afb9
-2011-01-03T04:50:06.137696Z
-430
-sjj0412
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-235
-
-hdc
-dir
-

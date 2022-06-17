@@ -1,0 +1,10 @@
+acoral.bin
+acoral.elf
+acoral.d
+acoral.t
+acoral.x
+acoral.api
+acoral.map
+acoral.o
+*.o
+*.flags
