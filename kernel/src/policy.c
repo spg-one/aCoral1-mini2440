@@ -79,28 +79,10 @@ void acoral_policy_thread_release(acoral_thread_t *thread){
 void acoral_sched_policy_init(){
 	acoral_list_init(&policy_list.head);
 	comm_policy_init();
-#ifdef CFG_THRD_SLICE
-	slice_policy_init();
-#endif
+
 #ifdef CFG_THRD_PERIOD
 	period_policy_init();
 #endif
-#ifdef CFG_THRD_RM
-	rm_policy_init();
-#endif
-#ifdef CFG_THRD_POSIX
-	posix_policy_init();
-#endif
 }
 
-void app_enter_policy_init(){
-#ifdef CFG_THRD_RM
-	rm_init();
-#endif
-}
 
-void app_exit_policy_init(){
-#ifdef CFG_THRD_RM
-	rm_end();
-#endif
-}

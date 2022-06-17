@@ -1,6 +1,5 @@
 #include"acoral.h"
 #include"../include/test.h"
-acoral_spinlock_t lock;
 ACORAL_COMM_THREAD spintest(){
   	acoral_sr sr;
 	acoral_spin_lock_stamp(&lock);

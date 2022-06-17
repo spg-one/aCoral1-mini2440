@@ -3,6 +3,9 @@
         "int.h": "c",
         "resource.h": "c",
         "*.tcc": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "acoral.h": "c",
+        "autocfg.h": "c",
+        "kernel.h": "c"
     }
 }

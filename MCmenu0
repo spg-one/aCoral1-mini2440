@@ -1,0 +1,3 @@
+function MCmenu0 () {
+default=$1
+menu_name 'Main Menu'

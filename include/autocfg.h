@@ -7,15 +7,6 @@
  * hal Configuration
  */
 #define CFG_ARM_S3C2440 1
-#undef  CFG_ARM_S3C2410
-#undef  CFG_ARM_S3C44B0
-#undef  CFG_ARM_LPC2131
-#undef  CFG_ARM_LPC2200
-#undef  CFG_ARM_PB11MPCORE
-#undef  CFG_ARM_STM3210
-#undef  CFG_X86_EMU_SINGLE
-#undef  CFG_X86_EMU_CMP
-#undef  CFG_BRD_TEMPLATE
 
 /*
  * kernel configuration
@@ -24,11 +15,8 @@
 #undef  CFG_MEM_SLATE
 #define CFG_MEM2 1
 #define CFG_MEM2_SIZE (1024000)
-#define CFG_THRD_SLICE 1
 #define CFG_THRD_PERIOD 1
-#define CFG_THRD_RM 1
 #define CFG_HARD_RT_PRIO_NUM (0)
-#define CFG_THRD_POSIX 1
 #define CFG_POSIX_STAIR_NUM (30)
 #define CFG_MAX_THREAD (40)
 #define CFG_MIN_STACK_SIZE (1024)

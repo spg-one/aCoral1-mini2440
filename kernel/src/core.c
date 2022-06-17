@@ -94,12 +94,10 @@ void init(void *args){
 	acoral_shell_init();
 #endif
 	plugin_init();
-	app_enter_policy_init();
 	user_main();
 #ifdef CFG_TEST
 	test_init();
 #endif
-	app_exit_policy_init();
 }
 
 acoral_thread_t orig_thread;

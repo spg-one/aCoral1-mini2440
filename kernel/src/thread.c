@@ -7,9 +7,6 @@
 #include <error.h>
 #include <timer.h>
 #include <mem.h>
-#ifdef CFG_CMP
-#include <ipi.h>
-#endif
 #include <print.h>
 #include <thread.h>
 extern acoral_queue_t acoral_res_release_queue;
@@ -72,14 +69,7 @@ void acoral_suspend_thread(acoral_thread_t *thread){
 	acoral_8 cpu;
 	if(!(ACORAL_THREAD_STATE_READY&thread->state))
 		return;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-        /*suspend	*/
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_SUSPEND,thread->res.id,NULL);
-		return;
-	}
-#endif
+
 	HAL_ENTER_CRITICAL();
 	/**/
 	acoral_rdyqueue_del(thread);
@@ -128,14 +118,7 @@ void acoral_resume_thread(acoral_thread_t *thread){
 	acoral_8 cpu;
 	if(!(thread->state&ACORAL_THREAD_STATE_SUSPEND))
 		return;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-        /*resumed	*/
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_RESUME,thread->res.id,NULL);
-		return;
-	}
-#endif
+
 	HAL_ENTER_CRITICAL();
 	/**/
 	acoral_rdyqueue_add(thread);
@@ -156,11 +139,7 @@ static void acoral_delay_thread(acoral_thread_t* thread,acoral_time time){
 	if(!acoral_list_empty(&thread->waiting)){
 		return;	
 	}
-#ifdef CFG_CMP
-	if(thread->cpu!=acoral_current_cpu){
-		return;
-	}
-#endif
+
 	/*timeticks*/
 	/*real_ticks=time*ACORAL_TICKS_PER_SEC/1000;*/
 	real_ticks = TIME_TO_TICKS(time);
@@ -199,14 +178,6 @@ void acoral_kill_thread(acoral_thread_t *thread){
 	acoral_sr cpu_sr;
 	acoral_8 cpu;
 	acoral_evt_t *evt;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-        /*kill	*/
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_KILL,thread->res.id,NULL);
-		return;
-	}
-#endif
 	HAL_ENTER_CRITICAL();
         /*	*/
         /*	*/
@@ -261,13 +232,6 @@ void acoral_thread_exit(){
 void acoral_thread_change_prio(acoral_thread_t* thread, acoral_u32 prio){
 	acoral_sr cpu_sr;
 	acoral_8 cpu;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_CHG_PRIO,thread->res.id,(void *)prio);
-		return;
-	}
-#endif
 	HAL_ENTER_CRITICAL();
 	if(thread->state&ACORAL_THREAD_STATE_READY){
 		acoral_rdyqueue_del(thread);
@@ -305,15 +269,7 @@ void acoral_rdy_thread(acoral_thread_t *thread){
 	acoral_8 cpu;
 	if(!(ACORAL_THREAD_STATE_SUSPEND&thread->state))
 		return;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-        /*resume	*/
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_RESUME,thread->res.id,NULL);
-		return;
-	}
-#endif
-	/**/
+
 	acoral_rdyqueue_add(thread);
 }
 
@@ -328,29 +284,14 @@ void acoral_unrdy_thread(acoral_thread_t *thread){
 	acoral_8 cpu;
 	if(!(ACORAL_THREAD_STATE_READY&thread->state))
 		return;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-        /*suspend	*/
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_SUSPEND,thread->res.id,NULL);
-		return;
-	}
-#endif
-	/**/
+
 	acoral_rdyqueue_del(thread);
 }
 
 void acoral_thread_move2_tail(acoral_thread_t *thread){
 	acoral_8 cpu;
 	acoral_sr cpu_sr;
-#ifdef CFG_CMP
-	cpu=thread->cpu;
-        /*suspend	*/
-	if(cpu!=acoral_current_cpu){
-	  	acoral_ipi_cmd_send(cpu,ACORAL_IPI_THREAD_MOVE2_TAIL,thread->res.id,NULL);
-		return;
-	}
-#endif
+
 	HAL_ENTER_CRITICAL();
 	acoral_unrdy_thread(thread);
 	acoral_rdy_thread(thread);

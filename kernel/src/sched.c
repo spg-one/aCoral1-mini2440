@@ -153,14 +153,6 @@ void acoral_real_sched(){
   		  HAL_SWITCH_TO(&next->stack);
 		  return;
 	    }
-#ifdef CFG_CMP
-	    if(prev->state&ACORAL_THREAD_STATE_MOVE){
-		  /*这个函数开lock后不能使用prev的堆栈*/
-		  prev->state&=~ACORAL_THREAD_STATE_MOVE;
-  		  HAL_MOVE_SWITCH_TO(&prev->move_lock,0,&next->stack);
-		  return;
-	    }
-#endif
 	    /*线程切换*/
 	    HAL_CONTEXT_SWITCH(&prev->stack,&next->stack);
 	}
@@ -186,14 +178,6 @@ void acoral_real_intr_sched(){
   		  HAL_INTR_SWITCH_TO(&next->stack);
 		  return;
 	    }
-#ifdef CFG_CMP
-	    if(prev->state&ACORAL_THREAD_STATE_MOVE){
-		  /*这个函数开lock后不能使用prev的堆栈*/
-		  prev->state&=~ACORAL_THREAD_STATE_MOVE;
-  		  HAL_MOVE_SWITCH_TO(&prev->move_lock,0,&next->stack);
-		  return;
-	    }
-#endif
 	    /*线程切换*/
 	    HAL_INTR_CTX_SWITCH(&prev->stack,&next->stack);
 	}
