@@ -133,11 +133,6 @@ void acoral_start(){
 	acoral_prints("hello spg");
 #endif
 
-#ifdef CFG_CMP
-	/*cmp初始化*/
-    	acoral_cmp_init();
-#endif
-
 	/*主cpu开始函数*/
 	acoral_core_cpu_start();
 }

@@ -6,5 +6,7 @@ acoral.x
 acoral.api
 acoral.map
 acoral.o
+hal.api
 *.o
 *.flags
+.log

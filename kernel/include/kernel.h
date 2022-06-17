@@ -27,8 +27,6 @@
 #include "period_thrd.h"
 #include "posix_thrd.h"
 #include "rm_thrd.h"
-#include "ipi.h"
-#include "cmp.h"
 
 #include "atomic.h"
 #include "spinlock.h"

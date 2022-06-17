@@ -31,7 +31,7 @@ typedef acoral_u32 acoral_sr;
 	(_index_)=((_vector_)-HAL_INTR_MIN)
 	
 #ifndef CFG_CMP
-#define HAL_CMD_IPI 0
+
 #define HAL_IPI_SEND(cpu,vector)
 #define HAL_CPU_IS_ACTIVE(cpu) 1
 #define HAL_PREPARE_CPUS()
