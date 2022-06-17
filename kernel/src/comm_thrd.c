@@ -9,16 +9,18 @@
 #include<comm_thrd.h>
 acoral_sched_policy_t comm_policy;
 
-/*================================
- * func: create thread in acoral
- *	 普通线程的创建
- * in:   (*route)   执行线程的函数名
- *       stack_size 线程的堆栈空间
- *       args       传进线程的参数
- *       name       创建线程的名字
- *       prio       创建线程的优先级
- *       cpu        绑定进程到指定cpu运行,-1为由系统指定
- *================================*/
+/**
+ * @brief create thread in acoral
+ * 
+ * @param route 执行线程的函数名
+ * @param stack_size 线程的堆栈空间
+ * @param args 传进线程的参数
+ * @param name 创建线程的名字
+ * @param prio 创建线程的优先级
+ * @param cpu 绑定进程到指定cpu运行，-1为由系统指定
+ * @return acoral_id 
+ */
+
 acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,acoral_u8 prio,acoral_8 cpu){
 	acoral_comm_policy_data_t policy_ctrl;
 	acoral_thread_t *thread;
