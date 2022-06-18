@@ -18,11 +18,3 @@ void hal_ticks_init(){
    	rTCON = rTCON & (~0xf) |0x02;              	/* updata*/
 	rTCON = rTCON & (~0xf) |0x09; 			/* star*/
 }
-
-acoral_u32 hal_ticks_delay(){ //TODO删了
-	acoral_u32 initial;
-	acoral_u32 current;
-	initial=rTCNTB0;
-	current=rTCNTO0;
-	return (initial-current);
-}

@@ -51,9 +51,7 @@ void acoral_ticks_init(){
 }
 
 void acoral_ticks_entry(acoral_vector vector){
-#ifdef CFG_HOOK_TICKS
-	acoral_ticks_hook();
-#endif
+
         ticks++;
 	acoral_printdbg("In ticks isr\n");
 	if(acoral_start_sched==true){
