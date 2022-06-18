@@ -31,10 +31,4 @@ typedef acoral_u32 acoral_sr;
 #define HAL_TRANSLATE_VECTOR(_vector_,_index_) \
 	(_index_)=((_vector_)-HAL_INTR_MIN)
 
-#ifndef CFG_PM
-#define HAL_SUSP_PREPARE()
-#define HAL_SUSP_ENTER()
-#define HAL_SUSP_FINISH()
-#endif
-
 #endif

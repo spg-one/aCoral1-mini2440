@@ -10,5 +10,4 @@ obj-$(CFG_MSG)+=message.o
 obj-$(CFG_THRD_PERIOD)+=period_thrd.o
 obj-$(CFG_STAT)+=stat.o
 obj-$(CFG_SOFT_DELAY)+=softdelay.o
-obj-$(CFG_PM)+=pm.o
 include $(TOPDIR)/rule.mk

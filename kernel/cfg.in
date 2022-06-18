@@ -32,8 +32,6 @@ comment 'Thread Management'
 int "Max Thread Number(5~)" CFG_MAX_THREAD 40
 int "Mini Thread Stack(Byte)" CFG_MIN_STACK_SIZE 512
 
-comment 'Power Mangement'
-bool 'Support power management' CFG_PM
 
 comment 'Event Mangement'
       bool 'Support MailBox Event' CFG_EVT_MBOX

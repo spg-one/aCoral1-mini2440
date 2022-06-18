@@ -25,10 +25,4 @@ extern acoral_u32 heap_end[];
 #define	HAL_TICKS_INIT() hal_ticks_init()
 #define HAL_BOARD_INIT()
 
-//功耗相关的硬件抽象接口，这个在单核下不用实现
-#ifdef CFG_PM
-#define HAL_SUSP_PREPARE() hal_susp_prepare()
-#define HAL_SUSP_ENTER() hal_susp_enter()
-#define HAL_SUSP_FINISH() hal_susp_finish()
-#endif
 #endif

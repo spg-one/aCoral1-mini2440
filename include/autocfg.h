@@ -20,7 +20,6 @@
 #define CFG_POSIX_STAIR_NUM (30)
 #define CFG_MAX_THREAD (40)
 #define CFG_MIN_STACK_SIZE (1024)
-#undef  CFG_PM
 #define CFG_EVT_MBOX 1
 #define CFG_EVT_SEM 1
 #define CFG_MSG 1

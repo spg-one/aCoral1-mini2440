@@ -91,14 +91,6 @@ ResetHandler:
 	str	r2, [r1, #oMPLLCON]
 
 	bl	memsetup
-
-#ifdef CFG_PM
-	@ Check if this is a wake-up from sleep
-	ldr	r1, PMST_ADDR
-	ldr r0, [r1]  
-	tst r0, #PMST_SMR  
-	bne WakeupStart 
-#endif
 		
 	bl      InitStacks
 
@@ -112,29 +104,6 @@ ResetHandler:
 	bl    mem_clear
 	ldr    pc,=acoral_start	
 	b 	.
-
-#ifdef CFG_PM
-WakeupStart:
-	@ Clear sleep reset bit
-	ldr	r0, PMST_ADDR
-	mov	r1, #PMST_SMR
-	str	r1, [r0]
-
-	@ Release the SDRAM signal protections
-	ldr	r0, PMCTL1_ADDR
-	ldr	r1, [r0]
-	bic	r1, r1, #(SCLKE | SCLK1 | SCLK0)
-	str	r1, [r0]
-
-	@ Go...
-	ldr	r0, PMSR0_ADDR	@ read a return address
-	ldr	r1, [r0]
-	mov	pc, r1
-	nop
-	nop
-1:	b	1b		@ infinite loop
-
-#endif
  
 copy_self:
 
@@ -292,20 +261,6 @@ mem_clear:
 	cmp r0,r1
 	blt 1b
 	mov pc,lr
-
-#ifdef CFG_PM
-.align 4
-PMCTL0_ADDR:
-	.long 0x4c00000c
-PMCTL1_ADDR:
-	.long 0x56000080
-PMST_ADDR:
-	.long 0x560000B4
-PMSR0_ADDR:
-	.long 0x560000B8
-REFR_ADDR:
-	.long 0x48000024
-#endif
 
 @***************************************************************
 @ Data Area

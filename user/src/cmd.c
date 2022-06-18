@@ -62,15 +62,7 @@ acoral_shell_cmd_t spg_cmd={
 	NULL
 };
 
-#ifdef CFG_PM
-void acoral_suspend();
-acoral_shell_cmd_t suspend_cmd={
-	"suspend",
-	acoral_suspend,
-	"suspend system",
-	NULL
-};
-#endif
+
 
 extern acoral_shell_cmd_t dt_cmd;
 extern fs_cmd_init();
@@ -79,9 +71,6 @@ void cmd_init(){
 	//add_command(&mem2_cmd);
 	add_command(&dt_cmd);
 	add_command(&spg_cmd);
-#ifdef CFG_PM
-	add_command(&suspend_cmd);
-#endif
 	add_command(&exit_cmd);
 	add_command(&help_cmd);
 #ifdef CFG_SHELL_FS_CMD
