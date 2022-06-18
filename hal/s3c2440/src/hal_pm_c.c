@@ -1,4 +1,4 @@
-#include<acoral.h>
+#include<acoral.h> //TODO pm删了
 #include"hal_2440_cfg.h"
 #include"hal_2440_c.h"
 acoral_u32 *regs_save_ptr;

@@ -6,7 +6,7 @@
  * on us. We need to use _exactly_ the address the user gave us,
  * not some alias that contains the same information.
  */
-typedef struct { volatile acoral_32 val; } acoral_atomic_t;
+typedef struct { volatile acoral_32 val; } acoral_atomic_t; //TODO 下面可删
 #define acoral_atomic_init(v) 
 #define acoral_atomic_read(v)  HAL_ATOMIC_READ(v)
 #define acoral_atomic_inc(v)   HAL_ATOMIC_INC(v)

@@ -1,7 +1,7 @@
 #include<acoral.h>
 #include<hal_2440_cfg.h>
 #include<hal_2440_c.h>
-void hal_all_entry(acoral_vector vector){
+void hal_all_entry(acoral_vector vector){//TODO 加个#define acoral_hal_all_entry hal_all_entry 前者放到kernel里面去
     unsigned long eint;
     unsigned long irq=4;
     if(vector==4||vector==5){
@@ -83,7 +83,7 @@ void hal_intr_init(){
     rEINTMSK= 0xffffffff;      /*屏蔽所有外部中断*/
     rINTMSK = 0xffffffff;       /*屏蔽所有中断*/
 
-	for(i=HAL_INTR_MIN;i<=HAL_INTR_MAX;i++){
+	for(i=HAL_INTR_MIN;i<=HAL_INTR_MAX;i++){ //TODO 拿到kernel去
 		acoral_set_intr_enter(i,hal_intr_ack);
 		acoral_set_intr_exit(i,NULL);
 		acoral_set_intr_mask(i,hal_intr_mask);

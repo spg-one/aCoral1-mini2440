@@ -7,6 +7,8 @@
         "acoral.h": "c",
         "autocfg.h": "c",
         "kernel.h": "c",
-        "hal.h": "c"
+        "hal.h": "c",
+        "hal_2440_c.h": "c",
+        "hal_port.h": "c"
     }
 }
