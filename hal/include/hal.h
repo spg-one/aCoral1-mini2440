@@ -11,6 +11,5 @@
 #include "hal_comm.h"
 /*这个是用户真正要移植的部分的头文件*/
 #include "hal_port.h"
-#include "hal_undef.h"
 #include "hal_int.h"
 #endif /* HAL_H_ */
