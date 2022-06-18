@@ -3,7 +3,7 @@
 #include<type.h>
 typedef acoral_u32 acoral_sr;
 #define HAL_MAX_CPU CFG_MAX_CPU
-/// TODO加///
+/// TODO 加///
 #define HAL_REG(base,offset) (*(volatile acoral_u32 *)((base) + (offset)))
 
 /****************************                                                                                                                 

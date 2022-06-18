@@ -9,6 +9,9 @@
         "kernel.h": "c",
         "hal.h": "c",
         "hal_2440_c.h": "c",
-        "hal_port.h": "c"
+        "hal_port.h": "c",
+        "type.h": "c",
+        "hal_2440_cfg.h": "c",
+        "hal_int.h": "c"
     }
 }

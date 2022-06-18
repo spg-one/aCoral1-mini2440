@@ -20,7 +20,7 @@ void hal_all_entry(acoral_vector vector){//TODO 加个#define acoral_hal_all_ent
     acoral_intr_entry(vector);
 }
 
-static void hal_intr_unmask(acoral_vector vector){
+void hal_intr_unmask(acoral_vector vector){
           if((vector>3) && (vector<8)){
                rEINTMSK &=~(1<<vector);
                vector = 4;
@@ -35,7 +35,7 @@ static void hal_intr_unmask(acoral_vector vector){
          rINTMSK &=~(1<<vector);			/*开启中断*/
 }
 
-static void hal_intr_mask(acoral_vector vector){
+void hal_intr_mask(acoral_vector vector){
 
          if((vector>3) && (vector<8)){
                rEINTMSK |=(1<<vector);
@@ -51,7 +51,7 @@ static void hal_intr_mask(acoral_vector vector){
          rINTMSK |= (1<<vector);
 }
 
-static void hal_intr_ack(acoral_u32 vector){
+void hal_intr_ack(acoral_u32 vector){
 
         if((vector>3) && (vector<8)){
                rEINTPND &= ~(1<<vector);
@@ -83,12 +83,6 @@ void hal_intr_init(){
     rEINTMSK= 0xffffffff;      /*屏蔽所有外部中断*/
     rINTMSK = 0xffffffff;       /*屏蔽所有中断*/
 
-	for(i=HAL_INTR_MIN;i<=HAL_INTR_MAX;i++){ //TODO 拿到kernel去
-		acoral_set_intr_enter(i,hal_intr_ack);
-		acoral_set_intr_exit(i,NULL);
-		acoral_set_intr_mask(i,hal_intr_mask);
-		acoral_set_intr_unmask(i,hal_intr_unmask);
-	}
 }
 
 

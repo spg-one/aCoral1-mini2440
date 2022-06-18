@@ -57,7 +57,7 @@ export TOPDIR CROSS_COMPILE AS LD CC ARCH BOARD HOSTCC\
 #
 
 CPPFLAGS =$(ACORAL_INCLUDE_DIR) $(PLUGIN_CPPFLAGS) $(BSP_CPPFLAGS)
-CFLAGS = $(CPPFLAGS) -Wall -Wstrict-prototypes -g -fomit-frame-pointer
+CFLAGS = $(CPPFLAGS) -W -Wstrict-prototypes -g -fomit-frame-pointer
 AFLAGS = $(CPPFLAGS)
 export CPPFLAGS CFLAGS AFLAGS
 
