@@ -10,7 +10,7 @@ extern acoral_u32 heap_end[];
 #define HAL_HEAP_END heap_end
 #define HAL_MEM_INIT() hal_mem_init()
 
-//线程相关的硬件抽象接口 //TODO 全大写为了和汇编接口统一
+//线程相关的硬件抽象接口 //TODO 全大写为了和汇编接口统一 头文件里面注释///
 #define HAL_STACK_INIT(stack,route,exit,args) hal_stack_init(stack,route,exit,args)
 
 
