@@ -23,7 +23,7 @@ typedef acoral_32    s32_t;
 typedef acoral_u32   mem_ptr_t;
 
 /* 结构体 */
-//#ifdef __GNU_C__ 
+
 
 #define PACK_STRUCT_FIELD(x)  x 
 #define PACK_STRUCT_STRUCT  __attribute__((__packed__))

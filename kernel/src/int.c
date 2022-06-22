@@ -114,7 +114,7 @@ void acoral_intr_mask(acoral_vector vector){
 void acoral_intr_entry(acoral_vector vector){
 	acoral_vector index;
 #ifdef CFG_DEBUG
-  	acoral_print("isr in cpu:%d\n",acoral_current_cpu);
+  	//acoral_print("isr in cpu:%d\n",acoral_current_cpu);
 #endif
    	HAL_TRANSLATE_VECTOR(vector,index);
 	acoral_intr_nesting_inc();

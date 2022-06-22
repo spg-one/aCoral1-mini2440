@@ -1,4 +1,4 @@
 O_TARGET := src.o
-obj-y =dummy.o 
-obj-$(CFG_DRIVER)=driver.o
+obj-y :=driver_init.o brd_driver.o con_uart.o dm9000.o
+
 include $(TOPDIR)/rule.mk

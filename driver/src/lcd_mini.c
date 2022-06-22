@@ -70,7 +70,8 @@ void Lcd_Init(void)
     rLCDCON1 = (LCD_PIXCLOCK << 8) | (3 <<  5) | (12 << 1);
     rLCDCON2 = (LCD_UPPER_MARGIN << 24) | ((LCD_HEIGHT - 1) << 14) | (LCD_LOWER_MARGIN << 6) | (LCD_VSYNC_LEN << 0);
     rLCDCON3 = (LCD_RIGHT_MARGIN << 19) | ((LCD_WIDTH  - 1) <<  8) | (LCD_LEFT_MARGIN << 0);
-    rLCDCON4 = (13 <<  8) | (LCD_HSYNC_LEN << 0);
+    rLCDCON4 = (13 <<  8) | (LCD_HSYNC_LEN << 0);
+
     rLCDCON5   =  ((1<<11) | (1 << 9) | (1 << 8) | (1 << 3) | (1 << 0));
 
     rLCDSADDR1=(((acoral_u32)LCD_BUFFER>>22)<<21)|M5D((acoral_u32)LCD_BUFFER>>1);

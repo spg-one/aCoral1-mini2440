@@ -53,7 +53,7 @@ void acoral_ticks_init(){
 void acoral_ticks_entry(acoral_vector vector){
 
         ticks++;
-	acoral_printdbg("In ticks isr\n");
+	//acoral_printdbg("In ticks isr\n");
 	if(acoral_start_sched==true){
 		time_delay_deal();
 		acoral_policy_delay_deal();

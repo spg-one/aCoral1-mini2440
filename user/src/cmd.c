@@ -73,8 +73,4 @@ void cmd_init(){
 	add_command(&spg_cmd);
 	add_command(&exit_cmd);
 	add_command(&help_cmd);
-#ifdef CFG_SHELL_FS_CMD
-	fs_cmd_init();
-#endif
-
 }

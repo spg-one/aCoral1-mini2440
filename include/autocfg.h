@@ -4,20 +4,12 @@
 #define AUTOCONF_INCLUDED
 
 /*
- * hal Configuration
- */
-#define CFG_ARM_S3C2440 1
-
-/*
  * kernel configuration
  */
-#define CFG_MEM_BUDDY 1
-#undef  CFG_MEM_SLATE
 #define CFG_MEM2 1
 #define CFG_MEM2_SIZE (1024000)
 #define CFG_THRD_PERIOD 1
 #define CFG_HARD_RT_PRIO_NUM (0)
-#define CFG_POSIX_STAIR_NUM (30)
 #define CFG_MAX_THREAD (40)
 #define CFG_MIN_STACK_SIZE (1024)
 #define CFG_EVT_MBOX 1
@@ -25,54 +17,32 @@
 #define CFG_MSG 1
 #define CFG_SOFT_DELAY 1
 #define CFG_TICKS_PER_SEC (100)
-#undef  CFG_HOOK
 
 /*
  * Driver configuration
  */
 #define CFG_DRIVER 1
-#define CFG_DRV_CONSOLE 1
 #define CFG_DRV_CON_UART 1
-#undef  CFG_DRV_CON_TELNET
-#undef  CFG_DRV_LCD
-#undef  CFG_DRV_TS
 #define CFG_DRV_NET_DM9000 1
-#undef  CFG_DRV_SDI
-
-/*
- * Bsp configuration
- */
 
 /*
  * Plugin configuration
  */
-#undef  CFG_PLUGIN_GUI
 #define CFG_PLUGIN_NET 1
-#undef  CFG_PLUGIN_FS
-
-/*
- * lib configuration
- */
-#define CFG_LIB_EXT 1
 
 /*
  * Test configuration
  */
-#undef  CFG_TEST
+#undef CFG_TEST
 
 /*
  * User configuration
  */
 #define CFG_SHELL 1
 #define CFG_UART_SHELL 1
-#undef  CFG_TELNET_SHELL
-#undef  CFG_WEB_SERVER
 
 /*
  * System hacking
  */
 #define CFG_BAUD_RATE (115200)
-#undef  CFG_OUT_SEMI
-#undef  CFG_DEBUG
-#undef  CFG_STAT
-#define __GNU_C__ 1
+#define CFG_DEBUG 1

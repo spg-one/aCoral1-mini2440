@@ -1,4 +1,4 @@
-O_TARGET := hal.o
-obj-y :=$(BOARD)/board.o src/src.o
-subdir-y=$(BOARD) src
+O_TARGET :=hal.o
+obj-y :=src/src.o
+subdir-y=src
 include $(TOPDIR)/rule.mk
