@@ -45,7 +45,7 @@ OBJCOPY         = $(CROSS_COMPILE)objcopy
 OBJDUMP         = $(CROSS_COMPILE)objdump
 HOSTCC     = gcc
 MAKEFILES= $(TOPDIR)/.config
-export TOPDIR CROSS_COMPILE AS LD CC ARCH BOARD HOSTCC\
+export TOPDIR CROSS_COMPILE AS LD CC HOSTCC\
 	CPP AR NM STRIP OBJCOPY OBJDUMP MAKE MAKEFILES
 
 #
@@ -53,7 +53,7 @@ export TOPDIR CROSS_COMPILE AS LD CC ARCH BOARD HOSTCC\
 #
 
 CPPFLAGS =$(ACORAL_INCLUDE_DIR) $(PLUGIN_CPPFLAGS) $(BSP_CPPFLAGS)
-CFLAGS = $(CPPFLAGS) -W -Wstrict-prototypes -g -fomit-frame-pointer
+CFLAGS = $(CPPFLAGS) -Wall -Wstrict-prototypes -g -fomit-frame-pointer
 AFLAGS = $(CPPFLAGS)
 export CPPFLAGS CFLAGS AFLAGS
 
@@ -78,7 +78,6 @@ subdir-$(CFG_TEST)+=test
 
 acoral:include/autocfg.h first_rule $(CORE_FILES)
 	@echo "###System Configure###"
-	@echo   ARCH=$(ARCH)
 	@echo "######################"
 	$(LD) -v  \
 		$(CORE_FILES) $(hal_EXT_FILES)\

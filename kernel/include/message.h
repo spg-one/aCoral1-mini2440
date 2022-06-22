@@ -80,11 +80,11 @@ typedef struct
 
 
 /*function define*/
-void             acoral_msgctr_sys_init();
-void             acoral_msg_sys_init();
+void             acoral_msgctr_sys_init(void);
+void             acoral_msg_sys_init(void);
 void             acoral_msgctr_list_queueadd(acoral_msgctr_t*);
-acoral_msgctr_t* acoral_alloc_msgctr();
-acoral_msg_t*    acoral_alloc_msg();
+acoral_msgctr_t* acoral_alloc_msgctr(void);
+acoral_msg_t*    acoral_alloc_msg(void);
 acoral_u32       acoral_msgctr_init(acoral_msgctr_t*);
 acoral_u32       acoral_msg_init(acoral_msg_t*, acoral_u32,
 		                         acoral_u32, acoral_u32, void*);
@@ -102,8 +102,8 @@ void             acoral_print_all_msg(acoral_msgctr_t*);
 void             acoral_print_waitThreadsNum(acoral_msgctr_t*);
 
 
-void acoral_msgctr_pool_init();
-void acoral_msg_pool_init();
+void acoral_msgctr_pool_init(void);
+void acoral_msg_pool_init(void);
 void wake_up_thread(acoral_list_t*);
 #endif
 

@@ -13,7 +13,7 @@
 #define MBOX_ERR_TIMEOUT         8
 
 acoral_u32    *acoral_mbox_init(acoral_evt_t*);
-acoral_evt_t  *acoral_mbox_create();
+acoral_evt_t  *acoral_mbox_create(void);
 acoral_u32    acoral_mbox_del(acoral_evt_t *);
 acoral_u32    acoral_mbox_send(acoral_evt_t*, void*);
 void*         acoral_mbox_recv(acoral_evt_t*, acoral_u32);

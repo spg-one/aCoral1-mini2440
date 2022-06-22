@@ -11,10 +11,10 @@ typedef struct{
 	acoral_prio_array_t array;
 }acoral_rdy_queue_t;
 
-void acoral_sched_init();
+void acoral_sched_init(void);
 #define acoral_sched_lock_state() (sched_lock[acoral_current_cpu])
 #define acoral_sched_lock() (sched_lock[acoral_current_cpu]=1)
-void acoral_sched_unlock();
+void acoral_sched_unlock(void);
 #define acoral_sched_state() (need_sched[acoral_current_cpu])
 #define acoral_set_sched_state(val) (need_sched[acoral_current_cpu]=(val))
 #define acoral_get_running_thread(cpu) (running_thread[(cpu)])
@@ -32,6 +32,6 @@ void acoral_thread_runqueue_init(void);
 void acoral_rdyqueue_add(acoral_thread_t *new);
 void acoral_rdyqueue_del(acoral_thread_t *old);
 acoral_u32 acoral_get_idlest_cpu(void);
-void acoral_sched();
-void acoral_select_thread();
+void acoral_sched(void);
+void acoral_select_thread(void);
 #endif

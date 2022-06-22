@@ -65,8 +65,8 @@ acoral_shell_cmd_t spg_cmd={
 
 
 extern acoral_shell_cmd_t dt_cmd;
-extern fs_cmd_init();
-void cmd_init(){
+extern fs_cmd_init(void);
+void cmd_init(void){
 	add_command(&mem_cmd);
 	//add_command(&mem2_cmd);
 	add_command(&dt_cmd);

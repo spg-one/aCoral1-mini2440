@@ -21,14 +21,14 @@ typedef struct{
 	acoral_u8 type;
 	acoral_id (*policy_thread_init)(acoral_thread_t *,void (*route)(void *args),void *,void *);
 	void (*policy_thread_release)(acoral_thread_t *);
-	void (*delay_deal)();
+	void (*delay_deal)(void);
 	acoral_char *name;
 }acoral_sched_policy_t;
 
 acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,void *stack,acoral_u32 sched_policy,void *data);
-void acoral_policy_delay_deal();
+void acoral_policy_delay_deal(void);
 void acoral_register_sched_policy(acoral_sched_policy_t *policy);
 acoral_sched_policy_t *acoral_get_policy_ctrl(acoral_u8 type);
 acoral_id acoral_policy_thread_init(acoral_u32 policy,acoral_thread_t *thread,void (*route)(void *args),void *args,void *data);
-void acoral_sched_policy_init();
+void acoral_sched_policy_init(void);
 #endif

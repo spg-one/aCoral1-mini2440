@@ -28,7 +28,7 @@ void acoral_set_ticks(acoral_time time);
 void time_delay_deal(void);
 void acoral_delayqueue_add(acoral_queue_t*, acoral_thread_t*);
 acoral_evt_t *acoral_alloc_evt(void);
-void timeout_delay_deal();
+void timeout_delay_deal(void);
 void timeout_queue_add(acoral_thread_t*);
 void timeout_queue_del(acoral_thread_t*);
 

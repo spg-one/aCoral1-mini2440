@@ -168,7 +168,7 @@ void get_cmd(acoral_char *cmd_buf){
 }
 
 #define SHELL_STACK_SIZE 1024
-void acoral_shell_init(){
+void acoral_shell_init(void){
 	acoral_comm_policy_data_t data;
 	head_cmd=NULL;
 	tail_cmd=NULL;

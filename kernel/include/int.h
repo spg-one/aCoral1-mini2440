@@ -26,6 +26,6 @@ void acoral_intr_entry(acoral_vector vector);
 void acoral_intr_unmask(acoral_vector vector);
 void acoral_intr_mask(acoral_vector vector);
 void acoral_default_isr(acoral_vector vector);
-void acoral_intr_exit();
+void acoral_intr_exit(void);
 extern acoral_intr_ctr_t intr_table[];
 #endif

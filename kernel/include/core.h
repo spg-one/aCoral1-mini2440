@@ -40,7 +40,7 @@ void acoral_init_call(void);
 void acoral_thread_sys_init(void);
 void acoral_start(void);
 void acoral_core_cpu_start(void);
-void acoral_start_os();
+void acoral_start_os(void);
 void acoral_sys_call(void);
 void acoral_app_call(void);
 #endif

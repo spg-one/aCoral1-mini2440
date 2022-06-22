@@ -20,9 +20,9 @@ typedef struct {
 	void                *data;
 }acoral_evt_t;
 
-void acoral_evt_sys_init();
-void acoral_evt_pool_init();
-acoral_evt_t *acoral_alloc_evt();
+void acoral_evt_sys_init(void);
+void acoral_evt_pool_init(void);
+acoral_evt_t *acoral_alloc_evt(void);
 void acoral_evt_init(acoral_evt_t *evt);
 bool acoral_evt_queue_empty(acoral_evt_t *evt);
 #endif
