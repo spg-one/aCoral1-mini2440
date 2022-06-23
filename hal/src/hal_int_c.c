@@ -1,3 +1,18 @@
+/**
+ * @file hal_int_c.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief 中断二级入口、中断开关以及中断初始化c代码
+ * @version 1.0
+ * @date 2022-06-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ * <table> 
+ * <tr><th> 版本 <th>作者 <th>日期 <th>修改内容
+ * <tr><td> 0.1 <th>jivin <td>2010-3-8 <td>Created 
+ * <tr><td> 1.0 <th>王彬浩 <td>2022-06-23 <td>Standardized 
+ * </table>
+ */
 #include<hal_2440_cfg.h>
 #include<hal_2440_c.h>
 void hal_all_entry(acoral_vector vector){//TODO 加个#define acoral_hal_all_entry hal_all_entry 前者放到kernel里面去

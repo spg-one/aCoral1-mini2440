@@ -2,7 +2,7 @@
  * @file core.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
  * @brief 
- * @version 0.1
+ * @version 1.0
  * @date 2022-06-18
  * 
  * @copyright Copyright (c) 2022
