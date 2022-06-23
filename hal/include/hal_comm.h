@@ -1,5 +1,5 @@
 /**
- * @file hal_common.h
+ * @file hal_comm.h
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
  * @brief hal层中断部分通用接口
  * @version 1.0
