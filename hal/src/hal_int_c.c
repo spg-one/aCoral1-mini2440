@@ -1,4 +1,3 @@
-#include<acoral.h>
 #include<hal_2440_cfg.h>
 #include<hal_2440_c.h>
 void hal_all_entry(acoral_vector vector){//TODO 加个#define acoral_hal_all_entry hal_all_entry 前者放到kernel里面去

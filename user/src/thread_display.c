@@ -2,6 +2,7 @@
 #include<policy.h>
 #include<hal.h>
 #include"../include/shell.h"
+#include <hal_comm.h>
 void display_thread(acoral_32 argc,acoral_char **argv){
 	acoral_sr cpu_sr;	
 	acoral_list_t *head,*tmp;
@@ -55,7 +56,7 @@ void display_thread(acoral_32 argc,acoral_char **argv){
 
 acoral_shell_cmd_t dt_cmd={
 	"dt",
-	display_thread,
+	(void*)display_thread,
 	"View all thread info",
 	NULL
 };

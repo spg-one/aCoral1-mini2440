@@ -1,10 +1,11 @@
 TOPDIR=$(shell pwd)
 ACORAL_INCLUDE_DIR=-I$(TOPDIR)/include -I$(TOPDIR)/kernel/include \
 	-I$(TOPDIR)/hal/include \
-	-I$(TOPDIR)/hal/include \
        	-I$(TOPDIR)/lib/include\
        	-I$(TOPDIR)/driver/include\
-       	-I$(TOPDIR)/plugin/include 
+       	-I$(TOPDIR)/plugin/include\
+		-I$(TOPDIR)/user/include
+
 CONFIG_SHELL:= $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	else if [ -x /bin/bash ]; then echo /bin/bash; \
 	else echo sh; fi ; fi)

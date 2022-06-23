@@ -1,6 +1,9 @@
 #include<kernel.h>
 #include"../include/shell.h"
 #include"console.h"
+#include <print.h>
+#include <shell.h>
+#include <driver.h>
 void malloc_scan(acoral_32 argc,acoral_char **argv){
 	acoral_mem_scan();
 }
@@ -35,19 +38,19 @@ void help(acoral_32 argc,acoral_char **argv){
 
 acoral_shell_cmd_t help_cmd={
 	"help",
-	help,
+	(void*)help,
 	"View all Shell Command info",
 	NULL
 };
 
-void exit(acoral_32 argc,acoral_char **argv){
+void shell_exit(acoral_32 argc,acoral_char **argv){
 	acoral_dev_config(acoral_cur_thread->console_id,CONSOLE_EXIT,NULL,0);
 	acoral_shell_exit((void *)argv[0]);
 }
 
 acoral_shell_cmd_t exit_cmd={
 	"exit",
-	exit,
+	(void*)shell_exit,
 	"Exit Shell",
 	NULL
 };
@@ -57,7 +60,7 @@ void spg(acoral_32 argc,acoral_char **argv){
 
 acoral_shell_cmd_t spg_cmd={
 	"spg",
-	spg,
+	(void*)spg,
 	"Easter egg",
 	NULL
 };
@@ -65,7 +68,7 @@ acoral_shell_cmd_t spg_cmd={
 
 
 extern acoral_shell_cmd_t dt_cmd;
-extern fs_cmd_init(void);
+extern int fs_cmd_init(void);
 void cmd_init(void){
 	add_command(&mem_cmd);
 	//add_command(&mem2_cmd);

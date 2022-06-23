@@ -24,10 +24,10 @@ void acoral_intr_sys_init(){
 	HAL_INTR_INIT();
 
 	for(i=HAL_INTR_MIN;i<=HAL_INTR_MAX;i++){ 
-		acoral_set_intr_enter(i,HAL_INTR_ACK);
+		acoral_set_intr_enter(i,hal_intr_ack);
 		acoral_set_intr_exit(i,NULL);
-		acoral_set_intr_mask(i,HAL_INTR_MASK);
-		acoral_set_intr_unmask(i,HAL_INTR_UNMASK);
+		acoral_set_intr_mask(i,hal_intr_mask);
+		acoral_set_intr_unmask(i,hal_intr_unmask);
 	}
 
 
