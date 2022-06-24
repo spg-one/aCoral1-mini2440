@@ -3,17 +3,18 @@
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
  * @brief hal层，mini2440时钟、中断、定时器、GPIO相关寄存器地址
  * @version 1.0
- * @date 2022-06-23
- * 
  * @copyright Copyright (c) 2022
- * 
- * <table> 
- * <tr><th> 版本 <th>作者 <th>日期 <th>修改内容
- * <tr><td> 0.1 <th>jivin <td>2010-03-08 <td>Created 
- * <tr><td> 1.0 <th>王彬浩 <td>2022-06-23 <td>Standardized 
- * </table>
+ * @date 2022-06-23
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <th>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <th>王彬浩 <td> 2022-06-23 <td>Standardized 
+ *  </table>
  */
+
 //TODO 或许可以和hal_2440_cfg.h合并
+
 #ifndef HAL_2440_C_H
 #define HAL_2440_C_H
 #include"type.h"

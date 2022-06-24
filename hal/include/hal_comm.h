@@ -1,24 +1,23 @@
 /**
  * @file hal_comm.h
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief hal层中断部分通用接口
+ * @brief hal层，中断部分通用接声明
  * @version 1.0
- * @date 2022-06-23
- * 
  * @copyright Copyright (c) 2022
- * 
- * <table> 
- * <tr><th> 版本 <th>作者 <th>日期 <th>修改内容
- * <tr><td> 0.1 <th>jivin <td>2010-03-08 <td>Created 
- * <tr><td> 1.0 <th>王彬浩 <td>2022-06-23 <td>Standardized 
- * </table>
+ * @date 2022-06-23
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <th>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <th>王彬浩 <td> 2022-06-23 <td>Standardized 
+ *  </table>
  */
 
 #ifndef HAL_COMM_H
 #define HAL_COMM_H
 #include<type.h>
 typedef acoral_u32 acoral_sr;
-#define HAL_MAX_CPU CFG_MAX_CPU
+#define HAL_MAX_CPU CFG_MAX_CPU //TODO 删一下
 /// TODO 加///
 #define HAL_REG(base,offset) (*(volatile acoral_u32 *)((base) + (offset)))
 

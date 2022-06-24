@@ -1,4 +1,19 @@
 /**
+ * @mainpage aCoral-I源码文档
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief 
+ * @version 1.0
+ * @copyright Copyright (c) 2022
+ * @date 2022-06-24
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <th>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <th>王彬浩 <td> 2022-06-24 <td>Standardized 
+ *  </table>
+ */
+
+/**
  * @file core.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
  * @brief 

@@ -1,8 +1,17 @@
-/*--------------------*/
-/*  acoral_thread_t 增加 timeout*/
-/*  链表，用来处理超时，挂g_timeout_queue*/
-/*  pegasus  0719*/
-/*--------------------*/
+/**
+ * @file thread.h
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层，线程优先级、控制块定义，线程管理函数声明
+ * @version 1.0
+ * @copyright Copyright (c) 2022
+ * @date 2022-06-24
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <th>pegasus <td>2010-07-19 <td>增加timeout链表，用来处理超时，挂g_timeout_queue
+ *   <tr><td> 1.0 <th>王彬浩 <td> 2022-06-24 <td>Standardized 
+ *  </table>
+ */
 
 #ifndef ACORAL_THREAD_H
 #define ACORAL_THREAD_H
@@ -39,8 +48,16 @@
 #define ACORAL_THREAD_STATE_DELAY (1<<(ACORAL_THREAD_STATE_MINI+5))
 #define ACORAL_THREAD_STATE_MOVE (1<<(ACORAL_THREAD_STATE_MINI+6))
 #define acoral_init_stack() HAL_INIT_STACK()
+
+/**
+ * 
+ *  @struct acoral_thread_t1
+ *  @brief 线程控制块TCB
+ * 
+ * 
+ */
 typedef struct{
-  	acoral_res_t res;
+  	acoral_res_t res;	///资源id，线程创建后作为线程id
 
 	acoral_u8 state;
 	acoral_u8 prio;
