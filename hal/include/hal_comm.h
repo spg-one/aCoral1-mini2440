@@ -3,8 +3,8 @@
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
  * @brief hal层，中断部分通用接声明
  * @version 1.0
- * @copyright Copyright (c) 2022
  * @date 2022-06-23
+ * @copyright Copyright (c) 2022
  * @revisionHistory 
  *  <table> 
  *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 

@@ -111,7 +111,7 @@ void acoral_intr_mask(acoral_vector vector){
 *the commen isr of vector      
 *中断公共服务入口函数
 *===========================*/
-void acoral_intr_entry(acoral_vector vector){
+void acoral_intr_entry(acoral_vector vector){ //TODO或者把这个弱定义了
 	acoral_vector index;
 #ifdef CFG_DEBUG
   	//acoral_print("isr in cpu:%d\n",acoral_current_cpu);
