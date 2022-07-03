@@ -1,3 +1,17 @@
+/**
+ * @file resource.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层,第二级内存管理——资源池
+ * @version 1.0
+ * @date 2022-07-04
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized 
+ *  </table>
+ */
 #include<type.h>
 #include<hal.h>
 #include<queue.h>
@@ -229,26 +243,6 @@ void acoral_pool_res_init(acoral_pool_t * pool){
 }
 
 /*================================
- *        resource pool initial 
- *              资源池初始化
- *================================*/
-void  acoral_pools_init(void)
-{
-    acoral_pool_t  *pool;
-    acoral_u32 i;
-    pool = &acoral_pools[0];
-    for (i = 0; i < (ACORAL_MAX_POOLS - 1); i++) {
-        pool->base_adr= (void *)&acoral_pools[i+1];
-		pool->id=i;
-        pool++;
-		acoral_spin_init(&pool->lock);
-    }
-    pool->base_adr= (void *)0;
-    acoral_free_res_pool = &acoral_pools[0];
-	acoral_spin_init(&acoral_free_res_pool->lock);
-}
-
-/*================================
  *        resource pool control initial 
  *              资源池控制块初始化
  *================================*/
@@ -268,7 +262,7 @@ void acoral_pool_ctrl_init(acoral_pool_ctrl_t *pool_ctrl)
 	}
 	else{
 		pool_ctrl->num_per_pool=size/pool_ctrl->size;
-		acoral_create_pool(pool_ctrl);
+		acoral_create_pool(pool_ctrl); //先创建一个资源池，后面如果一个池子不够了，那在不超过这类资源的max_pool的条件下再创建新的池子
 	}
 }
 
@@ -296,12 +290,27 @@ void acoral_free_obj(void *obj){
 	acoral_release_res((acoral_char *)obj-sizeof(acoral_res_t));
 }
 
-/*================================
- *        resource  system initial 
- *          资源系统初始化
- *================================*/
+
+
+/**
+ * @brief 资源系统初始化
+ * @note link all pools by making every pool's base_adr point to next pool,\
+ * 		and then initialize acoral_free_res_pool as the first pool.
+ * 
+ */
 void acoral_res_sys_init(){
-	acoral_pools_init();
+	acoral_pool_t  *pool;
+    acoral_u32 i;
+    pool = &acoral_pools[0];
+    for (i = 0; i < (ACORAL_MAX_POOLS - 1); i++) {
+        pool->base_adr= (void *)&acoral_pools[i+1];
+		pool->id=i;
+        pool++;
+		acoral_spin_init(&pool->lock);
+    }
+    pool->base_adr= (void *)0;
+    acoral_free_res_pool = &acoral_pools[0];
+	acoral_spin_init(&acoral_free_res_pool->lock);
 }
 
 acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert){

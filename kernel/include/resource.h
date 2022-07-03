@@ -61,12 +61,17 @@ typedef struct{
       void (*release_res)(acoral_res_t *res);
 }acoral_res_api_t;
 
+/**
+ * @brief  资源池控制块
+ * 
+ */
 typedef struct {
   acoral_u32       type;
-  acoral_u32       size;
-  acoral_u32 	  num_per_pool;
-  acoral_u32       num;
-  acoral_u32 	  max_pools;
+  acoral_u32       size;      ///<size of one single resource eg.size of TCB
+  acoral_u32   num_per_pool;  ///<the amount of resource in one pool eg.there are 20 TCBs in one TCB pool
+  acoral_u32       num;       ///<the amount of pools which contain a certain type of resource(maybe TCB) in system at present will be added once one pool created; restrict by max_pools below;
+  acoral_u32 	  max_pools;   ///<upbound of the amount of pools for this type. eg. the number of TCB pool limited to 2 because that there are at most 40 thread in system at one time and every TCB pool contains 20.
+
   acoral_list_t 	 *free_pools,*pools,list[2];
   acoral_res_api_t *api;
   acoral_spinlock_t lock;
@@ -105,7 +110,7 @@ void acoral_collect_pool(acoral_pool_ctrl_t *pool_ctrl);
 acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl);
 void acoral_release_res(acoral_res_t *res);
 acoral_res_t * acoral_get_res_by_id(acoral_id id);
-void  acoral_pools_init(void);
 void acoral_pool_res_init(acoral_pool_t * pool);
 acoral_u8 acoral_get_cpu_by_id(acoral_id id);
+void acoral_res_sys_init();
 #endif

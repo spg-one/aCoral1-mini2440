@@ -1,3 +1,17 @@
+/**
+ * @file buddy.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层,第一级内存管理——伙伴系统
+ * @version 1.0
+ * @date 2022-07-04
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized 
+ *  </table>
+ */
 #include <type.h>
 #include<spinlock.h>
 #include<hal.h>

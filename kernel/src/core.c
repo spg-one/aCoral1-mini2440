@@ -18,15 +18,16 @@
 /**
  * @file core.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief 
+ * @brief kernel层,aCoral内核初始化文件，紧接start.S
  * @version 1.0
- * @date 2022-06-18
- * 
+ * @date 2022-07-04
  * @copyright Copyright (c) 2022
- *  //TODO 做表格
- * <table> 
- * <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
- * </table>
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized 
+ *  </table>
  */
 
 #include <acoral.h>
@@ -42,12 +43,7 @@ extern volatile acoral_u32 idle_count[HAL_MAX_CPU];
  */
 void idle(void *args)
 {
-	while (1)
-	{
-#ifdef CFG_STAT
-		idle_count[acoral_current_cpu]++; // TODO这是什么
-#endif
-	}
+	for(;;){}
 }
 
 /**
@@ -114,10 +110,7 @@ void init(void *args)
 	soft_delay_init();
 #endif
 
-#ifdef CFG_STAT
-	/*内核统计相关数据初始化*/
-	stat_init();
-#endif
+
 	/*创建后台服务进程*/
 	acoral_init_list(&acoral_res_release_queue.head);
 	data.cpu = acoral_current_cpu;
@@ -215,17 +208,14 @@ void acoral_module_init()
 	acoral_intr_sys_init();
 	/*内存管理系统初始化*/
 	acoral_mem_sys_init();
-	/*资源管理系统初始化*/
-	acoral_res_sys_init();
-	/*驱动管理系统初始化*/
 	/*线程管理系统初始化*/
 	acoral_thread_sys_init();
 	/*时钟管理系统初始化*/
 	acoral_time_sys_init();
-	/*事件管理系统初始化,这个必须要，因为内存管理系统用到了*/
+	/*事件管理系统初始化*/
 	acoral_evt_sys_init();
-	/*消息管理系统初始化*/
 #ifdef CFG_DRIVER
+	/*驱动管理系统初始化*/
 	acoral_drv_sys_init();
 #endif
 }
