@@ -4,13 +4,15 @@
 #include <print.h>
 #include <shell.h>
 #include <driver.h>
+#include <mem.h>
+#include <buddy.h>
 void malloc_scan(acoral_32 argc,acoral_char **argv){
 	acoral_mem_scan();
 }
 
 acoral_shell_cmd_t mem_cmd={
 	"memscan",
-	malloc_scan,
+	(void*)malloc_scan,
 	"View the first Level Memory Managment Info",
 	NULL
 };
@@ -21,7 +23,7 @@ void malloc_scan2(acoral_32 argc,acoral_char **argv){
 
 acoral_shell_cmd_t mem2_cmd={
 	"memscan2",
-	malloc_scan2,
+	(void*)malloc_scan2,
 	"View the seconde Level Memory Managment Info",
 	NULL
 };

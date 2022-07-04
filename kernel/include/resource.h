@@ -112,5 +112,5 @@ void acoral_release_res(acoral_res_t *res);
 acoral_res_t * acoral_get_res_by_id(acoral_id id);
 void acoral_pool_res_init(acoral_pool_t * pool);
 acoral_u8 acoral_get_cpu_by_id(acoral_id id);
-void acoral_res_sys_init();
+void acoral_res_sys_init(void);
 #endif

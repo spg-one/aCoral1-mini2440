@@ -33,7 +33,7 @@ all: acoral
 # Include the make variables (CC, etc...)
 #
 
-CROSS_COMPILE   =/home/spg/Documents/aCoral/arm-2010q1/bin/arm-none-eabi-
+CROSS_COMPILE   =/home/spg/Documents/aCoral/aCoral1-Tools/arm-2010q1/bin/arm-none-eabi-
 
 AS              = $(CROSS_COMPILE)as
 LD              = $(CROSS_COMPILE)ld
@@ -80,14 +80,14 @@ subdir-$(CFG_TEST)+=test
 acoral:include/autocfg.h first_rule $(CORE_FILES)
 	@echo "###System Configure###"
 	@echo "######################"
-	$(LD) -v  \
+	@$(LD) -v  \
 		$(CORE_FILES) $(hal_EXT_FILES)\
 		-o acoral.elf $(CLIBS) $(LINKFLAGS)
-	$(NM) -v -l acoral.elf > acoral.map
-	$(OBJCOPY) -O binary -S acoral.elf acoral.bin $(OBJCOPYFLAGS)
-	$(OBJDUMP) -S acoral.elf > acoral.d 
-	$(OBJDUMP) -t acoral.elf > acoral.t 
-	$(OBJDUMP) -x acoral.elf > acoral.x 
+	@$(NM) -v -l acoral.elf > acoral.map
+	@$(OBJCOPY) -O binary -S acoral.elf acoral.bin $(OBJCOPYFLAGS)
+	@$(OBJDUMP) -S acoral.elf > acoral.d 
+	@$(OBJDUMP) -t acoral.elf > acoral.t 
+	@$(OBJDUMP) -x acoral.elf > acoral.x 
 	cat acoral.t |grep ".text"|grep "acoral"|sort>acoral.api
 	cat acoral.t |grep ".text"|grep "hal"|sort>hal.api
 

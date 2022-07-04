@@ -34,7 +34,7 @@ ALL_SUB_DIRS	:= $(sort $(subdir-y) $(subdir-m) $(subdir-n) $(subdir-))
 	$(CPP) $(CFLAGS) $(EXTRA_CFLAGS) $(CFLAGS_$@) $< > $@
 
 %.o: %.c $(BASE_DEP_FILES)
-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $(CFLAGS_$@) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $(CFLAGS_$@) -c -o $@ $<
 	@ ( \
 	    echo 'ifeq ($(strip $(subst $(comma),:,$(CFLAGS) $(EXTRA_CFLAGS) $(CFLAGS_$@))),$$(strip $$(subst $$(comma),:,$$(CFLAGS) $$(EXTRA_CFLAGS) $$(CFLAGS_$@))))' ; \
 	    echo 'FILES_FLAGS_UP_TO_DATE += $@' ; \
@@ -42,20 +42,20 @@ ALL_SUB_DIRS	:= $(sort $(subdir-y) $(subdir-m) $(subdir-n) $(subdir-))
 	) > $(dir $@)/.$(notdir $@).flags
 
 %.o: %.s $(BASE_DEP_FILES)
-	$(AS) $(AFLAGS) $(EXTRA_CFLAGS) -o $@ $<
+	@$(AS) $(AFLAGS) $(EXTRA_CFLAGS) -o $@ $<
 
 %.s: %.S $(BASE_DEP_FILES)
-	$(CPP) $(AFLAGS) $(EXTRA_AFLAGS) $(AFLAGS_$@) $< > $@
+	@$(CPP) $(AFLAGS) $(EXTRA_AFLAGS) $(AFLAGS_$@) $< > $@
 
 %.o: %.S $(BASE_DEP_FILES)
-	$(CC) $(AFLAGS) $(EXTRA_AFLAGS) $(AFLAGS_$@) -c -o $@ $<
+	@$(CC) $(AFLAGS) $(EXTRA_AFLAGS) $(AFLAGS_$@) -c -o $@ $<
 
 
 all_targets:$(BASE_DEP_FILES) $(O_TARGET) $(L_TARGET)
 ifdef O_TARGET
 $(O_TARGET):$(BASE_DEP_FILES) $(obj-y)
 	rm -f $@
-	$(LD) $(EXTRA_LDFLAGS) -r -o $@ $(filter $(obj-y), $^)
+	@$(LD) $(EXTRA_LDFLAGS) -r -o $@ $(filter $(obj-y), $^)
 endif
 
 ifdef L_TARGET
