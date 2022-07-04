@@ -1,5 +1,5 @@
 #include<type.h>
-#include<bitops.h>
+#include<bitops.h> //TODO 放到kernel，还有list和queue
 acoral_u32 acoral_ffs(acoral_u32 word)
 {
 	acoral_u32 k;

@@ -1,3 +1,4 @@
+
 /**
  * @file resource.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
@@ -12,7 +13,8 @@
  *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized 
  *  </table>
  */
-#include<type.h>
+
+#include<type.h> //TODO 改名字位资源
 #include<hal.h>
 #include<queue.h>
 #include<mem.h>
