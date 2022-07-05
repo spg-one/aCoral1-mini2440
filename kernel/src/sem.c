@@ -69,12 +69,10 @@ acoral_u32 acoral_sem_del(acoral_evt_t *evt, acoral_u32 opt)
 		return SEM_ERR_TYPE; /* error*/
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	thread =acoral_evt_high_thread(evt);
 	if (thread==NULL)
 	{
 		/*队列上无等待任务*/
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		evt = NULL;
 		return SEM_ERR_UNDEF;
@@ -82,7 +80,6 @@ acoral_u32 acoral_sem_del(acoral_evt_t *evt, acoral_u32 opt)
 	else
 	{
 		/*有等待任务*/
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return SEM_ERR_TASK_EXIST; /*error*/
 	}
@@ -115,16 +112,12 @@ acoral_u32 acoral_sem_trypend(acoral_evt_t *evt)
 
 	/* 计算信号量处理*/
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if ((acoral_8)evt->count <= SEM_RES_AVAI)
 	{   /* available*/
 		evt->count++;
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return SEM_SUCCED;
 	}
-
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	return SEM_ERR_TIMEOUT;
 }
@@ -158,11 +151,9 @@ acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 
 	/* 计算信号量处理*/
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if ((acoral_8)evt->count <= SEM_RES_AVAI)
 	{   /* available*/
 		evt->count++;
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return SEM_SUCCED;
 	}
@@ -175,20 +166,17 @@ acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 		timeout_queue_add(cur);
 	}
 	acoral_evt_queue_add(evt,cur);
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	
 	acoral_sched();
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if(timeout>0 && cur->delay<=0)
 	{
 		//--------------
 		// modify by pegasus 0804: count-- [+]
 		evt->count--;
 		acoral_evt_queue_del(cur);
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return SEM_ERR_TIMEOUT;
 	}
@@ -196,7 +184,6 @@ acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 	//-------------------
 	// modify by pegasus 0804: timeout_queue_del [+]
 	timeout_queue_del(cur);
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	return SEM_SUCCED;
 }
@@ -223,13 +210,11 @@ acoral_u32 acoral_sem_post(acoral_evt_t *evt)
 	}
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 
 	/* 计算信号量的释放*/
 	if ((acoral_8)evt->count <= SEM_RES_NOAVAI)
 	{ /* no waiting thread*/
 		evt->count--;
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return SEM_SUCCED;
 	}
@@ -240,7 +225,6 @@ acoral_u32 acoral_sem_post(acoral_evt_t *evt)
 	{
 		/*应该有等待线程却没有找到*/
 		acoral_printerr("Err Sem post\n");
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return SEM_ERR_UNDEF;
 	}
@@ -248,7 +232,6 @@ acoral_u32 acoral_sem_post(acoral_evt_t *evt)
 	/*释放等待任务*/
 	acoral_evt_queue_del(thread);
 	acoral_rdy_thread(thread);
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	acoral_sched();
 	return SEM_SUCCED;
@@ -267,9 +250,7 @@ acoral_32 acoral_sem_getnum(acoral_evt_t* evt)
 		return SEM_ERR_NULL;
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	t = 1 - (acoral_32)evt->count;
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	return t;
 }

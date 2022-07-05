@@ -103,6 +103,7 @@ void acoral_unrdy_thread(acoral_thread_t *thread);
 void acoral_rdy_thread(acoral_thread_t *thread);
 void acoral_thread_move2_tail_by_id(acoral_id thread_id);
 void acoral_thread_move2_tail(acoral_thread_t *thread);
+void acoral_set_thread_console(acoral_id id);
 extern acoral_queue_t acoral_threads_queue;
 #endif
 

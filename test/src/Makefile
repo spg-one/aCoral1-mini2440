@@ -7,7 +7,6 @@ obj-$(CFG_TEST_DELAY) +=test_delay.o
 obj-$(CFG_TEST_MBOX) +=test_mbox.o
 obj-$(CFG_TEST_MUTEX) +=test_mutex.o 
 obj-$(CFG_TEST_SEM) +=test_sem.o 
-obj-$(CFG_TEST_SPINLOCK) +=test_spinlock.o 
 obj-$(CFG_TEST_ATOMIC) +=test_atomic.o 
 obj-$(CFG_TEST_RM) +=test_rm.o 
 obj-$(CFG_TEST_STAT) +=test_stat.o 

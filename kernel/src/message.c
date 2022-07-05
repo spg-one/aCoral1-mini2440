@@ -107,7 +107,6 @@ acoral_u32  acoral_msgctr_init(acoral_msgctr_t *msgctr)
 	acoral_init_list(&msgctr->msglist);
 	acoral_init_list(&msgctr->waiting);
 	acoral_init_list(&msgctr->msgctr_list);
-	acoral_spin_init(&msgctr->spin_lock);
 	return MSGCTR_SUCCED;
 }
 
@@ -123,7 +122,6 @@ acoral_u32 acoral_msg_init(
 	msg->ttl  =  nTtl;              /*消息生存周期*/
 	msg->data =  dat;               /*消息指针*/
 	acoral_init_list(&msg->msglist);
-	acoral_spin_init(&(msg->msglist.lock));
 	return 0;
 }
 
@@ -163,11 +161,6 @@ acoral_msgctr_t*  acoral_msgctr_create (acoral_u32 *err)
 	acoral_init_list(&msgctr->msglist);
 	acoral_init_list(&msgctr->waiting);
 
-	acoral_spin_init(&(msgctr->msgctr_list.lock));
-	acoral_spin_init(&(msgctr->msglist.lock));
-	acoral_spin_init(&(msgctr->waiting.lock));
-
-	acoral_spin_init(&msgctr->spin_lock);
 	acoral_list_add2_tail (&msgctr->msgctr_list, &(g_msgctr_header.head));
 	return msgctr;
 }
@@ -203,18 +196,15 @@ acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 		return MST_ERR_INTR;
 */
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&msgctr->spin_lock);
 
 	if (NULL == msgctr)
 	{
-		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MST_ERR_NULL;
 	}
 
 	if (NULL == msg)
 	{
-		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MSG_ERR_NULL;
 	}
@@ -224,7 +214,6 @@ acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 	/*----------------*/
 	if (ACORAL_MESSAGE_MAX_COUNT <= msgctr->count)
 	{
-		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MSG_ERR_COUNT;
 	}
@@ -245,7 +234,6 @@ acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 		wake_up_thread(&msgctr->waiting);
 		msgctr->wait_thread_num--;
 	}
-	acoral_spin_unlock(&msgctr->spin_lock);
 	HAL_EXIT_CRITICAL();
 	acoral_sched();
 	return MSGCTR_SUCCED;
@@ -280,7 +268,6 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 	cur = acoral_cur_thread;
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&msgctr->spin_lock);
 	if(timeout>0){
 		cur->delay = TIME_TO_TICKS(timeout);
 		timeout_queue_add( cur);
@@ -306,7 +293,6 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 				acoral_list_del (q);
 				acoral_release_res ((acoral_res_t *)pmsg);		
 				msgctr->count--;
-				acoral_spin_unlock(&msgctr->spin_lock);
 				HAL_EXIT_CRITICAL();
 				return dat;
 			}
@@ -318,14 +304,12 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 		msgctr->wait_thread_num++;
 		acoral_msgctr_queue_add(msgctr, cur);
 		acoral_unrdy_thread(cur);
-		acoral_spin_unlock(&msgctr->spin_lock);
 		HAL_EXIT_CRITICAL();
 		acoral_sched();
 		/*-----------------*/
 		/*  看有没有超时*/
 		/*-----------------*/
 		HAL_ENTER_CRITICAL();
-		acoral_spin_lock(&msgctr->spin_lock);
 	
 		if (timeout>0&&(acoral_32)cur->delay <=0 )
 			break;
@@ -339,7 +323,6 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 	if(msgctr->wait_thread_num>0)
 		msgctr->wait_thread_num--;
 	acoral_list_del(&cur->waiting);
-	acoral_spin_unlock(&msgctr->spin_lock);
 	HAL_EXIT_CRITICAL();
 	*err = MST_ERR_TIMEOUT;
 	return NULL;

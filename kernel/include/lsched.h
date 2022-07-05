@@ -7,7 +7,6 @@ extern acoral_u8 need_sched[];
 extern acoral_u8 sched_lock[];
 extern acoral_thread_t *running_thread[],*ready_thread[];
 typedef struct{
-/*	acoral_spin_lock lock;*/
 	acoral_prio_array_t array;
 }acoral_rdy_queue_t;
 

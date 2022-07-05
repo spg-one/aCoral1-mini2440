@@ -27,7 +27,6 @@
 
 
 #include "atomic.h"
-#include "spinlock.h"
 #define acoral_enter_critical() HAL_ENTER_CRITICAL()
 #define acoral_exit_critical() HAL_EXIT_CRITICAL()
 #ifndef CFG_CMP

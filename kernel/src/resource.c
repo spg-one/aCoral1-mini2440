@@ -108,11 +108,9 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl){
 	acoral_res_t *res;
 	acoral_pool_t *pool;
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&pool_ctrl->lock);
 	first=pool_ctrl->free_pools->next;
 	if(acoral_list_empty(first)){
 	  	if(acoral_create_pool(pool_ctrl)){
-			acoral_spin_unlock(&pool_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return NULL;
 		}
@@ -131,7 +129,6 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl){
 	if(!pool->free_num){
 	  	acoral_list_del(&pool->free_list);
 	}
-	acoral_spin_unlock(&pool_ctrl->lock);
 	HAL_EXIT_CRITICAL();
 	return res;
 }
@@ -154,7 +151,6 @@ void acoral_release_res(acoral_res_t *res){
 		return;
 	}
  	pool_ctrl=pool->ctrl;
-	acoral_spin_lock(&pool_ctrl->lock);
 	if((void *)res<pool->base_adr){
 		acoral_printerr("Err Res\n");
 		return;
@@ -174,7 +170,6 @@ void acoral_release_res(acoral_res_t *res){
 	pool->free_num++;
 	if(acoral_list_empty(&pool->free_list))
 	  	acoral_list_add(&pool->free_list,pool_ctrl->free_pools);
-	acoral_spin_unlock(&pool_ctrl->lock);
 	return;
 }
 
@@ -202,9 +197,7 @@ acoral_pool_t *acoral_get_free_pool(){
 	HAL_ENTER_CRITICAL();
 	tmp=acoral_free_res_pool;
 	if(NULL!=tmp){
-		acoral_spin_lock(&tmp->lock);
 		acoral_free_res_pool=*(void **)tmp->base_adr;
-		acoral_spin_unlock(&tmp->lock);
 	}
 	HAL_EXIT_CRITICAL();
 	return tmp;
@@ -256,7 +249,6 @@ void acoral_pool_ctrl_init(acoral_pool_ctrl_t *pool_ctrl)
 	pool_ctrl->num=0;
 	acoral_init_list(pool_ctrl->pools);
     acoral_init_list(pool_ctrl->free_pools);
-    acoral_spin_init(&pool_ctrl->lock);
 	/*调整pool的对象个数以最大化利用分配了的内存*/
 	size=acoral_malloc_size(pool_ctrl->size*pool_ctrl->num_per_pool);
 	if(size<pool_ctrl->size){
@@ -308,11 +300,9 @@ void acoral_res_sys_init(){
         pool->base_adr= (void *)&acoral_pools[i+1];
 		pool->id=i;
         pool++;
-		acoral_spin_init(&pool->lock);
     }
     pool->base_adr= (void *)0;
     acoral_free_res_pool = &acoral_pools[0];
-	acoral_spin_init(&acoral_free_res_pool->lock);
 }
 
 acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert){

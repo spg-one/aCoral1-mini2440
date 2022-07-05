@@ -53,7 +53,6 @@ typedef struct
 	acoral_u8           type;            /*类型*/
 	acoral_list_t       msgctr_list;    /*全局消息列表*/
 	
-	acoral_spinlock_t   spin_lock;
 
 	acoral_u32          count;           /*消息数量*/
 	acoral_u32          wait_thread_num; /*等待线程数*/

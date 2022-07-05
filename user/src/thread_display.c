@@ -12,7 +12,7 @@ void display_thread(acoral_32 argc,acoral_char **argv){
 	acoral_prints("------------------------------------------------------\r\n");
 	acoral_prints("Name\t\tType\t\tConsole\t\tState\r\n");
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&acoral_threads_queue.head.lock);
+
 	for(tmp=head->next;tmp!=head;tmp=tmp->next){
 		thread=list_entry(tmp,acoral_thread_t,global_list);
 		acoral_print("%s\t\t",thread->name);
@@ -50,7 +50,7 @@ void display_thread(acoral_32 argc,acoral_char **argv){
 		acoral_prints("\r\n");
 	}
 	acoral_prints("------------------------------------------------------\r\n");
-	acoral_spin_unlock(&acoral_threads_queue.head.lock);
+
 	HAL_EXIT_CRITICAL();
 }
 

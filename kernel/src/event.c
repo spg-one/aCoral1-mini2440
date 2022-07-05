@@ -22,7 +22,6 @@ acoral_evt_t *acoral_alloc_evt(){
 }
 
 void acoral_evt_init(acoral_evt_t *evt){
-	acoral_spin_init(&evt->spin_lock);
 	acoral_list_init(&evt->wait_queue.head);
 }
 

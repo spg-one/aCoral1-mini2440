@@ -13,7 +13,6 @@
  *  </table>
  */
 #include <type.h>
-#include<spinlock.h>
 #include<hal.h>
 #include <print.h>
 #define LEVEL 14 
@@ -38,7 +37,6 @@ typedef struct{
 	acoral_u32 block_num;
 	acoral_u32 free_num;
 	acoral_u32 block_size;
-	acoral_spinlock_t lock;
 }acoral_block_ctr_t;
 
 acoral_block_ctr_t *acoral_mem_ctrl;
@@ -186,7 +184,6 @@ acoral_err buddy_init(acoral_u32 start_adr,acoral_u32 end_adr){
 			num-=max_num;
 		}
 	}
-	acoral_spin_init(&acoral_mem_ctrl->lock);
 	return 0;
 }
 
@@ -231,13 +228,11 @@ static void *r_malloc(acoral_u8 level){
 	acoral_u32 index;
 	acoral_32 num,cur;
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&acoral_mem_ctrl->lock);
 	acoral_mem_ctrl->free_num-=1<<level;
 	cur=acoral_mem_ctrl->free_cur[level];
 	if(cur<0){
 		num=recus_malloc(level+1);
 		if(num<0){
-			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return NULL;
 		}
@@ -254,7 +249,6 @@ static void *r_malloc(acoral_u8 level){
 #ifdef CFG_TEST_MEM
 		buddy_scan();
 #endif
-		acoral_spin_unlock(&acoral_mem_ctrl->lock);
 		HAL_EXIT_CRITICAL();
 		return (void *)(acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT));
 	}
@@ -267,7 +261,6 @@ static void *r_malloc(acoral_u8 level){
 	if(level==acoral_mem_ctrl->level-1){
 		num=index<<level;
 		if(num+(1<<level)>acoral_mem_ctrl->block_num){
-			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return NULL; 
 		}
@@ -285,7 +278,6 @@ static void *r_malloc(acoral_u8 level){
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif
-	acoral_spin_unlock(&acoral_mem_ctrl->lock);
 	HAL_EXIT_CRITICAL();
 	return (void *)(acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT));
 }
@@ -348,7 +340,6 @@ void buddy_free(void *ptr){
 		return;
 	}
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&acoral_mem_ctrl->lock);
 	if(num&0x1){
 		level=0;
 		/*下面是地址检查*/
@@ -356,21 +347,18 @@ void buddy_free(void *ptr){
 		buddy_level=acoral_mem_blocks[BLOCK_INDEX(num)].level;
 		if(buddy_level>0){
 			acoral_printerr("Invalid Free Address:0x%x\n",ptr);
-			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return;
 		}
 		/*伙伴分配出去，如果对应的位为1,肯定是回收过一次了*/
 		if(buddy_level==0&&acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return;
 		}
 		/*伙伴没有分配出去了，如果对应的位为0,肯定是回收过一次了*/
 		if(buddy_level<0&&!acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return;
 		}
@@ -379,7 +367,6 @@ void buddy_free(void *ptr){
 		/*已经释放*/
 		if(level<0){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-			acoral_spin_unlock(&acoral_mem_ctrl->lock);
 			HAL_EXIT_CRITICAL();
 			return;
 		}	
@@ -393,7 +380,6 @@ void buddy_free(void *ptr){
 		index=num>>level;
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
 		HAL_EXIT_CRITICAL();
-		acoral_spin_unlock(&acoral_mem_ctrl->lock);
 		return;
 	}
 	index=num>>1+level;
@@ -416,7 +402,6 @@ void buddy_free(void *ptr){
 			index=index>>1;
 	}
 	HAL_EXIT_CRITICAL();
-	acoral_spin_unlock(&acoral_mem_ctrl->lock);
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif

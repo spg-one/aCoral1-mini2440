@@ -3,7 +3,6 @@
 #include<type.h>
 #include<core.h>
 #include<list.h>
-#include<spinlock.h>
 #define ACORAL_MAX_POOLS 40
 
 #define ACORAL_MAX_RES_TYPE 4
@@ -74,7 +73,6 @@ typedef struct {
 
   acoral_list_t 	 *free_pools,*pools,list[2];
   acoral_res_api_t *api;
-  acoral_spinlock_t lock;
   acoral_u8 *name;
 }acoral_pool_ctrl_t;
 
@@ -90,7 +88,6 @@ typedef struct {
    acoral_pool_ctrl_t *ctrl;
    acoral_list_t ctrl_list;
    acoral_list_t free_list;
-   acoral_spinlock_t lock;
 }acoral_pool_t;
 
 typedef struct{

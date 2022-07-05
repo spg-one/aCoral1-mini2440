@@ -23,14 +23,12 @@ acoral_queue_t timeout_queue;
 static acoral_u32 ticks;
 void acoral_time_sys_init(){
   	acoral_init_list(&time_delay_queue.head);
-	acoral_spin_init(&time_delay_queue.head.lock);
 
 	/*---------------*/
 	/*  新增延时初始化 timeout_queue*/
 	/*  pegasus   0719*/
 	/*---------------*/
 	acoral_init_list(&timeout_queue.head);
-	acoral_spin_init(&timeout_queue.head.lock);
 }
 
 
@@ -86,7 +84,6 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 	/*这里采用关ticks中断，不用关中断，是为了减少最大关中断时间，下面是个链表，时间不确定。*/
 	/*这里可以看出，延时函数会有些误差，因为ticks中断可能被延迟*/
 #ifndef CFG_TICKS_PRIVATE
-	acoral_spin_lock(&head->lock);
 	new->state|=ACORAL_THREAD_STATE_DELAY;
 	tmp1=head;
 	while(1){
@@ -102,7 +99,6 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 				thread->delay-=delay2;
 				acoral_list_add(&new->waiting,tmp);
 				acoral_unrdy_thread(new);
-				acoral_spin_unlock(&tmp->lock);
 				break;
 			}
 			
@@ -110,12 +106,9 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 			new->delay=delay2;
 			acoral_list_add(&new->waiting,tmp);
 			acoral_unrdy_thread(new);
-			acoral_spin_unlock(&tmp->lock);
 			break;
 		}
 		/*获取下一个成员锁*/
-		acoral_spin_lock(&tmp1->lock);
-		acoral_spin_unlock(&tmp->lock);
 	}
 #else
 	new->state|=ACORAL_THREAD_STATE_DELAY;
@@ -154,16 +147,10 @@ void time_delay_deal(){
 		if(thread->delay>0)
 		    break;
 		/*防止add判断delay时取下thread*/
-#ifndef CFG_TICKS_PRIVATE
-		acoral_spin_lock(&head->lock);
-		acoral_spin_lock(&tmp->lock);
-#endif
+
 		tmp1=tmp->next;
 		acoral_list_del(&thread->waiting);
-#ifndef CFG_TICKS_PRIVATE
-		acoral_spin_unlock(&tmp->lock);
-		acoral_spin_unlock(&head->lock);
-#endif
+
 		tmp=tmp1;
 		thread->state&=~ACORAL_THREAD_STATE_DELAY;
 		acoral_rdy_thread(thread);
@@ -184,7 +171,6 @@ void timeout_queue_add(acoral_thread_t *new)
 	head=&timeout_queue.head;
 	HAL_ENTER_CRITICAL();
 #ifndef CFG_TICKS_PRIVATE
-	acoral_spin_lock(&head->lock);
 	tmp1=head;
 	while(1){
 		tmp=tmp1;
@@ -197,19 +183,14 @@ void timeout_queue_add(acoral_thread_t *new)
 				new->delay=delay2;
 				thread->delay-=delay2;
 				acoral_list_add(&new->timeout,tmp);
-				acoral_spin_unlock(&tmp->lock);
 				break;
 			}
 			
 		}else{
 			new->delay=delay2;
 			acoral_list_add(&new->timeout,tmp);
-			acoral_spin_unlock(&tmp->lock);
 			break;
 		}
-		/*获取下一个成员锁*/
-		acoral_spin_lock(&tmp1->lock);
-		acoral_spin_unlock(&tmp->lock);
 	}
 #else
 	for (tmp=head->next;delay2=delay,tmp!=head; tmp=tmp->next){
@@ -244,11 +225,9 @@ void timeout_queue_del(acoral_thread_t *new)
 
 	p = new->timeout.prev;
 	q = &new->timeout;
-	acoral_spin_lock(&p->lock);
-	acoral_spin_lock(&q->lock);
+
 	acoral_list_del(&new->timeout);
-	acoral_spin_unlock(&q->lock);
-	acoral_spin_unlock(&p->lock);
+
 	return;
 }
 
@@ -279,16 +258,10 @@ void timeout_delay_deal()
 		ACORAL_ASSERT(thread,"in timeout deal");
 		if(thread->delay>0)
 		    break;
-#ifndef CFG_TICKS_PRIVATE
-		acoral_spin_lock(&head->lock);
-		acoral_spin_lock(&tmp->lock);
-#endif
+
 		tmp1=tmp->next;
 		acoral_list_del(&thread->timeout);
-#ifndef CFG_TICKS_PRIVATE
-		acoral_spin_unlock(&tmp->lock);
-		acoral_spin_unlock(&head->lock);
-#endif
+
 		tmp=tmp1;
 		/*thread->state*/
 		acoral_rdy_thread(thread);

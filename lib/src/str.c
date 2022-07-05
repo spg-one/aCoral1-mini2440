@@ -1,4 +1,5 @@
 #include<string.h>
+#include <type.h>
 
 acoral_u8  acoral_tolower(acoral_u8 c){
       if(IS_LOWER(c))
@@ -51,7 +52,7 @@ acoral_u32 acoral_str_len(const acoral_char *str)
 acoral_char *acoral_str_cpy(acoral_char *to, const acoral_char *from)
 {
     acoral_char *rev = to;
-    while(*to++ = *from++);
+    while((*to++ = *from++));
     return rev;
 }
 

@@ -375,7 +375,7 @@ acoral_32 acoral_prints(const acoral_char *str)
 	return acoral_dev_write(acoral_cur_thread->console_id,(void *)str,printed_len,0,0);
 }
 
-acoral_char acoral_getchar(){
+acoral_char acoral_getchar(void){
 	acoral_char c;
 	acoral_dev_read(acoral_cur_thread->console_id,&c,1,0,0);
 	return c;
@@ -399,7 +399,7 @@ acoral_32 acoral_debug(const acoral_char *fmt, ...)
 	if(console_id==ACORAL_DEV_ERR_ID){
 		console_id=acoral_dev_open("console");
 		if(console_id==ACORAL_DEV_ERR_ID)
-			return;
+			return -1;
 	}
 	return acoral_dev_write(console_id,(void *)print_buf,printed_len,0,0);
 }
@@ -411,7 +411,7 @@ acoral_32 acoral_debugs(const acoral_char *str)
 	if(console_id==ACORAL_DEV_ERR_ID){
 		console_id=acoral_dev_open("console");
 		if(console_id==ACORAL_DEV_ERR_ID)
-			return;
+			return -1;
 	}
 	return acoral_dev_write(console_id,(void *)str,printed_len,0,0);
 }

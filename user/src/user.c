@@ -8,7 +8,7 @@ void dummy(void *args){
 		acoral_delay_self(1000);
 	}
 }
-void user_main()
+void user_main(void)
 {
 //	acoral_create_thread(dummy,256,NULL,NULL,20,0);
 }

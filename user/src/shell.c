@@ -1,6 +1,10 @@
 #include<acoral.h>
 #include"../include/shell.h"
 #include<console.h>
+#include <thread.h>
+#include <cmd.h>
+#include <print.h>
+
 #define BUF_SIZE 128
 #define MAX_ARGS_NUM 8
 acoral_shell_cmd_t *head_cmd,*tail_cmd;
@@ -75,7 +79,7 @@ void add_command(acoral_shell_cmd_t *cmd)
 	}
 }
 
-acoral_shell_cmd_t *find_cmd(acoral_char *cmdname)
+acoral_shell_cmd_t *find_cmd(const acoral_char *cmdname)
 {
 	acoral_shell_cmd_t *curr;
 	curr =head_cmd;
@@ -87,7 +91,7 @@ acoral_shell_cmd_t *find_cmd(acoral_char *cmdname)
 	return NULL;
 }
 
-void execmd(acoral_32 argc,acoral_char **argv)
+void execmd(acoral_32 argc,const acoral_char **argv)
 {
 	acoral_shell_cmd_t *cmd = find_cmd(argv[0]);
 	if (cmd == NULL) {
@@ -108,7 +112,7 @@ void cmd_exe(acoral_char *buf){
 		acoral_memset(argv, 0, sizeof(argv));
 		parse_args(buf, &argc, argv, &resid,&stacked_state);
 		if (argc > 0)
-			execmd(argc, (const acoral_char **)argv);
+			execmd(argc, (const acoral_char **)argv);//TODO 保留const？
 		buf = resid;
 	}	
 }

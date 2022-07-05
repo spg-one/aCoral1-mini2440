@@ -7,7 +7,6 @@
 
 #ifndef QUEUE_H_
 #define QUEUE_H_
-#include<spinlock.h>
 #include<list.h>
 #include<core.h>
 #define ACORAL_PRIO_QUEUE_EMPTY 255

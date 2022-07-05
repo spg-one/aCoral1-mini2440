@@ -332,8 +332,7 @@ tcpip_thread(void *arg)
  *          to an IP header (if netif doesn't got NETIF_FLAG_ETHARP flag)
  * @param inp the network interface on which the packet was received
  */
-err_t
-tcpip_input(struct pbuf *p, struct netif *inp)
+err_t tcpip_input(struct pbuf *p, struct netif *inp)
 {
   struct tcpip_msg *msg;
 	//===============
@@ -377,7 +376,7 @@ tcpip_input(struct pbuf *p, struct netif *inp)
   //   }
   //   return ERR_OK;
   // }
-  // return ERR_VAL;
+   return ERR_OK; //TODO 返回值还有其他的
 }
 
 /**

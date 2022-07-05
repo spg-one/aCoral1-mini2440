@@ -26,14 +26,9 @@ void acoral_release_thread1(acoral_thread_t *thread){
 	acoral_thread_t *daem;
 	thread->state=ACORAL_THREAD_STATE_EXIT;
 	head=&acoral_res_release_queue.head;
-	acoral_spin_lock(&head->lock);
 	tmp=head->prev;
-	if(tmp!=head)
-		acoral_spin_lock(&tmp->lock);
 	acoral_list_add2_tail(&thread->waiting,head);
-	if(tmp!=head)
-		acoral_spin_unlock(&tmp->lock);
-	acoral_spin_unlock(&head->lock);
+
 	daem=(acoral_thread_t *)acoral_get_res_by_id(daemon_id);
 	acoral_rdy_thread(daem);
 }
@@ -46,9 +41,7 @@ void acoral_release_thread1(acoral_thread_t *thread){
 void acoral_release_thread(acoral_res_t *res){
 	acoral_thread_t *thread;
 	thread=(acoral_thread_t *)res;
-	acoral_spin_lock(&acoral_threads_queue.head.lock);
 	acoral_list_del(&thread->global_list);
-	acoral_spin_unlock(&acoral_threads_queue.head.lock);
 #ifdef CFG_TEST
 	acoral_print("Release %s thread\n",thread->name);
 #endif
@@ -185,18 +178,12 @@ void acoral_kill_thread(acoral_thread_t *thread){
 		evt=thread->evt;
 		/**/
 		if(thread->state&ACORAL_THREAD_STATE_DELAY){
-			acoral_spin_lock(&thread->waiting.prev->lock);
-			acoral_spin_lock(&thread->waiting.lock);
 			acoral_list_del(&thread->waiting);
-			acoral_spin_unlock(&thread->waiting.lock);
-			acoral_spin_unlock(&thread->waiting.prev->lock);
 		}else
 		{
 			/**/
 			if(evt!=NULL){
-				acoral_spin_lock(&evt->spin_lock);
 				acoral_evt_queue_del(thread);
-				acoral_spin_unlock(&evt->spin_lock);
 			}
 		}
 	}
@@ -350,14 +337,9 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 	acoral_init_list(&thread->ready);
 	acoral_init_list(&thread->timeout);
 	acoral_init_list(&thread->global_list);
-	acoral_spin_init(&thread->timeout.lock);
-	acoral_spin_init(&thread->waiting.lock);
-	acoral_spin_init(&thread->ready.lock);
-	acoral_spin_init(&thread->move_lock);
+
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&acoral_threads_queue.head.lock);
 	acoral_list_add2_tail(&thread->global_list,&acoral_threads_queue.head);
-	acoral_spin_unlock(&acoral_threads_queue.head.lock);
 	HAL_EXIT_CRITICAL();
 #ifdef CFG_TEST
 	acoral_print("%s thread initial well\n",thread->name);
@@ -390,7 +372,6 @@ void acoral_sched_mechanism_init(){
 	acoral_thread_pool_init();
 	acoral_thread_runqueue_init();
 	acoral_init_list(&acoral_threads_queue.head);
-	acoral_spin_init(&acoral_threads_queue.head.lock);
 }
 
 /*================================

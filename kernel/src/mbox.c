@@ -73,10 +73,8 @@ acoral_u32 acoral_mbox_send(acoral_evt_t * event, void *msg)
 		return MBOX_ERR_TYPE;
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&event->spin_lock);
 	if(event->data != NULL)
 	{
-		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MBOX_ERR_MES_EXIST;
 	}
@@ -86,7 +84,6 @@ acoral_u32 acoral_mbox_send(acoral_evt_t * event, void *msg)
 	if (thread==NULL)
 	{
 		/* 没有等待队列*/
-		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return  MBOX_SUCCED;
 	}
@@ -94,7 +91,6 @@ acoral_u32 acoral_mbox_send(acoral_evt_t * event, void *msg)
 	timeout_queue_del(thread);
 	acoral_evt_queue_del(thread);
 	acoral_rdy_thread(thread);
-	acoral_spin_unlock(&event->spin_lock);
 	HAL_EXIT_CRITICAL();
 	acoral_sched();
 	return MBOX_SUCCED;
@@ -117,7 +113,6 @@ void* acoral_mbox_recv(acoral_evt_t * event, acoral_time timeout)
 		return NULL;
 	
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&event->spin_lock);
 	if( event->data == NULL)
 	{
 		cur = acoral_cur_thread;
@@ -128,30 +123,25 @@ void* acoral_mbox_recv(acoral_evt_t * event, acoral_time timeout)
 		}
 		acoral_unrdy_thread(cur);
 		acoral_evt_queue_add(event, cur);
-		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
 		acoral_sched();
 		HAL_ENTER_CRITICAL();
-		acoral_spin_lock(&event->spin_lock);
 
 		if (timeout > 0 && cur->delay <= 0)
 		{
 			acoral_evt_queue_del(cur);
-			acoral_spin_unlock(&event->spin_lock);
 			HAL_EXIT_CRITICAL();
 			return NULL;
 		}
 
 		msg        = event->data;
 		event->data = NULL;
-		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return msg;
 	}
 	
 	msg         = event->data;
 	event->data = NULL;
-	acoral_spin_unlock(&event->spin_lock);
 	HAL_EXIT_CRITICAL();
 
 	return msg;
@@ -173,17 +163,14 @@ void* acoral_mbox_tryrecv(acoral_evt_t * event)
 		return NULL;
 	
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&event->spin_lock);
 	if( event->data == NULL)
 	{
-		acoral_spin_unlock(&event->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return NULL;
 	}
 	
 	msg         = event->data;
 	event->data = NULL;
-	acoral_spin_unlock(&event->spin_lock);
 	HAL_EXIT_CRITICAL();
 
 	return msg;

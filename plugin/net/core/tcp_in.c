@@ -260,7 +260,7 @@ tcp_input(struct pbuf *p, struct netif *inp)
   LWIP_DEBUGF(TCP_INPUT_DEBUG, ("-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"));
 #endif /* TCP_INPUT_DEBUG */
 
-   		/*/
+   		/*
 		// 调试打印接收信息
 		lwip_printf("\r\n********tcp_input*************\r\n");
 		lwip_printf("接收tcp数据长度:%d <--->\r\n",plen);
@@ -277,7 +277,7 @@ tcp_input(struct pbuf *p, struct netif *inp)
 
 		}
 		lwip_printf("\r\n+++++++++++++++++++++\r\n");
-		/**/
+		*/
   if (pcb != NULL) {
     /* The incoming segment belongs to a connection. */
 #if TCP_INPUT_DEBUG

@@ -62,7 +62,6 @@ void acoral_periodqueue_add(acoral_thread_t *new){
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
 	head=&period_delay_queue.head;
-	acoral_spin_lock(&head->lock);
 	new->state|=ACORAL_THREAD_STATE_DELAY;
 	for (tmp=head->next;delay2=delay,tmp!=head; tmp=tmp->next){
 		thread = list_entry (tmp, acoral_thread_t, waiting);
@@ -77,7 +76,6 @@ void acoral_periodqueue_add(acoral_thread_t *new){
 		thread = list_entry(tmp, acoral_thread_t, waiting);
 		thread->delay-=delay2;
 	}
-	acoral_spin_unlock(&head->lock);
 }
 
 void period_thread_delay(acoral_thread_t* thread,acoral_time time){
@@ -102,11 +100,9 @@ void period_delay_deal(){
 		    break;
 		private_data=thread->private_data;
 		/*防止add判断delay时取下thread*/
-		acoral_spin_lock(&head->lock);
 		tmp1=tmp->next;
 		acoral_list_del(&thread->waiting);
 		tmp=tmp1;
-		acoral_spin_unlock(&head->lock);
 		if(thread->state&ACORAL_THREAD_STATE_SUSPEND){
 			thread->stack=(acoral_u32 *)((acoral_8 *)thread->stack_buttom+thread->stack_size-4);
 			HAL_STACK_INIT(&thread->stack,private_data->route,period_thread_exit,private_data->args);
@@ -123,7 +119,6 @@ void period_thread_exit(){
 acoral_sched_policy_t period_policy;
 void period_policy_init(){
 	acoral_list_init(&period_delay_queue.head);
-	acoral_spin_init(&period_delay_queue.head.lock);
 	period_policy.type=ACORAL_SCHED_POLICY_PERIOD;
 	period_policy.policy_thread_init=period_policy_thread_init;
 	period_policy.policy_thread_release=period_policy_thread_release;

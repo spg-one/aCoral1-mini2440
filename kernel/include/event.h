@@ -1,7 +1,6 @@
 #ifndef ACORAL_EVENT_H
 #define ACORAL_EVENT_H
 #include "resource.h"
-#include "spinlock.h"
 #include "queue.h"
 
 #define ACORAL_EVENT_MIN_NUM 0
@@ -13,7 +12,6 @@
 typedef struct {
 	acoral_res_t         res;
   	acoral_u8            type;
-	acoral_spinlock_t    spin_lock;
 	acoral_32           count;
 	acoral_queue_t      wait_queue;
 	acoral_char            *name;

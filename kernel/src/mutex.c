@@ -68,18 +68,15 @@ acoral_u32 acoral_mutex_del(acoral_evt_t *evt, acoral_u32 opt)
 
 	/* 是否有任务等待*/
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if (acoral_evt_queue_empty(evt))
 	{
 		/*无等待任务删除*/
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_SUCCED;
 	}
 	else
 	{
 		/*有等待任务*/
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_TASK_EXIST;
 	}
@@ -101,10 +98,8 @@ acoral_u32 acoral_mutex_trypend(acoral_evt_t *evt)
 	cur=acoral_cur_thread;
 	
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if (NULL== evt)
 	{
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_NULL;
 	}
@@ -115,12 +110,10 @@ acoral_u32 acoral_mutex_trypend(acoral_evt_t *evt)
 		evt->count &= MUTEX_U_MASK;
 		evt->count |= cur->prio;
 		evt->data = (void*)cur;
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_SUCCED;
 	}
 
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	return MUTEX_ERR_TIMEOUT;
 }
@@ -145,10 +138,8 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 	cur=acoral_cur_thread;
 	
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if (NULL== evt)
 	{
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_NULL;
 	}
@@ -159,7 +150,6 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 		evt->count &= MUTEX_U_MASK;
 		evt->count |= cur->prio;
 		evt->data = (void*)cur;
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_SUCCED;
 	}
@@ -188,15 +178,12 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 		cur->delay = TIME_TO_TICKS(timeout);
 		timeout_queue_add(cur);
 	}
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	acoral_sched();
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
 		acoral_printk("Time Out Return\n");
 		acoral_evt_queue_del(cur);
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_TIMEOUT;
 	}
@@ -208,7 +195,6 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 	if(evt->data!=cur){
 		acoral_printk("Err Ready Return\n");
 		acoral_evt_queue_del(cur);
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_RDY;
 	}
@@ -235,10 +221,8 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 	cur=acoral_cur_thread;
 	
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 	if (NULL== evt)
 	{
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_NULL;
 	}
@@ -252,7 +236,6 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 
 		/*提升至天花板优先级*/
 		cur->prio = (evt->count & MUTEX_CEILING_MASK)>> 16;
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_SUCCED;
 	}
@@ -266,20 +249,17 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 		cur->delay = TIME_TO_TICKS(timeout);
 		timeout_queue_add(cur);
 	}
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 
 	/*触发调度*/
 	acoral_sched();
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 
 	/*超时时间内未获得互斥量*/
 	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
 		acoral_printk("Time Out Return\n");
 		acoral_evt_queue_del(cur);
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_TIMEOUT;
 	}
@@ -290,7 +270,6 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 	if(evt->data!=cur){
 		acoral_printk("Err Ready Return\n");
 		acoral_evt_queue_del(cur);
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_RDY;
 	}
@@ -311,12 +290,10 @@ acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 	acoral_thread_t      *cur;
 
 	HAL_ENTER_CRITICAL();
-	acoral_spin_lock(&evt->spin_lock);
 
 	if ( NULL == evt )
 	{
 		acoral_printerr("mutex NULL\n");
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_NULL;   /*error*/
 	}
@@ -327,7 +304,6 @@ acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 	if (highPrio!=0&&cur->prio != highPrio && cur->prio != ownerPrio )
 	{
 		acoral_printerr("mutex prio err\n");
-		acoral_spin_unlock(&evt->spin_lock);
 		HAL_EXIT_CRITICAL();
 		return MUTEX_ERR_UNDEF;
 	}
@@ -342,7 +318,6 @@ acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 	if (thread==NULL){
 			evt->count |= MUTEX_AVAI;
 			evt->data = NULL;
-			acoral_spin_unlock(&evt->spin_lock);
 			HAL_EXIT_CRITICAL();
 			return MUTEX_SUCCED;
 	}
@@ -355,7 +330,6 @@ acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 	evt->count |= thread->prio;
 	evt->data = thread;
 	acoral_rdy_thread(thread);
-	acoral_spin_unlock(&evt->spin_lock);
 	HAL_EXIT_CRITICAL();
 	acoral_sched();
 	return MUTEX_SUCCED;
