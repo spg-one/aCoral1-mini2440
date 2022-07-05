@@ -10,3 +10,4 @@ hal.api
 *.o
 *.flags
 .log
+*.svn-base
