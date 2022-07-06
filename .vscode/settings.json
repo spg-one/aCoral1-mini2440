@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "int.h": "c",
-        "resource.h": "c",
+        "mem.h": "c",
         "*.tcc": "c",
         "type_traits": "c",
         "acoral.h": "c",

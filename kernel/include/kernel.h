@@ -16,7 +16,6 @@
 #include "int.h"
 #include "timer.h"
 #include "mem.h"
-#include "resource.h"
 #include "event.h"
 #include "mutex.h"
 #include "sem.h"

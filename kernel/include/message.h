@@ -8,7 +8,7 @@
 #include<type.h>
 #include<queue.h>
 #include<list.h>
-#include<resource.h>
+#include<mem.h>
 #include<event.h>
 #include<thread.h>
 

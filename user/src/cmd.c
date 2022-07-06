@@ -5,7 +5,6 @@
 #include <shell.h>
 #include <driver.h>
 #include <mem.h>
-#include <buddy.h>
 
 void malloc_scan(acoral_32 argc,acoral_char **argv){
 	acoral_mem_scan();

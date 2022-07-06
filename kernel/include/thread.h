@@ -18,7 +18,7 @@
 #include<autocfg.h>
 #include<type.h>
 #include<list.h>
-#include<resource.h>
+#include<mem.h>
 #include<queue.h>
 #include<event.h>
 

@@ -1,7 +1,7 @@
 #ifndef ACORAL_DRIVER_H
 #define ACORAL_DRIVER_H
 #include<type.h>
-#include<resource.h>
+#include<mem.h>
 #define ACORAL_DEV_OPEN_OK 0
 #define ACORAL_DEV_ERR_ID -1
 #define ACORAL_ERR_NO_DRV_RES 5

@@ -1,7 +1,6 @@
 #include <type.h>
 #include <hal.h>
 #include <queue.h>
-#include <resource.h>
 #include <lsched.h>
 #include <cpu.h>
 #include <error.h>

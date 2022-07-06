@@ -18,7 +18,6 @@
 #include<hal.h>
 #include<queue.h>
 #include<mem.h>
-#include<resource.h>
 #include<print.h>
 #include<core.h>
 acoral_pool_t acoral_pools[ACORAL_MAX_POOLS];

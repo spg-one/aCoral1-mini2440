@@ -1,6 +1,6 @@
 #ifndef ACORAL_EVENT_H
 #define ACORAL_EVENT_H
-#include "resource.h"
+#include "mem.h"
 #include "queue.h"
 
 #define ACORAL_EVENT_MIN_NUM 0
