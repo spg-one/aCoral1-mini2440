@@ -34,7 +34,7 @@ void soft_delay_init(){
 	data.cpu=acoral_current_cpu;
 	data.prio=ACORAL_TMP_PRIO;
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
-	tmp_id=acoral_create_thread_ext(delay_task,256,NULL,"softdelay",NULL,ACORAL_SCHED_POLICY_COMM,&data);
+	tmp_id=acoral_create_thread(delay_task,256,NULL,"softdelay",NULL,ACORAL_SCHED_POLICY_COMM,&data);
 	if(tmp_id==-1)
 		return;
 	acoral_delay_self(1000);

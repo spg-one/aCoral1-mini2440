@@ -167,7 +167,11 @@ sys_thread_t sys_thread_new(char *name, void (* thread)(void *arg), void *arg, i
 		struct timeoutnode * pto;
 		SYS_ARCH_DECL_PROTECT(x);
 		
-		tmp =  acoral_create_thread(thread, TCPIP_THREAD_STACKSIZE, arg, NULL, prio, 0 );
+		acoral_comm_policy_data_t data;
+		data.cpu = 0;
+		data.prio = prio;
+		data.prio_type = ACORAL_ABSOLUTE_PRIO;
+		tmp =  acoral_create_thread(thread, TCPIP_THREAD_STACKSIZE, arg, "TCPIP_THREAD",NULL, ACORAL_SCHED_POLICY_COMM, &data );
 		i   = getTONAvai();
 		if (i >= TCPIP_THREAD_MAXNUM)
 			return 0;

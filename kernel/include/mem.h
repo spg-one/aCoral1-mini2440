@@ -9,7 +9,31 @@ void* buddy_malloc(acoral_u32  size);
 void buddy_free(void *p);
 void buddy_scan(void);
 
-/*mem.h*/
+#define LEVEL 14 
+#define BLOCK_INDEX(index) ((index)>>1)
+#define BLOCK_SHIFT 7 
+#define BLOCK_SIZE (1<<BLOCK_SHIFT)
+#define MEM_NO_ALLOC 0
+#define MEM_OK 1
+typedef struct{
+	acoral_8 level;
+}acoral_block_t;
+
+typedef struct{
+	acoral_32 *free_list[LEVEL];
+	acoral_u32 *bitmap[LEVEL];
+	acoral_32 free_cur[LEVEL];
+	acoral_u32 num[LEVEL];
+	acoral_8 level;
+	acoral_u8 state;
+	acoral_u32 start_adr;
+	acoral_u32 end_adr;
+	acoral_u32 block_num;
+	acoral_u32 free_num;
+	acoral_u32 block_size;
+}acoral_block_ctr_t;
+
+/*resource.h*/
 #include<type.h>
 #include<core.h>
 #include<list.h>
@@ -121,7 +145,7 @@ void acoral_pool_res_init(acoral_pool_t * pool);
 acoral_u8 acoral_get_cpu_by_id(acoral_id id);
 void acoral_res_sys_init(void);
 
-
+/*mem.h*/
 #define acoral_malloc(size) buddy_malloc(size)
 #define acoral_free(ptr) buddy_free(ptr)
 #define acoral_malloc_size(size) buddy_malloc_size(size)

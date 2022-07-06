@@ -31,11 +31,6 @@
 #define CFG_PLUGIN_NET 1
 
 /*
- * Test configuration
- */
-#undef CFG_TEST
-
-/*
  * User configuration
  */
 #define CFG_SHELL 1

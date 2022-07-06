@@ -1,7 +1,7 @@
 /**
  * @file mem.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief kernel层,集合了伙伴系统和资源池系统初始化的两级内存管理系统
+ * @brief kernel层,整合了伙伴系统和资源池系统初始化的两级内存管理系统
  * @version 1.0
  * @date 2022-07-04
  * @copyright Copyright (c) 2022
@@ -10,14 +10,18 @@
  *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
  *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
  *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized, add acoral_res_sys_init
+ * 	 <tr><td> 1.1 <td>王彬浩 <td> 2022-07-06 <td>将resource.c 和 buddy.c放进来
  *  </table>
  */
 
 #include <autocfg.h>
-#include<type.h>
-#include<hal.h>
-#include<mem.h>
-
+#include <hal.h>
+#include <mem.h>
+#include <print.h>
+#include <type.h> //TODO 改名字位资源
+#include <queue.h>
+#include <print.h>
+#include <core.h>
 /**
  * @brief 内存管理系统初始化
  * @note 初始化mmu;初始化两级内存管理系统，第一级为伙伴系统，第二级为资源池系统
@@ -32,46 +36,9 @@ void acoral_mem_sys_init(){
 }
 
 
-/**
- * @file buddy.c
- * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief kernel层,第一级内存管理——伙伴系统
- * @version 1.0
- * @date 2022-07-04
- * @copyright Copyright (c) 2022
- * @revisionHistory 
- *  <table> 
- *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
- *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
- *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized 
- *  </table>
- */
-#include <type.h>
-#include<hal.h>
-#include <print.h>
-#define LEVEL 14 
-#define BLOCK_INDEX(index) ((index)>>1)
-#define BLOCK_SHIFT 7 
-#define BLOCK_SIZE (1<<BLOCK_SHIFT)
-#define MEM_NO_ALLOC 0
-#define MEM_OK 1
-typedef struct{
-	acoral_8 level;
-}acoral_block_t;
+/*伙伴系统部分*/
+
 extern volatile acoral_u32 acoral_start_sched;
-typedef struct{
-	acoral_32 *free_list[LEVEL];
-	acoral_u32 *bitmap[LEVEL];
-	acoral_32 free_cur[LEVEL];
-	acoral_u32 num[LEVEL];
-	acoral_8 level;
-	acoral_u8 state;
-	acoral_u32 start_adr;
-	acoral_u32 end_adr;
-	acoral_u32 block_num;
-	acoral_u32 free_num;
-	acoral_u32 block_size;
-}acoral_block_ctr_t;
 
 acoral_block_ctr_t *acoral_mem_ctrl;
 acoral_block_t *acoral_mem_blocks;
@@ -277,9 +244,6 @@ static void *r_malloc(acoral_u8 level){
 		acoral_mem_ctrl->free_cur[level]=cur;
 		if((num&0x1)==0)
 			acoral_mem_blocks[BLOCK_INDEX(num)].level=level;
-#ifdef CFG_TEST
-		acoral_print("Malloc-level:%d,num:%d\n",level,num);
-#endif
 #ifdef CFG_TEST_MEM
 		buddy_scan();
 #endif
@@ -306,9 +270,6 @@ static void *r_malloc(acoral_u8 level){
 	}
 	if((num&0x1)==0)
 		acoral_mem_blocks[BLOCK_INDEX(num)].level=level;
-#ifdef CFG_TEST
-	acoral_print("malloc-level:%d,num:%d\n",level,num);
-#endif
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif
@@ -407,9 +368,6 @@ void buddy_free(void *ptr){
 		acoral_mem_ctrl->free_num+=1<<level;
 		acoral_mem_blocks[BLOCK_INDEX(num)].level=-1;
 	}
-#ifdef CFG_TEST
-	acoral_print("Free-level:%d,num:%d\n",level,num);
-#endif
 	if(level==max_level-1){
 		index=num>>level;
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
@@ -442,31 +400,8 @@ void buddy_free(void *ptr){
 }
 
 
+/*资源池部分*/
 
-
-
-
-/**
- * @file resource.c
- * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief kernel层,第二级内存管理——资源池
- * @version 1.0
- * @date 2022-07-04
- * @copyright Copyright (c) 2022
- * @revisionHistory 
- *  <table> 
- *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
- *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
- *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-04 <td>Standardized 
- *  </table>
- */
-
-#include<type.h> //TODO 改名字位资源
-#include<hal.h>
-#include<queue.h>
-#include<mem.h>
-#include<print.h>
-#include<core.h>
 acoral_pool_t acoral_pools[ACORAL_MAX_POOLS];
 acoral_pool_t *acoral_free_res_pool;
 /*================================
@@ -569,9 +504,6 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl){
 	pool->res_free=(void *)((acoral_u8 *)pool->base_adr+res->next_id*pool->size);
 	res->id=(res->id>>(ACORAL_RES_INDEX_INIT_BIT-ACORAL_RES_INDEX_BIT))&ACORAL_RES_INDEX_MASK|pool->id;
         pool->free_num--;
-#ifdef CFG_TEST
-	acoral_print("Alloc res 0x%x\n",res);
-#endif
 	if(!pool->free_num){
 	  	acoral_list_del(&pool->free_list);
 	}
@@ -606,9 +538,6 @@ void acoral_release_res(acoral_res_t *res){
 		acoral_printerr("Err Res\n");
 		return;
 	}
-#ifdef CFG_TEST
-	acoral_print("Free res 0x%x\n",res);
-#endif
 	tmp=pool->res_free;
 	pool->res_free=(void *)res;
 	res->id=index<<ACORAL_RES_INDEX_INIT_BIT;

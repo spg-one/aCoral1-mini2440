@@ -73,12 +73,6 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 	acoral_thread_t *thread;
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
-#ifdef CFG_TEST
-	if(new->state&ACORAL_THREAD_STATE_DELAY){
-		acoral_printerr("Still in delay but be waked,why?\n");
-		return;
-	}
-#endif
 	head=&queue->head;
 	HAL_ENTER_CRITICAL();
 	/*这里采用关ticks中断，不用关中断，是为了减少最大关中断时间，下面是个链表，时间不确定。*/

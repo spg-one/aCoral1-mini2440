@@ -86,11 +86,9 @@ void daem(void *args)
 	}
 }
 
-#ifdef CFG_TEST
-#define DAEM_STACK_SIZE 512
-#else
+
 #define DAEM_STACK_SIZE 256
-#endif
+
 acoral_thread_t *thread;
 
 /**
@@ -116,7 +114,7 @@ void init(void *args)
 	data.cpu = acoral_current_cpu;
 	data.prio = ACORAL_DAEMON_PRIO;
 	data.prio_type = ACORAL_ABSOLUTE_PRIO;
-	daemon_id = acoral_create_thread_ext(daem, DAEM_STACK_SIZE, NULL, "daemon", NULL, ACORAL_SCHED_POLICY_COMM, &data);
+	daemon_id = acoral_create_thread(daem, DAEM_STACK_SIZE, NULL, "daemon", NULL, ACORAL_SCHED_POLICY_COMM, &data);
 	thread = (acoral_thread_t *)acoral_get_res_by_id(daemon_id);
 	if (daemon_id == -1)
 		while (1)
@@ -127,9 +125,6 @@ void init(void *args)
 #endif
 	plugin_init();
 	user_main();
-#ifdef CFG_TEST
-	test_init();
-#endif
 }
 
 acoral_thread_t orig_thread;
@@ -172,14 +167,14 @@ void acoral_core_cpu_start()
 	data.cpu = acoral_current_cpu;
 	data.prio = ACORAL_IDLE_PRIO;
 	data.prio_type = ACORAL_ABSOLUTE_PRIO;
-	idle_id = acoral_create_thread_ext(idle, IDLE_STACK_SIZE, NULL, "idle", NULL, ACORAL_SCHED_POLICY_COMM, &data);
+	idle_id = acoral_create_thread(idle, IDLE_STACK_SIZE, NULL, "idle", NULL, ACORAL_SCHED_POLICY_COMM, &data);
 	if (idle_id == -1)
 		while (1)
 			;
 	/*创建初始化线程,这个调用层次比较多，需要多谢堆栈*/
 	data.prio = ACORAL_INIT_PRIO;
 	/*动态堆栈*/
-	init_id = acoral_create_thread_ext(init, ACORAL_TEST_STACK_SIZE, "in init", "init", NULL, ACORAL_SCHED_POLICY_COMM, &data);
+	init_id = acoral_create_thread(init, ACORAL_TEST_STACK_SIZE, "in init", "init", NULL, ACORAL_SCHED_POLICY_COMM, &data);
 	if (init_id == -1)
 		while (1)
 			;

@@ -41,9 +41,6 @@ void acoral_release_thread(acoral_res_t *res){
 	acoral_thread_t *thread;
 	thread=(acoral_thread_t *)res;
 	acoral_list_del(&thread->global_list);
-#ifdef CFG_TEST
-	acoral_print("Release %s thread\n",thread->name);
-#endif
 	acoral_policy_thread_release(thread);
   	acoral_free((void *)thread->stack_buttom);
 	acoral_release_res((acoral_res_t *)thread);
@@ -340,9 +337,6 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 	HAL_ENTER_CRITICAL();
 	acoral_list_add2_tail(&thread->global_list,&acoral_threads_queue.head);
 	HAL_EXIT_CRITICAL();
-#ifdef CFG_TEST
-	acoral_print("%s thread initial well\n",thread->name);
-#endif
 	return 0;
 }
 

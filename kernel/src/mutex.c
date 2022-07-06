@@ -323,9 +323,6 @@ acoral_u32 acoral_mutex_post(acoral_evt_t *evt)
 	}
 	timeout_queue_del(thread);
 	acoral_evt_queue_del(thread);
-#ifdef CFG_TEST
-	acoral_print("%d post %d\n",cur->prio,thread->prio);
-#endif
 	evt->count &= MUTEX_U_MASK;
 	evt->count |= thread->prio;
 	evt->data = thread;

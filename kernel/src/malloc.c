@@ -23,11 +23,6 @@ struct mem2_ctrl_t{
 	acoral_8 *top_p;
 	acoral_8 *down_p;
 	acoral_u32 *freep_p;
-#ifdef CFG_TEST
-	acoral_u32 alloc_num;
-	acoral_u32 free_num;
-	acoral_u32 alloc_size;
-#endif
 	acoral_u8 mem_state;
 }mem_ctrl;
 
@@ -41,11 +36,6 @@ static void *r_malloc(acoral_32 size){
 #ifdef CFG_TEST_MEM2
 	acoral_print("...................\n");
 	v_mem_scan();
-#endif
-#ifdef CFG_TEST
-	mem_ctrl.alloc_size+=size;
-	mem_ctrl.alloc_num++;
-	acoral_print("In malloc:%d\n",size);
 #endif
 	tp=mem_ctrl.freep_p;
 	ctp=(acoral_8 *)tp;
@@ -112,9 +102,6 @@ static void *r_malloc(acoral_32 size){
 	v_mem_scan();
 	acoral_print("...................\n");
 #endif
-#ifdef CFG_TEST
-	mem_ctrl.alloc_size-=size;
-#endif
 	acoral_mutex_post(&mem_ctrl.mutex);
 	return NULL;
 }
@@ -147,11 +134,6 @@ void v_free(void * p){
 	prev_tp=tp;
 	ctp=(acoral_8 *)tp;
     b_size=BLOCK_SIZE(*tp);
-#ifdef CFG_TEST
-	mem_ctrl.alloc_size-=b_size;
-	mem_ctrl.free_num++;
-	acoral_print("In free:%d\n",b_size);
-#endif
 #ifdef CFG_TEST_MEM2
 	acoral_print("...................\n");
 	acoral_print("Before free\n");
@@ -222,11 +204,6 @@ void v_mem_init(){
 	mem_ctrl.top_p=mem_ctrl.down_p+size;
 	mem_ctrl.freep_p=(acoral_u32 *)mem_ctrl.down_p;
 	BLOCK_SET_FREE(mem_ctrl.freep_p,size);
-#ifdef CFG_TEST
-	mem_ctrl.alloc_size=0;
-	mem_ctrl.alloc_num=0;
-	mem_ctrl.free_num=0;
-#endif
 }
 
 void v_mem_scan(void){
@@ -254,8 +231,5 @@ void v_mem_scan(void){
 		}
 		ctp=ctp+size;
 	}while(ctp<mem_ctrl.top_p);
-#ifdef CFG_TEST
-	acoral_print("Alloc Size:%d  Free_num:%d  alloc_num:%d\r\n",mem_ctrl.alloc_size,mem_ctrl.free_num,mem_ctrl.alloc_num);
-#endif
 }
 

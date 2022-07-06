@@ -8,14 +8,6 @@ acoral_32 acoral_prints(const acoral_char * buf);
 acoral_char acoral_putchar(acoral_char c);
 #define acoral_printerr acoral_print
 
-
-
-#ifdef CFG_TEST
-#define acoral_printk(str) acoral_prints(str)
-#else
-#define acoral_printk(fmt)
-#endif
-
 #ifdef CFG_DEBUG
 #undef acoral_printk
 #define acoral_printk(str) acoral_prints(str)

@@ -70,12 +70,10 @@ O_TARGET:=acoral.o
 obj-y :=hal/hal.o kernel/kernel.o lib/lib.o\
 	plugin/plugin.o user/user.o
 obj-y +=driver/driver.o
-obj-$(CFG_TEST)+=test/test.o
 obj-$(CFG_BSP)+=bsp/bsp.o
 subdir-y=hal kernel lib plugin user
 subdir-y +=driver
 subdir-$(CFG_BSP)+=bsp
-subdir-$(CFG_TEST)+=test
 
 acoral:include/autocfg.h first_rule $(CORE_FILES)
 	@echo "###System Configure###"
