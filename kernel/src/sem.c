@@ -68,19 +68,19 @@ acoral_u32 acoral_sem_del(acoral_evt_t *evt, acoral_u32 opt)
 	if ( evt->type != ACORAL_EVENT_SEM )
 		return SEM_ERR_TYPE; /* error*/
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	thread =acoral_evt_high_thread(evt);
 	if (thread==NULL)
 	{
 		/*队列上无等待任务*/
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		evt = NULL;
 		return SEM_ERR_UNDEF;
 	}
 	else
 	{
 		/*有等待任务*/
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return SEM_ERR_TASK_EXIST; /*error*/
 	}
 }
@@ -111,14 +111,14 @@ acoral_u32 acoral_sem_trypend(acoral_evt_t *evt)
 	}
 
 	/* 计算信号量处理*/
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if ((acoral_8)evt->count <= SEM_RES_AVAI)
 	{   /* available*/
 		evt->count++;
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return SEM_SUCCED;
 	}
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return SEM_ERR_TIMEOUT;
 }
 
@@ -150,11 +150,11 @@ acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 	}
 
 	/* 计算信号量处理*/
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if ((acoral_8)evt->count <= SEM_RES_AVAI)
 	{   /* available*/
 		evt->count++;
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return SEM_SUCCED;
 	}
 
@@ -166,25 +166,25 @@ acoral_u32 acoral_sem_pend(acoral_evt_t *evt, acoral_time timeout)
 		timeout_queue_add(cur);
 	}
 	acoral_evt_queue_add(evt,cur);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	
 	acoral_sched();
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if(timeout>0 && cur->delay<=0)
 	{
 		//--------------
 		// modify by pegasus 0804: count-- [+]
 		evt->count--;
 		acoral_evt_queue_del(cur);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return SEM_ERR_TIMEOUT;
 	}
 
 	//-------------------
 	// modify by pegasus 0804: timeout_queue_del [+]
 	timeout_queue_del(cur);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return SEM_SUCCED;
 }
 
@@ -209,13 +209,13 @@ acoral_u32 acoral_sem_post(acoral_evt_t *evt)
 		return SEM_ERR_TYPE;
 	}
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 
 	/* 计算信号量的释放*/
 	if ((acoral_8)evt->count <= SEM_RES_NOAVAI)
 	{ /* no waiting thread*/
 		evt->count--;
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return SEM_SUCCED;
 	}
 	/* 有等待线程*/
@@ -225,14 +225,14 @@ acoral_u32 acoral_sem_post(acoral_evt_t *evt)
 	{
 		/*应该有等待线程却没有找到*/
 		acoral_printerr("Err Sem post\n");
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return SEM_ERR_UNDEF;
 	}
 	timeout_queue_del(thread);
 	/*释放等待任务*/
 	acoral_evt_queue_del(thread);
 	acoral_rdy_thread(thread);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	acoral_sched();
 	return SEM_SUCCED;
 }
@@ -249,9 +249,9 @@ acoral_32 acoral_sem_getnum(acoral_evt_t* evt)
 	if (NULL == evt)
 		return SEM_ERR_NULL;
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	t = 1 - (acoral_32)evt->count;
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return t;
 }
 

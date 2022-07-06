@@ -2,7 +2,6 @@
 #include <hal.h>
 #include <lsched.h>
 #include <print.h>
-#include <cpu.h>
 #include <int.h>
 acoral_intr_ctr_t intr_table[HAL_INTR_NUM];
 
@@ -114,7 +113,7 @@ void acoral_intr_mask(acoral_vector vector){
 void acoral_intr_entry(acoral_vector vector){ //TODO或者把这个弱定义了
 	acoral_vector index;
 #ifdef CFG_DEBUG
-  	//acoral_print("isr in cpu:%d\n",acoral_current_cpu);
+  	//acoral_print("isr in cpu:%d\n",0);
 #endif
    	HAL_TRANSLATE_VECTOR(vector,index);
 	acoral_intr_nesting_inc();
@@ -241,12 +240,12 @@ void acoral_fault_entry(acoral_u32 lr,acoral_u32 *stack){
 		while(1);	
 	acoral_printerr("Exception occur\n");
 	acoral_printerr("******************\n");
-	acoral_printerr("CPU:%d\n",acoral_current_cpu);;
-	acoral_printerr("Thread name:%s\n",acoral_cur_thread->name);;
-	acoral_printerr("Thread prio:%d\n",acoral_cur_thread->prio);;
-	acoral_printerr("Thread stack_size:%d\n",acoral_cur_thread->stack_size);;
-	acoral_printerr("Thread stack_buttom:0x%x\n",acoral_cur_thread->stack_buttom);;
-	acoral_printerr("Thread stack:0x%x\n",acoral_cur_thread->stack);;
+	acoral_printerr("CPU:%d\n",0);
+	acoral_printerr("Thread name:%s\n",acoral_cur_thread->name);
+	acoral_printerr("Thread prio:%d\n",acoral_cur_thread->prio);
+	acoral_printerr("Thread stack_size:%d\n",acoral_cur_thread->stack_size);
+	acoral_printerr("Thread stack_buttom:0x%x\n",acoral_cur_thread->stack_buttom);
+	acoral_printerr("Thread stack:0x%x\n",acoral_cur_thread->stack);
 	acoral_printerr("Pc:0x%x\n",lr);
 	acoral_printerr("Stack:0x%x\n",stack);
 	acoral_printerr("******************\n");

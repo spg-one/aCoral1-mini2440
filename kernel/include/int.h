@@ -19,6 +19,8 @@ typedef struct {
 #define acoral_intr_nesting HAL_GET_INTR_NESTING()
 #define acoral_intr_nesting_inc() HAL_INTR_NESTING_INC()
 #define acoral_intr_nesting_dec() HAL_INTR_NESTING_DEC()
+#define acoral_enter_critical() HAL_ENTER_CRITICAL()
+#define acoral_exit_critical() HAL_EXIT_CRITICAL()
 void acoral_intr_init(void);
 acoral_32 acoral_intr_attach(acoral_vector vector,void (*isr)(acoral_vector));
 acoral_32 acoral_intr_detach(acoral_vector vector);

@@ -7,6 +7,8 @@
 #include<mem.h>
 #include<timer.h>
 #include<period_thrd.h>
+#include <int.h>
+
 acoral_queue_t period_delay_queue;
 acoral_id period_policy_thread_init(acoral_thread_t *thread,void (*route)(void *args),void *args,void *data){
 	acoral_sr cpu_sr;
@@ -26,9 +28,9 @@ acoral_id period_policy_thread_init(acoral_thread_t *thread,void (*route)(void *
 		private_data=(period_policy_data_t *)acoral_malloc2(sizeof(period_policy_data_t));
 		if(private_data==NULL){
 			acoral_printerr("No level2 mem space for private_data:%s\n",thread->name);
-			HAL_ENTER_CRITICAL();
+			acoral_enter_critical();
 			acoral_release_res((acoral_res_t *)thread);
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return -1;
 		}
 		private_data->time=policy_data->time;
@@ -39,16 +41,16 @@ acoral_id period_policy_thread_init(acoral_thread_t *thread,void (*route)(void *
 	}
 	if(acoral_thread_init(thread,route,period_thread_exit,args)!=0){
 		acoral_printerr("No thread stack:%s\n",thread->name);
-		HAL_ENTER_CRITICAL();
+		acoral_enter_critical();
 		acoral_release_res((acoral_res_t *)thread);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return -1;
 	}
         /*将线程就绪，并重新调度*/
 	acoral_resume_thread(thread);
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	period_thread_delay(thread,((period_policy_data_t *)thread->private_data)->time);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return thread->res.id;
 }
 

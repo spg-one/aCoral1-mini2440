@@ -195,17 +195,17 @@ acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 /*	if (acoral_intr_nesting > 0)
 		return MST_ERR_INTR;
 */
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 
 	if (NULL == msgctr)
 	{
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return MST_ERR_NULL;
 	}
 
 	if (NULL == msg)
 	{
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return MSG_ERR_NULL;
 	}
 
@@ -214,7 +214,7 @@ acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 	/*----------------*/
 	if (ACORAL_MESSAGE_MAX_COUNT <= msgctr->count)
 	{
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return MSG_ERR_COUNT;
 	}
 
@@ -234,7 +234,7 @@ acoral_u32 acoral_msg_send(acoral_msgctr_t* msgctr, acoral_msg_t* msg)
 		wake_up_thread(&msgctr->waiting);
 		msgctr->wait_thread_num--;
 	}
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	acoral_sched();
 	return MSGCTR_SUCCED;
 }
@@ -267,7 +267,7 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 
 	cur = acoral_cur_thread;
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if(timeout>0){
 		cur->delay = TIME_TO_TICKS(timeout);
 		timeout_queue_add( cur);
@@ -293,7 +293,7 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 				acoral_list_del (q);
 				acoral_release_res ((acoral_res_t *)pmsg);		
 				msgctr->count--;
-				HAL_EXIT_CRITICAL();
+				acoral_exit_critical();
 				return dat;
 			}
 		}
@@ -304,12 +304,12 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 		msgctr->wait_thread_num++;
 		acoral_msgctr_queue_add(msgctr, cur);
 		acoral_unrdy_thread(cur);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		acoral_sched();
 		/*-----------------*/
 		/*  看有没有超时*/
 		/*-----------------*/
-		HAL_ENTER_CRITICAL();
+		acoral_enter_critical();
 	
 		if (timeout>0&&(acoral_32)cur->delay <=0 )
 			break;
@@ -323,7 +323,7 @@ void* acoral_msg_recv (acoral_msgctr_t* msgctr,
 	if(msgctr->wait_thread_num>0)
 		msgctr->wait_thread_num--;
 	acoral_list_del(&cur->waiting);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	*err = MST_ERR_TIMEOUT;
 	return NULL;
 

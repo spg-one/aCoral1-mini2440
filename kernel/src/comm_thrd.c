@@ -1,5 +1,4 @@
 #include<type.h>
-#include<cpu.h>
 #include<queue.h>
 #include<thread.h>
 #include<lsched.h>
@@ -7,6 +6,7 @@
 #include<hal.h>
 #include<policy.h>
 #include<comm_thrd.h>
+#include <int.h>
 acoral_sched_policy_t comm_policy;
 
 /**
@@ -60,9 +60,9 @@ acoral_id comm_policy_thread_init(acoral_thread_t *thread,void (*route)(void *ar
 	thread->prio=prio;
 	if(acoral_thread_init(thread,route,acoral_thread_exit,args)!=0){
 		acoral_printerr("No thread stack:%s\n",thread->name);
-		HAL_ENTER_CRITICAL();
+		acoral_enter_critical();
 		acoral_release_res((acoral_res_t *)thread);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return -1;
 	}
         /*将线程就绪，并重新调度*/

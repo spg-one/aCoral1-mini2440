@@ -1,7 +1,6 @@
 #include<type.h>
 #include<hal.h>
 #include<thread.h>
-#include<cpu.h>
 #include<int.h>
 #include<lsched.h>
 acoral_u8 need_sched[HAL_MAX_CPU];

@@ -15,18 +15,16 @@
 
 #include<type.h>
 #include<hal_comm.h>
-#include<cpu.h>
 #include<atomic.h>
 
-acoral_u32 intr_nesting[HAL_MAX_CPU];
+acoral_u32 intr_nesting;
 
 /**
  * @brief 中断嵌套初始化
  */
 void hal_intr_nesting_init_comm(){
 	acoral_u32 i;
-	for(i=0;i<HAL_MAX_CPU;i++) //TODO 删
-	  	intr_nesting[i]=0;
+	intr_nesting=0;
 }
 
 /**
@@ -35,7 +33,7 @@ void hal_intr_nesting_init_comm(){
  * @return acoral_u32 当前CPU的中断嵌套数
  */
 acoral_u32 hal_get_intr_nesting_comm(){
-    return intr_nesting[acoral_current_cpu];
+    return intr_nesting;
 }
 
 
@@ -44,10 +42,8 @@ acoral_u32 hal_get_intr_nesting_comm(){
 *减少当前CPU中断嵌套数
 *===========================*/
 void hal_intr_nesting_dec_comm(){
-    acoral_u8 cpu;
-    cpu=acoral_current_cpu;
-    if(intr_nesting[cpu]>0)
-	intr_nesting[cpu]--;
+    if(intr_nesting>0)
+	intr_nesting--;
 }
 
 
@@ -56,7 +52,7 @@ void hal_intr_nesting_dec_comm(){
 *增加中断嵌套数
 *===========================*/
 void hal_intr_nesting_inc_comm(){
-    intr_nesting[acoral_current_cpu]++;
+    intr_nesting++;
 }
 
 void hal_sched_bridge_comm(){

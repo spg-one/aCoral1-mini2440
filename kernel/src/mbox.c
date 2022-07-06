@@ -72,10 +72,10 @@ acoral_u32 acoral_mbox_send(acoral_evt_t * event, void *msg)
 	if(event->type != ACORAL_EVENT_MBOX)
 		return MBOX_ERR_TYPE;
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if(event->data != NULL)
 	{
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return MBOX_ERR_MES_EXIST;
 	}
 	event->data = msg;
@@ -84,14 +84,14 @@ acoral_u32 acoral_mbox_send(acoral_evt_t * event, void *msg)
 	if (thread==NULL)
 	{
 		/* 没有等待队列*/
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return  MBOX_SUCCED;
 	}
 	/*释放等待任务*/
 	timeout_queue_del(thread);
 	acoral_evt_queue_del(thread);
 	acoral_rdy_thread(thread);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	acoral_sched();
 	return MBOX_SUCCED;
 }
@@ -112,7 +112,7 @@ void* acoral_mbox_recv(acoral_evt_t * event, acoral_time timeout)
 	if(event->type!=ACORAL_EVENT_MBOX)
 		return NULL;
 	
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if( event->data == NULL)
 	{
 		cur = acoral_cur_thread;
@@ -123,26 +123,26 @@ void* acoral_mbox_recv(acoral_evt_t * event, acoral_time timeout)
 		}
 		acoral_unrdy_thread(cur);
 		acoral_evt_queue_add(event, cur);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		acoral_sched();
-		HAL_ENTER_CRITICAL();
+		acoral_enter_critical();
 
 		if (timeout > 0 && cur->delay <= 0)
 		{
 			acoral_evt_queue_del(cur);
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return NULL;
 		}
 
 		msg        = event->data;
 		event->data = NULL;
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return msg;
 	}
 	
 	msg         = event->data;
 	event->data = NULL;
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 
 	return msg;
 }
@@ -162,16 +162,16 @@ void* acoral_mbox_tryrecv(acoral_evt_t * event)
 	if(event->type!=ACORAL_EVENT_MBOX)
 		return NULL;
 	
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if( event->data == NULL)
 	{
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return NULL;
 	}
 	
 	msg         = event->data;
 	event->data = NULL;
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 
 	return msg;
 }

@@ -34,7 +34,6 @@
 acoral_queue_t acoral_res_release_queue;
 volatile acoral_u32 acoral_start_sched = false;
 acoral_id daemon_id, idle_id, init_id;
-extern volatile acoral_u32 idle_count[HAL_MAX_CPU];
 
 /**
  * @brief aCoral空闲守护线程idle函数
@@ -62,13 +61,13 @@ void daem(void *args)
 		for (tmp = head->next; tmp != head;)
 		{
 			tmp1 = tmp->next;
-			HAL_ENTER_CRITICAL();
+			acoral_enter_critical();
 			thread = list_entry(tmp, acoral_thread_t, waiting);
 			/*如果线程资源已经不在使用，即release状态则释放*/
 
 			acoral_list_del(tmp); /**/
 
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			tmp = tmp1;
 			if (thread->state == ACORAL_THREAD_STATE_RELEASE)
 			{
@@ -76,10 +75,10 @@ void daem(void *args)
 			}
 			else
 			{
-				HAL_ENTER_CRITICAL();
+				acoral_enter_critical();
 				tmp1 = head->prev;
 				acoral_list_add2_tail(&thread->waiting, head); /**/
-				HAL_EXIT_CRITICAL();
+				acoral_exit_critical();
 			}
 		}
 		acoral_suspend_self();
@@ -111,7 +110,7 @@ void init(void *args)
 
 	/*创建后台服务进程*/
 	acoral_init_list(&acoral_res_release_queue.head);
-	data.cpu = acoral_current_cpu;
+	data.cpu = 0;
 	data.prio = ACORAL_DAEMON_PRIO;
 	data.prio_type = ACORAL_ABSOLUTE_PRIO;
 	daemon_id = acoral_create_thread(daem, DAEM_STACK_SIZE, NULL, "daemon", NULL, ACORAL_SCHED_POLICY_COMM, &data);
@@ -146,9 +145,9 @@ void acoral_start()
 	/*串口终端应该初始化好了，将根线程的终端id设置为串口终端*/
 #ifdef CFG_DRIVER
 	orig_thread.console_id = acoral_dev_open("console");
-	acoral_prints("hello spg");
+	//acoral_prints("hello spgj");
 #endif
-
+	//acoral_prints("here\n");
 	/*主cpu开始函数*/
 	acoral_core_cpu_start();
 }
@@ -164,20 +163,25 @@ void acoral_core_cpu_start()
 	acoral_comm_policy_data_t data;
 	/*创建空闲线程*/
 	acoral_start_sched = false;
-	data.cpu = acoral_current_cpu;
+	data.cpu = 0;
 	data.prio = ACORAL_IDLE_PRIO;
 	data.prio_type = ACORAL_ABSOLUTE_PRIO;
 	idle_id = acoral_create_thread(idle, IDLE_STACK_SIZE, NULL, "idle", NULL, ACORAL_SCHED_POLICY_COMM, &data);
 	if (idle_id == -1)
-		while (1)
-			;
+	{
+		while(1){}
+	}
 	/*创建初始化线程,这个调用层次比较多，需要多谢堆栈*/
 	data.prio = ACORAL_INIT_PRIO;
 	/*动态堆栈*/
 	init_id = acoral_create_thread(init, ACORAL_TEST_STACK_SIZE, "in init", "init", NULL, ACORAL_SCHED_POLICY_COMM, &data);
 	if (init_id == -1)
-		while (1)
-			;
+	{
+		//acoral_prints("hhh\n");
+		while (1){}
+	}
+		
+	
 	acoral_start_os();
 }
 
@@ -190,6 +194,8 @@ void acoral_start_os()
 	acoral_sched_init();
 	acoral_select_thread();
 	acoral_set_running_thread(acoral_ready_thread);
+	acoral_prints("1\n");
+	acoral_prints(acoral_cur_thread->name);
 	HAL_START_OS(&acoral_cur_thread->stack);
 }
 

@@ -8,11 +8,11 @@
 
 #include <hal.h>
 #include <queue.h>
-#include <cpu.h>
 #include <print.h>
 #include <policy.h>
 #include <comm_thrd.h>
 #include <timer.h>
+#include <int.h>
 
 acoral_queue_t time_delay_queue;
 /*----------------*/
@@ -51,7 +51,7 @@ void acoral_ticks_init(){
 void acoral_ticks_entry(acoral_vector vector){
 
         ticks++;
-	//acoral_printdbg("In ticks isr\n");
+	//acoral_prints("In ticks isr\n");
 	if(acoral_start_sched==true){
 		time_delay_deal();
 		acoral_policy_delay_deal();
@@ -74,7 +74,7 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
 	head=&queue->head;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	/*这里采用关ticks中断，不用关中断，是为了减少最大关中断时间，下面是个链表，时间不确定。*/
 	/*这里可以看出，延时函数会有些误差，因为ticks中断可能被延迟*/
 #ifndef CFG_TICKS_PRIVATE
@@ -121,7 +121,7 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 	}
 	acoral_unrdy_thread(new);
 #endif
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	acoral_sched();
 	return;
 }
@@ -163,7 +163,7 @@ void timeout_queue_add(acoral_thread_t *new)
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
 	head=&timeout_queue.head;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 #ifndef CFG_TICKS_PRIVATE
 	tmp1=head;
 	while(1){
@@ -202,7 +202,7 @@ void timeout_queue_add(acoral_thread_t *new)
 	}
 #endif
 
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return;
 }
 

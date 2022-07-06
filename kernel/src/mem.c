@@ -22,6 +22,8 @@
 #include <queue.h>
 #include <print.h>
 #include <core.h>
+#include <int.h>
+
 /**
  * @brief 内存管理系统初始化
  * @note 初始化mmu;初始化两级内存管理系统，第一级为伙伴系统，第二级为资源池系统
@@ -228,13 +230,13 @@ static void *r_malloc(acoral_u8 level){
 	acoral_sr cpu_sr;
 	acoral_u32 index;
 	acoral_32 num,cur;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	acoral_mem_ctrl->free_num-=1<<level;
 	cur=acoral_mem_ctrl->free_cur[level];
 	if(cur<0){
 		num=recus_malloc(level+1);
 		if(num<0){
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return NULL;
 		}
 		index=num>>level+1;
@@ -247,7 +249,7 @@ static void *r_malloc(acoral_u8 level){
 #ifdef CFG_TEST_MEM
 		buddy_scan();
 #endif
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return (void *)(acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT));
 	}
 	index=acoral_ffs(acoral_mem_ctrl->bitmap[level][cur]);
@@ -259,7 +261,7 @@ static void *r_malloc(acoral_u8 level){
 	if(level==acoral_mem_ctrl->level-1){
 		num=index<<level;
 		if(num+(1<<level)>acoral_mem_ctrl->block_num){
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return NULL; 
 		}
 	}
@@ -273,7 +275,7 @@ static void *r_malloc(acoral_u8 level){
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return (void *)(acoral_mem_ctrl->start_adr+(num<<BLOCK_SHIFT));
 }
 
@@ -334,7 +336,7 @@ void buddy_free(void *ptr){
 		acoral_printerr("Invalid Free Address:0x%x\n",ptr);
 		return;
 	}
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if(num&0x1){
 		level=0;
 		/*下面是地址检查*/
@@ -342,19 +344,19 @@ void buddy_free(void *ptr){
 		buddy_level=acoral_mem_blocks[BLOCK_INDEX(num)].level;
 		if(buddy_level>0){
 			acoral_printerr("Invalid Free Address:0x%x\n",ptr);
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return;
 		}
 		/*伙伴分配出去，如果对应的位为1,肯定是回收过一次了*/
 		if(buddy_level==0&&acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return;
 		}
 		/*伙伴没有分配出去了，如果对应的位为0,肯定是回收过一次了*/
 		if(buddy_level<0&&!acoral_get_bit(index,acoral_mem_ctrl->bitmap[level])){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return;
 		}
 	}else{
@@ -362,7 +364,7 @@ void buddy_free(void *ptr){
 		/*已经释放*/
 		if(level<0){
 			acoral_printerr("Address:0x%x have been freed\n",ptr);
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return;
 		}	
 		acoral_mem_ctrl->free_num+=1<<level;
@@ -371,7 +373,7 @@ void buddy_free(void *ptr){
 	if(level==max_level-1){
 		index=num>>level;
 		acoral_set_bit(index,acoral_mem_ctrl->bitmap[level]);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		return;
 	}
 	index=num>>1+level;
@@ -393,7 +395,7 @@ void buddy_free(void *ptr){
 		if(level<max_level-1)
 			index=index>>1;
 	}
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 #ifdef CFG_TEST_MEM
 	buddy_scan();
 #endif
@@ -488,11 +490,11 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl){
   	acoral_list_t *first;
 	acoral_res_t *res;
 	acoral_pool_t *pool;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	first=pool_ctrl->free_pools->next;
 	if(acoral_list_empty(first)){
 	  	if(acoral_create_pool(pool_ctrl)){
-			HAL_EXIT_CRITICAL();
+			acoral_exit_critical();
 			return NULL;
 		}
 		else{
@@ -507,7 +509,7 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl){
 	if(!pool->free_num){
 	  	acoral_list_del(&pool->free_list);
 	}
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return res;
 }
 
@@ -569,12 +571,12 @@ acoral_pool_t *acoral_get_pool_by_id(acoral_id res_id){
 acoral_pool_t *acoral_get_free_pool(){
 	acoral_sr cpu_sr;
   	acoral_pool_t *tmp;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	tmp=acoral_free_res_pool;
 	if(NULL!=tmp){
 		acoral_free_res_pool=*(void **)tmp->base_adr;
 	}
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return tmp;
 }
 

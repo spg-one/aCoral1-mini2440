@@ -2,8 +2,9 @@
 #include<thread.h>
 #include<comm_thrd.h>
 #include<hal.h>
-#include<cpu.h>
 #include<policy.h>
+#include <int.h>
+
 acoral_u32 sample_100ms;
 volatile acoral_u32 sample;
 void delay(){
@@ -31,7 +32,7 @@ void soft_delay_init(){
 	acoral_comm_policy_data_t data;
 	acoral_thread_t *thread;
 	acoral_id tmp_id;
-	data.cpu=acoral_current_cpu;
+	data.cpu=0;
 	data.prio=ACORAL_TMP_PRIO;
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
 	tmp_id=acoral_create_thread(delay_task,256,NULL,"softdelay",NULL,ACORAL_SCHED_POLICY_COMM,&data);
@@ -41,8 +42,8 @@ void soft_delay_init(){
 	sample_100ms=sample/10;
 	/*这里daemo回收进程还没启动，不能使用acoral_kill_thread*/
 	thread=(acoral_thread_t *)acoral_get_res_by_id(tmp_id);
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	acoral_unrdy_thread(thread);
 	acoral_release_thread((acoral_res_t *)thread);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 }

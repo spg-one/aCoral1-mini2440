@@ -1,8 +1,10 @@
 #ifndef SCHED_H
 #define SCHED_H
 #include<type.h>
-#include<cpu.h>
 #include<thread.h>
+
+#define HAL_MAX_CPU 1
+#define acoral_current_cpu 0
 extern acoral_u8 need_sched[];
 extern acoral_u8 sched_lock[];
 extern acoral_thread_t *running_thread[],*ready_thread[];

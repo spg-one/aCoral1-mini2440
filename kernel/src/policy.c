@@ -4,6 +4,8 @@
 #include<thread.h>
 #include<print.h>
 #include<policy.h>
+#include <int.h>
+
 acoral_queue_t policy_list;
 acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,void *stack,acoral_u32 sched_policy,void *data){
 	acoral_thread_t *thread;
@@ -43,9 +45,9 @@ acoral_id acoral_policy_thread_init(acoral_u32 policy,acoral_thread_t *thread,vo
 	acoral_sched_policy_t   *policy_ctrl;
 	policy_ctrl=acoral_get_policy_ctrl(policy);	
 	if(policy_ctrl==NULL||policy_ctrl->policy_thread_init==NULL){
-		HAL_ENTER_CRITICAL();
+		acoral_enter_critical();
 		acoral_release_res((acoral_res_t *)thread);
-		HAL_EXIT_CRITICAL();
+		acoral_exit_critical();
 		acoral_printerr("No thread policy support:%d\n",thread->policy);
 		return -1;
 	}

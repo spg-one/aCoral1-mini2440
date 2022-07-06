@@ -15,8 +15,8 @@
         "hal_int.h": "c",
         "hal_comm.h": "c",
         "driver.h": "c",
-        "mem.h": "c",
         "buddy.h": "c",
-        "plugin.h": "c"
+        "plugin.h": "c",
+        "lsched.h": "c"
     }
 }

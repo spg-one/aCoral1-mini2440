@@ -178,7 +178,7 @@ void acoral_shell_init(void){
 	tail_cmd=NULL;
 	cmd_init();
 #ifdef CFG_UART_SHELL
-	data.cpu=acoral_current_cpu;
+	data.cpu=0;
 	data.prio=ACORAL_TMP_PRIO;
 	data.prio_type=ACORAL_ABSOLUTE_PRIO;
 	acoral_create_thread(acoral_shell_enter,SHELL_STACK_SIZE,(void *)acoral_cur_thread->console_id,"shell",NULL,ACORAL_SCHED_POLICY_COMM,&data);

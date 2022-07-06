@@ -2,14 +2,14 @@
 #include <hal.h>
 #include <queue.h>
 #include <lsched.h>
-#include <cpu.h>
 #include <error.h>
 #include <timer.h>
 #include <mem.h>
 #include <print.h>
 #include <thread.h>
+#include <int.h>
 extern acoral_queue_t acoral_res_release_queue;
-extern acoral_rdy_queue_t acoral_ready_queues[HAL_MAX_CPU];
+extern acoral_rdy_queue_t* acoral_ready_queues;
 acoral_queue_t acoral_threads_queue;
 acoral_res_api_t thread_api;
 acoral_pool_ctrl_t acoral_thread_pool_ctrl;
@@ -59,10 +59,10 @@ void acoral_suspend_thread(acoral_thread_t *thread){
 	if(!(ACORAL_THREAD_STATE_READY&thread->state))
 		return;
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	/**/
 	acoral_rdyqueue_del(thread);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	/**/
 	acoral_sched();
 }
@@ -108,10 +108,10 @@ void acoral_resume_thread(acoral_thread_t *thread){
 	if(!(thread->state&ACORAL_THREAD_STATE_SUSPEND))
 		return;
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	/**/
 	acoral_rdyqueue_add(thread);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	/**/
 	acoral_sched();
 }
@@ -167,7 +167,7 @@ void acoral_kill_thread(acoral_thread_t *thread){
 	acoral_sr cpu_sr;
 	acoral_8 cpu;
 	acoral_evt_t *evt;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
         /*	*/
         /*	*/
 	if(thread->state&ACORAL_THREAD_STATE_SUSPEND){
@@ -185,7 +185,7 @@ void acoral_kill_thread(acoral_thread_t *thread){
 	}
 	acoral_unrdy_thread(thread);
 	acoral_release_thread1(thread);
-      	HAL_EXIT_CRITICAL();
+    acoral_exit_critical();
 	acoral_sched();
 }
 
@@ -215,14 +215,14 @@ void acoral_thread_exit(){
 void acoral_thread_change_prio(acoral_thread_t* thread, acoral_u32 prio){
 	acoral_sr cpu_sr;
 	acoral_8 cpu;
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	if(thread->state&ACORAL_THREAD_STATE_READY){
 		acoral_rdyqueue_del(thread);
 		thread->prio = prio;
 		acoral_rdyqueue_add(thread);
 	}else
 		thread->prio = prio;
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 }
 
 /*===========================
@@ -275,10 +275,10 @@ void acoral_thread_move2_tail(acoral_thread_t *thread){
 	acoral_8 cpu;
 	acoral_sr cpu_sr;
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	acoral_unrdy_thread(thread);
 	acoral_rdy_thread(thread);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	acoral_sched();
 }
 
@@ -321,10 +321,10 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 	/*cpu_mask*/
 	if(thread->cpu_mask==-1)
 		thread->cpu_mask=0xefffffff;
-	if(thread->cpu<0)
-	      thread->cpu=acoral_get_idle_maskcpu(thread->cpu_mask);
-	if(thread->cpu>=HAL_MAX_CPU)
-		thread->cpu=HAL_MAX_CPU-1;
+	if(thread->cpu!=0){
+		acoral_prints("cpu can not be negetive");
+		return ACORAL_ERR_THREAD_ILLEGAL_CPU;
+	}
 	thread->data=NULL;
 	thread->state=ACORAL_THREAD_STATE_SUSPEND;
 	/*继承父线程的console_id*/
@@ -334,9 +334,9 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 	acoral_init_list(&thread->timeout);
 	acoral_init_list(&thread->global_list);
 
-	HAL_ENTER_CRITICAL();
+	acoral_enter_critical();
 	acoral_list_add2_tail(&thread->global_list,&acoral_threads_queue.head);
-	HAL_EXIT_CRITICAL();
+	acoral_exit_critical();
 	return 0;
 }
 

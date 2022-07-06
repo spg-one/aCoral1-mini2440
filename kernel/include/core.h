@@ -34,7 +34,6 @@
 
 volatile extern acoral_u32 acoral_start_sched;
 extern acoral_id daemon_id;
-acoral_u32 acoral_get_idlest_cpu(void);
 void acoral_module_init(void);
 void acoral_init_call(void);
 void acoral_thread_sys_init(void);
