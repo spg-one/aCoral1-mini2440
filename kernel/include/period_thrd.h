@@ -3,7 +3,6 @@
 #include<type.h>
 #include<thread.h>
 typedef struct{
-	acoral_8 cpu;
 	acoral_u8 prio;
 	acoral_8 prio_type;
 	acoral_time time;

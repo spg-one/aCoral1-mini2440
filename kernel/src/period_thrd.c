@@ -17,7 +17,6 @@ acoral_id period_policy_thread_init(acoral_thread_t *thread,void (*route)(void *
 	period_policy_data_t *private_data;
 	if(thread->policy==ACORAL_SCHED_POLICY_PERIOD){
 		policy_data=(acoral_period_policy_data_t *)data;
-		thread->cpu=policy_data->cpu;
 		prio=policy_data->prio;
 		if(policy_data->prio_type==ACORAL_BASE_PRIO){
 			prio+=ACORAL_BASE_PRIO_MIN;
@@ -37,7 +36,6 @@ acoral_id period_policy_thread_init(acoral_thread_t *thread,void (*route)(void *
 		private_data->route=route;
 		private_data->args=args;
 		thread->private_data=private_data;
-		thread->cpu_mask=-1;
 	}
 	if(acoral_thread_init(thread,route,period_thread_exit,args)!=0){
 		acoral_printerr("No thread stack:%s\n",thread->name);

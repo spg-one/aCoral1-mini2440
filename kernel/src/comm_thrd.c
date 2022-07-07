@@ -17,11 +17,10 @@ acoral_sched_policy_t comm_policy;
  * @param args 传进线程的参数
  * @param name 创建线程的名字
  * @param prio 创建线程的优先级
- * @param cpu 绑定进程到指定cpu运行，-1为由系统指定
  * @return acoral_id 
  */
 
-acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,acoral_u8 prio,acoral_8 cpu){
+acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,acoral_u8 prio){
 	acoral_comm_policy_data_t policy_ctrl;
 	acoral_thread_t *thread;
         /*分配tcb数据块*/
@@ -35,13 +34,10 @@ acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,voi
 	stack_size=stack_size&(~3);
 	thread->stack_size=stack_size;
 	thread->stack_buttom=NULL;
-        /*设置线程要运行的cpu核心*/
-	policy_ctrl.cpu=cpu;
         /*设置线程的优先级*/
 	policy_ctrl.prio=prio;
 	policy_ctrl.prio_type=ACORAL_BASE_PRIO;
 	thread->policy=ACORAL_SCHED_POLICY_COMM;
-	thread->cpu_mask=-1;
 	return comm_policy_thread_init(thread,route,args,&policy_ctrl);
 }
 
@@ -50,7 +46,6 @@ acoral_id comm_policy_thread_init(acoral_thread_t *thread,void (*route)(void *ar
 	acoral_u32 prio;
 	acoral_comm_policy_data_t *policy_data;
 	policy_data=(acoral_comm_policy_data_t *)data;
-	thread->cpu=policy_data->cpu;
 	prio=policy_data->prio;
 	if(policy_data->prio_type==ACORAL_BASE_PRIO){
 		prio+=ACORAL_BASE_PRIO_MIN;

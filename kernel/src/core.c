@@ -110,7 +110,6 @@ void init(void *args)
 
 	/*创建后台服务进程*/
 	acoral_init_list(&acoral_res_release_queue.head);
-	data.cpu = 0;
 	data.prio = ACORAL_DAEMON_PRIO;
 	data.prio_type = ACORAL_ABSOLUTE_PRIO;
 	daemon_id = acoral_create_thread(daem, DAEM_STACK_SIZE, NULL, "daemon", NULL, ACORAL_SCHED_POLICY_COMM, &data);
@@ -163,7 +162,6 @@ void acoral_core_cpu_start()
 	acoral_comm_policy_data_t data;
 	/*创建空闲线程*/
 	acoral_start_sched = false;
-	data.cpu = 0;
 	data.prio = ACORAL_IDLE_PRIO;
 	data.prio_type = ACORAL_ABSOLUTE_PRIO;
 	idle_id = acoral_create_thread(idle, IDLE_STACK_SIZE, NULL, "idle", NULL, ACORAL_SCHED_POLICY_COMM, &data);

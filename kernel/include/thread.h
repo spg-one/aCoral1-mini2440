@@ -61,8 +61,6 @@ typedef struct{
 
 	acoral_u8 state;
 	acoral_u8 prio;
-	acoral_8 cpu; //TODO 删
-	acoral_u32 cpu_mask; //指示线程可以在哪些CPU上运行 //TODO 删 
 	acoral_u8 policy;
 	acoral_list_t ready;
 	acoral_list_t timeout;

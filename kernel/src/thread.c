@@ -318,13 +318,7 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
 	}
 	thread->stack=(acoral_u32 *)((acoral_8 *)thread->stack_buttom+stack_size-4);
 	HAL_STACK_INIT(&thread->stack,route,exit,args);
-	/*cpu_mask*/
-	if(thread->cpu_mask==-1)
-		thread->cpu_mask=0xefffffff;
-	if(thread->cpu!=0){
-		acoral_prints("cpu can not be negetive");
-		return ACORAL_ERR_THREAD_ILLEGAL_CPU;
-	}
+	
 	thread->data=NULL;
 	thread->state=ACORAL_THREAD_STATE_SUSPEND;
 	/*继承父线程的console_id*/

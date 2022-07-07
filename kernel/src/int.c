@@ -240,7 +240,6 @@ void acoral_fault_entry(acoral_u32 lr,acoral_u32 *stack){
 		while(1);	
 	acoral_printerr("Exception occur\n");
 	acoral_printerr("******************\n");
-	acoral_printerr("CPU:%d\n",0);
 	acoral_printerr("Thread name:%s\n",acoral_cur_thread->name);
 	acoral_printerr("Thread prio:%d\n",acoral_cur_thread->prio);
 	acoral_printerr("Thread stack_size:%d\n",acoral_cur_thread->stack_size);

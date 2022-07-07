@@ -17,6 +17,7 @@
         "driver.h": "c",
         "buddy.h": "c",
         "plugin.h": "c",
-        "lsched.h": "c"
+        "lsched.h": "c",
+        "thread.h": "c"
     }
 }

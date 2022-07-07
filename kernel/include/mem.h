@@ -45,7 +45,6 @@ typedef struct{
 #define ACORAL_RES_EVENT 2
 #define ACORAL_RES_TIMER 3
 #define ACORAL_RES_DRIVER 4
-#define ACORAL_RES_GUI 5
 #define ACORAL_RES_USER 6
 /*------------------*/
 /* pegasus  0719*/
@@ -59,7 +58,6 @@ typedef struct{
 #define ACORAL_RES_TYPE_BIT 10
 #define ACORAL_RES_INDEX_BIT 14
 #define ACORAL_RES_INDEX_INIT_BIT 16
-#define ACORAL_RES_CPU_BIT 24 //DEL
 #define ACORAL_RES_ID_BIT 24
 
 #define ACORAL_POOL_INDEX_MASK 0x000003FF
@@ -68,7 +66,6 @@ typedef struct{
 #define ACORAL_RES_TYPE_MASK   0x00003c00
 #define ACORAL_RES_INDEX_MASK  0x00FFC000
 #define ACORAL_RES_ID_MASK     0x00FFFFFF
-#define ACORAL_RES_CPU_MASK    0xFF000000 //DEL
 
 #define ACORAL_RES_ERR         0xf0   
 #define ACORAL_RES_NO_RES      ACORAL_RES_ERR+0 
@@ -82,7 +79,6 @@ typedef struct{
  *      res_id--资源ID
  *================================*/
 #define ACORAL_RES_TYPE(id) ((id&ACORAL_RES_TYPE_MASK)>>ACORAL_RES_TYPE_BIT)
-#define ACORAL_RES_CPU(id) ((id&ACORAL_RES_CPU_MASK)>>ACORAL_RES_CPU_BIT) //DEL
 
 typedef union {
    acoral_id id;
@@ -142,7 +138,6 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl);
 void acoral_release_res(acoral_res_t *res);
 acoral_res_t * acoral_get_res_by_id(acoral_id id);
 void acoral_pool_res_init(acoral_pool_t * pool);
-acoral_u8 acoral_get_cpu_by_id(acoral_id id);
 void acoral_res_sys_init(void);
 
 /*mem.h*/
