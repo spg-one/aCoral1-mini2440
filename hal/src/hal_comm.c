@@ -28,33 +28,36 @@ void hal_intr_nesting_init_comm(){
 }
 
 /**
- * @brief 获取当前CPU的中断嵌套数
+ * @brief 获取系统当前中断嵌套数
  * 
- * @return acoral_u32 当前CPU的中断嵌套数
+ * @return acoral_u32 中断嵌套数
  */
 acoral_u32 hal_get_intr_nesting_comm(){
     return intr_nesting;
 }
 
-
-/*===========================                                                                                                                 
-*Decrise the nesting      
-*减少当前CPU中断嵌套数
-*===========================*/
+/**
+ * @brief 减少系统当前中断嵌套数
+ * 
+ */
 void hal_intr_nesting_dec_comm(){
     if(intr_nesting>0)
 	intr_nesting--;
 }
 
-
-/*===========================                                                                                                                 
-*Incrise the nesting        
-*增加中断嵌套数
-*===========================*/
+/**
+ * @brief 增加系统当前中断嵌套数
+ * 
+ */
 void hal_intr_nesting_inc_comm(){
     intr_nesting++;
 }
 
+
+/**
+ * @brief 保证调度的原子性
+ * 
+ */
 void hal_sched_bridge_comm(){
   	acoral_sr cpu_sr;
 	HAL_ENTER_CRITICAL();
@@ -62,6 +65,10 @@ void hal_sched_bridge_comm(){
 	HAL_EXIT_CRITICAL();
 }
 
+/**
+ * @brief 保证调度（中断引起）的原子性
+ * 
+ */
 void hal_intr_exit_bridge_comm(){
   	acoral_sr cpu_sr;
 	HAL_ENTER_CRITICAL();
@@ -69,6 +76,12 @@ void hal_intr_exit_bridge_comm(){
 	HAL_EXIT_CRITICAL();
 }
 
+/**
+ * @brief 原子加法操作，加法过程中不会被打断
+ * 
+ * @param i 被加数
+ * @param v v->val为加数
+ */
 void hal_atomic_add_comm(int i, acoral_atomic_t *v)
 {
 		acoral_sr sr;
@@ -77,6 +90,12 @@ void hal_atomic_add_comm(int i, acoral_atomic_t *v)
 		HAL_INTR_RESTORE(sr);
 }
 
+/**
+ * @brief 原子加减法操作，减法过程中不会被打断
+ * 
+ * @param i 减数数
+ * @param v v->val为被减数
+ */
 void hal_atomic_sub_comm(int i, acoral_atomic_t *v)
 {
 	acoral_sr sr;
