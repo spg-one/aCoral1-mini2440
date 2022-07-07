@@ -1,3 +1,17 @@
+/**
+ * @file softdelay.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层，软件延时，不使用定时器的定时函数
+ * @version 1.0
+ * @date 2022-07-07
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-07 <td>Standardized 
+ *  </table>
+ */
 #include<type.h>
 #include<thread.h>
 #include<comm_thrd.h>
@@ -5,28 +19,47 @@
 #include<policy.h>
 #include <int.h>
 
-acoral_u32 sample_100ms;
 volatile acoral_u32 sample;
+volatile acoral_u32 sample_per_1000ms;
+
+/**
+ * @brief 软件延时
+ * 
+ */
 void delay(){
 	volatile acoral_32 tmp=0xfff;
 	while(tmp-->0);
 	sample++;
 }
 
-void delay_task(void *args){
+/**
+ * @brief 软件中断初始化线程函数，测量标定值sample
+ * 
+ */
+void delay_task(void){
 	sample=0;
 	for(;;){
 		delay();
 	}
 }
 
-void acoral_soft_delay(acoral_u32 n100ms){
+/**
+ * @brief 用户API，软件中断接口
+ * 
+ * @param n_1000ms 延时时间，单位1000ms
+ */
+void acoral_soft_delay(acoral_u32 n_1000ms){
 	acoral_u32 i;
-	acoral_u32 tmp=n100ms*sample_100ms;	
+	acoral_u32 tmp=n_1000ms*sample_per_1000ms;	
 	for(i=0;i<tmp;i++)
 		delay();
 }
 
+/**
+ * @brief 软件延时初始化
+ * @note 创建delay_task线程后，让它自己跑1000毫秒，看这1000毫秒它能让sample加到多少。后面要延时就通过sample来标定。
+ * 
+ */
 void soft_delay_init(){
 	acoral_sr cpu_sr;
 	acoral_comm_policy_data_t data;
@@ -38,7 +71,7 @@ void soft_delay_init(){
 	if(tmp_id==-1)
 		return;
 	acoral_delay_self(1000);
-	sample_100ms=sample/10;
+	acoral_u32 sample_per_1000ms = sample;
 	/*这里daemo回收进程还没启动，不能使用acoral_kill_thread*/
 	thread=(acoral_thread_t *)acoral_get_res_by_id(tmp_id);
 	acoral_enter_critical();
