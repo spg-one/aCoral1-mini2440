@@ -3,31 +3,35 @@
 #include<thread.h>
 #include<int.h>
 #include<lsched.h>
-acoral_u8 need_sched[HAL_MAX_CPU];
-acoral_u8 sched_lock[HAL_MAX_CPU];
-acoral_thread_t *running_thread[HAL_MAX_CPU],*ready_thread[HAL_MAX_CPU];
-static acoral_rdy_queue_t acoral_ready_queues[HAL_MAX_CPU];
+acoral_u8 need_sched;
+acoral_u8 sched_lock;
+acoral_thread_t *running_thread,*ready_thread;
+
+static acoral_rdy_queue_t acoral_ready_queues; 
+/* 之前是static acoral_rdy_queue_t acoral_ready_queues[HAL_MAX_CPU],*/
+/*改成static acoral_rdy_queue_t* acoral_ready_queues 后，由于static存在，会把这个指针变量初始化为0，*/
+/*后面初始化就绪队列的操作就会修改0地址的异常向量表，导致时钟中断被打开后，无法正常进入中断服务*/
+/*很恐怖的bug！！谨此记录*/
+
 void acoral_sched_init(){
 	acoral_u8 i;
-	for(i=0;i<HAL_MAX_CPU;i++){
-		sched_lock[acoral_current_cpu]=0;
-		need_sched[acoral_current_cpu]=0;
-	}
+	sched_lock=0;
+	need_sched=0;
 }
 
 void acoral_sched_unlock(){
-	sched_lock[acoral_current_cpu]=0;	
+	sched_lock=0;	
 	acoral_sched();
 }
 
 void acoral_set_orig_thread(acoral_thread_t *thread){
-  	running_thread[acoral_current_cpu]=thread;
+  	running_thread=thread;
 }
 
 void acoral_set_running_thread(acoral_thread_t *thread){
-  	running_thread[acoral_current_cpu]->state&=~ACORAL_THREAD_STATE_RUNNING;
+  	running_thread->state&=~ACORAL_THREAD_STATE_RUNNING;
 	thread->state|=ACORAL_THREAD_STATE_RUNNING;
-  	running_thread[acoral_current_cpu]=thread;
+  	running_thread=thread;
 }
 
 /*================================
@@ -37,45 +41,13 @@ void acoral_set_running_thread(acoral_thread_t *thread){
 void acoral_thread_runqueue_init(){
 	acoral_prio_array_t *array;
 	acoral_rdy_queue_t *rdy_queue;
-	acoral_u8 cpu;
 	/*初始化每个核上的优先级队列*/
-	for(cpu=0;cpu<HAL_MAX_CPU;cpu++){
-		rdy_queue=acoral_ready_queues+cpu;
-		array=&rdy_queue->array;
-		acoral_prio_queue_init(array);
-	}
-
+	rdy_queue=&acoral_ready_queues;
+	array=&rdy_queue->array;
+	acoral_prio_queue_init(array);
 }
 
-/*================================
- *      Get the idlest core 
- *     获取最空闲的cpu核 
- *================================*/
-acoral_u32 acoral_get_idlest_cpu(){
-  	acoral_u32 cpu,i,count=-1;
-	acoral_rdy_queue_t *rdy_queue;
-  	for(i=0;i<HAL_MAX_CPU;i++){
-	    rdy_queue=acoral_ready_queues+i;
-	    if(count>rdy_queue->array.num){
-	      	count=rdy_queue->array.num;
-		cpu=i;
-	    }
-	}
-	return cpu;
-}
 
-acoral_u32 acoral_get_idle_maskcpu(acoral_u32 cpu_mask){
-  	acoral_u32 cpu,i,count=-1;
-	acoral_rdy_queue_t *rdy_queue;
-  	for(i=0,cpu=0;i<HAL_MAX_CPU;i++){
-	    rdy_queue=acoral_ready_queues+i;
-	    if(count>rdy_queue->array.num&&(1<<i&cpu_mask)){
-	      	count=rdy_queue->array.num;
-		cpu=i;
-	    }
-	}
-	return cpu;
-}
 
 /*================================
  * func: add thread to acoral_ready_queues
@@ -83,13 +55,10 @@ acoral_u32 acoral_get_idle_maskcpu(acoral_u32 cpu_mask){
  *================================*/
 void acoral_rdyqueue_add(acoral_thread_t *thread){
 	acoral_rdy_queue_t *rdy_queue;
-	acoral_u8 cpu;
-	cpu=thread->cpu;
-	rdy_queue=acoral_ready_queues+cpu;
+	rdy_queue=&acoral_ready_queues;
 	acoral_prio_queue_add(&rdy_queue->array,thread->prio,&thread->ready);
 	thread->state&=~ACORAL_THREAD_STATE_SUSPEND;
 	thread->state|=ACORAL_THREAD_STATE_READY;
-	thread->res.id=thread->res.id|cpu<<ACORAL_RES_CPU_BIT;
 	acoral_set_need_sched(true);
 }
 
@@ -98,10 +67,8 @@ void acoral_rdyqueue_add(acoral_thread_t *thread){
  *    将线程从就绪队列上取下
  *================================*/
 void acoral_rdyqueue_del(acoral_thread_t *thread){
-	acoral_8 cpu;
 	acoral_rdy_queue_t *rdy_queue;
-	cpu=thread->cpu;
-	rdy_queue=acoral_ready_queues+cpu;
+	rdy_queue=&acoral_ready_queues;
         acoral_prio_queue_del(&rdy_queue->array,thread->prio,&thread->ready);
 	thread->state&=~ACORAL_THREAD_STATE_READY;
 	thread->state&=~ACORAL_THREAD_STATE_RUNNING;
@@ -187,15 +154,13 @@ void acoral_real_intr_sched(){
  *     选择优先级最高的线程
  *================================*/
 void acoral_select_thread(){
-  	acoral_u8 cpu;
 	acoral_u32 index;
 	acoral_rdy_queue_t *rdy_queue;
 	acoral_prio_array_t *array;
 	acoral_list_t *head;
 	acoral_thread_t *thread;
 	acoral_queue_t *queue;
-	cpu=acoral_current_cpu;
-	rdy_queue=acoral_ready_queues+cpu;
+	rdy_queue=&acoral_ready_queues;
 	array=&rdy_queue->array;
 	/*找出就绪队列中优先级最高的线程的优先级*/
 	index = acoral_get_highprio(array);

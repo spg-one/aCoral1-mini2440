@@ -9,7 +9,7 @@
 #include <thread.h>
 #include <int.h>
 extern acoral_queue_t acoral_res_release_queue;
-extern acoral_rdy_queue_t* acoral_ready_queues;
+extern acoral_rdy_queue_t* acoral_ready_queues; //TODO 也许可删
 acoral_queue_t acoral_threads_queue;
 acoral_res_api_t thread_api;
 acoral_pool_ctrl_t acoral_thread_pool_ctrl;
