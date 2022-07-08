@@ -1,22 +1,5 @@
 #include<type.h>
-typedef struct {
-  	acoral_u32 cpsr;
-	acoral_u32 r0;
-	acoral_u32 r1;
-	acoral_u32 r2;
-	acoral_u32 r3;
-	acoral_u32 r4;
-	acoral_u32 r5;
-	acoral_u32 r6;
-	acoral_u32 r7;
-	acoral_u32 r8;
-	acoral_u32 r9;
-	acoral_u32 r10;
-	acoral_u32 r11;
-	acoral_u32 r12;
-	acoral_u32 lr;
-	acoral_u32 pc;
-}hal_ctx_t;
+#include <hal_thread.h>
 
 void hal_stack_init(acoral_u32 **stk,void (*route)(),void (*exit)(),void *args){
 	hal_ctx_t *ctx=(hal_ctx_t *)*stk;	

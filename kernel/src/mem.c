@@ -32,7 +32,7 @@ void acoral_mem_sys_init(){
   	HAL_MEM_INIT();	//mmu初始化
   	acoral_mem_init((acoral_u32)HAL_HEAP_START,(acoral_u32)HAL_HEAP_END);	//伙伴系统初始化
 #ifdef CFG_MEM2
-  	acoral_mem_init2(); //TODO what is this?
+  	acoral_mem_init2(); //从伙伴系统中拿出一部分内存，用作任意大小分配的内存
 #endif
 	acoral_res_sys_init();	//资源池系统初始化
 }

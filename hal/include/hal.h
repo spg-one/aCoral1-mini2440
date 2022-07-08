@@ -17,7 +17,11 @@
 #define HAL_H_
 #include "autocfg.h"
 #include "hal_comm.h"
-/*这个是用户真正要移植的部分的头文件*/
-#include "hal_port.h"
 #include "hal_int.h"
+#include <hal_nand.h>
+#include <hal_2440_c.h>
+#include <hal_2440_cfg.h>
+#include <hal_mem.h>
+#include <hal_thread.h>
+#include <hal_timer.h>
 #endif /* HAL_H_ */

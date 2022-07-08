@@ -17,6 +17,7 @@
 #include<hal_comm.h>
 #include<atomic.h>
 
+///中断嵌套数
 acoral_u32 intr_nesting;
 
 /**

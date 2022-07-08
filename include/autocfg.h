@@ -22,7 +22,6 @@
  * Driver configuration
  */
 #define CFG_DRIVER 1
-#define CFG_DRV_CON_UART 1
 #define CFG_DRV_NET_DM9000 1
 
 /*
@@ -34,7 +33,6 @@
  * User configuration
  */
 #define CFG_SHELL 1
-#define CFG_UART_SHELL 1
 
 /*
  * System hacking

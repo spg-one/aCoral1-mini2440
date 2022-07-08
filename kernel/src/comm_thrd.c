@@ -27,7 +27,7 @@ acoral_id create_comm_thread(void (*route)(void *args),acoral_u32 stack_size,voi
 	thread=acoral_alloc_thread();
 	if(NULL==thread){
 		acoral_printerr("Alloc thread:%s fail\n",name);
-		acoral_printk("No Mem Space or Beyond the max thread\n");
+		acoral_prints("No Mem Space or Beyond the max thread\n");
 		return -1;
 	}
 	thread->name=name;

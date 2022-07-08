@@ -16,23 +16,16 @@
 #ifndef HAL_2440_CFG_H
 #define HAL_2440_CFG_H
 
-#define USR26_MODE		0x00
-#define FIQ26_MODE		0x01
-#define IRQ26_MODE		0x02
-#define SVC26_MODE		0x03
-#define USR_MODE		0x10
-#define FIQ_MODE		0x11
-#define IRQ_MODE		0x12
-#define SVC_MODE		0x13
-#define ABT_MODE		0x17
-#define UND_MODE		0x1b
-#define SYS_MODE		0x1f
+#define USR_MODE		0x10 ///>修改cpsr，切换到user模式
+#define FIQ_MODE		0x11 ///>修改cpsr，切换到fiq模式
+#define IRQ_MODE		0x12 ///>修改cpsr，切换到irq模式
+#define SVC_MODE		0x13 ///>修改cpsr，切换到supervisor模式
+#define ABT_MODE		0x17 ///>修改cpsr，切换到data_abort模式
+#define UND_MODE		0x1b ///>修改cpsr，切换到undfined_instruction模式
+#define SYS_MODE		0x1f ///>修改cpsr，切换到system模式
 #define MODE_MASK		0x1f
-#define NOINT        	0xc0
-#define NOIRQ           0x80
-#define PSR_T_BIT       0x20
-#define PSR_F_BIT       0x40
-#define PSR_I_BIT       0x80
+#define NOINT        	0xc0 ///>修改cpsr，禁止irq和fiq
+#define NOIRQ           0x80 ///>修改cpsr，禁止irq
 
 
 #define FCLK 400000000
@@ -142,13 +135,6 @@
 
 
 /* Clock and Power Management */
-
-#define SCLKE		(1 << 19)
-#define SCLK1		(1 << 18)
-#define SCLK0		(1 << 17)
-#define PMST_SMR	(1 << 1)
-
-
 #define CLK_CTL_BASE		0x4C000000
 #define bCLKCTL(Nb)		(CLK_CTL_BASE + (Nb))
 /* Offset */

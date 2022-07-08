@@ -2,6 +2,7 @@
 #include<core.h>
 #include<hal_2440_cfg.h>
 #include<hal_2440_c.h>
+#include <hal_timer.h>
 
 /****************************************
 *****这个函数的作用是初始化滴答时钟数据**

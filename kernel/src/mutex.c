@@ -182,7 +182,7 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 	acoral_sched();
 	acoral_enter_critical();
 	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
-		acoral_printk("Time Out Return\n");
+		acoral_prints("Time Out Return\n");
 		acoral_evt_queue_del(cur);
 		acoral_exit_critical();
 		return MUTEX_ERR_TIMEOUT;
@@ -193,7 +193,7 @@ acoral_u32 acoral_mutex_pend(acoral_evt_t *evt, acoral_time timeout)
 	timeout_queue_del(cur);
 
 	if(evt->data!=cur){
-		acoral_printk("Err Ready Return\n");
+		acoral_prints("Err Ready Return\n");
 		acoral_evt_queue_del(cur);
 		acoral_exit_critical();
 		return MUTEX_ERR_RDY;
@@ -258,7 +258,7 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 
 	/*超时时间内未获得互斥量*/
 	if(evt->data!=cur&&timeout>0&&cur->delay<=0){
-		acoral_printk("Time Out Return\n");
+		acoral_prints("Time Out Return\n");
 		acoral_evt_queue_del(cur);
 		acoral_exit_critical();
 		return MUTEX_ERR_TIMEOUT;
@@ -268,7 +268,7 @@ acoral_u32 acoral_mutex_pend2(acoral_evt_t *evt, acoral_time timeout)
 	timeout_queue_del(cur);
 
 	if(evt->data!=cur){
-		acoral_printk("Err Ready Return\n");
+		acoral_prints("Err Ready Return\n");
 		acoral_evt_queue_del(cur);
 		acoral_exit_critical();
 		return MUTEX_ERR_RDY;

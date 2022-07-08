@@ -9,11 +9,6 @@ acoral_char acoral_putchar(acoral_char c);
 #define acoral_printerr acoral_print
 
 #ifdef CFG_DEBUG
-#undef acoral_printk
-#define acoral_printk(str) acoral_prints(str)
 #define acoral_printdbg(str) acoral_prints(str)
-#else
-#undef acoral_printdbg(fmt)
-#define acoral_printdbg(fmt)
 #endif
 #endif
