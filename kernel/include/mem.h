@@ -1,36 +1,66 @@
+/**
+ * @file mem.h
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层，内存相关头文件
+ * @version 1.0
+ * @date 2022-07-08
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-08 <td>Standardized 
+ *  </table>
+ */
 #ifndef ACORAL_MEM_H
 #define ACORAL_MEM_H
 #include<autocfg.h>
+#include"type.h"
+#include <hal.h>
 
 /*buddy.h*/
-#include"type.h"
 acoral_err buddy_init(acoral_u32 start, acoral_u32 end);
 void* buddy_malloc(acoral_u32  size);
 void buddy_free(void *p);
 void buddy_scan(void);
 
+///最大层数
 #define LEVEL 14 
+///bitmap的index换算，因为除去最大内存块的剩余层中64块用一个32位图表示，所以要除以2
 #define BLOCK_INDEX(index) ((index)>>1)
+///基本内存块偏移量
 #define BLOCK_SHIFT 7 
+///基本内存块大小 128b
 #define BLOCK_SIZE (1<<BLOCK_SHIFT)
+///内存系统状态定义：容量太小不可分配
 #define MEM_NO_ALLOC 0
+///内存系统状态定义：容量足够可以分配
 #define MEM_OK 1
+
+/**
+ * @brief 内存块层数结构体
+ * 
+ */
 typedef struct{
 	acoral_8 level;
 }acoral_block_t;
 
+/**
+ * @brief 内存控制块结构体
+ * 
+ */
 typedef struct{
-	acoral_32 *free_list[LEVEL];
-	acoral_u32 *bitmap[LEVEL];
-	acoral_32 free_cur[LEVEL];
-	acoral_u32 num[LEVEL];
-	acoral_8 level;
-	acoral_u8 state;
-	acoral_u32 start_adr;
-	acoral_u32 end_adr;
-	acoral_u32 block_num;
-	acoral_u32 free_num;
-	acoral_u32 block_size;
+	acoral_32 *free_list[LEVEL]; //各层空闲位图链表
+	acoral_u32 *bitmap[LEVEL]; //各层内存状态位图块，两种情况：一. 最大内存块层，为一块内存空闲与否；二.其余层，1 标识两块相邻内存块有一块空闲，0 标识没有空闲
+	acoral_32 free_cur[LEVEL]; //各层空闲位图链表头
+	acoral_u32 num[LEVEL]; //各层内存块个数
+	acoral_8 level; //层数 
+	acoral_u8 state; //状态
+	acoral_u32 start_adr; //内存起始地址
+	acoral_u32 end_adr; //内存终止地址
+	acoral_u32 block_num; //基本内存块数
+	acoral_u32 free_num; //空闲基本内存块数
+	acoral_u32 block_size; //基本内存块大小
 }acoral_block_ctr_t;
 
 /*resource.h*/
@@ -133,7 +163,6 @@ acoral_pool_t *acoral_get_free_pool(void);
 acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl);
 void acoral_pool_res_init(acoral_pool_t *pool);
 void acoral_release_pool(acoral_pool_ctrl_t *pool_ctrl);
-void acoral_collect_pool(acoral_pool_ctrl_t *pool_ctrl);
 acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl);
 void acoral_release_res(acoral_res_t *res);
 acoral_res_t * acoral_get_res_by_id(acoral_id id);
@@ -141,12 +170,12 @@ void acoral_pool_res_init(acoral_pool_t * pool);
 void acoral_res_sys_init(void);
 
 /*mem.h*/
+#define acoral_mmu_init() HAL_MEM_INIT()
 #define acoral_malloc(size) buddy_malloc(size)
 #define acoral_free(ptr) buddy_free(ptr)
 #define acoral_malloc_size(size) buddy_malloc_size(size)
 #define acoral_mem_init(start,end) buddy_init(start,end)
 #define acoral_mem_scan() buddy_scan()
-
 
 
 

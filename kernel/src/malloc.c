@@ -1,4 +1,4 @@
-#include<type.h>
+#include<type.h> //TODO合并
 #include<mutex.h>
 #include<print.h>
 #include<mem.h>
@@ -189,6 +189,10 @@ void v_free(void * p){
 	acoral_mutex_post(&mem_ctrl.mutex);
 }
 
+/**
+ * @brief 任意大小内存分配系统初始化。从伙伴系统中拿出一部分内存，用作任意大小分配的内存
+ * 
+ */
 void v_mem_init(){
 	acoral_size size;
 	size=acoral_malloc_size(MEM_SIZE);

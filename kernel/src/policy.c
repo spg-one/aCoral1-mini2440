@@ -7,25 +7,6 @@
 #include <int.h>
 
 acoral_queue_t policy_list;
-acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,void *stack,acoral_u32 sched_policy,void *data){
-	acoral_thread_t *thread;
-        /*分配tcb数据块*/
-	thread=acoral_alloc_thread();
-	if(NULL==thread){
-		acoral_printerr("Alloc thread:%s fail\n",name);
-		acoral_prints("No Mem Space or Beyond the max thread\n");
-		return -1;
-	}
-	thread->name=name;
-	stack_size=stack_size&(~3);
-	thread->stack_size=stack_size;
-	if(stack!=NULL)
-		thread->stack_buttom=(acoral_u32 *)stack;
-	else
-		thread->stack_buttom=NULL;
-	thread->policy=sched_policy;
-	return acoral_policy_thread_init(sched_policy,thread,route,args,data);
-}
 
 acoral_sched_policy_t *acoral_get_policy_ctrl(acoral_u8 type){
 	acoral_list_t   *tmp,*head;

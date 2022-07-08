@@ -1,3 +1,18 @@
+/**
+ * @file thread.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层，线程机制相关函数
+ * @version 1.0
+ * @date 2022-07-08
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-08 <td>Standardized 
+ *  </table>
+ */
+
 #include <type.h>
 #include <hal.h>
 #include <queue.h>
@@ -8,11 +23,45 @@
 #include <print.h>
 #include <thread.h>
 #include <int.h>
+#include <policy.h>
+
 extern acoral_queue_t acoral_res_release_queue;
 extern acoral_rdy_queue_t* acoral_ready_queues; //TODO 也许可删
 acoral_queue_t acoral_threads_queue;
 acoral_res_api_t thread_api;
 acoral_pool_ctrl_t acoral_thread_pool_ctrl;
+
+/**
+ * @brief 创建一个线程
+ * 
+ * @param route 线程函数
+ * @param stack_size 线程栈大小
+ * @param args 线程函数参数
+ * @param name 线程名字
+ * @param stack 线程栈指针
+ * @param sched_policy 线程调度策略
+ * @param data 线程策略数据
+ * @return acoral_id 返回线程id
+ */
+acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,void *stack,acoral_u32 sched_policy,void *data){
+	acoral_thread_t *thread;
+        /*分配tcb数据块*/
+	thread=acoral_alloc_thread();
+	if(NULL==thread){
+		acoral_printerr("Alloc thread:%s fail\n",name);
+		acoral_prints("No Mem Space or Beyond the max thread\n");
+		return -1;
+	}
+	thread->name=name;
+	stack_size=stack_size&(~3);
+	thread->stack_size=stack_size;
+	if(stack!=NULL)
+		thread->stack_buttom=(acoral_u32 *)stack;
+	else
+		thread->stack_buttom=NULL;
+	thread->policy=sched_policy;
+	return acoral_policy_thread_init(sched_policy,thread,route,args,data);
+}
 
 /*================================
  * func: release thread in acoral

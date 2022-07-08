@@ -78,6 +78,7 @@ typedef struct{
 	void*	data;
 }acoral_thread_t;
 
+acoral_id create_thread_ext(void (*route)(void *args),acoral_u32 stack_size,void *args,acoral_char *name,void *stack,acoral_u32 sched_policy,void *data);
 #define acoral_create_thread(route,stack_size,args,name,stack,policy,policy_data) create_thread_ext(route,stack_size,args,name,stack,policy,policy_data);
 void acoral_release_thread(acoral_res_t *thread);
 void acoral_suspend_self(void);

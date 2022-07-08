@@ -20,17 +20,9 @@ void display_thread(acoral_32 argc,acoral_char **argv){
 			case ACORAL_SCHED_POLICY_COMM:
 				acoral_prints("Common\t\t");
 				break;
-			case ACORAL_SCHED_POLICY_SLICE:
-				acoral_prints("Slice\t\t");
-				break;
 			case ACORAL_SCHED_POLICY_PERIOD:
 				acoral_prints("Period\t\t");
 				break;
-			case ACORAL_SCHED_POLICY_RM:
-				acoral_prints("RM\t\t");
-				break;
-			case ACORAL_SCHED_POLICY_POSIX:
-				acoral_prints("Posix\t\t");
 			default:
 				break;
 		}
