@@ -1,7 +1,7 @@
 /**
  * @file hal_comm.h
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief hal层，中断部分通用接口声明
+ * @brief hal层，中断部分通用接口声明 //TODO 放到int里面
  * @version 1.0
  * @date 2022-06-23
  * @copyright Copyright (c) 2022
@@ -16,9 +16,9 @@
 #ifndef HAL_COMM_H
 #define HAL_COMM_H
 #include<type.h>
-typedef acoral_u32 acoral_sr;
+typedef acoral_u32 acoral_sr; //TODO 放到type里面？
 /// TODO 加///
-#define HAL_REG(base,offset) (*(volatile acoral_u32 *)((base) + (offset)))
+
 
 
 /****************************                                                                                                                 
@@ -36,13 +36,7 @@ typedef acoral_u32 acoral_sr;
 #define HAL_SCHED_BRIDGE() hal_sched_bridge_comm()
 #define HAL_INTR_EXIT_BRIDGE() hal_intr_exit_bridge_comm()
 
-#define HAL_ATOMIC_INIT(v) 
-#define HAL_ATOMIC_READ(v) ((v)->val)
-#define HAL_ATOMIC_SET(i,v) (((v)->val) = (i))
-#define HAL_ATOMIC_INC(v)  hal_atomic_add_comm(1,v)
-#define HAL_ATOMIC_DEC(v)  hal_atomic_sub_comm(1,v)
-#define HAL_ATOMIC_ADD(i,v) hal_atomic_add_comm(i,v)
-#define HAL_ATOMIC_SUB(i,v) hal_atomic_sub_comm(i,v)
+
 #define HAL_TRANSLATE_VECTOR(_vector_,_index_) \
 	(_index_)=((_vector_)-HAL_INTR_MIN)
 

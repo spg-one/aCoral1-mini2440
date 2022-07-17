@@ -31,7 +31,4 @@
 #include "comm_thrd.h"
 #include "period_thrd.h"
 
-
-#include "atomic.h"
-
 #endif /* KERNEL_H_ */

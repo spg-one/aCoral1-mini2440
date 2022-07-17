@@ -1,7 +1,7 @@
 /**
  * @file mem.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief kernel层,整合了伙伴系统和资源池系统初始化的两级内存管理系统
+ * @brief kernel层，整合了伙伴系统和资源池系统初始化的两级内存管理系统
  * @version 1.0
  * @date 2022-07-04
  * @copyright Copyright (c) 2022

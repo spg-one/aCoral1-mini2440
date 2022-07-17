@@ -1,7 +1,7 @@
 /**
  * @file autocfg.h
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief aCoral一些配置头文件
+ * @brief aCoral一些配置头文件，属于历史遗留，以后还要删改
  * @version 1.0
  * @date 2022-07-08
  * @copyright Copyright (c) 2022

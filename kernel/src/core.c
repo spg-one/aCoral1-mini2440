@@ -18,7 +18,7 @@
 /**
  * @file core.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief kernel层,aCoral内核初始化文件，紧接start.S
+ * @brief kernel层，aCoral内核初始化文件，紧接start.S
  * @version 1.0
  * @date 2022-07-04
  * @copyright Copyright (c) 2022

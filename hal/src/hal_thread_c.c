@@ -1,4 +1,4 @@
-//TODO 删
+//TODO 挪到thread.c里面吧
 #include<type.h>
 #include <hal_thread.h>
 

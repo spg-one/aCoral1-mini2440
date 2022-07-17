@@ -132,7 +132,7 @@ typedef struct {
   acoral_u32 	  max_pools;   ///<upbound of the amount of pools for this type. eg. the number of TCB pool limited to 2 because that there are at most 40 thread in system at one time and every TCB pool contains 20.
 
   acoral_list_t 	 *free_pools,*pools,list[2];
-  acoral_res_api_t *api;
+  acoral_res_api_t *api; //TODO delete?
   acoral_u8 *name;
 }acoral_pool_ctrl_t;
 
@@ -155,7 +155,7 @@ typedef struct{
     void (*release_pool)(acoral_pool_ctrl_t * res_ctrl);
     acoral_res_t *(*get_res)(acoral_pool_ctrl_t *res_ctrl);
     acoral_u32* (*release_res)(acoral_res_t *res);
-}acoral_res_ops_t;
+}acoral_res_ops_t; //TODO 这个什么意思
 
 acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert);
 acoral_pool_t *acoral_get_pool_by_id(acoral_id id);
