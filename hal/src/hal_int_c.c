@@ -1,7 +1,7 @@
 /**
  * @file hal_int_c.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief 中断二级入口、中断开关以及中断初始化c代码
+ * @brief hal层，中断二级入口、中断开关以及中断初始化c代码
  * @version 1.0
  * @date 2022-06-23 
  * @copyright Copyright (c) 2022

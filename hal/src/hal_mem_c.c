@@ -1,7 +1,7 @@
 /**
  * @file hal_mem_c.c
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief hal层，内存（mmu）初始化
+ * @brief hal层，内存（mmu）初始化上层代码
  * @version 1.0
  * @date 2022-06-24
  * @copyright Copyright (c) 2022

@@ -1,7 +1,7 @@
 /**
  * @file hal_comm.h
  * @author 王彬浩 (SPGGOGOGO@outlook.com)
- * @brief hal层，中断部分通用接声明
+ * @brief hal层，中断部分通用接口声明
  * @version 1.0
  * @date 2022-06-23
  * @copyright Copyright (c) 2022

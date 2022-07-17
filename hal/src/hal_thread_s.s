@@ -1,3 +1,19 @@
+ /**
+ * @file hal_thread_s.s
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief hal层，线程上下文切换操作
+ * @version 1.0
+ * @date 2022-07-17
+ * @copyright Copyright (c) 2022
+ * @revisionHistory
+ *  <table>
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-17 <td>Standardized
+ *  </table>
+ */
+
+
  .equ NOINT    ,	0xc0
  .equ SVCMODE  ,	0x13
 
