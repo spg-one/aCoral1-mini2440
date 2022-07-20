@@ -13,7 +13,7 @@
  *  </table>
  */
 
-//TODO 或许可以和hal_2440_cfg.h合并
+//TODO 或许可以和hal_2440_cfg.h合并 add.并不能合并，start.S用到了hal_2440_cfg.h这个文件，一旦合并，汇编器不能识别hal_2440_c.h的语法
 
 #ifndef HAL_2440_C_H
 #define HAL_2440_C_H

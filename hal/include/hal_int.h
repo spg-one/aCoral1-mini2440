@@ -28,4 +28,23 @@ void hal_intr_init();
 #define HAL_INTR_MAX HAL_INTR_MIN+HAL_INTR_NUM-1
 #define HAL_INTR_INIT()	hal_intr_init()
 
+/****************************                                                                                                                 
+* the comm interrupt interface of hal     
+*  hal层中断部分通用接口
+*****************************/
+#define HAL_START_OS(stack) HAL_SWITCH_TO(stack)
+#define HAL_INTR_NESTING_INIT()   hal_intr_nesting_init_comm()
+#define HAL_GET_INTR_NESTING()    hal_get_intr_nesting_comm()
+#define HAL_INTR_NESTING_DEC()    hal_intr_nesting_dec_comm()
+#define HAL_INTR_NESTING_INC()    hal_intr_nesting_inc_comm()
+#define HAL_ENTER_CRITICAL()  (cpu_sr = HAL_INTR_DISABLE_SAVE())
+#define HAL_EXIT_CRITICAL()  HAL_INTR_RESTORE(cpu_sr)
+#define HAL_INTR_ATTACH(vecotr,isr)
+#define HAL_SCHED_BRIDGE() hal_sched_bridge_comm()
+#define HAL_INTR_EXIT_BRIDGE() hal_intr_exit_bridge_comm()
+
+
+#define HAL_TRANSLATE_VECTOR(_vector_,_index_) \
+	(_index_)=((_vector_)-HAL_INTR_MIN)
+
 #endif

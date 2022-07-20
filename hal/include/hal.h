@@ -16,7 +16,6 @@
 #ifndef HAL_H_
 #define HAL_H_
 #include "autocfg.h"
-#include "hal_comm.h"
 #include "hal_int.h"
 #include <hal_nand.h>
 #include <hal_2440_c.h>

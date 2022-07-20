@@ -38,4 +38,5 @@ typedef acoral_u32 acoral_err;
 typedef acoral_u32 acoral_size;
 typedef acoral_32 acoral_id;
 typedef acoral_u32 *acoral_ptr;
+typedef acoral_u32 acoral_sr; 
 #endif

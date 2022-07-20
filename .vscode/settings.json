@@ -13,7 +13,6 @@
         "type.h": "c",
         "hal_2440_cfg.h": "c",
         "hal_int.h": "c",
-        "hal_comm.h": "c",
         "driver.h": "c",
         "buddy.h": "c",
         "plugin.h": "c",
