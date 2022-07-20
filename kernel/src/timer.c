@@ -69,7 +69,7 @@ void acoral_ticks_entry(acoral_vector vector){
  *================================*/
 void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 	acoral_sr cpu_sr;
-	acoral_list_t   *tmp, *tmp1,*head;
+	acoral_list_t   *tmp, *head;
 	acoral_thread_t *thread;
 	acoral_32  delay2;
 	acoral_32  delay= new->delay;
@@ -77,34 +77,7 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 	acoral_enter_critical();
 	/*这里采用关ticks中断，不用关中断，是为了减少最大关中断时间，下面是个链表，时间不确定。*/
 	/*这里可以看出，延时函数会有些误差，因为ticks中断可能被延迟*/
-#ifndef CFG_TICKS_PRIVATE
-	new->state|=ACORAL_THREAD_STATE_DELAY;
-	tmp1=head;
-	while(1){
-		tmp=tmp1;
-		delay2=delay;
-		if(tmp->next!=head){
-			tmp1=tmp->next;
-			thread = list_entry (tmp1, acoral_thread_t, waiting);
-			ACORAL_ASSERT(thread,"in delay queue add");
-			delay  = delay - thread->delay;
-			if (delay < 0){
-				new->delay=delay2;
-				thread->delay-=delay2;
-				acoral_list_add(&new->waiting,tmp);
-				acoral_unrdy_thread(new);
-				break;
-			}
-			
-		}else{
-			new->delay=delay2;
-			acoral_list_add(&new->waiting,tmp);
-			acoral_unrdy_thread(new);
-			break;
-		}
-		/*获取下一个成员锁*/
-	}
-#else
+
 	new->state|=ACORAL_THREAD_STATE_DELAY;
 	for (tmp=head->next;delay2=delay,tmp!=head; tmp=tmp->next){
 		thread = list_entry (tmp, acoral_thread_t, waiting);
@@ -120,7 +93,7 @@ void acoral_delayqueue_add(acoral_queue_t *queue, acoral_thread_t *new){
 		thread->delay-=delay2;
 	}
 	acoral_unrdy_thread(new);
-#endif
+
 	acoral_exit_critical();
 	acoral_sched();
 	return;

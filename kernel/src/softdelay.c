@@ -26,7 +26,7 @@ volatile acoral_u32 sample_per_1000ms;
  * @brief 软件延时
  * 
  */
-void delay(){
+void delay(void){
 	volatile acoral_32 tmp=0xfff;
 	while(tmp-->0);
 	sample++;
@@ -36,7 +36,7 @@ void delay(){
  * @brief 软件中断初始化线程函数，测量标定值sample
  * 
  */
-void delay_task(void){
+void delay_task(){
 	sample=0;
 	for(;;){
 		delay();
@@ -60,7 +60,7 @@ void acoral_soft_delay(acoral_u32 n_1000ms){
  * @note 创建delay_task线程后，让它自己跑1000毫秒，看这1000毫秒它能让sample加到多少。后面要延时就通过sample来标定。
  * 
  */
-void soft_delay_init(){
+void soft_delay_init(void){
 	acoral_sr cpu_sr;
 	acoral_comm_policy_data_t data;
 	acoral_thread_t *thread;

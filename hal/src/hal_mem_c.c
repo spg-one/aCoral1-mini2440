@@ -20,11 +20,6 @@
 extern acoral_u32 MMU_base[];
 extern acoral_u32 __ENTRY[];
 
-void hal_mem_init()
-{
-    hal_mmu_init();
-}
-
 void flush_cache()
 {
     acoral_32 i, j;
@@ -87,4 +82,9 @@ void hal_mmu_setmtt(acoral_32 vaddrStart, acoral_32 vaddrEnd, acoral_32 paddrSta
     nSec = (vaddrEnd >> 20) - (vaddrStart >> 20);
     for (i = 0; i <= nSec; i++)
         *pTT++ = attr | (((paddrStart >> 20) + i) << 20);
+}
+
+void hal_mem_init()
+{
+    hal_mmu_init();
 }

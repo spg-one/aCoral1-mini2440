@@ -35,7 +35,7 @@ typedef struct {
 	acoral_u32 pc;
 }hal_ctx_t;
 
-void hal_stack_init(acoral_u32 **stk,void (*route)(),void (*exit)(),void *args);
+void hal_stack_init(acoral_u32 **stk,void (*route)(void),void (*exit)(void),void *args);
 
 //线程相关的硬件抽象接口 //TODO 全大写为了和汇编接口统一 头文件里面注释///
 #define HAL_STACK_INIT(stack,route,exit,args) hal_stack_init(stack,route,exit,args)

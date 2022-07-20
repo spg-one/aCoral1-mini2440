@@ -117,7 +117,7 @@ void period_thread_exit(){
 }
 
 acoral_sched_policy_t period_policy;
-void period_policy_init(){
+void period_policy_init(void){
 	acoral_list_init(&period_delay_queue.head);
 	period_policy.type=ACORAL_SCHED_POLICY_PERIOD;
 	period_policy.policy_thread_init=period_policy_thread_init;

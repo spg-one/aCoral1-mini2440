@@ -20,7 +20,7 @@
 void hal_intr_unmask(acoral_vector vector);
 void hal_intr_mask(acoral_vector vector);
 void hal_intr_ack(acoral_u32 vector);
-void hal_intr_init();
+void hal_intr_init(void);
 
 //中断相关的硬件抽象接口
 #define HAL_INTR_MIN      0
