@@ -143,13 +143,6 @@ typedef struct {
    acoral_list_t free_list;
 }acoral_pool_t;
 
-typedef struct{
-    void (*create_pool)(acoral_pool_ctrl_t * res_ctrl);
-    void (*release_pool)(acoral_pool_ctrl_t * res_ctrl);
-    acoral_res_t *(*get_res)(acoral_pool_ctrl_t *res_ctrl);
-    acoral_u32* (*release_res)(acoral_res_t *res);
-}acoral_res_ops_t; //TODO 这个什么意思
-
 acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert);
 acoral_pool_t *acoral_get_pool_by_id(acoral_id id);
 acoral_pool_t *acoral_get_free_pool(void);

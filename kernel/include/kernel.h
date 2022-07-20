@@ -26,7 +26,6 @@
 #include "event.h"
 #include "mutex.h"
 #include "sem.h"
-#include "mbox.h"
 #include "policy.h"
 #include "comm_thrd.h"
 #include "period_thrd.h"

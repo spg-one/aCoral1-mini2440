@@ -26,7 +26,6 @@
 #define CFG_HARD_RT_PRIO_NUM (0)
 #define CFG_MAX_THREAD (40)
 #define CFG_MIN_STACK_SIZE (1024)
-#define CFG_EVT_MBOX 1
 #define CFG_EVT_SEM 1
 #define CFG_MSG 1
 #define CFG_SOFT_DELAY 1
