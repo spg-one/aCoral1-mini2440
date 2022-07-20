@@ -115,11 +115,6 @@ typedef union {
    acoral_u16 next_id;
 }acoral_res_t;
 
-
-typedef struct{
-      void (*release_res)(acoral_res_t *res);
-}acoral_res_api_t;
-
 /**
  * @brief  资源池控制块
  * 
@@ -130,9 +125,7 @@ typedef struct {
   acoral_u32   num_per_pool;  ///<the amount of resource in one pool eg.there are 20 TCBs in one TCB pool
   acoral_u32       num;       ///<the amount of pools which contain a certain type of resource(maybe TCB) in system at present will be added once one pool created; restrict by max_pools below;
   acoral_u32 	  max_pools;   ///<upbound of the amount of pools for this type. eg. the number of TCB pool limited to 2 because that there are at most 40 thread in system at one time and every TCB pool contains 20.
-
   acoral_list_t 	 *free_pools,*pools,list[2];
-  acoral_res_api_t *api; //TODO delete?
   acoral_u8 *name;
 }acoral_pool_ctrl_t;
 

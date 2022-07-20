@@ -28,7 +28,6 @@
 extern acoral_queue_t acoral_res_release_queue;
 extern acoral_rdy_queue_t* acoral_ready_queues; //TODO 也许可删
 acoral_queue_t acoral_threads_queue;
-acoral_res_api_t thread_api;
 acoral_pool_ctrl_t acoral_thread_pool_ctrl;
 
 /**
@@ -388,7 +387,6 @@ acoral_err acoral_thread_init(acoral_thread_t *thread,void (*route)(void *args),
  *      
  *================================*/
 void acoral_thread_pool_init(){
-	thread_api.release_res=acoral_release_thread;
 	acoral_thread_pool_ctrl.type=ACORAL_RES_THREAD;
 	acoral_thread_pool_ctrl.size=sizeof(acoral_thread_t);
 	if(CFG_MAX_THREAD>20)
@@ -396,7 +394,6 @@ void acoral_thread_pool_init(){
 	else
 		acoral_thread_pool_ctrl.num_per_pool=CFG_MAX_THREAD;
 	acoral_thread_pool_ctrl.max_pools=ACORAL_MAX_THREAD/acoral_thread_pool_ctrl.num_per_pool;
-	acoral_thread_pool_ctrl.api=&thread_api;
 	acoral_pool_ctrl_init(&acoral_thread_pool_ctrl);
 }
 
