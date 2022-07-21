@@ -43,8 +43,4 @@ void hal_intr_init(void);
 #define HAL_SCHED_BRIDGE() hal_sched_bridge_comm()
 #define HAL_INTR_EXIT_BRIDGE() hal_intr_exit_bridge_comm()
 
-
-#define HAL_TRANSLATE_VECTOR(_vector_,_index_) \
-	(_index_)=((_vector_)-HAL_INTR_MIN)
-
 #endif

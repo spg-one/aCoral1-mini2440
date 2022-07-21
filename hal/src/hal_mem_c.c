@@ -20,7 +20,7 @@
 extern acoral_u32 MMU_base[];
 extern acoral_u32 __ENTRY[];
 
-void flush_cache()
+static void flush_cache()
 {
     acoral_32 i, j;
     MMU_DisableDCache();

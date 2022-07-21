@@ -12,10 +12,11 @@
  *   <tr><td> 1.0 <td>王彬浩 <td> 2022-06-24 <td>Standardized 
  *  </table>
  */
-
+//TODO 完善注释
 #ifndef HAL_2440_CFG_H
 #define HAL_2440_CFG_H
 
+/* CPSR相关 */
 #define USR_MODE		0x10 ///>修改cpsr，切换到user模式
 #define FIQ_MODE		0x11 ///>修改cpsr，切换到fiq模式
 #define IRQ_MODE		0x12 ///>修改cpsr，切换到irq模式
@@ -23,20 +24,23 @@
 #define ABT_MODE		0x17 ///>修改cpsr，切换到data_abort模式
 #define UND_MODE		0x1b ///>修改cpsr，切换到undfined_instruction模式
 #define SYS_MODE		0x1f ///>修改cpsr，切换到system模式
-#define MODE_MASK		0x1f
+#define MODE_MASK		0x1f ///>修改cssr，清零[4:0]五个模式位
 #define NOINT        	0xc0 ///>修改cpsr，禁止irq和fiq
 #define NOIRQ           0x80 ///>修改cpsr，禁止irq
 
-
-#define FCLK 400000000
-#define HCLK 100000000
-#define PCLK 50000000
+/* 时钟相关 */
+#define FCLK 400000000 ///>aCoral启动后的FCLK频率为400MHz，由下面的公式得到
+#define HCLK 100000000 ///>aCoral启动后的HCLK频率为100MHz，由FCLK分频得到
+#define PCLK 50000000  ///>aCoral启动后的PCLK频率为50MHz，由FCLK分频得到
 #define M_MDIV    0x7f 
 #define M_PDIV    0x2
 #define M_SDIV    0x1
-#define M_DIVN    0x5
+#define M_DIVN    0x5 ///>决定FCLK、HCLK和PCLK的比例
 
+/// FCLK = mpll = ( 2 × m × Fin ) / ( p × 2s ) , m = ( MDIV + 8 ), p = ( PDIV + 2 ), s = SDIV
 #define vMPLLCON	((M_MDIV << 12) | (M_PDIV << 4) | (M_SDIV)) 
+
+
 /* initial values for DRAM */
 #define vBWSCON			0x22111110
 #define vBANKCON0		0x00000700
@@ -47,16 +51,15 @@
 #define vBANKCON5		0x00000700
 #define vBANKCON6		0x00018009
 #define vBANKCON7		0x00018009
-#define vREFRESH                0x008e04eb
+#define vREFRESH        0x008e04eb
 #define vBANKSIZE		0xB2
 #define vMRSRB6			0x30
 #define vMRSRB7			0x30
 
-
-/* Interrupts */
+/* 中断相关 */
 #define INT_CTL_BASE		0x4A000000
 #define bINT_CTL(Nb)		(INT_CTL_BASE + (Nb))
-/* Offset */
+/* 中断寄存器地址相对偏移量，offset */
 #define oSRCPND			0x00
 #define oINTMOD			0x04
 #define oINTMSK			0x08
@@ -65,8 +68,7 @@
 #define oINTOFFSET		0x14
 #define oSUBSRCPND		0x18
 #define oINTSUBMSK		0x1C
-
-/* Registers */
+/* 中断寄存器地址 */
 #define SRCPND			bINT_CTL(oSRCPND)
 #define INTMOD			bINT_CTL(oINTMOD)
 #define INTMSK			bINT_CTL(oINTMSK)
@@ -75,7 +77,6 @@
 #define INTOFFSET		bINT_CTL(oINTOFFSET)
 #define SUBSRCPND		bINT_CTL(oSUBSRCPND)
 #define INTSUBMSK		bINT_CTL(oINTSUBMSK)
-
 
 /* Memory Controller */
 #define MEM_CTL_BASE		0x48000000
@@ -109,7 +110,7 @@
 #define MRSRB6			bMEMCTL(oMRSRB6)
 #define MRSRB7			bMEMCTL(oMRSRB7)
 /* Bits */
-#define SELF_REFRESH		(1 << 22)
+
 
 #define DESC_SEC	(0x2|(1<<4))
 #define CB		(3<<2)  /*cache_on, write_back*/

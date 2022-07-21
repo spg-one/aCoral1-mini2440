@@ -20,7 +20,12 @@
 ///中断嵌套数
 acoral_u32 intr_nesting;
 
-void hal_all_entry(acoral_vector vector){//TODO 加个#define acoral_hal_all_entry hal_all_entry 前者放到kernel里面去
+/**
+ * @brief 中断入口，对中断复用进行展开
+ * 
+ * @param vector 中断向量号（中断复用未展开），来自INTOFFSET寄存器，
+ */
+void hal_all_entry(acoral_vector vector){
     unsigned long eint;
     unsigned long irq=4;
     if(vector==4||vector==5){
@@ -39,6 +44,11 @@ void hal_all_entry(acoral_vector vector){//TODO 加个#define acoral_hal_all_ent
     acoral_intr_entry(vector);
 }
 
+/**
+ * @brief 通过向中断屏蔽（INTMSK）寄存器某位写入0来打开相应中断，对中断复用进行了合并处理
+ * 
+ * @param vector 中断向量号（中断复用展开后）
+ */
 void hal_intr_unmask(acoral_vector vector){
           if((vector>3) && (vector<8)){
                rEINTMSK &=~(1<<vector);
@@ -54,6 +64,11 @@ void hal_intr_unmask(acoral_vector vector){
          rINTMSK &=~(1<<vector);			/*开启中断*/
 }
 
+/**
+ * @brief 通过向中断屏蔽（INTMSK）寄存器某位写入1来屏蔽相应中断，对中断复用进行了合并处理
+ * 
+ * @param vector 中断向量号（中断复用展开后）
+ */
 void hal_intr_mask(acoral_vector vector){
 
          if((vector>3) && (vector<8)){
@@ -70,6 +85,11 @@ void hal_intr_mask(acoral_vector vector){
          rINTMSK |= (1<<vector);
 }
 
+/**
+ * @brief 中断响应后要清中断，不然中断会一直触发。对中断复用进行了合并操作
+ * 
+ * @param vector 中断向量号（中断复用展开后）
+ */
 void hal_intr_ack(acoral_u32 vector){
 
         if((vector>3) && (vector<8)){
@@ -88,6 +108,10 @@ void hal_intr_ack(acoral_u32 vector){
 		rINTPND = 1<<vector;		
 }
 
+/**
+ * @brief 中断控制器寄存器初始化
+ * 
+ */
 void hal_intr_init(){
 	acoral_u32 i;
     /*配置中断管脚*/
