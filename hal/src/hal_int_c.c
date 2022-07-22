@@ -28,7 +28,7 @@ acoral_u32 intr_nesting;
 void hal_all_entry(acoral_vector vector){
     unsigned long eint;
     unsigned long irq=4;
-    if(vector==4||vector==5){
+    if(vector==4||vector==5){ //处理S3C2440的EINT4_7和EINT8_23中断复用
     	eint=rEINTPND;
     	for(;irq<24;irq++){
       		 if(eint & (1<<irq)){
@@ -82,7 +82,7 @@ void hal_intr_mask(acoral_vector vector){
          else if(vector > 23)
                vector -= 18; 
 
-         rINTMSK |= (1<<vector);
+         rINTMSK |= (1<<vector); //屏蔽中断
 }
 
 /**
@@ -104,8 +104,8 @@ void hal_intr_ack(acoral_u32 vector){
                vector -= 18;
    
         
-        rSRCPND = 1<<vector;
-		rINTPND = 1<<vector;		
+        rSRCPND = 1<<vector; //清除SRCPND寄存器
+		rINTPND = 1<<vector; //清除INTPND寄存器		
 }
 
 /**

@@ -135,8 +135,6 @@ void acoral_start()
 {
 	orig_thread.console_id = ACORAL_DEV_ERR_ID;
 	acoral_set_orig_thread(&orig_thread);
-	/*板子初始化*/
-	HAL_BOARD_INIT();
 
 	/*内核模块初始化*/
 	acoral_module_init();

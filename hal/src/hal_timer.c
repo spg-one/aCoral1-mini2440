@@ -18,10 +18,10 @@
 #include<hal_2440_c.h>
 #include <hal_timer.h>
 
-/****************************************
-*****这个函数的作用是初始化滴答时钟数据**
-****************相关数据*****************
-*****************************************/
+/**
+ * @brief 初始化定时器0，用于时钟tick
+ * 
+ */
 void hal_ticks_init(){
   	rTCON = rTCON & (~0xf) ;	/* clear manual update bit, stop Timer0*/
     rTCFG0 &= 0xFFFF00;
@@ -31,5 +31,5 @@ void hal_ticks_init(){
 
    	rTCNTB0 = PCLK /(8*(249+1)*ACORAL_TICKS_PER_SEC);
    	rTCON = rTCON & (~0xf) |0x02;              	/* updata*/
-	rTCON = rTCON & (~0xf) |0x09; 			/* star*/
+	rTCON = rTCON & (~0xf) |0x09; 			/* 启动定时器0*/
 }

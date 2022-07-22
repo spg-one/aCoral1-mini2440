@@ -24,6 +24,10 @@ static void nand_wait(void)
 			;
 }
 
+/**
+ * @brief nandflash重置
+ * 
+ */
 static void nand_reset()
 {
 	int i;
@@ -35,6 +39,10 @@ static void nand_reset()
 	nand_deselect();
 }
 
+/**
+ * @brief nandflash初始化
+ * 
+ */
 void nand_init(void)
 {
 
@@ -44,6 +52,13 @@ void nand_init(void)
 	nand_reset();
 }
 
+/**
+ * @brief 判断block是否有数据反转
+ *
+ * @param nand
+ * @param i
+ * @return int
+ */
 static int is_bad_block(struct boot_nand_t *nand, unsigned long i)
 {
 	unsigned char data;
@@ -81,6 +96,14 @@ static int is_bad_block(struct boot_nand_t *nand, unsigned long i)
 	return 0;
 }
 
+/**
+ * @brief 读取某一个page
+ *
+ * @param nand nandflash指针
+ * @param buf 读取到的数据存放到buf
+ * @param addr page的起始地址
+ * @return int 返回读取到的大小，必定是page_size
+ */
 static int nand_read_page(struct boot_nand_t *nand, unsigned char *buf, unsigned long addr)
 {
 	unsigned short *ptr16 = (unsigned short *)buf;
@@ -123,6 +146,11 @@ static int nand_read_page(struct boot_nand_t *nand, unsigned char *buf, unsigned
 	return nand->page_size;
 }
 
+/**
+ * @brief 读取nandflash的型号
+ *
+ * @return unsigned short 读取到的型号id
+ */
 static unsigned short nand_read_id()
 {
 	unsigned short res = 0;
@@ -133,6 +161,14 @@ static unsigned short nand_read_id()
 	return res;
 }
 
+/**
+ * @brief 读取nandflash中某一块数据，大小对page向上取整。只适用于特定型号的nandflash
+ *
+ * @param buf 读取到的数据存放在buf中
+ * @param start_addr 要读取的区域的起始地址
+ * @param size 要读取的大小
+ * @return int 返回0表示读取成功，其余失败
+ */
 int nand_read(unsigned char *buf, unsigned long start_addr, int size)
 {
 
@@ -146,7 +182,7 @@ int nand_read(unsigned char *buf, unsigned long start_addr, int size)
 	for (i = 0; i < 10; i++)
 		;
 
-	nand_id = nand_read_id();
+	nand_id = nand_read_id(); //读取型号
 
 	if (nand_id == 0xec76 || /* Samsung K91208 */
 		nand_id == 0xad76)
@@ -163,22 +199,23 @@ int nand_read(unsigned char *buf, unsigned long start_addr, int size)
 		nand.block_size = 128 * 1024;
 		nand.bad_block_offset = nand.page_size;
 	}
-	else
+	else //未知的型号
 	{
 		return -1;
 	}
 
-	if ((start_addr & (nand.block_size - 1)))
+	if ((start_addr & (nand.block_size - 1))) //起始地址必须是page的倍数，因为nandflash读写的最小单位是page
 		return -1;
 
 	if (size & (nand.page_size - 1))
 	{
-		size = (size + nand.page_size - 1) & (~(nand.page_size - 1));
+		size = (size + nand.page_size - 1) & (~(nand.page_size - 1)); //对size向上取整，比如一个size不到就取一个size，不到两个就取2.
 	}
 
-	if ((size & (nand.page_size - 1)))
+	if ((size & (nand.page_size - 1))) //取整失败
 		return -1;
 
+	//开始读取
 	for (i = start_addr; i < (start_addr + size);)
 	{
 

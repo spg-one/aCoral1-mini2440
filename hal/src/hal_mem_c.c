@@ -31,6 +31,11 @@ static void flush_cache()
             MMU_CleanInvalidateDCacheIndex((i << 26) | (j << 5));
     MMU_InvalidateICache();
 }
+
+/**
+ * @brief 初始化mmu映射表
+ * 
+ */
 static void hal_mmu_init(void)
 {
     /*========================== IMPORTANT NOTE =========================*/

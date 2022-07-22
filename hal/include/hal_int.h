@@ -24,7 +24,7 @@ void hal_intr_init(void);
 
 //中断相关的硬件抽象接口
 #define HAL_INTR_MIN      0
-#define HAL_INTR_NUM	 50
+#define HAL_INTR_NUM	 50 ///>S3C2440有50个中断源
 #define HAL_INTR_MAX HAL_INTR_MIN+HAL_INTR_NUM-1
 #define HAL_INTR_INIT()	hal_intr_init()
 
@@ -39,7 +39,7 @@ void hal_intr_init(void);
 #define HAL_INTR_NESTING_INC()    hal_intr_nesting_inc_comm()
 #define HAL_ENTER_CRITICAL()  (cpu_sr = HAL_INTR_DISABLE_SAVE())
 #define HAL_EXIT_CRITICAL()  HAL_INTR_RESTORE(cpu_sr)
-#define HAL_INTR_ATTACH(vecotr,isr)
+#define HAL_INTR_ATTACH(vecotr,isr) //TODO 该写什么？
 #define HAL_SCHED_BRIDGE() hal_sched_bridge_comm()
 #define HAL_INTR_EXIT_BRIDGE() hal_intr_exit_bridge_comm()
 
