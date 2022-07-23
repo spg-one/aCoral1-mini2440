@@ -77,8 +77,6 @@ void acoral_intr_unmask(acoral_vector vector)
 	if (intr_table[vector].unmask != NULL && intr_table[vector].type == ACORAL_COMM_INTR)
 	{
 		intr_table[vector].unmask(vector);
-		/*将中断状态设为真*/
-		intr_table[vector].state = true;
 	}
 }
 
@@ -97,8 +95,6 @@ void acoral_intr_mask(acoral_vector vector)
 	if (intr_table[vector].mask != NULL && intr_table[vector].type == ACORAL_COMM_INTR)
 	{
 		intr_table[vector].mask(vector);
-		/*将中断状态设为假    */
-		intr_table[vector].state = false;
 	}
 }
 

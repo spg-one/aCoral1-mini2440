@@ -18,9 +18,12 @@
 #define ACORAL_COMM_INTR 1
 #define ACORAL_EXPERT_INTR 2
 #define ACORAL_RT_INTR 3
+
+/**
+ * @brief 中断结构体
+ * 
+ */
 typedef struct {
-	acoral_u32 index;
-	acoral_u8  state;
 	acoral_u8  type;
 	void (*isr)(acoral_vector);
 	void (*enter)(acoral_vector);
@@ -35,7 +38,7 @@ typedef struct {
 #define acoral_intr_nesting_dec() HAL_INTR_NESTING_DEC()
 #define acoral_enter_critical() HAL_ENTER_CRITICAL()
 #define acoral_exit_critical() HAL_EXIT_CRITICAL()
-void acoral_intr_init(void);
+
 acoral_32 acoral_intr_attach(acoral_vector vector,void (*isr)(acoral_vector));
 acoral_32 acoral_intr_detach(acoral_vector vector);
 void acoral_intr_entry(acoral_vector vector);

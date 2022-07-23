@@ -45,7 +45,7 @@ void hal_all_entry(acoral_vector vector){
 }
 
 /**
- * @brief 通过向中断屏蔽（INTMSK）寄存器某位写入0来打开相应中断，对中断复用进行了合并处理
+ * @brief 使能中断。通过向中断屏蔽（INTMSK）寄存器某位写入0来打开相应中断，对中断复用进行了合并处理
  * 
  * @param vector 中断向量号（中断复用展开后）
  */
@@ -65,7 +65,7 @@ void hal_intr_unmask(acoral_vector vector){
 }
 
 /**
- * @brief 通过向中断屏蔽（INTMSK）寄存器某位写入1来屏蔽相应中断，对中断复用进行了合并处理
+ * @brief 除能中断。通过向中断屏蔽（INTMSK）寄存器某位写入1来屏蔽相应中断，对中断复用进行了合并处理
  * 
  * @param vector 中断向量号（中断复用展开后）
  */
@@ -86,7 +86,7 @@ void hal_intr_mask(acoral_vector vector){
 }
 
 /**
- * @brief 中断响应后要清中断，不然中断会一直触发。对中断复用进行了合并操作
+ * @brief 清中断。中断响应后要清中断，不然中断会一直触发。对中断复用进行了合并操作
  * 
  * @param vector 中断向量号（中断复用展开后）
  */
