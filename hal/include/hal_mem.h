@@ -15,8 +15,8 @@
 #ifndef HAL_MEM_H
 #define HAL_MEM_H
 
-extern acoral_u32 heap_start[]; ///>来自链接脚本 //TODO为什么数组？
-extern acoral_u32 heap_end[]; ///>来自链接脚本
+extern acoral_u32 heap_start[]; ///<来自链接脚本 //TODO为什么数组？
+extern acoral_u32 heap_end[]; ///<来自链接脚本
 
 #define HAL_HEAP_START heap_start
 #define HAL_HEAP_END heap_end

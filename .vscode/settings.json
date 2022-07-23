@@ -17,6 +17,9 @@
         "buddy.h": "c",
         "plugin.h": "c",
         "lsched.h": "c",
-        "thread.h": "c"
+        "thread.h": "c",
+        "queue.h": "c",
+        "shell.h": "c",
+        "event.h": "c"
     }
 }

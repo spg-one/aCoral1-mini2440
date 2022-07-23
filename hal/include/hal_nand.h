@@ -21,9 +21,9 @@
  */
 struct boot_nand_t
 {
-	int page_size; ///>nandflash读写的基本单位，每个page大小为（2K+64）Byte
-	int block_size; ///>nandflash擦除的基本单位，每个block有64个page
-	int bad_block_offset; ///>坏块偏移量
+	int page_size; ///<nandflash读写的基本单位，每个page大小为（2K+64）Byte
+	int block_size; ///<nandflash擦除的基本单位，每个block有64个page
+	int bad_block_offset; ///<坏块偏移量
 };
 
 void nand_init(void);

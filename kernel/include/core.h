@@ -1,3 +1,17 @@
+/**
+ * @file core.h
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层，core.c对应的头文件
+ * @version 1.0
+ * @date 2022-07-23
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-23 <td>Standardized 
+ *  </table>
+ */
 #ifndef ACORAL_CORE_H //TODO 要调整
 #define ACORAL_CORE_H
 #include<autocfg.h>
@@ -6,15 +20,7 @@
 #define ACORAL_MAX_THREAD CFG_MAX_THREAD
 #define ACORAL_MIN_STACK_SIZE CFG_MIN_STACK_SIZE 
 
-#ifdef CFG_MEM_TEST
-#define ACORAL_TEST_STACK_SIZE 1024
-#else
-#define ACORAL_TEST_STACK_SIZE 512
-#endif
-
-#define ACORAL_PRINT_STACK_SIZE 512
-
-#define ACORAL_MAX_PRIO_NUM ((CFG_MAX_THREAD+1)&0xff)
+#define ACORAL_MAX_PRIO_NUM ((CFG_MAX_THREAD+1)&0xff) ///<总共有40个线程，就有0~40共41个优先级
 
 
 #define ACORAL_MINI_PRIO  ACORAL_MAX_PRIO_NUM-1

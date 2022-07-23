@@ -28,8 +28,6 @@
 /*多少ticks检测一次msg的生命周期*/
 #define WAKE_UP_PER               30
 
-/*MESSAGE类型*/
-#define ACORAL_MSGCTR             1
 
 /*return*/
 #define MST_ERR_NULL              0

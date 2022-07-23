@@ -100,7 +100,7 @@ acoral_u32  acoral_msgctr_init(acoral_msgctr_t *msgctr)
 		return MST_ERR_NULL;
 
 	msgctr->name  = NULL;
-	msgctr->type  = ACORAL_MSGCTR;
+	msgctr->type  = ACORAL_EVENT_MSGCTR;
 	msgctr->count = 0;
 	msgctr->wait_thread_num = 0;
 
@@ -153,7 +153,7 @@ acoral_msgctr_t*  acoral_msgctr_create (acoral_u32 *err)
 		return NULL;
 
 	msgctr->name  = NULL;
-	msgctr->type  = ACORAL_MSGCTR;
+	msgctr->type  = ACORAL_EVENT_MSGCTR;
 	msgctr->count = 0;
 	msgctr->wait_thread_num = 0;
 

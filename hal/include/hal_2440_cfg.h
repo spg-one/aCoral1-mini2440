@@ -17,25 +17,25 @@
 #define HAL_2440_CFG_H
 
 /* CPSR相关 */
-#define USR_MODE		0x10 ///>修改cpsr，切换到user模式
-#define FIQ_MODE		0x11 ///>修改cpsr，切换到fiq模式
-#define IRQ_MODE		0x12 ///>修改cpsr，切换到irq模式
-#define SVC_MODE		0x13 ///>修改cpsr，切换到supervisor模式
-#define ABT_MODE		0x17 ///>修改cpsr，切换到data_abort模式
-#define UND_MODE		0x1b ///>修改cpsr，切换到undfined_instruction模式
-#define SYS_MODE		0x1f ///>修改cpsr，切换到system模式
-#define MODE_MASK		0x1f ///>修改cssr，清零[4:0]五个模式位
-#define NOINT        	0xc0 ///>修改cpsr，禁止irq和fiq
-#define NOIRQ           0x80 ///>修改cpsr，禁止irq
+#define USR_MODE		0x10 ///<修改cpsr，切换到user模式
+#define FIQ_MODE		0x11 ///<修改cpsr，切换到fiq模式
+#define IRQ_MODE		0x12 ///<修改cpsr，切换到irq模式
+#define SVC_MODE		0x13 ///<修改cpsr，切换到supervisor模式
+#define ABT_MODE		0x17 ///<修改cpsr，切换到data_abort模式
+#define UND_MODE		0x1b ///<修改cpsr，切换到undfined_instruction模式
+#define SYS_MODE		0x1f ///<修改cpsr，切换到system模式
+#define MODE_MASK		0x1f ///<修改cssr，清零[4:0]五个模式位
+#define NOINT        	0xc0 ///<修改cpsr，禁止irq和fiq
+#define NOIRQ           0x80 ///<修改cpsr，禁止irq
 
 /* 时钟相关 */
-#define FCLK 400000000 ///>aCoral启动后的FCLK频率为400MHz，由下面的公式得到
-#define HCLK 100000000 ///>aCoral启动后的HCLK频率为100MHz，由FCLK分频得到
-#define PCLK 50000000  ///>aCoral启动后的PCLK频率为50MHz，由FCLK分频得到
+#define FCLK 400000000 ///<aCoral启动后的FCLK频率为400MHz，由下面的公式得到
+#define HCLK 100000000 ///<aCoral启动后的HCLK频率为100MHz，由FCLK分频得到
+#define PCLK 50000000  ///<aCoral启动后的PCLK频率为50MHz，由FCLK分频得到
 #define M_MDIV    0x7f 
 #define M_PDIV    0x2
 #define M_SDIV    0x1
-#define M_DIVN    0x5 ///>决定FCLK、HCLK和PCLK的比例
+#define M_DIVN    0x5 ///<决定FCLK、HCLK和PCLK的比例
 
 /// FCLK = mpll = ( 2 × m × Fin ) / ( p × 2s ) , m = ( MDIV + 8 ), p = ( PDIV + 2 ), s = SDIV
 #define vMPLLCON	((M_MDIV << 12) | (M_PDIV << 4) | (M_SDIV)) 

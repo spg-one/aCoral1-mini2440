@@ -170,7 +170,7 @@ void acoral_core_cpu_start()
 	/*创建初始化线程,这个调用层次比较多，需要多谢堆栈*/
 	data.prio = ACORAL_INIT_PRIO;
 	/*动态堆栈*/
-	init_id = acoral_create_thread(init, ACORAL_TEST_STACK_SIZE, "in init", "init", NULL, ACORAL_SCHED_POLICY_COMM, &data);
+	init_id = acoral_create_thread(init, 512, "in init", "init", NULL, ACORAL_SCHED_POLICY_COMM, &data);
 	if (init_id == -1)
 	{
 		//acoral_prints("hhh\n");

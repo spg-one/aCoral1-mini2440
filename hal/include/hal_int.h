@@ -24,7 +24,7 @@ void hal_intr_init(void);
 
 //中断相关的硬件抽象接口
 #define HAL_INTR_MIN      0
-#define HAL_INTR_NUM	 50 ///>S3C2440有50个中断源
+#define HAL_INTR_NUM	 50 ///<S3C2440有50个中断源
 #define HAL_INTR_MAX HAL_INTR_MIN+HAL_INTR_NUM-1
 #define HAL_INTR_INIT()	hal_intr_init()
 
