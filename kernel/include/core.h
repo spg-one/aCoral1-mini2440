@@ -1,17 +1,7 @@
-#ifndef ACORAL_CORE_H
+#ifndef ACORAL_CORE_H //TODO 要调整
 #define ACORAL_CORE_H
 #include<autocfg.h>
 #include<type.h>
-
-#define ACORAL_WAIT_ERR 1
-#define ACORAL_WAIT_OK 1
-#define CFG_ASSERT CFG_TEST
-
-#ifdef CFG_ASSERT
-#define ACORAL_ASSERT(res,msg) acoral_assert_res(res,msg)
-#else 
-#define ACORAL_ASSERT(res,msg)
-#endif
 
 #define ACORAL_MAX_THREAD CFG_MAX_THREAD
 #define ACORAL_MIN_STACK_SIZE CFG_MIN_STACK_SIZE 

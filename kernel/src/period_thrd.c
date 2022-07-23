@@ -91,11 +91,9 @@ void period_delay_deal(){
 	if(acoral_list_empty(head))
 	    	return;
 	thread=list_entry(head->next,acoral_thread_t,waiting);
-	ACORAL_ASSERT(thread,"in period thread deal");
 	thread->delay--;
 	for(tmp=head->next;tmp!=head;){
 		thread=list_entry(tmp,acoral_thread_t,waiting);
-		ACORAL_ASSERT(thread,"in period thread deal ");
 		if(thread->delay>0)
 		    break;
 		private_data=thread->private_data;

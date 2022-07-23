@@ -106,11 +106,9 @@ void time_delay_deal(){
 	if(acoral_list_empty(head))
 	  	return;
 	thread=list_entry(head->next,acoral_thread_t,waiting);
-	ACORAL_ASSERT(thread,"in time deal");
 	thread->delay--;
 	for(tmp=head->next;tmp!=head;){
 		thread=list_entry(tmp,acoral_thread_t,waiting);
-		ACORAL_ASSERT(thread,"in time deal for");
 		if(thread->delay>0)
 		    break;
 		/*防止add判断delay时取下thread*/
@@ -216,13 +214,11 @@ void timeout_delay_deal()
 	}
 
 	thread=list_entry(head->next,acoral_thread_t,timeout);
-	ACORAL_ASSERT(thread,"in timeout deal");
 	if (thread->delay>0)
 		thread->delay--;
 	for(tmp=head->next;tmp!=head;)
 	{
 		thread=list_entry(tmp,acoral_thread_t,timeout);
-		ACORAL_ASSERT(thread,"in timeout deal");
 		if(thread->delay>0)
 		    break;
 

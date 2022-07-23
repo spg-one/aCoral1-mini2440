@@ -30,13 +30,10 @@ typedef unsigned int acoral_u32;
 typedef signed int acoral_32;
 typedef unsigned long long acoral_u64;
 typedef signed long long acoral_64;
-typedef float acoral_fl;
 typedef acoral_32  acoral_vector;
 typedef acoral_u32  acoral_time;
-typedef acoral_u32 acoral_adr;
 typedef acoral_u32 acoral_err;
 typedef acoral_u32 acoral_size;
 typedef acoral_32 acoral_id;
-typedef acoral_u32 *acoral_ptr;
 typedef acoral_u32 acoral_sr; 
 #endif

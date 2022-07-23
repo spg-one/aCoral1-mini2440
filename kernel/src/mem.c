@@ -366,7 +366,7 @@ static void *r_malloc(acoral_u8 level)
 
 /**
  * @brief 用户指定的内存大小不一定合适，可以先用这个函数进行一下调整
- * 
+ *
  * @param size 用户想使用内存的大小
  * @return acoral_u32 实际将要分配的内存大小
  */
@@ -389,7 +389,7 @@ acoral_u32 buddy_malloc_size(acoral_u32 size)
 
 /**
  * @brief 伙伴系统分配内存
- * 
+ *
  * @param size 用户需要的大小
  * @return void* 返回分配的地址
  */
@@ -416,7 +416,7 @@ void *buddy_malloc(acoral_u32 size)
 
 /**
  * @brief 伙伴系统回收内存
- * 
+ *
  * @param ptr 要回收的地址
  */
 void buddy_free(void *ptr)
@@ -431,15 +431,17 @@ void buddy_free(void *ptr)
 	acoral_u32 adr;
 	adr = (acoral_u32)ptr;
 	if (acoral_mem_ctrl->state == MEM_NO_ALLOC)
-		{return;}
-	
+	{
+		return;
+	}
+
 	//无效地址
 	if (ptr == NULL || adr < acoral_mem_ctrl->start_adr || adr + BLOCK_SIZE > acoral_mem_ctrl->end_adr)
 	{
 		acoral_printerr("Invalid Free Address:0x%x\n", ptr);
 		return;
 	}
-	max_level = acoral_mem_ctrl->level; //记下层数
+	max_level = acoral_mem_ctrl->level;						 //记下层数
 	num = (adr - acoral_mem_ctrl->start_adr) >> BLOCK_SHIFT; //地址与基本块数换算
 	//如果不是block整数倍，肯定是非法地址
 	if (adr != acoral_mem_ctrl->start_adr + (num << BLOCK_SHIFT))
@@ -454,7 +456,7 @@ void buddy_free(void *ptr)
 		//下面是地址检查
 		index = num >> 1;
 		buddy_level = acoral_mem_blocks[BLOCK_INDEX(num)].level;
-		
+
 		//不是从0层，直接返回错误
 		if (buddy_level > 0)
 		{
@@ -487,12 +489,12 @@ void buddy_free(void *ptr)
 			acoral_exit_critical();
 			return;
 		}
-		acoral_mem_ctrl->free_num += 1 << level; //空闲基本块数增加
+		acoral_mem_ctrl->free_num += 1 << level;		//空闲基本块数增加
 		acoral_mem_blocks[BLOCK_INDEX(num)].level = -1; //标志此基本块未被分配
 	}
 	if (level == max_level - 1) //最大内存块直接回收
 	{
-		index = num >> level; //最大内存块层，一块一位
+		index = num >> level;								   //最大内存块层，一块一位
 		acoral_set_bit(index, acoral_mem_ctrl->bitmap[level]); //标志空闲
 		acoral_exit_critical();
 		return;
@@ -501,9 +503,9 @@ void buddy_free(void *ptr)
 	while (level < max_level) //其余层回收，有可能回收到最大层
 	{
 		cur = index / 32;
-		if (!acoral_get_bit(index, acoral_mem_ctrl->bitmap[level]))  //两块都没空闲
+		if (!acoral_get_bit(index, acoral_mem_ctrl->bitmap[level])) //两块都没空闲
 		{
-			acoral_set_bit(index, acoral_mem_ctrl->bitmap[level]); //设置成有一块空闲
+			acoral_set_bit(index, acoral_mem_ctrl->bitmap[level]);								//设置成有一块空闲
 			if (acoral_mem_ctrl->free_cur[level] < 0 || cur < acoral_mem_ctrl->free_cur[level]) //无空闲块或者释放的位比空闲位图链表头小
 			{
 				acoral_mem_ctrl->free_list[level][cur] = acoral_mem_ctrl->free_cur[level];
@@ -527,18 +529,18 @@ void buddy_free(void *ptr)
 
 /*资源池部分*/
 
-///aCoral资源池数组，总共有ACORAL_MAX_POOLS=40个
+/// aCoral资源池数组，总共有ACORAL_MAX_POOLS=40个
 acoral_pool_t acoral_pools[ACORAL_MAX_POOLS];
 
-///aCoral空闲资源池指针
+/// aCoral空闲资源池指针
 acoral_pool_t *acoral_free_res_pool;
 
 /**
  * @brief 创建一个某一类型的资源池
  * @note 创建的时机包括系统刚初始化时，以及系统中空闲资源池不够时
- * 
+ *
  * @param pool_ctrl 某一类型资源池的控制块
- * @return acoral_err 
+ * @return acoral_err
  */
 acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl)
 {
@@ -566,7 +568,7 @@ acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl)
 
 /**
  * @brief 释放所有某一类型的资源池
- * 
+ *
  * @param pool_ctrl 某一类型的资源池控制块
  */
 void acoral_release_pool(acoral_pool_ctrl_t *pool_ctrl)
@@ -589,16 +591,16 @@ void acoral_release_pool(acoral_pool_ctrl_t *pool_ctrl)
 }
 
 /**
- * @brief 
- * 
- * @param pool_ctrl 
+ * @brief
+ *
+ * @param pool_ctrl
  */
 
 /**
  * @brief 获取某一类型的资源
- * 
+ *
  * @param pool_ctrl 某一类型的资源池控制块
- * @return acoral_res_t* 
+ * @return acoral_res_t*
  */
 acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl)
 {
@@ -635,7 +637,7 @@ acoral_res_t *acoral_get_res(acoral_pool_ctrl_t *pool_ctrl)
 
 /**
  * @brief 释放某一资源
- * 
+ *
  * @param res 将要释放的资源
  */
 void acoral_release_res(acoral_res_t *res)
@@ -644,12 +646,14 @@ void acoral_release_res(acoral_res_t *res)
 	acoral_u32 index;
 	void *tmp;
 	acoral_pool_ctrl_t *pool_ctrl;
-	if (!ACORAL_ASSERT(res, "Res Release\n"))
+	if (res == NULL || acoral_get_res_by_id(res->id) != res)
+	{
 		return;
+	}
 	pool = acoral_get_pool_by_id(res->id);
 	if (pool == NULL)
 	{
-		acoral_printerr("Res release Err\n");
+		acoral_printerr("Res release Err\n"); //TODO 删printerr
 		return;
 	}
 	pool_ctrl = pool->ctrl;
@@ -676,7 +680,7 @@ void acoral_release_res(acoral_res_t *res)
 
 /**
  * @brief 根据资源ID获取某一资源对应的资源池
- * 
+ *
  * @param res_id 资源ID
  * @return acoral_pool_t* 获取到的资源池指针
  */
@@ -691,7 +695,7 @@ acoral_pool_t *acoral_get_pool_by_id(acoral_id res_id)
 
 /**
  * @brief 获取空闲资源池
- * 
+ *
  * @return acoral_pool_t* 获取到的空闲资源池指针
  */
 acoral_pool_t *acoral_get_free_pool()
@@ -710,7 +714,7 @@ acoral_pool_t *acoral_get_free_pool()
 
 /**
  * @brief 根据id获取某一资源
- * 
+ *
  * @param id 资源id
  * @return acoral_res_t* 获取到的资源
  */
@@ -727,7 +731,7 @@ acoral_res_t *acoral_get_res_by_id(acoral_id id)
 
 /**
  * @brief 与一个资源池中的资源初始化
- * 
+ *
  * @param pool 指定的资源池
  */
 void acoral_pool_res_init(acoral_pool_t *pool)
@@ -795,22 +799,4 @@ void acoral_res_sys_init()
 	}
 	pool->base_adr = (void *)0;
 	acoral_free_res_pool = &acoral_pools[0];
-}
-
-/**
- * @brief 母鸡
- * 
- * @param res 
- * @param assert 
- * @return acoral_char 
- */
-acoral_char acoral_assert_res(acoral_res_t *res, acoral_8 *assert)
-{
-	if (res == NULL || acoral_get_res_by_id(res->id) != res)
-	{
-		acoral_printerr("%s\n", assert);
-		acoral_printerr("Err res's id:%x\n", res->id);
-		return false;
-	}
-	return true;
 }

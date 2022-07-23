@@ -167,6 +167,5 @@ void acoral_select_thread(){
 	queue = array->queue + index;
 	head=&queue->head;
 	thread=list_entry(head->next, acoral_thread_t, ready);
-	ACORAL_ASSERT(thread,"Aseert:In select thread");
 	acoral_set_ready_thread(thread);
 }

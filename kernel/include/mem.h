@@ -143,7 +143,6 @@ typedef struct {
    acoral_list_t free_list;
 }acoral_pool_t;
 
-acoral_char acoral_assert_res(acoral_res_t *res,acoral_8 *assert);
 acoral_pool_t *acoral_get_pool_by_id(acoral_id id);
 acoral_pool_t *acoral_get_free_pool(void);
 acoral_err acoral_create_pool(acoral_pool_ctrl_t *pool_ctrl);
