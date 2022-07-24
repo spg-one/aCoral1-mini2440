@@ -16,11 +16,6 @@ typedef struct {
 	void *data;
 }acoral_queue_t;
 
-struct acoral_prio_array {
-	acoral_u32 num;
-	acoral_u32 bitmap[PRIO_BITMAP_SIZE];
-	acoral_queue_t queue[ACORAL_MAX_PRIO_NUM];
-};
-typedef struct acoral_prio_array acoral_prio_array_t;
+
 
 #endif /* QUEUE_H_ */

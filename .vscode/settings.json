@@ -20,6 +20,8 @@
         "thread.h": "c",
         "queue.h": "c",
         "shell.h": "c",
-        "event.h": "c"
+        "event.h": "c",
+        "bitops.h": "c",
+        "list.h": "c"
     }
 }
