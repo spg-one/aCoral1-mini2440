@@ -22,10 +22,14 @@ extern acoral_u8 need_sched;
 extern acoral_u8 sched_lock;
 extern acoral_thread_t *running_thread,*ready_thread;
 
+/**
+ * @brief aCoral就绪队列
+ * 
+ */
 typedef struct{
-	acoral_u32 num;
-	acoral_u32 bitmap[PRIO_BITMAP_SIZE];
-	acoral_queue_t queue[ACORAL_MAX_PRIO_NUM];
+	acoral_u32 num;								///<就绪的线程数
+	acoral_u32 bitmap[PRIO_BITMAP_SIZE];		///<优先级位图，每一位对应一个优先级，为1表示这个优先级有就绪线程
+	acoral_queue_t queue[ACORAL_MAX_PRIO_NUM];	///<每一个优先级都有独立的队列
 }acoral_rdy_queue_t;
 
 void acoral_sched_init(void);

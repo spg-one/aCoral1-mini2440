@@ -10,7 +10,7 @@
 #include<list.h>
 #include<core.h>
 #define ACORAL_PRIO_QUEUE_EMPTY 255
-#define PRIO_BITMAP_SIZE ((((ACORAL_MAX_PRIO_NUM+1+7)/8)+sizeof(acoral_u32)-1)/sizeof(acoral_u32))
+#define PRIO_BITMAP_SIZE ((((ACORAL_MAX_PRIO_NUM+1+7)/8)+sizeof(acoral_u32)-1)/sizeof(acoral_u32)) //TODO要移动，还要知道怎么算的
 typedef struct {
 	acoral_list_t head;
 	void *data;
