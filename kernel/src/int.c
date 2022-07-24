@@ -1,3 +1,17 @@
+/**
+ * @file int.c
+ * @author 王彬浩 (SPGGOGOGO@outlook.com)
+ * @brief kernel层，中断相关函数
+ * @version 1.0
+ * @date 2022-07-24
+ * @copyright Copyright (c) 2022
+ * @revisionHistory 
+ *  <table> 
+ *   <tr><th> 版本 <th>作者 <th>日期 <th>修改内容 
+ *   <tr><td> 0.1 <td>jivin <td>2010-03-08 <td>Created 
+ *   <tr><td> 1.0 <td>王彬浩 <td> 2022-07-24 <td>Standardized 
+ *  </table>
+ */
 #include <type.h>
 #include <hal.h>
 #include <lsched.h>
@@ -5,10 +19,10 @@
 #include <int.h>
 acoral_intr_ctr_t intr_table[HAL_INTR_NUM];
 
-/*===========================
- *Initialize the interrupt
- *中断初始化函数
- *===========================*/
+/**
+ * @brief 中断初始化函数
+ * 
+ */
 void acoral_intr_sys_init()
 {
 	acoral_u32 i;
@@ -39,10 +53,13 @@ void acoral_intr_sys_init()
 	}
 }
 
-/*===========================
- *Binding the isr t0 the Vector
- *将服务函数isr绑定到中断向量Vector
- *===========================*/
+/**
+ * @brief 将服务函数isr绑定到中断向量Vector
+ * 
+ * @param vector 中断向量号
+ * @param isr 中断服务程序指针
+ * @return acoral_32 返回0表示成功
+ */
 acoral_32 acoral_intr_attach(acoral_vector vector, void (*isr)(acoral_vector))
 {
 	if (intr_table[vector].type != ACORAL_RT_INTR) //实时中断是什么？
@@ -52,20 +69,23 @@ acoral_32 acoral_intr_attach(acoral_vector vector, void (*isr)(acoral_vector))
 	return 0;
 }
 
-/*===========================
- *Detach the  isr from the Vector
- *将中断的服务函数设为默认的
- *===========================*/
+/**
+ * @brief 将中断的服务函数设为默认的
+ * 
+ * @param vector 中断向量号
+ * @return acoral_32 返回0表示成功
+ */
 acoral_32 acoral_intr_detach(acoral_vector vector)
 {
 	intr_table[vector].isr = acoral_default_isr;
 	return 0;
 }
 
-/*===========================
- *Enable the interrupt
- *使能中断
- *===========================*/
+/**
+ * @brief 使能中断
+ * 
+ * @param vector 中断向量号
+ */
 void acoral_intr_unmask(acoral_vector vector)
 {
 	if (vector > HAL_INTR_MAX)
@@ -80,10 +100,11 @@ void acoral_intr_unmask(acoral_vector vector)
 	}
 }
 
-/*===========================
- *Disable the interrupt
- *除能中断
- *===========================*/
+/**
+ * @brief 除能中断
+ * 
+ * @param vector 中断向量号
+ */
 void acoral_intr_mask(acoral_vector vector)
 {
 	if (vector > HAL_INTR_MAX)
@@ -98,15 +119,13 @@ void acoral_intr_mask(acoral_vector vector)
 	}
 }
 
-/*===========================
- *the commen isr of vector
- *中断公共服务入口函数
- *===========================*/
+/**
+ * @brief 中断公共服务入口函数
+ * 
+ * @param vector 中断向量号
+ */
 void acoral_intr_entry(acoral_vector vector)
 { // TODO或者把这个弱定义了
-#ifdef CFG_DEBUG
-	// acoral_print("isr in cpu:%d\n",0);
-#endif
 	acoral_intr_nesting_inc();
 	if (intr_table[vector].type == ACORAL_EXPERT_INTR)
 	{
@@ -138,19 +157,20 @@ void acoral_intr_entry(acoral_vector vector)
 	acoral_intr_exit();
 }
 
-/*===========================
- *The default isr
- *默认中断处理程序
- *===========================*/
+/**
+ * @brief aCoral默认中断处理程序
+ * 
+ * @param vector 中断向量号 
+ */
 void acoral_default_isr(acoral_vector vector)
 {
 	acoral_printdbg("in Default interrupt route\n");
 }
 
-/*===========================
- *The exit function of the vector
- *中断退出函数
- *===========================*/
+/**
+ * @brief 中断退出函数
+ * 
+ */
 void acoral_intr_exit()
 {
 	if (!acoral_need_sched)
@@ -169,56 +189,67 @@ void acoral_intr_exit()
 	HAL_INTR_EXIT_BRIDGE();
 }
 
-/*===========================
- *Set the enter function of the vector
- *设置中断进入函数为isr
- *===========================*/
+/**
+ * @brief 设置中断进入函数
+ * 
+ * @param vector 中断向量号
+ * @param enter 中断进入函数，aCoral中为hal_intr_ack
+ */
 void acoral_set_intr_enter(acoral_vector vector, void (*enter)(acoral_vector))
 {
 	intr_table[vector].enter = enter;
 }
 
-/*===========================
- *Set the exit  function of the vector
- *设置中断退出函数为isr
- *===========================*/
+/**
+ * @brief 设置中断退出函数
+ * 
+ * @param vector 中断向量号
+ * @param exit 中断退出函数，aCoral中为空
+ */
 void acoral_set_intr_exit(acoral_vector vector, void (*exit)(acoral_vector))
 {
 	intr_table[vector].exit = exit;
 }
 
-/*===========================
- *Set the mask  function of the vector
- *设置中断屏蔽函数为isr
- *===========================*/
+/**
+ * @brief 设置中断屏蔽函数
+ * 
+ * @param vector 中断向量号
+ * @param mask 中断屏蔽函数，aCoral中为hal_intr_mask
+ */
 void acoral_set_intr_mask(acoral_vector vector, void (*mask)(acoral_vector))
 {
 	intr_table[vector].mask = mask;
 }
 
-/*===========================
- *Set the unmask function of the vector
- *设置中断使能函数为isr
- *===========================*/
+/**
+ * @brief 设置中断使能函数
+ * 
+ * @param vector 中断向量号
+ * @param unmask 中断使能函数，aCoral中为hal_intr_unmask
+ */
 void acoral_set_intr_unmask(acoral_vector vector, void (*unmask)(acoral_vector))
 {
 	intr_table[vector].unmask = unmask;
 }
 
-/*===========================
- *Set interrupt type
- *设置中断类型
- *===========================*/
+/**
+ * @brief 设置中断类型，ACORAL_COMM_INTR、ACORAL_EXPERT_INTR或ACORAL_RT_INTR
+ * 
+ * @param vector 
+ * @param type 
+ */
 void acoral_intr_set_type(acoral_vector vector, acoral_u8 type)
 {
-	intr_table[vector].type = type;
+	intr_table[vector].type = type; //TODO type约束
 }
 
-/*===========================
- *     exception err output
- *        异常错误输出
- *===========================*/
-
+/**
+ * @brief 异常错误输出，aCoral除了中断异常以外的异常发生后，都会通过EXP_HANDLER进入这个函数打印异常信息
+ * 
+ * @param lr 链接寄存器，保存异常发生时的pc
+ * @param stack 栈指针，保存发生异常时线程的栈
+ */
 void acoral_fault_entry(acoral_u32 lr, acoral_u32 *stack)
 {
 	acoral_intr_disable();

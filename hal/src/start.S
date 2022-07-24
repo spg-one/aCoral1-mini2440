@@ -50,7 +50,7 @@ __ENTRY:
 @****************************************************************
 
 HandleFIQ:
-	ldr pc,=acoral_start
+	ldr pc,=EXP_HANDLER
 HandleIRQ:
 	ldr pc,=HAL_INTR_ENTRY
 HandleUndef:

@@ -15,22 +15,25 @@
 #ifndef ACORAL_INT_H
 #define ACORAL_INT_H
 #include"type.h"
-#define ACORAL_COMM_INTR 1
-#define ACORAL_EXPERT_INTR 2
-#define ACORAL_RT_INTR 3
+
+//中断类型
+#define ACORAL_COMM_INTR 1		///<普通中断，会自动调用acoral_intr_ctr_t中的enter成员清除中断，用户只需要关心isr就行
+#define ACORAL_EXPERT_INTR 2	///<专家中断，不会调用enter成员，需要在isr中手动清除中断，如DM9000网卡
+#define ACORAL_RT_INTR 3		///<实时中断，不知道是什么
 
 /**
  * @brief 中断结构体
  * 
  */
 typedef struct {
-	acoral_u8  type;
-	void (*isr)(acoral_vector);
-	void (*enter)(acoral_vector);
-	void (*exit)(acoral_vector);
-	void (*mask)(acoral_vector);
-	void (*unmask)(acoral_vector);
+	acoral_u8  type;				///<上面三种中断类型
+	void (*isr)(acoral_vector);		///<中断服务程序
+	void (*enter)(acoral_vector);	///<中断服务程序执行之前执行的操作，aCroal中为hal_intr_ack函数
+	void (*exit)(acoral_vector);	///<中断服务程序执行完成后的操作，比如置中断结束，目前aCoral中没有这个操作
+	void (*mask)(acoral_vector);	///<除能中断操作
+	void (*unmask)(acoral_vector);	///<使能中断操作
 }acoral_intr_ctr_t;
+
 #define acoral_intr_enable() HAL_INTR_ENABLE()
 #define acoral_intr_disable() HAL_INTR_DISABLE()
 #define acoral_intr_nesting HAL_GET_INTR_NESTING()
