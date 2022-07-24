@@ -3,8 +3,8 @@
 #include<thread.h>
 #include<int.h>
 #include<lsched.h>
-acoral_u8 need_sched;
-acoral_u8 sched_lock;
+acoral_u8 need_sched; ///<aCoral是否需要调度标志，仅当aCoral就绪队列acoral_ready_queues有线程加入或被取下时，该标志被置为true；仅当aCoral在调度线程时，该标志位被置为false
+acoral_u8 sched_lock=1; ///<aCoral初始化完成之前，调度都是被上锁的，即不允许调度。
 acoral_thread_t *running_thread,*ready_thread;
 
 static acoral_rdy_queue_t acoral_ready_queues; 
@@ -16,12 +16,7 @@ static acoral_rdy_queue_t acoral_ready_queues;
 void acoral_sched_init(){
 	acoral_u8 i;
 	sched_lock=0;
-	need_sched=0;
-}
-
-void acoral_sched_unlock(){
-	sched_lock=0;	
-	acoral_sched();
+	acoral_set_need_sched(false);
 }
 
 void acoral_set_orig_thread(acoral_thread_t *thread){
