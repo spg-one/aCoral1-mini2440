@@ -20,7 +20,7 @@
 /*
  * kernel configuration
  */
-#define CFG_MEM2 1
+#define CFG_MEM2 1 ///< 任意大小内存分配
 #define CFG_MEM2_SIZE (1024000)
 #define CFG_THRD_PERIOD 1
 #define CFG_HARD_RT_PRIO_NUM (0)

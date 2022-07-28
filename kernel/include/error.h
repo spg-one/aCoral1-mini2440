@@ -18,4 +18,12 @@
 #define ACORAL_ERR_THREAD_DELAY ACORAL_ERR_THREAD+1
 #define ACORAL_ERR_THREAD_NO_STACK ACORAL_ERR_THREAD+2 ///<线程栈指针为空
 
+/*return*/ // TODO 放到err.h里面
+#define MST_ERR_NULL 0
+#define MST_ERR_INTR 1
+#define MST_ERR_TIMEOUT 2
+#define MST_ERR_UNDEF 3
+#define MSG_ERR_COUNT 4
+#define MSGCTR_SUCCED 5
+#define MSG_ERR_NULL 6
 #endif

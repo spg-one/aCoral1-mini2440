@@ -18,9 +18,12 @@
 #include<type.h>
 #include<thread.h>
 
-extern acoral_u8 need_sched; 
+extern acoral_u8 acoral_need_sched; 
 extern acoral_u8 sched_lock;
 extern acoral_thread_t *running_thread,*ready_thread;
+
+///就绪队列中的优先级位图的大小，目前等于2，算法就是优先级数目除以32向上取整
+#define PRIO_BITMAP_SIZE ((ACORAL_MAX_PRIO_NUM+31)/32) 
 
 /**
  * @brief aCoral就绪队列
@@ -34,8 +37,7 @@ typedef struct{
 
 void acoral_sched_init(void);
 #define acoral_sched_is_lock sched_lock
-#define acoral_need_sched need_sched
-#define acoral_set_need_sched(val) (need_sched=(val))
+#define acoral_set_need_sched(val) (acoral_need_sched=(val))
 
 #define acoral_cur_thread running_thread
 void acoral_set_running_thread(acoral_thread_t *thread);
