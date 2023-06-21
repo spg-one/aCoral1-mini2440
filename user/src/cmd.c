@@ -67,8 +67,6 @@ acoral_shell_cmd_t spg_cmd={
 	NULL
 };
 
-
-
 extern acoral_shell_cmd_t dt_cmd;
 extern int fs_cmd_init(void);
 void cmd_init(void){

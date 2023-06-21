@@ -71,7 +71,6 @@ typedef struct{
 	acoral_u32 *stack_buttom;
 	acoral_u32 stack_size;
 	acoral_32 delay;
-	acoral_u32 slice;
 	acoral_char *name;
 	acoral_id console_id;
 	void*	private_data;

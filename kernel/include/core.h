@@ -17,13 +17,20 @@
 #include <autocfg.h>
 #include <type.h>
 
-#define ACORAL_MAX_THREAD CFG_MAX_THREAD         ///<最多40个线程
-#define ACORAL_MIN_STACK_SIZE CFG_MIN_STACK_SIZE ///<线程最小拥有1024字节的栈
-#define ACORAL_MAX_PRIO_NUM ((CFG_MAX_THREAD + 1) & 0xff) ///< 41。总共有40个线程，就有0~40共41个优先级
-#define ACORAL_MINI_PRIO ACORAL_MAX_PRIO_NUM - 1 ///< aCoral最低优先级
-#define ACORAL_INIT_PRIO 0                     ///< init线程独有的最高优先级
-#define ACORAL_MAX_PRIO 1                      ///< 除init线程外的最高优先级
-#define ACORAL_TICKS_PER_SEC CFG_TICKS_PER_SEC ///< aCoral每秒100次tick中断
+///最多40个线程
+#define ACORAL_MAX_THREAD CFG_MAX_THREAD
+///线程最小拥有1024字节的栈
+#define ACORAL_MIN_STACK_SIZE CFG_MIN_STACK_SIZE
+///41。总共有40个线程，就有0~40共41个优先级
+#define ACORAL_MAX_PRIO_NUM ((CFG_MAX_THREAD + 1) & 0xff)
+///aCoral最低优先级40
+#define ACORAL_MINI_PRIO ACORAL_MAX_PRIO_NUM - 1
+///init线程独有的最高优先级
+#define ACORAL_INIT_PRIO 0
+///除init线程外的最高优先级
+#define ACORAL_MAX_PRIO 1
+///aCoral每秒100次tick中断
+#define ACORAL_TICKS_PER_SEC CFG_TICKS_PER_SEC
 
 volatile extern acoral_u32 acoral_start_sched;
 extern acoral_id daemon_id;
